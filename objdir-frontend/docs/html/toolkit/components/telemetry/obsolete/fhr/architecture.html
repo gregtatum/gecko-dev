@@ -1,0 +1,504 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Architecture &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Payload Format" href="dataformat.html" />
+    <link rel="prev" title="Firefox Health Report (Obsolete)" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internals/index.html">Internals</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Obsolete Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../uitelemetry/index.html">UITelemetry data format (obsolete)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Firefox Health Report (Obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hybrid-content.html">Hybrid Content Telemetry (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optout-ping.html">“optout” ping (obsolete)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="../index.html">Obsolete Documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Firefox Health Report (Obsolete)</a> &raquo;</li>
+        
+      <li>Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/toolkit/components/telemetry/obsolete/fhr/architecture.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="architecture">
+<span id="healthreport-architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">healthreporter.jsm</span></code> contains the main interface for FHR, the
+<code class="docutils literal notranslate"><span class="pre">HealthReporter</span></code> type. An instance of this is created by the
+<code class="docutils literal notranslate"><span class="pre">data_reporting_service</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">providers.jsm</span></code> contains numerous <code class="docutils literal notranslate"><span class="pre">Metrics.Provider</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Metrics.Measurement</span></code> used for collecting application metrics. If you
+are looking for the FHR probes, this is where they are.</p>
+<div class="section" id="storage">
+<h2>Storage<a class="headerlink" href="#storage" title="Permalink to this headline">¶</a></h2>
+<p>Firefox Health Report stores data in 3 locations:</p>
+<ul class="simple">
+<li><p>Metrics measurements and provider state is stored in a SQLite database
+(via <code class="docutils literal notranslate"><span class="pre">Metrics.Storage</span></code>).</p></li>
+<li><p>Service state (such as the IDs of documents uploaded) is stored in a
+JSON file on disk (via OS.File).</p></li>
+<li><p>Lesser state and run-time options are stored in preferences.</p></li>
+</ul>
+</div>
+<div class="section" id="preferences">
+<h2>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h2>
+<p>Preferences controlling behavior of Firefox Health Report live in the
+<code class="docutils literal notranslate"><span class="pre">datareporting.healthreport.*</span></code> branch.</p>
+<div class="section" id="service-and-data-control">
+<h3>Service and Data Control<a class="headerlink" href="#service-and-data-control" title="Permalink to this headline">¶</a></h3>
+<p>The follow preferences control behavior of the service and data upload.</p>
+<dl>
+<dt>service.enabled</dt><dd><p>Controls whether the entire health report service runs. The overall
+service performs data collection, storing, and submission.</p>
+<p>This is the primary kill switch for Firefox Health Report
+outside of the build system variable. i.e. if you are using an
+official Firefox build and wish to disable FHR, this is what you
+should set to false to prevent FHR from not only submitting but
+also collecting data.</p>
+</dd>
+<dt>uploadEnabled</dt><dd><p>Whether uploading of data is enabled. This is the preference the
+checkbox in the preferences UI reflects. If this is
+disabled, FHR still collects data - it just doesn’t upload it.</p>
+</dd>
+<dt>service.loadDelayMsec</dt><dd><p>How long (in milliseconds) after initial application start should FHR
+wait before initializing.</p>
+<p>FHR may initialize sooner than this if the FHR service is requested.
+This will happen if e.g. the user goes to <code class="docutils literal notranslate"><span class="pre">about:healthreport</span></code>.</p>
+</dd>
+<dt>service.loadDelayFirstRunMsec</dt><dd><p>How long (in milliseconds) FHR should wait to initialize on first
+application run.</p>
+<p>FHR waits longer than normal to initialize on first application run
+because first-time initialization can use a lot of I/O to initialize
+the SQLite database and this I/O should not interfere with the
+first-run user experience.</p>
+</dd>
+<dt>documentServerURI</dt><dd><p>The URI of a Bagheera server that FHR should interface with for
+submitting documents.</p>
+<p>You typically do not need to change this.</p>
+</dd>
+<dt>documentServerNamespace</dt><dd><p>The namespace on the document server FHR should upload documents to.</p>
+<p>You typically do not need to change this.</p>
+</dd>
+<dt>infoURL</dt><dd><p>The URL of a page containing more info about FHR, it’s privacy
+policy, etc.</p>
+</dd>
+<dt>about.reportUrl</dt><dd><p>The URL to load in <code class="docutils literal notranslate"><span class="pre">about:healthreport</span></code>.</p>
+</dd>
+<dt>about.reportUrlUnified</dt><dd><p>The URL to load in <code class="docutils literal notranslate"><span class="pre">about:healthreport</span></code>. This is used instead of <code class="docutils literal notranslate"><span class="pre">reportUrl</span></code> for UnifiedTelemetry when it is not opt-in.</p>
+</dd>
+<dt>service.providerCategories</dt><dd><p>A comma-delimited list of category manager categories that contain
+registered <code class="docutils literal notranslate"><span class="pre">Metrics.Provider</span></code> records. Read below for how provider
+registration works.</p>
+</dd>
+</dl>
+<p>If the entire service is disabled, you lose data collection. This means
+that <strong>local</strong> data analysis won’t be available because there is no data
+to analyze! Keep in mind that Firefox Health Report can be useful even
+if it’s not submitting data to remote servers!</p>
+</div>
+<div class="section" id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<p>The following preferences allow you to control the logging behavior of
+Firefox Health Report.</p>
+<dl>
+<dt>logging.consoleEnabled</dt><dd><p>Whether to write log messages to the web console. This is true by
+default.</p>
+</dd>
+<dt>logging.consoleLevel</dt><dd><p>The minimum log level FHR messages must have to be written to the
+web console. By default, only FHR warnings or errors will be written
+to the web console. During normal/expected operation, no messages of
+this type should be produced.</p>
+</dd>
+<dt>logging.dumpEnabled</dt><dd><p>Whether to write log messages via <code class="docutils literal notranslate"><span class="pre">dump()</span></code>. If true, FHR will write
+messages to stdout/stderr.</p>
+<p>This is typically only enabled when developing FHR.</p>
+</dd>
+<dt>logging.dumpLevel</dt><dd><p>The minimum log level messages must have to be written via
+<code class="docutils literal notranslate"><span class="pre">dump()</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="state">
+<h3>State<a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>currentDaySubmissionFailureCount</dt><dd><p>How many submission failures the client has encountered while
+attempting to upload the most recent document.</p>
+</dd>
+<dt>lastDataSubmissionFailureTime</dt><dd><p>The time of the last failed document upload.</p>
+</dd>
+<dt>lastDataSubmissionRequestedTime</dt><dd><p>The time of the last document upload attempt.</p>
+</dd>
+<dt>lastDataSubmissionSuccessfulTime</dt><dd><p>The time of the last successful document upload.</p>
+</dd>
+<dt>nextDataSubmissionTime</dt><dd><p>The time the next data submission is scheduled for. FHR will not
+attempt to upload a new document before this time.</p>
+</dd>
+<dt>pendingDeleteRemoteData</dt><dd><p>Whether the client currently has a pending request to delete remote
+data. If true, the client will attempt to delete all remote data
+before an upload is performed.</p>
+</dd>
+</dl>
+<p>FHR stores various state in preferences.</p>
+</div>
+</div>
+<div class="section" id="registering-providers">
+<h2>Registering Providers<a class="headerlink" href="#registering-providers" title="Permalink to this headline">¶</a></h2>
+<p>Firefox Health Report providers are registered via the category manager.
+See <code class="docutils literal notranslate"><span class="pre">HealthReportComponents.manifest</span></code> for providers defined in this
+directory.</p>
+<p>Essentially, the category manager receives the name of a JS type and the
+URI of a JSM to import that exports this symbol. At run-time, the
+providers registered in the category manager are instantiated.</p>
+<p>Providers are registered via the category manager to make registration
+simple and less prone to errors. Any XPCOM component can create a
+category manager entry. Therefore, new data providers can be added
+without having to touch core Firefox Health Report code. Additionally,
+category manager registration means providers are more likely to be
+registered on FHR’s terms, when it wants. If providers were registered
+in code at application run-time, there would be the risk of other
+components prematurely instantiating FHR (causing a performance hit if
+performed at an inopportune time) or semi-complicated code around
+observers or listeners. Category manager entries are only 1 line per
+provider and leave FHR in control: they are simple and safe.</p>
+</div>
+<div class="section" id="document-generation-and-lifecycle">
+<h2>Document Generation and Lifecycle<a class="headerlink" href="#document-generation-and-lifecycle" title="Permalink to this headline">¶</a></h2>
+<p>FHR will attempt to submit a JSON document containing data every 24 wall
+clock hours.</p>
+<p>At upload time, FHR will query the database for <strong>all</strong> information from
+the last 180 days and assemble this data into a JSON document. We
+attempt to upload this JSON document with a client-generated UUID to the
+configured server.</p>
+<p>Before we attempt upload, the generated UUID is stored in the JSON state
+file on local disk. At this point, the client assumes the document with
+that UUID has been successfully stored on the server.</p>
+<p>If the client is aware of other document UUIDs that presumably exist on
+the server, those UUIDs are sent with the upload request so the client
+can request those UUIDs be deleted. This helps ensure that each client
+only has 1 document/UUID on the server at any one time.</p>
+<div class="section" id="importance-of-persisting-uuids">
+<h3>Importance of Persisting UUIDs<a class="headerlink" href="#importance-of-persisting-uuids" title="Permalink to this headline">¶</a></h3>
+<p>The choices of how, where, and when document UUIDs are stored and updated
+are very important. One should not attempt to change things unless she
+has a very detailed understanding of why things are the way they are.</p>
+<p>The client is purposefully very conservative about forgetting about
+generated UUIDs. In other words, once a UUID is generated, the client
+deliberately holds on to that UUID until it’s very confident that UUID
+is no longer stored on the server. The reason we do this is because
+<em>orphaned</em> documents/UUIDs on the server can lead to faulty analysis,
+such as over-reporting the number of Firefox installs that stop being
+used.</p>
+<p>When uploading a new UUID, we update the state and save the state file
+to disk <em>before</em> an upload attempt because if the upload succeeds but
+the response never makes it back to the client, we want the client to
+know about the uploaded UUID so it can delete it later to prevent an
+orphan.</p>
+<p>We maintain a list of UUIDs locally (not simply the last UUID) because
+multiple upload attempts could fail the same way as the previous
+paragraph describes and we have no way of knowing which (if any)
+actually succeeded. The safest approach is to assume every document
+produced managed to get uploaded some how.</p>
+<p>We store the UUIDs on a file on disk and not anywhere else because we
+want storage to be robust. We originally stored UUIDs in preferences,
+which only flush to disk periodically. Writes to preferences were
+apparently getting lost. We switched to writing directly to files to
+eliminate this window.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dataformat.html" class="btn btn-neutral float-right" title="Payload Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Firefox Health Report (Obsolete)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

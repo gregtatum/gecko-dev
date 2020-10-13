@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Code reviews &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Landing code (i.e. getting code into Mozilla’s repository)" href="landing-code.html" />
+    <link rel="prev" title="How to fix a bug" href="fixing-bugs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#contributing">Contributing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find-bugs.html">Find bugs to work on</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixing-bugs.html">How to fix a bug</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Code reviews</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-do-we-do-code-reviews">Why do we do code reviews?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-should-be-avoided-in-code-reviews">What should be avoided in code reviews?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-are-some-good-practices-for-code-reviews">What are some good practices for code reviews?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-we-communicate">How do we communicate?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="landing-code.html">Landing code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="levelling-up.html">Leveling up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding-standards.html">Coding standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filing-good-bugs.html">Filing good bugs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performance.html">Investigating performance issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="react-performance-tips.html">Writing efficient React code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Code reviews</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/contributing/code-reviews.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-reviews">
+<h1>Code reviews<a class="headerlink" href="#code-reviews" title="Permalink to this headline">¶</a></h1>
+<p>A review is required before code is added to Mozilla’s repository. In addition, contrary to what you might have seen in other open source projects, code is not pushed directly to the repository. Instead, once the code is approved by reviewers, they will <em>request</em> the code to be <em>landed</em> on the repository.</p>
+<p>All this can be done somehow manually, but we have infrastructure in place to help us with reviews and landing code.</p>
+<p>Learn about how to get started with getting your code reviewed and landed in our <a class="reference internal" href="code-reviews-setup.html"><span class="doc">setting up</span></a> guide.</p>
+<p>And read on to learn about why and how we do code reviews.</p>
+<div class="section" id="why-do-we-do-code-reviews">
+<h2>Why do we do code reviews?<a class="headerlink" href="#why-do-we-do-code-reviews" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="quality">
+<h3>Quality<a class="headerlink" href="#quality" title="Permalink to this headline">¶</a></h3>
+<p>Doing code reviews helps with <strong>correctness</strong>. It gives us a chance to check that the code:</p>
+<ul class="simple">
+<li><p>fixes the problem,</p></li>
+<li><p>doesn’t have bugs,</p></li>
+<li><p>doesn’t regress other things,</p></li>
+<li><p>covers edge cases.</p></li>
+</ul>
+<p>A review is also a chance for the reviewer to check that the right <strong>test coverage</strong> is here, that the change doesn’t have <strong>performance</strong> problems, that it <strong>simplifies hard to understand code</strong> and that it comes with <strong>code comments</strong> and <strong>adequate documentation</strong>.</p>
+</div>
+<div class="section" id="learning-and-sharing-knowledge">
+<h3>Learning and sharing knowledge<a class="headerlink" href="#learning-and-sharing-knowledge" title="Permalink to this headline">¶</a></h3>
+<p>While going through the process of doing a code review, <strong>both the reviewer and the reviewee</strong> will be learning something (a new part of the code, a new efficient way to write code, tests, localization, etc.).</p>
+<p>Making the code easy to understand by the reviewer helps everybody.</p>
+<p>Doing reviews also helps people working on DevTools feel more comfortable and learn about new parts of the codebase.</p>
+<p>It helps build consensus around ideas and practices.</p>
+</div>
+<div class="section" id="maintenance">
+<h3>Maintenance<a class="headerlink" href="#maintenance" title="Permalink to this headline">¶</a></h3>
+<p>Doing reviews gives us an opportunity to check we are willing to maintain and support the new code that being introduced for a feature or bug fix.</p>
+</div>
+<div class="section" id="code-consistency">
+<h3>Code consistency<a class="headerlink" href="#code-consistency" title="Permalink to this headline">¶</a></h3>
+<p>It is also a great opportunity for us to check that whatever new code is being written is consistent with what already exists in the code base.</p>
+</div>
+<div class="section" id="shared-responsibility">
+<h3>Shared responsibility<a class="headerlink" href="#shared-responsibility" title="Permalink to this headline">¶</a></h3>
+<p>Approving a code review means that you are the second person who thinks this change is correct and a good idea. Doing this makes you responsible for the code change just as much as the author.</p>
+<p>It is the entire DevTools group who owns the code, not just the author. We write code as a group, not as individuals, because on the long-term it’s the group that maintains it.</p>
+<p>Having a review discussion shares the ownership of the code, because authors and reviewers all put a little bit of themselves in it, and the code that results isn’t just the result of one person’s work</p>
+</div>
+</div>
+<div class="section" id="what-should-be-avoided-in-code-reviews">
+<h2>What should be avoided in code reviews?<a class="headerlink" href="#what-should-be-avoided-in-code-reviews" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Style nits that a linter should ideally handle.</p></li>
+<li><p>Requests that are outside of the scope of the bug.</p></li>
+</ul>
+</div>
+<div class="section" id="what-are-some-good-practices-for-code-reviews">
+<h2>What are some good practices for code reviews?<a class="headerlink" href="#what-are-some-good-practices-for-code-reviews" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-empathetic-language">
+<h3>Use empathetic language.<a class="headerlink" href="#use-empathetic-language" title="Permalink to this headline">¶</a></h3>
+<p>More reading:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://amyciavolino.com/assets/MindfulCommunicationInCodeReviews.pdf">Mindful Communication in Code Reviews</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://mtlynch.io/human-code-reviews-1/">How to Do Code Reviews Like a Human</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="prefer-smaller-commits-over-large-monolithic-commits">
+<h3>Prefer smaller commits over large monolithic commits.<a class="headerlink" href="#prefer-smaller-commits-over-large-monolithic-commits" title="Permalink to this headline">¶</a></h3>
+<p>It makes it easier for the reviewer to provide a quality review. It’s also easier to get consensus on the change if that change is small. Finally, it’s easier to understand the risk, and find regressions.</p>
+</div>
+<div class="section" id="be-explicit">
+<h3>Be explicit<a class="headerlink" href="#be-explicit" title="Permalink to this headline">¶</a></h3>
+<p>Specifically, be explicit about required versus optional changes.</p>
+<p>Reviews are conversations, and the reviewee should feel comfortable on discussing and pushing back on changes before making them.</p>
+</div>
+<div class="section" id="be-quick">
+<h3>Be quick<a class="headerlink" href="#be-quick" title="Permalink to this headline">¶</a></h3>
+<p>As a reviewer, strive to answer in a couple of days, or at least under a week.</p>
+<p>If that is not possible, please update the bug to let the requester know when you’ll get to the review. Or forward it to someone else who has more time.</p>
+</div>
+<div class="section" id="ask-for-help">
+<h3>Ask for help<a class="headerlink" href="#ask-for-help" title="Permalink to this headline">¶</a></h3>
+<p>Know when you’re out of your comfort zone as a reviewer, and don’t hesitate to ask for an extra review to someone else.</p>
+<p>It’s fine, you can’t know everything, and the more people participate, the more everybody learns, and the more bugs we avoid.</p>
+</div>
+</div>
+<div class="section" id="how-do-we-communicate">
+<h2>How do we communicate?<a class="headerlink" href="#how-do-we-communicate" title="Permalink to this headline">¶</a></h2>
+<p>First and foremost, like in any Mozilla-run platforms or events, please abide by <a class="reference external" href="https://www.mozilla.org/en-US/about/governance/policies/participation/">the Community Participation Guidelines</a>.</p>
+<p>Maintainers should <strong>lead by example through their tone and language</strong>. We want to build an inclusive and safe environment for working together.</p>
+<p>As a reviewer, <strong>double-check your comments</strong>. Just because you’re a reviewer and think you have a better solution doesn’t mean that’s true. Assume <strong>the code author has spent more time thinking about this part of the code than you have</strong> (if you’re the reviewer) and might actually be right, even if you originally thought something was wrong. It doesn’t take long to look up the code and double-check.</p>
+<p><strong>Being inclusive</strong> is highly important. We shouldn’t make any assumptions about the person requesting a review, or about the person you’re asking a review from, and always provide as much information as required, in a way that is as inclusive as possible.</p>
+<p>The bug will live forever online, and many people will read it long after the author and reviewers are done.</p>
+<p>Talking over video/IRC/Slack is a great way to get buy-in and share responsibility over a solution. It is also helpful to resolve disagreement and work through issues in a more relaxed environment.</p>
+<p><strong>Do not criticize</strong> the reviewee, talk about the quality of the code on its own, and not directly how the reviewee wrote the code.</p>
+<p>Take the time to thank and point out good code changes.</p>
+<p><strong>Using “please” and “what do you think?”</strong> goes a long way in making others feel like colleagues, and not subordinates.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="landing-code.html" class="btn btn-neutral float-right" title="Landing code (i.e. getting code into Mozilla’s repository)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fixing-bugs.html" class="btn btn-neutral float-left" title="How to fix a bug" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

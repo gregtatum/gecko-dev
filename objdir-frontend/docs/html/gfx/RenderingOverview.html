@@ -1,0 +1,648 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Rendering Overview &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Rendering Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/gfx/RenderingOverview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rendering-overview">
+<h1><a class="toc-backref" href="#id1">Rendering Overview</a><a class="headerlink" href="#rendering-overview" title="Permalink to this headline">¶</a></h1>
+<p>This document is an overview of the steps to render a webpage, and how HTML
+gets transformed and broken down, step by step, into commands that can execute
+on the GPU.</p>
+<p>If you’re coming into the graphics team with not a lot of background
+in browsers, start here :)</p>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#rendering-overview" id="id1">Rendering Overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#high-level-overview" id="id2">High level overview</a></p>
+<ul>
+<li><p><a class="reference internal" href="#layout" id="id3">Layout</a></p></li>
+<li><p><a class="reference internal" href="#webrender" id="id4">WebRender</a></p></li>
+<li><p><a class="reference internal" href="#software" id="id5">Software</a></p></li>
+<li><p><a class="reference internal" href="#asynchronous-panning-and-zooming" id="id6">Asynchronous Panning And Zooming</a></p></li>
+<li><p><a class="reference internal" href="#a-few-more-details" id="id7">A Few More Details</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#webrender-in-detail" id="id8">WebRender In Detail</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-picture-tree" id="id9">The Picture Tree</a></p></li>
+<li><p><a class="reference internal" href="#the-spatial-tree" id="id10">The Spatial Tree</a></p></li>
+<li><p><a class="reference internal" href="#the-clip-tree" id="id11">The Clip Tree</a></p></li>
+<li><p><a class="reference internal" href="#rendertask-tree" id="id12">RenderTask Tree</a></p>
+<ul>
+<li><p><a class="reference internal" href="#caching" id="id13">Caching</a></p></li>
+<li><p><a class="reference internal" href="#interning" id="id14">Interning</a></p></li>
+<li><p><a class="reference internal" href="#callbacks" id="id15">Callbacks</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="high-level-overview">
+<h2><a class="toc-backref" href="#id2">High level overview</a><a class="headerlink" href="#high-level-overview" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="../_images/RenderingOverviewSimple.png"><img alt="../_images/RenderingOverviewSimple.png" src="../_images/RenderingOverviewSimple.png" style="width: 100%;" /></a>
+<div class="section" id="layout">
+<h3><a class="toc-backref" href="#id3">Layout</a><a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
+<p>Starting at the left in the above image, we have a document
+represented by a DOM - a Document Object Model.  A Javascript engine
+will execute JS code, either to make changes to the DOM, or to respond to
+events generated by the DOM (or do both).</p>
+<p>The DOM is a high level description and we don’t know what to draw or
+where until it is combined with a Cascading Style Sheet (CSS).
+Combining these two and figuring out what, where and how to draw
+things is the responsibility of the Layout team.  The
+DOM is converted into a hierarchical Frame Tree, which nests visual
+elements (boxes).  Each element points to some node in a Style Tree
+that describes what it should look like – color, transparency, etc.
+The result is that now we know exactly what to render where, what goes
+on top of what (layering and blending) and at what pixel coordinate.
+This is the Display List.</p>
+<p>The Display List is a light-weight data structure because it’s shallow
+– it mostly points back to the Frame Tree.  There are two problems
+with this.  First, we want to cross process boundaries at this point.
+Everything up until now happens in a Content Process (of which there are
+several).  Actual GPU rendering happens in a GPU Process (on some
+platforms).  Second, everything up until now was written in C++; but
+WebRender is written in Rust.  Thus the shallow Display List needs to
+be serialized in a completely self-contained binary blob that will
+survive Interprocess Communication (IPC) and a language switch (C++ to
+Rust).  The result is the WebRender Display List.</p>
+</div>
+<div class="section" id="webrender">
+<h3><a class="toc-backref" href="#id4">WebRender</a><a class="headerlink" href="#webrender" title="Permalink to this headline">¶</a></h3>
+<p>The GPU process receives the WebRender Display List blob and
+de-serializes it into a Scene.  This Scene contains more than the
+strictly visible elements; for example, to anticipate scrolling, we
+might have several paragraphs of text extending past the visible page.</p>
+<p>For a given viewport, the Scene gets culled and stripped down to a
+Frame.  This is also where we start preparing data structures for GPU
+rendering, for example getting some font glyphs into an atlas for
+rasterizing text.</p>
+<p>The final step takes the Frame and submits commands to the GPU to
+actually render it.  The GPU will execute the commands and composite
+the final page.</p>
+</div>
+<div class="section" id="software">
+<h3><a class="toc-backref" href="#id5">Software</a><a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h3>
+<p>The above is the new WebRender-enabled way to do things.  But in the
+schematic you’ll note a second branch towards the bottom: this is the
+legacy code path which does not use WebRender (nor Rust).  In this
+case, the Display List is converted into a Layer Tree. The purpose of
+this Tree is to try and avoid having to re-render absolutely
+everything when the page needs to be refreshed. For example, when
+scrolling we should be able to redraw the page by mostly shifting
+things around. However that requires those ‘things’ to still be around
+from last time we drew the page.  In other words, visual elements that
+are likely to be static and reusable need to be drawn into their own
+private “page” (a cache).  Then we can recombine (composite) all of
+these when redrawing the actual page.</p>
+<p>Figuring out which elements would be good candidates for this, and
+striking a balance between good performance versus excessive memory
+use, is the purpose of the Layer Tree.  Each ‘layer’ is a cached image
+of some element(s).  This logic also takes occlusion into account, eg.
+don’t allocate and render a layer for elements that are known to be
+completely obscured by something in front of them.</p>
+<p>Redrawing the page by combining the Layer Tree with any newly
+rasterized elements is the job of the Compositor.</p>
+<p>Even when a layer cannot be reused in its entirety, it is likely
+that only a small part of it was invalidated.  Thus there is an
+elaborate system for tracking dirty rectangles, starting an update by
+copying the area that can be salvaged, and then redrawing only what
+cannot.</p>
+<p>In fact, this idea can be extended to delta-tracking of display lists
+themselves. Traversing the layout tree and building a display list is
+also not cheap, so the code tries to partially invalidate and rebuild
+the display list incrementally when possible.
+This optimization is used both for non-WebRender and WebRender in
+fact.</p>
+</div>
+<div class="section" id="asynchronous-panning-and-zooming">
+<h3><a class="toc-backref" href="#id6">Asynchronous Panning And Zooming</a><a class="headerlink" href="#asynchronous-panning-and-zooming" title="Permalink to this headline">¶</a></h3>
+<p>Earlier we mentioned that a Scene might contain more elements than are
+strictly necessary for rendering what’s visible (the Frame).  The
+reason for that is Asynchronous Panning and Zooming, or APZ for short.
+The browser will feel much more responsive if scrolling &amp; zooming can
+short-circuit all of these data transformations and IPC boundaries,
+and instead directly update an offset of some layer and recomposite.
+(Think of late-latching in a VR context)</p>
+<p>This simple idea introduces a lot of complexity: how much extra do you
+rasterize, and in which direction?  How much memory can we afford?
+What about Javascript that responds to scroll events and perhaps does
+something ‘interesting’ with the page in return?  What about nested
+frames or nested scrollbars?  What if we scroll so much that we go
+past the boundaries of the Scene that we know about?</p>
+<p>See AsyncPanZoom.rst for all that and more.</p>
+</div>
+<div class="section" id="a-few-more-details">
+<h3><a class="toc-backref" href="#id7">A Few More Details</a><a class="headerlink" href="#a-few-more-details" title="Permalink to this headline">¶</a></h3>
+<p>Here’s another schematic which basically repeats the previous one, but
+showing a little bit more detail.  Note that the direction is reversed
+– the data flow starts at the right.  Sorry about that :)</p>
+<a class="reference internal image-reference" href="../_images/RenderingOverviewDetail.png"><img alt="../_images/RenderingOverviewDetail.png" src="../_images/RenderingOverviewDetail.png" style="width: 100%;" /></a>
+<p>Some things to note:</p>
+<ul class="simple">
+<li><p>there are multiple content processes, currently 4 of them.  This is
+for security reasons (sandboxing), stability (isolate crashes) and
+performance (multi-core machines);</p></li>
+<li><p>ideally each “webpage” would run in its own process for security;
+this is being developed under the term ‘fission’;</p></li>
+<li><p>there is only a single GPU process, if there is one at all;
+some platforms have it as part of the Parent;</p></li>
+<li><p>not shown here is the Extension process that isolates WebExtensions;</p></li>
+<li><p>for non-WebRender, rasterization happens in the Content Process, and
+we send entire Layers to the GPU/Compositor process (via shared
+memory, only using actual IPC for its metadata like width &amp; height);</p></li>
+<li><p>if the GPU process crashes (a bug or a driver issue) we can simply
+restart it, resend the display list, and the browser itself doesn’t crash;</p></li>
+<li><p>the browser UI is just another set of DOM+JS, albeit one that runs
+with elevated privileges. That is, its JS can do things that
+normal JS cannot.  It lives in the Parent Process, which then uses
+IPC to get it rendered, same as regular Content. (the IPC arrow also
+goes to WebRender Display List but is omitted to reduce clutter);</p></li>
+<li><p>UI events get routed to APZ first, to minimize latency. By running
+inside the GPU process, we may have access to data such
+as rasterized clipping masks that enables finer grained hit testing;</p></li>
+<li><p>the GPU process talks back to the content process; in particular,
+when APZ scrolls out of bounds, it asks Content to enlarge/shift the
+Scene with a new “display port”;</p></li>
+<li><p>we still use the GPU when we can for compositing even in the
+non-WebRender case;</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="webrender-in-detail">
+<h2><a class="toc-backref" href="#id8">WebRender In Detail</a><a class="headerlink" href="#webrender-in-detail" title="Permalink to this headline">¶</a></h2>
+<p>Converting a display list into GPU commands is broken down into a
+number of steps and intermediate data structures.</p>
+<a class="reference internal image-reference" href="../_images/RenderingOverviewTrees.png"><img alt="../_images/RenderingOverviewTrees.png" class="align-center" src="../_images/RenderingOverviewTrees.png" style="width: 75%;" /></a>
+<blockquote>
+<div><p><em>Each element in the picture tree points to exactly one node in the spatial
+tree. Only a few of these links are shown for clarity (the dashed lines).</em></p>
+</div></blockquote>
+<div class="section" id="the-picture-tree">
+<h3><a class="toc-backref" href="#id9">The Picture Tree</a><a class="headerlink" href="#the-picture-tree" title="Permalink to this headline">¶</a></h3>
+<p>The incoming display list uses “stacking contexts”.  For example, to
+render some text with a drop shadow, a display list will contain three
+items:</p>
+<ul class="simple">
+<li><p>“enable shadow” with some parameters such as shadow color, blur size, and offset;</p></li>
+<li><p>the text item;</p></li>
+<li><p>“pop all shadows” to deactivate shadows;</p></li>
+</ul>
+<p>WebRender will break this down into two distinct elements, or
+“pictures”.  The first represents the shadow, so it contains a copy of the
+text item, but modified to use the shadow’s color, and to shift the
+text by the shadow’s offset.  The second picture contains the original text
+to draw on top of the shadow.</p>
+<p>The fact that the first picture, the shadow, needs to be blurred, is a
+“compositing” property of the picture which we’ll deal with later.</p>
+<p>Thus, the stack-based display list gets converted into a list of pictures
+– or more generally, a hierarchy of pictures, since items are nested
+as per the original HTML.</p>
+<p>Example visual elements are a TextRun, a LineDecoration, or an Image
+(like a .png file).</p>
+<p>Compared to 3D rendering, the picture tree is similar to a scenegraph: it’s a
+parent/child hierarchy of all the drawable elements that make up the “scene”, in
+this case the webpage.  One important difference is that the transformations are
+stored in a separate tree, the spatial tree.</p>
+</div>
+<div class="section" id="the-spatial-tree">
+<h3><a class="toc-backref" href="#id10">The Spatial Tree</a><a class="headerlink" href="#the-spatial-tree" title="Permalink to this headline">¶</a></h3>
+<p>The nodes in the spatial tree represent coordinate transforms.  Every time the
+DOM hierarchy needs child elements to be transformed relative to their parent,
+we add a new Spatial Node to the tree. All those child elements will then point
+to this node as their “local space” reference (aka coordinate frame).  In
+traditional 3D terms, it’s a scenegraph but only containing transform nodes.</p>
+<p>The nodes are called frames, as in “coordinate frame”:</p>
+<ul class="simple">
+<li><p>a Reference Frame corresponds to a <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code>;</p></li>
+<li><p>a Scrolling Frame corresponds to a scrollable part of the page;</p></li>
+<li><p>a Sticky Frame corresponds to some fixed position CSS style.</p></li>
+</ul>
+<p>Each element in the picture tree then points to a spatial node inside this tree,
+so by walking up and down the tree we can find the absolute position of where
+each element should render (traversing down) and how large each element needs to
+be (traversing up).  Originally the transform information was part of the
+picture tree, as in a traditional scenegraph, but visual elements and their
+transforms were split apart for technical reasons.</p>
+<p>Some of these nodes are dynamic.  A scroll-frame can obviously scroll, but a
+Reference Frame might also use a property binding to enable a live link with
+JavaScript, for dynamic updates of (currently) the transform and opacity.</p>
+<p>Axis-aligned transformations (scales and translations) are considered “simple”,
+and are conceptually combined into a single “CoordinateSystem”.  When we
+encounter a non-axis-aligned transform, we start a new CoordinateSystem.  We
+start in CoordinateSystem 0 at the root, and would bump this to CoordinateSystem
+1 when we encounter a Reference Frame with a rotation or 3D transform, for
+example.  This would then be the CoordinateSystem index for all its children,
+until we run into another (nested) non-simple transform, and so on.  Roughly
+speaking, as long as we’re in the same CoordinateSystem, the transform stack is
+simple enough that we have a reasonable chance of being able to flatten it. That
+lets us directly rasterize text at its final scale for example, optimizing
+away some of the intermediate pictures (offscreen textures).</p>
+<p>The layout code positions elements relative to their parent.  Thus to position
+the element on the actual page, we need to walk the Spatial Tree all the way to
+the root and apply each transform; the result is a <code class="docutils literal notranslate"><span class="pre">LayoutToWorldTransform</span></code>.</p>
+<p>One final step transforms from World to Device coordinates, which deals with
+DPI scaling and such.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>WebRender term</p></th>
+<th class="head"><p>Rough analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Spatial Tree</p></td>
+<td><p>Scenegraph – transforms only</p></td>
+</tr>
+<tr class="row-odd"><td><p>Picture Tree</p></td>
+<td><p>Scenegraph – drawables only (grouping)</p></td>
+</tr>
+<tr class="row-even"><td><p>Spatial Tree Rootnode</p></td>
+<td><p>World Space</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layout space</p></td>
+<td><p>Local/Object Space</p></td>
+</tr>
+<tr class="row-even"><td><p>Picture</p></td>
+<td><p>RenderTarget (sort of; see RenderTask below)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layout-To-World transform</p></td>
+<td><p>Local-To-World transform</p></td>
+</tr>
+<tr class="row-even"><td><p>World-To-Device transform</p></td>
+<td><p>World-To-Clipspace transform</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-clip-tree">
+<h3><a class="toc-backref" href="#id11">The Clip Tree</a><a class="headerlink" href="#the-clip-tree" title="Permalink to this headline">¶</a></h3>
+<p>Finally, we also have a Clip Tree, which contains Clip Shapes. For
+example, a rounded corner div will produce a clip shape, and since
+divs can be nested, you end up with another tree.  By pointing at a Clip Shape,
+visual elements will be clipped against this shape plus all parent shapes above it
+in the Clip Tree.</p>
+<p>As with CoordinateSystems, a chain of simple 2D clip shapes can be collapsed
+into something that can be handled in the vertex shader, at very little extra
+cost.  More complex clips must be rasterized into a mask first, which we then
+sample from to <code class="docutils literal notranslate"><span class="pre">discard</span></code> in the pixel shader as needed.</p>
+<p>In summary, at the end of scene building the display list turned into
+a picture tree, plus a spatial tree that tells us what goes where
+relative to what, plus a clip tree.</p>
+</div>
+<div class="section" id="rendertask-tree">
+<h3><a class="toc-backref" href="#id12">RenderTask Tree</a><a class="headerlink" href="#rendertask-tree" title="Permalink to this headline">¶</a></h3>
+<p>Now in a perfect world we could simply traverse the picture tree and start
+drawing things: one drawcall per picture to render its contents, plus one
+drawcall to draw the picture into its parent.  However, recall that the first
+picture in our example is a “text shadow” that needs to be blurred.  We can’t
+just rasterize blurry text directly, so we need a number of steps or “render
+passes” to get the intended effect:</p>
+<a class="reference internal image-reference" href="../_images/RenderingOverviewBlurTask.png"><img alt="../_images/RenderingOverviewBlurTask.png" class="align-right" src="../_images/RenderingOverviewBlurTask.png" style="height: 400px;" /></a>
+<ul class="simple">
+<li><p>rasterize the text into an offscreen rendertarget;</p></li>
+<li><p>apply one or more downscaling passes until the blur radius is reasonable;</p></li>
+<li><p>apply a horizontal Gaussian blur;</p></li>
+<li><p>apply a vertical Gaussian blur;</p></li>
+<li><p>use the result as an input for whatever comes next, or blit it to
+its final position on the page (or more generally, on the containing
+parent surface/picture).</p></li>
+</ul>
+<p>In the general case, which passes we need and how many of them depends
+on how the picture is supposed to be composited (CSS filters, SVG
+filters, effects) and its parameters (very large vs. small blur
+radius, say).</p>
+<p>Thus, we walk the picture tree and build a render task tree: each high
+level abstraction like “blur me” gets broken down into the necessary
+render passes to get the effect.  The result is again a tree because a
+render pass can have multiple input dependencies (eg. blending).</p>
+<p>(Cfr. games, this has echoes of the Frostbite Framegraph in that it
+dynamically builds up a renderpass DAG and dynamically allocates storage
+for the outputs).</p>
+<p>If there are complicated clip shapes that need to be rasterized first,
+so their output can be sampled as a texture for clip/discard
+operations, that would also end up in this tree as a dependency… (I think?).</p>
+<p>Once we have the entire tree of dependencies, we analyze it to see
+which tasks can be combined into a single pass for efficiency.  We
+ping-pong rendertargets when we can, but sometimes the dependencies
+cut across more than one level of the rendertask tree, and some
+copying is necessary.</p>
+<p>Once we’ve figured out the passes and allocated storage for anything
+we wish to persist in the texture cache, we finally start rendering.</p>
+<p>When rasterizing the elements into the Picture’s offscreen texture, we’d
+position them by walking the transform hierarchy as far up as the picture’s
+transform node, resulting in a <code class="docutils literal notranslate"><span class="pre">Layout</span> <span class="pre">To</span> <span class="pre">Picture</span></code> transform.  The picture
+would then go onto the page using a <code class="docutils literal notranslate"><span class="pre">Picture</span> <span class="pre">To</span> <span class="pre">World</span></code> coordinate transform.</p>
+<div class="section" id="caching">
+<h4><a class="toc-backref" href="#id13">Caching</a><a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h4>
+<p>Just as with layers in the software rasterizer, it is not always necessary to
+redraw absolutely everything when parts of a document change.  The webrender
+equivalent of layers is Slices – a grouping of pictures that are expected to
+render and update together.  Slices are automatically created based on
+heuristics and layout hints/flags.</p>
+<p>Implementation wise, slices re-use a lot of the existing machinery for Pictures;
+in fact they’re implemented as a “Virtual picture” of sorts.  The similarities
+make sense: both need to allocate offscreen textures in a cache, both will
+position and render all their children into it, and both then draw themselves
+into their parent as part of the parent’s draw.</p>
+<p>If a slice isn’t expected to change much, we give it a TileCacheInstance. It is
+itself made up of Tiles, where each tile will track what’s in it, what’s
+changing, and if it needs to be invalidated and redrawn or not as a result.
+Thus the “damage” from changes can be localized to single tiles, while we
+salvage the rest of the cache.  If tiles keep seeing a lot of invalidations,
+they will recursively divide themselves in a quad-tree like structure to try and
+localize the invalidations.  (And conversely, they’ll recombine children if
+nothing is invalidating them “for a while”).</p>
+</div>
+<div class="section" id="interning">
+<h4><a class="toc-backref" href="#id14">Interning</a><a class="headerlink" href="#interning" title="Permalink to this headline">¶</a></h4>
+<p>To spot invalidated tiles, we need a fast way to compare its contents from the
+previous frame with the current frame.  To speed this up, we use interning;
+similar to string-interning, this means that each <code class="docutils literal notranslate"><span class="pre">TextRun</span></code>, <code class="docutils literal notranslate"><span class="pre">Decoration</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Image</span></code> and so on is registered in a repository (a <code class="docutils literal notranslate"><span class="pre">DataStore</span></code>) and
+consequently referred to by its unique ID. Cache contents can then be encoded as a
+list of IDs (one such list per internable element type).  Diffing is then just a
+fast list comparison.</p>
+</div>
+<div class="section" id="callbacks">
+<h4><a class="toc-backref" href="#id15">Callbacks</a><a class="headerlink" href="#callbacks" title="Permalink to this headline">¶</a></h4>
+<p>GPU text rendering assumes that the individual font-glyphs are already
+available in a texture atlas.  Likewise SVG is not being rendered on
+the GPU.  Both inputs are prepared during scene building; glyph
+rasterization via a thread pool from within Rust itself, and SVG via
+opaque callbacks (back to C++) that produce blobs.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

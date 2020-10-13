@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuring Build Options &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Configuring Build Options</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/configuring_build_options.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configuring-build-options">
+<h1>Configuring Build Options<a class="headerlink" href="#configuring-build-options" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This page is an import from MDN and the contents might be outdated</p></td>
+</tr>
+</tbody>
+</table>
+<p>This document details how to configure Firefox builds.
+Most of the time a <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file is not required. The default
+options are the most well-supported, so it is preferable to add as few
+options as possible. Please read the following directions carefully
+before building, and follow them in order. Skipping any step may cause
+the build to fail, or the built software to be unusable. Build options,
+including options not usable from the command-line, may appear in
+“<code class="docutils literal notranslate"><span class="pre">confvars.sh</span></code>” files in the source tree.</p>
+<div class="section" id="using-a-mozconfig-configuration-file">
+<h2>Using a <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> configuration file<a class="headerlink" href="#using-a-mozconfig-configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>The choice of which Mozilla application to build and other configuration
+options can be configured in a <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file. (It is possible to
+manually call <code class="docutils literal notranslate"><span class="pre">configure</span></code> with command-line options, but this is not
+recommended). The <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file should be in your source directory
+(that is, <code class="docutils literal notranslate"><span class="pre">/mozilla-central/mozconfig</span></code>).</p>
+<p>Create a blank <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">&quot;# My first mozilla config&quot;</span> &gt; mozconfig
+</pre></div>
+</div>
+<p>If your mozconfig isn’t in your source directory, you can also use the
+<code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> environment variable to specify the path to your
+<code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>. The path you specify <strong>must</strong> be an <strong>absolute</strong> path or
+else <code class="docutils literal notranslate"><span class="pre">client.mk</span></code> will not find it. This is useful if you choose to
+have multiple <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files for different applications or
+configurations (see below for a full example). Note that in the
+<code class="docutils literal notranslate"><span class="pre">export</span></code> example below the filename was not <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>. Regardless
+of the name of the actual file you use, we refer to this file as the
+<code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file in the examples below.</p>
+<p>Setting the <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> path:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">MOZCONFIG</span><span class="o">=</span><span class="nv">$HOME</span>/mozilla/mozconfig-firefox
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling the file <code class="docutils literal notranslate"><span class="pre">.mozconfig</span></code> (with a leading dot) is also
+supported, but this is not recommended because it may make the file
+harder to find. This will also help when troubleshooting because
+people will want to know which build options you have selected and
+will assume that you have put them in your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file.</p>
+</div>
+</div>
+<div class="section" id="mozconfig-contains-two-types-of-options">
+<h2><code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> contains two types of options:<a class="headerlink" href="#mozconfig-contains-two-types-of-options" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Options prefixed with <code class="docutils literal notranslate"><span class="pre">mk_add_options</span></code> are passed to
+<code class="docutils literal notranslate"><span class="pre">client.mk</span></code>. The most important of these is <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR</span></code>, which
+controls where your application gets built (also known as the object
+directory).</p></li>
+<li><p>Options prefixed with <code class="docutils literal notranslate"><span class="pre">ac_add_options</span></code> are passed to <code class="docutils literal notranslate"><span class="pre">configure</span></code>,
+and affect the build process.</p></li>
+</ul>
+</div>
+<div class="section" id="building-with-an-objdir">
+<h2>Building with an objdir<a class="headerlink" href="#building-with-an-objdir" title="Permalink to this headline">¶</a></h2>
+<p>This means that the source code and object files are not intermingled in
+your directory system and you can build multiple applications (e.g.,
+Firefox and Thunderbird) from the same source tree. If you do not
+specify a <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR</span></code>, it will be automatically set to
+<code class="docutils literal notranslate"><span class="pre">&#64;TOPSRCDIR&#64;/obj-&#64;CONFIG_GUESS&#64;</span></code>.</p>
+<p>If you need to re-run <code class="docutils literal notranslate"><span class="pre">configure</span></code>, the easiest way to do it is using
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">configure</span></code>; running <code class="docutils literal notranslate"><span class="pre">configure</span></code> manually is strongly
+discouraged.</p>
+<p>Adding the following line to your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> allows you to change the
+objdir:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>@TOPSRCDIR@/obj-@CONFIG_GUESS@
+</pre></div>
+</div>
+<p>It is a good idea to have your objdir name start with <code class="docutils literal notranslate"><span class="pre">obj</span></code> so that
+Mercurial ignores it.</p>
+<p>Sometimes it can be useful to build multiple versions of the source
+(such as with and without diagnostic asserts). To avoid the time it
+takes to do a full rebuild, you can create multiple <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files
+which specify different objdirs. For example, a <code class="docutils literal notranslate"><span class="pre">mozconfig-dbg</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>@TOPSRCDIR@/obj-ff-dbg
+ac_add_options --enable-debug
+</pre></div>
+</div>
+<p>and a <code class="docutils literal notranslate"><span class="pre">mozconfig-rel-opt</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>@TOPSRCDIR@/obj-ff-rel-opt
+ac_add_options --disable-debug
+ac_add_options --enable-optimize
+</pre></div>
+</div>
+<p>allow for building both versions by specifying the configuration via
+the <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ env <span class="nv">MOZCONFIG</span><span class="o">=</span>/path/to/mozconfig-dbg ./mach build
+$ env <span class="nv">MOZCONFIG</span><span class="o">=</span>/path/to/mozconfig-rel-opt ./mach build
+</pre></div>
+</div>
+<p>Don’t forget to set the <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> environment variable for the
+<code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">run</span></code> command as well.</p>
+<p>Be aware that changing your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> will require the configure
+process to be rerun and therefore the build will take considerably
+longer, so if you find yourself changing the same options regularly, it
+may be worth having a separate <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> for each. The main downside
+of this is that each objdir will take up a significant amount of space
+on disk.</p>
+</div>
+<div class="section" id="parallel-compilation">
+<h2>Parallel compilation<a class="headerlink" href="#parallel-compilation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note</strong>: The build system automatically makes an intelligent guess
+for how many CPU cores to use when building. The option below is
+typically not needed.</p>
+</div>
+<p>Most modern systems have multiple cores or CPUs, and they can be
+optionally used concurrently to make the build faster. The <code class="docutils literal notranslate"><span class="pre">-j</span></code> flag
+controls how many parallel builds will run concurrently. You will see
+(diminishing) returns up to a value approximately 1.5× to 2.0× the
+number of cores on your system.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mk_add_options <span class="nv">MOZ_MAKE_FLAGS</span><span class="o">=</span><span class="s2">&quot;-j4&quot;</span>
+</pre></div>
+</div>
+<p>If your machine is overheating, you might want to try a lower value,
+e.g. <code class="docutils literal notranslate"><span class="pre">-j1</span></code>.</p>
+</div>
+<div class="section" id="choose-an-application">
+<h2>Choose an application<a class="headerlink" href="#choose-an-application" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">--enable-application=application</span></code> flag is used to select an
+application to build. Firefox is the default.</p>
+<p>Choose one of the following options to add to your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file:</p>
+<dl>
+<dt>Browser (Firefox)</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">browser</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note</strong>: This is the default</p>
+</div>
+</dd>
+<dt>Mail (Thunderbird)</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">comm</span><span class="o">/</span><span class="n">mail</span>
+</pre></div>
+</div>
+</dd>
+<dt>Mozilla Suite (SeaMonkey)</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">suite</span>
+</pre></div>
+</div>
+</dd>
+<dt>Calendar (Lightning Extension, uses Thunderbird)</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">comm</span><span class="o">/</span><span class="n">mail</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">calendar</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="selecting-build-options">
+<h2>Selecting build options<a class="headerlink" href="#selecting-build-options" title="Permalink to this headline">¶</a></h2>
+<p>The build options you choose depends on what application you are
+building and what you will be using the build for. If you want to use
+the build regularly, you will want a release build without extra
+debugging information; if you are a developer who wants to hack the
+source code, you probably want a non-optimized build with extra
+debugging macros.</p>
+<p>There are many options recognized by the configure script which are
+special-purpose options intended for embedders or other special
+situations, and should not be used to build the full suite/XUL
+applications. The full list of options can be obtained by running
+<code class="docutils literal notranslate"><span class="pre">./configure</span> <span class="pre">--help</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not use a configure option unless you know what it does.
+The default values are usually the right ones. Each additional option
+you add to your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file reduces the chance that your build
+will compile and run correctly.</p>
+</div>
+<p>The following build options are very common:</p>
+<div class="section" id="optimization">
+<h3>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-optimize</span></code></dt><dd><p>Enables the default compiler optimization options</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note</strong>: This is enabled by default</p>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-optimize=-O2</span></code></dt><dd><p>Chooses particular compiler optimization options. In most cases, this
+will not give the desired results, unless you know the Mozilla
+codebase very well; note, however, that if you are building with the
+Microsoft compilers, you probably <strong>do</strong> want this as <code class="docutils literal notranslate"><span class="pre">-O1</span></code> will
+optimize for size, unlike GCC.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-debug</span></code></dt><dd><p>Enables assertions in C++ and JavaScript, plus other debug-only code.
+This can significantly slow a build, but it is invaluable when
+writing patches. <strong>People developing patches (especially in C++)
+should generally use this option.</strong></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--disable-optimize</span></code></dt><dd><p>Disables compiler optimization. This makes it much easier to step
+through code in a debugger.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-debug-js-modules</span></code></dt><dd><p>Enable only JavaScript assertions. This is useful when working
+locally on JavaScript-powered components like the DevTools. This will
+help catch any errors introduced into the JS code, with less of a
+performance impact compared to the <code class="docutils literal notranslate"><span class="pre">--enable-debug</span></code> option.</p>
+</dd>
+</dl>
+<p>You can make an optimized build with debugging symbols. See <a class="reference internal" href="building_with_debug_symbols.html#building-with-debug-symbols"><span class="std std-ref">Building
+with Debug Symbols</span></a>.</p>
+</div>
+<div class="section" id="extensions">
+<h3>Extensions<a class="headerlink" href="#extensions" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-extensions=default|all|ext1,ext2,-skipext3</span></code></dt><dd><p>There are many optional pieces of code that live in {{
+Source(“extensions/”) }}. Many of these extensions are now considered
+an integral part of the browsing experience. There is a default list
+of extensions for the suite, and each app-specific <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>
+specifies a different default set. Some extensions are not compatible
+with all apps, for example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cookie</span></code> is not compatible with thunderbird</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">typeaheadfind</span></code> is not compatible with any toolkit app (Firefox,</dt><dd><p>Thunderbird)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Unless you know which extensions are compatible with which apps, do
+not use the <code class="docutils literal notranslate"><span class="pre">--enable-extensions</span></code> option; the build system will
+automatically select the proper default set of extensions.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--disable-tests</span></code></dt><dd><p>By default, many auxiliary test applications are built, which can
+help debug and patch the mozilla source. Disabling these tests can
+speed build time and reduce disk space considerably. Developers
+should generally not use this option.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="localization">
+<h3>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">mk_add_options</span> <span class="pre">MOZ_CO_LOCALES=ISOcode</span></code></dt><dd><p>TBD.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-ui-locale=ISOcode</span></code></dt><dd><p>TBD.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--with-l10n-base=/path/to/base/dir</span></code></dt><dd><p>TBD.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="other-options">
+<h3>Other Options<a class="headerlink" href="#other-options" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">mk_add_options</span> <span class="pre">AUTOCLOBBER=1</span></code></dt><dd><p>If a clobber would be required before a build, this will cause mach
+to clobber and continue with the build instead of asking the user to
+manually clobber and exiting.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-crashreporter</span></code></dt><dd><p>This enables the machinery that allows Firefox to write out a
+<a class="reference external" href="https://docs.microsoft.com/en-us/windows/desktop/Debug/minidump-files">minidump</a>
+files when crashing as well as the tools to process and submit crash
+reports to Mozilla. After enabling the crash reporter in your local
+build, you will need to run mach with the –enable-crash-reporter
+(note the extra dash) to enable it at runtime, like so:
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">run</span> <span class="pre">--enable-crash-reporter</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-warnings-as-errors</span></code></dt><dd><p>This makes compiler warnings into errors which fail the build. This
+can be useful since certain warnings coincide with reviewbot lints
+which must be fixed before merging.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--with-ccache=/path/to/.mozbuild/sccache/sccache</span></code></dt><dd><p>This enables sccache to speed up builds. This saves a considerable
+amount of time directly after a clobber build, so pulling in new
+updates and rebasing is less time-consuming.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="example-mozconfig-files">
+<span id="id1"></span><h2>Example <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> Files<a class="headerlink" href="#example-mozconfig-files" title="Permalink to this headline">¶</a></h2>
+<p>Mozilla’s official builds use mozconfig files from the appropriate
+directory within each repository.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files are taken from production builds
+and are provided as examples only. It is recommended to use the default
+build options, and only change the properties from the list above as
+needed. The production builds aren’t really appropriate for local
+builds.”</p>
+</div>
+<ul>
+<li><p class="rubric" id="firefox-2c-default-release-configuration">Firefox, <a class="reference external" href="http://hg.mozilla.org/mozilla-central/file/tip/browser/config/mozconfigs/macosx64/debug">Debugging Build (Mac OS X
+64bits)</a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="building-multiple-applications-from-the-same-source-tree">
+<h2>Building multiple applications from the same source tree<a class="headerlink" href="#building-multiple-applications-from-the-same-source-tree" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to build multiple applications from the same source tree,
+as long as you <a class="reference external" href="#Building_with_an_Objdir">use a different objdir</a> for
+each application.</p>
+<p>You can either create multiple <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files, or alternatively,
+use the <code class="docutils literal notranslate"><span class="pre">MOZ_BUILD_PROJECTS</span></code> make option.</p>
+<div class="section" id="using-moz-build-projects-in-a-single-mozconfig">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">MOZ_BUILD_PROJECTS</span></code> in a single <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code><a class="headerlink" href="#using-moz-build-projects-in-a-single-mozconfig" title="Permalink to this headline">¶</a></h3>
+<p>To use <code class="docutils literal notranslate"><span class="pre">MOZ_BUILD_PROJECTS</span></code>, you must specify a <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR</span></code> and a
+<code class="docutils literal notranslate"><span class="pre">MOZ_BUILD_PROJECTS</span></code> make option, containing space separated names.
+Each name can be an arbitrary directory name. For each name, a
+subdirectory is created under the toplevel objdir. You then need to use
+the <code class="docutils literal notranslate"><span class="pre">ac_add_app_options</span></code> with the specified names to enable different
+applications in each object directory.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">optimize</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">obj</span><span class="o">-</span><span class="nd">@CONFIG_GUESS</span><span class="o">@</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_BUILD_PROJECTS</span><span class="o">=</span><span class="s2">&quot;browser mail&quot;</span>
+<span class="n">ac_add_app_options</span> <span class="n">browser</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">browser</span>
+<span class="n">ac_add_app_options</span> <span class="n">mail</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">comm</span><span class="o">/</span><span class="n">mail</span>
+</pre></div>
+</div>
+<p>If you want to build only one project using this <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>, use the
+following command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MOZ_CURRENT_PROJECT</span><span class="o">=</span><span class="n">browser</span> <span class="o">./</span><span class="n">mach</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>This will build only the browser.</p>
+</div>
+<div class="section" id="using-multiple-mozconfig-files">
+<h3>Using multiple mozconfig files<a class="headerlink" href="#using-multiple-mozconfig-files" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, you may want to create separate <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files.</p>
+<p>As an example, the following steps can be used to build Firefox and
+Thunderbird. You should first create three <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mozconfig-common</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># add common options here, such as making an optimized release build</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_MAKE_FLAGS</span><span class="o">=</span><span class="s2">&quot;-j4&quot;</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">optimize</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mozconfig-firefox</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># include the common mozconfig</span>
+<span class="o">.</span> <span class="o">./</span><span class="n">mozconfig</span><span class="o">-</span><span class="n">common</span>
+
+<span class="c1"># Build Firefox</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=</span><span class="nd">@TOPSRCDIR</span><span class="o">@/</span><span class="n">obj</span><span class="o">-</span><span class="n">firefox</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">browser</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mozconfig-thunderbird</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># include the common mozconfig</span>
+<span class="o">.</span> <span class="o">./</span><span class="n">mozconfig</span><span class="o">-</span><span class="n">common</span>
+
+<span class="c1"># Build Thunderbird</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=</span><span class="nd">@TOPSRCDIR</span><span class="o">@/</span><span class="n">obj</span><span class="o">-</span><span class="n">thunderbird</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">comm</span><span class="o">/</span><span class="n">mail</span>
+</pre></div>
+</div>
+<p>To build Firefox, run the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MOZCONFIG</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">mozconfig</span><span class="o">-</span><span class="n">firefox</span>
+<span class="o">./</span><span class="n">mach</span> <span class="n">build</span>
+</pre></div>
+</div>
+<p>To build Thunderbird, run the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MOZCONFIG</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">mozconfig</span><span class="o">-</span><span class="n">thunderbird</span>
+<span class="o">./</span><span class="n">mach</span> <span class="n">build</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-mozconfigwrapper">
+<h3>Using mozconfigwrapper<a class="headerlink" href="#using-mozconfigwrapper" title="Permalink to this headline">¶</a></h3>
+<p>Mozconfigwrapper is similar to using multiple mozconfig files except
+that it abstracts and hides them so you don’t have to worry about where
+they live or which ones you’ve created. It also saves you from having to
+export the MOZCONFIG variable each time. For information on installing
+and configuring mozconfigwrapper, see
+<a class="reference external" href="https://github.com/ahal/mozconfigwrapper">https://github.com/ahal/mozconfigwrapper</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

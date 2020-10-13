@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Use Counters &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="WebExtension API for Telemetry" href="webextension-api.html" />
+    <link rel="prev" title="Origin Telemetry" href="origin.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Data collection</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="scalars.html">Scalars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histograms.html">Histograms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="events.html">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measuring-time.html">Measuring elapsed time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom-pings.html">Submitting custom pings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experiments.html">Experiment Annotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uptake.html">Uptake Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="origin.html">Origin Telemetry</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Use Counters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="webextension-api.html">WebExtension API for Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#browser-usage-telemetry">Browser Usage Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#version-history">Version History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Data collection</a> &raquo;</li>
+        
+      <li>Use Counters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/collection/use-counters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="use-counters">
+<h1>Use Counters<a class="headerlink" href="#use-counters" title="Permalink to this headline">¶</a></h1>
+<p>Use counters are used to report Telemetry statistics on whether individual documents
+use a given WebIDL method or attribute (getters and setters are reported separately), CSS
+property, or deprecated DOM operation.  Custom use counters can also be
+defined to test frequency of things that don’t fall into one of those
+categories.</p>
+<p>As of Firefox 65 the collection of Use Counters is enabled on all channels.</p>
+<div class="section" id="the-api">
+<h2>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h2>
+<p>The process to add a new use counter is different depending on the type feature that needs
+to be measured. In general, for each defined use counter, two separate boolean histograms are generated:</p>
+<ul class="simple">
+<li><p>one describes the use of the tracked feature for individual documents and has the <code class="docutils literal notranslate"><span class="pre">_DOCUMENT</span></code> suffix;</p></li>
+<li><p>the other describes the use of the same thing for top-level pages (basically what we think of as a <em>web page</em>) and has the <code class="docutils literal notranslate"><span class="pre">_PAGE</span></code> suffix.</p></li>
+</ul>
+<p>Using two histograms is particularly suited to measure how many sites would be affected by
+removing the tracked feature.</p>
+<p>Example scenarios:</p>
+<ul class="simple">
+<li><p>Site <em>X</em> triggers use counter <em>Y</em>.  We report “used” (true) in both the <code class="docutils literal notranslate"><span class="pre">_DOCUMENT</span></code> and <code class="docutils literal notranslate"><span class="pre">_PAGE</span></code> histograms.</p></li>
+<li><p>Site <em>X</em> does not trigger use counter <em>Y</em>.  We report “unused” (false) in both the <code class="docutils literal notranslate"><span class="pre">_DOCUMENT</span></code> and <code class="docutils literal notranslate"><span class="pre">_PAGE</span></code> histograms.</p></li>
+<li><p>Site <em>X</em> has an iframe for site <em>W</em>.  Site <em>W</em> triggers use counter <em>Y</em>, but site <em>X</em> does not.  We report one “used” and one “unused” in the individual <code class="docutils literal notranslate"><span class="pre">_DOCUMENT</span></code> histogram and one “used” in the top-level <code class="docutils literal notranslate"><span class="pre">_PAGE</span></code> histogram.</p></li>
+</ul>
+<div class="section" id="deprecated-dom-operations">
+<h3>Deprecated DOM operations<a class="headerlink" href="#deprecated-dom-operations" title="Permalink to this headline">¶</a></h3>
+<p>Use counters for deprecated DOM operations are declared in the <a class="reference external" href="https://searchfox.org/mozilla-central/source/dom/base/nsDeprecatedOperationList.h">nsDeprecatedOperationList.h</a> file. The counters are
+registered through the <code class="docutils literal notranslate"><span class="pre">DEPRECATED_OPERATION(DeprecationReference)</span></code> macro. The provided
+parameter must have the same value of the deprecation note added to the <em>IDL</em> file.</p>
+<p>See this <a class="reference external" href="https://hg.mozilla.org/mozilla-central/rev/e30a357b25f1">changeset</a> for a sample
+deprecated operation.</p>
+<div class="section" id="css-properties">
+<h4>CSS Properties<a class="headerlink" href="#css-properties" title="Permalink to this headline">¶</a></h4>
+<p>Use counters for CSS properties are generated for every property Gecko supports automatically, and are counted via StyleUseCounters (<a class="reference external" href="https://searchfox.org/mozilla-central/rev/7ed8e2d3d1d7a1464ba42763a33fd2e60efcaedc/servo/components/style/use_counters/mod.rs">Rust code</a>, <a class="reference external" href="https://searchfox.org/mozilla-central/rev/7ed8e2d3d1d7a1464ba42763a33fd2e60efcaedc/dom/base/Document.h#5077">C++ code</a>).</p>
+</div>
+</div>
+<div class="section" id="the-usecounters-registry">
+<h3>The UseCounters registry<a class="headerlink" href="#the-usecounters-registry" title="Permalink to this headline">¶</a></h3>
+<p>Use counters for WebIDL methods/attributes are registered in the <a class="reference external" href="https://searchfox.org/mozilla-central/source/dom/base/UseCounters.conf">UseCounters.conf</a> file.  The format of this file is very strict. Each line can be:</p>
+<ol class="arabic simple">
+<li><p>a blank line</p></li>
+<li><p>a comment, which is a line that begins with <code class="docutils literal notranslate"><span class="pre">//</span></code></p></li>
+<li><p>one of four possible use counter declarations:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span> <span class="pre">&lt;IDL</span> <span class="pre">interface</span> <span class="pre">name&gt;.&lt;IDL</span> <span class="pre">operation</span> <span class="pre">name&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute</span> <span class="pre">&lt;IDL</span> <span class="pre">interface</span> <span class="pre">name&gt;.&lt;IDL</span> <span class="pre">attribute</span> <span class="pre">name&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">custom</span> <span class="pre">&lt;any</span> <span class="pre">valid</span> <span class="pre">identifier&gt;</span> <span class="pre">&lt;description&gt;</span></code></p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="custom-use-counters">
+<h4>Custom use counters<a class="headerlink" href="#custom-use-counters" title="Permalink to this headline">¶</a></h4>
+<p>The &lt;description&gt; for custom counters will be appended to “When a document ” or “When a page “, so phrase it appropriately.  For instance, “constructs a Foo object” or “calls Document.bar(‘some value’)”.  It may contain any character (including whitespace).  Custom counters are incremented when SetUseCounter(eUseCounter_custom_MyName) is called on a Document object.</p>
+</div>
+<div class="section" id="webidl-methods-and-attributes">
+<h4>WebIDL methods and attributes<a class="headerlink" href="#webidl-methods-and-attributes" title="Permalink to this headline">¶</a></h4>
+<p>Additionally to having a new entry added to the <a class="reference external" href="https://searchfox.org/mozilla-central/source/dom/base/UseCounters.conf">UseCounters.conf</a> file, WebIDL methods and attributes must have a <code class="docutils literal notranslate"><span class="pre">[UseCounter]</span></code> extended attribute in the Web IDL file in order for the counters to be incremented.</p>
+<p>Both additions are required because generating things from bindings codegen and ensuring all the dependencies are correct would have been rather difficult.</p>
+</div>
+</div>
+</div>
+<div class="section" id="the-processor-script">
+<h2>The processor script<a class="headerlink" href="#the-processor-script" title="Permalink to this headline">¶</a></h2>
+<p>The definition files are processed twice:</p>
+<ul class="simple">
+<li><p>once to generate two C++ headers files, included by the web platform components (e.g. DOM) that own the features to be tracked;</p></li>
+<li><p>the other time by the Telemetry component, to generate the histogram definitions that make the collection system work.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The histograms that are generated out of use counters are set to <em>never</em> expire and are collected from Firefox release. Note that before Firefox 65 they were only collected on pre-release.</p>
+</div>
+<div class="section" id="gen-usecounters-py">
+<h3>gen-usecounters.py<a class="headerlink" href="#gen-usecounters-py" title="Permalink to this headline">¶</a></h3>
+<p>This script is called by the build system to generate:</p>
+<ul class="simple">
+<li><p>the <code class="docutils literal notranslate"><span class="pre">UseCounterList.h</span></code> header for the WebIDL, out of the definition files.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="interpreting-the-data">
+<h2>Interpreting the data<a class="headerlink" href="#interpreting-the-data" title="Permalink to this headline">¶</a></h2>
+<p>The histogram as accumulated on the client only puts values into the 1 bucket, meaning that
+the use counter directly reports if a feature was used but it does not directly report if
+it isn’t used.
+The values accumulated within a use counter should be considered proportional to
+<code class="docutils literal notranslate"><span class="pre">CONTENT_DOCUMENTS_DESTROYED</span></code> and <code class="docutils literal notranslate"><span class="pre">TOP_LEVEL_CONTENT_DOCUMENTS_DESTROYED</span></code> (see
+<a class="reference external" href="https://searchfox.org/mozilla-central/rev/1a973762afcbc5066f73f1508b0c846872fe3952/dom/base/Document.cpp#15059-15081">here</a>). The difference between the values of these two histograms
+and the related use counters below tell us how many pages did <em>not</em> use the feature in question.
+For instance, if we see that a given session has destroyed 30 content documents, but a
+particular use counter shows only a count of 5, we can infer that the use counter was <em>not</em>
+used in 25 of those 30 documents.</p>
+<p>Things are done this way, rather than accumulating a boolean flag for each use counter,
+to avoid sending histograms for features that don’t get widely used. Doing things in this
+fashion means smaller telemetry payloads and faster processing on the server side.</p>
+<div class="section" id="version-history">
+<h3>Version History<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Firefox 65:</p>
+<ul>
+<li><p>Enable Use Counters on release channel (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1477433">bug 1477433</a>)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="webextension-api.html" class="btn btn-neutral float-right" title="WebExtension API for Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="origin.html" class="btn btn-neutral float-left" title="Origin Telemetry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

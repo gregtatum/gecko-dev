@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugger.Environment &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugger.Frame" href="Debugger.Frame.html" />
+    <link rel="prev" title="Debugger.Source" href="Debugger.Source.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugger.Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessor-properties-of-the-debugger-environment-prototype-object">Accessor Properties of the Debugger.Environment Prototype Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-properties-of-the-debugger-environment-prototype-object">Function Properties of the Debugger.Environment Prototype Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>Debugger.Environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Debugger.Environment.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugger-environment">
+<h1>Debugger.Environment<a class="headerlink" href="#debugger-environment" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance represents a lexical environment,
+associating names with variables. Each <a class="reference internal" href="Debugger.Frame.html"><span class="doc">Debugger.Frame</span></a> instance
+representing a debuggee frame has an associated environment object
+describing the variables in scope in that frame; and each
+<a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instance representing a debuggee function has an
+environment object representing the environment the function has closed
+over.</p>
+<p>ECMAScript environments form a tree, in which each local environment is
+parented by its enclosing environment (in ECMAScript terms, its ‘outer’
+environment). We say an environment <i>binds</i> an identifier if that
+environment itself associates the identifier with a variable, independently
+of its outer environments. We say an identifier is <i>in scope</i> in an
+environment if the identifier is bound in that environment or any enclosing
+environment.</p>
+<p>SpiderMonkey creates <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instances as needed as the
+debugger inspects stack frames and function objects; calling
+<code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> as a function or constructor raises a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>
+exception.</p>
+<p>SpiderMonkey creates exactly one <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance for each
+environment it presents via a given <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance:
+if the debugger encounters the same environment through two different
+routes (perhaps two functions have closed over the same environment),
+SpiderMonkey presents the same <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance to the
+debugger each time. This means that the debugger can use the <code class="docutils literal notranslate"><span class="pre">==</span></code> operator
+to recognize when two <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instances refer to the same
+environment in the debuggee, and place its own properties on a
+<code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance to store metadata about particular
+environments.</p>
+<p>(If more than one <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance is debugging the
+same code, each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> gets a separate
+<code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance for a given environment. This allows the
+code using each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance to place whatever
+properties it likes on its own <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instances,
+without worrying about interfering with other debuggers.)</p>
+<p>If a <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance’s referent is not a debuggee
+environment, then attempting to access its properties (other than
+<code class="docutils literal notranslate"><span class="pre">inspectable</span></code>) or call any its methods throws an instance of <code class="docutils literal notranslate"><span class="pre">Error</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instances protect their referents from the
+garbage collector; as long as the <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance is
+live, the referent remains live. Garbage collection has no visible
+effect on <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instances.</p>
+<div class="section" id="accessor-properties-of-the-debugger-environment-prototype-object">
+<h2>Accessor Properties of the Debugger.Environment Prototype Object<a class="headerlink" href="#accessor-properties-of-the-debugger-environment-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance inherits the following accessor
+properties from its prototype:</p>
+<div class="section" id="inspectable">
+<h3><code class="docutils literal notranslate"><span class="pre">inspectable</span></code><a class="headerlink" href="#inspectable" title="Permalink to this headline">¶</a></h3>
+<p>True if this environment is a debuggee environment, and can therefore
+be inspected. False otherwise. All other properties and methods of
+<code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instances throw if applied to a non-inspectable
+environment.</p>
+</div>
+<div class="section" id="type">
+<h3><code class="docutils literal notranslate"><span class="pre">type</span></code><a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
+<p>The type of this environment object, one of the following values:</p>
+<ul class="simple">
+<li><p>“declarative”, indicating that the environment is a declarative
+environment record. Function calls, calls to <code class="docutils literal notranslate"><span class="pre">eval</span></code>, <code class="docutils literal notranslate"><span class="pre">let</span></code> blocks,
+<code class="docutils literal notranslate"><span class="pre">catch</span></code> blocks, and the like create declarative environment records.</p></li>
+<li><p>“object”, indicating that the environment’s bindings are the
+properties of an object. The global object and DOM elements appear in
+the chain of environments via object environments. (Note that <code class="docutils literal notranslate"><span class="pre">with</span></code>
+statements have their own environment type.)</p></li>
+<li><p>“with”, indicating that the environment was introduced by a <code class="docutils literal notranslate"><span class="pre">with</span></code>
+statement.</p></li>
+</ul>
+</div>
+<div class="section" id="scopekind">
+<h3><code class="docutils literal notranslate"><span class="pre">scopeKind</span></code><a class="headerlink" href="#scopekind" title="Permalink to this headline">¶</a></h3>
+<p>If this is a declarative environment, a string describing the kind of scope
+which this environment is associated with, or <code class="docutils literal notranslate"><span class="pre">null</span></code> for other types of
+environments.  There is an assortment of possible scope kinds which can be
+generated, with a selection of possible values below.  Unlike the type
+accessor, the categorization this performs is specific to SpiderMonkey’s
+implementation, and not derived from distinctions made in the ECMAScript
+language specification.</p>
+<ul class="simple">
+<li><p>“function”, indicating the top level body scope of a function for
+arguments and ‘var’ variables.</p></li>
+<li><p>“function lexical”, indicating the top level lexical scope in a function.</p></li>
+</ul>
+</div>
+<div class="section" id="parent">
+<h3><code class="docutils literal notranslate"><span class="pre">parent</span></code><a class="headerlink" href="#parent" title="Permalink to this headline">¶</a></h3>
+<p>The environment that encloses this one (the “outer” environment, in
+ECMAScript terminology), or <code class="docutils literal notranslate"><span class="pre">null</span></code> if this is the outermost environment.</p>
+</div>
+<div class="section" id="object">
+<h3><code class="docutils literal notranslate"><span class="pre">object</span></code><a class="headerlink" href="#object" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instance referring to the object whose
+properties this environment reflects. If this is a declarative
+environment record, this accessor throws a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> (since
+declarative environment records have no such object). Both <code class="docutils literal notranslate"><span class="pre">&quot;object&quot;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&quot;with&quot;</span></code> environments have <code class="docutils literal notranslate"><span class="pre">object</span></code> properties that provide the
+object whose properties they reflect as variable bindings.</p>
+</div>
+<div class="section" id="calleescript">
+<h3><code class="docutils literal notranslate"><span class="pre">calleeScript</span></code><a class="headerlink" href="#calleescript" title="Permalink to this headline">¶</a></h3>
+<p>If this environment represents the variable environment (the top-level
+environment within the function, which receives <code class="docutils literal notranslate"><span class="pre">var</span></code> definitions) for
+a call to a function <i>f</i>, then this property’s value is a
+[<code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code>][script] instance referring to <i>f</i>’s script. Otherwise,
+this property’s value is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<div class="section" id="optimizedout">
+<h3><code class="docutils literal notranslate"><span class="pre">optimizedOut</span></code><a class="headerlink" href="#optimizedout" title="Permalink to this headline">¶</a></h3>
+<p>True if this environment is optimized out. False otherwise. For example,
+functions whose locals are never aliased may present optimized-out
+environments. When true, <code class="docutils literal notranslate"><span class="pre">getVariable</span></code> returns an ordinary JavaScript
+object whose <code class="docutils literal notranslate"><span class="pre">optimizedOut</span></code> property is true on all bindings, and
+<code class="docutils literal notranslate"><span class="pre">setVariable</span></code> throws a <code class="docutils literal notranslate"><span class="pre">ReferenceError</span></code>.</p>
+</div>
+</div>
+<div class="section" id="function-properties-of-the-debugger-environment-prototype-object">
+<h2>Function Properties of the Debugger.Environment Prototype Object<a class="headerlink" href="#function-properties-of-the-debugger-environment-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>The methods described below may only be called with a <code class="docutils literal notranslate"><span class="pre">this</span></code> value
+referring to a <code class="docutils literal notranslate"><span class="pre">Debugger.Environment</span></code> instance; they may not be used as
+methods of other kinds of objects.</p>
+<div class="section" id="names">
+<h3><code class="docutils literal notranslate"><span class="pre">names()</span></code><a class="headerlink" href="#names" title="Permalink to this headline">¶</a></h3>
+<p>Return an array of strings giving the names of the identifiers bound by
+this environment. The result does not include the names of identifiers
+bound by enclosing environments.</p>
+</div>
+<div class="section" id="getvariable-name">
+<h3><code class="docutils literal notranslate"><span class="pre">getVariable(name)</span></code><a class="headerlink" href="#getvariable-name" title="Permalink to this headline">¶</a></h3>
+<p>Return the value of the variable bound to <i>name</i> in this
+environment, or <code class="docutils literal notranslate"><span class="pre">undefined</span></code> if this environment does not bind
+<i>name</i>. <i>Name</i> must be a string that is a valid ECMAScript
+identifier name. The result is a debuggee value.</p>
+<p>JavaScript engines often omit variables from environments, to save space
+and reduce execution time. If the given variable should be in scope, but
+<code class="docutils literal notranslate"><span class="pre">getVariable</span></code> is unable to produce its value, it returns an ordinary
+JavaScript object (not a <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instance) whose
+<code class="docutils literal notranslate"><span class="pre">optimizedOut</span></code> property is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>This is not an <a class="reference external" href="Debugger.Frame.html#invocation-functions-and-debugger-frames">invocation function</a>;
+if this call would cause debuggee code to run (say, because the
+environment is a <code class="docutils literal notranslate"><span class="pre">&quot;with&quot;</span></code> environment, and <i>name</i> refers to an
+accessor property of the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement’s operand), this call throws a
+<a class="reference external" href="Conventions.html#the-debugger-debuggeewouldrun-exception"><code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code></a>
+exception.</p>
+</div>
+<div class="section" id="setvariable-name-value">
+<h3><code class="docutils literal notranslate"><span class="pre">setVariable(name,</span> <span class="pre">value)</span></code><a class="headerlink" href="#setvariable-name-value" title="Permalink to this headline">¶</a></h3>
+<p>Store <i>value</i> as the value of the variable bound to <i>name</i> in
+this environment. <i>Name</i> must be a string that is a valid
+ECMAScript identifier name; <i>value</i> must be a debuggee value.</p>
+<p>If this environment binds no variable named <i>name</i>, throw a
+<code class="docutils literal notranslate"><span class="pre">ReferenceError</span></code>.</p>
+<p>This is not an <a class="reference external" href="Debugger.Frame.html#invocation-functions-and-debugger-frames">invocation function</a>;
+if this call would cause debuggee code to run, this call throws a
+<a class="reference external" href="Conventions.html#the-debugger-debuggeewouldrun-exception"><code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code></a>
+exception.</p>
+</div>
+<div class="section" id="find-name">
+<h3><code class="docutils literal notranslate"><span class="pre">find(name)</span></code><a class="headerlink" href="#find-name" title="Permalink to this headline">¶</a></h3>
+<p>Return a reference to the innermost environment, starting with this
+environment, that binds <i>name</i>. If <i>name</i> is not in scope in
+this environment, return <code class="docutils literal notranslate"><span class="pre">null</span></code>. <i>Name</i> must be a string whose
+value is a valid ECMAScript identifier name.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger.Frame.html" class="btn btn-neutral float-right" title="Debugger.Frame" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Debugger.Source.html" class="btn btn-neutral float-left" title="Debugger.Source" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

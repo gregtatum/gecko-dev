@@ -1,0 +1,1087 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>AddonManager Reference &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="System Add-ons Overview" href="SystemAddons.html" />
+    <link rel="prev" title="Add-on Manager" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Add-on Manager</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">AddonManager Reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemAddons.html">System Add-ons Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="SystemAddons.html#firefox-system-add-on-update-protocol">Firefox System Add-on Update Protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">Add-on Manager</a> &raquo;</li>
+        
+      <li>AddonManager Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/mozapps/extensions/addon-manager/AddonManager.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="addonmanager-reference">
+<h1>AddonManager Reference<a class="headerlink" href="#addonmanager-reference" title="Permalink to this headline">¶</a></h1>
+<dl class="js class">
+<dt id="AddonManager">
+<em class="property">class </em><code class="sig-name descname">AddonManager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the public API that UI and developers should be calling. All methods
+just forward to AddonManagerInternal.</p>
+<dl class="js function">
+<dt id="AddonManager.addAddonListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addAddonListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addAddonListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new AddonListener if the listener is not already registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> (<em>AddonManagerListener</em>) – The AddonListener to add.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.addInstallListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addInstallListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addInstallListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new InstallListener if the listener is not already registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> – The InstallListener to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.addManagerListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addManagerListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addManagerListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new AddonManagerListener if the listener is not already registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> (<em>AddonManagerListener</em>) – The listener to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.addStartupChange">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addStartupChange</code><span class="sig-paren">(</span><em class="sig-param">aType</em>, <em class="sig-param">aID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addStartupChange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a add-on to the list of detected changes for this startup. If
+addStartupChange is called multiple times for the same add-on in the same
+startup then only the most recent change will be remembered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aType</strong> – The type of change as a string. Providers can define their own types of changes or use the existing defined STARTUP_CHANGE_* constants</p></li>
+<li><p><strong>aID</strong> – The ID of the add-on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.addTypeListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addTypeListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addTypeListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new TypeListener if the listener is not already registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> (<em>TypeListener</em>) – The TypeListener to add</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.addUpgradeListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">addUpgradeListener</code><span class="sig-paren">(</span><em class="sig-param">aInstanceID</em>, <em class="sig-param">aCallback</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.addUpgradeListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds new or overrides existing UpgradeListener.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aInstanceID</strong> – The instance ID of an addon to register a listener for.</p></li>
+<li><p><strong>aCallback</strong> – The callback to invoke when updates are available for this addon.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if there is no addon matching the instanceID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.backgroundUpdateCheck">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">backgroundUpdateCheck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.backgroundUpdateCheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a background update check by starting an update for all add-ons
+that can be updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>null</strong> – Promise Resolves when the background update check is complete (the resulting addon installations may still be in progress).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="AddonManager.beforeShutdown">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">beforeShutdown</code><a class="headerlink" href="#AddonManager.beforeShutdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Async shutdown barrier which blocks the start of AddonManager
+shutdown. Callers should add blockers to this barrier if they need
+to complete add-on manager operations before it shuts down.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.callAddonListeners">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">callAddonListeners</code><span class="sig-paren">(</span><em class="sig-param">aMethod</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.callAddonListeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all registered AddonListeners with an event. Any parameters after
+the method parameter are passed to the listener.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMethod</strong> – The method on the listeners to call</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.callInstallListeners">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">callInstallListeners</code><span class="sig-paren">(</span><em class="sig-param">aMethod</em>, <em class="sig-param">aExtraListeners</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.callInstallListeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all registered InstallListeners with an event. Any parameters after
+the extraListeners parameter are passed to the listener.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMethod</strong> – The method on the listeners to call</p></li>
+<li><p><strong>aExtraListeners</strong> – An optional array of extra InstallListeners to also call</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>false if any of the listeners returned false, true otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.callManagerListeners">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">callManagerListeners</code><span class="sig-paren">(</span><em class="sig-param">aMethod</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.callManagerListeners" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all registered AddonManagerListeners with an event. Any parameters
+after the method parameter are passed to the listener.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMethod</strong> – The method on the listeners to call</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.callProviders">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">callProviders</code><span class="sig-paren">(</span><em class="sig-param">aMethod</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.callProviders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls a method on all registered providers if it exists and consumes any
+thrown exception. Return values are ignored. Any parameters after the
+method parameter are passed to the provider’s method.
+WARNING: Do not use for asynchronous calls; callProviders() does not
+invoke callbacks if provider methods throw synchronous exceptions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMethod</strong> – The method name to call</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><code class="xref any docutils literal notranslate"><span class="pre">callProvider</span></code></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.escapeAddonURI">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">escapeAddonURI</code><span class="sig-paren">(</span><em class="sig-param">aAddon</em>, <em class="sig-param">aUri</em>, <em class="sig-param">aAppVersion</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.escapeAddonURI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces %…% strings in an addon url (update and updateInfo) with
+appropriate values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aAddon</strong> – The Addon representing the add-on</p></li>
+<li><p><strong>aUri</strong> – The string representation of the URI to escape</p></li>
+<li><p><strong>aAppVersion</strong> – The optional application version to use for %APP_VERSION%</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The appropriately escaped URI.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getActiveAddons">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getActiveAddons</code><span class="sig-paren">(</span><em class="sig-param">aTypes</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getActiveAddons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets active add-ons of specific types.</p>
+<p>This is similar to getAddonsByTypes() but it may return a limited
+amount of information about only active addons.  Consequently, it
+can be implemented by providers using only immediately available
+data as opposed to getAddonsByTypes which may require I/O).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aTypes</strong> – An optional array of types to retrieve. Each type is a string name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAddonByID">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAddonByID</code><span class="sig-paren">(</span><em class="sig-param">aID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAddonByID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets an add-on with a specific ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aID</strong> (<em>string</em>) – The ID of the add-on to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if the aID argument is not specified</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Promise</strong> – resolves with the found Addon or null if no such add-on exists. Never rejects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAddonBySyncGUID">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAddonBySyncGUID</code><span class="sig-paren">(</span><em class="sig-param">aGUID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAddonBySyncGUID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously get an add-on with a specific Sync GUID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aGUID</strong> – String GUID of add-on to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if the aGUID argument is not specified</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAddonsByIDs">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAddonsByIDs</code><span class="sig-paren">(</span><em class="sig-param">aIDs</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAddonsByIDs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets an array of add-ons.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aIDs</strong> – The array of IDs to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if the aIDs argument is not specified</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Promise</strong> –</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAddonsByTypes">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAddonsByTypes</code><span class="sig-paren">(</span><em class="sig-param">aTypes</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAddonsByTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets add-ons of specific types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aTypes</strong> – An optional array of types to retrieve. Each type is a string name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAllAddons">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAllAddons</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAllAddons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets all installed add-ons.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getAllInstalls">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getAllInstalls</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getAllInstalls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets all current AddonInstalls.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getInstallForFile">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getInstallForFile</code><span class="sig-paren">(</span><em class="sig-param">aFile</em>, <em class="sig-param">aMimetype</em>, <em class="sig-param">aTelemetryInfo</em>, <em class="sig-param">aUseSystemLocation</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getInstallForFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets an AddonInstall for an nsIFile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aFile</strong> – The nsIFile where the add-on is located</p></li>
+<li><p><strong>aMimetype</strong> – An optional mimetype hint for the add-on</p></li>
+<li><p><strong>aTelemetryInfo</strong> – An optional object which provides details about the installation source included in the addon manager telemetry events.</p></li>
+<li><p><strong>aUseSystemLocation</strong> – If true the addon is installed into the system profile location.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if the aFile or aCallback arguments are not specified</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getInstallForURL">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getInstallForURL</code><span class="sig-paren">(</span><em class="sig-param">aUrl</em>, <em class="sig-param">aOptions={}</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getInstallForURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets an AddonInstall for a URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aUrl</strong> – The string represenation of the URL where the add-on is located</p></li>
+<li><p><strong>aOptions</strong> (<em>Object</em>) – Additional options for this install</p></li>
+<li><p><strong>aOptions.hash</strong> (<em>string</em>) – An optional hash of the add-on</p></li>
+<li><p><strong>aOptions.name</strong> (<em>string</em>) – An optional placeholder name while the add-on is being downloaded</p></li>
+<li><p><strong>aOptions.icons</strong> (<em>string|Object</em>) – Optional placeholder icons while the add-on is being downloaded</p></li>
+<li><p><strong>aOptions.version</strong> (<em>string</em>) – An optional placeholder version while the add-on is being downloaded</p></li>
+<li><p><strong>aOptions.browser</strong> (<em>XULElement</em>) – An optional &lt;browser&gt; element for download permissions prompts.</p></li>
+<li><p><strong>aOptions.triggeringPrincipal</strong> (<em>nsIPrincipal</em>) – The principal which is attempting to install the add-on.</p></li>
+<li><p><strong>aOptions.telemetryInfo</strong> (<em>Object</em>) – An optional object which provides details about the installation source included in the addon manager telemetry events.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>if aUrl is not specified or if an optional argument of an improper type is passed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getInstallsByTypes">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getInstallsByTypes</code><span class="sig-paren">(</span><em class="sig-param">aTypes</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getInstallsByTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Asynchronously gets all current AddonInstalls optionally limiting to a list
+of types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aTypes</strong> – An optional array of types to retrieve. Each type is a string name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p>If the aCallback argument is not specified</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getPreferredIconURL">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getPreferredIconURL</code><span class="sig-paren">(</span><em class="sig-param">aAddon</em>, <em class="sig-param">aSize</em>, <em class="sig-param">aWindow</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getPreferredIconURL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an icon from the icon set provided by the add-on
+that is closest to the specified size.</p>
+<p>The optional window parameter will be used to determine
+the screen resolution and select a more appropriate icon.
+Calling this method with 48px on retina screens will try to
+match an icon of size 96px.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aAddon</strong> – An addon object, meaning: An object with either an icons property that is a key-value list of icon size and icon URL, or an object having an iconURL property.</p></li>
+<li><p><strong>aSize</strong> – Ideal icon size in pixels</p></li>
+<li><p><strong>aWindow</strong> – Optional window object for determining the correct scale.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>String</strong> – The absolute URL of the icon or null if the addon doesn’t have icons</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.getStartupChanges">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">getStartupChanges</code><span class="sig-paren">(</span><em class="sig-param">aType</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.getStartupChanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an array of add-on IDs that changed during the most recent startup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aType</strong> – The type of startup change to get</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An array of add-on IDs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="AddonManager.init">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">init</code><a class="headerlink" href="#AddonManager.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.installAddonFromAOM">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">installAddonFromAOM</code><span class="sig-paren">(</span><em class="sig-param">browser</em>, <em class="sig-param">uri</em>, <em class="sig-param">install</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.installAddonFromAOM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts installation of an AddonInstall created from add-ons manager
+front-end code (e.g., drag-and-drop of xpis or “Install Add-on from File”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>browser</strong> – The browser element where the installation was initiated</p></li>
+<li><p><strong>uri</strong> – The URI of the page where the installation was initiated</p></li>
+<li><p><strong>install</strong> – The AddonInstall to be installed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.installAddonFromWebpage">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">installAddonFromWebpage</code><span class="sig-paren">(</span><em class="sig-param">aMimetype</em>, <em class="sig-param">aBrowser</em>, <em class="sig-param">aInstallingPrincipal</em>, <em class="sig-param">aInstall</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.installAddonFromWebpage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts installation of an AddonInstall notifying the registered
+web install listener of a blocked or started install.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMimetype</strong> – The mimetype of the add-on being installed</p></li>
+<li><p><strong>aBrowser</strong> – The optional browser element that started the install</p></li>
+<li><p><strong>aInstallingPrincipal</strong> – The nsIPrincipal that initiated the install</p></li>
+<li><p><strong>aInstall</strong> – The AddonInstall to be installed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.installBuiltinAddon">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">installBuiltinAddon</code><span class="sig-paren">(</span><em class="sig-param">aBase</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.installBuiltinAddon" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Installs an add-on from a built-in location</dt><dd><p>(ie a resource: url referencing assets shipped with the application)</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aBase</strong> – A string containing the base URL.  Must be a resource: URL.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a Promise that resolves when the addon is installed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.installTemporaryAddon">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">installTemporaryAddon</code><span class="sig-paren">(</span><em class="sig-param">aFile</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.installTemporaryAddon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Installs a temporary add-on from a local file or directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aFile</strong> – An nsIFile for the file or directory of the add-on to be temporarily installed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a Promise that rejects if the add-on is not a valid restartless add-on or if the same ID is already temporarily installed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.isInstallAllowed">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">isInstallAllowed</code><span class="sig-paren">(</span><em class="sig-param">aMimetype</em>, <em class="sig-param">aInstallingPrincipal</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.isInstallAllowed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a particular source is allowed to install add-ons of a
+given mimetype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMimetype</strong> – The mimetype of the add-on</p></li>
+<li><p><strong>aInstallingPrincipal</strong> – The nsIPrincipal that initiated the install</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the source is allowed to install this mimetype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.isInstallAllowedByPolicy">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">isInstallAllowedByPolicy</code><span class="sig-paren">(</span><em class="sig-param">aInstallingPrincipal</em>, <em class="sig-param">aInstall</em>, <em class="sig-param">explicit</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.isInstallAllowedByPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether a particular source is allowed to install add-ons based
+on policy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aInstallingPrincipal</strong> – The nsIPrincipal that initiated the install</p></li>
+<li><p><strong>aInstall</strong> – The AddonInstall to be installed</p></li>
+<li><p><strong>explicit</strong> – If this is set, we only return true if the source is explicitly blocked via policy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>boolean By default, returns true if the source is blocked by policy or there is no policy. If explicit is set, only returns true of the source is blocked by policy, false otherwise. This is needed for handling inverse cases.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.isInstallEnabled">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">isInstallEnabled</code><span class="sig-paren">(</span><em class="sig-param">aMimetype</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.isInstallEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether installation is enabled for a particular mimetype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aMimetype</strong> – The mimetype to check</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if installation is enabled for the mimetype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="AddonManager.isReady">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">isReady</code><a class="headerlink" href="#AddonManager.isReady" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean indicating whether AddonManager startup has completed.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.markProviderSafe">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">markProviderSafe</code><span class="sig-paren">(</span><em class="sig-param">aProvider</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.markProviderSafe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark a provider as safe to access via AddonManager APIs, before its
+startup has completed.</p>
+<p>Normally a provider isn’t marked as safe until after its (synchronous)
+startup() method has returned. Until a provider has been marked safe,
+it won’t be used by any of the AddonManager APIs. markProviderSafe()
+allows a provider to mark itself as safe during its startup; this can be
+useful if the provider wants to perform tasks that block startup, which
+happen after its required initialization tasks and therefore when the
+provider is in a safe state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aProvider</strong> – Provider object to mark safe</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.maybeInstallBuiltinAddon">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">maybeInstallBuiltinAddon</code><span class="sig-paren">(</span><em class="sig-param">aID</em>, <em class="sig-param">aVersion</em>, <em class="sig-param">aBase</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.maybeInstallBuiltinAddon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Like <cite>installBuiltinAddon</cite>, but only installs the addon at <cite>aBase</cite>
+if an existing built-in addon with the ID <cite>aID</cite> and version doesn’t
+already exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aID</strong> (<em>string</em>) – The ID of the add-on being registered.</p></li>
+<li><p><strong>aVersion</strong> (<em>string</em>) – The version of the add-on being registered.</p></li>
+<li><p><strong>aBase</strong> (<em>string</em>) – A string containing the base URL.  Must be a resource: URL.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a Promise that resolves when the addon is installed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.notifyAddonChanged">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">notifyAddonChanged</code><span class="sig-paren">(</span><em class="sig-param">aID</em>, <em class="sig-param">aType</em>, <em class="sig-param">aPendingRestart</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.notifyAddonChanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies all providers that an add-on has been enabled when that type of
+add-on only supports a single add-on being enabled at a time. This allows
+the providers to disable theirs if necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aID</strong> – The ID of the enabled add-on</p></li>
+<li><p><strong>aType</strong> – The type of the enabled add-on</p></li>
+<li><p><strong>aPendingRestart</strong> – A boolean indicating if the change will only take place the next time the application is restarted</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.observe">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">observe</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.observe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notified when a preference we’re interested in has changed.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><code class="xref any docutils literal notranslate"><span class="pre">nsIObserver</span></code></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.registerProvider">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">registerProvider</code><span class="sig-paren">(</span><em class="sig-param">aProvider</em>, <em class="sig-param">aTypes</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.registerProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a new AddonProvider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aProvider</strong> (<em>string</em>) – The provider to register</p></li>
+<li><p><strong>'Array' ].&lt;string&gt; aTypes</strong> (<em>[</em>) – An optional array of add-on types</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeAddonListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeAddonListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeAddonListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an AddonListener if the listener is registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> (<em>object</em>) – The AddonListener to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeInstallListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeInstallListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeInstallListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an InstallListener if the listener is registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> – The InstallListener to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeManagerListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeManagerListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeManagerListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an AddonManagerListener if the listener is registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> (<em>AddonManagerListener</em>) – The listener to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeStartupChange">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeStartupChange</code><span class="sig-paren">(</span><em class="sig-param">aType</em>, <em class="sig-param">aID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeStartupChange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a startup change for an add-on.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aType</strong> – The type of change</p></li>
+<li><p><strong>aID</strong> – The ID of the add-on</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeTypeListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeTypeListener</code><span class="sig-paren">(</span><em class="sig-param">aListener</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeTypeListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an TypeListener if the listener is registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aListener</strong> – The TypeListener to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.removeUpgradeListener">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">removeUpgradeListener</code><span class="sig-paren">(</span><em class="sig-param">aInstanceID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.removeUpgradeListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes an UpgradeListener if the listener is registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aInstanceID</strong> – The instance ID of the addon to remove</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.shouldAutoUpdate">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">shouldAutoUpdate</code><span class="sig-paren">(</span><em class="sig-param">aAddon</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.shouldAutoUpdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines whether an Addon should auto-update or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aAddon</strong> – The Addon representing the add-on</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the addon should auto-update, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.shutdownManager">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">shutdownManager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.shutdownManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shuts down the addon manager and all registered providers, this must clean
+up everything in order for automated tests to fake restarts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>null</strong> – Promise that resolves when all providers and dependent modules have finished shutting down</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.shutdownState">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">shutdownState</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.shutdownState" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report the current state of asynchronous shutdown</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.startup">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">startup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.startup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes the AddonManager, loading any known providers and initializing
+them.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.uninstallSystemProfileAddon">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">uninstallSystemProfileAddon</code><span class="sig-paren">(</span><em class="sig-param">aID</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.uninstallSystemProfileAddon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uninstall an addon from the system profile location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aID</strong> (<em>string</em>) – The ID of the addon to remove.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A promise that resolves when the addon is uninstalled.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.unregisterProvider">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">unregisterProvider</code><span class="sig-paren">(</span><em class="sig-param">aProvider</em><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.unregisterProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregisters an AddonProvider.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aProvider</strong> – The provider to unregister</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Whatever the provider’s ‘shutdown’ method returns (if anything). For providers that have async shutdown methods returning Promises, the caller should wait for that Promise to resolve.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.updateAddonAppDisabledStates">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">updateAddonAppDisabledStates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.updateAddonAppDisabledStates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies all providers they need to update the appDisabled property for
+their add-ons in response to an application change such as a blocklist
+update.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="AddonManager.updateAddonRepositoryData">
+<code class="sig-prename descclassname">AddonManager.</code><code class="sig-name descname">updateAddonRepositoryData</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#AddonManager.updateAddonRepositoryData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifies all providers that the repository has updated its data for
+installed add-ons.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="SystemAddons.html" class="btn btn-neutral float-right" title="System Add-ons Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Add-on Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

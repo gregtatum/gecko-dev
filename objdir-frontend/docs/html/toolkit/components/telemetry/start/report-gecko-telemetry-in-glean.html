@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to report Gecko Telemetry in engine-gecko via Glean &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Concepts" href="../concepts/index.html" />
+    <link rel="prev" title="Adding a new Telemetry probe" href="adding-a-new-probe.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Getting started</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="adding-a-new-probe.html">Adding a new Telemetry probe</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How to report Gecko Telemetry in engine-gecko via Glean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#further-reading">Further Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Getting started</a> &raquo;</li>
+        
+      <li>How to report Gecko Telemetry in engine-gecko via Glean</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/start/report-gecko-telemetry-in-glean.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-report-gecko-telemetry-in-engine-gecko-via-glean">
+<h1>How to report Gecko Telemetry in engine-gecko via Glean<a class="headerlink" href="#how-to-report-gecko-telemetry-in-engine-gecko-via-glean" title="Permalink to this headline">¶</a></h1>
+<p>In <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Gecko">Gecko</a>, the <a class="reference external" href="../index.html">Telemetry</a> system collects various measures of Gecko performance, hardware, usage and customizations.
+When the Gecko engine is embedded in Android products through any of the <a class="reference external" href="https://github.com/mozilla-mobile/android-components/tree/master/components/browser">engine-gecko-*</a> components of <a class="reference external" href="https://mozac.org/">Android Components</a> (there is one component for each Gecko channel),
+and the product is also using the <a class="reference external" href="https://docs.telemetry.mozilla.org/concepts/glean/glean.html">Glean SDK</a> for data collection, then Gecko metrics can be reported in <a class="reference external" href="https://mozilla.github.io/glean/book/user/pings/index.html">Glean pings</a>.
+This article provides an overview of what is needed to report any existing or new Telemetry data collection in Gecko to Glean.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Every new or changed data collection in Firefox needs a <a class="reference external" href="https://wiki.mozilla.org/Firefox/Data_Collection">data collection review</a> from a Data Steward.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Histograms are reported out of Gecko with a mechanism called <a class="reference external" href="../internals/geckoview-streaming.html">streaming Telemetry</a>.
+This mechanism intercepts Gecko calls to tagged histograms and batches and bubbles them up through the <a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/index.html">the GeckoView RuntimeTelemetry delegate</a>.
+The <code class="docutils literal notranslate"><span class="pre">engine-gecko-*</span></code> components provide implementations of the delegate which dispatches Gecko metrics to the Glean SDK.</p>
+</div>
+<div class="section" id="reporting-an-existing-histogram">
+<h2>Reporting an existing histogram<a class="headerlink" href="#reporting-an-existing-histogram" title="Permalink to this headline">¶</a></h2>
+<p>Exfiltrating existing histograms is a relatively straightforward process made up of a few small steps.</p>
+<div class="section" id="tag-histograms-in-histograms-json">
+<h3>Tag histograms in <code class="docutils literal notranslate"><span class="pre">Histograms.json</span></code><a class="headerlink" href="#tag-histograms-in-histograms-json" title="Permalink to this headline">¶</a></h3>
+<p>Accumulations to non-tagged histograms are ignored if streaming Telemetry is enabled.
+To tag a histogram you must add the <cite>geckoview_streaming</cite> product to the <a class="reference internal" href="../collection/histograms.html#histogram-products"><span class="std std-ref">products list</span></a>  in the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/toolkit/components/telemetry/Histograms.json">Histograms.json file</a> .</p>
+</div>
+<div class="section" id="add-glean-metrics-to-metrics-yaml">
+<h3>Add Glean metrics to <code class="docutils literal notranslate"><span class="pre">metrics.yaml</span></code><a class="headerlink" href="#add-glean-metrics-to-metrics-yaml" title="Permalink to this headline">¶</a></h3>
+<p>The Glean SDK provides a number of <a class="reference external" href="https://mozilla.github.io/glean/book/user/metrics/index.html">higher level metric types</a> to map Gecko histogram metrics to.
+However, Gecko histograms lack the metadata to infer the Glean SDK destination type manually.
+For this reason, engineers must pick the most appropriate Gecko SDK type themselves.</p>
+<p>Read more about how to add Glean SDK metrics to the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/toolkit/components/telemetry/geckoview/streaming/metrics.yaml">metrics.yaml file</a> in the <a class="reference external" href="https://mozilla.github.io/glean/book/user/adding-new-metrics.html">Glean SDK documentation</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Every new or changed data collection in Firefox needs a <a class="reference external" href="https://wiki.mozilla.org/Firefox/Data_Collection">data collection review</a> from a Data Steward.</p>
+</div>
+</div>
+<div class="section" id="example-reporting-checkerboard-duration">
+<h3>Example: reporting <code class="docutils literal notranslate"><span class="pre">CHECKERBOARD_DURATION</span></code><a class="headerlink" href="#example-reporting-checkerboard-duration" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to add the relevant tag (i.e. <code class="docutils literal notranslate"><span class="pre">geckoview_streaming</span></code>) to the histogram’s <code class="docutils literal notranslate"><span class="pre">products</span></code> key in the <code class="docutils literal notranslate"><span class="pre">Histograms.json</span></code> file.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;CHECKERBOARD_DURATION&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;record_in_processes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;gpu&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;products&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;firefox&quot;</span><span class="p">,</span> <span class="s2">&quot;fennec&quot;</span><span class="p">,</span> <span class="s2">&quot;geckoview&quot;</span><span class="p">,</span> <span class="s2">&quot;geckoview_streaming&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;alert_emails&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gfx-telemetry-alerts@mozilla.com&quot;</span><span class="p">,</span> <span class="s2">&quot;kgupta@mozilla.com&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;bug_numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1238040</span><span class="p">,</span> <span class="mi">1539309</span><span class="p">],</span>
+    <span class="nt">&quot;releaseChannelCollection&quot;</span><span class="p">:</span> <span class="s2">&quot;opt-out&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;expires_in_version&quot;</span><span class="p">:</span> <span class="s2">&quot;73&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;exponential&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;high&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span>
+    <span class="nt">&quot;n_buckets&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Duration of a checkerboard event in milliseconds&quot;</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Histograms with <code class="docutils literal notranslate"><span class="pre">&quot;releaseChannelCollection&quot;:</span> <span class="pre">&quot;opt-in&quot;</span></code>, or without a <code class="docutils literal notranslate"><span class="pre">releaseChannelCollection</span></code> specified in its definition are only collected on Gecko built for <code class="docutils literal notranslate"><span class="pre">&quot;nightly&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;beta&quot;</span></code> channels.</p>
+</div>
+<p>Since this is a timing distribution, with a milliseconds time unit, it can be added as follows to the <code class="docutils literal notranslate"><span class="pre">metrics.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gfx.content.checkerboard</span><span class="p">:</span>
+  <span class="nt">duration</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">timing_distribution</span>
+    <span class="nt">time_unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">millisecond</span>
+    <span class="nt">gecko_datapoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CHECKERBOARD_DURATION</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">Duration of a checkerboard event.</span>
+    <span class="nt">bugs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1238040</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1539309</span>
+    <span class="nt">data_reviews</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https://example.com/data-review-url-example</span>
+    <span class="nt">notification_emails</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gfx-telemetry-alerts@mozilla.com</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">kgupta@mozilla.com</span>
+    <span class="nt">expires</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2019-12-09</span> <span class="c1"># Gecko 73</span>
+</pre></div>
+</div>
+<p>Please note that the <code class="docutils literal notranslate"><span class="pre">gecko_datapoint</span></code> property will need to point to the name of the histogram exactly as written in the <code class="docutils literal notranslate"><span class="pre">Histograms.json</span></code> file. It is also important to note that <code class="docutils literal notranslate"><span class="pre">time_unit</span></code> needs to match the unit of the values that are recorded.</p>
+</div>
+<div class="section" id="example-recording-without-losing-process-information">
+<h3>Example: recording without losing process information<a class="headerlink" href="#example-recording-without-losing-process-information" title="Permalink to this headline">¶</a></h3>
+<p>If a histogram is being recorded in multiple processes, care must be taken to guarantee that data always comes from the same process throughout the lifetime of a Gecko instance,
+otherwise all the data will be added to the same Glean SDK metric.
+If process exclusivity cannot be guaranteed, then a histogram (and the respective Glean SDK metric) must be created for each relevant process.
+Consider the <code class="docutils literal notranslate"><span class="pre">IPC_MESSAGE_SIZE2</span></code> histogram:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;IPC_MESSAGE_SIZE2&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;record_in_processes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="s2">&quot;gpu&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;products&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;firefox&quot;</span><span class="p">,</span> <span class="s2">&quot;fennec&quot;</span><span class="p">,</span> <span class="s2">&quot;geckoview&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;alert_emails&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hchang@mozilla.com&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;bug_numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1353159</span><span class="p">],</span>
+    <span class="nt">&quot;expires_in_version&quot;</span><span class="p">:</span> <span class="s2">&quot;60&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;exponential&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;high&quot;</span><span class="p">:</span> <span class="mi">8000000</span><span class="p">,</span>
+    <span class="nt">&quot;n_buckets&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="nt">&quot;keyed&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Measures the size of all IPC messages sent that are &gt;= 4096 bytes.&quot;</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Data for this histogram could come, at the same time, from the <code class="docutils literal notranslate"><span class="pre">&quot;main&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;content&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;gpu&quot;</span></code> processes, since it is measuring IPC itself.
+By adding the <code class="docutils literal notranslate"><span class="pre">geckoview_streaming</span></code> product, data coming from all the processes would flow in the same Glean SDK metric and would loose the information about the process it came from.
+This problem can be solved by creating three histograms, one for each originating process.
+Here is, for example, the histogram for the GPU process:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;IPC_MESSAGE_SIZE2_GPU&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;record_in_processes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gpu&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;products&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;geckoview_streaming&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;alert_emails&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;hchang@mozilla.com&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;bug_numbers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1353159</span><span class="p">],</span>
+    <span class="nt">&quot;expires_in_version&quot;</span><span class="p">:</span> <span class="s2">&quot;60&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;exponential&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;high&quot;</span><span class="p">:</span> <span class="mi">8000000</span><span class="p">,</span>
+    <span class="nt">&quot;n_buckets&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Measures the size of all IPC messages sent that are &gt;= 4096 bytes.&quot;</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And the related Glean SDK metric</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ipc.message</span><span class="p">:</span>
+  <span class="nt">gpu_size</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">memory_distribution</span>
+    <span class="nt">memory_unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">byte</span>
+    <span class="nt">gecko_datapoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">IPC_MESSAGE_SIZE2_GPU</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">Measures the size of the IPC messages from/to the GPU process that are &gt;= 4096 bytes.</span>
+    <span class="nt">bugs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1353159</span>
+    <span class="nt">data_reviews</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https://example.com/data-review-url-example</span>
+    <span class="nt">notification_emails</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">hchang@mozilla.com</span>
+    <span class="nt">expires</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2019-12-09</span> <span class="c1"># Gecko 73</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ipc.message.gpu_size</span></code> metric in the Glean SDK will now contain all the data coming exclusively from the GPU process.
+Similar definitions can be used for the other processes.</p>
+</div>
+</div>
+<div class="section" id="reporting-a-scalar">
+<h2>Reporting a scalar<a class="headerlink" href="#reporting-a-scalar" title="Permalink to this headline">¶</a></h2>
+<p>Exfiltrating existing boolean, string or uint scalars, or adding new ones, is a relatively straightforward process made up of a few small steps.</p>
+<div class="section" id="tag-scalars-in-scalars-yaml">
+<h3>Tag scalars in <code class="docutils literal notranslate"><span class="pre">Scalars.yaml</span></code><a class="headerlink" href="#tag-scalars-in-scalars-yaml" title="Permalink to this headline">¶</a></h3>
+<p>Accumulations to non-tagged scalars are ignored if streaming Telemetry is enabled.
+To tag a scalar you must add the <cite>geckoview_streaming</cite> product to the <a class="reference internal" href="../collection/scalars.html#scalars-required-fields"><span class="std std-ref">products list</span></a>  in the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/toolkit/components/telemetry/Scalars.yaml">Scalars.yaml file</a> .</p>
+</div>
+<div class="section" id="id1">
+<h3>Add Glean metrics to <code class="docutils literal notranslate"><span class="pre">metrics.yaml</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The Glean SDK provides the <a class="reference external" href="https://mozilla.github.io/glean/book/user/metrics/quantity.html">Quantity</a>, <a class="reference external" href="https://mozilla.github.io/glean/book/user/metrics/boolean.html">Boolean</a> and <a class="reference external" href="https://mozilla.github.io/glean/book/user/metrics/string.html">String</a> metric types to map Gecko scalars to.
+However, Gecko scalars lack the metadata to infer the Glean SDK destination type manually.
+For this reason, engineers must pick the most appropriate Gecko SDK type themselves.</p>
+<p>Read more about how to add Glean SDK metrics to the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/toolkit/components/telemetry/geckoview/streaming/metrics.yaml">metrics.yaml file</a> in the <a class="reference external" href="https://mozilla.github.io/glean/book/user/adding-new-metrics.html">Glean SDK documentation</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Every new or changed data collection in Firefox needs a <a class="reference external" href="https://wiki.mozilla.org/Firefox/Data_Collection">data collection review</a> from a Data Steward.</p>
+</div>
+</div>
+<div class="section" id="example-reporting-the-display-width-from-gecko">
+<h3>Example: reporting the display width from Gecko<a class="headerlink" href="#example-reporting-the-display-width-from-gecko" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to add the relevant Gecko scalar with its streaming telemetry tag (i.e. <code class="docutils literal notranslate"><span class="pre">geckoview_streaming</span></code>) in the <code class="docutils literal notranslate"><span class="pre">Scalars.yaml</span></code> file.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gfx.info</span><span class="p">:</span>
+  <span class="nt">display_width</span><span class="p">:</span>
+    <span class="nt">bug_numbers</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1514840</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">&gt;</span>
+      <span class="no">The width of the main display as detected by Gecko.</span>
+    <span class="nt">kind</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">uint</span>
+    <span class="nt">expires</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">never</span>
+    <span class="nt">notification_emails</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gfx-telemetry-alerts@mozilla.com</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rhunt@mozilla.com</span>
+    <span class="nt">products</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;firefox&#39;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;fennec&#39;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;geckoview&#39;</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;geckoview_streaming&#39;</span>
+    <span class="nt">record_in_processes</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="s">&#39;main&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Scalars with <code class="docutils literal notranslate"><span class="pre">&quot;release_channel_collection&quot;:</span> <span class="pre">&quot;opt-in&quot;</span></code>, or without a <code class="docutils literal notranslate"><span class="pre">release_channel_collection</span></code> specified in its definition are only collected on Gecko built for <code class="docutils literal notranslate"><span class="pre">&quot;nightly&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;beta&quot;</span></code> channels.</p>
+</div>
+<p>Since this is a uint scalar, it can be added as follows to the <code class="docutils literal notranslate"><span class="pre">metrics.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gfx.display</span><span class="p">:</span>
+  <span class="nt">width</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">quantity</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The width of the display, in pixels.</span>
+    <span class="nt">unit</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pixels</span>
+    <span class="nt">gecko_datapoint</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gfx.info.display_width</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+      <span class="no">Duration of a checkerboard event.</span>
+    <span class="nt">bugs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">1514840</span>
+    <span class="nt">data_reviews</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">https://example.com/data-review-url-example</span>
+    <span class="nt">notification_emails</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">gfx-telemetry-alerts@mozilla.com</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rhunt@mozilla.com</span>
+    <span class="nt">expires</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">never</span>
+</pre></div>
+</div>
+<p>Please note that the <code class="docutils literal notranslate"><span class="pre">gecko_datapoint</span></code> property will need to point to the name of the scalar exactly as written in the <code class="docutils literal notranslate"><span class="pre">Scalars.yaml</span></code> file.</p>
+</div>
+</div>
+<div class="section" id="how-to-access-the-data">
+<h2>How to access the data?<a class="headerlink" href="#how-to-access-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Once a new build of Gecko will be provided through <a class="reference external" href="https://maven.mozilla.org/?prefix=maven2/org/mozilla/geckoview">Maven</a>, the Android Components team will automatically pick it up.
+Because the Gecko train model has three channels, there are three <code class="docutils literal notranslate"><span class="pre">engine-gecko-*</span></code> components, one per Gecko channel: <a class="reference external" href="https://github.com/mozilla-mobile/android-components/tree/master/components/browser/engine-gecko-nightly">“engine-gecko-nigthly”</a>, <a class="reference external" href="https://github.com/mozilla-mobile/android-components/tree/master/components/browser/engine-gecko-beta">“engine-gecko-beta”</a> and <a class="reference external" href="https://github.com/mozilla-mobile/android-components/tree/master/components/browser/engine-gecko">engine-gecko</a>.</p>
+<p>The availability of the metric in the specific product’s dataset depends on which channel the application is using.
+For example, if Fenix Release depends on the <code class="docutils literal notranslate"><span class="pre">engine-gecko</span> <span class="pre">(release)</span></code> channel, then the registry file additions need to be available on the Release channel for Gecko in order for them to be exposed in Fenix.</p>
+<p>Unless <a class="reference external" href="https://mozilla.github.io/glean/book/user/pings/custom.html">Glean custom pings</a> are used, all the metrics are reported through the <a class="reference external" href="https://mozilla.github.io/glean/book/user/pings/metrics.html">Glean metrics ping</a>.</p>
+</div>
+<div class="section" id="testing-your-metrics">
+<h2>Testing your metrics<a class="headerlink" href="#testing-your-metrics" title="Permalink to this headline">¶</a></h2>
+<p>At this time, the procedure for testing that metrics are correctly exfiltrated from GeckoView to Glean SDK-enabled products is a bit involved.</p>
+<ol class="arabic simple">
+<li><p>After adding your metric as described in the previous section, substitute the locally built GeckoView in your local copy of <a class="reference external" href="https://github.com/mozilla-mobile/android-components/">Android Components</a> as described in the <a class="reference external" href="https://mozilla.github.io/geckoview/contributor/geckoview-quick-start#dependency-substiting-your-local-geckoview-into-a-mozilla-project">GeckoView docs</a>.</p></li>
+<li><p>In Android Components, follow the <a class="reference external" href="https://github.com/mozilla-mobile/android-components/tree/master/samples/browser#glean-sdk-support">instructions to enable upload</a> in the <cite>samples-browser</cite> application.</p></li>
+<li><p>Build Android Components and the <cite>samples-browser</cite> application.</p></li>
+<li><p>Use the Glean SDK <a class="reference external" href="https://mozilla.github.io/glean/book/user/debugging/index.html">debugging features</a> to either dump the <cite>metrics</cite> ping or send it to the <a class="reference external" href="https://docs.telemetry.mozilla.org/concepts/glean/debug_ping_view.html">Glean Debug View</a>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is important to substitute GeckoView in Android Components, even if it’s possible to substitute it directly in the final product. This is because the bulk of the processing happens in Android Components, in the <cite>engine-gecko-*</cite> components wrapping GeckoView.</p>
+</div>
+</div>
+<div class="section" id="unsupported-features">
+<h2>Unsupported features<a class="headerlink" href="#unsupported-features" title="Permalink to this headline">¶</a></h2>
+<p>This is the list of the currently unsupported features:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../collection/scalars.html#scalars-keyed-scalars"><span class="std std-ref">keyed scalars</span></a> are not supported and there are no future plans for supporting them;</p></li>
+<li><p>uint scalar operations other than <a class="reference internal" href="../collection/scalars.html#scalars-c-api"><span class="std std-ref">set</span></a> are not supported and there are no future plans for supporting them.</p></li>
+<li><p><a class="reference internal" href="../collection/events.html#eventtelemetry"><span class="std std-ref">events</span></a> are not supported and there are no future plans for supporting them.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../concepts/index.html" class="btn btn-neutral float-right" title="Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="adding-a-new-probe.html" class="btn btn-neutral float-left" title="Adding a new Telemetry probe" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Visual Studio Code &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting reviews" href="reviews.html" />
+    <link rel="prev" title="Editor / IDE integration" href="editor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build/buildsystem/index.html#important-concepts">Important Concepts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../build/buildsystem/index.html#integrated-development-environment-ide">integrated development environment (IDE)</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Visual Studio Code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-knowledge">General Knowledge</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-c-features-and-support">C/C++ Features and Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clangd-specific-commands">Clangd-specific Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-configuration">Generating Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#useful-preferences">Useful preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommended-extensions">Recommended extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filing-bugs">Filing Bugs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../build/buildsystem/cppeclipse.html">Cpp Eclipse Projects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../build/buildsystem/visualstudio.html">Visual Studio Projects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../build/buildsystem/index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Working on Firefox</a> &raquo;</li>
+        
+          <li><a href="editor.html">Editor / IDE integration</a> &raquo;</li>
+        
+      <li>Visual Studio Code</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/vscode.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="visual-studio-code">
+<h1>Visual Studio Code<a class="headerlink" href="#visual-studio-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="general-knowledge">
+<h2>General Knowledge<a class="headerlink" href="#general-knowledge" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://code.visualstudio.com/">VSCode</a> is a multi-platform open-source programming editor developed by Microsoft and volunteers.
+It has support for many programming languages using extensions.</p>
+<p>For more general information on the VSCode project see <a class="reference external" href="https://github.com/Microsoft/vscode/">repo</a>.</p>
+</div>
+<div class="section" id="c-c-features-and-support">
+<h2>C/C++ Features and Support<a class="headerlink" href="#c-c-features-and-support" title="Permalink to this headline">¶</a></h2>
+<p>For C++ support we offer an out of the box configuration based on
+<a class="reference external" href="https://clangd.llvm.org">clangd</a>.</p>
+<p>Leveraging the <cite>clang</cite> toolchain compiler we now have support in the IDE for the following features:</p>
+<p><strong>1.</strong> Syntax highlighting</p>
+<p><strong>2.</strong> IntelliSense with comprehensive code completion and suggestion</p>
+<img alt="../_images/auto_completion.gif" src="../_images/auto_completion.gif" />
+<p><strong>3.</strong> Go-to definition and Go-to declaration</p>
+<img alt="../_images/goto_definition.gif" src="../_images/goto_definition.gif" />
+<p><strong>4.</strong> Find all references</p>
+<img alt="../_images/find_references.gif" src="../_images/find_references.gif" />
+<p><strong>5.</strong> Open type hierarchy</p>
+<img alt="../_images/type_hierarchy.gif" src="../_images/type_hierarchy.gif" />
+<p><strong>6.</strong> Rename symbol, all usages of the symbol will be renamed, including declaration, definition and references</p>
+<img alt="../_images/rename_symbol.gif" src="../_images/rename_symbol.gif" />
+<p><strong>7.</strong> Code formatting, based on <cite>clang-format</cite> that respects our coding standard using the <cite>.clang-format</cite> and <cite>.clang-format-ignore</cite> files. Format can be performed on an entire file or on a code selection</p>
+<img alt="../_images/format_selection.gif" src="../_images/format_selection.gif" />
+<p><strong>8.</strong> Inline parsing errors with limited auto-fix hints</p>
+<img alt="../_images/diagnostic_error.gif" src="../_images/diagnostic_error.gif" />
+<p><strong>9.</strong> Basic static-code analysis using <cite>clang-tidy</cite> and our list of enabled checkers. (This is still in progress not all checkers are supported by <cite>clangd</cite>)</p>
+</div>
+<div class="section" id="clangd-specific-commands">
+<h2>Clangd-specific Commands<a class="headerlink" href="#clangd-specific-commands" title="Permalink to this headline">¶</a></h2>
+<p>Clangd supports some commands that are specific to C/C++:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;clangd.switchheadersource&quot;</span>
+</pre></div>
+</div>
+<p>This command navigates from the currently open header file to its corresponding source file (if there is one), or vice versa.</p>
+<p>This command can be invoked from the command menu (activated via <code class="docutils literal notranslate"><span class="pre">F1</span></code>), or using its keybinding of <code class="docutils literal notranslate"><span class="pre">Alt+o</span></code> (<code class="docutils literal notranslate"><span class="pre">Alt+cmd+o</span></code> on Mac). The keybinding can also be customized in <code class="docutils literal notranslate"><span class="pre">Keyboard</span> <span class="pre">Shortcuts</span></code>.</p>
+</div>
+<div class="section" id="generating-configuration">
+<h2>Generating Configuration<a class="headerlink" href="#generating-configuration" title="Permalink to this headline">¶</a></h2>
+<p>In order to build the configuration for <cite>VS Code</cite> simply run from
+the terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mach</span> <span class="n">ide</span> <span class="n">vscode</span>
+</pre></div>
+</div>
+<p>If <cite>VS Code</cite> is already open with a previous configuration generated, please make sure to
+restart <cite>VS Code</cite> otherwise the new configuration will not be used, and the <cite>compile_commands.json</cite>
+needed by <cite>clangd</cite> server will not be refreshed. This is a known <a class="reference external" href="https://github.com/clangd/vscode-clangd/issues/42">bug</a>
+in <cite>clangd-vscode</cite> extension</p>
+</div>
+<div class="section" id="useful-preferences">
+<h2>Useful preferences<a class="headerlink" href="#useful-preferences" title="Permalink to this headline">¶</a></h2>
+<p>When setting the preference</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;editor.formatOnSave&quot;</span><span class="p">:</span> <span class="n">true</span>
+</pre></div>
+</div>
+<p>you might find that this isn’t working on large source code files, but triggering formatting manually works. This is due to the default timeout for formatOnSave, which is quite short (750ms). You might want to increase this timeout, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;editor.formatOnSaveTimeout&quot;</span><span class="p">:</span> <span class="mi">5000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recommended-extensions">
+<h2>Recommended extensions<a class="headerlink" href="#recommended-extensions" title="Permalink to this headline">¶</a></h2>
+<p>VS Code provides number of extensions for JavaScript, Rust, etc.
+By default, Firefox source tree comes with its own set of recommendations of Visual Studio Code extensions. They are listed in <a class="reference external" href="https://searchfox.org/mozilla-central/source/.vscode/extensions.json">.vscode/extensions.json</a>.</p>
+<p>For Rust development, the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=matklad.rust-analyzer">rust-analyzer</a> extension is recommended.
+<a class="reference external" href="https://rust-analyzer.github.io/manual.html">See the manual</a> for more information.</p>
+</div>
+<div class="section" id="filing-bugs">
+<h2>Filing Bugs<a class="headerlink" href="#filing-bugs" title="Permalink to this headline">¶</a></h2>
+<p>Bugs should be filed in the <cite>Firefox Build System</cite> product under <cite>Developer Environment Integration</cite>, preferably blocking <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1662709">Bug 1662709</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reviews.html" class="btn btn-neutral float-right" title="Getting reviews" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="editor.html" class="btn btn-neutral float-left" title="Editor / IDE integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

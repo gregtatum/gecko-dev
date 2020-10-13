@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Full Installer Configuration &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="MSI Package" href="MSI.html" />
+    <link rel="prev" title="Full Installer" href="FullInstaller.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/newtab/docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Installer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="InstallerBuild.html">Installer Build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StubInstaller.html">Stub Installer</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="FullInstaller.html">Full Installer</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Full Installer Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="MSI.html">MSI Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Helper.html">Helper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/newtab/content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="index.html">Installer</a> &raquo;</li>
+        
+          <li><a href="FullInstaller.html">Full Installer</a> &raquo;</li>
+        
+      <li>Full Installer Configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/browser/installer/windows/installer/FullConfig.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="full-installer-configuration">
+<h1>Full Installer Configuration<a class="headerlink" href="#full-installer-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page applies to the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> full installer. If you want to run or deploy the <a class="reference internal" href="MSI.html"><span class="doc">MSI package</span></a>, refer to the instructions on <a class="reference external" href="https://support.mozilla.org/kb/deploy-firefox-msi-installers">the support web page for it</a> instead; the command-line options documented here won’t work.</p>
+</div>
+<div class="section" id="command-line-options">
+<h2>Command-line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
+<p>The full installer provides a number of options that can be used either from the GUI or from the command line. The following command line options are accepted. The list is valid for Firefox 62 and later. Prior to Firefox 62, only <code class="docutils literal notranslate"><span class="pre">/S</span></code> and <code class="docutils literal notranslate"><span class="pre">/INI</span></code> are accepted, and <code class="docutils literal notranslate"><span class="pre">/StartMenuShortcut</span></code> is not available in INI files, only the plural <code class="docutils literal notranslate"><span class="pre">/StartMenuShortcuts</span></code> works (even though only one shortcut is created).</p>
+<p>The presence of <strong>any</strong> command-line option implicitly enables silent mode (see the <code class="docutils literal notranslate"><span class="pre">/S</span></code> option).</p>
+<p>Each option must start with a <code class="docutils literal notranslate"><span class="pre">/</span></code> as shown, <code class="docutils literal notranslate"><span class="pre">-</span></code> or <code class="docutils literal notranslate"><span class="pre">--</span></code> are not supported. Short names for the options are not provided; all names must be spelled out.</p>
+<p>For options that accept <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>, <code class="docutils literal notranslate"><span class="pre">=true</span></code> can be left off to get the same effect. That is, <code class="docutils literal notranslate"><span class="pre">/DesktopShortcut</span></code> and <code class="docutils literal notranslate"><span class="pre">/DesktopShortcut=true</span></code> both enable the desktop shortcut.</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">/S</span></code></dt><dd><p>Silent installation. This option doesn’t open the GUI, instead running the installation in the background using all the default settings. It’s useful as part of a script for configuring a new system, for example.</p>
+<p>For backwards compatibility, this option can also be spelled <code class="docutils literal notranslate"><span class="pre">-ms</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/InstallDirectoryPath=[path]</span></code></dt><dd><p>Absolute path specifying the complete install location. This directory does not need to exist already (but it can).</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">InstallDirectoryName</span></code> is set, then this setting will be ignored.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/InstallDirectoryName=[name]</span></code></dt><dd><p>Name of the installation directory to create within Program Files. For example, if <code class="docutils literal notranslate"><span class="pre">InstallDirectoryName</span></code> is set to <code class="docutils literal notranslate"><span class="pre">Firefox</span> <span class="pre">Release</span></code>, then the installation path will be something like <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Firefox</span> <span class="pre">Release</span></code>. The Program Files path used will be the correct one for the architecture of the application being installed and the locale/configuration of the machine; this setting is mainly useful to keep you from having to worry about those differences.</p>
+<p>If this is set, then <code class="docutils literal notranslate"><span class="pre">InstallDirectoryPath</span></code> will be ignored.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/TaskbarShortcut={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable pinning a shortcut to the taskbar. <code class="docutils literal notranslate"><span class="pre">true</span></code> by default. This feature only works on Windows 7 and 8; it isn’t possible to create taskbar pins from the installer on later Windows versions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/DesktopShortcut={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable creating a shortcut on the desktop. <code class="docutils literal notranslate"><span class="pre">true</span></code> by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/StartMenuShortcut={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable creating a Start menu shortcut. <code class="docutils literal notranslate"><span class="pre">true</span></code> by default.</p>
+<p>For backwards compatibility, this option can also be spelled <code class="docutils literal notranslate"><span class="pre">/StartMenuShortcuts</span></code> (plural), however only one shortcut is ever created in the Start menu per installation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/MaintenanceService={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable installing the Mozilla Maintenance Service. This will effectively prevent users from installing Firefox updates if they do not have write permissions to the installation directory. <code class="docutils literal notranslate"><span class="pre">true</span></code> by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/RemoveDistributionDir={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable removing the <code class="docutils literal notranslate"><span class="pre">distribution</span></code> directory from an existing installation that’s being paved over. By default this is <code class="docutils literal notranslate"><span class="pre">true</span></code> and the directory is removed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/PreventRebootRequired={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> to keep the installer from taking actions that would require rebooting the machine to complete, normally because files are in use. This should not be needed under normal circumstances because no such actions should be required unless you’re paving over a copy of Firefox that was running while the installer was trying to run, and setting this option in that case may result in an incomplete installation. <code class="docutils literal notranslate"><span class="pre">false</span></code> by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/OptionalExtensions={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable installing any bundled extensions that are present. Normally none of these exist, except in special distributions of Firefox such as the one produced by Mozilla China or by other partner organizations. <code class="docutils literal notranslate"><span class="pre">true</span></code> by default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/RegisterDefaultAgent={true,false}</span></code></dt><dd><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable creating a recurring scheduled task to run the default browser agent. There are other ways (a policy and a pref) to disable the actions that the agent takes; this option is provided for tightly-controlled environments where even a
+scheduled task that simply exits immediately is undesirable.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/INI=[absolute</span> <span class="pre">path</span> <span class="pre">to</span> <span class="pre">.ini</span> <span class="pre">file]</span></code></dt><dd><p>Read configuration from an .ini file. All settings should be placed into one section, called <code class="docutils literal notranslate"><span class="pre">[Install]</span></code>, and use the standard INI syntax. All settings are optional; they can be included or left out in any combination. Order does not matter.</p>
+<p>The available settings in the .ini file are the same as the command line options, except for <code class="docutils literal notranslate"><span class="pre">/S</span></code> and <code class="docutils literal notranslate"><span class="pre">/INI</span></code> (of course). They should be set with the same syntax described above for command line use.</p>
+<p>For any option provided both in an .ini file and on the command line, the value found on the command line will be used. This allows command line options to override .ini settings.</p>
+<p>Here’s an example of a valid .ini file for use with this option:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Install</span><span class="p">]</span>
+<span class="p">;</span> <span class="n">Semicolons</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">add</span> <span class="n">comments</span>
+<span class="n">InstallDirectoryName</span><span class="o">=</span><span class="n">Firefox</span> <span class="n">Release</span>
+<span class="n">DesktopShortcut</span><span class="o">=</span><span class="n">false</span>
+<span class="n">StartMenuShortcuts</span><span class="o">=</span><span class="n">true</span>
+<span class="n">MaintenanceService</span><span class="o">=</span><span class="n">false</span>
+<span class="n">OptionalExtensions</span><span class="o">=</span><span class="n">false</span>
+</pre></div>
+</div>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">/ExtractDir=[directory]</span></code></dt><dd><p>Extract the application files to the given directory and exit, without actually running the installer. No other options may be supplied along with <code class="docutils literal notranslate"><span class="pre">ExtractDir</span></code>, and <code class="docutils literal notranslate"><span class="pre">ExtractDir</span></code> is not available for use in .ini files.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="MSI.html" class="btn btn-neutral float-right" title="MSI Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="FullInstaller.html" class="btn btn-neutral float-left" title="Full Installer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

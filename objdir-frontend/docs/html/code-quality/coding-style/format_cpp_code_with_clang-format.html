@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Formatting C++ Code With clang-format &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using C++ in Mozilla code" href="using_cxx_in_firefox_code.html" />
+    <link rel="prev" title="Python Coding style" href="coding_style_python.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Code quality</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../static-analysis.html">Static analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lint/index.html">Linting</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Coding style</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="coding_style_cpp.html">C++ Coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding_style_general.html">Mode line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding_style_java.html">Java Coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding_style_js.html">JavaScript Coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding_style_other.html">Other coding style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding_style_python.html">Python Coding style</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Formatting C++ Code With clang-format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#manual-formatting">Manual formatting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#editor-integration">Editor integration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#merging-formatted-and-unformatted-code">Merging formatted and unformatted code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ignore-lists">Ignore lists</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="using_cxx_in_firefox_code.html">Using C++ in Mozilla code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Code quality</a> &raquo;</li>
+        
+          <li><a href="index.html">Coding style</a> &raquo;</li>
+        
+      <li>Formatting C++ Code With clang-format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/code-quality/coding-style/format_cpp_code_with_clang-format.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="formatting-c-code-with-clang-format">
+<h1>Formatting C++ Code With clang-format<a class="headerlink" href="#formatting-c-code-with-clang-format" title="Permalink to this headline">¶</a></h1>
+<p>Mozilla uses the Google coding style for whitespace, which is enforced
+using <a class="reference external" href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a>. A
+specific version of the binary will be installed when
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">clang-format</span></code> or <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> are run. We build our
+own binaries and update them as needed.</p>
+<p>Options are explicitly defined <a class="reference external" href="https://github.com/llvm-mirror/clang/blob/e8a55f98df6bda77ee2eaa7f7247bd655f79ae0e/lib/Format/Format.cpp#L856">in clang-format
+itself</a>.
+If the options are changed in clang upstream, this might cause some
+changes in the Firefox tree. For this reason, it is best to use the
+mozilla-provided binaries.</p>
+<div class="section" id="manual-formatting">
+<h2>Manual formatting<a class="headerlink" href="#manual-formatting" title="Permalink to this headline">¶</a></h2>
+<p>We provide a mach subcommand for running clang-format from the
+command-line. This wrapper handles ensuring the correct version of
+clang-format is installed and run.</p>
+<p>If clang-format isn’t installed, the binaries will be automatically
+downloaded from taskcluster and installed into ~/.mozbuild. We build our
+own clang-format binaries.</p>
+<div class="section" id="formatting-local-changes">
+<h3>Formatting local changes<a class="headerlink" href="#formatting-local-changes" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach clang-format
+</pre></div>
+</div>
+<p>When run without arguments, it will run on a local diff. This could miss
+some reformatting (for example, when blocks are touched).
+(<a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/python/mozbuild/mozbuild/code-analysis/mach_commands.py#1620">searchfox</a>)</p>
+</div>
+<div class="section" id="formatting-specific-paths">
+<h3>Formatting specific paths<a class="headerlink" href="#formatting-specific-paths" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach clang-format -p &lt;path&gt;     # Format &lt;path&gt; in-place
+$ ./mach clang-format -p &lt;path&gt; -s  # Show changes
+</pre></div>
+</div>
+<p>The command also accepts a <code class="docutils literal notranslate"><span class="pre">-p</span></code> argument to reformat a specific
+directory or file, and a <code class="docutils literal notranslate"><span class="pre">-s</span></code> flag to show the changes instead of
+applying them to the working directory
+(<a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/python/mozbuild/mozbuild/code-analysis/mach_commands.py#1633">searchfox</a>)</p>
+</div>
+<div class="section" id="formatting-specific-commits-revisions">
+<h3>Formatting specific commits / revisions<a class="headerlink" href="#formatting-specific-commits-revisions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach clang-format -c HEAD # Format a single git commit
+$ ./mach clang-format -c HEAD~~..HEAD # Format a range of git commits
+$ ./mach clang-format -c . # Format a single mercurial revision
+</pre></div>
+</div>
+<p>The command accepts a <code class="docutils literal notranslate"><span class="pre">-c</span></code> argument that takes a revision number or
+commit range, and will format the lines modified by those commits.
+(<a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/python/mozbuild/mozbuild/code-analysis/mach_commands.py#1635">searchfox</a>)</p>
+</div>
+<div class="section" id="scripting-clang-format">
+<h3>Scripting Clang-Format<a class="headerlink" href="#scripting-clang-format" title="Permalink to this headline">¶</a></h3>
+<p>Clang format expects that the path being passed to it is the path
+on-disk. If this is not the case, for example when formatting a
+temporary file, the “real” path must be specified. This can be done with
+the <code class="docutils literal notranslate"><span class="pre">--assume-filename</span> <span class="pre">&lt;path&gt;</span></code> argument.</p>
+</div>
+<div class="section" id="configuring-the-clang-format-commit-hook">
+<h3>Configuring the clang-format commit hook<a class="headerlink" href="#configuring-the-clang-format-commit-hook" title="Permalink to this headline">¶</a></h3>
+<p>To run clang-format at commit phase, run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">boostrap</span></code> or just add
+the following line in the <code class="docutils literal notranslate"><span class="pre">hgrc</span></code> file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[extensions]</span>
+<span class="na">clang-format</span> <span class="o">=</span> <span class="s">~/.mozbuild/version-control-tools/hgext/clang-format</span>
+</pre></div>
+</div>
+<p>We use a hg extension as they are more flexible than hooks.</p>
+<p>With git, the configuration is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># From the root git directory:
+$ ln -s $(pwd)/tools/lint/hooks_clang_format.py .git/hooks/pre-commit
+</pre></div>
+</div>
+<p>You’ll likely need to install the <code class="docutils literal notranslate"><span class="pre">python-hglib</span></code> package for your OS,
+or else you may get errors like <code class="docutils literal notranslate"><span class="pre">abort:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">hglib.client!</span></code>
+when you try to commit.</p>
+</div>
+</div>
+<div class="section" id="editor-integration">
+<h2>Editor integration<a class="headerlink" href="#editor-integration" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to configure many editors to support running
+<code class="docutils literal notranslate"><span class="pre">clang-format</span></code> automatically on save, or when run from within the
+editor.</p>
+<div class="section" id="editor-plugins">
+<h3>Editor plugins<a class="headerlink" href="#editor-plugins" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://atom.io/packages/clang-format">Atom</a></p></li>
+<li><p><a class="reference external" href="http://clang.llvm.org/docs/ClangFormat.html#bbedit-integration">BBEdit</a></p>
+<ul>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/llvm-mirror/clang/master/tools/clang-format/clang-format-bbedit.applescript">clang-format-bbedit.applescript</a></p></li>
+</ul>
+</li>
+<li><p>Eclipse</p>
+<ul>
+<li><p>Install the
+<a class="reference external" href="https://marketplace.eclipse.org/content/cppstyle">CppStyle</a>
+plugin</p></li>
+<li><p>In Preferences -&gt; C/C++ -&gt; CppStyle, set the clang-format path to
+~/.mozbuild/clang-tools/clang-tidy/bin/clang-format</p></li>
+<li><p>(Optional) check “Run clang-format on file save”</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="http://clang.llvm.org/docs/ClangFormat.html#emacs-integration">Emacs</a></p>
+<ul>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/llvm-mirror/clang/master/tools/clang-format/clang-format.el">clang-format.el</a>
+(Or install
+<a class="reference external" href="http://melpa.org/#/clang-format">clang-format</a> from MELPA)</p></li>
+<li><p><a class="reference external" href="http://melpa.org/#/google-c-style">google-c-style</a> from MELPA</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://packagecontrol.io/packages/Clang%20Format">Sublime Text</a></p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/rosshemsley/SublimeClangFormat">alternative
+tool</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="http://clang.llvm.org/docs/ClangFormat.html#vim-integration">Vim</a></p>
+<ul>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/llvm-mirror/clang/master/tools/clang-format/clang-format.py">clang-format.py</a></p></li>
+<li><p><a class="reference external" href="https://github.com/rhysd/vim-clang-format">vim-clang-format</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=LLVMExtensions.ClangFormat">Visual
+Studio</a></p>
+<ul>
+<li><p><a class="reference external" href="http://llvm.org/builds/">llvm.org plugin</a></p></li>
+<li><p><a class="reference external" href="https://blogs.msdn.microsoft.com/vcblog/2018/03/13/clangformat-support-in-visual-studio-2017-15-7-preview-1/">Integrated support in Visual Studio
+2017</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=xaver.clang-format">Visual Studio
+Code</a></p></li>
+<li><p><a class="reference external" href="https://github.com/travisjeffery/ClangFormat-Xcode">XCode</a></p></li>
+<li><p><a class="reference external" href="http://clang.llvm.org/docs/ClangFormat.html#script-for-patch-reformatting">Script for patch
+reformatting</a></p>
+<ul>
+<li><p><a class="reference external" href="https://raw.githubusercontent.com/llvm-mirror/clang/master/tools/clang-format/clang-format-diff.py">clang-format-diff.py</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>These tools generally run clang-format themselves, and won’t use
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">clang-format</span></code>. The binary installed by our tooling will be
+located at <code class="docutils literal notranslate"><span class="pre">~/.mozbuild/clang-tools/clang-tidy/bin/clang-format</span></code>.</p>
+<p>You typically shouldn’t need to specify any other special configuration
+in your editor besides the clang-format binary. Most of the
+configuration that clang-format relies on for formatting is stored
+inside our source tree. More specifically, using the .clang-format file
+located in the root of the repository. Please note that this doesn’t
+include the list of ignored files and directories (provided by
+.clang-format-ignore which is a feature provided by the mach command
+wrapper).</p>
+<p>Coding style configuration is done within clang-format itself. When we
+change the configuration (incorrect configuration, new feature in clang,
+etc), we use <a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/.clang-format">local
+overrides</a>.</p>
+</div>
+<div class="section" id="ignored-files-directories">
+<h3>Ignored files &amp; directories<a class="headerlink" href="#ignored-files-directories" title="Permalink to this headline">¶</a></h3>
+<p>We maintain a <a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/.clang-format-ignore">list of ignored directories and
+files</a>,
+which is used by <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">clang-format</span></code>. This is generally only used
+for code broken by clang-format, and third-party code.</p>
+</div>
+<div class="section" id="ignored-code-hunks">
+<h3>Ignored code hunks<a class="headerlink" href="#ignored-code-hunks" title="Permalink to this headline">¶</a></h3>
+<p>Sections of code may have formatting disabled using comments. If a
+section must not be formatted, the following comments will disable the
+reformat:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">clang</span><span class="o">-</span><span class="nb">format</span> <span class="n">off</span>
+<span class="n">my</span> <span class="n">code</span> <span class="n">which</span> <span class="n">should</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">reformated</span>
+<span class="o">//</span> <span class="n">clang</span><span class="o">-</span><span class="nb">format</span> <span class="n">on</span>
+</pre></div>
+</div>
+<p>You can find an <a class="reference external" href="https://searchfox.org/mozilla-central/rev/501eb4718d73870892d28f31a99b46f4783efaa0/xpcom/io/nsEscape.cpp#22">example of code not
+formatted</a>.</p>
+</div>
+</div>
+<div class="section" id="merging-formatted-and-unformatted-code">
+<h2>Merging formatted and unformatted code<a class="headerlink" href="#merging-formatted-and-unformatted-code" title="Permalink to this headline">¶</a></h2>
+<p>During the transition to using chromium style enforced by clang-format
+for all code in tree, it will often be necessary to rebase non-formatted
+code onto a formatted tree.</p>
+<div class="section" id="mercurial">
+<h3>Mercurial<a class="headerlink" href="#mercurial" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">format-source</span></code> extension, now bundled with
+<code class="docutils literal notranslate"><span class="pre">version-control-tools</span></code>, and installed by <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code>, may be
+used to seamlessly handle this situation. More details may be found in
+this
+<a class="reference external" href="https://docs.google.com/document/d/13AwAsvKMhH0mflDlfatBqn6LmZHiQih76oxM4zfrPl4/edit">document</a>.</p>
+<p>The parent changeset of the reformat has been tagged as
+<code class="docutils literal notranslate"><span class="pre">PRE_TREEWIDE_CLANG_FORMAT</span></code>.</p>
+</div>
+<div class="section" id="git">
+<h3>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h3>
+<p>To perform a rebase onto mozilla-central after the merge, a handy merge
+driver, <code class="docutils literal notranslate"><span class="pre">clang-format-merge</span></code>, has been written:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/emilio/clang-format-merge
+$ /path/to/clang-format-merge/git-wrapper rebase &lt;upstream&gt;
+</pre></div>
+</div>
+<p>The wrapper should clean up after itself, and the clone may be deleted
+after the rebase is complete.</p>
+</div>
+</div>
+<div class="section" id="ignore-lists">
+<h2>Ignore lists<a class="headerlink" href="#ignore-lists" title="Permalink to this headline">¶</a></h2>
+<p>To make sure that the blame/annotate features of Mercurial or git aren’t
+affected. Two files are maintained to keep track of the reformatting
+commits.</p>
+<div class="section" id="with-mercurial">
+<h3>With Mercurial<a class="headerlink" href="#with-mercurial" title="Permalink to this headline">¶</a></h3>
+<div class="line-block">
+<div class="line">The list is stored in
+<a class="reference external" href="/en-US/docs/">https://searchfox.org/mozilla-central/source/.hg-annotate-ignore-revs</a></div>
+<div class="line">Commit messages should also contain the string <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">ignore-this-changeset</span></code></div>
+</div>
+<p>The syntax in this file is generated using the following syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ hg log --template &#39;{node} - {author|person} - {desc|strip|firstline}\n&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="with-git">
+<h3>With git<a class="headerlink" href="#with-git" title="Permalink to this headline">¶</a></h3>
+<p>The list is stored in
+<a class="reference external" href="/en-US/docs/">https://searchfox.org/mozilla-central/source/.git-blame-ignore-revs</a>
+and contains git revisions for both gecko-dev and the git cinnabar
+repository.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="using_cxx_in_firefox_code.html" class="btn btn-neutral float-right" title="Using C++ in Mozilla code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="coding_style_python.html" class="btn btn-neutral float-left" title="Python Coding style" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

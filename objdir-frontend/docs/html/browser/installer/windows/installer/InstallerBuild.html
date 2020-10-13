@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installer Build &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Stub Installer" href="StubInstaller.html" />
+    <link rel="prev" title="Installer" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/newtab/docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Installer</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installer Build</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-build-the-installers">How to build the installers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-process">Build process</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="StubInstaller.html">Stub Installer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FullInstaller.html">Full Installer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MSI.html">MSI Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Helper.html">Helper</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/newtab/content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../components/payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="index.html">Installer</a> &raquo;</li>
+        
+      <li>Installer Build</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/browser/installer/windows/installer/InstallerBuild.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installer-build">
+<h1>Installer Build<a class="headerlink" href="#installer-build" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-build-the-installers">
+<h2>How to build the installers<a class="headerlink" href="#how-to-build-the-installers" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to build an installer in your local tree is to run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">package</span></code>. The finished installers will be in <code class="docutils literal notranslate"><span class="pre">$OBJDIR/dist/install/sea/</span></code>. You have to have a build of the application already done before that will work, but <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Artifact_builds">artifact builds</a> are supported, so that can save you a lot of time if you’re only doing installer work.</p>
+<p>You’ll also need to be on a Windows machine; the installer build depends on tools that aren’t available for other platforms.</p>
+<div class="section" id="stub-installer">
+<h3>Stub installer<a class="headerlink" href="#stub-installer" title="Permalink to this headline">¶</a></h3>
+<p>The stub installer probably won’t be built by default in a local tree; normally unless the build has been set to use one of the official update channels, only the full installer is built. If you need to work on the stub installer, you can override the default and get one built along with the full installer by adding <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">MOZ_STUB_INSTALLER=1</span></code> to your mozconfig.</p>
+</div>
+<div class="section" id="uninstaller">
+<h3>Uninstaller<a class="headerlink" href="#uninstaller" title="Permalink to this headline">¶</a></h3>
+<p>The uninstaller is built as part of the main application build, not the installer target, so <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> is what will get you an uninstaller. You’ll find it at <code class="docutils literal notranslate"><span class="pre">$OBJDIR/dist/bin/uninstaller/helper.exe</span></code>.</p>
+</div>
+<div class="section" id="branding">
+<h3>Branding<a class="headerlink" href="#branding" title="Permalink to this headline">¶</a></h3>
+<p>By default local builds use “unofficial” branding, which somewhat resembles a previous version of the Nightly branding, but is designed not to resemble any official channel too closely.</p>
+<p>But sometimes you’ll need to test installers that are built using one or more of the official channel branding configurations, perhaps to try out different strings, make sure different sets of art look good, or to test behavior around installing multiple channels at the same time.</p>
+<p>You can build installers (and the entire application) with official branding by adding <code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--with-branding=browser/branding/{nightly|aurora|official}</span></code> to your mozconfig (the default branding is <code class="docutils literal notranslate"><span class="pre">browser/branding/unofficial</span></code>).</p>
+</div>
+</div>
+<div class="section" id="build-process">
+<h2>Build process<a class="headerlink" href="#build-process" title="Permalink to this headline">¶</a></h2>
+<p>Both the full and stub installers are built through a similar process, which is summarized here along with references to the relevant bits of code.</p>
+<p>Most of this procedure is done in <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/mozapps/installer/windows/nsis/makensis.mk">makensis.mk</a> and in the <a class="reference external" href="https://searchfox.org/mozilla-central/rev/2b9779c59390ecc47be7a70d99753653d8eb5afc/python/mozbuild/mozbuild/mach_commands.py#2166">mach repackage</a> command.</p>
+<ol class="arabic simple" start="0">
+<li><p>A prerequisite is for the application to be in a packaged state, so <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">package</span></code> first creates a release-style package and puts it in <code class="docutils literal notranslate"><span class="pre">$OBJDIR/dist/firefox</span></code>.</p></li>
+<li><p>All required files are copied into the instgen directory. This includes .nsi and .nsh script files, plugin DLL files, image and icon files, and the 7-zip SFX module and its configuration files.</p></li>
+<li><p>The NSIS scripts are compiled, resulting in setup.exe and setup-stub.exe (if building the stub is enabled).</p></li>
+<li><p>The 7-zip SFX module is run through UPX.</p></li>
+<li><p>The application files and the full installer setup.exe are compressed together into one 7-zip file.</p></li>
+<li><p>The stub installer is compressed into its own 7-zip file.</p></li>
+<li><p>The (UPX-packed) 7-zip SFX module, the correct configuration data, and the 7-zip file containing the application files and setup.exe are concatenated together. This results in the final full installer.</p></li>
+<li><p>The (still UPX-packed) 7-zip SFX module, the correct configuration data, and the 7-zip file containing the stub installer are concatenated together. This results in the final stub installer.</p></li>
+</ol>
+<p>If this is an official build running on Mozilla automation infrastructure, then after this the installers will be signed, like other build products. Release engineering owns that process, it’s not within the scope of this documentation.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="StubInstaller.html" class="btn btn-neutral float-right" title="Stub Installer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Installer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

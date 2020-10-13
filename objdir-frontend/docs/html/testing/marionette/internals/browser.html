@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>browser module &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="capabilities module" href="capabilities.html" />
+    <link rel="prev" title="assert module" href="assert.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Prefs.html">Preferences</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">action module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addon.html">addon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html">assert module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">browser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capabilities.html">capabilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capture.html">capture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cert.html">cert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">cookie module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dom.html">dom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driver.html">driver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html">element module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error.html">error module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate.html">evaluate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event.html">event module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format.html">format module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interaction.html">interaction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listener.html">listener module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">message module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modal.html">modal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navigate.html">navigate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html">packets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefs.html">prefs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy.html">proxy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reftest.html">reftest module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">server module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync.html">sync module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Marionette</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>browser module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/testing/marionette/internals/browser.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="browser-module">
+<h1>browser module<a class="headerlink" href="#browser-module" title="Permalink to this headline">¶</a></h1>
+<dl class="js class">
+<dt id="event">
+<em class="property">class </em><code class="sig-name descname">event</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides functionality for creating and sending DOM events.</p>
+<dl class="js function">
+<dt id="event.isKeypressFiredKey">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">isKeypressFiredKey</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.isKeypressFiredKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the given key should cause keypress event when widget
+handles the native key event.  Otherwise, false.</p>
+<p>The key code should be one of consts of KeyboardEvent.DOM_VK_*,
+or a key name begins with “<a href="#id3"><span class="problematic" id="id4">VK_</span></a>”, or a character.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="event.sendKeysToElement">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">sendKeysToElement</code><span class="sig-paren">(</span><em class="sig-param">keyString</em>, <em class="sig-param">element</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.sendKeysToElement" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyString</strong> (<em>string</em>) – </p></li>
+<li><p><strong>element</strong> (<em>Element</em>) – </p></li>
+<li><p><strong>win</strong> (<em>Window</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="event.sendSingleKey">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">sendSingleKey</code><span class="sig-paren">(</span><em class="sig-param">keyToSend</em>, <em class="sig-param">modifiers</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.sendSingleKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synthesize a key event for a single key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keyToSend</strong> (<em>string</em>) – Code point or normalized key value</p></li>
+<li><p><strong>'Object' ].&lt;string, boolean&gt; modifiers</strong> (<em>[</em>) – Object with properties used in KeyboardEvent (shiftkey, repeat, …) as well as, the event <a href="#id1"><span class="problematic" id="id2">|type|</span></a> such as keydown. All properties are optional.</p></li>
+<li><p><strong>win</strong> (<em>Window</em>) – Window object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="event.synthesizeKey">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">synthesizeKey</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">event</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.synthesizeKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synthesise a key event.</p>
+<p>It is targeted at whatever would be targeted by an actual keypress
+by the user, typically the focused element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>string</em>) – Key to synthesise.  Should either be a character or a key code starting with “<a href="#id5"><span class="problematic" id="id6">VK_</span></a>” such as VK_RETURN, or a normalized key value.</p></li>
+<li><p><strong>'Object' ].&lt;string, ?&gt; event</strong> (<em>[</em>) – Object which may contain the properties shiftKey, ctrlKey, altKey, metaKey, accessKey, type.  If the type is specified (keydown or keyup), a key event of that type is fired.  Otherwise, a keydown, a keypress, and then a keyup event are fired in sequence.</p></li>
+<li><p><strong>win</strong> (<em>Window</em>) – Window object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If unknown key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="event.synthesizeMouse">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">synthesizeMouse</code><span class="sig-paren">(</span><em class="sig-param">element</em>, <em class="sig-param">offsetX</em>, <em class="sig-param">offsetY</em>, <em class="sig-param">opts</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.synthesizeMouse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Synthesise a mouse event on a target.</p>
+<p>The actual client point is determined by taking the aTarget’s client
+box and offseting it by offsetX and offsetY.  This allows mouse clicks
+to be simulated by calling this method.</p>
+<p>If the type is specified, an mouse event of that type is
+fired. Otherwise, a mousedown followed by a mouse up is performed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>element</strong> (<em>Element</em>) – Element to click.</p></li>
+<li><p><strong>offsetX</strong> (<em>number</em>) – Horizontal offset to click from the target’s bounding box.</p></li>
+<li><p><strong>offsetY</strong> (<em>number</em>) – Vertical offset to click from the target’s bounding box.</p></li>
+<li><p><strong>'Object' ].&lt;string, ?&gt; opts</strong> (<em>[</em>) – Object which may contain the properties “shiftKey”, “ctrlKey”, “altKey”, “metaKey”, “accessKey”, “clickCount”, “button”, and “type”.</p></li>
+<li><p><strong>win</strong> (<em>Window</em>) – Window object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="event.synthesizeMouseExpectEvent">
+<code class="sig-prename descclassname">event.</code><code class="sig-name descname">synthesizeMouseExpectEvent</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">offsetX</em>, <em class="sig-param">offsetY</em>, <em class="sig-param">ev</em>, <em class="sig-param">expectedTarget</em>, <em class="sig-param">expectedEvent</em>, <em class="sig-param">testName</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#event.synthesizeMouseExpectEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Similar to event.synthesizeMouse except that a test is performed to
+see if an event is fired at the right target as a result.</p>
+<p>To test that an event is not fired, use an expected type preceded by
+an exclamation mark, such as “!select”. This might be used to test that
+a click on a disabled element doesn’t fire certain events for instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<em>Element</em>) – Synthesise the mouse event on this target.</p></li>
+<li><p><strong>offsetX</strong> (<em>number</em>) – Horizontal offset from the target’s bounding box.</p></li>
+<li><p><strong>offsetY</strong> (<em>number</em>) – Vertical offset from the target’s bounding box.</p></li>
+<li><p><strong>'Object' ].&lt;string, ?&gt; ev</strong> (<em>[</em>) – Object which may contain the properties shiftKey, ctrlKey, altKey, metaKey, accessKey, type.</p></li>
+<li><p><strong>expectedTarget</strong> (<em>Element</em>) – Expected originalTarget of the event.</p></li>
+<li><p><strong>expectedEvent</strong> (<em>DOMEvent</em>) – Expected type of the event, such as “select”.</p></li>
+<li><p><strong>testName</strong> (<em>string</em>) – Test name when outputing results.</p></li>
+<li><p><strong>win</strong> (<em>Window</em>) – Window object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="capabilities.html" class="btn btn-neutral float-right" title="capabilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="assert.html" class="btn btn-neutral float-left" title="assert module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

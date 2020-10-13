@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DevTools node tests &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Automated tests: writing tests" href="writing-tests.html" />
+    <link rel="prev" title="Automated tests: DevTools mochitests" href="mochitest-devtools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="README.html">Automated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpcshell.html">xpcshell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-chrome.html">Chrome mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-devtools.html">DevTools mochitests</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Node tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#find-the-node-tests-on-try">Find the node tests on Try</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-tests-on-try">Run Tests On Try</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-tests-locally">Run Tests Locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-snapshots">Updating snapshots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests.html">Writing tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-intermittents.html">Debugging intermittent failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performance-tests.html">Performance tests (DAMP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html">Writing new performance test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-name-your-test-and-register-it">How to name your test and register it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-run-your-new-test">How to run your new test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-example.html">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-tips.html">Advanced tips</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>DevTools node tests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/tests/node-tests.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="devtools-node-tests">
+<h1>DevTools node tests<a class="headerlink" href="#devtools-node-tests" title="Permalink to this headline">¶</a></h1>
+<p>In addition to mochitests and xpcshell tests, some panels in DevTools are using node test libraries to run unit tests. For instance, several panels are using <a class="reference external" href="https://jestjs.io/">Jest</a> to run React component unit tests.</p>
+<div class="section" id="find-the-node-tests-on-try">
+<h2>Find the node tests on Try<a class="headerlink" href="#find-the-node-tests-on-try" title="Permalink to this headline">¶</a></h2>
+<p>The DevTools node tests are split in two different test suites on try:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">node(devtools)</span></code>: all the DevTools node tests, except the ones for the debugger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node(debugger)</span></code>: only the Debugger node tests</p></li>
+</ul>
+<p>They are running on the <code class="docutils literal notranslate"><span class="pre">Linux</span> <span class="pre">64</span> <span class="pre">opt</span></code> platform. They are both tier 1 jobs, which means that any failure will lead to a backout.</p>
+</div>
+<div class="section" id="run-tests-on-try">
+<h2>Run Tests On Try<a class="headerlink" href="#run-tests-on-try" title="Permalink to this headline">¶</a></h2>
+<p>To run the DevTools node tests on try, you can use <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">try</span> <span class="pre">fuzzy</span></code> and look for the jobs named <code class="docutils literal notranslate"><span class="pre">source-test-node-debugger-tests</span></code> and <code class="docutils literal notranslate"><span class="pre">source-test-node-devtools-tests</span></code>.</p>
+<p>They are also run when using the “devtools” preset: <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">try</span> <span class="pre">--preset</span> <span class="pre">devtools</span></code>.</p>
+<div class="section" id="node-tests-try-job-definition">
+<h3>Node tests try job definition<a class="headerlink" href="#node-tests-try-job-definition" title="Permalink to this headline">¶</a></h3>
+<p>The definition of those try jobs can be found at <a class="reference external" href="https://searchfox.org/mozilla-central/source/taskcluster/ci/source-test/node.yml">taskcluster/ci/source-test/node.yml</a>.</p>
+<p>The definition also contains the list of files that will trigger the node test jobs. Currently the debugger tests run when any file is modified under <code class="docutils literal notranslate"><span class="pre">devtools/client/debugger</span></code>, the devtools tests run when any file is modified under <code class="docutils literal notranslate"><span class="pre">devtools/client</span></code> or <code class="docutils literal notranslate"><span class="pre">devtools/shared</span></code>.</p>
+</div>
+</div>
+<div class="section" id="run-tests-locally">
+<h2>Run Tests Locally<a class="headerlink" href="#run-tests-locally" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisite-yarn">
+<h3>Prerequisite: yarn<a class="headerlink" href="#prerequisite-yarn" title="Permalink to this headline">¶</a></h3>
+<p>You will need yarn to be installed in order to run both the debugger and the DevTools tests. See https://yarnpkg.com/docs/install/.</p>
+</div>
+<div class="section" id="debugger">
+<h3>Debugger<a class="headerlink" href="#debugger" title="Permalink to this headline">¶</a></h3>
+<p>To run the debugger node tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">cd</span> <span class="n">devtools</span><span class="o">/</span><span class="n">client</span><span class="o">/</span><span class="n">debugger</span><span class="o">/</span>
+<span class="o">&gt;</span> <span class="n">yarn</span> <span class="o">&amp;&amp;</span> <span class="n">node</span> <span class="nb">bin</span><span class="o">/</span><span class="k">try</span><span class="o">-</span><span class="n">runner</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+<p>Note that the debugger is running other tasks than just unit tests: <code class="docutils literal notranslate"><span class="pre">flow</span></code>, <code class="docutils literal notranslate"><span class="pre">eslint</span></code>, <code class="docutils literal notranslate"><span class="pre">stylelint</span></code> etc…
+Using <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">&amp;&amp;</span> <span class="pre">yarn</span> <span class="pre">test</span></code> would only run the Jest tests, while <code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">bin/try-runner</span></code> will run the same tests and scripts as the ones used on try.</p>
+</div>
+<div class="section" id="devtools">
+<h3>DevTools<a class="headerlink" href="#devtools" title="Permalink to this headline">¶</a></h3>
+<p>To run the other (non-debugger) DevTools tests, the easiest is to rely on the same script as the one used to run the tests on try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">node</span> <span class="n">devtools</span><span class="o">/</span><span class="n">client</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">devtools</span><span class="o">-</span><span class="n">node</span><span class="o">-</span><span class="n">test</span><span class="o">-</span><span class="n">runner</span><span class="o">.</span><span class="n">js</span> <span class="o">--</span><span class="n">suite</span><span class="o">=</span><span class="p">{</span><span class="n">suitename</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>At the moment of writing, the supported suites for this script are: <code class="docutils literal notranslate"><span class="pre">aboutdebugging</span></code>, <code class="docutils literal notranslate"><span class="pre">accessibility</span></code>, <code class="docutils literal notranslate"><span class="pre">application</span></code>, <code class="docutils literal notranslate"><span class="pre">compatibility</span></code>, <code class="docutils literal notranslate"><span class="pre">framework</span></code>, <code class="docutils literal notranslate"><span class="pre">netmonitor</span></code>, <code class="docutils literal notranslate"><span class="pre">webconsole</span></code>.</p>
+<p>Alternatively, you can also locate the <code class="docutils literal notranslate"><span class="pre">package.json</span></code> corresponding to a given suite, and run <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">&amp;&amp;</span> <span class="pre">yarn</span> <span class="pre">test</span></code>.</p>
+</div>
+</div>
+<div class="section" id="updating-snapshots">
+<h2>Updating snapshots<a class="headerlink" href="#updating-snapshots" title="Permalink to this headline">¶</a></h2>
+<p>Some of the node tests are snapshot tests, which means they compare the output of a given component to a previous text snapshot. They might break if you are legitimately modifying a component and it means the snapshots need to be updated.</p>
+<p>A snapshot failure will show up as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>› 1 snapshot failed from 1 test suite
+</pre></div>
+</div>
+<p>It should also mention the command you can run to update the snapshots:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Inspect your code changes or run `yarn run test-ci -u` to update them.
+</pre></div>
+</div>
+<p>For example, if you need to update snapshots in a specific panel, first locate the package.json corresponding to the node test folder of the panel. In theory it should be under <code class="docutils literal notranslate"><span class="pre">devtools/client/{panelname}/test/node/</span></code> but it might be slightly different depending on each panel. Then run <code class="docutils literal notranslate"><span class="pre">yarn</span> <span class="pre">run</span> <span class="pre">test-ci</span> <span class="pre">-u</span></code> in this folder and add the snapshot changes to your commit.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing-tests.html" class="btn btn-neutral float-right" title="Automated tests: writing tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mochitest-devtools.html" class="btn btn-neutral float-left" title="Automated tests: DevTools mochitests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

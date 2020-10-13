@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Profiles &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reporting bugs" href="Bugs.html" />
+    <link rel="prev" title="Flags" href="Flags.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../marionette/index.html">Marionette</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">geckodriver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Support.html">Supported platforms</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities">WebDriver capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Capabilities.html">Firefox capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flags.html">Flags</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-locations-for-temporary-profiles">Default locations for temporary profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automation-preferences">Automation preferences</a><ul>
+<li class="toctree-l4"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/geckodriver/src/prefs.rs">testing/geckodriver/src/prefs.rs</a></li>
+<li class="toctree-l4"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/marionette/components/marionette.js">testing/marionette/components/marionette/marionette.js</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#temporary-profiles-not-being-removed">Temporary profiles not being removed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Bugs.html">Reporting bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TraceLogs.html">Enabling trace logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CrashReports.html">Analyzing crash data of Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notarization.html">macOS notarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#for-developers">For developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">geckodriver</a> &raquo;</li>
+        
+      <li>Profiles</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/geckodriver/Profiles.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="profiles">
+<h1>Profiles<a class="headerlink" href="#profiles" title="Permalink to this headline">¶</a></h1>
+<p>geckodriver uses <a class="reference external" href="https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data">profiles</a> to instrument Firefox’ behaviour.  The
+user will usually rely on geckodriver to generate a temporary,
+throwaway profile.  These profiles are deleted when the WebDriver
+session expires.</p>
+<p>In cases where the user needs to use custom, prepared profiles,
+geckodriver will make modifications to the profile that ensures
+correct behaviour.  See <a class="reference external" href="#automation-preferences"><em>Automation preferences</em></a> below on the
+precedence of user-defined preferences in this case.</p>
+<p>Custom profiles can be provided two different ways:</p>
+<ol class="simple">
+<li><p>by appending <code class="docutils literal notranslate"><span class="pre">--profile</span> <span class="pre">/some/location</span></code> to the <a class="reference external" href="./Capabilities.html#capability-args"><code class="docutils literal notranslate"><span class="pre">args</span></code> capability</a>,
+which will instruct geckodriver to use the profile <em>in-place</em>;</p></li>
+<li><p>or by setting the <a class="reference external" href="./Capabilities.html#capability-profile"><code class="docutils literal notranslate"><span class="pre">profile</span></code> capability</a> to a Base64-encoded
+ZIP of the profile directory.</p></li>
+</ol>
+<p>Note that geckodriver has a <a class="reference external" href="https://github.com/mozilla/geckodriver/issues/1058">known bug concerning <code class="docutils literal notranslate"><span class="pre">--profile</span></code></a> that
+prevents the randomised Marionette port from being passed to
+geckodriver.  To circumvent this issue, make sure you specify the
+port manually using <code class="docutils literal notranslate"><span class="pre">--marionette-port</span> <span class="pre">&lt;port&gt;</span></code>.</p>
+<p>The second way is compatible with shipping Firefox profiles across
+a network, when for example the geckodriver instance is running on
+a remote system.  This is the case when using Selenium’s <code class="docutils literal notranslate"><span class="pre">RemoteWebDriver</span></code>
+concept, where the WebDriver client and the server are running on
+two distinct systems.</p>
+<div class="section" id="default-locations-for-temporary-profiles">
+<h2>Default locations for temporary profiles<a class="headerlink" href="#default-locations-for-temporary-profiles" title="Permalink to this headline">¶</a></h2>
+<p>When a custom user profile is not provided with the <code class="docutils literal notranslate"><span class="pre">-profile</span></code>
+command-line argument geckodriver generates a temporary, throwaway
+profile.  This is written to the default system temporary folder
+and subsequently removed when the WebDriver session expires.</p>
+<p>The default location for temporary profiles depends on the system.
+On Unix systems it uses /tmp, and on Windows it uses the Windows
+directory.</p>
+<p>The default location can be overridden.  On Unix you set the <code class="docutils literal notranslate"><span class="pre">TMPDIR</span></code>
+environment variable.  On Windows, the following environment variables
+are respected, in order:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TMP</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TEMP</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USERPROFILE</span></code></p></li>
+</ol>
+<p>It is not necessary to change the temporary directory system-wide.
+All you have to do is make sure it gets set for the environment of
+the geckodriver process:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">TMPDIR</span><span class="o">=/</span><span class="n">some</span><span class="o">/</span><span class="n">location</span> <span class="o">./</span><span class="n">geckodriver</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="automation-preferences">
+<h2>Automation preferences<a class="headerlink" href="#automation-preferences" title="Permalink to this headline">¶</a></h2>
+<p>As indicated in the introduction, geckodriver configures Firefox
+so it is well-behaved in automation environments.  It uses a
+combination of preferences written to the profile prior to launching
+Firefox (1), and a set of recommended preferences set on startup (2).</p>
+<p>These can be perused here:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/geckodriver/src/prefs.rs">testing/geckodriver/src/prefs.rs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/marionette/components/marionette.js">testing/marionette/components/marionette/marionette.js</a></li>
+</ul>
+</div>
+<p>As mentioned, these are <em>recommended</em> preferences, and any user-defined
+preferences in the <a class="reference external" href="http://kb.mozillazine.org/User.js_file">user.js file</a> or as part of the <a class="reference external" href="./Capabilities.html#capability-prefs"><code class="docutils literal notranslate"><span class="pre">prefs</span></code> capability</a>
+take precedence.  This means for example that the user can tweak
+<code class="docutils literal notranslate"><span class="pre">browser.startup.page</span></code> to override the recommended preference for
+starting the browser with a blank page.</p>
+<p>The recommended preferences set at runtime (see 2 above) may also
+be disabled entirely by setting <code class="docutils literal notranslate"><span class="pre">marionette.prefs.recommended</span></code>.
+This may however cause geckodriver to not behave correctly according
+to the WebDriver standard, so it should be used with caution.</p>
+<p>Users should take note that the <code class="docutils literal notranslate"><span class="pre">marionette.port</span></code> preference is
+special, and will always be overridden when using geckodriver unless
+the <code class="docutils literal notranslate"><span class="pre">--marionette-port</span> <span class="pre">&lt;port&gt;</span></code> flag is used specifically to instruct
+the Marionette server in Firefox which port to use.</p>
+</div>
+<div class="section" id="temporary-profiles-not-being-removed">
+<h2>Temporary profiles not being removed<a class="headerlink" href="#temporary-profiles-not-being-removed" title="Permalink to this headline">¶</a></h2>
+<p>It is a known bug that geckodriver in some instances fails to remove
+the temporary profile, particularly when the session is not explicitly
+deleted or the process gets interrupted.  See <a class="reference external" href="https://github.com/mozilla/geckodriver/issues/299">geckodriver issue
+299</a> for more information.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Bugs.html" class="btn btn-neutral float-right" title="Reporting bugs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Flags.html" class="btn btn-neutral float-left" title="Flags" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

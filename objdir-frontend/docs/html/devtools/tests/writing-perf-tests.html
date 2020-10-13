@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing new performance test &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Performance test example: performance of click event in the inspector" href="writing-perf-tests-example.html" />
+    <link rel="prev" title="Performance Tests: DAMP" href="performance-tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="README.html">Automated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpcshell.html">xpcshell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-chrome.html">Chrome mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-devtools.html">DevTools mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-tests.html">Node tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests.html">Writing tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-intermittents.html">Debugging intermittent failures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performance-tests.html">Performance tests (DAMP)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Writing new performance test</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test-location">Test location</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-test">Basic test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-documents">Test documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-helpers">Test helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-runner">Test runner</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-name-your-test-and-register-it">How to name your test and register it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-run-your-new-test">How to run your new test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-example.html">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-tips.html">Advanced tips</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Writing new performance test</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/tests/writing-perf-tests.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-new-performance-test">
+<h1>Writing new performance test<a class="headerlink" href="#writing-new-performance-test" title="Permalink to this headline">¶</a></h1>
+<p>See <a class="reference internal" href="performance-tests.html"><span class="doc">Performance tests (DAMP)</span></a> for an overall description of our performance tests.
+Here, we will describe how to write a new test and register it to run in DAMP.</p>
+<p>{% hint style=”tip” %}</p>
+<p><strong>Reuse existing tests if possible!</strong></p>
+<p>If a <code class="docutils literal notranslate"><span class="pre">custom</span></code> page already exists for the tool you are testing, try to modify the existing <code class="docutils literal notranslate"><span class="pre">custom</span></code> test rather than adding a new individual test.</p>
+<p>New individual tests run separately, in new tabs, and make DAMP slower than just modifying existing tests. Complexifying <code class="docutils literal notranslate"><span class="pre">custom</span></code> test pages should also help cover more scenarios and catch more regressions. For those reasons, modifying existing tests should be the preferred way of extending DAMP coverage.</p>
+<p><code class="docutils literal notranslate"><span class="pre">custom</span></code> tests are using complex documents that should stress a particular tool in various ways. They are all named <code class="docutils literal notranslate"><span class="pre">custom.${tool}</span></code> (for instance <code class="docutils literal notranslate"><span class="pre">custom.inspector</span></code>). The test pages for those tests can be found in <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/pages/custom">pages/custom</a>.</p>
+<p>If your test case requires a dedicated document or can’t run next to the other tests in the current <code class="docutils literal notranslate"><span class="pre">custom</span></code> test, follow the instructions below to add a new individual test.</p>
+<p>{% endhint %}</p>
+<p>This page contains the general documentation for writing DAMP tests. See also:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="./writing-perf-tests-example.html">Performance test writing example</a> for a practical example of creating a new test</p></li>
+<li><p><a class="reference external" href="./writing-perf-tests-tips.html">Performance test writing tips</a> for detailed tips on how to write a good and efficient test</p></li>
+</ul>
+<div class="section" id="test-location">
+<h2>Test location<a class="headerlink" href="#test-location" title="Permalink to this headline">¶</a></h2>
+<p>Tests are located in <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests">testing/talos/talos/tests/devtools/addon/content/tests</a>. You will find subfolders for panels already tested in DAMP (debugger, inspector, …) as well as other subfolders for tests not specific to a given panel (server, toolbox).</p>
+<p>Tests are isolated in dedicated files. Some examples of tests:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests/netmonitor/simple.js">tests/netmonitor/simple.js</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests/inspector/mutations.js">tests/inspector/mutations.js</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="basic-test">
+<h2>Basic test<a class="headerlink" href="#basic-test" title="Permalink to this headline">¶</a></h2>
+<p>The basic skeleton of a test is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">const</span> <span class="p">{</span>
+  <span class="n">testSetup</span><span class="p">,</span>
+  <span class="n">testTeardown</span><span class="p">,</span>
+  <span class="n">SIMPLE_URL</span><span class="p">,</span>
+<span class="p">}</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;devtools/docs/head&quot;</span><span class="p">);</span>
+
+<span class="n">module</span><span class="o">.</span><span class="n">exports</span> <span class="o">=</span> <span class="k">async</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">await</span> <span class="n">testSetup</span><span class="p">(</span><span class="n">SIMPLE_URL</span><span class="p">);</span>
+
+  <span class="o">//</span> <span class="n">Run</span> <span class="n">some</span> <span class="n">measures</span> <span class="n">here</span>
+
+  <span class="k">await</span> <span class="n">testTeardown</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>always start the test by calling <code class="docutils literal notranslate"><span class="pre">testSetup(url)</span></code>, with the <code class="docutils literal notranslate"><span class="pre">url</span></code> of the document to use</p></li>
+<li><p>always end the test with <code class="docutils literal notranslate"><span class="pre">testTeardown()</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="test-documents">
+<h2>Test documents<a class="headerlink" href="#test-documents" title="Permalink to this headline">¶</a></h2>
+<p>DevTools performance heavily depends on the document against which DevTools are opened. There are two “historical” documents you can use for tests for any panel:</p>
+<ul class="simple">
+<li><p>“Simple”, an empty webpage. This one helps highlighting the load time of panels,</p></li>
+<li><p>“Complicated”, a copy of bild.be, a German newspaper website. This allows us to examine the performance of the tools when inspecting complicated, big websites.</p></li>
+</ul>
+<p>The URL of those documents are exposed by <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests/head.js">tests/head.js</a>. The Simple page can be found at <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/pages/simple.html">testing/talos/talos/tests/devtools/addon/content/pages/simple.html</a>. The Complicated page is downloaded via <a class="reference external" href="https://wiki.mozilla.org/ReleaseEngineering/Applications/Tooltool">tooltool</a> automatically the first time you run the DAMP tests.</p>
+<p>You can create also new test documents under <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/pages">testing/talos/talos/tests/devtools/addon/content/pages</a>. See the pages in the <code class="docutils literal notranslate"><span class="pre">custom</span></code> subfolder for instance. If you create a document in <code class="docutils literal notranslate"><span class="pre">pages/custom/mypanel/index.html</span></code>, the URL of the document in your tests should be <code class="docutils literal notranslate"><span class="pre">PAGES_BASE_URL</span> <span class="pre">+</span> <span class="pre">&quot;custom/mypanel/index.html&quot;</span></code>. The constant <code class="docutils literal notranslate"><span class="pre">PAGES_BASE_URL</span></code> is exposed by head.js.</p>
+<p>Note that modifying any existing test document will most likely impact the baseline for existing tests.</p>
+<p>Finally you can also create very simple test documents using data urls. Test documents don’t have to contain any specific markup or script to be valid DAMP test documents, so something as simple as <code class="docutils literal notranslate"><span class="pre">testSetup(&quot;data:text/html,my</span> <span class="pre">test</span> <span class="pre">document&quot;);</span></code> is valid.</p>
+</div>
+<div class="section" id="test-helpers">
+<h2>Test helpers<a class="headerlink" href="#test-helpers" title="Permalink to this headline">¶</a></h2>
+<p>Helper methods have been extracted in shared modules:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests/head.js">tests/head.js</a> for the most common ones</p></li>
+<li><p>tests/{subfolder}/{subfolder}-helpers.js for folder-specific helpers (<a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/tests/inspector/inspector-helpers.js">example</a>)</p></li>
+</ul>
+<p>To measure something which is not covered by an existing helper, you should use <code class="docutils literal notranslate"><span class="pre">runTest</span></code>, exposed by head.js.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module.exports = async function() {
+  await testSetup(SIMPLE_URL);
+
+  // Calling `runTest` will immediately start recording your action duration.
+  // You can execute any necessary setup action you don&#39;t want to record before calling it.
+  const test = runTest(`mypanel.mytest.mymeasure`);
+
+  await doSomeThings(); // &lt;== Do an action you want to record here
+
+  // Once your action is completed, call `runTest` returned object&#39;s `done` method.
+  // It will automatically record the action duration and appear in PerfHerder as a new subtest.
+  // It also creates markers in the profiler so that you can better inspect this action in
+  // profiler.firefox.com.
+  test.done();
+
+  await testTeardown();
+};
+</pre></div>
+</div>
+<p>If your measure is not simply the time spent by an asynchronous call (for instance computing an average, counting things…) there is a lower level helper called <code class="docutils literal notranslate"><span class="pre">logTestResult</span></code> which will directly log a value. See <a class="reference external" href="https://searchfox.org/mozilla-central/rev/325c1a707819602feff736f129cb36055ba6d94f/testing/talos/talos/tests/devtools/addon/content/tests/webconsole/streamlog.js#62">this example</a>.</p>
+</div>
+<div class="section" id="test-runner">
+<h2>Test runner<a class="headerlink" href="#test-runner" title="Permalink to this headline">¶</a></h2>
+<p>If you need to dive into the internals of the DAMP runner, most of the logic is in <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/damp.js">testing/talos/talos/tests/devtools/addon/content/damp.js</a>.</p>
+</div>
+</div>
+<div class="section" id="how-to-name-your-test-and-register-it">
+<h1>How to name your test and register it?<a class="headerlink" href="#how-to-name-your-test-and-register-it" title="Permalink to this headline">¶</a></h1>
+<p>If a new test file was created, it needs to be registered in the test suite. To register the new test, add it in <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/addon/content/damp-tests.js">damp-tests.js</a>. This file acts as the manifest for the DAMP test suite.</p>
+<p>If your are writing a test executing against Simple and Complicated documents, your test name will look like: <code class="docutils literal notranslate"><span class="pre">(simple|complicated).${tool-name}.${test-name}</span></code>.
+So for our example, it would be <code class="docutils literal notranslate"><span class="pre">simple.inspector.click</span></code> and <code class="docutils literal notranslate"><span class="pre">complicated.inspector.click</span></code>.
+For independent tests that don’t use the Simple or Complicated documents, the test name only needs to start with the tool name, if the test is specific to that tool
+For the example, it would be <code class="docutils literal notranslate"><span class="pre">inspector.click</span></code>.</p>
+<p>In general, the test name should try to match the path of the test file. As you can see in damp-tests.js this naming convention is not consistently followed. We have discrepancies for simple/complicated/custom tests, as well as for webconsole tests. This is largely for historical reasons.</p>
+</div>
+<div class="section" id="how-to-run-your-new-test">
+<h1>How to run your new test?<a class="headerlink" href="#how-to-run-your-new-test" title="Permalink to this headline">¶</a></h1>
+<p>You can run any performance test with this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --subtest ${your-test-name}
+</pre></div>
+</div>
+<p>By default, it will run the test 25 times. In order to run it just once, do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --subtest ${your-test-name} --cycles 1 --tppagecycles 1
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--cycles</span></code> controls the number of times Firefox is restarted
+<code class="docutils literal notranslate"><span class="pre">--tppagecycles</span></code> defines the number of times we repeat the test after each Firefox start</p>
+<p>Also, you can record a profile while running the test. To do that, execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --subtest ${your-test-name} --cycles 1 --tppagecycles 1 --gecko-profile --gecko-profile-entries 100000000
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--gecko-profile</span></code> enables the profiler
+<code class="docutils literal notranslate"><span class="pre">--gecko-profile-entries</span></code> defines the profiler buffer size, which needs to be large while recording performance tests</p>
+<p>Once it is done executing, the profile lives in a zip file you have to uncompress like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unzip</span> <span class="n">testing</span><span class="o">/</span><span class="n">mozharness</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">blobber_upload_dir</span><span class="o">/</span><span class="n">profile_damp</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+<p>Then you have to open <a class="reference external" href="https://profiler.firefox.com/">https://profiler.firefox.com/</a> and manually load the profile file that lives here: <code class="docutils literal notranslate"><span class="pre">profile_damp/page_0_pagecycle_1/cycle_0.profile</span></code></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing-perf-tests-example.html" class="btn btn-neutral float-right" title="Performance test example: performance of click event in the inspector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="performance-tests.html" class="btn btn-neutral float-left" title="Performance Tests: DAMP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

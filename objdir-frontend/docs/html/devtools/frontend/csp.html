@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Current DevTools CSP &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Remote Debugging Protocol" href="../backend/protocol.html" />
+    <link rel="prev" title="Telemetry" href="telemetry.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#frontend">Frontend</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="svgs.html">Panel SVGs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="react.html">React</a></li>
+<li class="toctree-l3"><a class="reference internal" href="react-guidelines.html">React Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux.html">Redux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux-guidelines.html">Redux Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Current DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scope-of-the-devtools-csp">Scope of the DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recognizing-csp-issues">Recognizing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-csp-issues">Fixing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-csp-issues-in-tests">Fixing CSP issues in tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Current DevTools CSP</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/frontend/csp.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>The DevTools toolbox is loaded in an iframe pointing to about:devtools-toolbox. This iframe has a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy</a> (CSP) applied, which will mitigate potential attacks. However this may limit the resources that can be loaded in the toolbox documenth.</p>
+<div class="section" id="current-devtools-csp">
+<h1>Current DevTools CSP<a class="headerlink" href="#current-devtools-csp" title="Permalink to this headline">¶</a></h1>
+<p>The current policy for about:devtools-toolbox is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span><span class="o">-</span><span class="n">src</span> <span class="n">chrome</span><span class="p">:</span> <span class="n">resource</span><span class="p">:;</span> <span class="n">img</span><span class="o">-</span><span class="n">src</span> <span class="n">chrome</span><span class="p">:</span> <span class="n">resource</span><span class="p">:</span> <span class="n">data</span><span class="p">:;</span> <span class="nb">object</span><span class="o">-</span><span class="n">src</span> <span class="s1">&#39;none&#39;</span>
+</pre></div>
+</div>
+<p>This means:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">chrome://</span></code> and <code class="docutils literal notranslate"><span class="pre">resource://</span></code> are allowed for any resource</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chrome://</span></code> and <code class="docutils literal notranslate"><span class="pre">resource://</span></code> and <code class="docutils literal notranslate"><span class="pre">data://</span></code> are allowed for images</p></li>
+</ul>
+<p>For more information about which resources and requests are in scope of the CSP, you can read the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src">default-src documentation on MDN</a>.</p>
+</div>
+<div class="section" id="scope-of-the-devtools-csp">
+<h1>Scope of the DevTools CSP<a class="headerlink" href="#scope-of-the-devtools-csp" title="Permalink to this headline">¶</a></h1>
+<p>This content security policy only applies to the toolbox document for now. If you are working within the document of a panel or if you are working on the server, those limitations should not apply.</p>
+<p>Note that even when working in the document of a panel, we are sometimes interacting with the toolbox document, for instance to show tooltips. So typically any resource created for a tooltip will be subject to the CSP limitations.</p>
+</div>
+<div class="section" id="recognizing-csp-issues">
+<h1>Recognizing CSP issues<a class="headerlink" href="#recognizing-csp-issues" title="Permalink to this headline">¶</a></h1>
+<p>Open the Browser Toolbox, if you see errors such as</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">JavaScript</span> <span class="n">Error</span><span class="p">:</span> <span class="s2">&quot;Content Security Policy: The page’s settings blocked the loading of a resource [...]&quot;</span>
+</pre></div>
+</div>
+<p>it means you are trying to load a resource with a forbidden scheme.</p>
+</div>
+<div class="section" id="fixing-csp-issues">
+<h1>Fixing CSP issues<a class="headerlink" href="#fixing-csp-issues" title="Permalink to this headline">¶</a></h1>
+<p>If your implementation hits a CSP issue, the first suggestion is to try to use a supported scheme. If this is not an option, check if you can perform your request or load your resource outside of the toolbox document. For instance if the resource you are loading is related to the debugged target, the request can (and probably should) be made from an actor in the DevTools server and then forwarded from the server to the client. Requests made by the server will not be impacted by the CSP.</p>
+<p>If it seems like the only solution is to update the CSP, get in touch with security peers in order to discuss about your use case. You can <a class="reference external" href="https://bugzilla.mozilla.org/enter_bug.cgi?product=Core&amp;component=DOM%3A%20Security">file a bug in Core/DOM: security</a>.</p>
+</div>
+<div class="section" id="fixing-csp-issues-in-tests">
+<h1>Fixing CSP issues in tests<a class="headerlink" href="#fixing-csp-issues-in-tests" title="Permalink to this headline">¶</a></h1>
+<p>If the issue comes from test code, it should be possible to update the test to use a supported scheme. A typical issue might be trying to load an iframe inside of the toolbox with a data-uri. Instead, you can create an HTML support file and load it from either a chrome:// or a resource:// URL.</p>
+<p>In general once a support file is added you can access it via:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://example.com/browser/[path_to_file]</span></code></p></li>
+<li><p>or <code class="docutils literal notranslate"><span class="pre">chrome://mochitests/content/browser/[path_to_file]</span></code></p></li>
+</ul>
+<p>For instance <a class="reference external" href="https://searchfox.org/mozilla-central/source/devtools/client/aboutdebugging/test/browser/resources/service-workers/controlled-sw.html">devtools/client/aboutdebugging/test/browser/resources/service-workers/controlled-sw.html</a> is accessed in tests via <code class="docutils literal notranslate"><span class="pre">http://example.com/browser/devtools/client/aboutdebugging/test/browser/resources/service-workers/controlled-sw.html</span></code>.</p>
+<p>If you absolutely have to use an unsupported scheme, you can turn off CSPs for the test only. To do so, you need to temporarily update two preferences:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">await</span> <span class="n">pushPref</span><span class="p">(</span><span class="s2">&quot;security.csp.enable&quot;</span><span class="p">,</span> <span class="n">false</span><span class="p">);</span>
+<span class="k">await</span> <span class="n">pushPref</span><span class="p">(</span><span class="s2">&quot;dom.security.skip_about_page_has_csp_assert&quot;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pushPref</span></code> helper will ensure the preferences come back to their initial value at the end of the test.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../backend/protocol.html" class="btn btn-neutral float-right" title="Remote Debugging Protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="telemetry.html" class="btn btn-neutral float-left" title="Telemetry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

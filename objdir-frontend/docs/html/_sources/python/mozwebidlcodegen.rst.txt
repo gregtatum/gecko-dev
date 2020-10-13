@@ -1,0 +1,10 @@
+mozwebidlcodegen package
+========================
+
+Module contents
+---------------
+
+.. automodule:: mozwebidlcodegen
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,29 @@
+mozbuild.controller package
+===========================
+
+Submodules
+----------
+
+mozbuild.controller.building module
+-----------------------------------
+
+.. automodule:: mozbuild.controller.building
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.controller.clobber module
+----------------------------------
+
+.. automodule:: mozbuild.controller.clobber
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozbuild.controller
+   :members:
+   :undoc-members:
+   :show-inheritance:

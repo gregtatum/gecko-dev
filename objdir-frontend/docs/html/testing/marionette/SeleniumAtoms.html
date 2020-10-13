@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Selenium atoms &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Preferences" href="Prefs.html" />
+    <link rel="prev" title="Style guide" href="CodeStyle.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Selenium atoms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#update-required-selenium-atoms">Update required Selenium atoms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#export-selenium-atoms">Export Selenium Atoms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#update-atom-js">Update atom.js</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-the-changes">Test the changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Prefs.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internals/index.html">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Marionette</a> &raquo;</li>
+        
+      <li>Selenium atoms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/marionette/SeleniumAtoms.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="selenium-atoms">
+<h1>Selenium atoms<a class="headerlink" href="#selenium-atoms" title="Permalink to this headline">¶</a></h1>
+<p>Marionette uses a small list of <a class="reference external" href="https://github.com/SeleniumHQ/selenium/tree/master/javascript/webdriver/atoms">Selenium atoms</a> to interact with
+web elements.  Initially those have been added to ensure a better
+reliability due to a wider usage inside the Selenium project. But
+by adding full support for the <a class="reference external" href="https://w3c.github.io/webdriver/webdriver-spec.html">WebDriver specification</a> they will
+be removed step by step.</p>
+<p>Currently the following atoms are in use:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">getElementText</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isDisplayed</span></code></p></li>
+</ul>
+<p>To use one of those atoms Javascript modules will have to import
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/marionette/atom.js">atom.js</a>.</p>
+<div class="section" id="update-required-selenium-atoms">
+<h2>Update required Selenium atoms<a class="headerlink" href="#update-required-selenium-atoms" title="Permalink to this headline">¶</a></h2>
+<p>In regular intervals the atoms, which are still in use, have to
+be updated.  Therefore they have to be exported from the Selenium
+repository first, and then updated in <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/marionette/atom.js">atom.js</a>.</p>
+<div class="section" id="export-selenium-atoms">
+<h3>Export Selenium Atoms<a class="headerlink" href="#export-selenium-atoms" title="Permalink to this headline">¶</a></h3>
+<p>The canonical GitHub repository for Selenium is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">SeleniumHQ</span><span class="o">/</span><span class="n">selenium</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>so make sure to have a local copy of it. For the cloning process
+it is recommended to specify the <code class="docutils literal notranslate"><span class="pre">--depth=1</span></code> argument, so only the
+last changeset is getting downloaded (which itself will already be
+more than 100 MB). Once the clone is ready the export of the atoms
+can be triggered by running the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">cd</span> <span class="n">selenium</span>
+<span class="o">%</span> <span class="o">./</span><span class="n">go</span>
+<span class="o">%</span> <span class="n">python</span> <span class="n">buck</span><span class="o">-</span><span class="n">out</span><span class="o">/</span><span class="n">crazy</span><span class="o">-</span><span class="n">fun</span><span class="o">/%</span><span class="n">changeset</span><span class="o">%/</span><span class="n">buck</span><span class="o">.</span><span class="n">pex</span> <span class="n">build</span> <span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">output</span> <span class="o">%</span><span class="n">atom</span><span class="o">%</span>
+</pre></div>
+</div>
+<p>Hereby <code class="docutils literal notranslate"><span class="pre">%changeset%</span></code> corresponds to the currently used version of
+buck, and <code class="docutils literal notranslate"><span class="pre">%atom%</span></code> to the atom to export. The following targets
+for exporting are available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">//javascript/webdriver/atoms:clear-element-firefox</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">//javascript/webdriver/atoms:get-text-firefox</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">//javascript/webdriver/atoms:is-displayed-firefox</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">//javascript/webdriver/atoms:is-enabled-firefox</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">//javascript/webdriver/atoms:is-selected-firefox</span></code></p></li>
+</ul>
+<p>For each of the exported atoms a file can now be found in the folder
+<code class="docutils literal notranslate"><span class="pre">buck-out/gen/javascript/webdriver/atoms/</span></code>.  They contain all the
+code including dependencies for the atom wrapped into a single function.</p>
+</div>
+<div class="section" id="update-atom-js">
+<h3>Update atom.js<a class="headerlink" href="#update-atom-js" title="Permalink to this headline">¶</a></h3>
+<p>To update the atoms for Marionette the <code class="docutils literal notranslate"><span class="pre">atoms.js</span></code> file has to be edited. For
+each atom to be updated the steps as laid out below have to be performed:</p>
+<ol class="simple">
+<li><p>Open the Javascript file of the exported atom. See above for
+its location.</p></li>
+<li><p>Remove the contained license header, which can be found somewhere
+in the middle of the file.</p></li>
+<li><p>Update the parameters of the wrapper function (at the very top)
+so that those are equal with the used parameters in <code class="docutils literal notranslate"><span class="pre">atom.js</span></code>.</p></li>
+<li><p>Copy the whole content of the file, and replace the existing
+code for the atom in <code class="docutils literal notranslate"><span class="pre">atom.js</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="test-the-changes">
+<h3>Test the changes<a class="headerlink" href="#test-the-changes" title="Permalink to this headline">¶</a></h3>
+<p>To ensure that the update of the atoms doesn’t cause a regression
+a try build should be run including Marionette unit tests, Firefox
+ui tests, and all the web-platform-tests.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Prefs.html" class="btn btn-neutral float-right" title="Preferences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CodeStyle.html" class="btn btn-neutral float-left" title="Style guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

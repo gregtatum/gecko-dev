@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Distributed sccache (sccache-dist) &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Adding Certificates for Testing" href="test_certificates.html" />
+    <link rel="prev" title="Build Telemetry" href="telemetry.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Distributed sccache (sccache-dist)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#steps-for-distributing-a-build-as-an-sccache-dist-client">Steps for distributing a build as an sccache-dist client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-for-setting-up-a-server">Steps for setting up a server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-questions-considerations">Common questions/considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Distributed sccache (sccache-dist)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/sccache-dist.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="distributed-sccache-sccache-dist">
+<span id="sccache-dist"></span><h1>Distributed sccache (sccache-dist)<a class="headerlink" href="#distributed-sccache-sccache-dist" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/mozilla/sccache">sccache</a> is a ccache-like tool written in
+rust.</p>
+<p>Distributed sccache (also referred to as sccache-dist) is being rolled out to
+Mozilla offices as a replacement for icecc. The steps for setting up your
+machine as an sccache-dist server as well as distributing your build to servers
+in your office are detailed below.</p>
+<p>In addition to improved security properties, distributed sccache offers
+distribution and caching of rust compilation, so it should be an improvement
+above and beyond what we see with icecc. Build servers run on Linux and
+distributing builds is currently supported from Linux, macOS, and Windows.</p>
+<div class="section" id="steps-for-distributing-a-build-as-an-sccache-dist-client">
+<h2>Steps for distributing a build as an sccache-dist client<a class="headerlink" href="#steps-for-distributing-a-build-as-an-sccache-dist-client" title="Permalink to this headline">¶</a></h2>
+<p>Start by following the instructions at <a class="reference external" href="https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#configure-a-client">https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#configure-a-client</a>
+to configure your sccache distributed client.
+<em>NOTE</em> If you’re distributing from Linux a toolchain will be packaged
+automatically and provided to the build server. If you’re distributing from
+Windows or macOS, start by using the cross-toolchains provided by
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> rather than attempting to use <code class="docutils literal notranslate"><span class="pre">icecc-create-env</span></code>.
+sccache 0.2.12 or above is recommended, and the auth section of your config
+must read:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">dist</span><span class="o">.</span><span class="n">auth</span><span class="p">]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;mozilla&quot;</span>
+</pre></div>
+</div>
+<ul>
+<li><p>The scheduler url to use is: <code class="docutils literal notranslate"><span class="pre">https://sccache1.corpdmz.&lt;OFFICE&gt;.mozilla.com</span></code>,
+where &lt;OFFICE&gt; is, for instance, sfo1. A complete list of office short names
+to be used can be found in the <a class="reference external" href="https://docs.google.com/spreadsheets/d/1alscUTcfFyu3L0vs_S_cGi9JxF4uPrfsmwJko9annWE/edit#gid=0">Office Addressing Schemes spreadsheet</a>.</p></li>
+<li><p>To use distributed sccache from a Mozilla office, you must be on the corporate
+network. Use the <code class="docutils literal notranslate"><span class="pre">Mozilla</span></code> ssid for wireless. The corp vlan is the default
+if wired.</p></li>
+<li><p>If you’re compiling from a macOS client, there are a handful of additional
+considerations outlined here:
+<a class="reference external" href="https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#considerations-when-distributing-from-macos">https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#considerations-when-distributing-from-macos</a>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> to download prebuilt toolchains to
+<code class="docutils literal notranslate"><span class="pre">~/.mozbuild/clang-dist-toolchain.tar.xz</span></code> and
+<code class="docutils literal notranslate"><span class="pre">~/.mozbuild/rustc-dist-toolchain.tar.xz</span></code>. This is an example of the paths
+that should be added to your client config to specify toolchains to build on
+macOS, located at <code class="docutils literal notranslate"><span class="pre">~/Library/Preferences/Mozilla.sccache/config</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">dist</span><span class="o">.</span><span class="n">toolchains</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;path_override&quot;</span>
+<span class="n">compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.rustup/toolchains/stable-x86_64-apple-darwin/bin/rustc&quot;</span>
+<span class="n">archive</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.mozbuild/rustc-dist-toolchain.tar.xz&quot;</span>
+<span class="n">archive_compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/builds/worker/toolchains/rustc/bin/rustc&quot;</span>
+
+<span class="p">[[</span><span class="n">dist</span><span class="o">.</span><span class="n">toolchains</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;path_override&quot;</span>
+<span class="n">compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang&quot;</span>
+<span class="n">archive</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.mozbuild/clang-dist-toolchain.tar.xz&quot;</span>
+<span class="n">archive_compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/builds/worker/toolchains/clang/bin/clang&quot;</span>
+
+<span class="p">[[</span><span class="n">dist</span><span class="o">.</span><span class="n">toolchains</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;path_override&quot;</span>
+<span class="n">compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang++&quot;</span>
+<span class="n">archive</span> <span class="o">=</span> <span class="s2">&quot;/path/to/home/.mozbuild/clang-dist-toolchain.tar.xz&quot;</span>
+<span class="n">archive_compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/builds/worker/toolchains/clang/bin/clang&quot;</span>
+</pre></div>
+</div>
+<p>Note that the version of <code class="docutils literal notranslate"><span class="pre">rustc</span></code> found in <code class="docutils literal notranslate"><span class="pre">rustc-dist-toolchain.tar.xz</span></code>
+must match the version of <code class="docutils literal notranslate"><span class="pre">rustc</span></code> used locally. The distributed archive
+will contain the version of <code class="docutils literal notranslate"><span class="pre">rustc</span></code> used by automation builds, which may
+lag behind stable for a few days after Rust releases, which is specified by
+the task definition in
+<a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/taskcluster/ci/toolchain/dist-toolchains.yml">this file</a>.
+For instance, to specify 1.37.0 rather than the current stable, run
+<code class="docutils literal notranslate"><span class="pre">rustup</span> <span class="pre">toolchain</span> <span class="pre">add</span> <span class="pre">1.37.0</span></code> and point to
+<code class="docutils literal notranslate"><span class="pre">/path/to/home/.rustup/toolchains/1.37.0-x86_64-apple-darwin/bin/rustc</span></code> in your
+client config.</p>
+<p>The build system currently requires an explicit target to be passed with
+<code class="docutils literal notranslate"><span class="pre">HOST_CFLAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">HOST_CXXFLAGS</span></code> e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">HOST_CFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+<span class="n">export</span> <span class="n">HOST_CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Compiling from a Windows client is supported but hasn’t seen as much testing
+as other platforms. The following example mozconfig can be used as a guide:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="n">CCACHE</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">home</span><span class="o">/.</span><span class="n">mozbuild</span><span class="o">/</span><span class="n">sccache</span><span class="o">/</span><span class="n">sccache</span><span class="o">.</span><span class="n">exe</span>
+
+<span class="n">export</span> <span class="n">CC</span><span class="o">=</span><span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang-cl.exe --driver-mode=cl&quot;</span>
+<span class="n">export</span> <span class="n">CXX</span><span class="o">=</span><span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang-cl.exe --driver-mode=cl&quot;</span>
+<span class="n">export</span> <span class="n">HOST_CC</span><span class="o">=</span><span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang-cl.exe --driver-mode=cl&quot;</span>
+<span class="n">export</span> <span class="n">HOST_CXX</span><span class="o">=</span><span class="s2">&quot;/path/to/home/.mozbuild/clang/bin/clang-cl.exe --driver-mode=cl&quot;</span>
+</pre></div>
+</div>
+<p>The client config should be located at
+<code class="docutils literal notranslate"><span class="pre">~/AppData/Roaming/Mozilla/sccache/config/config</span></code>, and as on macOS custom
+toolchains should be obtained with <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> and specified in the
+client config, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="n">dist</span><span class="o">.</span><span class="n">toolchains</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;path_override&quot;</span>
+<span class="n">compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/&lt;USER&gt;/.mozbuild/clang/bin/clang-cl.exe&quot;</span>
+<span class="n">archive</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/&lt;USER&gt;/.mozbuild/clang-dist-toolchain.tar.xz&quot;</span>
+<span class="n">archive_compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/builds/worker/toolchains/clang/bin/clang&quot;</span>
+
+<span class="p">[[</span><span class="n">dist</span><span class="o">.</span><span class="n">toolchains</span><span class="p">]]</span>
+<span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;path_override&quot;</span>
+<span class="n">compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/&lt;USER&gt;/.rustup/toolchains/stable-x86_64-pc-windows-msvc/bin/rustc.exe&quot;</span>
+<span class="n">archive</span> <span class="o">=</span> <span class="s2">&quot;C:/Users/&lt;USER&gt;/.mozbuild/rustc-dist-toolchain.tar.xz&quot;</span>
+<span class="n">archive_compiler_executable</span> <span class="o">=</span> <span class="s2">&quot;/builds/worker/toolchains/rustc/bin/rustc&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add the following to your mozconfig:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="n">CCACHE</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">home</span><span class="o">/.</span><span class="n">mozbuild</span><span class="o">/</span><span class="n">sccache</span><span class="o">/</span><span class="n">sccache</span>
+</pre></div>
+</div>
+<p>If you’re compiling from a macOS client, you might need some additional configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the target flag to Darwin</span>
+<span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+<span class="n">export</span> <span class="n">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+<span class="n">export</span> <span class="n">HOST_CFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+<span class="n">export</span> <span class="n">HOST_CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;--target=x86_64-apple-darwin16.0.0&quot;</span>
+
+<span class="c1"># Specify the macOS SDK to use</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">macos</span><span class="o">-</span><span class="n">sdk</span><span class="o">=/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">MacOSX</span><span class="o">-</span><span class="n">SDKs</span><span class="o">/</span><span class="n">MacOSX10</span><span class="o">.</span><span class="mf">11.</span><span class="n">sdk</span>
+</pre></div>
+</div>
+<p>You can get the right macOS SDK by downloading an old version of XCode from
+<a class="reference external" href="https://developer.apple.com">developer.apple.com</a> and unpacking the SDK
+from it.</p>
+</li>
+<li><p>When attempting to get your client running, the output of <code class="docutils literal notranslate"><span class="pre">sccache</span> <span class="pre">-s</span></code> should
+be consulted to confirm compilations are being distributed. To receive helpful
+logging from the local daemon in case they aren’t, run
+<code class="docutils literal notranslate"><span class="pre">SCCACHE_NO_DAEMON=1</span> <span class="pre">SCCACHE_LOG=sccache=trace</span> <span class="pre">path/to/sccache</span> <span class="pre">--start-server</span></code>
+in a terminal window separate from your build prior to building. <em>NOTE</em> use
+<code class="docutils literal notranslate"><span class="pre">RUST_LOG</span></code> instead of <code class="docutils literal notranslate"><span class="pre">SCCACHE_LOG</span></code> if your build of <code class="docutils literal notranslate"><span class="pre">sccache</span></code> does not
+include <a class="reference external" href="https://github.com/mozilla/sccache/pull/822">pull request 822</a>. (<code class="docutils literal notranslate"><span class="pre">sccache</span></code> binaries from
+<code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">bootstrap</span></code> do include this PR.)</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">build</span> <span class="pre">-j&lt;value&gt;</span></code> with an appropriately large <code class="docutils literal notranslate"><span class="pre">&lt;value&gt;</span></code>.
+<code class="docutils literal notranslate"><span class="pre">sccache</span> <span class="pre">--dist-status</span></code> should provide the number of cores available to you
+(or a message if you’re not connected). In the future this will be integrated
+with the build system to automatically select an appropriate value.</p></li>
+</ul>
+<p>This should be enough to distribute your build and replace your use of icecc.
+Bear in mind there may be a few speedbumps, and please ensure your version of
+sccache is current before investigating further. Please see the common questions
+section below and ask for help if anything is preventing you from using it over
+email (dev-builds), on slack in #sccache, or in #build on irc.</p>
+</div>
+<div class="section" id="steps-for-setting-up-a-server">
+<h2>Steps for setting up a server<a class="headerlink" href="#steps-for-setting-up-a-server" title="Permalink to this headline">¶</a></h2>
+<p>Build servers must run linux and use bubblewrap 0.3.0+ for sandboxing of compile
+processes. This requires a kernel 4.6 or greater, so Ubuntu 18+, RHEL 8, or
+similar.</p>
+<ul>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> or
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">artifact</span> <span class="pre">toolchain</span> <span class="pre">--from-build</span> <span class="pre">linux64-sccache</span></code> to acquire a recent
+version of <code class="docutils literal notranslate"><span class="pre">sccache-dist</span></code>. Please use a <code class="docutils literal notranslate"><span class="pre">sccache-dist</span></code> binary acquired in
+this fashion to ensure compatibility with statically linked dependencies.</p></li>
+<li><p>Collect the IP of your builder and request assignment of a static IP in a bug
+filed in
+<a class="reference external" href="https://bugzilla.mozilla.org/enter_bug.cgi?product=Infrastructure%20%26%20Operations&amp;component=NetOps%3A%20Office%20Other">NetOps :: Other</a>
+This bug should include your office (SFO, YVR, etc.), your MAC address, and a
+description of why you want a static IP (“To serve as an sccache builder”
+should be sufficient).</p></li>
+<li><p>Visit the <code class="docutils literal notranslate"><span class="pre">sccache</span></code> section of <a class="reference external" href="https://login.mozilla.com">https://login.mozilla.com</a> to generate an auth
+token for your builder.</p></li>
+<li><p>The instructions at <a class="reference external" href="https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#configure-a-build-server">https://github.com/mozilla/sccache/blob/master/docs/DistributedQuickstart.md#configure-a-build-server</a>
+should contain everything else required to configure and run the server.</p>
+<p><em>NOTE</em> Port 10500 will be used by convention for builders in offices.
+Please use port 10500 in the <code class="docutils literal notranslate"><span class="pre">public_addr</span></code> section of your builder config.</p>
+<p>Extra logging may be helpful when setting up a server. To enable logging,
+run your server with
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">env</span> <span class="pre">SCCACHE_LOG=sccache=trace</span> <span class="pre">~/.mozbuild/sccache/sccache-dist</span> <span class="pre">server</span> <span class="pre">--config</span> <span class="pre">~/.config/sccache/server.conf</span></code>
+(or similar). <em>NOTE</em> <code class="docutils literal notranslate"><span class="pre">sudo</span></code> <em>must</em> come before setting environment variables
+for this to work. <em>NOTE</em> use <code class="docutils literal notranslate"><span class="pre">RUST_LOG</span></code> instead of <code class="docutils literal notranslate"><span class="pre">SCCACHE_LOG</span></code> if your
+build of <code class="docutils literal notranslate"><span class="pre">sccache</span></code> does not include <a class="reference external" href="https://github.com/mozilla/sccache/pull/822">pull request 822</a>. (<code class="docutils literal notranslate"><span class="pre">sccache</span></code> binaries from
+<code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">bootstrap</span></code> do include this PR.)</p>
+<p>As when configuring a client, the scheduler url to use is:
+<code class="docutils literal notranslate"><span class="pre">https://sccache1.corpdmz.&lt;OFFICE&gt;.mozilla.com</span></code>, where &lt;OFFICE&gt; is an
+office abbreviation found
+<a class="reference external" href="https://docs.google.com/spreadsheets/d/1alscUTcfFyu3L0vs_S_cGi9JxF4uPrfsmwJko9annWE/edit#gid=0">here</a>.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="common-questions-considerations">
+<h2>Common questions/considerations<a class="headerlink" href="#common-questions-considerations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>My build is still slow: scache-dist can only do so much with parts of the
+build that aren’t able to be parallelized. To start debugging a slow build,
+ensure the “Successful distributed compilations” line in the output of
+<code class="docutils literal notranslate"><span class="pre">sccache</span> <span class="pre">-s</span></code> dominates other counts. For a full build, at least a 2-3x
+improvement should be observed.</p></li>
+<li><p>My build output is incomprehensible due to a flood of warnings: clang will
+treat some warnings differently when it’s fed preprocessed code in a separate
+invocation (preprocessing occurs locally with sccache-dist). Adding
+<code class="docutils literal notranslate"><span class="pre">rewrite_includes_only</span> <span class="pre">=</span> <span class="pre">true</span></code> to the <code class="docutils literal notranslate"><span class="pre">dist</span></code> section of your client config
+will improve this; however, setting this will cause build failures with a
+commonly deployed version of <code class="docutils literal notranslate"><span class="pre">glibc</span></code>. This option will default to <code class="docutils literal notranslate"><span class="pre">true</span></code>
+once the fix is more widely available. Details of this fix can be found in
+<a class="reference external" href="https://sourceware.org/ml/libc-alpha/2019-11/msg00431.html">this patch</a>.</p></li>
+<li><p>My build fails with a message about incompatible versions of rustc between
+dependent crates: if you’re using a custom toolchain check that the version
+of rustc in your <code class="docutils literal notranslate"><span class="pre">rustc-dist-toolchain.tar.xz</span></code> is the same as the version
+you’re running locally.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test_certificates.html" class="btn btn-neutral float-right" title="Adding Certificates for Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="telemetry.html" class="btn btn-neutral float-left" title="Build Telemetry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

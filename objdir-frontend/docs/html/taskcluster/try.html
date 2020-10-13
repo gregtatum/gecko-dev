@@ -1,0 +1,435 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Try &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Actions" href="actions.html" />
+    <link rel="prev" title="Periodic Taskgraphs" href="cron.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Try</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scheduling-a-task-on-try">Scheduling a Task on Try</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#try-option-syntax">Try Option Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#try-task-config">Try Task Config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#empty-try">Empty Try</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#complex-configuration">Complex Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+      <li>Try</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/try.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="try">
+<h1>Try<a class="headerlink" href="#try" title="Permalink to this headline">¶</a></h1>
+<p>“Try” is a way to “try out” a proposed change safely before review, without
+officially landing it.  This functionality has been around for a <em>long</em> time in
+various forms, and can sometimes show its age.</p>
+<p>Access to “push to try” is typically available to a much larger group of
+developers than those who can land changes in integration and release branches.
+Specifically, try pushes are allowed for anyone with <a class="reference external" href="https://www.mozilla.org/en-US/about/governance/policies/commit/access-policy/">SCM Level</a> 1, while
+integration branches are at SCM level 3.</p>
+<div class="section" id="scheduling-a-task-on-try">
+<h2>Scheduling a Task on Try<a class="headerlink" href="#scheduling-a-task-on-try" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods for scheduling a task on try: legacy try option syntax,
+try task config, and an empty try.</p>
+<div class="section" id="try-option-syntax">
+<h3>Try Option Syntax<a class="headerlink" href="#try-option-syntax" title="Permalink to this headline">¶</a></h3>
+<p>The first, older method is a command line string called <code class="docutils literal notranslate"><span class="pre">try</span> <span class="pre">syntax</span></code> which is passed
+into the decision task via the commit message. The resulting commit is then
+pushed to the <a class="reference external" href="https://hg.mozilla.org/try">https://hg.mozilla.org/try</a> repository.  An example try syntax
+might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span> <span class="o">-</span><span class="n">b</span> <span class="n">o</span> <span class="o">-</span><span class="n">p</span> <span class="n">linux64</span> <span class="o">-</span><span class="n">u</span> <span class="n">mochitest</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="n">t</span> <span class="n">none</span>
+</pre></div>
+</div>
+<p>This gets parsed by <code class="docutils literal notranslate"><span class="pre">taskgraph.try_option_syntax:TryOptionSyntax</span></code> and returns
+a list of matching task labels. For more information see the
+<a class="reference external" href="https://wiki.mozilla.org/Try">TryServer wiki page</a>.</p>
+</div>
+<div class="section" id="try-task-config">
+<h3>Try Task Config<a class="headerlink" href="#try-task-config" title="Permalink to this headline">¶</a></h3>
+<p>The second, more modern method specifies exactly the tasks to run.  That list
+of tasks is usually generated locally with some <a class="reference internal" href="../tools/try/selectors/fuzzy.html"><span class="doc">local tool</span></a>
+and attached to the commit pushed to the try repository. This gives
+finer control over exactly what runs and enables growth of an
+ecosystem of tooling appropriate to varied circumstances.</p>
+<div class="section" id="implementation">
+<h4>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h4>
+<p>This method uses a checked-in file called <code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code> which lives
+at the root of the source dir. The JSON object in this file contains a
+<code class="docutils literal notranslate"><span class="pre">tasks</span></code> key giving the labels of the tasks to run.  For example, the
+<code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code> file might look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;test-windows10-64/opt-web-platform-tests-12&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;test-windows7-32/opt-reftest-1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;test-windows7-32/opt-reftest-2&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;test-windows7-32/opt-reftest-3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;build-linux64/debug&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;source-test-mozlint-eslint&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Very simply, this will run any task label that gets passed in as well as their
+dependencies. While it is possible to manually commit this file and push to
+try, it is mainly meant to be a generation target for various <a class="reference internal" href="../tools/try/index.html#try-server"><span class="std std-ref">try server</span></a>
+choosers.  For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach try fuzzy
+</pre></div>
+</div>
+<p>A list of all possible task labels can be obtained by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach taskgraph tasks
+</pre></div>
+</div>
+<p>A list of task labels relevant to a tree (defaults to mozilla-central) can be
+obtained with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach taskgraph target
+</pre></div>
+</div>
+</div>
+<div class="section" id="modifying-tasks-in-a-try-push">
+<h4>Modifying Tasks in a Try Push<a class="headerlink" href="#modifying-tasks-in-a-try-push" title="Permalink to this headline">¶</a></h4>
+<p>It’s possible to alter the definition of a task by defining additional
+configuration in <code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code>. For example, to set an environment
+variable in all tasks, you can add:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;tasks&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span><span class="p">],</span>
+  <span class="s2">&quot;env&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;FOO&quot;</span><span class="p">:</span> <span class="s2">&quot;bar&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The allowed configs are defined in <a class="reference internal" href="../python/taskgraph.html#taskgraph.decision.try_task_config_schema" title="taskgraph.decision.try_task_config_schema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">taskgraph.decision.try_task_config_schema</span></code></a>.
+The values will be available to all transforms, so how each config applies will
+vary wildly from one context to the next. Some (such as <code class="docutils literal notranslate"><span class="pre">env</span></code>) will affect
+all tasks in the graph. Others might only affect certain kinds of task. The
+<code class="docutils literal notranslate"><span class="pre">use-artifact-builds</span></code> config only applies to build tasks for instance.</p>
+</div>
+</div>
+<div class="section" id="empty-try">
+<h3>Empty Try<a class="headerlink" href="#empty-try" title="Permalink to this headline">¶</a></h3>
+<p>If there is no try syntax or <code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code>, the <code class="docutils literal notranslate"><span class="pre">try_mode</span></code>
+parameter is None and no tasks are selected to run.  The resulting push will
+only have a decision task, but one with an “add jobs” action that can be used
+to add the desired jobs to the try push.</p>
+</div>
+<div class="section" id="complex-configuration">
+<h3>Complex Configuration<a class="headerlink" href="#complex-configuration" title="Permalink to this headline">¶</a></h3>
+<p>If you need more control over the build configuration,
+(<a class="reference internal" href="../tools/try/selectors/release.html"><span class="doc">staging releases</span></a>, for example),
+you can directly specify <a class="reference internal" href="parameters.html"><span class="doc">parameters</span></a>
+to override from the <code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code> like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;optimize_target_tasks&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;release_type&quot;</span><span class="p">:</span> <span class="s2">&quot;beta&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;target_tasks_method&quot;</span><span class="p">:</span> <span class="s2">&quot;staging_release_builds&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This format can express a superset of the version 1 format, as the
+version one configuration is equivalent to the following version 2
+config.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;try_task_config&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span>
+        <span class="s2">&quot;try_mode&quot;</span><span class="p">:</span> <span class="s2">&quot;try_task_config&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="actions.html" class="btn btn-neutral float-right" title="Actions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cron.html" class="btn btn-neutral float-left" title="Periodic Taskgraphs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

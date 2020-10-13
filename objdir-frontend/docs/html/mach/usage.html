@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Guide &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Implementing Commands" href="commands.html" />
+    <link rel="prev" title="Mach" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mach</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#command-help">Command Help</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tab-completion">Tab Completion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bash">Bash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bash-homebrew">Bash (homebrew)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zsh">Zsh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zsh-oh-my-zsh">Zsh (oh-my-zsh)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zsh-prezto">Zsh (prezto)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fish">Fish</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fish-homebrew">Fish (homebrew)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#user-settings">User Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-mach-to-your-path">Adding <code class="docutils literal notranslate"><span class="pre">mach</span></code> to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Implementing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="driver.html">Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Mach Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Mach</a> &raquo;</li>
+        
+      <li>User Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mach/usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-guide">
+<span id="mach-usage"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
+<p>Mach is the central entry point for most operations that can be performed in
+mozilla-central.</p>
+<div class="section" id="command-help">
+<h2>Command Help<a class="headerlink" href="#command-help" title="Permalink to this headline">¶</a></h2>
+<p>To see an overview of all the available commands, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach <span class="nb">help</span>
+</pre></div>
+</div>
+<p>For more detailed information on a specific command, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach <span class="nb">help</span> &lt;command&gt;
+</pre></div>
+</div>
+<p>If a command has subcommands listed, you can see more details on the subcommand
+by running:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach <span class="nb">help</span> &lt;command&gt; &lt;subcommand&gt;
+</pre></div>
+</div>
+<p>Alternatively, you can pass <code class="docutils literal notranslate"><span class="pre">-h/--help</span></code>. For example, all of the
+following are valid:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach <span class="nb">help</span> try
+$ ./mach <span class="nb">help</span> try fuzzy
+$ ./mach try -h
+$ ./mach try fuzzy --help
+</pre></div>
+</div>
+</div>
+<div class="section" id="tab-completion">
+<h2>Tab Completion<a class="headerlink" href="#tab-completion" title="Permalink to this headline">¶</a></h2>
+<p>There are commands built-in to <code class="docutils literal notranslate"><span class="pre">mach</span></code> that can generate a fast tab completion
+script for various shells. Supported shells are currently <code class="docutils literal notranslate"><span class="pre">bash</span></code>, <code class="docutils literal notranslate"><span class="pre">zsh</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fish</span></code>. These generated scripts will slowly become out of date over time, so
+you may want to create a cron task to periodically re-generate them.</p>
+<p>See below for installation instructions:</p>
+<div class="section" id="bash">
+<h3>Bash<a class="headerlink" href="#bash" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mach mach-completion bash -f _mach
+$ sudo mv _mach /etc/bash_completion.d
+</pre></div>
+</div>
+</div>
+<div class="section" id="bash-homebrew">
+<h3>Bash (homebrew)<a class="headerlink" href="#bash-homebrew" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mach mach-completion bash -f <span class="k">$(</span>brew --prefix<span class="k">)</span>/etc/bash_completion.d/mach.bash-completion
+</pre></div>
+</div>
+</div>
+<div class="section" id="zsh">
+<h3>Zsh<a class="headerlink" href="#zsh" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mkdir ~/.zfunc
+$ mach mach-completion zsh -f ~/.zfunc/_mach
+</pre></div>
+</div>
+<p>then edit ~/.zshrc and add:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">fpath</span> <span class="o">+=</span> ~/.zfunc
+autoload -U compinit <span class="o">&amp;&amp;</span> compinit
+</pre></div>
+</div>
+<p>You can use any directory of your choosing.</p>
+</div>
+<div class="section" id="zsh-oh-my-zsh">
+<h3>Zsh (oh-my-zsh)<a class="headerlink" href="#zsh-oh-my-zsh" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mkdir <span class="nv">$ZSH</span>/plugins/mach
+$ mach mach-completion zsh -f <span class="nv">$ZSH</span>/plugins/mach/_mach
+</pre></div>
+</div>
+<p>then edit ~/.zshrc and add ‘mach’ to your enabled plugins:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>plugins<span class="o">(</span>mach ...<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="zsh-prezto">
+<h3>Zsh (prezto)<a class="headerlink" href="#zsh-prezto" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ mach mach-completion zsh -f ~/.zprezto/modules/completion/external/src/_mach
+</pre></div>
+</div>
+</div>
+<div class="section" id="fish">
+<h3>Fish<a class="headerlink" href="#fish" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach mach-completion fish -f ~/.config/fish/completions/mach.fish
+</pre></div>
+</div>
+</div>
+<div class="section" id="fish-homebrew">
+<h3>Fish (homebrew)<a class="headerlink" href="#fish-homebrew" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach mach-completion fish -f <span class="o">(</span>brew --prefix<span class="o">)</span>/share/fish/vendor_completions.d/mach.fish
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="user-settings">
+<h2>User Settings<a class="headerlink" href="#user-settings" title="Permalink to this headline">¶</a></h2>
+<p>Some mach commands can read configuration from a <code class="docutils literal notranslate"><span class="pre">machrc</span></code> file. The default
+location for this file is <code class="docutils literal notranslate"><span class="pre">~/.mozbuild/machrc</span></code> (you’ll need to create it).
+This can also be set to a different location by setting the <code class="docutils literal notranslate"><span class="pre">MACHRC</span></code>
+environment variable.</p>
+<p>For a list of all the available settings, run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ ./mach settings
+</pre></div>
+</div>
+<p>The settings file follows the <code class="docutils literal notranslate"><span class="pre">ini</span></code> format, e.g:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[alias]</span>
+<span class="na">eslint</span> <span class="o">=</span> <span class="s">lint -l eslint</span>
+
+<span class="k">[build]</span>
+<span class="na">telemetry</span> <span class="o">=</span> <span class="s">true</span>
+
+<span class="k">[try]</span>
+<span class="na">default</span> <span class="o">=</span> <span class="s">fuzzy</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-mach-to-your-path">
+<h2>Adding <code class="docutils literal notranslate"><span class="pre">mach</span></code> to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code><a class="headerlink" href="#adding-mach-to-your-path" title="Permalink to this headline">¶</a></h2>
+<p>If you don’t like having to type <code class="docutils literal notranslate"><span class="pre">./mach</span></code>, you can add your source directory
+to your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. DO NOT copy the script to a directory already in your
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commands.html" class="btn btn-neutral float-right" title="Implementing Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Mach" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1054 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UITour library API &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="WebPayments UI" href="../../payments/docs/index.html" />
+    <link rel="prev" title="UITour" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../newtab/docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../newtab/content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">UITour</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">UITour library API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="index.html">UITour</a> &raquo;</li>
+        
+      <li>UITour library API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/browser/components/uitour/docs/UITour-lib.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uitour-library-api">
+<h1>UITour library API<a class="headerlink" href="#uitour-library-api" title="Permalink to this headline">¶</a></h1>
+<p>This is the web API provided by the library UITour-lib.js for use by web content with appropriate permissions.</p>
+<dl class="js class">
+<dt id="Mozilla.UITour">
+<em class="property">class </em><code class="sig-prename descclassname">Mozilla.</code><code class="sig-name descname">UITour</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Library that exposes an event-based Web API for communicating with the
+desktop browser chrome. It can be used for tasks such as opening menu
+panels and highlighting the position of buttons in the toolbar.</p>
+<p>For security/privacy reasons <cite>Mozilla.UITour</cite> will only work on a list of allowed
+secure origins. The list of allowed origins can be found in
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/app/permissions">https://searchfox.org/mozilla-central/source/browser/app/permissions</a>.</p>
+<dl class="js function">
+<dt id="Mozilla.UITour.ConfigurationName">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">ConfigurationName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.ConfigurationName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.AppInfo" title="Mozilla.UITour.Configuration.AppInfo"><code class="xref js js-func docutils literal notranslate"><span class="pre">appinfo</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.CanReset" title="Mozilla.UITour.Configuration.CanReset"><code class="xref js js-func docutils literal notranslate"><span class="pre">canReset</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.AvailableTargets" title="Mozilla.UITour.Configuration.AvailableTargets"><code class="xref js js-func docutils literal notranslate"><span class="pre">availableTargets</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.Search" title="Mozilla.UITour.Configuration.Search"><code class="xref js js-func docutils literal notranslate"><span class="pre">search</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.Search" title="Mozilla.UITour.Configuration.Search"><code class="xref js js-func docutils literal notranslate"><span class="pre">selectedSearchEngine</span></code></a>
+DEPRECATED, use ‘search’</p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.Sync" title="Mozilla.UITour.Configuration.Sync"><code class="xref js js-func docutils literal notranslate"><span class="pre">sync</span></code></a>
+DEPRECATED, use ‘fxa’</p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.FxA" title="Mozilla.UITour.Configuration.FxA"><code class="xref js js-func docutils literal notranslate"><span class="pre">fxa</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.FxAConnections" title="Mozilla.UITour.Configuration.FxAConnections"><code class="xref js js-func docutils literal notranslate"><span class="pre">fxaConnections</span></code></a></p></li>
+</ul>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.HighlightEffect">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">HighlightEffect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.HighlightEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values:</p>
+<ul class="simple">
+<li><p>random</p></li>
+<li><p>wobble</p></li>
+<li><p>zoom</p></li>
+<li><p>color</p></li>
+</ul>
+<p>Generate using the following in the Browser Console:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[...</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">highlightEffects</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n* - &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.showHighlight" title="Mozilla.UITour.showHighlight"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showHighlight</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.MenuName">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">MenuName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.MenuName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values:</p>
+<ul class="simple">
+<li><p>appMenu</p></li>
+<li><p>bookmarks</p></li>
+<li><p>pocket</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.showMenu" title="Mozilla.UITour.showMenu"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showMenu</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.hideMenu" title="Mozilla.UITour.hideMenu"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.hideMenu</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.openSearchPanel" title="Mozilla.UITour.openSearchPanel"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.openSearchPanel</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Target">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">Target</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Valid values:</p>
+<ul class="simple">
+<li><p>accountStatus</p></li>
+<li><p>addons</p></li>
+<li><p>appMenu</p></li>
+<li><p>backForward</p></li>
+<li><p>bookmarks</p></li>
+<li><p>customize</p></li>
+<li><p>devtools</p></li>
+<li><p>forget</p></li>
+<li><p>help</p></li>
+<li><p>home</p></li>
+<li><p>library</p></li>
+<li><p>pageActionButton</p></li>
+<li><p>pageAction-bookmark</p></li>
+<li><p>pageAction-copyURL</p></li>
+<li><p>pageAction-emailLink</p></li>
+<li><p>pageAction-sendToDevice</p></li>
+<li><p>pocket</p></li>
+<li><p>privateWindow</p></li>
+<li><p>quit</p></li>
+<li><p>readerMode-urlBar</p></li>
+<li><p>screenshots</p></li>
+<li><p>search</p></li>
+<li><p>searchIcon</p></li>
+<li><p>selectedTabIcon</p></li>
+<li><p>urlbar</p></li>
+</ul>
+<p>Generate using the following in the Browser Console:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">[...</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">targets</span><span class="p">.</span><span class="nx">keys</span><span class="p">()].</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;\n* - &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.getConfiguration" title="Mozilla.UITour.getConfiguration"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.getConfiguration</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.showHighlight" title="Mozilla.UITour.showHighlight"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showHighlight</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.showInfo" title="Mozilla.UITour.showInfo"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showInfo</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.addNavBarWidget">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">addNavBarWidget</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.addNavBarWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the specified customizable widget to the navigation toolbar.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference internal" href="#Mozilla.UITour.Target" title="Mozilla.UITour.Target"><em>Mozilla.UITour.Target</em></a>) – Identifier of the customizable widget.</p></li>
+<li><p><strong>callback</strong> (<em>function</em>) – Called with no arguments once the icon was successfully added to the toolbar. Not called if it doesn’t succeed.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">addNavBarWidget</span><span class="p">(</span><span class="s1">&#39;forget&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;forget button added to toolbar&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.closeTab">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">closeTab</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.closeTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>The last tab in the current window will never be closed, in which case
+this call will have no effect. The calling code is expected to take an
+action after a small timeout in order to handle this case, for example by
+displaying a goodbye message or a button to restart the tour.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.forceShowReaderIcon">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">forceShowReaderIcon</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.forceShowReaderIcon" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is useful if you want to target an annotation (panel/highlight) on it
+but the tour page doesn’t have much textual content.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.getConfiguration">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">getConfiguration</code><span class="sig-paren">(</span><em class="sig-param">configName</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.getConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve some information about the application/profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configName</strong> (<a class="reference internal" href="#Mozilla.UITour.ConfigurationName" title="Mozilla.UITour.ConfigurationName"><em>Mozilla.UITour.ConfigurationName</em></a>) – Name of configuration to retrieve</p></li>
+<li><p><strong>callback</strong> (<em>function</em>) – Called with one argument containing the value of the configuration.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.getTreatmentTag">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">getTreatmentTag</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.getTreatmentTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieved the value for a set FHR treatment tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>String</em>) – Tag name to be retrieved</p></li>
+<li><p><strong>callback</strong> (<em>function</em>) – Called once the data has been retrieved</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">getTreatmentTag</span><span class="p">(</span><span class="s1">&#39;srch-chg-action&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.setTreatmentTag" title="Mozilla.UITour.setTreatmentTag"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.setTreatmentTag</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.hideHighlight">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">hideHighlight</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.hideHighlight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hide any visible UI highlight.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.showHighlight" title="Mozilla.UITour.showHighlight"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showHighlight</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.hideInfo">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">hideInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.hideInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hide any visible info panels.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.showInfo" title="Mozilla.UITour.showInfo"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showInfo</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.hideMenu">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">hideMenu</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.hideMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the named application menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference internal" href="#Mozilla.UITour.MenuName" title="Mozilla.UITour.MenuName"><em>Mozilla.UITour.MenuName</em></a>) – Menu name</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.showMenu" title="Mozilla.UITour.showMenu"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.showMenu</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.observe">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">observe</code><span class="sig-paren">(</span><em class="sig-param">listener</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.observe" title="Permalink to this definition">¶</a></dt>
+<dd><p>There can only be one observer per tour tab so calling this a second time will
+replace any previous <cite>listener</cite>.
+To remove an observer, call the method with <cite>null</cite> as the first argument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>listener</strong> (<em>function</em>) – Called when any UITour notification occurs.</p></li>
+<li><p><strong>callback</strong> (<em>function</em>) – Called when the browser acknowledges the observer.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.openPreferences">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">openPreferences</code><span class="sig-paren">(</span><em class="sig-param">pane</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.openPreferences" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pane</strong> (<em>String</em>) – Pane to open/switch the preferences to. Valid values match fragments on <a class="reference external" href="about:preferences">about:preferences</a> and are subject to change e.g.: For the Preferences: - general - applications - sync - privacy - advanced To open to the options of sending telemetry, health report, crash reports, that is, the privacy pane &gt; reports on the preferences. Please call <cite>Mozilla.UITour.openPreferences(“privacy-reports”)</cite>. UITour would do route mapping automatically.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.openSearchPanel">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">openSearchPanel</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.openSearchPanel" title="Permalink to this definition">¶</a></dt>
+<dd><p>This should have been implemented via <cite>showMenu(“search”, …)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback</strong> (<em>function</em>) – Called once the panel has opened.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.ping">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">ping</code><span class="sig-paren">(</span><em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.ping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure the browser is ready to handle this document as a tour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>callback</strong> (<em>function</em>) – Callback to call if UITour is working for the document.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.registerPageID">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">registerPageID</code><span class="sig-paren">(</span><em class="sig-param">pageID</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.registerPageID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an identifier to use in
+<a class="reference external" href="https://wiki.mozilla.org/Telemetry">Telemetry</a>. <cite>pageID</cite> must be a
+string unique to the page/tour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pageID</strong> (<em>string</em>) – Unique identifier for the page/tour.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">registerPageID</span><span class="p">(</span><span class="s1">&#39;firstrun-page-firefox-29&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.resetFirefox">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">resetFirefox</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.resetFirefox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a profile refresh/reset dialog, allowing users to choose to reomve
+add-ons and customizations as well as restore browser defaults, if possible.
+<cite>getConfiguration(‘canReset’)</cite> should first be used to determine whether
+Refresh/Reset is possible for the user’s build/profile.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.CanReset" title="Mozilla.UITour.Configuration.CanReset"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.Configuration.CanReset</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.setConfiguration">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">setConfiguration</code><span class="sig-paren">(</span><em class="sig-param">configName</em>, <em class="sig-param">configValue</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.setConfiguration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set some value or take some action.</p>
+<p>Valid configuration names:</p>
+<dl class="simple">
+<dt>defaultBrowser</dt><dd><p>Try to set the application as the default web browser. Since Fx40</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>configName</strong> (<em>String</em>) – Configuration name to set (e.g. “defaultBrowser”)</p></li>
+<li><p><strong>configValue</strong> (<em>String|Number|Boolean</em>) – Not currently used</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">setConfiguration</span><span class="p">(</span><span class="s1">&#39;defaultBrowser&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.setDefaultSearchEngine">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">setDefaultSearchEngine</code><span class="sig-paren">(</span><em class="sig-param">identifier</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.setDefaultSearchEngine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the specified search engine as the user-set default.</p>
+<p>See <a class="reference external" href="https://searchfox.org/mozilla-release/source/browser/locales/search/list.json">https://searchfox.org/mozilla-release/source/browser/locales/search/list.json</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>identifier</strong> (<em>String</em>) – Identifier of the engine (e.g. ‘yahoo’).</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.Configuration.Search" title="Mozilla.UITour.Configuration.Search"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.Configuration.Search</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.setSearchTerm">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">setSearchTerm</code><span class="sig-paren">(</span><em class="sig-param">term</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.setSearchTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the search term in the search box.</p>
+<p>This should have been implemented via <cite>setConfiguration(“searchTerm”, …)</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>term</strong> (<em>String</em>) – Search string e.g. ‘Firefox’</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.setTreatmentTag">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">setTreatmentTag</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.setTreatmentTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a key+value pair as a treatment tag for recording in FHR.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>String</em>) – tag name for the treatment</p></li>
+<li><p><strong>value</strong> (<em>String</em>) – tag value for the treatment</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">setTreatmentTag</span><span class="p">(</span><span class="s1">&#39;srch-chg-action&#39;</span><span class="p">,</span> <span class="s1">&#39;Switch&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.getTreatmentTag" title="Mozilla.UITour.getTreatmentTag"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.getTreatmentTag</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showConnectAnotherDevice">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showConnectAnotherDevice</code><span class="sig-paren">(</span><em class="sig-param">extraURLParams</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showConnectAnotherDevice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request the browser open the “Connect Another Device” Firefox Accounts page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extraURLParams</strong> (<em>Object</em>) – An object containing additional parameters for the URL opened by the browser for reasons of promotional campaign tracking. Each attribute of the object must have a name that is a string, is “flow_id”, “flow_begin_time”, “device_id” or begins with <cite>utm_</cite> and contains only only alphanumeric characters, dashes or underscores. The values may be any string and will automatically be encoded. For Flow metrics, see details at <a class="reference external" href="https://mozilla.github.io/ecosystem-platform/docs/fxa-engineering/fxa-metrics#content-server">https://mozilla.github.io/ecosystem-platform/docs/fxa-engineering/fxa-metrics#content-server</a></p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open https://accounts.firefox.com/connect_another_device?entrypoint=uitour</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showConnectAnotherDevice</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open:</span>
+<span class="c1">// https://accounts.firefox.com/connect_another_device?entrypoint=uitour&amp;utm_foo=bar&amp;utm_bar=baz</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showConnectAnotherDevice</span><span class="p">({</span>
+  <span class="s1">&#39;utm_foo&#39;</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;utm_bar&#39;</span><span class="o">:</span> <span class="s1">&#39;baz&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showFirefoxAccounts">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showFirefoxAccounts</code><span class="sig-paren">(</span><em class="sig-param">extraURLParams</em>, <em class="sig-param">entrypoint</em>, <em class="sig-param">email</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showFirefoxAccounts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request the browser open the Firefox Accounts page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extraURLParams</strong> (<em>Object</em>) – An object containing additional parameters for the URL opened by the browser for reasons of promotional campaign tracking. Each attribute of the object must have a name that is a string, is “flow_id”, “flow_begin_time”, “device_id” or begins with <cite>utm_</cite> and contains only only alphanumeric characters, dashes or underscores. The values may be any string and will automatically be encoded. For Flow metrics, see details at <a class="reference external" href="https://mozilla.github.io/ecosystem-platform/docs/fxa-engineering/fxa-metrics#content-server">https://mozilla.github.io/ecosystem-platform/docs/fxa-engineering/fxa-metrics#content-server</a></p></li>
+<li><p><strong>entrypoint</strong> (<em>String</em>) – A string containing the entrypoint name.</p></li>
+<li><p><strong>email</strong> (<em>String</em>) – A string containing the default email account for the URL opened by the browser.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open https://accounts.firefox.com/signup?entrypoint=uitour</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showFirefoxAccounts</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open:</span>
+<span class="c1">// https://accounts.firefox.com/signup?entrypoint=uitour&amp;utm_foo=bar&amp;utm_bar=baz</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showFirefoxAccounts</span><span class="p">({</span>
+  <span class="s1">&#39;utm_foo&#39;</span><span class="o">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;utm_bar&#39;</span><span class="o">:</span> <span class="s1">&#39;baz&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open:</span>
+<span class="c1">// https://accounts.firefox.com/?action=email&amp;email=foo%40bar.com&amp;entrypoint=uitour</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showFirefoxAccounts</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;foo@bar.com&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open:</span>
+<span class="c1">// https://accounts.firefox.com/signup?entrypoint=sample</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showFirefoxAccounts</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;sample&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// Will open:</span>
+<span class="c1">// https://accounts.firefox.com/?action=email&amp;email=foo%40bar.com&amp;entrypoint=uitour&amp;flow_id=c5b5ad7c4a94462afe4b9a7fbcca263dbd6c8409fb4539449c50c4a52544b2ed&amp;flow_begin_time=1590680755812</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showFirefoxAccounts</span><span class="p">({</span>
+  <span class="nx">flow_id</span><span class="o">:</span> <span class="s1">&#39;c5b5ad7c4a94462afe4b9a7fbcca263dbd6c8409fb4539449c50c4a52544b2ed&#39;</span><span class="p">,</span>
+  <span class="nx">flow_begin_time</span><span class="o">:</span> <span class="mf">1590680755812</span><span class="p">,</span>
+  <span class="nx">device_id</span><span class="o">:</span> <span class="s1">&#39;7e450f3337d3479b8582ea1c9bb5ba6c&#39;</span>
+<span class="p">},</span> <span class="s2">&quot;foo@bar.com&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showHighlight">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showHighlight</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">effect=&quot;none&quot;</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showHighlight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visually highlight a UI widget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<a class="reference internal" href="#Mozilla.UITour.Target" title="Mozilla.UITour.Target"><em>Mozilla.UITour.Target</em></a>) – Identifier of the UI widget to show a highlight on.</p></li>
+<li><p><strong>effect</strong> (<a class="reference internal" href="#Mozilla.UITour.HighlightEffect" title="Mozilla.UITour.HighlightEffect"><em>Mozilla.UITour.HighlightEffect</em></a>) – Name of the effect to use when highlighting.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showHighlight</span><span class="p">(</span><span class="s1">&#39;appMenu&#39;</span><span class="p">,</span> <span class="s1">&#39;wobble&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.hideHighlight" title="Mozilla.UITour.hideHighlight"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.hideHighlight</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showInfo">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showInfo</code><span class="sig-paren">(</span><em class="sig-param">target</em>, <em class="sig-param">title</em>, <em class="sig-param">text</em>, <em class="sig-param">icon=null</em>, <em class="sig-param">buttons=[]</em>, <em class="sig-param">buttons[]</em>, <em class="sig-param">options={}</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show an arrow panel with optional images and buttons anchored at a specific UI target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target</strong> (<a class="reference internal" href="#Mozilla.UITour.Target" title="Mozilla.UITour.Target"><em>Mozilla.UITour.Target</em></a>) – Identifier of the UI widget to anchor the panel at.</p></li>
+<li><p><strong>title</strong> (<em>String</em>) – Title text to be shown as the heading of the panel.</p></li>
+<li><p><strong>text</strong> (<em>String</em>) – Body text of the panel.</p></li>
+<li><p><strong>icon</strong> (<em>String</em>) – URL of a 48x48px (96px &#64; 2dppx) image (which will be resolved relative to the tab’s URI) to display in the panel.</p></li>
+<li><p><strong>'Array' ].&lt;Object&gt; buttons</strong> (<em>[</em>) – Array of objects describing buttons.</p></li>
+<li><p><strong>buttons[].label</strong> (<em>String</em>) – Button label</p></li>
+<li><p><strong>buttons[].icon</strong> (<em>String</em>) – Button icon URL</p></li>
+<li><p><strong>buttons[].style</strong> (<em>String</em>) – Button style (“primary” or “link”)</p></li>
+<li><p><strong>buttons[].callback</strong> (<em>function</em>) – Called when the button is clicked</p></li>
+<li><p><strong>options</strong> (<em>Object</em>) – Advanced options</p></li>
+<li><p><strong>options.closeButtonCallback</strong> (<em>function</em>) – Called when the panel’s close button is clicked.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Cancel&#39;</span><span class="p">,</span>
+    <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;link&#39;</span><span class="p">,</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">cancelBtnCallback</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Confirm&#39;</span><span class="p">,</span>
+    <span class="nx">style</span><span class="o">:</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">confirmBtnCallback</span>
+  <span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="s1">&#39;//mozorg.cdn.mozilla.net/media/img/firefox/australis/logo.png&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">closeButtonCallback</span><span class="o">:</span> <span class="nx">closeBtnCallback</span>
+<span class="p">};</span>
+
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showInfo</span><span class="p">(</span><span class="s1">&#39;appMenu&#39;</span><span class="p">,</span> <span class="s1">&#39;my title&#39;</span><span class="p">,</span> <span class="s1">&#39;my text&#39;</span><span class="p">,</span> <span class="nx">icon</span><span class="p">,</span> <span class="nx">buttons</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.hideInfo" title="Mozilla.UITour.hideInfo"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.hideInfo</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showMenu">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showMenu</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">callback</em><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showMenu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open the named application menu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference internal" href="#Mozilla.UITour.MenuName" title="Mozilla.UITour.MenuName"><em>Mozilla.UITour.MenuName</em></a>) – Menu name</p></li>
+<li><p><strong>callback</strong> (<em>function</em>) – Callback to be called with no arguments when the menu opens.</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">UITour</span><span class="p">.</span><span class="nx">showMenu</span><span class="p">(</span><span class="s1">&#39;appMenu&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;menu was opened&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.hideMenu" title="Mozilla.UITour.hideMenu"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.hideMenu</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showNewTab">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showNewTab</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showNewTab" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads <a class="reference external" href="about:newtab">about:newtab</a> in the tour tab.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.showProtectionReport">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">showProtectionReport</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.showProtectionReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads <a class="reference external" href="about:protections">about:protections</a> in the tour tab.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.toggleReaderMode">
+<code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">toggleReaderMode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.toggleReaderMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle into reader mode for the current tab. Once the user enters reader
+mode, the UITour document will not be active and therefore cannot call other
+UITour APIs.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="js class">
+<dt id="Mozilla.UITour.Configuration">
+<em class="property">class </em><code class="sig-prename descclassname">Mozilla.UITour.</code><code class="sig-name descname">Configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="js function">
+<dt id="Mozilla.UITour.Configuration.AccountService">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">AccountService</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.AccountService" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about an account service</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> (<em>String</em>) – The service ID. A list of attached service IDs can be found <a class="reference external" href="https://docs.telemetry.mozilla.org/datasets/fxa_metrics/attribution.html#service-attribution">on our telemetry documentation site</a>.</p></li>
+<li><p><strong>lastAccessedWeeksAgo</strong> (<em>Number</em>) – How many weeks ago the service was accessed by this account.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.AccountServices">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">AccountServices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.AccountServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about clients attached to the account.
+An object. The key is a string ID of the attached service. A list of attached
+service IDs can be found
+<a class="reference external" href="https://docs.telemetry.mozilla.org/datasets/fxa_metrics/attribution.html#service-attribution">on our telemetry documentation site</a>.
+The value is a <a class="reference internal" href="#Mozilla.UITour.Configuration.AccountService" title="Mozilla.UITour.Configuration.AccountService"><code class="xref js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.Configuration.AccountService()</span></code></a></p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.AppInfo">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">AppInfo</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.AppInfo" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>canSetDefaultBrowserInBackground</strong> (<em>Boolean</em>) – Whether the application can be set as the default browser in the background without user interaction.</p></li>
+<li><p><strong>defaultBrowser</strong> (<em>Boolean</em>) – Whether the application is the default browser. Since Fx40.</p></li>
+<li><p><strong>defaultUpdateChannel</strong> (<em>String</em>) – Update channel e.g. ‘release’, ‘beta’, ‘aurora’, ‘nightly’, ‘default’ (self-built or automated testing builds)</p></li>
+<li><p><strong>distribution</strong> (<em>String</em>) – Contains the distributionId property. This value will be “default” in most cases but can differ for repack or funnelcake builds. Since Fx48</p></li>
+<li><p><strong>profileCreatedWeeksAgo</strong> (<em>Number</em>) – The number of weeks since the profile was created, starting from 0 for profiles dating less than seven days old. Since Fx56.</p></li>
+<li><p><strong>profileResetWeeksAgo</strong> (<em>Number</em>) – The number of weeks since the profile was last reset, starting from 0 for profiles reset less than seven days ago. If the profile has never been reset it returns null. Since Fx56.</p></li>
+<li><p><strong>version</strong> (<em>String</em>) – Version string e.g. “48.0a2”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.AvailableTargets">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">AvailableTargets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.AvailableTargets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array of UI <a class="reference internal" href="#Mozilla.UITour.Target" title="Mozilla.UITour.Target"><code class="xref js js-func docutils literal notranslate"><span class="pre">Targets</span></code></a> currently available to be annotated.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.BrowserServices">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">BrowserServices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.BrowserServices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about a services attached to the browser. All properties are
+optional and only exist if the service is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sync</strong> (<a class="reference internal" href="#Mozilla.UITour.Configuration.Sync" title="Mozilla.UITour.Configuration.Sync"><em>Mozilla.UITour.Configuration.Sync</em></a>) – If sync is configured</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.CanReset">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">CanReset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.CanReset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicate whether a user can refresh their Firefox profile via <a class="reference internal" href="#Mozilla.UITour.resetFirefox" title="Mozilla.UITour.resetFirefox"><code class="xref js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.resetFirefox()</span></code></a>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.resetFirefox" title="Mozilla.UITour.resetFirefox"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.resetFirefox</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.FxA">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">FxA</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.FxA" title="Permalink to this definition">¶</a></dt>
+<dd><p>FxA local status, including whether FxA is connected and the general
+account state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setup</strong> (<em>Boolean</em>) – Whether FxA is setup on this device. If false, no other properties will exist.</p></li>
+<li><p><strong>accountStateOK</strong> (<em>Boolean</em>) – Whether the FxA account state is OK. If false, it probably means the account is unverified or the user has changed their password on another device and needs to update it here. In that case many other properties will not exist.</p></li>
+<li><p><strong>browserServices</strong> (<a class="reference internal" href="#Mozilla.UITour.Configuration.BrowserServices" title="Mozilla.UITour.Configuration.BrowserServices"><em>Mozilla.UITour.Configuration.BrowserServices</em></a>) – Information about account services attached to this browser, and with special support implemented by this browser. You should not expect every accountService connected in this browser to get a special entry here. Indeed, what services, and in what circumstances they may appear here in the future is largely TBD.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.FxAConnections">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">FxAConnections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.FxAConnections" title="Permalink to this definition">¶</a></dt>
+<dd><p>FxA connections status - information about the account which typically
+isn’t stored locally, so needs to be obtained from the FxA servers. As such,
+requesting this information is likely to be high-latency and may return
+incomplete data if there is a network or server error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setup</strong> (<em>Boolean</em>) – Whether FxA is setup on this device. If false, no other properties will exist.</p></li>
+<li><p><strong>numOtherDevices</strong> (<em>Number</em>) – Number of devices connected to this account, not counting this device.</p></li>
+<li><p><strong>'Object' ].&lt;String, Number&gt; numDevicesByType</strong> (<em>[</em>) – A count of devices connected to the account by device ‘type’. Valid values for type are defined by the FxA server but roughly correspond to form-factor with values like ‘desktop’, ‘mobile’, ‘vr’, etc.</p></li>
+<li><p><strong>accountServices</strong> (<a class="reference internal" href="#Mozilla.UITour.Configuration.AccountServices" title="Mozilla.UITour.Configuration.AccountServices"><em>Mozilla.UITour.Configuration.AccountServices</em></a>) – Information about services attached to this account. These services may be enabled on devices or applications external to this browser and should not be confused with devices. For example, if the user has enabled Monitor or Lockwise on one or more devices - including on this device - that service will have a single entry here.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.Search">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">Search</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.Search" title="Permalink to this definition">¶</a></dt>
+<dd><p>From version 34 through 42 inclusive, a string was returned for the ‘selectedSearchEngine’
+configuration instead of the object like ‘search’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>searchEngineIdentifier</strong> (<em>String</em>) – The default engine’s identifier</p></li>
+<li><p><strong>'Array' ].&lt;String&gt; engines</strong> (<em>[</em>) – Identifiers of visible engines</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="Mozilla.UITour.Configuration.Sync">
+<code class="sig-prename descclassname">Mozilla.UITour.Configuration.</code><code class="sig-name descname">Sync</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Mozilla.UITour.Configuration.Sync" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync status and device counts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setup</strong> (<em>Boolean</em>) – Whether sync is setup</p></li>
+<li><p><strong>desktopDevices</strong> (<em>Number</em>) – Number of desktop devices</p></li>
+<li><p><strong>mobileDevices</strong> (<em>Number</em>) – Number of mobile devices</p></li>
+<li><p><strong>totalDevices</strong> (<em>Number</em>) – Total number of connected devices</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#Mozilla.UITour.getConfiguration" title="Mozilla.UITour.getConfiguration"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.getConfiguration</span></code></a></p></li>
+<li><p><a class="reference internal" href="#Mozilla.UITour.ConfigurationName" title="Mozilla.UITour.ConfigurationName"><code class="xref any js js-func docutils literal notranslate"><span class="pre">Mozilla.UITour.ConfigurationName</span></code></a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../payments/docs/index.html" class="btn btn-neutral float-right" title="WebPayments UI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="UITour" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,902 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozbuild.test.backend package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozbuild.test.backend package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozbuild.test.backend.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozbuild-test-backend-package">
+<h1>mozbuild.test.backend package<a class="headerlink" href="#mozbuild-test-backend-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozbuild.test.backend.common">
+<span id="mozbuild-test-backend-common-module"></span><h2>mozbuild.test.backend.common module<a class="headerlink" href="#module-mozbuild.test.backend.common" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.common.BackendTester">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.common.</code><code class="sig-name descname">BackendTester</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.common.BackendTester" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.common.BackendTester.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.common.BackendTester.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.common.BackendTester.tearDown">
+<code class="sig-name descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.common.BackendTester.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_build">
+<span id="mozbuild-test-backend-test-build-module"></span><h2>mozbuild.test.backend.test_build module<a class="headerlink" href="#module-mozbuild.test.backend.test_build" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_build.TestBuild">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_build.</code><code class="sig-name descname">TestBuild</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.do_test_backend">
+<code class="sig-name descname">do_test_backend</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">backends</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.do_test_backend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.line_handler">
+<code class="sig-name descname">line_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.line_handler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.tearDown">
+<code class="sig-name descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.test_faster_make">
+<code class="sig-name descname">test_faster_make</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.test_faster_make" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.test_faster_recursive_make">
+<code class="sig-name descname">test_faster_recursive_make</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.test_faster_recursive_make" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.test_recursive_make">
+<code class="sig-name descname">test_recursive_make</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.test_recursive_make" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_build.TestBuild.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_build.TestBuild.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_configenvironment">
+<span id="mozbuild-test-backend-test-configenvironment-module"></span><h2>mozbuild.test.backend.test_configenvironment module<a class="headerlink" href="#module-mozbuild.test.backend.test_configenvironment" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_configenvironment.ConfigEnvironment">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_configenvironment.</code><code class="sig-name descname">ConfigEnvironment</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_configenvironment.ConfigEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mozbuild.backend.html#mozbuild.backend.configenvironment.ConfigEnvironment" title="mozbuild.backend.configenvironment.ConfigEnvironment"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.backend.configenvironment.ConfigEnvironment</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_configenvironment.TestEnvironment">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_configenvironment.</code><code class="sig-name descname">TestEnvironment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_configenvironment.TestEnvironment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_configenvironment.TestEnvironment.test_auto_substs">
+<code class="sig-name descname">test_auto_substs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_configenvironment.TestEnvironment.test_auto_substs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test the automatically set values of ACDEFINES, ALLSUBSTS
+and ALLEMPTYSUBSTS.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_database">
+<span id="mozbuild-test-backend-test-database-module"></span><h2>mozbuild.test.backend.test_database module<a class="headerlink" href="#module-mozbuild.test.backend.test_database" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_database.TestCompileDBBackends">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_database.</code><code class="sig-name descname">TestCompileDBBackends</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_database.TestCompileDBBackends" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_database.TestCompileDBBackends.perform_check">
+<code class="sig-name descname">perform_check</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">compile_commands_path</span></em>, <em class="sig-param"><span class="n">topsrcdir</span></em>, <em class="sig-param"><span class="n">topobjdir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_database.TestCompileDBBackends.perform_check" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_database.TestCompileDBBackends.test_clangd">
+<code class="sig-name descname">test_clangd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_database.TestCompileDBBackends.test_clangd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can generate a <cite>compile_commands.json</cite> and that is correct.
+in order to be used by ClandBackend</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_database.TestCompileDBBackends.test_database">
+<code class="sig-name descname">test_database</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_database.TestCompileDBBackends.test_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can generate a <cite>compile_commands.json</cite> and that is correct.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_database.TestCompileDBBackends.test_static_analysis">
+<code class="sig-name descname">test_static_analysis</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_database.TestCompileDBBackends.test_static_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can generate a <cite>compile_commands.json</cite> and that is correct.
+in order to be used by StaticAnalysisBackend</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_fastermake">
+<span id="mozbuild-test-backend-test-fastermake-module"></span><h2>mozbuild.test.backend.test_fastermake module<a class="headerlink" href="#module-mozbuild.test.backend.test_fastermake" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_fastermake.TestFasterMakeBackend">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_fastermake.</code><code class="sig-name descname">TestFasterMakeBackend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_fastermake.TestFasterMakeBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_fastermake.TestFasterMakeBackend.test_basic">
+<code class="sig-name descname">test_basic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_fastermake.TestFasterMakeBackend.test_basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure the FasterMakeBackend works without error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_fastermake.TestFasterMakeBackend.test_final_target_files_wildcard">
+<code class="sig-name descname">test_final_target_files_wildcard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_fastermake.TestFasterMakeBackend.test_final_target_files_wildcard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that wildcards in FINAL_TARGET_FILES work properly.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_gn_processor">
+<span id="mozbuild-test-backend-test-gn-processor-module"></span><h2>mozbuild.test.backend.test_gn_processor module<a class="headerlink" href="#module-mozbuild.test.backend.test_gn_processor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_gn_processor.</code><code class="sig-name descname">TestGnMozbuildFactoring</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py attribute">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_attrs">
+<code class="sig-name descname">test_attrs</code><em class="property"> = {'DEFINES': {'DEBUG': True, 'UNICODE': True}, 'LIBRARY_NAME': 'Foo', 'LOCAL_INCLUDES': ['!/ipc/ipdl/_ipdlheaders', '/ipc/chromium/src', '/ipc/glue']}</em><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_common_attrs">
+<code class="sig-name descname">test_common_attrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_common_attrs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_dictionary_factor">
+<code class="sig-name descname">test_dictionary_factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_dictionary_factor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_list_factor">
+<code class="sig-name descname">test_list_factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_list_factor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_single_attr_set">
+<code class="sig-name descname">test_single_attr_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_single_attr_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_value_factor">
+<code class="sig-name descname">test_value_factor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildFactoring.test_value_factor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_gn_processor.</code><code class="sig-name descname">TestGnMozbuildWriter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.tearDown">
+<code class="sig-name descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.test_gn_processor">
+<code class="sig-name descname">test_gn_processor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_gn_processor.TestGnMozbuildWriter.test_gn_processor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_partialconfigenvironment">
+<span id="mozbuild-test-backend-test-partialconfigenvironment-module"></span><h2>mozbuild.test.backend.test_partialconfigenvironment module<a class="headerlink" href="#module-mozbuild.test.backend.test_partialconfigenvironment" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_partialconfigenvironment.</code><code class="sig-name descname">TestPartial</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.tearDown">
+<code class="sig-name descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_auto_substs">
+<code class="sig-name descname">test_auto_substs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_auto_substs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test the automatically set values of ACDEFINES, and ALLDEFINES</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_dependencies">
+<code class="sig-name descname">test_dependencies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test getting dependencies on defines and substs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_env_override">
+<code class="sig-name descname">test_env_override</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_env_override" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test overriding a subst with an environment variable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_remove_subst">
+<code class="sig-name descname">test_remove_subst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_remove_subst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test removing a subst from the config. The file should be overwritten with ‘None’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_set_subst">
+<code class="sig-name descname">test_set_subst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_set_subst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test setting a subst</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_update">
+<code class="sig-name descname">test_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_partialconfigenvironment.TestPartial.test_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test calling update on the substs or defines pseudo dicts</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_recursivemake">
+<span id="mozbuild-test-backend-test-recursivemake-module"></span><h2>mozbuild.test.backend.test_recursivemake module<a class="headerlink" href="#module-mozbuild.test.backend.test_recursivemake" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_recursivemake.</code><code class="sig-name descname">TestRecursiveMakeBackend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_backend_mk">
+<code class="sig-name descname">test_backend_mk</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_backend_mk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure backend.mk file is written out properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_basic">
+<code class="sig-name descname">test_basic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure the RecursiveMakeBackend works without error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_config">
+<code class="sig-name descname">test_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that CONFIGURE_SUBST_FILES are properly handled.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_defines">
+<code class="sig-name descname">test_defines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_defines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that DEFINES are written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_exports">
+<code class="sig-name descname">test_exports</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_exports" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure EXPORTS is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_exports_generated">
+<code class="sig-name descname">test_exports_generated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_exports_generated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure EXPORTS that are listed in GENERATED_FILES
+are handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_final_target">
+<code class="sig-name descname">test_final_target</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_final_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that FINAL_TARGET is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_final_target_pp_files">
+<code class="sig-name descname">test_final_target_pp_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_final_target_pp_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that FINAL_TARGET_PP_FILES is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_files">
+<code class="sig-name descname">test_generated_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure GENERATED_FILES is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_files_force">
+<code class="sig-name descname">test_generated_files_force</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_files_force" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure GENERATED_FILES with .force is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_includes">
+<code class="sig-name descname">test_generated_includes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_generated_includes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that GENERATED_INCLUDES are written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_host_rust_library">
+<code class="sig-name descname">test_host_rust_library</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_host_rust_library" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that a Rust library is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_host_rust_library_with_features">
+<code class="sig-name descname">test_host_rust_library_with_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_host_rust_library_with_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that a host Rust library with features is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_manifests_package_tests">
+<code class="sig-name descname">test_install_manifests_package_tests</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_manifests_package_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure test suites honor package_tests=False.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_manifests_written">
+<code class="sig-name descname">test_install_manifests_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_manifests_written" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_substitute_config_files">
+<code class="sig-name descname">test_install_substitute_config_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_install_substitute_config_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we recurse into the dirs that install substituted config files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_ipdl_sources">
+<code class="sig-name descname">test_ipdl_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_ipdl_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that PREPROCESSED_IPDL_SOURCES and IPDL_SOURCES are written to
+ipdlsrcs.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_jar_manifests">
+<code class="sig-name descname">test_jar_manifests</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_jar_manifests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_linkage">
+<code class="sig-name descname">test_linkage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_linkage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_list_files">
+<code class="sig-name descname">test_list_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_list_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_local_includes">
+<code class="sig-name descname">test_local_includes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_local_includes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that LOCAL_INCLUDES are written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_files">
+<code class="sig-name descname">test_localized_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that LOCALIZED_FILES is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files">
+<code class="sig-name descname">test_localized_generated_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure LOCALIZED_GENERATED_FILES is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files_AB_CD">
+<code class="sig-name descname">test_localized_generated_files_AB_CD</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files_AB_CD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure LOCALIZED_GENERATED_FILES is handled properly
+when {AB_CD} and {AB_rCD} are used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files_force">
+<code class="sig-name descname">test_localized_generated_files_force</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_generated_files_force" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure LOCALIZED_GENERATED_FILES with .force is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_pp_files">
+<code class="sig-name descname">test_localized_pp_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_localized_pp_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that LOCALIZED_PP_FILES is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_makefile_conversion">
+<code class="sig-name descname">test_makefile_conversion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_makefile_conversion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure Makefile.in is converted properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_missing_makefile_in">
+<code class="sig-name descname">test_missing_makefile_in</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_missing_makefile_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure missing Makefile.in results in Makefile creation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_mtime_no_change">
+<code class="sig-name descname">test_mtime_no_change</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_mtime_no_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure mtime is not updated if file content does not change.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_old_install_manifest_deleted">
+<code class="sig-name descname">test_old_install_manifest_deleted</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_old_install_manifest_deleted" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_output_files">
+<code class="sig-name descname">test_output_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_output_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure proper files are generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_prog_lib_c_only">
+<code class="sig-name descname">test_prog_lib_c_only</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_prog_lib_c_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that C-only binary artifacts are marked as such.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_program_paths">
+<code class="sig-name descname">test_program_paths</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_program_paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>PROGRAMs with various moz.build settings that change the destination should produce
+the expected paths in backend.mk.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_resources">
+<code class="sig-name descname">test_resources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure RESOURCE_FILES is handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_library">
+<code class="sig-name descname">test_rust_library</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_library" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that a Rust library is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_library_with_features">
+<code class="sig-name descname">test_rust_library_with_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_library_with_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that a Rust library with features is written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_programs">
+<code class="sig-name descname">test_rust_programs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_rust_programs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that {<a href="#id1"><span class="problematic" id="id2">HOST_</span></a>,}RUST_PROGRAMS are written to backend.mk correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_sources">
+<code class="sig-name descname">test_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure SOURCES, HOST_SOURCES and WASM_SOURCES are handled properly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_substitute_config_files">
+<code class="sig-name descname">test_substitute_config_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_substitute_config_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure substituted config files are produced.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifest_deffered_installs_written">
+<code class="sig-name descname">test_test_manifest_deffered_installs_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifest_deffered_installs_written" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shared support files are written to their own data file by the backend.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifest_pattern_matches_recorded">
+<code class="sig-name descname">test_test_manifest_pattern_matches_recorded</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifest_pattern_matches_recorded" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pattern matches in test manifests’ support-files should be recorded.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifests_duplicate_support_files">
+<code class="sig-name descname">test_test_manifests_duplicate_support_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifests_duplicate_support_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure duplicate support-files in test manifests work.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifests_files_written">
+<code class="sig-name descname">test_test_manifests_files_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_manifests_files_written" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure test manifests get turned into files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_support_files_tracked">
+<code class="sig-name descname">test_test_support_files_tracked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_test_support_files_tracked" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_variable_passthru">
+<code class="sig-name descname">test_variable_passthru</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_variable_passthru" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure variable passthru is written out correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_xpidl_generation">
+<code class="sig-name descname">test_xpidl_generation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeBackend.test_xpidl_generation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure xpidl files and directories are written out.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_recursivemake.</code><code class="sig-name descname">TestRecursiveMakeTraversal</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal">
+<code class="sig-name descname">test_traversal</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_2">
+<code class="sig-name descname">test_traversal_2</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_filter">
+<code class="sig-name descname">test_traversal_filter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_parallel">
+<code class="sig-name descname">test_traversal_parallel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_recursivemake.TestRecursiveMakeTraversal.test_traversal_parallel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_test_manifest">
+<span id="mozbuild-test-backend-test-test-manifest-module"></span><h2>mozbuild.test.backend.test_test_manifest module<a class="headerlink" href="#module-mozbuild.test.backend.test_test_manifest" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_test_manifest.TestTestManifestBackend">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_test_manifest.</code><code class="sig-name descname">TestTestManifestBackend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_test_manifest.TestTestManifestBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_all_tests_metadata_file_written">
+<code class="sig-name descname">test_all_tests_metadata_file_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_all_tests_metadata_file_written" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure all-tests.pkl is generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_defaults_metadata_file_written">
+<code class="sig-name descname">test_test_defaults_metadata_file_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_defaults_metadata_file_written" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure test-defaults.pkl is generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_installs_metadata_file_written">
+<code class="sig-name descname">test_test_installs_metadata_file_written</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_installs_metadata_file_written" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure test-installs.pkl is generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_manifest_sources">
+<code class="sig-name descname">test_test_manifest_sources</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_test_manifest.TestTestManifestBackend.test_test_manifest_sources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that backend sources are generated correctly.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend.test_visualstudio">
+<span id="mozbuild-test-backend-test-visualstudio-module"></span><h2>mozbuild.test.backend.test_visualstudio module<a class="headerlink" href="#module-mozbuild.test.backend.test_visualstudio" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.backend.test_visualstudio.TestVisualStudioBackend">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.backend.test_visualstudio.</code><code class="sig-name descname">TestVisualStudioBackend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_visualstudio.TestVisualStudioBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.test.backend.common.BackendTester" title="mozbuild.test.backend.common.BackendTester"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.test.backend.common.BackendTester</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.test.backend.test_visualstudio.TestVisualStudioBackend.test_basic">
+<code class="sig-name descname">test_basic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.backend.test_visualstudio.TestVisualStudioBackend.test_basic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure we can consume our stub project.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.backend">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozbuild.test.backend" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

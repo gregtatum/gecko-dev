@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Architecture Overview &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Utilities" href="utilities.html" />
+    <link rel="prev" title="Address Bar" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Address Bar</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Architecture Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-urlbarquerycontext">The UrlbarQueryContext</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-model">The Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-controller">The Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-view">The View</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#urlbarresult">UrlbarResult</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="utilities.html">Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging.html">Debugging &amp; Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experiments.html">Extensions &amp; Experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contact.html">Getting in Touch</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/newtab/docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/newtab/content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="index.html">Address Bar</a> &raquo;</li>
+        
+      <li>Architecture Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/browser/urlbar/overview.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="architecture-overview">
+<h1>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this headline">¶</a></h1>
+<p>The address bar is implemented as a <em>model-view-controller</em> (MVC) system. One of
+the scopes of this architecture is to allow easy replacement of its components,
+for easier experimentation.</p>
+<p>Each search is represented by a unique object, the <em>UrlbarQueryContext</em>. This
+object, created by the <em>View</em>, describes the search and is passed through all of
+the components, along the way it gets augmented with additional information.
+The <em>UrlbarQueryContext</em> is passed to the <em>Controller</em>, and finally to the
+<em>Model</em>.  The model appends results to a property of <em>UrlbarQueryContext</em> in
+chunks, it sorts them through a <em>Muxer</em> and then notifies the <em>Controller</em>.</p>
+<p>See the specific components below, for additional details about each one’s tasks
+and responsibilities.</p>
+<div class="section" id="the-urlbarquerycontext">
+<h2>The UrlbarQueryContext<a class="headerlink" href="#the-urlbarquerycontext" title="Permalink to this headline">¶</a></h2>
+<p>The <em>UrlbarQueryContext</em> object describes a single instance of a search.
+It is augmented as it progresses through the system, with various information:</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarQueryContext</span> <span class="p">{</span>
+  <span class="nx">allowAutofill</span><span class="p">;</span> <span class="c1">// {boolean} If true, providers are allowed to return</span>
+                 <span class="c1">// autofill results.  Even if true, it&#39;s up to providers</span>
+                 <span class="c1">// whether to include autofill results, but when false, no</span>
+                 <span class="c1">// provider should include them.</span>
+  <span class="nx">isPrivate</span><span class="p">;</span> <span class="c1">// {boolean} Whether the search started in a private context.</span>
+  <span class="nx">maxResults</span><span class="p">;</span> <span class="c1">// {integer} The maximum number of results requested. It is</span>
+              <span class="c1">// possible to request more results than the shown ones, and</span>
+              <span class="c1">// do additional filtering at the View level.</span>
+  <span class="nx">searchString</span><span class="p">;</span> <span class="c1">// {string} The user typed string.</span>
+  <span class="nx">userContextId</span><span class="p">;</span> <span class="c1">// {integer} The user context ID (containers feature).</span>
+
+  <span class="c1">// Optional properties.</span>
+  <span class="nx">muxer</span><span class="p">;</span> <span class="c1">// {string} Name of a registered muxer. Muxers can be registered</span>
+         <span class="c1">// through the UrlbarProvidersManager.</span>
+  <span class="nx">providers</span><span class="p">;</span> <span class="c1">// {array} List of registered provider names. Providers can be</span>
+             <span class="c1">// registered through the UrlbarProvidersManager.</span>
+  <span class="nx">sources</span><span class="o">:</span> <span class="p">{</span><span class="nx">array</span><span class="p">}</span> <span class="nx">list</span> <span class="k">of</span> <span class="nx">accepted</span> <span class="nx">UrlbarUtils</span><span class="p">.</span><span class="nx">RESULT_SOURCE</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">context</span><span class="p">.</span>
+          <span class="c1">// This allows to switch between different search modes. If not</span>
+          <span class="c1">// provided, a default will be generated by the Model, depending on</span>
+          <span class="c1">// the search string.</span>
+  <span class="nx">engineName</span><span class="o">:</span> <span class="c1">// {string} if sources is restricting to just SEARCH, this</span>
+              <span class="c1">// property can be used to pick a specific search engine, by</span>
+              <span class="c1">// setting it to the name under which the engine is registered</span>
+              <span class="c1">// with the search service.</span>
+  <span class="nx">currentPage</span><span class="o">:</span> <span class="c1">// {string} url of the page that was loaded when the search</span>
+               <span class="c1">// began.</span>
+  <span class="nx">allowSearchSuggestions</span><span class="o">:</span> <span class="c1">// {boolean} Whether to allow search suggestions.</span>
+                          <span class="c1">// This is a veto, meaning that when false,</span>
+                          <span class="c1">// suggestions will not be fetched, but when true,</span>
+                          <span class="c1">// some other condition may still prohibit</span>
+                          <span class="c1">// suggestions, like private browsing mode. Defaults</span>
+                          <span class="c1">// to true.</span>
+
+  <span class="c1">// Properties added by the Model.</span>
+  <span class="nx">results</span><span class="p">;</span> <span class="c1">// {array} list of UrlbarResult objects.</span>
+  <span class="nx">tokens</span><span class="p">;</span> <span class="c1">// {array} tokens extracted from the searchString, each token is an</span>
+          <span class="c1">// object in the form {type, value, lowerCaseValue}.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Model</em> is the component responsible for retrieving search results based on
+the user’s input, and sorting them accordingly to their importance.
+At the core is the <a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarProvidersManager.jsm">UrlbarProvidersManager</a>,
+a component tracking all the available search providers, and managing searches
+across them.</p>
+<p>The <em>UrlbarProvidersManager</em> is a singleton, it registers internal providers on
+startup and can register/unregister providers on the fly.
+It can manage multiple concurrent queries, and tracks them internally as
+separate <em>Query</em> objects.</p>
+<p>The <em>Controller</em> starts and stops queries through the <em>UrlbarProvidersManager</em>.
+It’s possible to wait for the promise returned by <em>startQuery</em> to know when no
+more results will be returned, it is not mandatory though.
+Queries can be canceled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Canceling a query will issue an interrupt() on the database connection,
+terminating any running and future SQL query, unless a query is running inside
+a <em>runInCriticalSection</em> task.</p>
+</div>
+<p>The <em>searchString</em> gets tokenized by the <a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarTokenizer.jsm">UrlbarTokenizer</a>
+component into tokens, some of these tokens have a special meaning and can be
+used by the user to restrict the search to specific result type (See the
+<em>UrlbarTokenizer::TYPE</em> enum).</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The tokenizer uses heuristics to determine each token’s type, as such the
+consumer may want to check the value before applying filters.</p>
+</div>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarProvidersManager</span> <span class="p">{</span>
+  <span class="nx">registerProvider</span><span class="p">(</span><span class="nx">providerObj</span><span class="p">);</span>
+  <span class="nx">unregisterProvider</span><span class="p">(</span><span class="nx">providerObj</span><span class="p">);</span>
+  <span class="nx">registerMuxer</span><span class="p">(</span><span class="nx">muxerObj</span><span class="p">);</span>
+  <span class="nx">unregisterMuxer</span><span class="p">(</span><span class="nx">muxerObjOrName</span><span class="p">);</span>
+  <span class="nx">async</span> <span class="nx">startQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="nx">cancelQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Can be used by providers to run uninterruptible queries.</span>
+  <span class="nx">runInCriticalSection</span><span class="p">(</span><span class="nx">taskFn</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="urlbarprovider">
+<h3>UrlbarProvider<a class="headerlink" href="#urlbarprovider" title="Permalink to this headline">¶</a></h3>
+<p>A provider is specialized into searching and returning results from different
+information sources. Internal providers are usually implemented in separate
+<em>jsm</em> modules with a <em>UrlbarProvider</em> name prefix. External providers can be
+registered as <em>Objects</em> through the <em>UrlbarProvidersManager</em>.
+Each provider is independent and must satisfy a base API, while internal
+implementation details may vary deeply among different providers.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Providers are singleton, and must track concurrent searches internally, for
+example mapping them by UrlbarQueryContext.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Internal providers can access the Places database through the
+<em>PlacesUtils.promiseLargeCacheDBConnection</em> utility.</p>
+</div>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">UrlbarProvider</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Unique name for the provider, used by the context to filter on providers.</span>
+<span class="cm">   * Not using a unique name will cause the newest registration to win.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">get</span> <span class="nx">name</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">&quot;UrlbarProviderBase&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * The type of the provider, must be one of UrlbarUtils.PROVIDER_TYPE.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">get</span> <span class="nx">type</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Trying to access the base class, must be overridden&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Whether this provider should be invoked for the given context.</span>
+<span class="cm">   * If this method returns false, the providers manager won&#39;t start a query</span>
+<span class="cm">   * with this provider, to save on resources.</span>
+<span class="cm">   * @param {UrlbarQueryContext} queryContext The query context object</span>
+<span class="cm">   * @returns {boolean} Whether this provider should be invoked for the search.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">isActive</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Trying to access the base class, must be overridden&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Gets the provider&#39;s priority.  Priorities are numeric values starting at</span>
+<span class="cm">   * zero and increasing in value.  Smaller values are lower priorities, and</span>
+<span class="cm">   * larger values are higher priorities.  For a given query, `startQuery` is</span>
+<span class="cm">   * called on only the active and highest-priority providers.</span>
+<span class="cm">   * @param {UrlbarQueryContext} queryContext The query context object</span>
+<span class="cm">   * @returns {number} The provider&#39;s priority for the given query.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">getPriority</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// By default, all providers share the lowest priority.</span>
+    <span class="k">return</span> <span class="mf">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Starts querying.</span>
+<span class="cm">   * @param {UrlbarQueryContext} queryContext The query context object</span>
+<span class="cm">   * @param {function} addCallback Callback invoked by the provider to add a new</span>
+<span class="cm">   *        result. A UrlbarResult should be passed to it.</span>
+<span class="cm">   * @note Extended classes should return a Promise resolved when the provider</span>
+<span class="cm">   *       is done searching AND returning results.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">startQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">,</span> <span class="nx">addCallback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Trying to access the base class, must be overridden&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Cancels a running query,</span>
+<span class="cm">   * @param {UrlbarQueryContext} queryContext The query context object to cancel</span>
+<span class="cm">   *        query for.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">cancelQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Trying to access the base class, must be overridden&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="urlbarmuxer">
+<h3>UrlbarMuxer<a class="headerlink" href="#urlbarmuxer" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Muxer</em> is responsible for sorting results based on their importance and
+additional rules that depend on the UrlbarQueryContext. The muxer to use is
+indicated by the UrlbarQueryContext.muxer property.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The Muxer is a replaceable component, as such what is described here is a
+reference for the default View, but may not be valid for other implementations.</p>
+</div>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">UrlbarMuxer</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Unique name for the muxer, used by the context to sort results.</span>
+<span class="cm">   * Not using a unique name will cause the newest registration to win.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">get</span> <span class="nx">name</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">&quot;UrlbarMuxerBase&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="cm">/**</span>
+<span class="cm">   * Sorts UrlbarQueryContext results in-place.</span>
+<span class="cm">   * @param {UrlbarQueryContext} queryContext the context to sort results for.</span>
+<span class="cm">   * @abstract</span>
+<span class="cm">   */</span>
+  <span class="nx">sort</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Trying to access the base class, must be overridden&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-controller">
+<h2>The Controller<a class="headerlink" href="#the-controller" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarController.jsm">UrlbarController</a>
+is the component responsible for reacting to user’s input, by communicating
+proper course of action to the Model (e.g. starting/stopping a query) and the
+View (e.g. showing/hiding a panel). It is also responsible for reporting Telemetry.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each <em>View</em> has a different <em>Controller</em> instance.</p>
+</div>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarController</span> <span class="p">{</span>
+  <span class="nx">async</span> <span class="nx">startQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="nx">cancelQuery</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Invoked by the ProvidersManager when results are available.</span>
+  <span class="nx">receiveResults</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Used by the View to listen for results.</span>
+  <span class="nx">addQueryListener</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+  <span class="nx">removeQueryListener</span><span class="p">(</span><span class="nx">listener</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-view">
+<h2>The View<a class="headerlink" href="#the-view" title="Permalink to this headline">¶</a></h2>
+<p>The View is the component responsible for presenting search results to the
+user and handling their input.</p>
+<div class="section" id="id1">
+<h3><a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarInput.jsm">UrlbarInput.jsm</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Implements an input box <em>View</em>, owns an <em>UrlbarView</em>.</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarInput</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">textbox</span><span class="p">,</span> <span class="nx">panel</span> <span class="p">});</span>
+  <span class="c1">// Uses UrlbarValueFormatter to highlight the base host, search aliases</span>
+  <span class="c1">// and to keep the host visible on overflow.</span>
+  <span class="nx">formatValue</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+  <span class="nx">openResults</span><span class="p">();</span>
+  <span class="c1">// Converts an internal URI (e.g. a URI with a username or password) into</span>
+  <span class="c1">// one which we can expose to the user.</span>
+  <span class="nx">makeURIReadable</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span>
+  <span class="c1">// Handles an event which would cause a url or text to be opened.</span>
+  <span class="nx">handleCommand</span><span class="p">();</span>
+  <span class="c1">// Called by the view when a result is selected.</span>
+  <span class="nx">resultsSelected</span><span class="p">();</span>
+  <span class="c1">// The underlying textbox</span>
+  <span class="nx">textbox</span><span class="p">;</span>
+  <span class="c1">// The results panel.</span>
+  <span class="nx">panel</span><span class="p">;</span>
+  <span class="c1">// The containing window.</span>
+  <span class="nb">window</span><span class="p">;</span>
+  <span class="c1">// The containing document.</span>
+  <span class="nb">document</span><span class="p">;</span>
+  <span class="c1">// An UrlbarController instance.</span>
+  <span class="nx">controller</span><span class="p">;</span>
+  <span class="c1">// An UrlbarView instance.</span>
+  <span class="nx">view</span><span class="p">;</span>
+  <span class="c1">// Whether the current value was typed by the user.</span>
+  <span class="nx">valueIsTyped</span><span class="p">;</span>
+  <span class="c1">// Whether the context is in Private Browsing mode.</span>
+  <span class="nx">isPrivate</span><span class="p">;</span>
+  <span class="c1">// Whether the input box is focused.</span>
+  <span class="nx">focused</span><span class="p">;</span>
+  <span class="c1">// The go button element.</span>
+  <span class="nx">goButton</span><span class="p">;</span>
+  <span class="c1">// The current value, can also be set.</span>
+  <span class="nx">value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarView.jsm">UrlbarView.jsm</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>Represents the base <em>View</em> implementation, communicates with the <em>Controller</em>.</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarView</span> <span class="p">{</span>
+  <span class="c1">// Manage View visibility.</span>
+  <span class="nx">open</span><span class="p">();</span>
+  <span class="nx">close</span><span class="p">();</span>
+  <span class="c1">// Invoked when the query starts.</span>
+  <span class="nx">onQueryStarted</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Invoked when new results are available.</span>
+  <span class="nx">onQueryResults</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Invoked when the query has been canceled.</span>
+  <span class="nx">onQueryCancelled</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Invoked when the query is done. This is invoked in any case, even if the</span>
+  <span class="c1">// query was canceled earlier.</span>
+  <span class="nx">onQueryFinished</span><span class="p">(</span><span class="nx">queryContext</span><span class="p">);</span>
+  <span class="c1">// Invoked when the view opens.</span>
+  <span class="nx">onViewOpen</span><span class="p">();</span>
+  <span class="c1">// Invoked when the view closes.</span>
+  <span class="nx">onViewClose</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="urlbarresult">
+<h2>UrlbarResult<a class="headerlink" href="#urlbarresult" title="Permalink to this headline">¶</a></h2>
+<p>An <a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/components/urlbar/UrlbarResult.jsm">UrlbarResult</a>
+instance represents a single search result with a result type, that
+identifies specific kind of results.
+Each kind has its own properties, that the <em>View</em> may support, and a few common
+properties, supported by all of the results.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Result types are also enumerated by <em>UrlbarUtils.RESULT_TYPE</em>.</p>
+</div>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">UrlbarResult</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">resultType</span><span class="p">,</span> <span class="nx">payload</span><span class="p">);</span>
+
+  <span class="nx">type</span><span class="o">:</span> <span class="p">{</span><span class="nx">integer</span><span class="p">}</span> <span class="nx">One</span> <span class="k">of</span> <span class="nx">UrlbarUtils</span><span class="p">.</span><span class="nx">RESULT_TYPE</span><span class="p">.</span>
+  <span class="nx">source</span><span class="o">:</span> <span class="p">{</span><span class="nx">integer</span><span class="p">}</span> <span class="nx">One</span> <span class="k">of</span> <span class="nx">UrlbarUtils</span><span class="p">.</span><span class="nx">RESULT_SOURCE</span><span class="p">.</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="p">{</span><span class="nx">string</span><span class="p">}</span> <span class="nx">A</span> <span class="nx">title</span> <span class="nx">that</span> <span class="nx">may</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">as</span> <span class="nx">a</span> <span class="nx">label</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">result</span><span class="p">.</span>
+  <span class="nx">icon</span><span class="o">:</span> <span class="p">{</span><span class="nx">string</span><span class="p">}</span> <span class="nx">Url</span> <span class="k">of</span> <span class="nx">an</span> <span class="nx">icon</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">result</span><span class="p">.</span>
+  <span class="nx">payload</span><span class="o">:</span> <span class="p">{</span><span class="nx">object</span><span class="p">}</span> <span class="nb">Object</span> <span class="nx">containing</span> <span class="nx">properties</span> <span class="k">for</span> <span class="nx">the</span> <span class="nx">specific</span> <span class="nx">RESULT_TYPE</span><span class="p">.</span>
+  <span class="nx">autofill</span><span class="o">:</span> <span class="p">{</span><span class="nx">object</span><span class="p">}</span> <span class="nx">An</span> <span class="nx">object</span> <span class="nx">describing</span> <span class="nx">the</span> <span class="nx">text</span> <span class="nx">that</span> <span class="nx">should</span> <span class="nx">be</span>
+            <span class="nx">autofilled</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">input</span> <span class="nx">when</span> <span class="nx">the</span> <span class="nx">result</span> <span class="nx">is</span> <span class="nx">selected</span><span class="p">,</span> <span class="k">if</span> <span class="nx">any</span><span class="p">.</span>
+  <span class="nx">autofill</span><span class="p">.</span><span class="nx">value</span><span class="o">:</span> <span class="p">{</span><span class="nx">string</span><span class="p">}</span> <span class="nx">The</span> <span class="nx">autofill</span> <span class="nx">value</span><span class="p">.</span>
+  <span class="nx">autofill</span><span class="p">.</span><span class="nx">selectionStart</span><span class="o">:</span> <span class="p">{</span><span class="nx">integer</span><span class="p">}</span> <span class="nx">The</span> <span class="nx">first</span> <span class="nx">index</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">autofill</span>
+                           <span class="nx">selection</span><span class="p">.</span>
+  <span class="nx">autofill</span><span class="p">.</span><span class="nx">selectionEnd</span><span class="o">:</span> <span class="p">{</span><span class="nx">integer</span><span class="p">}</span> <span class="nx">The</span> <span class="nx">last</span> <span class="nx">index</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">autofill</span> <span class="nx">selection</span><span class="p">.</span>
+  <span class="nx">suggestedIndex</span><span class="o">:</span> <span class="p">{</span><span class="nx">integer</span><span class="p">}</span> <span class="nx">Suggest</span> <span class="nx">a</span> <span class="nx">preferred</span> <span class="nx">position</span> <span class="k">for</span> <span class="k">this</span> <span class="nx">result</span>
+                  <span class="nx">within</span> <span class="nx">the</span> <span class="nx">result</span> <span class="nx">set</span><span class="p">.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The following RESULT_TYPEs are supported:</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="c1">// An open tab.</span>
+<span class="c1">// Payload: { icon, url, userContextId }</span>
+<span class="nx">TAB_SWITCH</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+<span class="c1">// A search suggestion or engine.</span>
+<span class="c1">// Payload: { icon, suggestion, keyword, query, keywordOffer, inPrivateWindow, isPrivateEngine }</span>
+<span class="nx">SEARCH</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
+<span class="c1">// A common url/title tuple, may be a bookmark with tags.</span>
+<span class="c1">// Payload: { icon, url, title, tags }</span>
+<span class="nx">URL</span><span class="o">:</span> <span class="mf">3</span><span class="p">,</span>
+<span class="c1">// A bookmark keyword.</span>
+<span class="c1">// Payload: { icon, url, keyword, postData }</span>
+<span class="nx">KEYWORD</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
+<span class="c1">// A WebExtension Omnibox result.</span>
+<span class="c1">// Payload: { icon, keyword, title, content }</span>
+<span class="nx">OMNIBOX</span><span class="o">:</span> <span class="mf">5</span><span class="p">,</span>
+<span class="c1">// A tab from another synced device.</span>
+<span class="c1">// Payload: { icon, url, device, title }</span>
+<span class="nx">REMOTE_TAB</span><span class="o">:</span> <span class="mf">6</span><span class="p">,</span>
+<span class="c1">// An actionable message to help the user with their query.</span>
+<span class="c1">// textData and buttonTextData are objects containing an l10n id and args.</span>
+<span class="c1">// If a tip is untranslated it&#39;s possible to provide text and buttonText.</span>
+<span class="c1">// Payload: { icon, textData, buttonTextData, [buttonUrl], [helpUrl] }</span>
+<span class="nx">TIP</span><span class="o">:</span> <span class="mf">7</span><span class="p">,</span>
+<span class="c1">// A type of result created at runtime, for example by an extension.</span>
+<span class="c1">// Payload: { dynamicType }</span>
+<span class="nx">DYNAMIC</span><span class="o">:</span> <span class="mf">8</span><span class="p">,</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utilities.html" class="btn btn-neutral float-right" title="Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Address Bar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>taskgraph.loader package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>taskgraph.loader package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/taskgraph.loader.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="taskgraph-loader-package">
+<h1>taskgraph.loader package<a class="headerlink" href="#taskgraph-loader-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-taskgraph.loader.multi_dep">
+<span id="taskgraph-loader-multi-dep-module"></span><h2>taskgraph.loader.multi_dep module<a class="headerlink" href="#module-taskgraph.loader.multi_dep" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.assert_unique_members">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">assert_unique_members</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kinds</span></em>, <em class="sig-param"><span class="n">error_msg</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.assert_unique_members" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.chunk_locale_grouping">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">chunk_locale_grouping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.chunk_locale_grouping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split by a chunk_locale (but also by platform, build-type, product)</p>
+<p>This grouping is written for mac signing with notarization, but might also
+be useful elsewhere.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.get_primary_dep">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">get_primary_dep</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">dep_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.get_primary_dep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the dependent task to inherit attributes from.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">primary-dependency</span></code> is defined in <code class="docutils literal notranslate"><span class="pre">kind.yml</span></code> and is a string,
+then find the first dep with that task kind and return it. If it is
+defined and is a list, the first kind in that list with a matching dep
+is the primary dependency. If it’s undefined, return the first dep.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.group_by">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">group_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.group_by" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.group_tasks">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">group_tasks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.group_tasks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.loader">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">loader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="n">loaded_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load tasks based on the jobs dependant kinds, designed for use as
+multiple-dependent needs.</p>
+<p>Required <code class="docutils literal notranslate"><span class="pre">group-by-fn</span></code> is used to define how we coalesce the
+multiple deps together to pass to transforms, e.g. all kinds specified get
+collapsed by platform with <cite>platform</cite></p>
+<p>Optional <code class="docutils literal notranslate"><span class="pre">primary-dependency</span></code> (ordered list or string) is used to determine
+which upstream kind to inherit attrs from. See <code class="docutils literal notranslate"><span class="pre">get_primary_dep</span></code>.</p>
+<p>The <cite>only-for-build-platforms</cite> kind configuration, if specified, will limit
+the build platforms for which a job will be created. Alternatively there is
+‘not-for-build-platforms’ kind configuration which will be consulted only after
+‘only-for-build-platforms’ is checked (if present), and omit any jobs where the
+build platform matches.</p>
+<p>Optional <code class="docutils literal notranslate"><span class="pre">job-template</span></code> kind configuration value, if specified, will be used to
+pass configuration down to the specified transforms used.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.partner_repack_ids_grouping">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">partner_repack_ids_grouping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.partner_repack_ids_grouping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split by partner_repack_ids (but also by platform, build-type, product)</p>
+<p>This grouping is written for release-{eme-free,partner}-repack-signing.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.platform_grouping">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">platform_grouping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.platform_grouping" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.single_locale_grouping">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">single_locale_grouping</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.single_locale_grouping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split by a single locale (but also by platform, build-type, product)</p>
+<p>The locale can be <cite>None</cite> (en-US build/signing/repackage), a single locale,
+or multiple locales per task, e.g. for l10n chunking. In the case of a task
+with, say, five locales, the task will show up in all five locale groupings.</p>
+<p>This grouping is written for non-partner-repack beetmover, but might also
+be useful elsewhere.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.multi_dep.skip_only_or_not">
+<code class="sig-prename descclassname">taskgraph.loader.multi_dep.</code><code class="sig-name descname">skip_only_or_not</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">task</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.multi_dep.skip_only_or_not" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if we should skip this task based on <a href="#id1"><span class="problematic" id="id2">only_</span></a> or <a href="#id3"><span class="problematic" id="id4">not_</span></a> config.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.loader.single_dep">
+<span id="taskgraph-loader-single-dep-module"></span><h2>taskgraph.loader.single_dep module<a class="headerlink" href="#module-taskgraph.loader.single_dep" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.loader.single_dep.loader">
+<code class="sig-prename descclassname">taskgraph.loader.single_dep.</code><code class="sig-name descname">loader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="n">loaded_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.single_dep.loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load tasks based on the jobs dependant kinds.</p>
+<p>The <cite>only-for-build-platforms</cite> kind configuration, if specified, will limit
+the build platforms for which a job will be created. Alternatively there is
+‘not-for-build-platforms’ kind configuration which will be consulted only after
+‘only-for-build-platforms’ is checked (if present), and omit any jobs where the
+build platform matches.</p>
+<p>Optional <cite>only-for-attributes</cite> kind configuration, if specified, will limit
+the jobs chosen to ones which have the specified attribute, with the specified
+value.</p>
+<p>Optional <cite>job-template</cite> kind configuration value, if specified, will be used to
+pass configuration down to the specified transforms used.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.loader.test">
+<span id="taskgraph-loader-test-module"></span><h2>taskgraph.loader.test module<a class="headerlink" href="#module-taskgraph.loader.test" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.loader.test.expand_tests">
+<code class="sig-prename descclassname">taskgraph.loader.test.</code><code class="sig-name descname">expand_tests</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_sets_cfg</span></em>, <em class="sig-param"><span class="n">test_platforms</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.test.expand_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expand the test sets in <cite>test_platforms</cite> out to sets of test names.
+Returns a dictionary like <cite>get_test_platforms</cite>, with an additional
+<cite>test-names</cite> key for each test platform, containing a set of test
+names.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.test.get_builds_by_platform">
+<code class="sig-prename descclassname">taskgraph.loader.test.</code><code class="sig-name descname">get_builds_by_platform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dep_kind</span></em>, <em class="sig-param"><span class="n">loaded_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.test.get_builds_by_platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the build tasks on which tests will depend, keyed by
+platform/type.  Returns a dictionary mapping build platform to task.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.test.get_test_platforms">
+<code class="sig-prename descclassname">taskgraph.loader.test.</code><code class="sig-name descname">get_test_platforms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_platforms_cfg</span></em>, <em class="sig-param"><span class="n">builds_by_platform</span></em>, <em class="sig-param"><span class="n">signed_builds_by_platform</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.test.get_test_platforms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the test platforms for which test tasks should be generated,
+based on the available build platforms.  Returns a dictionary mapping
+test platform to {test-set, build-platform, build-label}.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.loader.test.loader">
+<code class="sig-prename descclassname">taskgraph.loader.test.</code><code class="sig-name descname">loader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="n">loaded_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.test.loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate tasks implementing Gecko tests.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.loader.transform">
+<span id="taskgraph-loader-transform-module"></span><h2>taskgraph.loader.transform module<a class="headerlink" href="#module-taskgraph.loader.transform" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.loader.transform.loader">
+<code class="sig-prename descclassname">taskgraph.loader.transform.</code><code class="sig-name descname">loader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">kind</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">params</span></em>, <em class="sig-param"><span class="n">loaded_tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.loader.transform.loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the input elements that will be transformed into tasks in a generic
+way.  The elements themselves are free-form, and become the input to the
+first transform.</p>
+<p>By default, this reads jobs from the <cite>jobs</cite> key, or from yaml files
+named by <cite>jobs-from</cite>.  The entities are read from mappings, and the
+keys to those mappings are added in the <cite>name</cite> key of each entity.</p>
+<p>If there is a <cite>job-defaults</cite> config, then every job is merged with it.
+This provides a simple way to set default values for all jobs of a kind.
+The <cite>job-defaults</cite> key can also be specified in a yaml file pointed to by
+<cite>jobs-from</cite>. In this case it will only apply to tasks defined in the same
+file.</p>
+<p>Other kind implementations can use a different loader function to
+produce inputs and hand them to <cite>transform_inputs</cite>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.loader">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-taskgraph.loader" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,526 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>General Conventions &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tutorial: Show Allocations Per Call Path" href="Tutorial-Alloc-Log-Tree.html" />
+    <link rel="prev" title="Debugger.Memory" href="Debugger.Memory.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">General Conventions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debuggee-values">Debuggee Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debuggee-code">Debuggee Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#completion-values">Completion Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resumption-values">Resumption Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timestamps">Timestamps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-debugger-debuggeewouldrun-exception">The <code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code> Exception</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>General Conventions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Conventions.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="general-conventions">
+<h1>General Conventions<a class="headerlink" href="#general-conventions" title="Permalink to this headline">¶</a></h1>
+<p>This page describes general conventions used in the <a class="reference internal" href="Debugger-API.html"><span class="doc">Debugger</span></a> API,
+and defines some terminology used throughout the specification.</p>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Properties of objects that comprise the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> interface, and those
+that the interface creates, follow some general conventions:</p>
+<ul class="simple">
+<li><p>Instances and prototypes are extensible; you can add your own properties
+and methods to them.</p></li>
+<li><p>Properties are configurable. This applies to both “own” and prototype
+properties, and to both methods and data properties. (Leaving these
+properties open to redefinition will hopefully make it easier for
+JavaScript debugger code to cope with bugs, bug fixes, and changes in the
+interface over time.)</p></li>
+<li><p>Method properties are writable.</p></li>
+<li><p>We prefer inherited accessor properties to own data properties. Both are
+read using the same syntax, but inherited accessors seem like a more
+accurate reflection of what’s going on. Unless otherwise noted, these
+properties have getters but no setters, as they cannot meaningfully be
+assigned to.</p></li>
+</ul>
+</div>
+<div class="section" id="debuggee-values">
+<h2>Debuggee Values<a class="headerlink" href="#debuggee-values" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> interface follows some conventions to help debuggers safely
+inspect and modify the debuggee’s objects and values. Primitive values are
+passed freely between debugger and debuggee; copying or wrapping is handled
+transparently. Objects received from the debuggee (including host objects
+like DOM elements) are fronted in the debugger by <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code>
+instances, which provide reflection-oriented methods for inspecting their
+referents; see <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code>, below.</p>
+<p>Of the debugger’s objects, only <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code> instances may be passed
+to the debuggee: when this occurs, the debuggee receives the
+<code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code>’s referent, not the <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code> instance itself.</p>
+<p>In the descriptions below, the term “debuggee value” means either a
+primitive value or a <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code> instance; it is a value that might
+be received from the debuggee, or that could be passed to the debuggee.</p>
+</div>
+<div class="section" id="debuggee-code">
+<h2>Debuggee Code<a class="headerlink" href="#debuggee-code" title="Permalink to this headline">¶</a></h2>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> instance maintains a set of global objects that, taken
+together, comprise the debuggee. Code evaluated in the scope of a debuggee
+global object, directly or indirectly, is considered <em>debuggee code</em>.
+Similarly:</p>
+<ul class="simple">
+<li><p>a <em>debuggee frame</em> is a frame running debuggee code;</p></li>
+<li><p>a <em>debuggee function</em> is a function that closes over a debuggee
+global object (and thus the function’s code is debuggee code);</p></li>
+<li><p>a <em>debuggee environment</em> is an environment whose outermost
+enclosing environment is a debuggee global object; and</p></li>
+<li><p>a <em>debuggee script</em> is a script containing debuggee code.</p></li>
+</ul>
+</div>
+<div class="section" id="completion-values">
+<h2>Completion Values<a class="headerlink" href="#completion-values" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> API often needs to convey the result of running some JS code. For example, suppose you get a <code class="docutils literal notranslate"><span class="pre">frame.onPop</span></code> callback telling you that a method in the debuggee just finished. Did it return successfully? Did it throw? What did it return? The debugger passes the <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler a <em>completion value</em> that tells what happened.</p>
+<p>A completion value is one of these:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">return:</span> <span class="pre">value</span> <span class="pre">}</span></code></p>
+<p>The code completed normally, returning <i>value</i>. <i>Value</i> is a
+debuggee value.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">throw:</span> <span class="pre">value,</span> <span class="pre">stack:</span> <span class="pre">stack</span> <span class="pre">}</span></code></p>
+<p>The code threw <i>value</i> as an exception. <i>Value</i> is a debuggee
+value.  <i>stack</i> is a <code class="docutils literal notranslate"><span class="pre">SavedFrame</span></code> representing the location from which
+the value was thrown, and may be missing.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>The code was terminated, as if by the “slow script” ribbon.</p>
+</li>
+</ul>
+<p>Generators and async functions add a wrinkle: they can suspend themselves (with <code class="docutils literal notranslate"><span class="pre">yield</span></code> or <code class="docutils literal notranslate"><span class="pre">await</span></code>), which removes their frame from the stack. Later, the generator or async frame might be returned to the stack and continue running where it left off. Does it count as “completion” when a generator suspends itself?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> API says yes. <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> do trigger the <code class="docutils literal notranslate"><span class="pre">frame.onPop</span></code> handler, passing a completion value that explains why the frame is being suspended. The completion value gets an extra <code class="docutils literal notranslate"><span class="pre">.yield</span></code> or <code class="docutils literal notranslate"><span class="pre">.await</span></code> property, to distinguish this kind of completion from a normal <code class="docutils literal notranslate"><span class="pre">return</span></code>.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="k">return</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span> <span class="k">yield</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>where <em>value</em> is a debuggee value for the iterator result object, like <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">value:</span> <span class="pre">1,</span> <span class="pre">done:</span> <span class="pre">false</span> <span class="pre">}</span></code>, for the yield.</p>
+<p>When a generator function is called, it first evaluates any default argument
+expressions and destructures its arguments. Then its frame is suspended, and the
+new generator object is returned to the caller. This initial suspension is reported
+to any <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handlers as a completion value of the form:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="k">return</span><span class="o">:</span> <span class="nx">generatorObject</span><span class="p">,</span> <span class="k">yield</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">initial</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>where <em>generatorObject</em> is a debuggee value for the generator object being
+returned to the caller.</p>
+<p>When an async function awaits a promise, its suspension is reported to any
+<code class="docutils literal notranslate"><span class="pre">onPop</span></code> handlers as a completion value of the form:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span> <span class="k">return</span><span class="o">:</span> <span class="nx">promise</span><span class="p">,</span> <span class="nx">await</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>where <em>promise</em> is a debuggee value for the promise being returned to the
+caller.</p>
+<p>The first time a call to an async function awaits, returns, or throws, a promise
+of its result is returned to the caller. Subsequent resumptions of the async
+call, if any, are initiated directly from the job queue’s event loop, with no
+calling frame on the stack. Thus, if needed, an <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler can distinguish
+an async call’s initial suspension, which returns the promise, from any
+subsequent suspensions by checking the <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code>’s <code class="docutils literal notranslate"><span class="pre">older</span></code> property: if
+that is <code class="docutils literal notranslate"><span class="pre">null</span></code>, the call was resumed directly from the event loop.</p>
+<p>Async generators are a combination of async functions and generators that can
+use both <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code> expressions. Suspensions of async generator frames
+are reported using any combination of the completion values above.</p>
+</div>
+<div class="section" id="resumption-values">
+<h2>Resumption Values<a class="headerlink" href="#resumption-values" title="Permalink to this headline">¶</a></h2>
+<p>As the debuggee runs, the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> interface calls various
+debugger-provided handler functions to report the debuggee’s behavior.
+Some of these calls can return a value indicating how the debuggee’s
+execution should continue; these are called <em>resumption values</em>. A
+resumption value has one of the following forms:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">undefined</span></code></p>
+<p>The debuggee should continue execution normally.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">return:</span> <span class="pre">value</span> <span class="pre">}</span></code></p>
+<p>Force the top frame of the debuggee to return <i>value</i> immediately,
+as if by executing a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement. <i>Value</i> must be a debuggee
+value. (Most handler functions support this, except those whose
+descriptions say otherwise.) See the list of special cases below.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">throw:</span> <span class="pre">value</span> <span class="pre">}</span></code></p>
+<p>Throw <i>value</i> as an exception from the current bytecode
+instruction. <i>Value</i> must be a debuggee value. Note that unlike
+completion values, resumption values do not specify a stack.  When
+initiating an exceptional return from a handler, the current debuggee stack
+will be used. If a handler wants to avoid modifying the stack of an
+already-thrown exception, it should return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">null</span></code></p>
+<p>Terminate the debuggee, as if it had been cancelled by the “slow script”
+dialog box.</p>
+</li>
+</ul>
+<p>In some places, the JS language treats <code class="docutils literal notranslate"><span class="pre">return</span></code> statements specially or
+doesn’t allow them at all. So there are a few special cases.</p>
+<ul>
+<li><p>An arrow function without curly braces can’t contain a return
+statement, but <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">return:</span> <span class="pre">value</span> <span class="pre">}</span></code> works anyway,
+returning the specified value.</p>
+<p>Likewise, if the top frame of the debuggee is not in a function at
+all—that is, it’s running toplevel code in a <code class="docutils literal notranslate"><span class="pre">script</span></code> tag, or <code class="docutils literal notranslate"><span class="pre">eval</span></code>
+code—then <i>value</i> is returned even though <code class="docutils literal notranslate"><span class="pre">return</span></code> statements
+aren’t legal in that kind of code. (In the case of a <code class="docutils literal notranslate"><span class="pre">script</span></code> tag,
+the browser discards the return value.)</p>
+</li>
+<li><p>If the debuggee is in a function that was called as a constructor (that
+is, via a <code class="docutils literal notranslate"><span class="pre">new</span></code> expression), then <i>value</i> serves as the value
+returned by the function’s body, not that produced by the <code class="docutils literal notranslate"><span class="pre">new</span></code>
+expression: if the value is not an object, the <code class="docutils literal notranslate"><span class="pre">new</span></code> expression returns
+the frame’s <code class="docutils literal notranslate"><span class="pre">this</span></code> value.</p>
+<p>Similarly, if the function is the constructor for a subclass, then a
+non-object value may result in a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</li>
+<li><p>Returning from a generator simulates a <code class="docutils literal notranslate"><span class="pre">return</span></code>, not a <code class="docutils literal notranslate"><span class="pre">yield</span></code>;
+there is no way to force a debuggee generator to <code class="docutils literal notranslate"><span class="pre">yield</span></code>.</p>
+<p>The way generators execute is rather odd. When a generator-function
+is first called, it is put onto the stack and runs just a few
+bytecode instructions (or more, if the generator-function has any
+default argument values to compute), then performs the “initial
+suspend”.  At that point, a new generator object is created and
+returned to the caller. Thereafter, the caller may cause execution
+of the generator to resume at any time, by calling <code class="docutils literal notranslate"><span class="pre">genObj.next()</span></code>,
+and the generator may pause itself again using <code class="docutils literal notranslate"><span class="pre">yield</span></code>.</p>
+<p>JS generators normally can’t return before the “initial
+suspend”—there’s no place to put a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement—but
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">return:</span> <span class="pre">value</span> <span class="pre">}</span></code> there works anyway, replacing
+the generator object that the initial suspend would normally create
+and return.</p>
+<p>Returning from a generator that’s been resumed via <code class="docutils literal notranslate"><span class="pre">genobj.next()</span></code>
+(or one of the other methods) closes the generator, and the
+<code class="docutils literal notranslate"><span class="pre">genobj.next()</span></code> or other method returns a new object of the form
+<code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">done:</span> <span class="pre">true,</span> <span class="pre">value:</span> <span class="pre">value</span> <span class="pre">}</span></code>.</p>
+</li>
+</ul>
+<p>If a debugger hook function throws an exception, rather than returning a
+resumption value, we never propagate such an exception to the debuggee;
+instead, we call the associated <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> instance’s
+<code class="docutils literal notranslate"><span class="pre">uncaughtExceptionHook</span></code> property, as described below.</p>
+</div>
+<div class="section" id="timestamps">
+<h2>Timestamps<a class="headerlink" href="#timestamps" title="Permalink to this headline">¶</a></h2>
+<p>Timestamps are expressed in units of milliseconds since an arbitrary,
+but fixed, epoch.  The resolution of timestamps is generally greater
+than milliseconds, though no specific resolution is guaranteed.</p>
+</div>
+<div class="section" id="the-debugger-debuggeewouldrun-exception">
+<h2>The <code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code> Exception<a class="headerlink" href="#the-debugger-debuggeewouldrun-exception" title="Permalink to this headline">¶</a></h2>
+<p>Some debugger operations that appear to simply inspect the debuggee’s state
+may actually cause debuggee code to run. For example, reading a variable
+might run a getter function on the global or on a <code class="docutils literal notranslate"><span class="pre">with</span></code> expression’s
+operand; and getting an object’s property descriptor will run a handler
+trap if the object is a proxy. To protect the debugger’s integrity, only
+methods whose stated purpose is to run debuggee code can do so. These
+methods are called <a class="reference external" href="Debugger.Frame.html#invocation-functions-and-debugger-frames">invocation functions</a>, and they follow certain
+common conventions to report the debuggee’s behavior safely. For other
+methods, if their normal operation would cause debuggee code to run, they
+throw an instance of the <code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code> exception.</p>
+<p>If there are debugger frames on stack from multiple Debugger instances, the
+thrown exception is an instance of the topmost locking debugger’s global’s
+<code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code> exception may have a <code class="docutils literal notranslate"><span class="pre">cause</span></code> property,
+providing more detailed information on why the debuggee would have run. The
+<code class="docutils literal notranslate"><span class="pre">cause</span></code> property’s value is one of the following strings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;proxy&quot;</span></code>: Carrying out the operation would have caused a proxy handler to run.           |</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;getter&quot;</span></code>: Carrying out the operation would have caused an object property getter to run. |</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;setter&quot;</span></code>: Carrying out the operation would have caused an object property setter to run. |</p></li>
+</ul>
+<p>If the system can’t determine why control attempted to enter the debuggee,
+it will leave the exception’s <code class="docutils literal notranslate"><span class="pre">cause</span></code> property undefined.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Tutorial-Alloc-Log-Tree.html" class="btn btn-neutral float-right" title="Tutorial: Show Allocations Per Call Path" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Debugger.Memory.html" class="btn btn-neutral float-left" title="Debugger.Memory" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

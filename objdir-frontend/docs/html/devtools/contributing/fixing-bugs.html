@@ -1,0 +1,449 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to fix a bug &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Code reviews" href="code-reviews.html" />
+    <link rel="prev" title="Find bugs to work on" href="find-bugs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#contributing">Contributing</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="find-bugs.html">Find bugs to work on</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">How to fix a bug</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#make-sure-you-understand-what-needs-to-be-done">Make sure you understand what needs to be done</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#find-out-where-are-the-files-that-need-changing">Find out where are the files that need changing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-do-you-know-that-you-have-found-what-you-were-looking-for">How do you know that you have found what you were looking for?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next-do-whatever-needs-doing">NEXT: do whatever needs doing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-tests">Run tests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#time-for-a-review">Time for a review</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="code-reviews.html">Code reviews</a></li>
+<li class="toctree-l3"><a class="reference internal" href="landing-code.html">Landing code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="levelling-up.html">Leveling up</a></li>
+<li class="toctree-l3"><a class="reference internal" href="coding-standards.html">Coding standards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="filing-good-bugs.html">Filing good bugs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="performance.html">Investigating performance issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="react-performance-tips.html">Writing efficient React code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>How to fix a bug</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/contributing/fixing-bugs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-fix-a-bug">
+<h1>How to fix a bug<a class="headerlink" href="#how-to-fix-a-bug" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="make-sure-you-understand-what-needs-to-be-done">
+<h2>Make sure you understand what needs to be done<a class="headerlink" href="#make-sure-you-understand-what-needs-to-be-done" title="Permalink to this headline">¶</a></h2>
+<p>If you’re not quite sure of this, please add a comment requesting more information in the bug itself. It is absolutely fine to also talk to someone via other means (e.g. irc, email, in the office kitchen…), but it is good to come back to the bug and add the extra information, just in case you stop working on the bug at some point and someone else has to pick work where you left it.</p>
+</div>
+<div class="section" id="find-out-where-are-the-files-that-need-changing">
+<h2>Find out where are the files that need changing<a class="headerlink" href="#find-out-where-are-the-files-that-need-changing" title="Permalink to this headline">¶</a></h2>
+<p>In an ideal world, the bug has this information from the start, but very often it doesn’t.</p>
+<p>If you’re not yet familiar with the codebase, the <a class="reference internal" href="../files/README.html"><span class="doc">files and directories overview</span></a> might help you find where things are.</p>
+<p>If you know what you’re looking for (e.g. a string that has a typo and needs correcting, or a function name that needs modifying), you can use a source code search engine:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://searchfox.org/mozilla-central/source">Searchfox</a></li>
+</ul>
+</div>
+<p>It is a good idea to <a class="reference external" href="https://support.mozilla.org/en-US/kb/how-search-from-address-bar">add smart keyword searches</a> for Searchfox or DXR to search faster.</p>
+<p>You can also use your operating system’s command line. For example, let’s search for occurrences of <code class="docutils literal notranslate"><span class="pre">TODO</span></code> in the code base.</p>
+<p>Within your command line prompt, <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the <code class="docutils literal notranslate"><span class="pre">devtools</span></code> directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/mozilla-central/devtools <span class="c1"># use your actual folder name!</span>
+grep -r <span class="s1">&#39;TODO&#39;</span> .
+</pre></div>
+</div>
+<p>This will list all the places in the DevTools code that contain the <code class="docutils literal notranslate"><span class="pre">TODO</span></code> string. If there are too many instances, you can combine the above with <code class="docutils literal notranslate"><span class="pre">less</span></code>, to scroll and paginate the output of <code class="docutils literal notranslate"><span class="pre">grep</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep -r <span class="s1">&#39;TODO&#39;</span> . <span class="p">|</span> less
+</pre></div>
+</div>
+<p>Press <code class="docutils literal notranslate"><span class="pre">q</span></code> to exit.</p>
+<p>If after all of this you still can’t find your bearings, add a comment in the bug asking for more information.</p>
+</div>
+<div class="section" id="how-do-you-know-that-you-have-found-what-you-were-looking-for">
+<h2>How do you know that you have found what you were looking for?<a class="headerlink" href="#how-do-you-know-that-you-have-found-what-you-were-looking-for" title="Permalink to this headline">¶</a></h2>
+<p>There are a few options to confirm that you found the right files:</p>
+<div class="section" id="if-this-is-about-changing-a-string">
+<h3>If this is about changing a string…<a class="headerlink" href="#if-this-is-about-changing-a-string" title="Permalink to this headline">¶</a></h3>
+<p>Edit the file(s), and change the string (e.g. fix a typo). Rebuild, and run again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build
+./mach run
+</pre></div>
+</div>
+<p>Then go to the panel that displays the string you wanted to change.</p>
+<p>Does the typo still occur? Or is the string being displayed the correct one now?</p>
+</div>
+<div class="section" id="if-this-is-about-changing-javascript-code">
+<h3>If this is about changing JavaScript code…<a class="headerlink" href="#if-this-is-about-changing-javascript-code" title="Permalink to this headline">¶</a></h3>
+<p>If you think you found the right file to edit, add some logging statement on a place of the code which is likely to be executed (for example, on a class constructor):</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// For front-end code</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;hello friends\n&#39;</span><span class="p">);</span>
+
+<span class="c1">// Sometimes it&#39;s hard to spot your output. Emojis can help here really well.</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;👗👗👗&#39;</span><span class="p">,</span> <span class="s1">&#39;This is your logged output!&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or…</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// For server code</span>
+<span class="nx">dump</span><span class="p">(</span><span class="s1">&#39;hello friends\n&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>TIP: Whether to use one or another depends on the type of bug you’re working on, but if you’ve just started in DevTools, it’s highly likely you’ll take a front-end bug first.</p>
+<p>Then rebuild and run again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build
+./mach run
+</pre></div>
+</div>
+<p>Go to the panel or initiate the action that is likely to result on the code being executed, and pay close attention to the output in your console.</p>
+<p>Can you see <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">friends</span></code>? Then you found the file that you were looking for.</p>
+<p>It’s possible that you’ll get a lot of other messages you don’t care about now, but we can use <code class="docutils literal notranslate"><span class="pre">grep</span></code> to filter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach run <span class="p">|</span> grep hello friends
+</pre></div>
+</div>
+<p>This will only show lines that contain <code class="docutils literal notranslate"><span class="pre">hello</span> <span class="pre">friends</span></code>. If you get an empty output after trying to get the code to execute, maybe this isn’t the right file, or maybe you didn’t trigger the action.</p>
+<p>And that means it’s time to ask for more information in the bug or from your colleagues. Tell them what you tried, so they don’t have to figure that out themselves (saves everyone some time!).</p>
+</div>
+<div class="section" id="if-this-is-about-changing-css-code">
+<h3>If this is about changing CSS code…<a class="headerlink" href="#if-this-is-about-changing-css-code" title="Permalink to this headline">¶</a></h3>
+<p>If you think you have found the right file and the right CSS selector, you could try to edit the file to insert some outrageously colourful rule (for example, a really thick bright blue border), then restart DevTools to see if the changes show up.</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">border</span><span class="o">:</span> <span class="nt">4px</span> <span class="nt">solid</span> <span class="nt">blue</span><span class="o">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="next-do-whatever-needs-doing">
+<h2>NEXT: do whatever needs doing<a class="headerlink" href="#next-do-whatever-needs-doing" title="Permalink to this headline">¶</a></h2>
+<p>This will always depend on the specific bug you’re working on, so it’s hard to provide guidance here.</p>
+<p>The key aspect here is that if you have questions, you should not hesitate to ask. Ask your mentor, your manager, or <a class="reference external" href="https://firefox-dev.tools/#getting-in-touch">get in touch</a>. <strong>You should just not get stuck</strong>.</p>
+<p>Some people find it difficult to recognise or even admit they’re in such a situation, so some ways to describe ‘stuck’ could be:</p>
+<ul class="simple">
+<li><p>you’ve tried everything you could think of, nothing works, and do not know what else to do.</p></li>
+<li><p>you have various ideas for things that can be done, and do not know which one to go for.</p></li>
+<li><p>you have not learned anything new about the problem in the last one or two days.</p></li>
+<li><p>you’re starting to think about abandoning this bug and doing something else instead.</p></li>
+<li><p>you don’t know what to do, but are afraid of asking for help.</p></li>
+</ul>
+<p>If you think <em>any</em> of the above describes you, ask for help!</p>
+<p>Another tip you can use if you’re afraid that you’re wasting people’s time is to timebox. For example, give yourself 2 hours to investigate. If you can’t figure anything after that time has elapsed, stop and ask for help. It might be that you needed a key piece of information that was missing in the bug description, or you misunderstood something, or maybe even that you found a bug and that’s why things didn’t work even if they should! This is why it’s important to call for help sooner rather than later.</p>
+<div class="section" id="useful-references">
+<h3>Useful references<a class="headerlink" href="#useful-references" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="coding-standards">
+<h4>Coding standards<a class="headerlink" href="#coding-standards" title="Permalink to this headline">¶</a></h4>
+<p>If it’s your first time contributing, the documentation on <a class="reference internal" href="coding-standards.html"><span class="doc">coding standards</span></a> might have answers to questions such as what style of code to use, how to name new files (if you have to add any), tools we use to run automated checks, etc.</p>
+</div>
+<div class="section" id="specialised-guides">
+<h4>Specialised guides<a class="headerlink" href="#specialised-guides" title="Permalink to this headline">¶</a></h4>
+<p>We also have a few guides explaining how to work on specific types of problems, for example: <a class="reference internal" href="performance.html"><span class="doc">investigating performance issues</span></a>, or <a class="reference internal" href="react-performance-tips.html"><span class="doc">writing efficient React code</span></a>. Please have a look at the sidebar or use the search box on top of the sidebar to see if there’s something written about the type of bug you’re working on.</p>
+<p>If not, maybe you’ll be able to contribute with one by the time you fix your bug!</p>
+</div>
+<div class="section" id="mdn">
+<h4>MDN<a class="headerlink" href="#mdn" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://developer.mozilla.org/">MDN Web Docs</a> (also known as <em>MDN</em>) has a lot of information about HTML, CSS, JS, DOM, Web APIs, Gecko-specific APIs, and more.</p>
+</div>
+</div>
+</div>
+<div class="section" id="run-tests">
+<h2>Run tests<a class="headerlink" href="#run-tests" title="Permalink to this headline">¶</a></h2>
+<p>We have several types of automated tests to help us when developing.</p>
+<p>Some, like the linting tests, address coding style; others address functionality, such as unit and integration tests. This page has more <a class="reference external" href="../tests/">details on types of tests and how to run them</a>.</p>
+<p>You might want to run the unit and integration types of tests quite frequently, to confirm you’re not breaking anything else. Depending on what you’re doing, it might be even possible to run just one test file which addresses the specific change you’re implementing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach <span class="nb">test</span> devtools/path/to/test.js
+</pre></div>
+</div>
+<p>Sometimes you might want to run a number of tests which are related to the bug you’re fixing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach <span class="nb">test</span> devtools/path/to/test-thing-*.js
+</pre></div>
+</div>
+<p>At the beginning, it is entirely possible that you have no idea of where the tests are for the thing you’re working on. Please ask for help! You will eventually learn your way around.</p>
+<p>It is good etiquette to ensure the tests pass locally before asking for a code review. This includes linting tests. To run them, please <a class="reference internal" href="eslint.html"><span class="doc">configure your system to run ESlint</span></a>, and then you can execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach eslint devtools/path/to/files/you/changed
+</pre></div>
+</div>
+<p>Our tool for code review will run the linter automatically as well, but if you run this locally you’ll get instant feedback, and avoid having to send an updated commit again.</p>
+</div>
+<div class="section" id="time-for-a-review">
+<h2>Time for a review<a class="headerlink" href="#time-for-a-review" title="Permalink to this headline">¶</a></h2>
+<p>When you think you have fixed the bug, first let’s celebrate a bit! Yay! Well done 😀</p>
+<p>And now it’s time to <a class="reference internal" href="code-reviews.html"><span class="doc">get your code reviewed</span></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="code-reviews.html" class="btn btn-neutral float-right" title="Code reviews" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="find-bugs.html" class="btn btn-neutral float-left" title="Find bugs to work on" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

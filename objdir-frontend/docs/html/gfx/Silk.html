@@ -1,0 +1,751 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Silk Overview &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Firefox DevTools Contributor Docs" href="../devtools/index.html" />
+    <link rel="prev" title="Advanced Layers" href="AdvancedLayers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Graphics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GraphicsOverview.html">Graphics Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LayersHistory.html">Layers History</a></li>
+<li class="toctree-l2"><a class="reference internal" href="OffMainThreadPainting.html">Off Main Thread Painting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AsyncPanZoom.html">Asynchronous Panning and Zooming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="AdvancedLayers.html">Advanced Layers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Silk Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-vsync">Hardware Vsync</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compositor">Compositor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#out-of-process-compositors">Out-of-process Compositors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compositorvsyncdispatcher">CompositorVsyncDispatcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-displays">Multiple Displays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compositorvsyncscheduler-observer">CompositorVsyncScheduler::Observer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#geckotouchdispatcher">GeckoTouchDispatcher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-events">Input Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#widget-compositor-compositorvsyncdispatcher-geckotouchdispatcher-shutdown-procedure">Widget, Compositor, CompositorVsyncDispatcher, GeckoTouchDispatcher Shutdown Procedure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#refresh-driver">Refresh Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compressing-vsync-messages">Compressing Vsync Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-monitors">Multiple Monitors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#object-lifetime">Object Lifetime</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threads">Threads</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Graphics</a> &raquo;</li>
+        
+      <li>Silk Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/gfx/Silk.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="silk-overview">
+<h1>Silk Overview<a class="headerlink" href="#silk-overview" title="Permalink to this headline">¶</a></h1>
+<img alt="../_images/SilkArchitecture.png" src="../_images/SilkArchitecture.png" />
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>Our current architecture is to align three components to hardware vsync
+timers:</p>
+<ol class="arabic simple">
+<li><p>Compositor</p></li>
+<li><p>RefreshDriver / Painting</p></li>
+<li><p>Input Events</p></li>
+</ol>
+<p>The flow of our rendering engine is as follows:</p>
+<ol class="arabic simple">
+<li><p>Hardware Vsync event occurs on an OS specific <em>Hardware Vsync Thread</em>
+on a per monitor basis.</p></li>
+<li><p>The <em>Hardware Vsync Thread</em> attached to the monitor notifies the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatchers</span></code> and <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code>.</p></li>
+<li><p>For every Firefox window on the specific monitor, notify a
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>. The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is
+specific to one window.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> notifies a
+<code class="docutils literal notranslate"><span class="pre">CompositorWidgetVsyncObserver</span></code> when remote compositing, or a
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> when compositing in-process.</p></li>
+<li><p>If remote compositing, a vsync notification is sent from the
+<code class="docutils literal notranslate"><span class="pre">CompositorWidgetVsyncObserver</span></code> to the <code class="docutils literal notranslate"><span class="pre">VsyncBridgeChild</span></code> on the
+UI process, which sends an IPDL message to the <code class="docutils literal notranslate"><span class="pre">VsyncBridgeParent</span></code>
+on the compositor thread of the GPU process, which then dispatches to
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> notifies the Chrome
+<code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> that a vsync has occurred.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> sends IPC messages to all content
+processes to tick their respective active <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> dispatches input events on the <em>Compositor
+Thread</em>, then composites. Input events are only dispatched on the
+<em>Compositor Thread</em> on b2g.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RefreshDriver</span></code> paints on the <em>Main Thread</em>.</p></li>
+</ol>
+</div>
+<div class="section" id="hardware-vsync">
+<h2>Hardware Vsync<a class="headerlink" href="#hardware-vsync" title="Permalink to this headline">¶</a></h2>
+<p>Hardware vsync events from (1), occur on a specific <code class="docutils literal notranslate"><span class="pre">Display</span></code> Object.
+The <code class="docutils literal notranslate"><span class="pre">Display</span></code> object is responsible for enabling / disabling vsync on
+a per connected display basis. For example, if two monitors are
+connected, two <code class="docutils literal notranslate"><span class="pre">Display</span></code> objects will be created, each listening to
+vsync events for their respective displays. We require one <code class="docutils literal notranslate"><span class="pre">Display</span></code>
+object per monitor as each monitor may have different vsync rates. As a
+fallback solution, we have one global <code class="docutils literal notranslate"><span class="pre">Display</span></code> object that can
+synchronize across all connected displays. The global <code class="docutils literal notranslate"><span class="pre">Display</span></code> is
+useful if a window is positioned halfway between the two monitors. Each
+platform will have to implement a specific <code class="docutils literal notranslate"><span class="pre">Display</span></code> object to hook
+and listen to vsync events. As of this writing, both Firefox OS and OS X
+create their own hardware specific <em>Hardware Vsync Thread</em> that executes
+after a vsync has occurred. OS X creates one <em>Hardware Vsync Thread</em> per
+<code class="docutils literal notranslate"><span class="pre">CVDisplayLinkRef</span></code>. We do not currently support multiple displays, so
+we use one global <code class="docutils literal notranslate"><span class="pre">CVDisplayLinkRef</span></code> that works across all active
+displays. On Windows, we have to create a new platform <code class="docutils literal notranslate"><span class="pre">thread</span></code> that
+waits for DwmFlush(), which works across all active displays. Once the
+thread wakes up from DwmFlush(), the actual vsync timestamp is retrieved
+from DwmGetCompositionTimingInfo(), which is the timestamp that is
+actually passed into the compositor and refresh driver.</p>
+<p>When a vsync occurs on a <code class="docutils literal notranslate"><span class="pre">Display</span></code>, the <em>Hardware Vsync Thread</em>
+callback fetches all <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatchers</span></code> associated with the
+<code class="docutils literal notranslate"><span class="pre">Display</span></code>. Each <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is notified that a vsync
+has occurred with the vsync’s timestamp. It is the responsibility of the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> to notify the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> that is
+awaiting vsync notifications. The <code class="docutils literal notranslate"><span class="pre">Display</span></code> will then notify the
+associated <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code>, which should notify all
+active <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> to tick.</p>
+<p>All <code class="docutils literal notranslate"><span class="pre">Display</span></code> objects are encapsulated in a <code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> object.
+The <code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> object lives in <code class="docutils literal notranslate"><span class="pre">gfxPlatform</span></code> and is instantiated
+only on the parent process when <code class="docutils literal notranslate"><span class="pre">gfxPlatform</span></code> is created. The
+<code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> is destroyed when <code class="docutils literal notranslate"><span class="pre">gfxPlatform</span></code> is destroyed. It can
+also be destroyed when the layout frame rate pref (or other prefs that
+influence frame rate) are changed. This may mean we switch from hardware
+to software vsync (or vice versa) at runtime. During the switch, there
+may briefly be 2 vsync sources. Otherwise, there is only one
+<code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> object throughout the entire lifetime of Firefox. Each
+platform is expected to implement their own <code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> to manage
+vsync events. On OS X, this is through <code class="docutils literal notranslate"><span class="pre">CVDisplayLinkRef</span></code>. On
+Windows, it should be through <code class="docutils literal notranslate"><span class="pre">DwmGetCompositionTimingInfo</span></code>.</p>
+</div>
+<div class="section" id="compositor">
+<h2>Compositor<a class="headerlink" href="#compositor" title="Permalink to this headline">¶</a></h2>
+<p>When the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is notified of the vsync event,
+the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> associated with the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> begins execution. Since the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> executes on the <em>Hardware Vsync Thread</em>
+and the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> composites on the <code class="docutils literal notranslate"><span class="pre">CompositorThread</span></code>, the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> posts a task to the
+<code class="docutils literal notranslate"><span class="pre">CompositorThread</span></code>. The <code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent</span></code> then composites.
+The model where the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> notifies components on
+the <em>Hardware Vsync Thread</em>, and the component schedules the task on the
+appropriate thread is used everywhere.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> listens to vsync events as
+needed and stops listening to vsync when composites are no longer
+scheduled or required. Every <code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent</span></code> is associated
+and tied to one <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code>, which is
+associated with the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>. Each
+<code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent</span></code> is associated with one widget and is created
+when a new platform window or <code class="docutils literal notranslate"><span class="pre">nsBaseWidget</span></code> is created. The
+<code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent</span></code>, <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code>, and <code class="docutils literal notranslate"><span class="pre">nsBaseWidget</span></code> all have
+the same lifetimes, which are created and destroyed together.</p>
+</div>
+<div class="section" id="out-of-process-compositors">
+<h2>Out-of-process Compositors<a class="headerlink" href="#out-of-process-compositors" title="Permalink to this headline">¶</a></h2>
+<p>When compositing out-of-process, this model changes slightly. In this
+case there are effectively two observers: a UI process observer
+(<code class="docutils literal notranslate"><span class="pre">CompositorWidgetVsyncObserver</span></code>), and the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> in the GPU process. There are
+also two dispatchers: the widget dispatcher in the UI process
+(<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>), and the IPDL-based dispatcher in the
+GPU process (<code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent::NotifyVsync</span></code>). The UI process
+observer and the GPU process dispatcher are linked via an IPDL protocol
+called PVsyncBridge. <code class="docutils literal notranslate"><span class="pre">PVsyncBridge</span></code> is a top-level protocol for
+sending vsync notifications to the compositor thread in the GPU process.
+The compositor controls vsync observation through a separate actor,
+<code class="docutils literal notranslate"><span class="pre">PCompositorWidget</span></code>, which (as a subactor for
+<code class="docutils literal notranslate"><span class="pre">CompositorBridgeChild</span></code>) links the compositor thread in the GPU
+process to the main thread in the UI process.</p>
+<p>Out-of-process compositors do not go through
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> directly. Instead, the
+<code class="docutils literal notranslate"><span class="pre">CompositorWidgetDelegate</span></code> in the UI process creates one, and gives it
+a <code class="docutils literal notranslate"><span class="pre">CompositorWidgetVsyncObserver</span></code>. This observer forwards
+notifications to a Vsync I/O thread, where <code class="docutils literal notranslate"><span class="pre">VsyncBridgeChild</span></code> then
+forwards the notification again to the compositor thread in the GPU
+process. The notification is received by a <code class="docutils literal notranslate"><span class="pre">VsyncBridgeParent</span></code>. The
+GPU process uses the layers ID in the notification to find the correct
+compositor to dispatch the notification to.</p>
+</div>
+<div class="section" id="compositorvsyncdispatcher">
+<h2>CompositorVsyncDispatcher<a class="headerlink" href="#compositorvsyncdispatcher" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> executes on the <em>Hardware Vsync
+Thread</em>. It contains references to the <code class="docutils literal notranslate"><span class="pre">nsBaseWidget</span></code> it is associated
+with and has a lifetime equal to the <code class="docutils literal notranslate"><span class="pre">nsBaseWidget</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is responsible for notifying the
+<code class="docutils literal notranslate"><span class="pre">CompositorBridgeParent</span></code> that a vsync event has occurred. There can be
+multiple <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatchers</span></code> per <code class="docutils literal notranslate"><span class="pre">Display</span></code>, one
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> per window. The only responsibility of the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is to notify components when a vsync event
+has occurred, and to stop listening to vsync when no components require
+vsync events. We require one <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> per window so
+that we can handle multiple <code class="docutils literal notranslate"><span class="pre">Displays</span></code>. When compositing in-process,
+the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is attached to the CompositorWidget
+for the window. When out-of-process, it is attached to the
+CompositorWidgetDelegate, which forwards observer notifications over
+IPDL. In the latter case, its lifetime is tied to a CompositorSession
+rather than the nsIWidget.</p>
+</div>
+<div class="section" id="multiple-displays">
+<h2>Multiple Displays<a class="headerlink" href="#multiple-displays" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> has an API to switch a <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>
+from one <code class="docutils literal notranslate"><span class="pre">Display</span></code> to another <code class="docutils literal notranslate"><span class="pre">Display</span></code>. For example, when one
+window either goes into full screen mode or moves from one connected
+monitor to another. When one window moves to another monitor, we expect
+a platform specific notification to occur. The detection of when a
+window enters full screen mode or moves is not covered by Silk itself,
+but the framework is built to support this use case. The expected flow
+is that the OS notification occurs on <code class="docutils literal notranslate"><span class="pre">nsIWidget</span></code>, which retrieves the
+associated <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> then notifies the <code class="docutils literal notranslate"><span class="pre">VsyncSource</span></code> to
+switch to the correct <code class="docutils literal notranslate"><span class="pre">Display</span></code> the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> is
+connected to. Because the notification works through the <code class="docutils literal notranslate"><span class="pre">nsIWidget</span></code>,
+the actual switching of the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> to the correct
+<code class="docutils literal notranslate"><span class="pre">Display</span></code> should occur on the <em>Main Thread</em>. The current
+implementation of Silk does not handle this case and needs to be built
+out.</p>
+</div>
+<div class="section" id="compositorvsyncscheduler-observer">
+<h2>CompositorVsyncScheduler::Observer<a class="headerlink" href="#compositorvsyncscheduler-observer" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> handles the vsync
+notifications and interactions with the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>.
+When the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> requires a scheduled composite, it notifies the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> that it needs to listen to vsync.
+The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> then observes / unobserves
+vsync as needed from the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> to enable
+composites.</p>
+</div>
+<div class="section" id="geckotouchdispatcher">
+<h2>GeckoTouchDispatcher<a class="headerlink" href="#geckotouchdispatcher" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> is a singleton that resamples touch events
+to smooth out jank while tracking a user’s finger. Because input and
+composite are linked together, the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> has a reference to the
+<code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> and vice versa.</p>
+</div>
+<div class="section" id="input-events">
+<h2>Input Events<a class="headerlink" href="#input-events" title="Permalink to this headline">¶</a></h2>
+<p>One large goal of Silk is to align touch events with vsync events. On
+Firefox OS, touchscreens often have different touch scan rates than the
+display refreshes. A Flame device has a touch refresh rate of 75 HZ,
+while a Nexus 4 has a touch refresh rate of 100 HZ, while the device’s
+display refresh rate is 60HZ. When a vsync event occurs, we resample
+touch events, and then dispatch the resampled touch event to APZ. Touch
+events on Firefox OS occur on a <em>Touch Input Thread</em> whereas they are
+processed by APZ on the <em>APZ Controller Thread</em>. We use <a class="reference external" href="https://web.archive.org/web/20200909082458/http://www.masonchang.com/blog/2014/8/25/androids-touch-resampling-algorithm">Google
+Android’s touch
+resampling</a>
+algorithm to resample touch events.</p>
+<p>Currently, we have a strict ordering between Composites and touch
+events. When a touch event occurs on the <em>Touch Input Thread</em>, we store
+the touch event in a queue. When a vsync event occurs, the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> notifies the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> of a vsync
+event, which notifies the <code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> processes the touch event first on the <em>APZ
+Controller Thread</em>, which is the same as the <em>Compositor Thread</em> on b2g,
+then the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> finishes compositing. We require this strict
+ordering because if a vsync notification is dispatched to both the
+<code class="docutils literal notranslate"><span class="pre">Compositor</span></code> and <code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> at the same time, a race
+condition occurs between processing the touch event and therefore
+position versus compositing. In practice, this creates very janky
+scrolling. As of this writing, we have not analyzed input events on
+desktop platforms.</p>
+<p>One slight quirk is that input events can start a composite, for example
+during a scroll and after the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> is no longer listening to
+vsync events. In these cases, we notify the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> to observe
+vsync so that it dispatches touch events. If touch events were not
+dispatched, and since the <code class="docutils literal notranslate"><span class="pre">Compositor</span></code> is not listening to vsync
+events, the touch events would never be dispatched. The
+<code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> handles this case by always forcing the
+<code class="docutils literal notranslate"><span class="pre">Compositor</span></code> to listen to vsync events while touch events are
+occurring.</p>
+</div>
+<div class="section" id="widget-compositor-compositorvsyncdispatcher-geckotouchdispatcher-shutdown-procedure">
+<h2>Widget, Compositor, CompositorVsyncDispatcher, GeckoTouchDispatcher Shutdown Procedure<a class="headerlink" href="#widget-compositor-compositorvsyncdispatcher-geckotouchdispatcher-shutdown-procedure" title="Permalink to this headline">¶</a></h2>
+<p>When the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/0df249a0e4d3/widget/nsBaseWidget.cpp#l182">nsBaseWidget shuts
+down</a>
+- It calls nsBaseWidget::DestroyCompositor on the <em>Gecko Main Thread</em>.
+During nsBaseWidget::DestroyCompositor, it first destroys the
+CompositorBridgeChild. CompositorBridgeChild sends a sync IPC call to
+CompositorBridgeParent::RecvStop, which calls
+<a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/ab0490972e1e/gfx/layers/ipc/CompositorParent.cpp#l509">CompositorBridgeParent::Destroy</a>.
+During this time, the <em>main thread</em> is blocked on the parent process.
+CompositorBridgeParent::RecvStop runs on the <em>Compositor thread</em> and
+cleans up some resources, including setting the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> to nullptr.
+CompositorBridgeParent::RecvStop also explicitly keeps the
+CompositorBridgeParent alive and posts another task to run
+CompositorBridgeParent::DeferredDestroy on the Compositor loop so that
+all ipdl code can finish executing. The
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> also unobserves from vsync and
+cancels any pending composite tasks. Once
+CompositorBridgeParent::RecvStop finishes, the <em>main thread</em> in the
+parent process continues shutting down the nsBaseWidget.</p>
+<p>At the same time, the <em>Compositor thread</em> is executing tasks until
+CompositorBridgeParent::DeferredDestroy runs, which flushes the
+compositor message loop. Now we have two tasks as both the nsBaseWidget
+releases a reference to the Compositor on the <em>main thread</em> during
+destruction and the CompositorBridgeParent::DeferredDestroy releases a
+reference to the CompositorBridgeParent on the <em>Compositor Thread</em>.
+Finally, the CompositorBridgeParent itself is destroyed on the <em>main
+thread</em> once both references are gone due to explicit <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/50b95032152c/gfx/layers/ipc/CompositorParent.h#l148">main thread
+destruction</a>.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code>, any accesses to the
+widget after nsBaseWidget::DestroyCompositor executes are invalid. Any
+accesses to the compositor between the time the
+nsBaseWidget::DestroyCompositor runs and the
+CompositorVsyncScheduler::Observer’s destructor runs aren’t safe yet a
+hardware vsync event could occur between these times. Since any tasks
+posted on the Compositor loop after
+CompositorBridgeParent::DeferredDestroy is posted are invalid, we make
+sure that no vsync tasks can be posted once
+CompositorBridgeParent::RecvStop executes and DeferredDestroy is posted
+on the Compositor thread. When the sync call to
+CompositorBridgeParent::RecvStop executes, we explicitly set the
+CompositorVsyncScheduler::Observer to null to prevent vsync
+notifications from occurring. If vsync notifications were allowed to
+occur, since the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code>’s vsync
+notification executes on the <em>hardware vsync thread</em>, it would post a
+task to the Compositor loop and may execute after
+CompositorBridgeParent::DeferredDestroy. Thus, we explicitly shut down
+vsync events in the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> during nsBaseWidget::Shutdown to
+prevent any vsync tasks from executing after
+CompositorBridgeParent::DeferredDestroy.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> may be destroyed on either the <em>main
+thread</em> or <em>Compositor Thread</em>, since both the nsBaseWidget and
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> race to destroy on different
+threads. nsBaseWidget is destroyed on the <em>main thread</em> and releases a
+reference to the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> during destruction. The
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> has a race to be destroyed either
+during CompositorBridgeParent shutdown or from the
+<code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> which is destroyed on the main thread with
+<a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/21567e9a6e40/xpcom/base/ClearOnShutdown.h#l15">ClearOnShutdown</a>.
+Whichever object, the CompositorBridgeParent or the
+<code class="docutils literal notranslate"><span class="pre">GeckoTouchDispatcher</span></code> is destroyed last will hold the last reference
+to the <code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code>, which destroys the object.</p>
+</div>
+<div class="section" id="refresh-driver">
+<h2>Refresh Driver<a class="headerlink" href="#refresh-driver" title="Permalink to this headline">¶</a></h2>
+<p>The Refresh Driver is ticked from a <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/ab0490972e1e/layout/base/nsRefreshDriver.cpp#l11">single active
+timer</a>.
+The assumption is that there are multiple <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> connected
+to a single <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>. There are two <code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code>: an active
+and an inactive <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>. Each Tab has its own
+<code class="docutils literal notranslate"><span class="pre">RefreshDriver</span></code>, which connects to one of the global
+<code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code>. The <code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code> execute on the <em>Main Thread</em>
+and tick their connected <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code>. We do not want to break
+this model of multiple <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> per a set of two global
+<code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code>. Each <code class="docutils literal notranslate"><span class="pre">RefreshDriver</span></code> switches between the active
+and inactive <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>.</p>
+<p>Instead, we create a new <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>, the <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>
+which ticks based on vsync messages. We replace the current active timer
+with a <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>. All tabs will then tick based on this new
+active timer. Since the <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> has a lifetime of the process,
+we only need to create a single <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> per
+<code class="docutils literal notranslate"><span class="pre">Display</span></code> when Firefox starts. Even if we do not have any content
+processes, the Chrome process will still need a <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>,
+thus we can associate the <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> with each
+<code class="docutils literal notranslate"><span class="pre">Display</span></code>.</p>
+<p>When Firefox starts, we initially create a new <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code> in
+the Chrome process. The <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code> will listen to vsync
+notifications from <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> on the global
+<code class="docutils literal notranslate"><span class="pre">Display</span></code>. When nsRefreshDriver::Shutdown executes, it will delete the
+<code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>. This creates a problem as all the
+<code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code> are currently manually memory managed whereas
+<code class="docutils literal notranslate"><span class="pre">VsyncObservers</span></code> are ref counted. To work around this problem, we
+create a new <code class="docutils literal notranslate"><span class="pre">RefreshDriverVsyncObserver</span></code> as an inner class to
+<code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>, which actually receives vsync notifications. It
+then ticks the <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> inside <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>.</p>
+<p>With Content processes, the start up process is more complicated. We
+send vsync IPC messages via the use of the PBackground thread on the
+parent process, which allows us to send messages from the Parent
+process’ without waiting on the <em>main thread</em>. This sends messages from
+the Parent::<em>PBackground Thread</em> to the Child::<em>Main Thread</em>. The
+<em>main thread</em> receiving IPC messages on the content process is
+acceptable because <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> must execute on the <em>main thread</em>.
+However, there is some amount of time required to setup the IPC
+connection upon process creation and during this time, the
+<code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> must tick to set up the process. To get around this,
+we initially use software <code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code> that already exist during
+content process startup and swap in the <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code> once the
+IPC connection is created.</p>
+<p>During nsRefreshDriver::ChooseTimer, we create an async PBackground IPC
+open request to create a <code class="docutils literal notranslate"><span class="pre">VsyncParent</span></code> and <code class="docutils literal notranslate"><span class="pre">VsyncChild</span></code>. At the same
+time, we create a software <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> and tick the
+<code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> as normal. Once the PBackground callback is executed
+and an IPC connection exists, we swap all <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> currently
+associated with the active <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> and swap the
+<code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code> to use the <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code>. Since all
+interactions on the content process occur on the main thread, there are
+no need for locks. The <code class="docutils literal notranslate"><span class="pre">VsyncParent</span></code> listens to vsync events through
+the <code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimerDispatcher</span></code> on the parent side and sends vsync
+IPC messages to the <code class="docutils literal notranslate"><span class="pre">VsyncChild</span></code>. The <code class="docutils literal notranslate"><span class="pre">VsyncChild</span></code> notifies the
+<code class="docutils literal notranslate"><span class="pre">VsyncRefreshTimer</span></code> on the content process.</p>
+<p>During the shutdown process of the content process, ActorDestroy is
+called on the <code class="docutils literal notranslate"><span class="pre">VsyncChild</span></code> and <code class="docutils literal notranslate"><span class="pre">VsyncParent</span></code> due to the normal
+PBackground shutdown process. Once ActorDestroy is called, no IPC
+messages should be sent across the channel. After ActorDestroy is
+called, the IPDL machinery will delete the <strong>VsyncParent/Child</strong> pair.
+The <code class="docutils literal notranslate"><span class="pre">VsyncParent</span></code>, due to being a <code class="docutils literal notranslate"><span class="pre">VsyncObserver</span></code>, is ref counted.
+After <code class="docutils literal notranslate"><span class="pre">VsyncParent::ActorDestroy</span></code> is called, it unregisters itself
+from the <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code>, which holds the last reference
+to the <code class="docutils literal notranslate"><span class="pre">VsyncParent</span></code>, and the object will be deleted.</p>
+<p>Thus the overall flow during normal execution is:</p>
+<ol class="arabic simple">
+<li><p>VsyncSource::Display::RefreshTimerVsyncDispatcher receives a Vsync
+notification from the OS in the parent process.</p></li>
+<li><p>RefreshTimerVsyncDispatcher notifies
+VsyncRefreshTimer::RefreshDriverVsyncObserver that a vsync occurred on
+the parent process on the hardware vsync thread.</p></li>
+<li><p>RefreshTimerVsyncDispatcher notifies the VsyncParent on the hardware
+vsync thread that a vsync occurred.</p></li>
+<li><p>The VsyncRefreshTimer::RefreshDriverVsyncObserver in the parent
+process posts a task to the main thread that ticks the refresh
+drivers.</p></li>
+<li><p>VsyncParent posts a task to the PBackground thread to send a vsync
+IPC message to VsyncChild.</p></li>
+<li><p>VsyncChild receive a vsync notification on the content process on the
+main thread and ticks their respective RefreshDrivers.</p></li>
+</ol>
+</div>
+<div class="section" id="compressing-vsync-messages">
+<h2>Compressing Vsync Messages<a class="headerlink" href="#compressing-vsync-messages" title="Permalink to this headline">¶</a></h2>
+<p>Vsync messages occur quite often and the <em>main thread</em> can be busy for
+long periods of time due to JavaScript. Consistently sending vsync
+messages to the refresh driver timer can flood the <em>main thread</em> with
+refresh driver ticks, causing even more delays. To avoid this problem,
+we compress vsync messages on both the parent and child processes.</p>
+<p>On the parent process, newer vsync messages update a vsync timestamp but
+do not actually queue any tasks on the <em>main thread</em>. Once the parent
+process’ <em>main thread</em> executes the refresh driver tick, it uses the
+most updated vsync timestamp to tick the refresh driver. After the
+refresh driver has ticked, one single vsync message is queued for
+another refresh driver tick task. On the content process, the IPDL
+<code class="docutils literal notranslate"><span class="pre">compress</span></code> keyword automatically compresses IPC messages.</p>
+</div>
+<div class="section" id="multiple-monitors">
+<h2>Multiple Monitors<a class="headerlink" href="#multiple-monitors" title="Permalink to this headline">¶</a></h2>
+<p>In order to have multiple monitor support for the <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code>, we
+have multiple active <code class="docutils literal notranslate"><span class="pre">RefreshTimers</span></code>. Each <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> is
+associated with a specific <code class="docutils literal notranslate"><span class="pre">Display</span></code> via an id and tick when it’s
+respective <code class="docutils literal notranslate"><span class="pre">Display</span></code> vsync occurs. We have <strong>N RefreshTimers</strong>, where
+N is the number of connected displays. Each <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> still has
+multiple <code class="docutils literal notranslate"><span class="pre">RefreshDrivers</span></code>.</p>
+<p>When a tab or window changes monitors, the <code class="docutils literal notranslate"><span class="pre">nsIWidget</span></code> receives a
+display changed notification. Based on which display the window is on,
+the window switches to the correct <code class="docutils literal notranslate"><span class="pre">RefreshTimerVsyncDispatcher</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncDispatcher</span></code> on the parent process based on the display
+id. Each <code class="docutils literal notranslate"><span class="pre">TabParent</span></code> should also send a notification to their child.
+Each <code class="docutils literal notranslate"><span class="pre">TabChild</span></code>, given the display ID, switches to the correct
+<code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> associated with the display ID. When each display vsync
+occurs, it sends one IPC message to notify vsync. The vsync message
+contains a display ID, to tick the appropriate <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code> on the
+content process. There is still only one <strong>VsyncParent/VsyncChild</strong>
+pair, just each vsync notification will include a display ID, which maps
+to the correct <code class="docutils literal notranslate"><span class="pre">RefreshTimer</span></code>.</p>
+</div>
+<div class="section" id="object-lifetime">
+<h2>Object Lifetime<a class="headerlink" href="#object-lifetime" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>CompositorVsyncDispatcher - Lives as long as the nsBaseWidget
+associated with the VsyncDispatcher</p></li>
+<li><p>CompositorVsyncScheduler::Observer - Lives and dies the same time as
+the CompositorBridgeParent.</p></li>
+<li><p>RefreshTimerVsyncDispatcher - As long as the associated display
+object, which is the lifetime of Firefox.</p></li>
+<li><p>VsyncSource - Lives as long as the gfxPlatform on the chrome process,
+which is the lifetime of Firefox.</p></li>
+<li><p>VsyncParent/VsyncChild - Lives as long as the content process</p></li>
+<li><p>RefreshTimer - Lives as long as the process</p></li>
+</ol>
+</div>
+<div class="section" id="threads">
+<h2>Threads<a class="headerlink" href="#threads" title="Permalink to this headline">¶</a></h2>
+<p>All <code class="docutils literal notranslate"><span class="pre">VsyncObservers</span></code> are notified on the <em>Hardware Vsync Thread</em>. It
+is the responsibility of the <code class="docutils literal notranslate"><span class="pre">VsyncObservers</span></code> to post tasks to their
+respective correct thread. For example, the
+<code class="docutils literal notranslate"><span class="pre">CompositorVsyncScheduler::Observer</span></code> will be notified on the <em>Hardware
+Vsync Thread</em>, and post a task to the <em>Compositor Thread</em> to do the
+actual composition.</p>
+<ol class="arabic simple">
+<li><p>Compositor Thread - Nothing changes</p></li>
+<li><p>Main Thread - PVsyncChild receives IPC messages on the main thread.
+We also enable/disable vsync on the main thread.</p></li>
+<li><p>PBackground Thread - Creates a connection from the PBackground thread
+on the parent process to the main thread in the content process.</p></li>
+<li><p>Hardware Vsync Thread - Every platform is different, but we always
+have the concept of a hardware vsync thread. Sometimes this is
+actually created by the host OS. On Windows, we have to create a
+separate platform thread that blocks on DwmFlush().</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../devtools/index.html" class="btn btn-neutral float-right" title="Firefox DevTools Contributor Docs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="AdvancedLayers.html" class="btn btn-neutral float-left" title="Advanced Layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

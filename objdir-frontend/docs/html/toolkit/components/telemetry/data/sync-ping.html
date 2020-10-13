@@ -1,0 +1,697 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>“sync” ping &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="“third-party-modules” ping" href="third-party-modules-ping.html" />
+    <link rel="prev" title="“prio” ping" href="prio-ping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Data documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="common-ping.html">Common ping format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="environment.html">Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="main-ping.html">“main” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crash-ping.html">Crash ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backgroundhangmonitor-ping.html">“backgroundhangmonitor” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="anonymous-ping.html">“anonymous” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="first-shutdown-ping.html">“first-shutdown” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="activation-ping.html">“activation” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="addons-malware-ping.html">Add-ons malware ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core-ping.html">“core” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coverage-ping.html">“coverage” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="default-browser-ping.html">“default-browser” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-ping.html">“deletion” ping (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-request-ping.html">“deletion-request” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="downgrade-ping.html">“downgrade” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event-ping.html">“event” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="health-ping.html">“health” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="heartbeat-ping.html">“heartbeat” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install-ping.html">Install Ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="launcher-process-failure-ping.html">Launcher Process Failure ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules-ping.html">“modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="new-profile-ping.html">“new-profile” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prio-ping.html">“prio” ping</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">“sync” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="third-party-modules-ping.html">“third-party-modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uitour-ping.html">“uitour-tag” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="update-ping.html">“update” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xfocsp-error-report-ping.html">“xfocsp-error-report” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ecosystem-telemetry.html">Ecosystem Telemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Data documentation</a> &raquo;</li>
+        
+      <li>“sync” ping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/data/sync-ping.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sync-ping">
+<h1>“sync” ping<a class="headerlink" href="#sync-ping" title="Permalink to this headline">¶</a></h1>
+<p>This is an aggregated format that contains information about each sync that occurred during a timeframe. It is submitted every 12 hours, and on browser shutdown, but only if the <code class="docutils literal notranslate"><span class="pre">syncs</span></code> property would not be empty. The ping does not contain the environment block, nor the clientId.</p>
+<p>Each item in the <code class="docutils literal notranslate"><span class="pre">syncs</span></code> property is generated after a sync is completed, for both successful and failed syncs, and contains measurements pertaining to sync performance and error information.</p>
+<p>A JSON-schema document describing the exact format of the ping’s payload property can be found at <a class="reference external" href="https://searchfox.org/mozilla-central/source/services/sync/tests/unit/sync_ping_schema.json">services/sync/tests/unit/sync_ping_schema.json</a>.</p>
+<p>Structure:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">version</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;sync&quot;</span><span class="p">,</span>
+  <span class="p">...</span> <span class="nx">common</span> <span class="nx">ping</span> <span class="nx">data</span>
+  <span class="nx">payload</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">version</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">os</span> <span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="c1">// os data from the current telemetry environment. OS specific, but typically includes name, version and locale.</span>
+    <span class="nx">discarded</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span> <span class="nx">count</span><span class="o">&gt;</span> <span class="c1">// Number of syncs discarded -- left out if zero.</span>
+    <span class="nx">why</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Why did we submit the ping? Either &quot;shutdown&quot;, &quot;schedule&quot;, or &quot;idchanged&quot;.</span>
+    <span class="nx">uid</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Hashed FxA unique ID, or string of 32 zeros. If this changes between syncs, the payload is submitted.</span>
+    <span class="nx">deviceID</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Hashed FxA Device ID, hex string of 64 characters, not included if the user is not logged in. If this changes between syncs, the payload is submitted.</span>
+    <span class="nx">sessionStartDate</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">ISO</span> <span class="nx">date</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Hourly precision, ISO date in local time</span>
+    <span class="c1">// Array of recorded syncs. The ping is not submitted if this would be empty</span>
+    <span class="nx">syncs</span><span class="o">:</span> <span class="p">[{</span>
+      <span class="nx">when</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span> <span class="nx">milliseconds</span> <span class="nx">since</span> <span class="nx">epoch</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="nx">took</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span> <span class="nx">duration</span> <span class="k">in</span> <span class="nx">milliseconds</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="nx">didLogin</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">bool</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, is this the first sync after login? Excluded if we don&#39;t know.</span>
+      <span class="nx">why</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, why the sync occurred, excluded if we don&#39;t know.</span>
+
+      <span class="c1">// Optional, excluded if there was no error.</span>
+      <span class="nx">failureReason</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// &quot;httperror&quot;, &quot;networkerror&quot;, &quot;shutdownerror&quot;, etc.</span>
+        <span class="nx">code</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Only present for &quot;httperror&quot; and &quot;networkerror&quot;.</span>
+        <span class="nx">error</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Only present for &quot;othererror&quot; and &quot;unexpectederror&quot;.</span>
+        <span class="nx">from</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, and only present for &quot;autherror&quot;.</span>
+      <span class="p">},</span>
+
+      <span class="c1">// Optional, excluded if we couldn&#39;t get a valid uid or local device id</span>
+      <span class="nx">devices</span><span class="o">:</span> <span class="p">[{</span>
+        <span class="nx">os</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// OS string as reported by Services.appinfo.OS, if known</span>
+        <span class="nx">version</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Firefox version, as reported by Services.appinfo.version if known</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Hashed FxA device id for device</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// broad device &quot;type&quot;, as reported by fxa (&quot;mobile&quot;, &quot;tv&quot;, etc).</span>
+        <span class="nx">syncID</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Hashed Sync device id for device, if the user is a sync user.</span>
+      <span class="p">}],</span>
+
+      <span class="c1">// Internal sync status information. Omitted if it would be empty.</span>
+      <span class="nx">status</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">sync</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The value of the Status.sync property, unless it indicates success.</span>
+        <span class="nx">service</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The value of the Status.service property, unless it indicates success.</span>
+      <span class="p">},</span>
+      <span class="c1">// Information about each engine&#39;s sync.</span>
+      <span class="nx">engines</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// &quot;bookmarks&quot;, &quot;tabs&quot;, etc.</span>
+          <span class="nx">took</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span> <span class="nx">duration</span> <span class="k">in</span> <span class="nx">milliseconds</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, values of 0 are omitted.</span>
+
+          <span class="nx">status</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The value of Status.engines, if it holds a non-success value.</span>
+
+          <span class="c1">// Optional, excluded if all items would be 0. A missing item indicates a value of 0.</span>
+          <span class="nx">incoming</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">applied</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of records applied</span>
+            <span class="nx">succeeded</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of records that applied without error</span>
+            <span class="nx">failed</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of records that failed to apply</span>
+            <span class="nx">newFailed</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of records that failed for the first time this sync</span>
+            <span class="nx">reconciled</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of records that were reconciled</span>
+          <span class="p">},</span>
+
+          <span class="c1">// Optional, excluded if it would be empty. Records that would be</span>
+          <span class="c1">// empty (e.g. 0 sent and 0 failed) are omitted.</span>
+          <span class="nx">outgoing</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nx">sent</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of outgoing records sent. Zero values are omitted.</span>
+              <span class="nx">failed</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number that failed to send. Zero values are omitted.</span>
+            <span class="p">}</span>
+          <span class="p">],</span>
+          <span class="c1">// Optional, excluded if there were no errors</span>
+          <span class="nx">failureReason</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="c1">// Same as above.</span>
+
+          <span class="c1">// Timings and counts for detailed steps that the engine reported</span>
+          <span class="c1">// as part of its sync. Optional; omitted if the engine didn&#39;t</span>
+          <span class="c1">// report any extra steps.</span>
+          <span class="nx">steps</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The step name.</span>
+            <span class="nx">took</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span> <span class="nx">duration</span> <span class="k">in</span> <span class="nx">milliseconds</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Omitted if 0.</span>
+            <span class="c1">// Optional, extra named counts (e.g., number of items handled</span>
+            <span class="c1">// in this step). Omitted if the engine didn&#39;t report extra</span>
+            <span class="c1">// counts.</span>
+            <span class="nx">counts</span><span class="o">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The counter name.</span>
+                <span class="nx">count</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The counter value.</span>
+              <span class="p">},</span>
+            <span class="p">],</span>
+          <span class="p">},</span>
+
+          <span class="c1">// Optional, excluded if it would be empty or if the engine cannot</span>
+          <span class="c1">// or did not run validation on itself.</span>
+          <span class="nx">validation</span><span class="o">:</span> <span class="p">{</span>
+            <span class="c1">// Optional validator version, default of 0.</span>
+            <span class="nx">version</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span>
+            <span class="nx">checked</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span>
+            <span class="nx">took</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">non</span><span class="o">-</span><span class="nx">monotonic</span> <span class="nx">integer</span> <span class="nx">duration</span> <span class="k">in</span> <span class="nx">milliseconds</span><span class="o">&gt;</span><span class="p">,</span>
+            <span class="c1">// Entries with a count of 0 are excluded, the array is excluded if no problems are found.</span>
+            <span class="nx">problems</span><span class="o">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The problem identified.</span>
+                <span class="nx">count</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Number of times it occurred.</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="c1">// Format is same as above, this is only included if we tried and failed</span>
+            <span class="c1">// to run validation, and if it&#39;s present, all other fields in this object are optional.</span>
+            <span class="nx">failureReason</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">],</span>
+      <span class="c1">// Information about any storage migrations that have occurred. Omitted if it would be empty.</span>
+      <span class="nx">migrations</span><span class="o">:</span> <span class="p">[</span>
+        <span class="c1">// See the section on the `migrations` array for detailed documentation on what may appear here.</span>
+        <span class="p">{</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span> <span class="nx">identifier</span><span class="o">&gt;</span><span class="p">,</span>
+          <span class="c1">// per-type data</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}],</span>
+    <span class="c1">// The &quot;node type&quot; as reported by the token server. This will not change</span>
+    <span class="c1">// from sync to sync, so is reported once per ping. Optional because it</span>
+    <span class="c1">// will not appear if the token server omits this information, but in</span>
+    <span class="c1">// general, we will expect all &quot;new&quot; pings to have it.</span>
+    <span class="nx">syncNodeType</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">events</span><span class="o">:</span> <span class="p">[</span>
+      <span class="nx">event_array</span> <span class="c1">// See events below.</span>
+    <span class="p">],</span>
+    <span class="nx">histograms</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span> <span class="c1">// See histograms below</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="info">
+<h2>info<a class="headerlink" href="#info" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="discarded">
+<h3>discarded<a class="headerlink" href="#discarded" title="Permalink to this headline">¶</a></h3>
+<p>The ping may only contain a certain number of entries in the <code class="docutils literal notranslate"><span class="pre">&quot;syncs&quot;</span></code> array, currently 500 (it is determined by the <code class="docutils literal notranslate"><span class="pre">&quot;services.sync.telemetry.maxPayloadCount&quot;</span></code> preference). Entries beyond this are discarded, and recorded in the discarded count.</p>
+</div>
+<div class="section" id="syncs-took">
+<h3>syncs.took<a class="headerlink" href="#syncs-took" title="Permalink to this headline">¶</a></h3>
+<p>These values should be monotonic. If we can’t get a monotonic timestamp, -1 will be reported on the payload, and the values will be omitted from the engines. Additionally, the value will be omitted from an engine if it would be 0 (either due to timer inaccuracy or finishing instantaneously).</p>
+</div>
+<div class="section" id="uid">
+<h3>uid<a class="headerlink" href="#uid" title="Permalink to this headline">¶</a></h3>
+<p>This property containing a hash of the FxA account identifier, which is a 32 character hexadecimal string. In the case that we are unable to authenticate with FxA and have never authenticated in the past, it will be a placeholder string consisting of 32 repeated <code class="docutils literal notranslate"><span class="pre">0</span></code> characters.</p>
+</div>
+<div class="section" id="syncs-why">
+<h3>syncs.why<a class="headerlink" href="#syncs-why" title="Permalink to this headline">¶</a></h3>
+<p>One of the following values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">startup</span></code>: This is the first sync triggered after browser startup.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">schedule</span></code>: This is a sync triggered because it has been too long since the last sync.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">score</span></code>: This sync is triggered by a high score value one of sync’s trackers, indicating that many changes have occurred since the last sync.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: The user manually triggered the sync.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabs</span></code>: The user opened the synced tabs sidebar, which triggers a sync.</p></li>
+</ul>
+</div>
+<div class="section" id="syncs-status">
+<h3>syncs.status<a class="headerlink" href="#syncs-status" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">engine.status</span></code>, <code class="docutils literal notranslate"><span class="pre">payload.status.sync</span></code>, and <code class="docutils literal notranslate"><span class="pre">payload.status.service</span></code> properties are sync error codes, which are listed in <a class="reference external" href="https://searchfox.org/mozilla-central/source/services/sync/modules/constants.js">services/sync/modules/constants.js</a>, and success values are not reported.</p>
+</div>
+<div class="section" id="syncs-failurereason">
+<h3>syncs.failureReason<a class="headerlink" href="#syncs-failurereason" title="Permalink to this headline">¶</a></h3>
+<p>Stores error information, if any is present. Always contains the “name” property, which identifies the type of error it is. The types can be.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">httperror</span></code>: Indicates that we received an HTTP error response code, but are unable to be more specific about the error. Contains the following properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: Integer HTTP status code.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nserror</span></code>: Indicates that an exception with the provided error code caused sync to fail.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: The nsresult error code (integer).</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shutdownerror</span></code>: Indicates that the sync failed because we shut down before completion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">autherror</span></code>: Indicates an unrecoverable authentication error.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span></code>: Where the authentication error occurred, one of the following values: <code class="docutils literal notranslate"><span class="pre">tokenserver</span></code>, <code class="docutils literal notranslate"><span class="pre">fxaccounts</span></code>, or <code class="docutils literal notranslate"><span class="pre">hawkclient</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">othererror</span></code>: Indicates that it is a sync error code that we are unable to give more specific information on. As with the <code class="docutils literal notranslate"><span class="pre">syncStatus</span></code> property, it is a sync error code, which are listed in <a class="reference external" href="https://searchfox.org/mozilla-central/source/services/sync/modules/constants.js">services/sync/modules/constants.js</a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code>: String identifying which error was present.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unexpectederror</span></code>: Indicates that some other error caused sync to fail, typically an uncaught exception.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">error</span></code>: The message provided by the error.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sqlerror</span></code>: Indicates that we received a <code class="docutils literal notranslate"><span class="pre">mozIStorageError</span></code> from a database query.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code</span></code>: Value of the <code class="docutils literal notranslate"><span class="pre">error.result</span></code> property, one of the constants listed <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/MozIStorageError#Constants">here</a>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="syncs-engine-name">
+<h3>syncs.engine.name<a class="headerlink" href="#syncs-engine-name" title="Permalink to this headline">¶</a></h3>
+<p>Third-party engines are not reported, so only the following values are allowed: <code class="docutils literal notranslate"><span class="pre">addons</span></code>, <code class="docutils literal notranslate"><span class="pre">bookmarks</span></code>, <code class="docutils literal notranslate"><span class="pre">clients</span></code>, <code class="docutils literal notranslate"><span class="pre">forms</span></code>, <code class="docutils literal notranslate"><span class="pre">history</span></code>, <code class="docutils literal notranslate"><span class="pre">passwords</span></code>, <code class="docutils literal notranslate"><span class="pre">prefs</span></code>, and <code class="docutils literal notranslate"><span class="pre">tabs</span></code>.</p>
+</div>
+<div class="section" id="syncs-engine-validation-problems">
+<h3>syncs.engine.validation.problems<a class="headerlink" href="#syncs-engine-validation-problems" title="Permalink to this headline">¶</a></h3>
+<p>For engines that can run validation on themselves, an array of objects describing validation errors that have occurred. Items that would have a count of 0 are excluded. Each engine will have its own set of items that it might put in the <code class="docutils literal notranslate"><span class="pre">name</span></code> field, but there are a finite number. See <code class="docutils literal notranslate"><span class="pre">BookmarkProblemData.getSummary</span></code> in <a class="reference external" href="https://searchfox.org/mozilla-central/source/services/sync/modules/bookmark_validator.js">services/sync/modules/bookmark_validator.js</a> for an example.</p>
+</div>
+<div class="section" id="syncs-devices">
+<h3>syncs.devices<a class="headerlink" href="#syncs-devices" title="Permalink to this headline">¶</a></h3>
+<p>The list of remote devices associated with this account, as reported by the clients collection. The ID of each device is hashed using the same algorithm as the local id.</p>
+</div>
+</div>
+<div class="section" id="events-in-the-sync-ping">
+<h2>Events in the “sync” ping<a class="headerlink" href="#events-in-the-sync-ping" title="Permalink to this headline">¶</a></h2>
+<p>The sync ping includes events in the same format as they are included in the
+main ping, see <a class="reference internal" href="../collection/events.html#eventtelemetry"><span class="std std-ref">Events</span></a>.</p>
+<p>All events submitted as part of the sync ping which already include the “extra”
+object (the 6th parameter of the event array described in the event telemetry
+documentation) may also include a “serverTime” parameter, which the most recent
+unix timestamp sent from the sync server (as a string). This arrives in the
+<code class="docutils literal notranslate"><span class="pre">X-Weave-Timestamp</span></code> HTTP header, and may be omitted in cases where the client
+has not yet made a request to the server, or doesn’t have it for any other
+reason. It is included to improve flow analysis across multiple clients.</p>
+<p>Every event recorded in this ping will have a category of <code class="docutils literal notranslate"><span class="pre">sync</span></code>. The following
+events are defined, categorized by the event method.</p>
+</div>
+<div class="section" id="histograms-in-the-sync-ping">
+<h2>Histograms in the “sync” ping<a class="headerlink" href="#histograms-in-the-sync-ping" title="Permalink to this headline">¶</a></h2>
+<p>The sync ping includes histograms relating to measurements of password manager usage.
+These histograms are duplicated in the main ping. Histograms are only included in a ping if they have been set by the pwmgr code.
+Currently, the histograms that can be included are:</p>
+<p>PWMGR_BLOCKLIST_NUM_SITES
+PWMGR_FORM_AUTOFILL_RESULT
+PWMGR_LOGIN_LAST_USED_DAYS
+PWMGR_LOGIN_PAGE_SAFETY
+PWMGR_NUM_PASSWORDS_PER_HOSTNAME
+PWMGR_NUM_SAVED_PASSWORDS
+PWMGR_PROMPT_REMEMBER_ACTION
+PWMGR_PROMPT_UPDATE_ACTION
+PWMGR_SAVING_ENABLED</p>
+<p>Histograms are objects with the following 6 properties:
+- min - minimum bucket size
+- max - maximum bucket size
+- histogram_type
+- counts - array representing contents of the buckets in the histogram
+- ranges - array with calculated bucket sizes</p>
+<div class="section" id="sendcommand">
+<h3>sendcommand<a class="headerlink" href="#sendcommand" title="Permalink to this headline">¶</a></h3>
+<p>Records that Sync wrote a remote “command” to another client. These commands
+cause that other client to take some action, such as resetting Sync on that
+client, or opening a new URL.</p>
+<ul class="simple">
+<li><p>object: The specific command being written.</p></li>
+<li><p>value: Not used (ie, <code class="docutils literal notranslate"><span class="pre">null</span></code>)</p></li>
+<li><p>extra: An object with the following attributes:</p>
+<ul>
+<li><p>deviceID: A GUID which identifies the device the command is being sent to.</p></li>
+<li><dl class="simple">
+<dt>flowID: A GUID which uniquely identifies this command invocation. This GUID</dt><dd><p>is the same for every device the tab is sent to.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>streamID: A GUID which uniquely identifies this command invocation’s</dt><dd><p>specific target. This GUID is unique for every device the tab is
+sent to (new in Firefox 79).</p>
+</dd>
+</dl>
+</li>
+<li><p>serverTime: (optional) Most recent server timestamp, as described above.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="processcommand">
+<h3>processcommand<a class="headerlink" href="#processcommand" title="Permalink to this headline">¶</a></h3>
+<p>Records that Sync processed a remote “command” previously sent by another
+client. This is logically the “other end” of <code class="docutils literal notranslate"><span class="pre">sendcommand</span></code>.</p>
+<ul class="simple">
+<li><p>object: The specific command being processed.</p></li>
+<li><p>value: Not used (ie, <code class="docutils literal notranslate"><span class="pre">null</span></code>)</p></li>
+<li><p>extra: An object with the following attributes:</p>
+<ul>
+<li><dl class="simple">
+<dt>flowID: A GUID which uniquely identifies this command invocation. The value</dt><dd><p>for this GUID will be the same as the flowID sent to the client via
+<code class="docutils literal notranslate"><span class="pre">sendcommand</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>streamID: A GUID which uniquely identifies this command invocation’s</dt><dd><p>specific target. The value for this GUID will be the same as the
+streamID sent to the client via <code class="docutils literal notranslate"><span class="pre">sendcommand</span></code> (new in Firefox 79).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>reason: A string value of either <code class="docutils literal notranslate"><span class="pre">&quot;poll&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;push&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;push-missed&quot;</span></code></dt><dd><p>representing an explanation for why the command is being processed.</p>
+</dd>
+</dl>
+</li>
+<li><p>serverTime: (optional) Most recent server timestamp, as described above.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-migrations-array">
+<h2>The <code class="docutils literal notranslate"><span class="pre">migrations</span></code> Array<a class="headerlink" href="#the-migrations-array" title="Permalink to this headline">¶</a></h2>
+<p>The application-services developers are in the process of oxidizing parts of firefox sync and the related data storage code, which typically requires migrating the old storage into a new database and/or format.</p>
+<p>When a migration like this occurs, a record is reported in this list the next time the sync ping is submitted.</p>
+<p>Because the format of each data store may be drastically different, we are not attempting to come up with a generic representation here, and currently planning on allowing each migration record to vary independently (at least for now). These records will be distinctly identified by their <code class="docutils literal notranslate"><span class="pre">&quot;type&quot;</span></code> field.</p>
+<p>They should only appear once per migration (that is, we’d rather fail to report a record than report them multiple times).</p>
+<div class="section" id="migrations-type-webext-storage">
+<h3>migrations.type: <code class="docutils literal notranslate"><span class="pre">&quot;webext-storage&quot;</span></code><a class="headerlink" href="#migrations-type-webext-storage" title="Permalink to this headline">¶</a></h3>
+<p>This indicates a migration was performed from the legacy kinto-based extension-storage database into the new webext-storage rust implementation.</p>
+<p>It contains the following fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: Always the string <code class="docutils literal notranslate"><span class="pre">&quot;webext-storage&quot;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entries</span></code>: The number of entries/preferences in the source (legacy) database, including ones we failed to read. See below for information on the distinction between <code class="docutils literal notranslate"><span class="pre">entries</span></code> and <code class="docutils literal notranslate"><span class="pre">extensions</span></code> in this record.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entriesSuccessful</span></code>: The number of entries/preferences (see below) which we have successfully migrated into the destination database..</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extensions</span></code>: The number of distinct extensions which have at least one preference in the source (legacy) database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">extensionsSuccessful</span></code>: The number of distinct extensions which have at least one preference in the destination (migrated) database.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openFailure</span></code>: A boolean flag that is true if we hit a read error prior to . This likely indicates complete corruption, or a bug in an underlying library like rusqlite.</p></li>
+</ul>
+<div class="section" id="note-entries-vs-extensions">
+<h4>Note: “entries” vs “extensions”<a class="headerlink" href="#note-entries-vs-extensions" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">webext-storage</span></code> migration record detailed above contains counts for both:</p>
+<ul class="simple">
+<li><p>The number of “entries” detected vs successfully migrated.</p></li>
+<li><p>The number of “extensions” detected vs successfully migrated.</p></li>
+</ul>
+<p>This may seem redundant, but these refer to different (but related) things. The distinction here has to do with the way the two databases store extension-storage data:</p>
+<ul class="simple">
+<li><p>The legacy database stores one row for each (<code class="docutils literal notranslate"><span class="pre">extension_id</span></code>, <code class="docutils literal notranslate"><span class="pre">preference_name</span></code>, <code class="docutils literal notranslate"><span class="pre">preference_value</span></code>) triple. These are referred to as <code class="docutils literal notranslate"><span class="pre">entries</span></code>.</p></li>
+<li><p>Conversely, the new database stores one row per extension, which is a pair containing both the <code class="docutils literal notranslate"><span class="pre">extension_id</span></code>, as well as a dictionary holding all preference data, and so are equivalent to extensions.</p></li>
+</ul>
+<p>(The description above is a somewhat simplified view of things, as it ignores a number values each database stores which is irrelevant for migration)</p>
+<p>That is, <code class="docutils literal notranslate"><span class="pre">entries</span></code> represent each individual preference setting, and <code class="docutils literal notranslate"><span class="pre">extensions</span></code> represent the collected set of preferences for a given extension.</p>
+<p>Counts for are <em>both</em> of these are present as it’s likely that the disparity would point to different kinds of issues with the migration code.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="third-party-modules-ping.html" class="btn btn-neutral float-right" title="“third-party-modules” ping" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="prio-ping.html" class="btn btn-neutral float-left" title="“prio” ping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

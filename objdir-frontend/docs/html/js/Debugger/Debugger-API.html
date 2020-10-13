@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The Debugger Interface &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The Debugger Object" href="Debugger.html" />
+    <link rel="prev" title="Debugger API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-instances-and-shadow-objects">Debugger Instances and Shadow Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Debugger-API.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-debugger-interface">
+<h1>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface<a class="headerlink" href="#the-debugger-interface" title="Permalink to this headline">¶</a></h1>
+<p>Mozilla’s JavaScript engine, SpiderMonkey, provides a debugging interface
+named <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> which lets JavaScript code observe and manipulate the
+execution of other JavaScript code. Both Firefox’s built-in developer tools
+and the Firebug add-on use <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> to implement their JavaScript
+debuggers. However, <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> is quite general, and can be used to
+implement other kinds of tools like tracers, coverage analysis,
+patch-and-continue, and so on.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Debugger</span></code> has three essential qualities:</p>
+<ul class="simple">
+<li><p>It is a <em>source level</em> interface: it operates in terms of the JavaScript
+language, not machine language. It operates on JavaScript objects, stack
+frames, environments, and code, and presents a consistent interface
+regardless of whether the debuggee is interpreted, compiled, or
+optimized. If you have a strong command of the JavaScript language, you
+should have all the background you need to use <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> successfully,
+even if you have never looked into the language’s implementation.</p></li>
+<li><p>It is for use <em>by JavaScript code</em>. JavaScript is both the debuggee
+language and the tool implementation language, so the qualities that make
+JavaScript effective on the web can be brought to bear in crafting tools
+for developers. As is expected of JavaScript APIs, <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> is a
+<em>sound</em> interface: using (or even misusing) <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> should never cause
+Gecko to crash. Errors throw proper JavaScript exceptions.</p></li>
+<li><p>It is an <em>intra-thread</em> debugging API. Both the debuggee and the code
+using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> to observe it must run in the same thread. Cross-thread,
+cross-process, and cross-device tools must use <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> to observe the
+debuggee from within the same thread, and then handle any needed
+communication themselves. (Firefox’s builtin tools have a
+<a class="reference external" href="https://wiki.mozilla.org/Remote_Debugging_Protocol">protocol</a> defined for this purpose.)</p></li>
+</ul>
+<p>In Gecko, the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> API is available to chrome code only. By design,
+it ought not to introduce security holes, so in principle it could be made
+available to content as well; but it is hard to justify the security risks
+of the additional attack surface.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> API cannot currently observe self-hosted JavaScript. This is not
+inherent in the API’s design, but simply that the self-hosting infrastructure
+isn’t prepared for the kind of invasions the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> API can perform.</p>
+<div class="section" id="debugger-instances-and-shadow-objects">
+<h2>Debugger Instances and Shadow Objects<a class="headerlink" href="#debugger-instances-and-shadow-objects" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Debugger</span></code> reflects every aspect of the debuggee’s state as a JavaScript
+value—not just actual JavaScript values like objects and primitives,
+but also stack frames, environments, scripts, and compilation units, which
+are not normally accessible as objects in their own right.</p>
+<p>Here is a JavaScript program in the process of running a timer callback function:</p>
+<p><img alt="A running JavaScript program and its Debugger shadows" src="../../_images/shadows.svg" /></p>
+<p>This diagram shows the various types of shadow objects that make up the
+Debugger API (which all follow some <a class="reference internal" href="Conventions.html"><span class="doc">general conventions</span></a>):</p>
+<ul class="simple">
+<li><p>A <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> represents a debuggee object, offering a
+reflection-oriented API that protects the debugger from accidentally
+invoking getters, setters, proxy traps, and so on.</p></li>
+<li><p>A <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> represents a block of JavaScript
+code—either a function body or a top-level script. Given a
+<code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code>, one can set breakpoints, translate between source
+positions and bytecode offsets (a deviation from the “source level”
+design principle), and find other static characteristics of the code.</p></li>
+<li><p>A <a class="reference internal" href="Debugger.Frame.html"><span class="doc">Debugger.Frame</span></a> represents a running stack frame. You can use
+these to walk the stack and find each frame’s script and environment. You
+can also set <code class="docutils literal notranslate"><span class="pre">onStep</span></code> and <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handlers on frames.</p></li>
+<li><p>A <a class="reference internal" href="Debugger.Environment.html"><span class="doc">Debugger.Environment</span></a> represents an environment,
+associating variable names with storage locations. Environments may
+belong to a running stack frame, captured by a function closure, or
+reflect some global object’s properties as variables.</p></li>
+</ul>
+<p>The <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance itself is not really a shadow of
+anything in the debuggee; rather, it maintains the set of global objects
+which are to be considered debuggees. A <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> observes only execution
+taking place in the scope of these global objects. You can set functions to
+be called when new stack frames are pushed; when new code is loaded; and so
+on.</p>
+<p>Omitted from this picture are <a class="reference internal" href="Debugger.Source.html"><span class="doc">Debugger.Source</span></a> instances, which
+represent JavaScript compilation units. A <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> can furnish a
+full copy of its source code, and explain how the code entered the system,
+whether via a call to <code class="docutils literal notranslate"><span class="pre">eval</span></code>, a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element, or otherwise. A
+<code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> points to the <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> from which it is derived.</p>
+<p>Also omitted is the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code>’s <a class="reference internal" href="Debugger.Memory.html"><span class="doc">Debugger.Memory</span></a> instance, which
+holds methods and accessors for observing the debuggee’s memory use.</p>
+<p>All these types follow some <a class="reference internal" href="Conventions.html"><span class="doc">general conventions</span></a>, which you
+should look through before drilling down into any particular type’s
+specification.</p>
+<p>All shadow objects are unique per <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> and per referent. For a given
+<code class="docutils literal notranslate"><span class="pre">Debugger</span></code>, there is exactly one <code class="docutils literal notranslate"><span class="pre">Debugger.Object</span></code> that refers to a
+particular debuggee object; exactly one <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> for a particular
+stack frame; and so on. Thus, a tool can store metadata about a shadow’s
+referent as a property on the shadow itself, and count on finding that
+metadata again if it comes across the same referent. And since shadows are
+per-<code class="docutils literal notranslate"><span class="pre">Debugger</span></code>, tools can do so without worrying about interfering with
+other tools that use their own <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> instances.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Here are some things you can try out yourself that show off some of <code class="docutils literal notranslate"><span class="pre">Debugger</span></code>’s
+features:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="Tutorial-Breakpoint.html"><span class="doc">Setting a breakpoint</span></a> in a page, running a handler function
+when it is hit that evaluates an expression in the page’s context.</p></li>
+<li><p><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html"><span class="doc">Showing how many objects different call paths allocate.</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger.html" class="btn btn-neutral float-right" title="The Debugger Object" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Debugger API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

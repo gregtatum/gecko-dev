@@ -1,0 +1,575 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GeckoView Contributor Guide &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="GeckoView For Gecko Engineers" href="for-gecko-engineers.html" />
+    <link rel="prev" title="Contributing to GeckoView" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../consumer/index.html">Using GeckoView</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Contributing to GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#contributor-site">Contributor Site</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">GeckoView Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="for-gecko-engineers.html">GeckoView For Gecko Engineers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mc-quick-start.html">Mozilla Central Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contributing-to-mc.html">Mozilla Central Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="native-debugging.html">Debugging Native Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to GeckoView</a> &raquo;</li>
+        
+      <li>GeckoView Contributor Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/contributor/geckoview-quick-start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="geckoview-contributor-guide">
+<h1>GeckoView Contributor Guide<a class="headerlink" href="#geckoview-contributor-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="geckoview-contributor-quick-start-guide">
+<h2>GeckoView Contributor Quick Start Guide<a class="headerlink" href="#geckoview-contributor-quick-start-guide" title="Permalink to this headline">¶</a></h2>
+<p>This is a guide for developers who want to contribute to the GeckoView
+project. If you want to get started using GeckoView in your app then you
+should refer to the
+<a class="reference external" href="https://wiki.mozilla.org/Mobile/GeckoView#Get_Started">wiki</a>.</p>
+<div class="section" id="get-set-up-with-mozilla-central">
+<h3>Get set up with Mozilla Central<a class="headerlink" href="#get-set-up-with-mozilla-central" title="Permalink to this headline">¶</a></h3>
+<p>The GeckoView codebase is part of the main Firefox tree and can be found
+in <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>. You will need to get set up as a contributor to
+Firefox in order to contribute to GeckoView. To get set up with
+<code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>, follow the <a class="reference external" href="mc-quick-start.html">Quick Start Guide for Git
+Users</a>, or the <a class="reference external" href="https://developer.mozilla.org/docs/Mozilla/Developer_guide/Introduction">Contributing to the Mozilla code
+base</a>
+guide on <a class="reference external" href="https://developer.mozilla.org/">MDN</a> for Mercurial users.</p>
+<p>Once you have a copy of <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>, you will need to build
+GeckoView.</p>
+</div>
+<div class="section" id="bootstrap-gecko">
+<h3>Bootstrap Gecko<a class="headerlink" href="#bootstrap-gecko" title="Permalink to this headline">¶</a></h3>
+<p>Bootstrap configures everything for GeckoView and Fennec (Firefox for Android) development.</p>
+<ul class="simple">
+<li><p>Ensure you have <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> checked out. If this is the first
+time you are doing this, it may take some time.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout central/default
+</pre></div>
+</div>
+<p>If you are on Windows, you will need to install the
+<a class="reference external" href="https://adoptopenjdk.net/?variant=openjdk8">Java 1.8 SDK</a>.</p>
+<p>If you are on a mac, you will need to have the Xcode build tools
+installed. You can do this by either <a class="reference external" href="https://developer.apple.com/xcode/">installing
+Xcode</a> or installing only the
+tools from the command line by running <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code> and
+following the on screen instructions. Use the <code class="docutils literal notranslate"><span class="pre">--no-interactive</span></code>
+argument to automatically accept any license agreements.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach bootstrap <span class="o">[</span> --no-interactive<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Choose option `4. Firefox for Android` for GeckoView development.
+This will give you a version of Gecko configured for Android that has
+not bundled the native code into embedded libraries so you can amend
+the code.</p></li>
+<li><p>Say Y to all configuration options</p></li>
+<li><p>Once <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">bootstrap</span></code> is complete, it will automatically write
+the configuration into a new <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file. If you already
+have a <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">mach</span></code> will instead output new configuration
+that you should append to your existing file.</p></li>
+</ul>
+</div>
+<div class="section" id="build-from-the-command-line">
+<h3>Build from the command line<a class="headerlink" href="#build-from-the-command-line" title="Permalink to this headline">¶</a></h3>
+<p>In order to pick up the configuration changes we just made we need to
+build from the command line. This will update generated sources, compile
+native code, and produce GeckoView AARs and example and test APKs.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-using-android-studio">
+<h3>Build Using Android Studio<a class="headerlink" href="#build-using-android-studio" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p>Install <a class="reference external" href="https://developer.android.com/studio/install">Android
+Studio</a>.</p></li>
+<li><p>Disable Instant Run. This is because Fennec and the Geckoview Example
+app cannot deploy with Instant Run on.</p>
+<ul class="simple">
+<li><p>Select Android Studio &gt; Preferences from the menu bar</p></li>
+<li><p>Navigate to Build, Execution, Deployment &gt; Instant Run.</p></li>
+<li><p>Uncheck the box that reads
+<code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">Instant</span> <span class="pre">Run</span> <span class="pre">to</span> <span class="pre">hot</span> <span class="pre">swap</span> <span class="pre">code/resource</span> <span class="pre">changes</span> <span class="pre">on</span> <span class="pre">deploy</span></code>.</p></li>
+</ul>
+<p><img alt="alt text" src="../../../../_images/DisableInstantRun.png" /></p>
+</li>
+<li><p>Choose File-&gt;Open from the toolbar</p></li>
+<li><p>Navigate to the root of your <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> source directory and
+click “Open”</p></li>
+<li><p>Click yes if it asks if you want to use the gradle wrapper.</p>
+<ul class="simple">
+<li><p>If the gradle sync does not automatically start, select File &gt;
+Sync Project with Gradle Files.</p></li>
+</ul>
+</li>
+<li><p>Wait for the project to index and gradle to sync. Once synced, the
+workspace will reconfigure to display the different projects.</p>
+<ul class="simple">
+<li><p>annotations contains custom annotations used inside GeckoView and
+Fennec.</p></li>
+<li><p>app is Fennec - Firefox for Android. Here is where you will find
+code specific to that app.</p></li>
+<li><p>geckoview is the GeckoView project. Here is all the Java files
+related to GeckoView</p></li>
+<li><p>geckoview_example is an example browser built using GeckoView.</p></li>
+<li><p>omnijar contains the parts of Gecko and GeckoView that are not
+written in Java or Kotlin</p></li>
+<li><p>thirdparty contains third party code that Fennec and GeckoView
+use.</p></li>
+</ul>
+<p><img alt="alt text 1" src="../../../../_images/GeckoViewStructure.png" /></p>
+</li>
+</ul>
+<p>Now you’re set up and ready to go.</p>
+<p><strong>Important: at this time, building from Android Studio or directly from
+Gradle does not (re-)compile native code, including C++ and Rust.</strong> This
+means you will need to run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> yourself to pick up changes to
+native code. <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1509539">Bug
+1509539</a> tracks
+making Android Studio and Gradle do this automatically.</p>
+</div>
+<div class="section" id="performing-a-bug-fix">
+<h3>Performing a bug fix<a class="headerlink" href="#performing-a-bug-fix" title="Permalink to this headline">¶</a></h3>
+<p>One you have got GeckoView building and running, you will want to start
+contributing. There is a general guide to <a class="reference external" href="contributing-to-mc.html">Performing a Bug Fix for Git
+Developers</a> for you to follow. To contribute to
+GeckoView specifically, you will need the following additional
+information.</p>
+<div class="section" id="running-tests-and-linter-locally">
+<h4>Running tests and linter locally<a class="headerlink" href="#running-tests-and-linter-locally" title="Permalink to this headline">¶</a></h4>
+<p>To ensure that your patch does not break existing functionality in
+GeckoView, you can run the junit test suite with the following command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mach</span> <span class="n">geckoview</span><span class="o">-</span><span class="n">junit</span>
+</pre></div>
+</div>
+<p>This command also allows you to run individual tests or test classes,
+e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mach</span> <span class="n">geckoview</span><span class="o">-</span><span class="n">junit</span> <span class="n">org</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">geckoview</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">NavigationDelegateTest</span>
+<span class="o">./</span><span class="n">mach</span> <span class="n">geckoview</span><span class="o">-</span><span class="n">junit</span> <span class="n">org</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">geckoview</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">NavigationDelegateTest</span><span class="c1">#loadUnknownHost</span>
+</pre></div>
+</div>
+<p>If your patch makes a GeckoView JavaScript module, you should run ESLint
+as well:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mach</span> <span class="n">lint</span> <span class="o">-</span><span class="n">l</span> <span class="n">eslint</span> <span class="n">mobile</span><span class="o">/</span><span class="n">android</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="n">geckoview</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>To see information on other options, simply run
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">geckoview-junit</span> <span class="pre">--help</span></code>; of particular note for dealing with
+intermittent test failures are <code class="docutils literal notranslate"><span class="pre">--repeat</span> <span class="pre">N</span></code> and
+<code class="docutils literal notranslate"><span class="pre">--run-until-failure</span></code>, both of which do exactly what you’d expect.</p>
+</div>
+<div class="section" id="updating-the-changelog-and-api-documentation">
+<h4>Updating the changelog and API documentation<a class="headerlink" href="#updating-the-changelog-and-api-documentation" title="Permalink to this headline">¶</a></h4>
+<p>If the patch that you want to submit changes the public API for
+GeckoView, you must ensure that the API documentation is kept up to
+date. To check whether your patch has altered the API, run the following
+command.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach lint --linter android-api-lint
+</pre></div>
+</div>
+<p>The output of this command will inform you if any changes you have made
+break the existing API. Review the changes and follow the instructions
+it provides.</p>
+<p>If the linter asks you to update the changelog, please ensure that you
+follow the correct format for changelog entries. Under the heading for
+the next release version, add a new entry for the changes that you are
+making to the API, along with links to any relevant files, and bug
+number e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>- Added [`GeckoRuntimeSettings.Builder#aboutConfigEnabled`][71.12] to control whether or
+  not `about:config` should be available.
+  ([bug 1540065]({{bugzilla}}1540065))
+
+[71.12]: {{javadoc_uri}}/GeckoRuntimeSettings.Builder.html#aboutConfigEnabled-boolean-
+</pre></div>
+</div>
+</div>
+<div class="section" id="submitting-to-the-try-server">
+<h4>Submitting to the <code class="docutils literal notranslate"><span class="pre">try</span></code> server<a class="headerlink" href="#submitting-to-the-try-server" title="Permalink to this headline">¶</a></h4>
+<p>It is advisable to run your tests before submitting your patch. You can
+do this using Mozilla’s <code class="docutils literal notranslate"><span class="pre">try</span></code> server. To submit a GeckoView patch to
+<code class="docutils literal notranslate"><span class="pre">try</span></code> before submitting it for review, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach try fuzzy -q <span class="s2">&quot;android&quot;</span>
+</pre></div>
+</div>
+<p>This will run all of the Android test suite. If your patch passes on
+<code class="docutils literal notranslate"><span class="pre">try</span></code> you can be (fairly) confident that it will land successfully
+after review.</p>
+</div>
+<div class="section" id="tagging-a-reviewer">
+<h4>Tagging a reviewer<a class="headerlink" href="#tagging-a-reviewer" title="Permalink to this headline">¶</a></h4>
+<p>When submitting a patch to Phabricator, if you know who you want to
+review your patch, put their Phabricator handle against the
+<code class="docutils literal notranslate"><span class="pre">reviewers</span></code> field.</p>
+<p>If you don’t know who to tag for a review in the Phabricator submission
+message, leave the field blank and, after submission, follow the link to
+the patch in Phabricator and scroll to the bottom of the screen until
+you see the comment box.</p>
+<ul class="simple">
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Action</span></code> drop down and pick the <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">Reviewers</span></code> option.</p></li>
+<li><p>In the presented box, add <code class="docutils literal notranslate"><span class="pre">geckoview-reviewers</span></code>. Selecting this group as the reviewer will notify all the members of the GeckoView team there is a patch to review.</p></li>
+<li><p>Click <code class="docutils literal notranslate"><span class="pre">Submit</span></code> to submit the reviewer change request.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="include-geckoview-as-a-dependency">
+<h3>Include GeckoView as a dependency<a class="headerlink" href="#include-geckoview-as-a-dependency" title="Permalink to this headline">¶</a></h3>
+<p>If you want to include a development version of GeckoView as a
+dependency inside another app, you must link to a local copy. There are
+several ways to achieve this, but the preferred way is to use Gradle’s
+<em>dependency substitution</em> mechanism, for which there is first-class
+support in <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> and a pattern throughout Mozilla’s
+GeckoView-consuming ecosystem.</p>
+<p>The good news is that <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> produces everything you need, so
+that after the configuration below, you should find that the following
+commands rebuild your local GeckoView and then consume your local
+version in the downstream project.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/mozilla-central <span class="o">&amp;&amp;</span> ./mach build
+<span class="nb">cd</span> /path/to/project <span class="o">&amp;&amp;</span> ./gradlew assembleDebug
+</pre></div>
+</div>
+<p><strong>Be sure that your ``mozconfig`` specifies the correct ``–target``
+argument for your target device.</strong> Many projects use “ABI splitting” to
+include only the target device’s native code libraries in APKs deployed
+to the device. On x86-64 and aarch64 devices, this can result in
+GeckoView failing to find any libraries, because valid x86 and ARM
+libraries were not included in a deployed APK. Avoid this by setting
+<code class="docutils literal notranslate"><span class="pre">--target</span></code> to the exact ABI that your device supports.</p>
+<div class="section" id="dependency-substiting-your-local-geckoview-into-a-mozilla-project">
+<h4>Dependency substiting your local GeckoView into a Mozilla project<a class="headerlink" href="#dependency-substiting-your-local-geckoview-into-a-mozilla-project" title="Permalink to this headline">¶</a></h4>
+<p>Most GeckoView-consuming projects produced by Mozilla support dependency
+substitution via <code class="docutils literal notranslate"><span class="pre">local.properties</span></code>. These projects include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/mozilla-mobile/fenix">Fenix</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mozilla-mobile/reference-browser">reference-browser</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mozilla-mobile/android-components">android-components</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MozillaReality/FirefoxReality">Firefox Reality</a></p></li>
+</ul>
+<p>Simply edit (or create) the file <code class="docutils literal notranslate"><span class="pre">local.properties</span></code> in the project
+root and include a line like:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">dependencySubstitutions.geckoviewTopsrcdir</span><span class="o">=</span><span class="s">/path/to/mozilla-central</span>
+</pre></div>
+</div>
+<p>The default object directory – the one that a plain <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code>
+discovers – will be used. You can optionally specify a particular object
+directory with an additional line like:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">dependencySubstitutions.geckoviewTopobjdir</span><span class="o">=</span><span class="s">/path/to/object-directory</span>
+</pre></div>
+</div>
+<p>With these lines, the GeckoView-consuming project should use the
+GeckoView AAR produced by <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> in your local
+<code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>.</p>
+<p><strong>Remember to remove the lines in ``local.properties`` when you want to
+return to using the published GeckoView builds!</strong></p>
+</div>
+<div class="section" id="dependency-substituting-your-local-geckoview-into-a-non-mozilla-project">
+<h4>Dependency substituting your local GeckoView into a non-Mozilla project<a class="headerlink" href="#dependency-substituting-your-local-geckoview-into-a-non-mozilla-project" title="Permalink to this headline">¶</a></h4>
+<p>In projects that don’t have first-class support for dependency
+substitution already, you can do the substitution yourself. See the
+documentation in
+<a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/substitute-local-geckoview.gradle">substitue-local-geckoview.gradle</a>,
+but roughly: in each Gradle project that consumes GeckoView, i.e., in
+each <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> with a
+<code class="docutils literal notranslate"><span class="pre">dependencies</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">'org.mozilla.geckoview:geckoview-...'</span> <span class="pre">}</span></code> block,
+include lines like:</p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">ext</span><span class="o">.</span><span class="na">topsrcdir</span> <span class="o">=</span> <span class="s2">&quot;/path/to/mozilla-central&quot;</span>
+<span class="n">ext</span><span class="o">.</span><span class="na">topobjdir</span> <span class="o">=</span> <span class="s2">&quot;/path/to/object-directory&quot;</span> <span class="c1">// Optional.</span>
+<span class="n">apply</span> <span class="nl">from:</span> <span class="s2">&quot;${topsrcdir}/substitute-local-geckoview.gradle&quot;</span>
+</pre></div>
+</div>
+<p><strong>Remember to remove the lines from all ``build.gradle`` files when you
+want to return to using the published GeckoView builds!</strong></p>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h3>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Get started with <a class="reference external" href="native-debugging.html">Native Debugging</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="for-gecko-engineers.html" class="btn btn-neutral float-right" title="GeckoView For Gecko Engineers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Contributing to GeckoView" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

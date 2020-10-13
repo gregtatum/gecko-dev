@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GN support in the build system &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Build Telemetry" href="telemetry.html" />
+    <link rel="prev" title="Sparse Checkouts" href="sparse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Support for projects building with GN</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-gn-configs-as-json">Generating GN configs as JSON</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generating-moz-build-files-from-gn-json-configs">Generating moz.build files from GN JSON configs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>GN support in the build system</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/gn.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gn-support-in-the-build-system">
+<span id="gn"></span><h1>GN support in the build system<a class="headerlink" href="#gn-support-in-the-build-system" title="Permalink to this headline">¶</a></h1>
+<p><abbr title="Generated Ninja">GN</abbr> is a third-party build tool used by chromium and
+some related projects that are vendored in mozilla-central. Rather than
+requiring <code class="docutils literal notranslate"><span class="pre">GN</span></code> to build or writing our own build definitions for these projects,
+we have support in the build system for translating GN configuration
+files into moz.build files. In most cases these moz.build files will be like any
+others in the tree (except that they shouldn’t be modified by hand), however
+those updating vendored code or building on platforms not supported by
+Mozilla automation may need to re-generate these files. This is a two-step
+process, described below.</p>
+<div class="section" id="generating-gn-configs-as-json">
+<h2>Generating GN configs as JSON<a class="headerlink" href="#generating-gn-configs-as-json" title="Permalink to this headline">¶</a></h2>
+<p>The first step must take place on a machine with access to the <code class="docutils literal notranslate"><span class="pre">GN</span></code> tool, which
+is specified in a mozconfig with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">GN</span><span class="o">=&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">gn</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>With this specified, and the tree configured, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach build-backend -b GnConfigGen
+</pre></div>
+</div>
+<p>This will run <code class="docutils literal notranslate"><span class="pre">gn</span> <span class="pre">gen</span></code> on projects found in <code class="docutils literal notranslate"><span class="pre">GN_DIRS</span></code> specified in moz.build
+files, injecting variables from the current build configuration and specifying
+the result be written to a JSON file in <code class="docutils literal notranslate"><span class="pre">$objdir/gn-output</span></code>. The file will
+have a name derived from the arguments passed to <code class="docutils literal notranslate"><span class="pre">gn</span> <span class="pre">gen</span></code>, for instance
+<code class="docutils literal notranslate"><span class="pre">x64_False_x64_linux.json</span></code>.</p>
+<p>If updating upstream sources or vendoring a new project, this step must be
+performed for each supported build configuration. If adding support for a
+specific configuration, the generated configuration may be added to existing
+configs before re-generating the <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> files, which should be found under
+the <code class="docutils literal notranslate"><span class="pre">gn-configs</span></code> directory under the vendored project’s top-level directory.</p>
+</div>
+<div class="section" id="generating-moz-build-files-from-gn-json-configs">
+<h2>Generating moz.build files from GN JSON configs<a class="headerlink" href="#generating-moz-build-files-from-gn-json-configs" title="Permalink to this headline">¶</a></h2>
+<p>Once the relevant JSON configs are present under a project’s <code class="docutils literal notranslate"><span class="pre">gn-configs</span></code>
+directory, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach build-backend -b GnMozbuildWriter
+</pre></div>
+</div>
+<p>This will combine the configuration files present into a set of moz.build files
+that will build the given project. Once the result is verified, the resulting
+moz.build files should be checked in and should build like any other part of
+mozilla-central.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Build Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sparse.html" class="btn btn-neutral float-left" title="Sparse Checkouts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

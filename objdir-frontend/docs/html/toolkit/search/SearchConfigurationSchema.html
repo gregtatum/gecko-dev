@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Search Configuration Schema &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Default Search Engines" href="DefaultSearchEngines.html" />
+    <link rel="prev" title="Search Engine Configuration" href="SearchEngineConfiguration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Search Service</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#definitions">Definitions</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#contents">Contents</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="SearchEngineConfiguration.html">Search Engine Configuration</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Search Configuration Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="DefaultSearchEngines.html">Default Search Engines</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">Search Service</a> &raquo;</li>
+        
+      <li>Search Configuration Schema</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/toolkit/search/SearchConfigurationSchema.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="search-configuration-schema">
+<h1>Search Configuration Schema<a class="headerlink" href="#search-configuration-schema" title="Permalink to this headline">¶</a></h1>
+<p>This document outlines the details of the schema and how the various sub-parts
+interact. For the full fields and descriptions, please see the <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/components/search/schema/">schema itself</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the examples, only relevant properties are displayed.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The configuration is a JSON blob which is object with a <cite>data</cite> property which
+is an array of engines:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">data</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="c1">// engine 1 details</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="c1">// engine 2 details</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="engine-objects">
+<h2>Engine Objects<a class="headerlink" href="#engine-objects" title="Permalink to this headline">¶</a></h2>
+<p>An engine’s details are located in the properties of the object associated with it.
+An engine that is deployed globally could be listed simply as:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;telemetryId&quot;</span><span class="o">:</span> <span class="s2">&quot;engine1-telem&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">appliesTo</span></code> section is an array of objects. At least one object is required
+to specify which regions/locales the engine is included within. If an
+<code class="docutils literal notranslate"><span class="pre">appliesTo</span></code> object lists additional attributes then these will override any
+attributes at the top-level.</p>
+<p>For example, a more complex engine definition may be available only to users
+located specific regions or with certain locales. For example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;us&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web-us@ext&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;gb&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web-gb@ext&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case users identified as being in the US region would use the WebExtension
+with identifier <code class="docutils literal notranslate"><span class="pre">web-us&#64;ext</span></code>. GB region users would get
+<code class="docutils literal notranslate"><span class="pre">web-gb&#64;ext</span></code>, and all other users would get <code class="docutils literal notranslate"><span class="pre">web&#64;ext</span></code>.</p>
+</div>
+<div class="section" id="special-attributes">
+<h2>Special Attributes<a class="headerlink" href="#special-attributes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="user-locale">
+<h3>$USER_LOCALE<a class="headerlink" href="#user-locale" title="Permalink to this headline">¶</a></h3>
+<p>If a <code class="docutils literal notranslate"><span class="pre">webExtension.locales</span></code> property contains an element with the value
+<code class="docutils literal notranslate"><span class="pre">&quot;$USER_LOCALE&quot;</span></code> then the special value will be replaced in the
+configuration object with the users locale. For example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;locales&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;matches&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;us&quot;</span><span class="p">,</span> <span class="s2">&quot;gb&quot;</span><span class="p">]</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;locales&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;$USER_LOCALE&quot;</span><span class="p">],</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Will report either <code class="docutils literal notranslate"><span class="pre">[us]</span></code> or <code class="docutils literal notranslate"><span class="pre">[gb]</span></code> as the <code class="docutils literal notranslate"><span class="pre">webExtension.locales</span></code>
+depending on the user’s locale.</p>
+</div>
+<div class="section" id="default">
+<h3>“default”<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h3>
+<p>You can specify <code class="docutils literal notranslate"><span class="pre">&quot;default&quot;</span></code> as a region in the configuration if
+the engine is to be included when we do not know the user’s region.</p>
+</div>
+<div class="section" id="override">
+<h3>“override”<a class="headerlink" href="#override" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">&quot;override&quot;</span></code> field can be set to true if you want a section to
+only override otherwise included engines. <code class="docutils literal notranslate"><span class="pre">&quot;override&quot;</span></code> will only work for
+sections which apply to distributions or experiments. The experiment case was
+added in Firefox 81.</p>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="c1">// Complicated and lengthy inclusion rules</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;override&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;distributions&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;mydistrocode&quot;</span><span class="p">]},</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;searchUrlGetParams&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;custom&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;foobar&quot;</span> <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="application-scoping">
+<h2>Application Scoping<a class="headerlink" href="#application-scoping" title="Permalink to this headline">¶</a></h2>
+<p>An engine configuration may be scoped to a particular application.</p>
+<div class="section" id="name">
+<h3>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h3>
+<p>One or more application names may be specified. Currently the only application
+type supported is <code class="docutils literal notranslate"><span class="pre">firefox</span></code>. If an application name is specified, then it
+must be matched for the section to apply. If there are no application names
+specified, then the section will match any consumer of the configuration.</p>
+<p>In the following example, <code class="docutils literal notranslate"><span class="pre">web&#64;ext</span></code> would be included on any consumer
+of the configuration, but <code class="docutils literal notranslate"><span class="pre">web1&#64;ext</span></code> would only be included on Firefox desktop.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">[]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;firefox&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="channel">
+<h3>Channel<a class="headerlink" href="#channel" title="Permalink to this headline">¶</a></h3>
+<p>One or more channels may be specified in an array to restrict a configuration
+to just those channels. The current known channels are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>default: Self-builds of Firefox, or possibly some self-distributed versions.</p></li>
+<li><p>nightly: Firefox Nightly builds.</p></li>
+<li><p>aurora: Firefox Developer Edition</p></li>
+<li><p>beta: Firefox Beta</p></li>
+<li><p>release: The main Firefox release channel.</p></li>
+<li><p>esr: The ESR Channel. This will also match versions of Firefox where the
+displayed version number includes <code class="docutils literal notranslate"><span class="pre">esr</span></code>. We do this to include Linux
+distributions and other manual builds of ESR.</p></li>
+</ul>
+</div></blockquote>
+<p>In the following example, <code class="docutils literal notranslate"><span class="pre">web&#64;ext</span></code> would be set as default on the default
+channel only, whereas <code class="docutils literal notranslate"><span class="pre">web1&#64;ext</span></code> would be set as default on release and esr
+channels.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;channel&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;default&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;channel&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;release&quot;</span><span class="p">,</span> <span class="s2">&quot;esr&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="distributions">
+<h3>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">¶</a></h3>
+<p>Distributions may be specified to be included or excluded in an <code class="docutils literal notranslate"><span class="pre">appliesTo</span></code>
+section. The <code class="docutils literal notranslate"><span class="pre">distributions</span></code> field in the <code class="docutils literal notranslate"><span class="pre">application</span></code> section is an array
+of distribution identifiers. The identifiers match those supplied by the
+<code class="docutils literal notranslate"><span class="pre">distribution.id</span></code> preference.</p>
+<p>In the following, <code class="docutils literal notranslate"><span class="pre">web&#64;ext</span></code> would be included in only the <code class="docutils literal notranslate"><span class="pre">cake</span></code>
+distribution. <code class="docutils literal notranslate"><span class="pre">web1&#64;ext</span></code> would be excluded from the <code class="docutils literal notranslate"><span class="pre">apples</span></code> distribution
+but included in the main desktop application, and all other distributions.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;distributions&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;cake&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;excludedDistributions&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;apples&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="version">
+<h3>Version<a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h3>
+<p>Minimum and Maximum versions may be specified to restrict a configuration to
+specific ranges. These may be open-ended. Version comparison is performed
+using <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Toolkit_version_format">the version comparator</a>.</p>
+<p>Note: comparison against <code class="docutils literal notranslate"><span class="pre">maxVersion</span></code> is a less-than comparison. The
+<code class="docutils literal notranslate"><span class="pre">maxVersion</span></code> won’t be matched directly.</p>
+<p>In the following example, <code class="docutils literal notranslate"><span class="pre">web&#64;ext</span></code> would be included for any version after
+72.0a1, whereas <code class="docutils literal notranslate"><span class="pre">web1&#64;ext</span></code> would be included only between 68.0a1 and 71.x
+version.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;minVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;72.0a1&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;minVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;68.0a1&quot;</span>
+        <span class="s2">&quot;maxVersion&quot;</span><span class="o">:</span> <span class="s2">&quot;72.0a1&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
+<p>We can run experiments by giving sections within <code class="docutils literal notranslate"><span class="pre">appliesTo</span></code> a
+<code class="docutils literal notranslate"><span class="pre">experiment</span></code> value, the Search Service can then optionally pass in a
+matching <code class="docutils literal notranslate"><span class="pre">experiment</span></code> value to match those sections.</p>
+<p>Sections which have a <code class="docutils literal notranslate"><span class="pre">experiment</span></code> will not be used unless a matching
+<code class="docutils literal notranslate"><span class="pre">experiment</span></code> has been passed in, for example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;experiment&quot;</span><span class="o">:</span> <span class="s2">&quot;nov-16&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web-experimental@ext&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;web-gb@ext&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="engine-defaults">
+<h2>Engine Defaults<a class="headerlink" href="#engine-defaults" title="Permalink to this headline">¶</a></h2>
+<p>An engine may be specified as the default for one of two purposes:</p>
+<ol class="arabic simple">
+<li><p>normal browsing mode,</p></li>
+<li><p>private browsing mode.</p></li>
+</ol>
+<p>If there is no engine specified for private browsing mode for a particular region/locale
+pair, then the normal mode engine is used.</p>
+<p>If the instance of the application does not support a separate private browsing mode engine,
+then it will only use the normal mode engine.</p>
+<p>An engine may or may not be default for particular regions/locales. The <code class="docutils literal notranslate"><span class="pre">default</span></code>
+property is a tri-state value with states of <code class="docutils literal notranslate"><span class="pre">yes</span></code>, <code class="docutils literal notranslate"><span class="pre">yes-if-no-other</span></code> and
+<code class="docutils literal notranslate"><span class="pre">no</span></code>. Here’s an example of how they apply:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;us&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="s2">&quot;excluded&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;us&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes-if-no-other&quot;</span>
+  <span class="p">}]</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine2@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;gb&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span>
+  <span class="p">}]</span>
+<span class="p">},</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine3@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;no&quot;</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;everywhere&quot;</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+  <span class="p">}]</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine4@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;defaultPrivate&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;appliesTo&quot;</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="s2">&quot;included&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;fr&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In this example, for normal mode:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="mailto:engine1&#37;&#52;&#48;ext">engine1<span>&#64;</span>ext</a> is default in the US region, and all other regions except for GB</p></li>
+<li><p><a class="reference external" href="mailto:engine2&#37;&#52;&#48;ext">engine2<span>&#64;</span>ext</a> is default in only the GB region</p></li>
+<li><p><a class="reference external" href="mailto:engine3&#37;&#52;&#48;ext">engine3<span>&#64;</span>ext</a> and engine4 are never default anywhere</p></li>
+</ul>
+</div></blockquote>
+<p>In private browsing mode:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="mailto:engine1&#37;&#52;&#48;ext">engine1<span>&#64;</span>ext</a> is default in the US region, and all other regions execpt for GB and FR</p></li>
+<li><p><a class="reference external" href="mailto:engine2&#37;&#52;&#48;ext">engine2<span>&#64;</span>ext</a> is default in only the GB region</p></li>
+<li><p><a class="reference external" href="mailto:engine3&#37;&#52;&#48;ext">engine3<span>&#64;</span>ext</a> is never default anywhere</p></li>
+<li><p><a class="reference external" href="mailto:engine4&#37;&#52;&#48;ext">engine4<span>&#64;</span>ext</a> is default in the FR region.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="engine-ordering">
+<h2>Engine Ordering<a class="headerlink" href="#engine-ordering" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">orderHint</span></code> field indicates the suggested ordering of an engine relative to
+other engines when displayed to the user, unless the user has customized their
+ordering.</p>
+<p>The default ordering of engines is based on a combination of if the engine is
+default, and the <code class="docutils literal notranslate"><span class="pre">orderHint</span></code> fields. The ordering is structured as follows:</p>
+<ol class="arabic simple">
+<li><p>Default engine in normal mode</p></li>
+<li><p>Default engine in private browsing mode (if different from the normal mode engine)</p></li>
+<li><p>Other engines in order from the highest <code class="docutils literal notranslate"><span class="pre">orderHint</span></code> to the lowest.</p></li>
+</ol>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;orderHint&quot;</span><span class="o">:</span> <span class="mf">2000</span><span class="p">,</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine2@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;orderHint&quot;</span><span class="o">:</span> <span class="mf">1000</span><span class="p">,</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;yes&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine3@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;orderHint&quot;</span><span class="o">:</span> <span class="mf">500</span><span class="p">,</span>
+  <span class="s2">&quot;default&quot;</span><span class="o">:</span> <span class="s2">&quot;no&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This would result in the order: <code class="docutils literal notranslate"><span class="pre">engine2&#64;ext,</span> <span class="pre">engine1&#64;ext,</span> <span class="pre">engine3&#64;ext</span></code>.</p>
+</div>
+<div class="section" id="region-params">
+<h2>Region Params<a class="headerlink" href="#region-params" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">regionParams</span></code> field allows us to override query parameters used based on the users current Region without having to reload the engine list which is based on the users home Region.</p>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;webExtension&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;engine1@ext&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;searchUrlGetParams&quot;</span><span class="o">:</span> <span class="p">[{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;param&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;default&quot;</span> <span class="p">}],</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;regionParams&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;US&quot;</span><span class="o">:</span> <span class="p">[{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;param&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="o">:</span> <span class="s2">&quot;custom&quot;</span> <span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Will send <code class="docutils literal notranslate"><span class="pre">param=custom</span></code> whenever we detect the user is in US.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="DefaultSearchEngines.html" class="btn btn-neutral float-right" title="Default Search Engines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="SearchEngineConfiguration.html" class="btn btn-neutral float-left" title="Search Engine Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

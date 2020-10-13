@@ -1,0 +1,21 @@
+mozversioncontrol package
+=========================
+
+Submodules
+----------
+
+mozversioncontrol.repoupdate module
+-----------------------------------
+
+.. automodule:: mozversioncontrol.repoupdate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozversioncontrol
+   :members:
+   :undoc-members:
+   :show-inheritance:

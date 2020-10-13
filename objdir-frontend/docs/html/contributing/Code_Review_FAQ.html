@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Code Review FAQ &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Code Review FAQ</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contributing/Code_Review_FAQ.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="code-review-faq">
+<h1>Code Review FAQ<a class="headerlink" href="#code-review-faq" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-the-purpose-of-code-review">
+<h2>What is the purpose of code review?<a class="headerlink" href="#what-is-the-purpose-of-code-review" title="Permalink to this headline">¶</a></h2>
+<p>Code review is our basic mechanism for validating the design and
+implementation of patches. It also helps us maintain a level of
+consistency in design and implementation practices across the many
+hackers and among the various modules of Mozilla.</p>
+<p>Of course, code review doesn’t happen instantaneously, and so there is
+some latency built into the system. We’re always looking for ways to
+reduce the wait, while simultaneously allowing reviewers to do a good
+chunk of hacking themselves. We don’t have a perfect system, and we
+never will. It’s still evolving, so let us know if you have suggestions.</p>
+<p>Mozilla used to have the concept of “super-review”, but <a class="reference external" href="https://groups.google.com/forum/#!topic/mozilla.governance/HHU0h-44NDo">a consensus was
+reached in
+2018</a>
+to retire this process.</p>
+</div>
+<div class="section" id="who-must-review-my-code">
+<h2>Who must review my code?<a class="headerlink" href="#who-must-review-my-code" title="Permalink to this headline">¶</a></h2>
+<p>You must have an approval (“r={{ mediawiki.external(‘name’) }}”) from
+the module owner or designated “peer” of the module where the code will
+be checked in. If your code affects several modules, then generally you
+should have an “r={{ mediawiki.external(‘name’) }}” from the owner or
+designated peer of each affected module. We try to be reasonable here,
+so we don’t have an absolute rule on when every module owner must
+approve. For example, tree-wide changes such as a change to a string
+class or a change to text that is displayed in many modules generally
+doesn’t get reviewed by every module owner.</p>
+<p>You may wish to ask others as well.</p>
+</div>
+<div class="section" id="what-do-reviewers-look-for">
+<h2>What do reviewers look for?<a class="headerlink" href="#what-do-reviewers-look-for" title="Permalink to this headline">¶</a></h2>
+<p>A review is focused on a patch’s design, implementation, usefulness in
+fixing a stated problem, and fit within its module. A reviewer should be
+someone with domain expertise in the problem area. A reviewer may also
+utilize other areas of his or her expertise and comment on other
+possible improvements. There are no inherent limitations on what
+comments a reviewer might make about improving the code.</p>
+<p>Reviewers will probably look at the following areas of the code:</p>
+<ul class="simple">
+<li><p>“goal” review: is the issue being fixed actually a bug? Does the
+patch fix the fundamental problem?</p></li>
+<li><p>API/design review. Because APIs define the interactions between
+modules, they need special care. Review is especially important to
+keep APIs balanced and targeted, and not too specific or
+overdesigned. There are a <a class="reference external" href="https://wiki.mozilla.org/WebAPI/WebIDL_Review_Checklist">WebIDL review
+checklist</a>.
+There are also templates for emails that should be sent when APIs are
+going to be exposed to the Web and general guidance around naming on
+<a class="reference external" href="https://wiki.mozilla.org/WebAPI/ExposureGuidelines">this wiki
+page</a>.</p></li>
+<li><p>Maintainability review. Code which is unreadable is impossible to
+maintain. If the reviewer has to ask questions about the purpose of a
+piece of code, then it is probably not documented well enough. Does
+the code follow the <a class="reference internal" href="../code-quality/coding-style/index.html#coding-style"><span class="std std-ref">Coding style</span></a> ? Be careful when
+reviewing code using modern C++ features like auto.</p></li>
+<li><p>Security review. Does the design use security concepts such as input
+sanitizers, wrappers, and other techniques? Does this code need
+additional security testing such as fuzz-testing or static analysis?</p></li>
+<li><p>Integration review. Does this code work properly with other modules?
+Is it localized properly? Does it have server dependencies? Does it
+have user documentation?</p></li>
+<li><p>Testing review. Are there tests for correct function? Are there tests
+for error conditions and incorrect inputs which could happen during
+operation?</p></li>
+<li><p>Performance review. Has this code been profiled? Are you sure it’s
+not negatively affecting performance of other code?</p></li>
+<li><p>License review. Does the code follow the <a class="reference external" href="http://www.mozilla.org/hacking/committer/committers-agreement.pdf">code licensing
+rules</a>?</p></li>
+</ul>
+</div>
+<div class="section" id="how-can-i-tell-the-status-of-reviews">
+<h2>How can I tell the status of reviews?<a class="headerlink" href="#how-can-i-tell-the-status-of-reviews" title="Permalink to this headline">¶</a></h2>
+<p>When a patch has passed review you’ll see “Accepted” in green at the top
+of a Phabricator revision, under the title. In Bugzilla (which is
+deprecated in favour of Phabricator), this is indicated by “{{
+mediawiki.external(‘name’) }}:review+” in the attachment table in the
+bug report. If it has failed review then you’ll see “Needs Revision” in
+red at the top of the revision, or, in Bugzilla, “{{
+mediawiki.external(‘name’) }}:review-“. Most of the time that a reviewer
+sets a review flag, they will also add a comment to the bug explaining
+the review.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

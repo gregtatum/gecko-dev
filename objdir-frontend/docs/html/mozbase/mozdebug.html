@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozdebug — Configure and launch compatible debuggers. &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handling content for the browser" href="servingcontent.html" />
+    <link rel="prev" title="mozcrash — Print stack traces from minidumps left behind by crashed processes" href="mozcrash.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">mozbase</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manifestparser.html">Managing lists of tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettinginfo.html">Getting information on the system under test</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="setuprunning.html">Set up and running</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mozfile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozfile</span></code> — File utilities for use in Mozilla testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozgeckoprofiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozgeckoprofiler.rst</span></code> — Gecko Profiler utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinstall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozinstall</span></code> — Install and uninstall Gecko-based applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozpower.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozpower</span></code> — Power-usage testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozprofile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozprofile</span></code> — Create and modify Mozilla application profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozprocess.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozprocess</span></code> — Launch and manage processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozrunner.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozrunner</span></code> — Manage remote and local gecko processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozcrash.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozcrash</span></code> — Print stack traces from minidumps left behind by crashed processes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozdebug</span></code> — Configure and launch compatible debuggers.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="servingcontent.html">Handling content for the browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggingreporting.html">Logging and reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devicemanagement.html">Device management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">mozbase</a> &raquo;</li>
+        
+          <li><a href="setuprunning.html">Set up and running</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozdebug</span></code> — Configure and launch compatible debuggers.</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mozbase/mozdebug.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-mozdebug">
+<span id="mozdebug-configure-and-launch-compatible-debuggers"></span><h1><a class="reference internal" href="#module-mozdebug" title="mozdebug"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozdebug</span></code></a> — Configure and launch compatible debuggers.<a class="headerlink" href="#module-mozdebug" title="Permalink to this headline">¶</a></h1>
+<p>This module contains a set of function to gather information about the
+debugging capabilities of the platform. It allows to look for a specific
+debugger or to query the system for a compatible/default debugger.</p>
+<p>The following simple example looks for the default debugger on the
+current platform and launches a debugger process with the correct
+debugger-specific arguments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mozdebug</span>
+
+<span class="n">debugger</span> <span class="o">=</span> <span class="n">mozdebug</span><span class="o">.</span><span class="n">get_default_debugger_name</span><span class="p">()</span>
+<span class="n">debuggerInfo</span> <span class="o">=</span> <span class="n">mozdebug</span><span class="o">.</span><span class="n">get_debugger_info</span><span class="p">(</span><span class="n">debugger</span><span class="p">)</span>
+
+<span class="n">debuggeePath</span> <span class="o">=</span> <span class="s2">&quot;toDebug&quot;</span>
+
+<span class="n">processArgs</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">debuggerInfo</span><span class="o">.</span><span class="n">path</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">debuggerInfo</span><span class="o">.</span><span class="n">args</span>
+<span class="n">processArgs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">debuggeePath</span><span class="p">)</span>
+
+<span class="n">run_process</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py function">
+<dt id="mozdebug.get_debugger_info">
+<code class="sig-prename descclassname">mozdebug.</code><code class="sig-name descname">get_debugger_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">debugger</span></em>, <em class="sig-param"><span class="n">debuggerArgs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">debuggerInteractive</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozdebug.get_debugger_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the information about the requested debugger.</p>
+<p>Returns a dictionary containing the <a href="#id1"><span class="problematic" id="id2">|path|</span></a> of the debugger executable,
+if it will run in <a href="#id3"><span class="problematic" id="id4">|interactive|</span></a> mode, its arguments and whether it needs
+to escape arguments it passes to the debugged program (<a href="#id5"><span class="problematic" id="id6">|requiresEscapedArgs|</span></a>).
+If the debugger cannot be found in the system, returns <a href="#id7"><span class="problematic" id="id8">|None|</span></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>debugger</strong> – The name of the debugger.</p></li>
+<li><p><strong>debuggerArgs</strong> – If specified, it’s the arguments to pass to the debugger,</p></li>
+</ul>
+</dd>
+</dl>
+<p>as a string. Any debugger-specific separator arguments are appended after these
+arguments.
+:param debuggerInteractive: If specified, forces the debugger to be interactive.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozdebug.get_default_debugger_name">
+<code class="sig-prename descclassname">mozdebug.</code><code class="sig-name descname">get_default_debugger_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">search</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozdebug.get_default_debugger_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the debugger name for the default debugger on current platform.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>search</strong> – If specified, stops looking for the debugger if the
+default one is not found (<a href="#id9"><span class="problematic" id="id10">|DebuggerSearch.OnlyFirst|</span></a>) or keeps
+looking for other compatible debuggers (<a href="#id11"><span class="problematic" id="id12">|DebuggerSearch.KeepLooking|</span></a>).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="servingcontent.html" class="btn btn-neutral float-right" title="Handling content for the browser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mozcrash.html" class="btn btn-neutral float-left" title="mozcrash — Print stack traces from minidumps left behind by crashed processes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

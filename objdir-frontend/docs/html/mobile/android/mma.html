@@ -1,0 +1,595 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MMA Mobile Marketing Automation &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>MMA Mobile Marketing Automation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mobile/android/mma.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mma-mobile-marketing-automation">
+<h1>MMA Mobile Marketing Automation<a class="headerlink" href="#mma-mobile-marketing-automation" title="Permalink to this headline">¶</a></h1>
+<p>We want to engage with users more. MMA is the project for this purpose. When a user performs a certain
+UI action, he/she will see a prompt and have a chance to  interact with it. For example, if a user uses
+Firefox 10 times a week, but Firefox is not his default browser, we’ll prompt the user the next time
+when he launchers our app, and guide him to set us as default browser.</p>
+<p>Mozilla is using a third party framework called “Leanplum” in order to achieve above goal for
+Android 56 release. Leanplum is a San Francisco company, founded in 2012. We put their SDK in
+our codebase and sync upstream when there’s a major update. Please find it in <code class="docutils literal notranslate"><span class="pre">mobile/android/thirdparty/com/leanplum</span></code>.
+The SDK is documented at <a class="reference external" href="https://www.leanplum.com/docs/android/">https://www.leanplum.com/docs/android/</a></p>
+<p>There are three major component in Leanplum SDK.
+1. Events : Triggers when users perform certain actions. An event will normally trigger a prompt message.
+2. Deep Links : Actions that users can perform to interact with the prompt message.
+3. Messages :  Campaigns that we want to engage with users. Messages is a combination of an Event and a Deep Link.</p>
+<div class="section" id="data-collection">
+<h2>Data collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="who-will-have-leanplum-enabled">
+<h3>Who will have Leanplum enabled?<a class="headerlink" href="#who-will-have-leanplum-enabled" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>We use Switchboard <a class="reference external" href="https://wiki.mozilla.org/Firefox/Kinto">https://wiki.mozilla.org/Firefox/Kinto</a> to filter users to have Leanplum enabled. Currently, for users in the USA
+and whose locale is set to English, 10% of that users will have Leanplum enabled.</p></li>
+<li><p>If the user has “Health Report” setting enabled.</p></li>
+<li><p>If above two are true, when the app starts, and switchboard configure arrived, Firefox for Android will send the
+triggers and message interaction history to Leanplum server when available.</p></li>
+</ul>
+</div>
+<div class="section" id="where-does-data-sent-to-the-leanplum-backend-go">
+<h3>Where does data sent to the Leanplum backend go?<a class="headerlink" href="#where-does-data-sent-to-the-leanplum-backend-go" title="Permalink to this headline">¶</a></h3>
+<p>The Leanplum SDK is hard-coded to send data to the endpoint <a class="reference external" href="https://www.leanplum.com">https://www.leanplum.com</a>.  The endpoint is
+defined by <code class="docutils literal notranslate"><span class="pre">com.leanplum.internal.Constants.API_HOST_NAME</span></code> at
+<a class="reference external" href="https://searchfox.org/mozilla-central/rev/c49a70b53f67dd5550eec8a08793805f2aca8d42/mobile/android/thirdparty/com/leanplum/internal/Constants.java#32">https://searchfox.org/mozilla-central/rev/c49a70b53f67dd5550eec8a08793805f2aca8d42/mobile/android/thirdparty/com/leanplum/internal/Constants.java#32</a>.</p>
+<p>The user is identified by Leanplum using a random UUID generated by Firefox for Android when Leanplum is initialized for the first time.
+This unique identifier is only used by Leanplum and can’t be tracked back to any Firefox users.</p>
+</div>
+<div class="section" id="what-data-is-collected-and-sent-to-the-leanplum-backend">
+<h3>What data is collected and sent to the Leanplum backend?<a class="headerlink" href="#what-data-is-collected-and-sent-to-the-leanplum-backend" title="Permalink to this headline">¶</a></h3>
+<p>The Leanplum SDK collects and sends two messages to the Leanplum backend.  The messages have the
+following parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Sent</span> <span class="n">every</span> <span class="n">time</span> <span class="n">when</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">triggered</span>
+<span class="s2">&quot;action&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;track&quot;</span>                   <span class="o">//</span> <span class="n">track</span><span class="p">:</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">tracked</span><span class="o">.</span>
+<span class="s2">&quot;event&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;Launch&quot;</span>                   <span class="o">//</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">triggered</span><span class="o">.</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">E_Saved_Bookmark</span><span class="o">.</span>
+<span class="s2">&quot;info&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;&quot;</span>                          <span class="o">//</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">triggered</span><span class="o">.</span> <span class="n">Basic</span> <span class="n">context</span> <span class="n">associated</span> <span class="k">with</span> <span class="n">the</span> <span class="n">event</span><span class="o">.</span>
+<span class="s2">&quot;value&quot;</span> <span class="o">-&gt;</span> <span class="mf">0.0</span>                        <span class="o">//</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">triggered</span><span class="o">.</span> <span class="n">Value</span> <span class="n">of</span> <span class="n">that</span> <span class="n">event</span><span class="o">.</span>
+<span class="s2">&quot;messageId&quot;</span> <span class="o">-&gt;</span> <span class="mi">5111602214338560</span>       <span class="o">//</span> <span class="n">Used</span> <span class="n">when</span> <span class="n">an</span> <span class="n">event</span> <span class="ow">is</span> <span class="n">triggered</span><span class="o">.</span> <span class="n">The</span> <span class="n">ID</span> <span class="n">of</span> <span class="n">the</span> <span class="n">message</span><span class="o">.</span>
+
+<span class="o">//</span> <span class="n">Sent</span> <span class="n">when</span> <span class="n">the</span> <span class="n">app</span> <span class="n">starts</span>
+<span class="s2">&quot;action&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;start&quot;</span>                   <span class="o">//</span> <span class="n">start</span><span class="p">:</span> <span class="n">Leanplum</span> <span class="n">SDK</span> <span class="n">starts</span><span class="o">.</span> <span class="n">heartbeat</span>
+<span class="s2">&quot;userAttributes&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;{                // A set of key-value pairs used to describe the user.</span>
+  <span class="s2">&quot;Focus Installed&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>           <span class="o">//</span> <span class="n">If</span> <span class="n">Focus</span> <span class="k">for</span> <span class="n">Android</span> <span class="ow">is</span> <span class="n">installed</span><span class="o">.</span>
+  <span class="s2">&quot;Klar Installed&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>            <span class="o">//</span> <span class="n">If</span> <span class="n">Klar</span> <span class="k">for</span> <span class="n">Android</span> <span class="ow">is</span> <span class="n">installed</span><span class="o">.</span>
+  <span class="s2">&quot;Pocket Installed&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>          <span class="o">//</span> <span class="n">If</span> <span class="n">Pocket</span> <span class="k">for</span> <span class="n">Android</span> <span class="ow">is</span> <span class="n">installed</span><span class="o">.</span>
+  <span class="s2">&quot;Signed In Sync&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>            <span class="o">//</span> <span class="n">If</span> <span class="n">the</span> <span class="n">user</span> <span class="n">has</span> <span class="n">signed</span> <span class="ow">in</span> <span class="n">to</span> <span class="n">Mozilla</span> <span class="n">account</span><span class="o">.</span>
+  <span class="s2">&quot;Default Browser&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>           <span class="o">//</span> <span class="n">If</span> <span class="n">the</span> <span class="n">user</span> <span class="n">has</span> <span class="nb">set</span> <span class="n">Firefox</span> <span class="k">for</span> <span class="n">Android</span> <span class="k">as</span> <span class="n">default</span> <span class="n">browser</span><span class="o">.</span>
+  <span class="s2">&quot;Pocket in Top Sites&quot;</span> <span class="o">-&gt;</span> <span class="n">true</span>       <span class="o">//</span> <span class="n">If</span> <span class="n">Pocket</span> <span class="n">recommendations</span> <span class="k">for</span> <span class="n">Top</span> <span class="n">Sites</span> <span class="n">home</span> <span class="n">panel</span> <span class="n">are</span> <span class="n">enabled</span> <span class="p">(</span><span class="n">by</span> <span class="n">default</span> <span class="ow">or</span> <span class="n">through</span> <span class="n">user</span> <span class="n">action</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="s2">&quot;appId&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;app_6Ao....&quot;</span>              <span class="o">//</span> <span class="n">Leanplum</span> <span class="n">App</span> <span class="n">ID</span><span class="o">.</span>
+<span class="s2">&quot;clientKey&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;dev_srwDUNZR....&quot;</span>     <span class="o">//</span> <span class="n">Leanplum</span> <span class="n">client</span> <span class="n">access</span> <span class="n">key</span><span class="o">.</span>
+<span class="s2">&quot;systemName&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;Android OS&quot;</span>          <span class="o">//</span> <span class="n">Fixed</span> <span class="n">String</span> <span class="ow">in</span> <span class="n">SDK</span><span class="o">.</span>
+<span class="s2">&quot;locale&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;zh_TW&quot;</span>                   <span class="o">//</span> <span class="n">System</span> <span class="n">Locale</span><span class="o">.</span>
+<span class="s2">&quot;timezone&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;Asia/Taipei&quot;</span>           <span class="o">//</span> <span class="n">System</span> <span class="n">Timezone</span><span class="o">.</span>
+<span class="s2">&quot;versionName&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;55.0a1&quot;</span>             <span class="o">//</span> <span class="n">Firefox</span> <span class="k">for</span> <span class="n">Android</span> <span class="n">version</span><span class="o">.</span>
+<span class="s2">&quot;systemVersion&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;7.1.2&quot;</span>            <span class="o">//</span> <span class="n">System</span> <span class="n">version</span><span class="o">.</span>
+<span class="s2">&quot;deviceModel&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;Google Pixel&quot;</span>       <span class="o">//</span> <span class="n">System</span> <span class="n">device</span> <span class="n">model</span><span class="o">.</span>
+<span class="s2">&quot;timezoneOffsetSeconds&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;28800&quot;</span>    <span class="o">//</span> <span class="n">User</span> <span class="n">timezone</span> <span class="n">offset</span> <span class="k">with</span> <span class="n">PST</span><span class="o">.</span>
+<span class="s2">&quot;deviceName&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;Google Pixel&quot;</span>        <span class="o">//</span> <span class="n">System</span> <span class="n">device</span> <span class="n">name</span><span class="o">.</span>
+<span class="s2">&quot;region&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;(detect)&quot;</span>                <span class="o">//</span> <span class="n">Not</span> <span class="n">used</span><span class="o">.</span> <span class="n">We</span> <span class="n">strip</span> <span class="n">play</span><span class="o">-</span><span class="n">SERVICES</span><span class="o">-</span><span class="n">location</span> <span class="n">so</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">will</span> <span class="n">be</span> <span class="n">the</span> <span class="n">default</span> <span class="n">stub</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">Leanplum</span> <span class="n">SDK</span><span class="o">.</span>
+<span class="s2">&quot;city&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;(detect)&quot;</span>                  <span class="o">//</span> <span class="n">Same</span> <span class="k">as</span> <span class="n">above</span><span class="o">.</span>
+<span class="s2">&quot;country&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;(detect)&quot;</span>               <span class="o">//</span> <span class="n">Same</span> <span class="k">as</span> <span class="n">above</span><span class="o">.</span>
+<span class="s2">&quot;location&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;(detect)&quot;</span>              <span class="o">//</span> <span class="n">Same</span> <span class="k">as</span> <span class="n">above</span><span class="o">.</span>
+<span class="s2">&quot;newsfeedMessages&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot; size = 0&quot;</span>     <span class="o">//</span> <span class="n">Not</span> <span class="n">used</span><span class="o">.</span> <span class="n">New</span> <span class="n">Leanplum</span> <span class="n">Inbox</span> <span class="n">message</span><span class="p">(</span><span class="n">Leanplum</span> <span class="n">feature</span><span class="p">)</span> <span class="n">count</span><span class="o">.</span>
+<span class="s2">&quot;includeDefaults&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;false&quot;</span>          <span class="o">//</span> <span class="n">Not</span> <span class="n">used</span><span class="o">.</span> <span class="n">Always</span> <span class="n">false</span><span class="o">.</span>
+
+<span class="o">//</span> <span class="n">Other</span> <span class="n">life</span> <span class="n">cycle</span> <span class="n">actions</span>
+<span class="s2">&quot;action&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;heartbeat&quot;</span>               <span class="o">//</span> <span class="n">heartbeat</span><span class="p">:</span> <span class="n">every</span> <span class="mi">15</span> <span class="n">minutes</span> <span class="n">when</span> <span class="n">app</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">foreground</span>
+                                      <span class="o">//</span> <span class="n">pauseSession</span><span class="p">:</span> <span class="n">when</span> <span class="n">app</span> <span class="n">goes</span> <span class="n">to</span> <span class="n">background</span>
+                                      <span class="o">//</span> <span class="n">resumeSession</span><span class="p">:</span> <span class="n">when</span> <span class="n">app</span> <span class="n">goes</span> <span class="n">to</span> <span class="n">foreground</span>
+
+<span class="o">//</span> <span class="n">Sent</span> <span class="k">for</span> <span class="n">every</span> <span class="n">action</span>
+<span class="s2">&quot;userId&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;b13b3c239d01aa7c&quot;</span>        <span class="o">//</span> <span class="n">Set</span> <span class="n">by</span> <span class="n">Firefox</span> <span class="k">for</span> <span class="n">Android</span><span class="p">,</span> <span class="n">we</span> <span class="n">use</span> <span class="n">random</span> <span class="n">uuid</span> <span class="n">so</span> <span class="n">users</span> <span class="n">are</span> <span class="n">anonymous</span> <span class="n">to</span> <span class="n">Leanplum</span><span class="o">.</span>
+<span class="s2">&quot;deviceId&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;b13b3c239d01aa7c&quot;</span>      <span class="o">//</span> <span class="n">Same</span> <span class="k">as</span> <span class="n">above</span><span class="o">.</span>
+<span class="s2">&quot;sdkVersion&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;2.2.2-SNAPSHOT&quot;</span>      <span class="o">//</span> <span class="n">Leanplum</span> <span class="n">SDK</span> <span class="n">version</span><span class="o">.</span>
+<span class="s2">&quot;devMode&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;true&quot;</span>                   <span class="o">//</span> <span class="n">If</span> <span class="n">the</span> <span class="n">SDK</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">developer</span> <span class="n">mode</span><span class="o">.</span> <span class="n">For</span> <span class="n">official</span> <span class="n">builds</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s false.</span>
+<span class="s2">&quot;time&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;1.497595093902E9&quot;</span>          <span class="o">//</span> <span class="n">System</span> <span class="n">time</span> <span class="ow">in</span> <span class="n">second</span><span class="o">.</span>
+<span class="s2">&quot;token&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;nksZ5pa0R5iegC7wj....&quot;</span>    <span class="o">//</span> <span class="n">Token</span> <span class="n">come</span> <span class="kn">from</span> <span class="nn">Leanplum</span> <span class="n">backend</span><span class="o">.</span>
+
+
+<span class="s2">&quot;gcmRegistrationId&quot;</span> <span class="o">-&gt;</span> <span class="s2">&quot;APA91....&quot;</span>    <span class="o">//</span> <span class="n">Send</span> <span class="n">GCM</span> <span class="n">token</span> <span class="n">to</span> <span class="n">Leanplum</span> <span class="n">backend</span><span class="o">.</span> <span class="n">This</span> <span class="n">happens</span> <span class="n">separately</span> <span class="n">when</span> <span class="n">Leanplum</span> <span class="n">SDK</span> <span class="n">gets</span> <span class="n">initialized</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="section" id="notes-on-what-data-is-collected">
+<h4>Notes on what data is collected<a class="headerlink" href="#notes-on-what-data-is-collected" title="Permalink to this headline">¶</a></h4>
+<p>User Identifier:
+Since Device ID is a random UUID, Leanplum can’t map the device to any know Client ID in Firefox for Android nor Advertising ID.</p>
+<p>Events:
+Most of the Leanplum events can be mapped to a single combination of Telemetry event (Event+Method+Extra).
+Some events are not collected in Mozilla Telemetry. This will be addressed separately in each campaign review.
+There are three elements that are used for each event. They are: event name, value(default: 0.0), and info(default: “”).
+Default value for event value is 0.0. Default value for event info is empty string.</p>
+<p>List of current Events related data that is sent:</p>
+<ul class="simple">
+<li><p>When a page could be reader mode and is visible to the user</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span><span class="p">:</span> <span class="s2">&quot;E_Reader_Available&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Download videos or any other media</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Download_Media_Saved_Image&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Save password and login from door hanger</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Saved_Login_And_Password&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Save a bookmark from Firefox for Android menu</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Saved_Bookmark&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Load the bookmark from home panel</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Opened_Bookmark&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Interact with search url area</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Interact_With_Search_URL_Area&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Interact with search widget</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Interact_With_Search_Widget&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>When a screenshot is taken</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Screenshot&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Open a new tab</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Opened_New_Tab&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>App start but Firefox for Android is not set as default browser</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Launch_But_Not_Default_Browser&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>General app start event</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Launch_Browser&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The user just dismissed on-boarding</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Dismiss_Onboarding&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Sign in Firefox Account</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_User_Signed_In_To_FxA&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Firefox Sync finished event</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_User_Finished_Sync&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The user just resumed the app from background</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Resumed_From_Background&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>User set Firefox for Android as default browser and resumed the app</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Changed_Default_To_Fennec&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>User installed the Focus app</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Just_Installed_Focus&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>User installed the Klar app</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Just_Installed_Klar&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>User accessed the promo webpage for the Awesomescreen’s Firefox promo banner.</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Opened_Firefox_Promo&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>User dismissed the Awesomescreen’s Firefox promo banner.</p></li>
+</ul>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span> <span class="p">:</span> <span class="s2">&quot;E_Dismissed_Firefox_Promo&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deep Links:
+Deep links are actions that can point Firefox for Android to open certain pages or load features such as <cite>show bookmark list</cite> or
+<cite>open a SUMO page</cite>. When users see a prompt Leanplum message, they can click the button(s) on it. These buttons can
+trigger the following deep links:</p>
+<ul class="simple">
+<li><p>Link to open pages specifically in Firefox for Android (firefox://open?url=)</p></li>
+<li><p>Link to Set Default Browser settings (firefox://default_browser)</p></li>
+<li><p>Link to specific Add-on page (<a class="reference external" href="http://link_to_the_add_on_page">http://link_to_the_add_on_page</a>)</p></li>
+<li><p>Link to sync signup/sign in (firefox://sign_up)</p></li>
+<li><p>Link to default search engine settings (firefox://preferences_search)</p></li>
+<li><p>Link to “Save as PDF” feature (firefox://save_as_pdf)</p></li>
+<li><p>Take user directly to a Sign up for a newsletter (<a class="reference external" href="http://link_to_newsletter_page">http://link_to_newsletter_page</a>)</p></li>
+<li><p>Link to bookmark list (firefox://bookmark_list)</p></li>
+<li><p>Link to history list (firefox://history_list)</p></li>
+<li><p>Link to main preferences (firefox://preferences)</p></li>
+<li><p>Link to privacy preferences (firefox://preferences_privacy)</p></li>
+<li><p>Link to notifications preferences (firefox://preferences_notifications)</p></li>
+<li><p>Link to accessibility preferences (firefox://preferences_accessibility)</p></li>
+<li><p>Link to general setting (firefox://preferences_general)</p></li>
+<li><p>Link to home page setting (firefox://preferences_home)</p></li>
+</ul>
+<p>Messages :
+Messages are prompts to the user from Leanplum. Messages can be in-app prompts or push notifications. The interaction of that prompt will be kept and sent to Leanplum backend (such
+as “Accept” and “Show”). A messages is a combination of an Event and a Deep Link. The combinations are downloaded from Leanplum
+when Leanplum SDK is initialized. When the criteria is met (set in Leanplum backend, could be when an event happens a certain number of times,
+and/or targeting certain user attribute ), a prompt message will show up. And there may be buttons for users to click. Those clicks
+may trigger deep links.</p>
+<p>We use another Mozilla’s Google Cloud Messaging(GCM) sender ID to send push notifications.
+These push notifications will look like the notifications that Sync sends out.
+Sender ID let GCM knows Mozilla is sending push notifications via Leanplum.
+GCM will generate a token at client side. We’ll send this GCM token to Leanplum so Leanplum knows whom to send push notifications.
+This token is only useful to Mozilla’s sender ID so it’s anonymized to other parties.
+Push Notifications can be triggered by Events, or be sent by Mozilla marketing team manually.</p>
+<p>The list of current messages for Android can be found here: <a class="reference external" href="https://wiki.mozilla.org/Leanplum_Contextual_Hints#Android">https://wiki.mozilla.org/Leanplum_Contextual_Hints#Android</a></p>
+</div>
+</div>
+</div>
+<div class="section" id="technical-notes">
+<h2>Technical notes<a class="headerlink" href="#technical-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-flags-controlling-the-leanplum-sdk-integration">
+<h3>Build flags controlling the Leanplum SDK integration<a class="headerlink" href="#build-flags-controlling-the-leanplum-sdk-integration" title="Permalink to this headline">¶</a></h3>
+<p>To test this locally, add lines like:</p>
+<p>export MOZ_ANDROID_MMA=1
+ac_add_options –with-leanplum-sdk-keyfile=/path/to/leanplum-sdk-developer.token</p>
+<p>MOZ_ANDROID_MMA depends on MOZ_ANDROID_GOOGLE_PLAY_SERVICES and MOZ_ANDROID_GCM.
+Since Leanplum requires Google Play Services library, those flags are a proxy for it, and enable respectively.</p>
+<p>We want to enable MOZ_ANDROID_MMA in Nightly, but only for
+MOZILLA_OFFICIAL builds.  Since MOZILLA_OFFICIAL is still defined in
+old-configure.in, we can’t integrate it in
+mobile/android/moz.configure, and therefore we enable using the
+automation mozconfigs.</p>
+</div>
+<div class="section" id="technical-notes-on-the-leanplum-sdk-integration">
+<h3>Technical notes on the Leanplum SDK integration<a class="headerlink" href="#technical-notes-on-the-leanplum-sdk-integration" title="Permalink to this headline">¶</a></h3>
+<p>Just like Adjust, MmaDelegate uses mmaInterface to inject the MmaLeanplumImp and MmaStubImp.
+Constants used by Leanplum is in MmaConstants. Services in AndroidManifest are in
+<code class="docutils literal notranslate"><span class="pre">mobile/android/base/MmaAndroidManifest_services.xml.in</span></code> which is also injected by build flag
+MOZ_ANDROID_MMA.</p>
+</div>
+<div class="section" id="notes-and-links">
+<h3>Notes and links<a class="headerlink" href="#notes-and-links" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Leanplum web page: <a class="reference external" href="http://leanplum.com/">http://leanplum.com/</a></p></li>
+<li><p>Leanplum SDK github repo: <a class="reference external" href="https://github.com/Leanplum/Leanplum-Android-SDK">https://github.com/Leanplum/Leanplum-Android-SDK</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

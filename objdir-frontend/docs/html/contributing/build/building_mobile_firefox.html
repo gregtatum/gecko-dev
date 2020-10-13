@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Firefox for Mobile Devices &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Bug Handling" href="../../bug-mgmt/index.html" />
+    <link rel="prev" title="Understanding Artifact Builds" href="artifact_builds.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/capturing_minidump.html">Capturing a minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_gdb.html">Debugging Firefox with GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_rr.html">Debugging Firefox with rr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/stacktrace_report.html">How to get a stacktrace for a bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="artifact_builds.html">Understanding Artifact Builds</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>Firefox for Mobile Devices</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/build/building_mobile_firefox.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="firefox-for-mobile-devices">
+<h1>Firefox for Mobile Devices<a class="headerlink" href="#firefox-for-mobile-devices" title="Permalink to this headline">¶</a></h1>
+<p>We have several different mobile products aimed at different tasks,
+devices, and audiences:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://geckoview.dev/contributor/geckoview-quick-start">Building Firefox for
+Android</a>.
+(Codename: Fennec)</p></li>
+<li><p><a class="reference external" href="https://developer.mozilla.org/docs/Mozilla/Firefox_for_iOS">Building Firefox for iOS</a>,
+our general-purpose browser for iOS with desktop sync built-in.</p></li>
+<li><p><a class="reference external" href="https://github.com/mozilla-mobile/focus">Building Firefox
+Focus</a>, our
+privacy-focused browser for
+<a class="reference external" href="https://github.com/mozilla-mobile/focus-ios">iOS</a> and
+<a class="reference external" href="https://github.com/mozilla-mobile/focus-android">Android</a>.</p></li>
+</ul>
+<p>For both Desktop and Mobile development, please bear the following in
+mind:</p>
+<ul class="simple">
+<li><p>While you can build Firefox on older hardware it can take quite a bit
+of time to compile on slower machines. Having at least 8GB of RAM is
+recommended, and more is always better. The build process is both CPU
+and I/O intensive, so building on a machine with an SSD is also
+strongly preferred.</p></li>
+<li><p>Fast broadband internet is strongly recommended as well. Both the
+development environment and the source code repository are quite
+large.</p></li>
+<li><p>Though you can build Firefox to run on 32-bit machines, the build
+process for almost all of our products requires a 64-bit OS.</p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../bug-mgmt/index.html" class="btn btn-neutral float-right" title="Bug Handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="artifact_builds.html" class="btn btn-neutral float-left" title="Understanding Artifact Builds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

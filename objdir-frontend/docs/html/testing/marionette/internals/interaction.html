@@ -1,0 +1,586 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>interaction module &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="listener module" href="listener.html" />
+    <link rel="prev" title="format module" href="format.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Prefs.html">Preferences</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">action module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addon.html">addon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html">assert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="browser.html">browser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capabilities.html">capabilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capture.html">capture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cert.html">cert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">cookie module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dom.html">dom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driver.html">driver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html">element module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error.html">error module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate.html">evaluate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event.html">event module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format.html">format module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">interaction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listener.html">listener module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">message module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modal.html">modal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navigate.html">navigate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html">packets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefs.html">prefs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy.html">proxy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reftest.html">reftest module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">server module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync.html">sync module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Marionette</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>interaction module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/testing/marionette/internals/interaction.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interaction-module">
+<h1>interaction module<a class="headerlink" href="#interaction-module" title="Permalink to this headline">¶</a></h1>
+<dl class="js class">
+<dt id="interaction">
+<em class="property">class </em><code class="sig-name descname">interaction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#interaction" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="js function">
+<dt id="interaction.clearElement">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">clearElement</code><span class="sig-paren">(</span><em class="sig-param">el</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.clearElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears the form control or the editable element, if required.</p>
+<p>Before clearing the element, it will attempt to scroll it into
+view if it is not already in the viewport.  An error is raised
+if the element cannot be brought into view.</p>
+<p>If the element is a submittable form control and it is empty
+(it has no value or it has no files associated with it, in the
+case it is a &lt;code&gt;&amp;lt;input type=file&amp;gt;&lt;/code&gt; element) or
+it is an editing host and its &lt;code&gt;innerHTML&lt;/code&gt; content IDL
+attribute is empty, this function acts as a no-op.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>Element</em>) – Element to clear.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#InvalidElementStateError" title="InvalidElementStateError"><strong>InvalidElementStateError</strong></a> – If element is disabled, read-only, non-editable, not a submittable element or not an editing host, or cannot be scrolled into view.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.clickElement">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">clickElement</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">strict=false</em>, <em class="sig-param">specCompat=false</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.clickElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interact with an element by clicking it.</p>
+<p>The element is scrolled into view before visibility- or interactability
+checks are performed.</p>
+<p>Selenium-style visibility checks will be performed
+if &lt;var&gt;specCompat&lt;/var&gt; is false (default).  Otherwise
+pointer-interactability checks will be performed.  If either of these
+fail an <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> ElementNotInteractableError} is thrown.</p>
+<p>If &lt;var&gt;strict&lt;/var&gt; is enabled (defaults to disabled), further
+accessibility checks will be performed, and these may result in an
+<a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> ElementNotAccessibleError} being returned.</p>
+<p>When &lt;var&gt;el&lt;/var&gt; is not enabled, an <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> InvalidElementStateError}
+is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement|XULElement</em>) – Element to click.</p></li>
+<li><p><strong>strict</strong> (<em>boolean</em>) – strict Enforce strict accessibility tests.</p></li>
+<li><p><strong>specCompat</strong> (<em>boolean</em>) – specCompat Use WebDriver specification compatible interactability definition.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="error.html#ElementNotInteractableError" title="ElementNotInteractableError"><strong>ElementNotInteractableError</strong></a> – If either Selenium-style visibility check or pointer-interactability check fails.</p></li>
+<li><p><a class="reference internal" href="error.html#ElementClickInterceptedError" title="ElementClickInterceptedError"><strong>ElementClickInterceptedError</strong></a> – If &lt;var&gt;el&lt;/var&gt; is obscured by another element and a click would not hit, in &lt;var&gt;specCompat&lt;/var&gt; mode.</p></li>
+<li><p><a class="reference internal" href="error.html#ElementNotAccessibleError" title="ElementNotAccessibleError"><strong>ElementNotAccessibleError</strong></a> – If &lt;var&gt;strict&lt;/var&gt; is true and element is not accessible.</p></li>
+<li><p><a class="reference internal" href="error.html#InvalidElementStateError" title="InvalidElementStateError"><strong>InvalidElementStateError</strong></a> – If &lt;var&gt;el&lt;/var&gt; is not enabled.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.flushEventLoop">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">flushEventLoop</code><span class="sig-paren">(</span><em class="sig-param">el</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.flushEventLoop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Waits until the event loop has spun enough times to process the
+DOM events generated by clicking an element, or until the document
+is unloaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>Element</em>) – Element that is expected to receive the click.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Promise</strong> – Promise is resolved once &lt;var&gt;el&lt;/var&gt; has been clicked (its &lt;code&gt;click&lt;/code&gt; event fires), the document is unloaded, or a 500 ms timeout is reached.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.isElementDisplayed">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">isElementDisplayed</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">strict=false</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.isElementDisplayed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the element displayedness of an element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement|XULElement</em>) – Element to determine displayedness of.</p></li>
+<li><p><strong>strict</strong> (<em>boolean</em>) – strict Enforce strict accessibility tests.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if element is displayed, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.isElementEnabled">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">isElementEnabled</code><span class="sig-paren">(</span><em class="sig-param">el</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.isElementEnabled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if element is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement|XULElement</em>) – Element to test if is enabled.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if enabled, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.isElementSelected">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">isElementSelected</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">strict=false</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.isElementSelected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if the referenced element is selected or not, with
+an additional accessibility check if &lt;var&gt;strict&lt;/var&gt; is true.</p>
+<p>This operation only makes sense on input elements of the checkbox-
+and radio button states, and option elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement|XULElement</em>) – Element to test if is selected.</p></li>
+<li><p><strong>strict</strong> (<em>boolean</em>) – strict Enforce strict accessibility tests.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#ElementNotAccessibleError" title="ElementNotAccessibleError"><strong>ElementNotAccessibleError</strong></a> – If &lt;var&gt;el&lt;/var&gt; is not accessible when &lt;var&gt;strict&lt;/var&gt; is true.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>boolean</strong> – True if element is selected, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.isKeyboardInteractable">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">isKeyboardInteractable</code><span class="sig-paren">(</span><em class="sig-param">el</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.isKeyboardInteractable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs checks if &lt;var&gt;el&lt;/var&gt; is keyboard-interactable.</p>
+<p>To decide if an element is keyboard-interactable various properties,
+and computed CSS styles have to be evaluated. Whereby it has to be taken
+into account that the element can be part of a container (eg. option),
+and as such the container has to be checked instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>Element</em>) – Element to check.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if element is keyboard-interactable, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.moveCaretToEnd">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">moveCaretToEnd</code><span class="sig-paren">(</span><em class="sig-param">el</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.moveCaretToEnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>If &lt;var&gt;el&lt;var&gt; is a textual form control and no previous
+selection state exists, move the caret to the end of the form control.</p>
+<p>The element has to be a &lt;code&gt;&amp;lt;input type=text&amp;gt;&lt;/code&gt;
+or &lt;code&gt;&amp;lt;textarea&amp;gt;&lt;/code&gt; element for the cursor to move
+be moved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>Element</em>) – Element to potential move the caret in.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.selectOption">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">selectOption</code><span class="sig-paren">(</span><em class="sig-param">option</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.selectOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select &lt;tt&gt;&amp;lt;option&amp;gt;&lt;/tt&gt; element in a &lt;tt&gt;&amp;lt;select&amp;gt;&lt;/tt&gt;
+list.</p>
+<p>Because the dropdown list of select elements are implemented using
+native widget technology, our trusted synthesised events are not able
+to reach them.  Dropdowns are instead handled mimicking DOM events,
+which for obvious reasons is not ideal, but at the current point in
+time considered to be good enough.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>option</strong> (<em>HTMLOptionElement</em>) – Option element to select.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If &lt;var&gt;el&lt;/var&gt; is a XUL element or not an &lt;tt&gt;&amp;lt;option&amp;gt;&lt;/tt&gt; element.</p></li>
+<li><p><strong>Error</strong> – If unable to find &lt;var&gt;el&lt;/var&gt;’s parent &lt;tt&gt;&amp;lt;select&amp;gt;&lt;/tt&gt; element.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.sendKeysToElement">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">sendKeysToElement</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">value</em>, <em class="sig-param">strictFileInteractability</em>, <em class="sig-param">accessibilityChecks</em>, <em class="sig-param">webdriverClick</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.sendKeysToElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send keys to element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement|XULElement</em>) – Element to send key events to.</p></li>
+<li><p><strong>'Array' ].&lt;string&gt; value</strong> (<em>[</em>) – Sequence of keystrokes to send to the element.</p></li>
+<li><p><strong>strictFileInteractability</strong> (<em>boolean</em>) – Run interactability checks on <cite>&lt;input type=file&gt;</cite> elements.</p></li>
+<li><p><strong>accessibilityChecks</strong> (<em>boolean</em>) – Enforce strict accessibility tests.</p></li>
+<li><p><strong>webdriverClick</strong> (<em>boolean</em>) – Use WebDriver specification compatible interactability definition.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.setFormControlValue">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">setFormControlValue</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.setFormControlValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets a form element’s value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>DOMElement</em>) – An form element, e.g. input, textarea, etc.</p></li>
+<li><p><strong>value</strong> (<em>string</em>) – The value to be set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If &lt;var&gt;el&lt;/var&gt; is not an supported form element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="interaction.uploadFiles">
+<code class="sig-prename descclassname">interaction.</code><code class="sig-name descname">uploadFiles</code><span class="sig-paren">(</span><em class="sig-param">el</em>, <em class="sig-param">paths</em><span class="sig-paren">)</span><a class="headerlink" href="#interaction.uploadFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates an <cite>&lt;input type=file&gt;</cite>’s file list with given <cite>paths</cite>.</p>
+<p>Hereby will the file list be appended with <cite>paths</cite> if the
+element allows multiple files. Otherwise the list will be
+replaced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>el</strong> (<em>HTMLInputElement</em>) – An <cite>input type=file</cite> element.</p></li>
+<li><p><strong>'Array' ].&lt;string&gt; paths</strong> (<em>[</em>) – List of full paths to any of the files to be uploaded.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#InvalidArgumentError" title="InvalidArgumentError"><strong>InvalidArgumentError</strong></a> – If <cite>path</cite> doesn’t exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="listener.html" class="btn btn-neutral float-right" title="listener module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="format.html" class="btn btn-neutral float-left" title="format module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

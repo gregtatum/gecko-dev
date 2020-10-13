@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to handle E10S in actors &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Writing an Actor" href="protocol.js.html" />
+    <link rel="prev" title="How actors are organized" href="actor-hierarchy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#backend">Backend</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="protocol.html">Remote Debugging Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="client-api.html">Client API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugger-api.html">Debugger API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backward-compatibility.html">Backward Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-hierarchy.html">Actors Organization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Handling Multi-Processes in Actors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#use-case-and-examples">Use case and examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-of-the-setup-flow">Summary of the setup flow</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="protocol.js.html">Writing Actors With protocol.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-registration.html">Registering A New Actor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-best-practices.html">Actor Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>How to handle E10S in actors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/backend/actor-e10s-handling.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-handle-e10s-in-actors">
+<h1>How to handle E10S in actors<a class="headerlink" href="#how-to-handle-e10s-in-actors" title="Permalink to this headline">¶</a></h1>
+<p>In multi-process environments, most devtools actors are created and initialized in the child content process, to be able to access the resources they are exposing to the toolbox. But sometimes, these actors need to access things in the parent process too. Here’s why and how.</p>
+<p>{% hint style=”danger” %}</p>
+<p>This documentation page is <strong>deprecated</strong>. <code class="docutils literal notranslate"><span class="pre">setupInParent</span></code> relies on the message manager which is being deprecated. Furthermore, communications between parent and content processes should be avoided for security reasons. If possible, the client should be responsible for calling actors both on the parent and content process.</p>
+<p>This page will be removed when all actors relying on this API are removed.</p>
+<p>{% endhint %}</p>
+<div class="section" id="use-case-and-examples">
+<h2>Use case and examples<a class="headerlink" href="#use-case-and-examples" title="Permalink to this headline">¶</a></h2>
+<p>Some actors need to exchange messages between the parent and the child process (typically when some components aren’t available in the child process).</p>
+<p>To that end, there’s a parent/child setup mechanism at <code class="docutils literal notranslate"><span class="pre">DevToolsServer</span></code> level that can be used.</p>
+<p>When the actor is loaded for the first time in the <code class="docutils literal notranslate"><span class="pre">DevToolsServer</span></code> running in the child process, it may decide to run a setup procedure to load a module in the parent process with which to communicate.</p>
+<p>Example code for the actor running in the child process:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  const {DevToolsServer} = require(&quot;devtools/server/devtools-server&quot;);
+
+  // Setup the child&lt;-&gt;parent communication only if the actor module
+  // is running in a child process.
+  if (DevToolsServer.isInChildProcess) {
+    setupChildProcess();
+  }
+
+  function setupChildProcess() {
+    // `setupInParent`  is defined on DevToolsServerConnection,
+    // your actor receives a reference to one instance in its constructor.
+    conn.setupInParent({
+      module: &quot;devtools/server/actors/module-name&quot;,
+      setupParent: &quot;setupParentProcess&quot;
+    });
+    // ...
+  }
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">setupChildProcess</span></code> helper defined and used in the previous example uses the <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.setupInParent</span></code> to run a given setup function in the parent process DevTools Server.</p>
+<p>With this, the <code class="docutils literal notranslate"><span class="pre">DevToolsServer</span></code> running in the parent process will require the requested module and call its <code class="docutils literal notranslate"><span class="pre">setupParentProcess</span></code> function (which should be exported on the module).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setupParentProcess</span></code> function will receive a parameter that contains a reference to the <strong>MessageManager</strong> and a prefix that should be used to send/receive messages between the child and parent processes.</p>
+<p>See below an example implementation of a <code class="docutils literal notranslate"><span class="pre">setupParent</span></code> function in the parent process:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exports</span><span class="o">.</span><span class="n">setupParentProcess</span> <span class="o">=</span> <span class="n">function</span> <span class="n">setupParentProcess</span><span class="p">({</span> <span class="n">mm</span><span class="p">,</span> <span class="n">prefix</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">Start</span> <span class="n">listening</span> <span class="k">for</span> <span class="n">messages</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">actor</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">child</span> <span class="n">process</span><span class="o">.</span>
+  <span class="n">setMessageManager</span><span class="p">(</span><span class="n">mm</span><span class="p">);</span>
+
+  <span class="n">function</span> <span class="n">handleChildRequest</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">switch</span> <span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">method</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">case</span> <span class="s2">&quot;get&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">doGetInParentProcess</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="n">case</span> <span class="s2">&quot;list&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">doListInParentProcess</span><span class="p">();</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="n">default</span><span class="p">:</span>
+        <span class="n">console</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Unknown method name&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">method</span><span class="p">);</span>
+        <span class="n">throw</span> <span class="n">new</span> <span class="n">Error</span><span class="p">(</span><span class="s2">&quot;Unknown method name&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="n">function</span> <span class="n">setMessageManager</span><span class="p">(</span><span class="n">newMM</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mm</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">//</span> <span class="n">Remove</span> <span class="n">listener</span> <span class="kn">from</span> <span class="nn">old</span> <span class="n">message</span> <span class="n">manager</span>
+      <span class="n">mm</span><span class="o">.</span><span class="n">removeMessageListener</span><span class="p">(</span><span class="s2">&quot;debug:some-message-name&quot;</span><span class="p">,</span> <span class="n">handleChildRequest</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="n">Switch</span> <span class="n">to</span> <span class="n">the</span> <span class="n">new</span> <span class="n">message</span> <span class="n">manager</span> <span class="k">for</span> <span class="n">future</span> <span class="n">use</span>
+    <span class="o">//</span> <span class="n">Note</span><span class="p">:</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">that</span> <span class="nb">any</span> <span class="n">other</span> <span class="n">functions</span> <span class="n">also</span> <span class="n">use</span> <span class="n">the</span> <span class="n">new</span> <span class="n">reference</span><span class="o">.</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">newMM</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mm</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">//</span> <span class="n">Add</span> <span class="n">listener</span> <span class="n">to</span> <span class="n">new</span> <span class="n">message</span> <span class="n">manager</span>
+      <span class="n">mm</span><span class="o">.</span><span class="n">addMessageListener</span><span class="p">(</span><span class="s2">&quot;debug:some-message-name&quot;</span><span class="p">,</span> <span class="n">handleChildRequest</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="n">onBrowserSwap</span><span class="p">:</span> <span class="n">setMessageManager</span><span class="p">,</span>
+    <span class="n">onDisconnected</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="n">setMessageManager</span><span class="p">(</span><span class="n">null</span><span class="p">),</span>
+  <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>The server will call the <code class="docutils literal notranslate"><span class="pre">onDisconnected</span></code> method returned by the parent process setup flow to give the actor modules the chance to cleanup their handlers registered on the disconnected message manager.</p>
+<p>The server will call the <code class="docutils literal notranslate"><span class="pre">onBrowserSwap</span></code> method returned by the parent process setup flow to notify actor modules when the message manager for the target frame has changed.  The parent process code should remove any message listeners from the previous message manager and add them to the new one.</p>
+</div>
+<div class="section" id="summary-of-the-setup-flow">
+<h2>Summary of the setup flow<a class="headerlink" href="#summary-of-the-setup-flow" title="Permalink to this headline">¶</a></h2>
+<p>In the child process:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">DevToolsServer</span></code> loads an actor module,</p></li>
+<li><p>the actor module checks <code class="docutils literal notranslate"><span class="pre">DevToolsServer.isInChildProcess</span></code> to know whether it runs in a child process or not,</p></li>
+<li><p>the actor module then uses the <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.setupInParent</span></code> helper to start setting up a parent-process counterpart,</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.setupInParent</span></code> helper asks the parent process to run the required module’s setup function,</p></li>
+<li><p>the actor module uses the <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.parentMessageManager.sendSyncMessage</span></code> and <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.parentMessageManager.addMessageListener</span></code> helpers to send or listen to message.</p></li>
+</ul>
+<p>In the parent process:</p>
+<ul class="simple">
+<li><p>The DevToolsServer receives the <code class="docutils literal notranslate"><span class="pre">DevToolsServerConnection.setupInParent</span></code> request,</p></li>
+<li><p>tries to load the required module,</p></li>
+<li><p>tries to call the <code class="docutils literal notranslate"><span class="pre">module[setupParent]</span></code> function with the frame message manager and the prefix as parameters <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">mm,</span> <span class="pre">prefix</span> <span class="pre">}</span></code>,</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">setupParent</span></code> function then uses the mm to subscribe the message manager events,</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">setupParent</span></code> function returns an object with <code class="docutils literal notranslate"><span class="pre">onDisconnected</span></code> and <code class="docutils literal notranslate"><span class="pre">onBrowserSwap</span></code> methods which the server can use to notify the module of various lifecycle events</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="protocol.js.html" class="btn btn-neutral float-right" title="Writing an Actor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="actor-hierarchy.html" class="btn btn-neutral float-left" title="How actors are organized" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Objects Replaced by Navigations &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="DOM Workers &amp; Storage" href="../workersAndStorage/index.html" />
+    <link rel="prev" title="BrowsingContext and WindowContext" href="BrowsingContext.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">DOM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ipc/index.html">DOM IPC</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">DOM Navigation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="embedding.html">Browsing Context Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="BrowsingContext.html">BrowsingContext and WindowContext</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Objects Replaced by Navigations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#types-of-navigations">Types of Navigations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workersAndStorage/index.html">DOM Workers &amp; Storage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">DOM</a> &raquo;</li>
+        
+          <li><a href="index.html">DOM Navigation</a> &raquo;</li>
+        
+      <li>Objects Replaced by Navigations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/dom/navigation/nav_replace.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objects-replaced-by-navigations">
+<h1>Objects Replaced by Navigations<a class="headerlink" href="#objects-replaced-by-navigations" title="Permalink to this headline">¶</a></h1>
+<p>There are 3 major types of navigations, each of which can cause different
+objects to be replaced. The general rules look something like this:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">objects replaced or preserved across navigations</span><a class="headerlink" href="#id5" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Class/Id</p></th>
+<th class="head"><p><span class="xref std std-ref">in-process navigations</span></p></th>
+<th class="head"><p><span class="xref std std-ref">cross-process navigations</span></p></th>
+<th class="head"><p><span class="xref std std-ref">cross-group navigations</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BrowserId <a class="footnote-reference brackets" href="#bid" id="id1">1</a></p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+</tr>
+<tr class="row-odd"><td><p>BrowsingContextWebProgress</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+</tr>
+<tr class="row-even"><td><p>BrowsingContextGroup</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-odd"><td><p>BrowsingContext</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-even"><td><p>nsFrameLoader</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-odd"><td><p>RemoteBrowser</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-even"><td><p>Browser{Parent,Child}</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-odd"><td><p>nsDocShell</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-even"><td><p>nsGlobalWindowOuter</p></td>
+<td><p>✔️ preserved</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-odd"><td><p>nsGlobalWindowInner</p></td>
+<td><p>❌ replaced <a class="footnote-reference brackets" href="#inner" id="id2">2</a></p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-even"><td><p>WindowContext</p></td>
+<td><p>❌ replaced <a class="footnote-reference brackets" href="#inner" id="id3">2</a></p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-odd"><td><p>WindowGlobal{Parent,Child}</p></td>
+<td><p>❌ replaced <a class="footnote-reference brackets" href="#inner" id="id4">2</a></p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+<tr class="row-even"><td><p>Document</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+<td><p>❌ replaced</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="footnote brackets">
+<dt class="label" id="bid"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The BrowserId is a unique ID on each <code class="docutils literal notranslate"><span class="pre">BrowsingContext</span></code> object, obtained
+using <code class="docutils literal notranslate"><span class="pre">GetBrowserId</span></code>, not a class. This ID will persist even when a
+<code class="docutils literal notranslate"><span class="pre">BrowsingContext</span></code> is replaced (e.g. due to
+<code class="docutils literal notranslate"><span class="pre">Cross-Origin-Opener-Policy</span></code>).</p>
+</dd>
+<dt class="label" id="inner"><span class="brackets">2</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>,<a href="#id4">3</a>)</span></dt>
+<dd><p>When navigating from the initial <code class="docutils literal notranslate"><span class="pre">about:blank</span></code> document to a same-origin
+document, the same <code class="docutils literal notranslate"><span class="pre">nsGlobalWindowInner</span></code> may be used. This initial
+<code class="docutils literal notranslate"><span class="pre">about:blank</span></code> document is the one created when synchronously accessing a
+newly-created pop-up window from <code class="docutils literal notranslate"><span class="pre">window.open</span></code>, or a newly-created
+document in an <code class="docutils literal notranslate"><span class="pre">&lt;iframe&gt;</span></code>.</p>
+</dd>
+</dl>
+<div class="section" id="types-of-navigations">
+<h2>Types of Navigations<a class="headerlink" href="#types-of-navigations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="in-process-navigations">
+<h3>in-process navigations<a class="headerlink" href="#in-process-navigations" title="Permalink to this headline">¶</a></h3>
+<p>An in-process navigation is the traditional type of navigation, and the most
+common type of navigation when <span class="xref std std-ref">Fission</span> is not enabled.</p>
+<p>These navigations are used when no process switching or BrowsingContext
+replacement is required, which includes most navigations with Fission
+disabled, and most same site-origin navigations when Fission is enabled.</p>
+</div>
+<div class="section" id="cross-process-navigations">
+<h3>cross-process navigations<a class="headerlink" href="#cross-process-navigations" title="Permalink to this headline">¶</a></h3>
+<p>A cross-process navigation is used when a navigation requires a process
+switch to occur, and no BrowsingContext replacement is required. This is a
+common type of load when <span class="xref std std-ref">Fission</span> is enabled, though it is also used
+for navigations to and from special URLs like <code class="docutils literal notranslate"><span class="pre">file://</span></code> URIs when
+Fission is disabled.</p>
+<p>These process changes are triggered by <code class="docutils literal notranslate"><span class="pre">DocumentLoadListener</span></code> when it
+determines that a process switch is required. See that class’s documentation
+for more details.</p>
+</div>
+<div class="section" id="cross-group-navigations">
+<h3>cross-group navigations<a class="headerlink" href="#cross-group-navigations" title="Permalink to this headline">¶</a></h3>
+<p>A cross-group navigation is used when the navigation’s <a class="reference external" href="https://html.spec.whatwg.org/multipage/origin.html#browsing-context-group-switches-due-to-cross-origin-opener-policy">response requires
+a browsing context group switch</a>.</p>
+<p>These types of switches may or may not cause the process to change, but will
+finish within a different <code class="docutils literal notranslate"><span class="pre">BrowsingContextGroup</span></code> than they started with.
+Like <span class="xref std std-ref">cross-process navigations</span>, these navigations are triggered using
+the process switching logic in <code class="docutils literal notranslate"><span class="pre">DocumentLoadListener</span></code>.</p>
+<p>As of the time of this writing, we currently trigger a cross-group navigation
+in the following circumstances, though this may change in the future:</p>
+<ul class="simple">
+<li><p>If the <a class="reference external" href="https://html.spec.whatwg.org/multipage/origin.html#the-cross-origin-opener-policy-header">Cross-Origin-Opener-Policy</a>
+header is specified, and a mismatch is detected.</p></li>
+<li><p>When switching processes between the parent process, and a content process.</p></li>
+<li><p>When loading an extension document in a toplevel browsing context.</p></li>
+<li><p>When navigating away from a preloaded <code class="docutils literal notranslate"><span class="pre">about:newtab</span></code> document.</p></li>
+<li><p>Sometimes, when loading a document with the <code class="docutils literal notranslate"><span class="pre">Large-Allocation</span></code> header on
+32-bit windows.</p></li>
+</ul>
+<p>State which needs to be saved over cross-group navigations on
+<code class="docutils literal notranslate"><span class="pre">BrowsingContext</span></code> instances is copied in the
+<code class="docutils literal notranslate"><span class="pre">CanonicalBrowsingContext::ReplacedBy</span></code> method.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../workersAndStorage/index.html" class="btn btn-neutral float-right" title="DOM Workers &amp; Storage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="BrowsingContext.html" class="btn btn-neutral float-left" title="BrowsingContext and WindowContext" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

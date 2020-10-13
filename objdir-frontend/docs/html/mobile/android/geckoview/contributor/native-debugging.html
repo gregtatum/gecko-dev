@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugging Native Code &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="WebIDL" href="../../../../dom/bindings/webidl/index.html" />
+    <link rel="prev" title="Mozilla Central Contributor Guide" href="contributing-to-mc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../consumer/index.html">Using GeckoView</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Contributing to GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#contributor-site">Contributor Site</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="geckoview-quick-start.html">GeckoView Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="for-gecko-engineers.html">GeckoView For Gecko Engineers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mc-quick-start.html">Mozilla Central Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contributing-to-mc.html">Mozilla Central Contributor Guide</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Debugging Native Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to GeckoView</a> &raquo;</li>
+        
+      <li>Debugging Native Code</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/contributor/native-debugging.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging-native-code">
+<h1>Debugging Native Code<a class="headerlink" href="#debugging-native-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="debugging-native-code-in-android-studio">
+<h2>Debugging Native Code in Android Studio.<a class="headerlink" href="#debugging-native-code-in-android-studio" title="Permalink to this headline">¶</a></h2>
+<p>If you want to work on the C++ code that powers GeckoView, you will need
+to be able to perform native debugging inside Android Studio. This
+article will guide you through how to do that.</p>
+<p>If you need to get set up with GeckoView for the first time, follow the
+<a class="reference external" href="geckoview-quick-start.html">Quick Start Guide</a>.</p>
+<div class="section" id="perform-a-debug-build-of-gecko">
+<h3>Perform a debug build of Gecko.<a class="headerlink" href="#perform-a-debug-build-of-gecko" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Edit your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file and add the following lines. These will
+ensure that the build includes debug checks and symbols.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">=</span><span class="s2">&quot;&lt;path&gt;/.mozbuild/android-ndk-r17b&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Ensure that the following lines are commented out in your
+<code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> if present. <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">configure</span></code> will not allow
+artifact builds to be enabled when generating a debug build.</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ac_add_options --enable-artifact-builds</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>To be absolutely sure that Android Studio will pick up your debug
+symbols, the first time you perform a debug build it is best to
+clobber your <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR</span></code>. Subsequent builds should not need this
+step.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach clobber
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Build as usual. Because this is a debug build, and because you have
+clobbered your <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR</span></code>, this will take a long time. Subsequent
+builds will be incremental and take less time, so go make yourself a
+cup of your favourite beverage.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-up-lldb-to-find-your-symbols">
+<h3>Set up lldb to find your symbols<a class="headerlink" href="#set-up-lldb-to-find-your-symbols" title="Permalink to this headline">¶</a></h3>
+<p>Edit your <code class="docutils literal notranslate"><span class="pre">~/.lldbinit</span></code> file (or create one if one does not already
+exist) and add the following lines.</p>
+<p>The first line tells LLDB to enable inline breakpoints - Android Studio
+will need this if you want to use visual breakpoints.</p>
+<p>The remaining lines tell LLDB where to go to find the symbols for
+debugging.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>settings <span class="nb">set</span> target.inline-breakpoint-strategy always
+settings append target.exec-search-paths &lt;PATH&gt;/objdir-android-opt/toolkit/library/build
+settings append target.exec-search-paths &lt;PATH&gt;/objdir-android-opt/mozglue/build
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="set-up-android-studio-to-perform-native-debugging">
+<h2>Set up Android Studio to perform native debugging.<a class="headerlink" href="#set-up-android-studio-to-perform-native-debugging" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Edit the configuration that you want to debug by clicking
+<code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">-&gt;</span> <span class="pre">Edit</span> <span class="pre">Configurations...</span></code> and selecting the correct
+configuration from the options on the left hand side of the resulting
+window.</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> tab.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Dual</span></code> from the <code class="docutils literal notranslate"><span class="pre">Debug</span> <span class="pre">type</span></code> select box. Dual will allow
+debugging of both native and Java code in the same session. It is
+possible to use <code class="docutils literal notranslate"><span class="pre">Native</span></code>, but it will only allow for debugging
+native code, and it’s frequently necessary to break in the Java code
+that configures Gecko and child processes in order to attach
+debuggers at the correct times.</p></li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">Symbol</span> <span class="pre">Directories</span></code>, add a new path pointing to
+<code class="docutils literal notranslate"><span class="pre">&lt;PATH&gt;/objdir-android-opt/toolkit/library/build</span></code>, the same path
+that you entered into your <code class="docutils literal notranslate"><span class="pre">.lldbinit</span></code> file.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Apply</span></code> and <code class="docutils literal notranslate"><span class="pre">OK</span></code> to close the window.</p></li>
+</ol>
+</div>
+<div class="section" id="debug-native-code-in-android-studio">
+<h2>Debug Native code in Android Studio<a class="headerlink" href="#debug-native-code-in-android-studio" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>The first time you are running a debug session for your app, it’s
+best to start from a completely clean build. Click
+<code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">-&gt;</span> <span class="pre">Rebuild</span> <span class="pre">Project</span></code> to clean and rebuild. You can also
+choose to remove any existing builds from your emulator to be
+completely sure, but this may not be necessary.</p></li>
+<li><p>If using Android Studio visual breakpoints, set your breakpoints in
+your native code.</p></li>
+<li><p>Run the app in debug mode as usual.</p></li>
+<li><p>When debugging Fennec or geckoview_example, you will almost
+immediately hit a breakpoint in <code class="docutils literal notranslate"><span class="pre">ElfLoader.cpp</span></code>. This is expected.
+If you are not using Android Studio visual breakpoints, you can set
+your breakpoints here using the lldb console that is available now
+this breakpoint has been hit. To set a breakpoint, select the app tab
+(if running Dual, there will also be an <code class="docutils literal notranslate"><span class="pre">&lt;app&gt;</span> <span class="pre">java</span></code> tab) from the
+debug window, and then select the <code class="docutils literal notranslate"><span class="pre">lldb</span></code> console tab. Type the
+following into the console:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">&lt;</span><span class="n">file</span><span class="o">&gt;.</span><span class="n">cpp</span><span class="p">:</span><span class="o">&lt;</span><span class="n">line</span> <span class="n">number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Once your breakpoints have been set, click the continue execution
+button to move beyond the <code class="docutils literal notranslate"><span class="pre">ElfLoader</span></code> breakpoint and your newly set
+native breakpoints should be hit. Debug as usual.</p></li>
+</ol>
+<div class="section" id="attaching-debuggers-to-content-and-other-child-processes">
+<h3>Attaching debuggers to content and other child processes<a class="headerlink" href="#attaching-debuggers-to-content-and-other-child-processes" title="Permalink to this headline">¶</a></h3>
+<p>Internally, GeckoView has a multi-process architecture. The main Gecko
+process lives in the main Android process, but content rendering and
+some other functions live in child processes. This balances load,
+ensures certain critical security properties, and allows GeckoView to
+recover if content processes become unresponsive or crash. However, it’s
+generally delicate to debug child processes because they come and go.</p>
+<p>The general approach is to make the Java code in the child process that
+you want to debug wait for a Java debugger at startup, and then to
+connect such a Java debugger manually from the Android Studio UI.</p>
+<p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1522318">Bug 1522318</a>
+added environment variables that makes GeckoView wait for Java debuggers
+to attach, making this debug process more developer-friendly. See
+<a class="reference external" href="../consumer/automation.html">Configuring GeckoView for Automation</a>
+for instructions on how to set environment variables that configure
+GeckoView’s runtime environment.</p>
+<div class="section" id="making-processes-wait-for-a-java-debugger">
+<h4>Making processes wait for a Java debugger<a class="headerlink" href="#making-processes-wait-for-a-java-debugger" title="Permalink to this headline">¶</a></h4>
+<p>The following environment variable makes the main (Gecko) process wait
+for a Java debugger to connect:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOZ_DEBUG_WAIT_FOR_JAVA_DEBUGGER</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>This is a superset of Android Studio’s built-in debugging support so
+it’s not particularly useful (unless you want to attach a different jdwp
+debugger).</p>
+<p>The following environment variable makes every child process wait for a
+Java debugger to connect:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOZ_DEBUG_CHILD_WAIT_FOR_JAVA_DEBUGGER</span><span class="o">=</span>
+</pre></div>
+</div>
+<p>Set <code class="docutils literal notranslate"><span class="pre">MOZ_DEBUG_CHILD_WAIT_FOR_JAVA_DEBUGGER=suffix</span></code> in the environment
+to make child processes with an Android process name ending with
+<code class="docutils literal notranslate"><span class="pre">suffix</span></code> wait for a Java debugger to connect. For example, the
+following environment variable makes every child content process wait
+for a Java debugger to connect:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">MOZ_DEBUG_CHILD_WAIT_FOR_JAVA_DEBUGGER</span><span class="o">=</span>:tab
+</pre></div>
+</div>
+<p>An easy way to set this is with <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">run</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach run --setenv <span class="nv">MOZ_DEBUG_CHILD_WAIT_FOR_JAVA_DEBUGGER</span><span class="o">=</span>:tab
+</pre></div>
+</div>
+</div>
+<div class="section" id="attaching-a-java-debugger-to-a-waiting-child-process">
+<h4>Attaching a Java debugger to a waiting child process<a class="headerlink" href="#attaching-a-java-debugger-to-a-waiting-child-process" title="Permalink to this headline">¶</a></h4>
+<p>This is standard: follow the <a class="reference external" href="https://developer.android.com/studio/debug/index.html#attach-debugger">Android Studio instructions</a>.
+You must attach a Java debugger, so you almost certainly want to attach
+a <code class="docutils literal notranslate"><span class="pre">Dual</span></code> debugger and you definitely can’t attach only a <code class="docutils literal notranslate"><span class="pre">Native</span></code>
+debugger.</p>
+<p>Determining the correct process to attach to is a little tricky because
+the mapping from process ID (pid) to process name is not always clear.
+Gecko content child processes are suffixed <code class="docutils literal notranslate"><span class="pre">:tab</span></code> at this time.</p>
+<p>If you attach <code class="docutils literal notranslate"><span class="pre">Dual</span></code> debuggers to both the main process and a content
+child process, you will have four (4!) debug tabs to manage in Android
+Studio, which is awkward. Android Studio doesn’t appear to configure
+attached debuggers in the same way that it configures debuggers
+connecting to launched Run Configurations, so you may need to manually
+configure search paths – i.e., you may need to invoke the contents of
+your <code class="docutils literal notranslate"><span class="pre">lldbinit</span></code> file in the appropriate <code class="docutils literal notranslate"><span class="pre">lldb</span></code> console by hand,
+using an invocation like
+<code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">source</span> <span class="pre">/absolute/path/to/topobjdir/lldbinit</span></code>.</p>
+<p>Android Studio also doesn’t appear to support targeting breakpoints from
+the UI (say, from clicking in a gutter) to specific debug tabs, so you
+may also need to set breakpoints in the appropriate <code class="docutils literal notranslate"><span class="pre">lldb</span></code> console by
+hand.</p>
+<p>Managing more debug tabs may require different approaches.</p>
+</div>
+<div class="section" id="using-android-studio-on-windows">
+<h4>Using Android Studio on Windows<a class="headerlink" href="#using-android-studio-on-windows" title="Permalink to this headline">¶</a></h4>
+<p>You can now use <a class="reference internal" href="../../../../contributing/build/artifact_builds.html#understanding-artifact-builds"><span class="std std-ref">artifact builds</span></a>
+mode on <a class="reference external" href="https://wiki.mozilla.org/MozillaBuild">MozillaBuild environment</a> even if you are
+not using WSL. If you want to debug GeckoView using Android Studio on
+Windows, you have to set an additional environment variable via the
+Control Panel to run the gradle script. The <code class="docutils literal notranslate"><span class="pre">mach</span></code> command sets these
+variables automatically, but Android Studio cannot.</p>
+<p>If you install MozillaBuild tools to <code class="docutils literal notranslate"><span class="pre">C:\mozilla-build</span></code> (default
+installation path), you have to set the <code class="docutils literal notranslate"><span class="pre">MOZILLABUILD</span></code> environment
+variable to recognize MozillaBuild installation path.</p>
+<p>To set environment variable on Windows 10, open the <code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">Panel</span></code>
+from <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">System</span></code>, then select <code class="docutils literal notranslate"><span class="pre">System</span> <span class="pre">and</span> <span class="pre">Security</span></code> -
+<code class="docutils literal notranslate"><span class="pre">System</span></code> - <code class="docutils literal notranslate"><span class="pre">Advanced</span> <span class="pre">system</span> <span class="pre">settings</span></code> -
+<code class="docutils literal notranslate"><span class="pre">Environment</span> <span class="pre">Variables</span> <span class="pre">...</span></code>.</p>
+<p>To set the <code class="docutils literal notranslate"><span class="pre">MOZILLABUILD</span></code> variable, click <code class="docutils literal notranslate"><span class="pre">New...</span></code> in
+<code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">variables</span> <span class="pre">for</span></code>, then <code class="docutils literal notranslate"><span class="pre">Variable</span> <span class="pre">name:</span></code> is <code class="docutils literal notranslate"><span class="pre">MOZILLABUILD</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Variable</span> <span class="pre">value:</span></code> is <code class="docutils literal notranslate"><span class="pre">C:\mozilla-build</span></code>.</p>
+<p>You also have to append some tool paths to the <code class="docutils literal notranslate"><span class="pre">Path</span></code> environment
+variable.</p>
+<p>To append the variables to PATH, double click <code class="docutils literal notranslate"><span class="pre">Path</span></code> in
+<code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Variables</span> <span class="pre">for</span></code>, then click <code class="docutils literal notranslate"><span class="pre">New</span></code>. And append the following
+variables to <code class="docutils literal notranslate"><span class="pre">Path</span></code>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%MOZILLABUILD%\msys\bin</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">%MOZILLABUILD%\bin</span></code></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../../dom/bindings/webidl/index.html" class="btn btn-neutral float-right" title="WebIDL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="contributing-to-mc.html" class="btn btn-neutral float-left" title="Mozilla Central Contributor Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

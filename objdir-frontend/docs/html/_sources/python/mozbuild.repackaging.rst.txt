@@ -1,0 +1,53 @@
+mozbuild.repackaging package
+============================
+
+Submodules
+----------
+
+mozbuild.repackaging.application\_ini module
+--------------------------------------------
+
+.. automodule:: mozbuild.repackaging.application_ini
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.repackaging.dmg module
+-------------------------------
+
+.. automodule:: mozbuild.repackaging.dmg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.repackaging.installer module
+-------------------------------------
+
+.. automodule:: mozbuild.repackaging.installer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.repackaging.mar module
+-------------------------------
+
+.. automodule:: mozbuild.repackaging.mar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.repackaging.msi module
+-------------------------------
+
+.. automodule:: mozbuild.repackaging.msi
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozbuild.repackaging
+   :members:
+   :undoc-members:
+   :show-inheritance:

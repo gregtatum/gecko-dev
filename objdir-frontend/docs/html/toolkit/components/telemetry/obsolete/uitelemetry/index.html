@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UITelemetry data format (obsolete) &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Firefox Health Report (Obsolete)" href="../fhr/index.html" />
+    <link rel="prev" title="Obsolete Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internals/index.html">Internals</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Obsolete Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">UITelemetry data format (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../fhr/index.html">Firefox Health Report (Obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hybrid-content.html">Hybrid Content Telemetry (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optout-ping.html">“optout” ping (obsolete)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="../index.html">Obsolete Documentation</a> &raquo;</li>
+        
+      <li>UITelemetry data format (obsolete)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/toolkit/components/telemetry/obsolete/uitelemetry/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uitelemetry-data-format-obsolete">
+<span id="uitelemetry"></span><h1>UITelemetry data format (obsolete)<a class="headerlink" href="#uitelemetry-data-format-obsolete" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">UITelemetry</span></code> is deprecated. As of Firefox 61, <code class="docutils literal notranslate"><span class="pre">UITelemetry</span></code> is no longer reported.</p>
+</div>
+<p>UI Telemetry sends its data as a JSON blob. This document describes the different parts
+of the JSON blob.</p>
+<div class="section" id="toolbars">
+<h2><code class="docutils literal notranslate"><span class="pre">toolbars</span></code><a class="headerlink" href="#toolbars" title="Permalink to this headline">¶</a></h2>
+<p>This tracks the state of the user’s UI customizations. It has the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sizemode</span></code> - string indicating whether the window is in maximized, normal (restored) or
+fullscreen mode;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bookmarksBarEnabled</span></code> - boolean indicating whether the bookmarks bar is visible;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">menuBarEnabled</span></code> - boolean indicating whether the menu bar is visible (always false on OS X);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">titleBarEnabled</span></code> - boolean indicating whether the (real) titlebar is visible (rather than
+having tabs in the titlebar);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defaultKept</span></code> - list of strings identifying toolbar buttons and items that are still in their
+default position. Only the IDs of builtin widgets are sent (ie not add-on widgets);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defaultMoved</span></code> - list of strings identifying toolbar buttons and items that are no longer in
+their default position, but have not been removed to the palette. Only the IDs of builtin widgets
+are sent (ie not add-on widgets);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nondefaultAdded</span></code> - list of strings identifying toolbar buttons and items that have been added
+from the palette. Only the IDs of builtin widgets are sent (ie not add-on widgets);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">defaultRemoved</span></code> - list of strings identifying toolbar buttons and items that are in the
+palette that are elsewhere by default. Only the IDs of builtin widgets are sent
+(ie not add-on widgets);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">addonToolbars</span></code> - the number of non-default toolbars that are customizable. 1 by default
+because it counts the add-on bar shim;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visibleTabs</span></code> - array of the number of visible tabs per window;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hiddenTabs</span></code> - array of the number of hidden tabs per window (ie tabs in panorama groups which
+are not the current group);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">countableEvents</span></code> - please refer to the next section.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">durations</span></code> - an object mapping descriptions to duration records, which records the amount of
+time a user spent doing something. Currently only has one property:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">customization</span></code> - how long a user spent customizing the browser. This is an array of
+objects, where each object has a <code class="docutils literal notranslate"><span class="pre">duration</span></code> property indicating the time in milliseconds,
+and a <code class="docutils literal notranslate"><span class="pre">bucket</span></code> property indicating a bucket in which the duration info falls.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="countableevents">
+<span id="uitelemetry-countableevents"></span><h2><code class="docutils literal notranslate"><span class="pre">countableEvents</span></code><a class="headerlink" href="#countableevents" title="Permalink to this headline">¶</a></h2>
+<p>Countable events are stored under the <code class="docutils literal notranslate"><span class="pre">toolbars</span></code> section. They count the number of times certain
+events happen. No timing or other correlating information is stored - purely the number of times
+things happen.</p>
+<p><code class="docutils literal notranslate"><span class="pre">countableEvents</span></code> contains a list of buckets as its properties. A bucket represents the state the browser was in when these events occurred, such as currently running an interactive tour. There are 3 types of buckets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__DEFAULT__</span></code> - No bucket, for times when the browser is not in any special state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bucket_&lt;NAME&gt;</span></code> - Normal buckets, for when the browser is in a special state. The <code class="docutils literal notranslate"><span class="pre">&lt;NAME&gt;</span></code> in the bucket ID is the name associated with the bucket and may be further broken down into parts by the <code class="docutils literal notranslate"><span class="pre">|</span></code> character.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bucket_&lt;NAME&gt;|&lt;INTERVAL&gt;</span></code> - Expiring buckets, which are similar to a countdown timer. The <code class="docutils literal notranslate"><span class="pre">&lt;INTERVAL&gt;</span></code> in the bucket ID describes the time interval the recorded event happened in. The intervals are <code class="docutils literal notranslate"><span class="pre">1m</span></code> (one minute), <code class="docutils literal notranslate"><span class="pre">3m</span></code> (three minutes), <code class="docutils literal notranslate"><span class="pre">10m</span></code> (ten minutes), and <code class="docutils literal notranslate"><span class="pre">1h</span></code> (one hour). After one hour, the <code class="docutils literal notranslate"><span class="pre">__DEFAULT__</span></code> bucket is automatically used again.</p></li>
+</ul>
+<p>Each bucket is an object with the following properties:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">click-builtin-item</span></code> is an object tracking clicks on builtin customizable toolbar items, keyed
+off the item IDs, with an object for each item with keys <code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">middle</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code> each
+storing a number indicating how often the respective type of click has happened.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">click-menu-button</span></code> is the same, except the item ID is always ‘button’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">click-bookmarks-bar</span></code> is the same, with the item IDs being replaced by either <code class="docutils literal notranslate"><span class="pre">container</span></code> for
+clicks on bookmark or livemark folders, and <code class="docutils literal notranslate"><span class="pre">item</span></code> for individual bookmarks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">click-menubar</span></code> is similar, with the item IDs being replaced by one of <code class="docutils literal notranslate"><span class="pre">menu</span></code>, <code class="docutils literal notranslate"><span class="pre">menuitem</span></code>
+or <code class="docutils literal notranslate"><span class="pre">other</span></code>, depending on the kind of item clicked. Note that this is not tracked on OS X, where
+we can’t listen for these events because of the global menubar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">click-bookmarks-menu-button</span></code> is also similar, with the item IDs being replaced by:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">menu</span></code> for clicks on the ‘menu’ part of the item;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span></code> for clicks that add a bookmark;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edit</span></code> for clicks that open the panel to edit an existing bookmark;</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">in-panel</span></code> for clicks when the button is in the menu panel, and clicking it does none of the</dt><dd><p>above;</p>
+</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">customize</span></code> tracks different types of customization events without the <code class="docutils literal notranslate"><span class="pre">left</span></code>, <code class="docutils literal notranslate"><span class="pre">middle</span></code> and
+<code class="docutils literal notranslate"><span class="pre">right</span></code> distinctions. The different events are the following, with each storing a count of the
+number of times they occurred:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code> counts the number of times the user starts customizing;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">add</span></code> counts the number of times an item is added somewhere from the palette;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move</span></code> counts the number of times an item is moved somewhere else (but not to the palette);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove</span></code> counts the number of times an item is removed to the palette;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">reset</span></code> counts the number of times the ‘restore defaults’ button is used;</p></li>
+</ul>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">search</span></code> is an object tracking searches of various types, keyed off the search</dt><dd><p>location, storing a number indicating how often the respective type of search
+has happened.</p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>There are also two special keys that mean slightly different things.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">urlbar-keyword</span></code> records searches that would have been an invalid-protocol
+error, but are now keyword searches.  They are also counted in the <code class="docutils literal notranslate"><span class="pre">urlbar</span></code>
+keyword (along with all the other urlbar searches).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection</span></code> searches records selections of search suggestions.  They include
+the source, the index of the selection, and the kind of selection (mouse or
+enter key).  Selection searches are also counted in their sources.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="uitour">
+<h2><code class="docutils literal notranslate"><span class="pre">UITour</span></code><a class="headerlink" href="#uitour" title="Permalink to this headline">¶</a></h2>
+<p>The UITour API provides ways for pages on trusted domains to safely interact with the browser UI and request it to perform actions such as opening menus and showing highlights over the browser chrome - for the purposes of interactive tours. We track some usage of this API via the <code class="docutils literal notranslate"><span class="pre">UITour</span></code> object in the UI Telemetry output.</p>
+<p>Each page is able to register itself with an identifier, a <code class="docutils literal notranslate"><span class="pre">Page</span> <span class="pre">ID</span></code>. A list of Page IDs that have been seen over the last 8 weeks is available via <code class="docutils literal notranslate"><span class="pre">seenPageIDs</span></code>.</p>
+<p>Page IDs are also used to identify buckets for <a class="reference internal" href="#uitelemetry-countableevents"><span class="std std-ref">countableEvents</span></a>, in the following circumstances:</p>
+<ul class="simple">
+<li><p>The current tab is a tour page. This will be a normal bucket with the name <code class="docutils literal notranslate"><span class="pre">UITour|&lt;PAGEID&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;PAGEID&gt;</span></code> is the page’s registered ID. This will result in bucket IDs such as <code class="docutils literal notranslate"><span class="pre">bucket_UITour|australis-tour</span></code>.</p></li>
+<li><p>A tour tab is open but another tab is active. This will be an expiring bucket with the name <code class="docutils literal notranslate"><span class="pre">UITour|&lt;PAGEID&gt;|inactive</span></code>. This will result in bucket IDs such as <code class="docutils literal notranslate"><span class="pre">bucket_UITour|australis-tour|inactive|1m</span></code>.</p></li>
+<li><p>A tour tab has recently been open but has been closed. This will be an expiring bucket with the name <code class="docutils literal notranslate"><span class="pre">UITour|&lt;PAGEID&gt;|closed</span></code>. This will result in bucket IDs such as <code class="docutils literal notranslate"><span class="pre">bucket_UITour|australis-tour|closed|10m</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="contextmenu">
+<h2><code class="docutils literal notranslate"><span class="pre">contextmenu</span></code><a class="headerlink" href="#contextmenu" title="Permalink to this headline">¶</a></h2>
+<p>We track context menu interactions to figure out which ones are most often used and/or how
+effective they are. In the <code class="docutils literal notranslate"><span class="pre">contextmenu</span></code> object, we first store things per-bucket. Next, we
+divide the following different context menu situations:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">selection</span></code> if there is content on the page that’s selected on which the user clicks;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">link</span></code> if the user opened the context menu for a link</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image-link</span></code> if the user opened the context menu on an image or canvas that’s a link;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">image</span></code> if the user opened the context menu on an image (that isn’t a link);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">canvas</span></code> if the user opened the context menu on a canvas (that isn’t a link);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">media</span></code> if the user opened the context menu on an HTML video or audio element;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input</span></code> if the user opened the context menu on a text input element;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">other</span></code> for all other openings of the content menu;</p></li>
+</ul>
+<p>Each of these objects (if they exist) then gets a “withcustom” and/or a “withoutcustom” property
+for context menus opened with custom page-created items and without them, and each of those
+properties holds an object with IDs corresponding to a count of how often an item with that ID was
+activated in the context menu. Only builtin context menu items are tracked, and besides those items
+there are four special items which get counts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">close-without-interaction</span></code> is incremented when the user closes the context menu without interacting with it;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">custom-page-item</span></code> is incremented when the user clicks an item that was created by the page;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown</span></code> is incremented when an item without an ID was clicked;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">other-item</span></code> is incremented when an add-on-provided menuitem is clicked.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../fhr/index.html" class="btn btn-neutral float-right" title="Firefox Health Report (Obsolete)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Obsolete Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

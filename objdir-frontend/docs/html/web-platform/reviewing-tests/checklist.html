@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Review Checklist &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Email Filters" href="email.html" />
+    <link rel="prev" title="Reviewing Tests" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">web-platform-tests documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#github">GitHub</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../writing-tests/index.html">Writing Tests</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Reviewing Tests</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Review Checklist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="email.html">Email Filters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="git.html">Working with Pull Requests as a reviewer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="reverting.html">Reverting Changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#test-review-policy">Test Review Policy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#notifications">Notifications</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#finding-contributions-to-review">Finding contributions to review</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">web-platform-tests documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Reviewing Tests</a> &raquo;</li>
+        
+      <li>Review Checklist</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/web-platform/reviewing-tests/checklist.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="review-checklist">
+<h1>Review Checklist<a class="headerlink" href="#review-checklist" title="Permalink to this headline">¶</a></h1>
+<p>The following checklist is provided as a guideline to assist in reviewing
+tests; in case of any contradiction with requirements stated elsewhere in the
+documentation it should be ignored
+(please <a class="reference external" href="https://github.com/web-platform-tests/wpt/issues/new">file a bug</a>!).</p>
+<p>As noted on the <a class="reference internal" href="index.html"><span class="doc">reviewing tests</span></a> page, nits need not block PRs
+from landing.</p>
+<div class="section" id="all-tests">
+<h2>All tests<a class="headerlink" href="#all-tests" title="Permalink to this headline">¶</a></h2>
+<p><label><input type="checkbox">
+The CI jobs on the pull request have passed.
+</label></p>
+<p><label><input type="checkbox">
+It is obvious what the test is trying to test.
+</label></p>
+<p><label><input type="checkbox">
+The test passes when it’s supposed to pass.
+</label></p>
+<p><label><input type="checkbox">
+The test fails when it’s supposed to fail.
+</label></p>
+<p><label><input type="checkbox">
+The test is testing what it thinks it’s testing.
+</label></p>
+<p><label><input type="checkbox">
+The spec backs up the expected behavior in the test.
+</label></p>
+<p><label><input type="checkbox">
+The test is automated as either <a class="reference internal" href="../writing-tests/reftests.html"><span class="doc">reftest</span></a> or
+a <a class="reference internal" href="../writing-tests/testharness.html"><span class="doc">script test</span></a> unless there’s a very good reason for it not to be.
+</label></p>
+<p><label><input type="checkbox">
+The test does not use external resources.
+</label></p>
+<p><label><input type="checkbox">
+The test does not use proprietary features (vendor-prefixed or otherwise).
+</label></p>
+<p><label><input type="checkbox">
+The test does not contain commented-out code.
+</label></p>
+<p><label><input type="checkbox">
+The test is placed in the relevant directory.
+</label></p>
+<p><label><input type="checkbox">
+The test has a reasonable and concise filename.
+</label></p>
+<p><label><input type="checkbox">
+If the test needs code running on the server side, the server code must be
+written in Python, and the Python code must not do anything potentially unsafe.
+</label></p>
+<p><label><input type="checkbox">
+If the test needs to be run in some non-standard configuration or needs user
+interaction, it is a manual test.
+</label></p>
+<p><label><input type="checkbox">
+<strong>Nit</strong>: The title is descriptive but not too wordy.
+</label></p>
+</div>
+<div class="section" id="reftests-only">
+<h2>Reftests Only<a class="headerlink" href="#reftests-only" title="Permalink to this headline">¶</a></h2>
+<p><label><input type="checkbox">
+The reference file is accurate and will render pixel-perfect
+identically to the test on all platforms.
+</label></p>
+<p><label><input type="checkbox">
+The reference file uses a different technique that won’t fail in
+the same way as the test.
+</label></p>
+<p><label><input type="checkbox">
+The test and reference render within a 800x600 viewport, only displaying
+scrollbars if their presence is being tested.
+</label></p>
+<p><label><input type="checkbox">
+<strong>Nit</strong>: The test has a self-describing statement.
+</label></p>
+<p><label><input type="checkbox">
+<strong>Nit</strong>: The self-describing statement is accurate, precise, simple, and
+self-explanatory. Someone with no technical knowledge should be able to say
+whether the test passed or failed within a few seconds, and not need to spend
+several minutes thinking or asking questions.
+</label></p>
+</div>
+<div class="section" id="script-tests-only">
+<h2>Script Tests Only<a class="headerlink" href="#script-tests-only" title="Permalink to this headline">¶</a></h2>
+<p><label><input type="checkbox">
+The number of tests in each file and the test names are consistent
+across runs and browsers. It is best to avoid the pattern where there is
+a test that asserts that the feature is supported and bails out without
+running the rest of the tests in the file if it isn’t.
+</label></p>
+<p><label><input type="checkbox">
+The test avoids patterns that make it less likely to be stable.
+In particular, tests should avoid setting internal timeouts, since the
+time taken to run it may vary on different devices; events should be used
+instead (if at all possible).
+</label></p>
+<p><label><input type="checkbox">
+The test uses the most specific asserts possible (e.g. doesn’t use
+<code class="docutils literal notranslate"><span class="pre">assert_true</span></code> for everything).
+</label></p>
+<p><label><input type="checkbox">
+The test uses <code class="docutils literal notranslate"><span class="pre">idlharness.js</span></code> if it is testing basic IDL-defined behavior.
+</label></p>
+<p><label><input type="checkbox">
+<strong>Nit</strong>: Tests in a single file are separated by one empty line.
+</label></p>
+</div>
+<div class="section" id="visual-tests-only">
+<h2>Visual Tests Only<a class="headerlink" href="#visual-tests-only" title="Permalink to this headline">¶</a></h2>
+<p><label><input type="checkbox">
+The test has a self-describing statement.
+</label></p>
+<p><label><input type="checkbox">
+The self-describing statement is accurate, precise, simple, and
+self-explanatory. Someone with no technical knowledge should be able to say
+whether the test passed or failed within a few seconds, and not need to spend
+several minutes thinking or asking questions.
+</label></p>
+<p><label><input type="checkbox">
+The test renders within a 800x600 viewport, only displaying scrollbars if their
+presence is being tested.
+</label></p>
+<p><label><input type="checkbox">
+The test renders to a fixed, static page with no animation.
+</label></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="email.html" class="btn btn-neutral float-right" title="Email Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Reviewing Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

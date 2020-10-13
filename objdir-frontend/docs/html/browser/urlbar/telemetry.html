@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Telemetry &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugging &amp; Logging" href="debugging.html" />
+    <link rel="prev" title="Utilities" href="utilities.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="index.html">Address Bar</a> &raquo;</li>
+        
+      <li>Telemetry</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/browser/urlbar/telemetry.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="telemetry">
+<h1>Telemetry<a class="headerlink" href="#telemetry" title="Permalink to this headline">¶</a></h1>
+<p>This section describes existing telemetry probes measuring interaction with the
+Address Bar.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Telemetry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#histograms">Histograms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scalars">Scalars</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-telemetry">Event Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#search-probes-relevant-to-the-address-bar">Search probes relevant to the Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#obsolete-probes">Obsolete probes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#obsolete-histograms">Obsolete histograms</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#obsolete-search-probes">Obsolete search probes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="histograms">
+<h2>Histograms<a class="headerlink" href="#histograms" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>PLACES_AUTOCOMPLETE_1ST_RESULT_TIME_MS</dt><dd><p>This probe tracks the amount of time it takes to get the first result.
+It is an exponential histogram with values between 5 and 100.</p>
+</dd>
+<dt>PLACES_AUTOCOMPLETE_6_FIRST_RESULTS_TIME_MS</dt><dd><p>This probe tracks the amount of time it takes to get the first six results.
+It is an exponential histogram with values between 50 and 1000.</p>
+</dd>
+<dt>FX_URLBAR_SELECTED_RESULT_METHOD</dt><dd><p>This probe tracks how a result was picked by the user from the list.
+It is a categorical histogram with these values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">enter</span></code>
+The user pressed Enter without selecting a result first.
+This most likely happens when the user confirms the default preselected
+result (aka <em>heuristic result</em>), or when they select with the keyboard a
+one-off search button and confirm with Enter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enterSelection</span></code>
+The user selected a result, but not using Tab or the arrow keys, and then
+pressed Enter. This is a rare and generally unexpected event, there may be
+exotic ways to select a result we didn’t consider, that are tracked here.
+Look at arrowEnterSelection and tabEnterSelection for more common actions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">click</span></code>
+The user clicked on a result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrowEnterSelection</span></code>
+The user selected a result using the arrow keys, and then pressed Enter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabEnterSelection</span></code>
+The first key the user pressed to select a result was the Tab key, and then
+they pressed Enter. Note that this means the user could have used the arrow
+keys after first pressing the Tab key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rightClickEnter</span></code>
+Before QuantumBar, it was possible to right-click a result to highlight but
+not pick it. Then the user could press Enter. This is no more possible.</p></li>
+</ul>
+</dd>
+<dt>FX_URLBAR_SELECTED_RESULT_INDEX</dt><dd><p>This probe tracks the indexes of picked results in the results list.
+It’s an enumerated histogram with 17 buckets.</p>
+</dd>
+<dt>FX_URLBAR_SELECTED_RESULT_TYPE_2</dt><dd><p>This probe tracks the types of picked results.
+It’s an enumerated histogram with 32 buckets.
+Values can be:</p>
+<blockquote>
+<div><ol class="arabic simple" start="0">
+<li><p>autofill</p></li>
+<li><p>bookmark</p></li>
+<li><p>history</p></li>
+<li><p>keyword</p></li>
+<li><p>searchengine</p></li>
+<li><p>searchsuggestion</p></li>
+<li><p>switchtab</p></li>
+<li><p>tag</p></li>
+<li><p>visiturl</p></li>
+<li><p>remotetab</p></li>
+<li><p>extension</p></li>
+<li><p>preloaded-top-site</p></li>
+<li><p>tip</p></li>
+<li><p>topsite</p></li>
+<li><p>formhistory</p></li>
+</ol>
+</div></blockquote>
+</dd>
+<dt>FX_URLBAR_SELECTED_RESULT_INDEX_BY_TYPE_2</dt><dd><p>This probe tracks picked result type, for each one it tracks the index where
+it appeared.
+It’s a keyed histogram where the keys are result types (see
+<a class="reference external" href="https://searchfox.org/mozilla-central/search?q=symbol:UrlbarUtils%23SELECTED_RESULT_TYPES&amp;redirect=false">UrlbarUtils.SELECTED_RESULT_TYPES</a>). For each key, this records the indexes
+of picked results for that result type.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="scalars">
+<h2>Scalars<a class="headerlink" href="#scalars" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>urlbar.tips</dt><dd><p>This is a keyed scalar whose values are uints and are incremented each time a
+tip result is shown, a tip is picked, and a tip’s help button is picked. The
+keys are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_clear-help</span></code>
+Incremented when the user picks the help button in the clear-history search
+intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_clear-picked</span></code>
+Incremented when the user picks the clear-history search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_clear-shown</span></code>
+Incremented when the clear-history search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_refresh-help</span></code>
+Incremented when the user picks the help button in the refresh-Firefox
+search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_refresh-picked</span></code>
+Incremented when the user picks the refresh-Firefox search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_refresh-shown</span></code>
+Incremented when the refresh-Firefox search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_ask-help</span></code>
+Incremented when the user picks the help button in the update_ask search
+intervention, which is shown when there’s a Firefox update available but the
+user’s preference says we should ask them to download and apply it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_ask-picked</span></code>
+Incremented when the user picks the update_ask search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_ask-shown</span></code>
+Incremented when the update_ask search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_refresh-help</span></code>
+Incremented when the user picks the help button in the update_refresh search
+intervention, which is shown when the user’s browser is up to date but they
+triggered the update intervention. We show this special refresh intervention
+instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_refresh-picked</span></code>
+Incremented when the user picks the update_refresh search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_refresh-shown</span></code>
+Incremented when the update_refresh search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_restart-help</span></code>
+Incremented when the user picks the help button in the update_restart search
+intervention, which is shown when there’s an update and it’s been downloaded
+and applied. The user needs to restart to finish.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_restart-picked</span></code>
+Incremented when the user picks the update_restart search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_restart-shown</span></code>
+Incremented when the update_restart search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_web-help</span></code>
+Incremented when the user picks the help button in the update_web search
+intervention, which is shown when we can’t update the browser or possibly
+even check for updates for some reason, so the user should download the
+latest version from the web.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_web-picked</span></code>
+Incremented when the user picks the update_web search intervention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intervention_update_web-shown</span></code>
+Incremented when the update_web search intervention is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchTip_onboard-picked</span></code>
+Incremented when the user picks the onboarding search tip.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchTip_onboard-shown</span></code>
+Incremented when the onboarding search tip is shown.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchTip_redirect-picked</span></code>
+Incremented when the user picks the redirect search tip.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchTip_redirect-shown</span></code>
+Incremented when the redirect search tip is shown.</p></li>
+</ul>
+</dd>
+<dt>urlbar.searchmode.*</dt><dd><p>This is set of keyed scalars whose values are uints are are incremented each
+time search mode is entered in the Urlbar. The suffix on the scalar name
+describes how search mode was entered. Possibilities include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bookmarkmenu</span></code>
+Used when the user selects the Search Bookmarks menu item in the Library
+menu.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">handoff</span></code>
+Used when the user uses the search box on the new tab page and is handed off
+to the address bar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">keywordoffer</span></code>
+Used when the user selects a keyword offer result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneoff</span></code>
+Used when the user selects a one-off engine in the Urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shortcut</span></code>
+Used when the user enters search mode with a keyboard shortcut or menu bar
+item (e.g. <code class="docutils literal notranslate"><span class="pre">Accel+K</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabmenu</span></code>
+Used when the user selects the Search Tabs menu item in the tab overflow
+menu.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabtosearch</span></code>
+Used when the user selects a tab-to-search result. These results suggest a
+search engine when the search engine’s domain is autofilled.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topsites_newtab</span></code>
+Used when the user selects a search shortcut Top Site from the New Tab Page.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topsites_urlbar</span></code>
+Used when the user selects a search shortcut Top Site from the Urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touchbar</span></code>
+Used when the user taps a search shortct on the Touch Bar, available on some
+Macs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">typed</span></code>
+Used when the user types an engine alias in the Urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">other</span></code>
+Used as a catchall for other behaviour. We don’t expect this scalar to hold
+any values. If it does, we need to correct an issue with search mode entry
+points.</p></li>
+</ul>
+<p>The keys for the scalars above are engine and source names. If the user enters
+a remote search mode with a built-in engine, we record the engine name. If the
+user enters a remote search mode with an engine they installed (e.g. via
+OpenSearch or a WebExtension), we record <code class="docutils literal notranslate"><span class="pre">other</span></code> (not to be confused with
+the <code class="docutils literal notranslate"><span class="pre">urlbar.searchmode.other</span></code> scalar above). If they enter a local search
+mode, we record the English name of the result source (e.g. “bookmarks”,
+“history”, “tabs”). Note that we slightly modify the engine name for some
+built-in engines: we flatten all localized Amazon sites (Amazon.com,
+Amazon.ca, Amazon.de, etc.) to “Amazon” and we flatten all localized
+Wikipedia sites (Wikipedia (en), Wikipedia (fr), etc.) to “Wikipedia”. This
+is done to reduce the number of keys used by these scalars.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="event-telemetry">
+<h2>Event Telemetry<a class="headerlink" href="#event-telemetry" title="Permalink to this headline">¶</a></h2>
+<p>The event telemetry is grouped under the <code class="docutils literal notranslate"><span class="pre">urlbar</span></code> category.</p>
+<dl class="simple">
+<dt>Event Method</dt><dd><p>There are two methods to describe the interaction with the urlbar:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">engagement</span></code>
+It is defined as a completed action in urlbar, where a user inserts text
+and executes one of the actions described in the Event Object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abandonment</span></code>
+It is defined as an action where the user inserts text but does not
+complete an engagement action, usually unfocusing the urlbar. This also
+happens when the user switches to another window, regardless of urlbar
+focus.</p></li>
+</ul>
+</dd>
+<dt>Event Value</dt><dd><p>This is how the user interaction started</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">typed</span></code>: The text was typed into the urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dropped</span></code>: The text was drag and dropped into the urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pasted</span></code>: The text was pasted into the urlbar.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">topsites</span></code>: The user opened the urlbar view without typing, dropping,
+or pasting.
+In these cases, if the urlbar input is showing the URL of the loaded page
+and the user has not modified the input’s content, the urlbar views shows
+the user’s top sites. Otherwise, if the user had modified the input’s
+content, the urlbar view shows results based on what the user has typed.
+To tell whether top sites were shown, it’s enough to check whether value is
+<code class="docutils literal notranslate"><span class="pre">topsites</span></code>. To know whether the user actually picked a top site, check
+check that <code class="docutils literal notranslate"><span class="pre">numChars</span></code> == 0. If <code class="docutils literal notranslate"><span class="pre">numChars</span></code> &gt; 0, the user initially opened
+top sites, but then they started typing and confirmed a different result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">returned</span></code>: The user abandoned a search, for example by switching to
+another tab/window, or focusing something else, then came back to it
+and continued. We consider a search continued if the user kept at least the
+first char of the original search string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restarted</span></code>: The user abandoned a search, for example by switching to
+another tab/window, or focusing something else, then came back to it,
+cleared it and then typed a new string.</p></li>
+</ul>
+</dd>
+<dt>Event Object</dt><dd><p>These describe actions in the urlbar:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">click</span></code>
+The user clicked on a result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">enter</span></code>
+The user confirmed a result with Enter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_go</span></code>
+The user dropped text on the input field.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">paste_go</span></code>
+The user used Paste &amp; Go feature. It is not the same as paste and Enter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blur</span></code>
+The user unfocused the urlbar. This is only valid for <code class="docutils literal notranslate"><span class="pre">abandonment</span></code>.</p></li>
+</ul>
+</dd>
+<dt>Event Extra</dt><dd><p>This object contains additional information about the interaction.
+Extra is a key-value store, where all the keys and values are strings.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">elapsed</span></code>
+Time in milliseconds from the initial interaction to an action.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numChars</span></code>
+Number of input characters the user typed or pasted at the time of
+submission.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">numWords</span></code>
+Number of words in the input. The measurement is taken from a trimmed input
+split up by its spaces. This is not a perfect measurement, since it will
+return an incorrect value for languages that do not use spaces or URLs
+containing spaces in its query parameters, for example.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selType</span></code>
+The type of the selected result at the time of submission.
+This is only present for <code class="docutils literal notranslate"><span class="pre">engagement</span></code> events.
+It can be one of: <code class="docutils literal notranslate"><span class="pre">none</span></code>, <code class="docutils literal notranslate"><span class="pre">autofill</span></code>, <code class="docutils literal notranslate"><span class="pre">visit</span></code>, <code class="docutils literal notranslate"><span class="pre">bookmark</span></code>,
+<code class="docutils literal notranslate"><span class="pre">history</span></code>, <code class="docutils literal notranslate"><span class="pre">keyword</span></code>, <code class="docutils literal notranslate"><span class="pre">search</span></code>, <code class="docutils literal notranslate"><span class="pre">searchsuggestion</span></code>, <code class="docutils literal notranslate"><span class="pre">switchtab</span></code>,
+<code class="docutils literal notranslate"><span class="pre">remotetab</span></code>, <code class="docutils literal notranslate"><span class="pre">extension</span></code>, <code class="docutils literal notranslate"><span class="pre">oneoff</span></code>, <code class="docutils literal notranslate"><span class="pre">keywordoffer</span></code>, <code class="docutils literal notranslate"><span class="pre">canonized</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tip</span></code>, <code class="docutils literal notranslate"><span class="pre">tiphelp</span></code>, <code class="docutils literal notranslate"><span class="pre">formhistory</span></code>, <code class="docutils literal notranslate"><span class="pre">tabtosearch</span></code>
+In practice, <code class="docutils literal notranslate"><span class="pre">tabtosearch</span></code> should not appear in real event telemetry.
+Opening a tab-to-search result enters search mode and entering search mode
+does not currently mark the end of an engagement. It is noted here for
+completeness.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">selIndex</span></code>
+Index of the selected result in the urlbar panel, or -1 for no selection.
+There won’t be a selection when a one-off button is the only selection, and
+for the <code class="docutils literal notranslate"><span class="pre">paste_go</span></code> or <code class="docutils literal notranslate"><span class="pre">drop_go</span></code> objects. There may also not be a
+selection if the system was busy and results arrived too late, then we
+directly decide whether to search or visit the given string without having
+a fully built result.
+This is only present for <code class="docutils literal notranslate"><span class="pre">engagement</span></code> events.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="search-probes-relevant-to-the-address-bar">
+<h2>Search probes relevant to the Address Bar<a class="headerlink" href="#search-probes-relevant-to-the-address-bar" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>SEARCH_COUNTS</dt><dd><p>This histogram tracks search engines and Search Access Points. It is augmented
+by multiple SAPs, including the urlbar.
+It’s a keyed histogram, the keys are strings made up of search engine names
+and SAP names, for example <code class="docutils literal notranslate"><span class="pre">google.urlbar</span></code>.
+For each key, this records the count of searches made using that engine and SAP.
+SAP names can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alias</span></code> This is when using an alias (like <code class="docutils literal notranslate"><span class="pre">&#64;google</span></code>) in the urlbar.
+Note there is often confusion between the terms alias and keyword, and
+they may be used inappropriately: aliases refer to search engines, while
+keywords refer to bookmarks. We expect no results for this SAP in Firefox
+82+, since urlbar-searchmode replaces it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">abouthome</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contextmenu</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">newtab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchbar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urlbar</span></code> Except aliases and search mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urlbar-searchmode</span></code> Used when the Urlbar is in search mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webextension</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneoff-urlbar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oneoff-searchbar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unknown</span></code> This is actually the searchbar, when using the current engine
+one-off button.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt>browser.engagement.navigation.*</dt><dd><p>These keyed scalars track search through different SAPs, for example the
+urlbar is tracked by <code class="docutils literal notranslate"><span class="pre">browser.engagement.navigation.urlbar</span></code>.
+It counts loads triggered in a subsession from the specified SAP, broken down
+by the originating action.
+Possible SAPs are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">urlbar</span></code>  Except search mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urlbar_searchmode</span></code>  Used when the Urlbar is in search mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">searchbar</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">about_home</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">about_newtab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contextmenu</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webextension</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">system</span></code></p></li>
+</ul>
+</div></blockquote>
+<p>Recorded actions may be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">search</span></code>
+Used for any search from <code class="docutils literal notranslate"><span class="pre">contextmenu</span></code>, <code class="docutils literal notranslate"><span class="pre">system</span></code> and <code class="docutils literal notranslate"><span class="pre">webextension</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_alias</span></code>
+For <code class="docutils literal notranslate"><span class="pre">urlbar</span></code>, indicates the user confirmed a search through an alias.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_enter</span></code>
+For <code class="docutils literal notranslate"><span class="pre">about_home</span></code> and <code class="docutils literal notranslate"><span class="pre">about:newtab</span></code> this counts any search.
+For the other SAPs it tracks typing and then pressing Enter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_formhistory</span></code>
+For <code class="docutils literal notranslate"><span class="pre">urlbar</span></code>, indicates the user picked a form history result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_oneoff</span></code>
+For <code class="docutils literal notranslate"><span class="pre">urlbar</span></code> or <code class="docutils literal notranslate"><span class="pre">searchbar</span></code>, indicates the user confirmed a search
+using a one-off button.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">search_suggestion</span></code>
+For <code class="docutils literal notranslate"><span class="pre">urlbar</span></code> or <code class="docutils literal notranslate"><span class="pre">searchbar</span></code>, indicates the user confirmed a search
+suggestion.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="obsolete-probes">
+<h2>Obsolete probes<a class="headerlink" href="#obsolete-probes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="obsolete-histograms">
+<h3>Obsolete histograms<a class="headerlink" href="#obsolete-histograms" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>FX_URLBAR_SELECTED_RESULT_TYPE (OBSOLETE)</dt><dd><p>This probe is obsolete and was replaced with
+<code class="docutils literal notranslate"><span class="pre">FX_URLBAR_SELECTED_RESULT_TYPE_2</span></code> in Firefox 78 in order to increase the
+number of buckets.</p>
+<p>This probe tracked the types of picked results.
+It’s an enumerated histogram with 14 buckets.
+Values can be:</p>
+<blockquote>
+<div><ol class="arabic simple" start="0">
+<li><p>autofill</p></li>
+<li><p>bookmark</p></li>
+<li><p>history</p></li>
+<li><p>keyword</p></li>
+<li><p>searchengine</p></li>
+<li><p>searchsuggestion</p></li>
+<li><p>switchtab</p></li>
+<li><p>tag</p></li>
+<li><p>visiturl</p></li>
+<li><p>remotetab</p></li>
+<li><p>extension</p></li>
+<li><p>preloaded-top-site</p></li>
+<li><p>tip</p></li>
+<li><p>topsite</p></li>
+</ol>
+</div></blockquote>
+</dd>
+<dt>FX_URLBAR_SELECTED_RESULT_INDEX_BY_TYPE (OBSOLETE)</dt><dd><p>This probe is obsolete and was replaced with
+<code class="docutils literal notranslate"><span class="pre">FX_URLBAR_SELECTED_RESULT_INDEX_BY_TYPE_2</span></code> in Firefox 78 in order to
+increase the number of buckets.</p>
+<p>This probe tracked picked result type, for each one it tracks the index where
+it appeared.
+It’s a keyed histogram where the keys are result types (see
+<a class="reference external" href="https://searchfox.org/mozilla-central/search?q=symbol:UrlbarUtils%23SELECTED_RESULT_TYPES&amp;redirect=false">UrlbarUtils.SELECTED_RESULT_TYPES</a>). For each key, this records the indexes
+of picked results for that result type.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="obsolete-search-probes">
+<h2>Obsolete search probes<a class="headerlink" href="#obsolete-search-probes" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>navigation.search (OBSOLETE)</dt><dd><p>This is a legacy and disabled event telemetry that is currently under
+discussion for removal or modernization. It can’t be enabled through a pref.
+it’s more or less equivalent to browser.engagement.navigation, but can also
+report the picked search engine.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging.html" class="btn btn-neutral float-right" title="Debugging &amp; Logging" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="utilities.html" class="btn btn-neutral float-left" title="Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

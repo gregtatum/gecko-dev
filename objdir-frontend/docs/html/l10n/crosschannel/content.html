@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Cross-channel Content &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="gecko-strings and Quarantine" href="repositories.html" />
+    <link rel="prev" title="Commits and Metadata" href="commits.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Localization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Localization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fluent/index.html">Fluent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../migrations/index.html">Migrating Strings From Legacy or Fluent Files</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Cross-channel</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="graph.html">Cross-channel VCS Graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="commits.html">Commits and Metadata</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cross-channel Content</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#content-sources">Content Sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#covered-content">Covered Content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#created-content-structure">Created Content Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l10n-file-contents">L10n File Contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#project-configurations">Project configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="repositories.html">gecko-strings and Quarantine</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html">L10N Glossary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Localization</a> &raquo;</li>
+        
+          <li><a href="index.html">Cross-channel</a> &raquo;</li>
+        
+      <li>Cross-channel Content</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/l10n/crosschannel/content.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cross-channel-content">
+<h1>Cross-channel Content<a class="headerlink" href="#cross-channel-content" title="Permalink to this headline">¶</a></h1>
+<p>When creating the actual content, there’s a number of questions to answer.</p>
+<ol class="arabic simple">
+<li><p>Where to take content from?</p></li>
+<li><p>Which content to take?</p></li>
+<li><p>Where to put the content?</p></li>
+<li><p>What to put into each file?</p></li>
+</ol>
+<div class="section" id="content-sources">
+<h2>Content Sources<a class="headerlink" href="#content-sources" title="Permalink to this headline">¶</a></h2>
+<p>The content of each revision in <code class="docutils literal notranslate"><span class="pre">gecko-strings</span></code> corresponds to a given
+revision in each original repository. For example, we have</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 56%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Repository</p></th>
+<th class="head"><p>Revision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>mozilla-central</p></td>
+<td><p>4c92802939c1</p></td>
+</tr>
+<tr class="row-odd"><td><p>mozilla-beta</p></td>
+<td><p>ace4081e8200</p></td>
+</tr>
+<tr class="row-even"><td><p>mozilla-release</p></td>
+<td><p>2cf08fbb92b2</p></td>
+</tr>
+<tr class="row-odd"><td><p>mozilla-esr68</p></td>
+<td><p>2cf9e0c91d51</p></td>
+</tr>
+<tr class="row-even"><td><p>comm-central</p></td>
+<td><p>3f3fc2c0d804</p></td>
+</tr>
+<tr class="row-odd"><td><p>comm-beta</p></td>
+<td><p>f95a6f4408a3</p></td>
+</tr>
+<tr class="row-even"><td><p>comm-release</p></td>
+<td><p>dc2694f035fa</p></td>
+</tr>
+<tr class="row-odd"><td><p>comm-esr68</p></td>
+<td><p>d05d4d87d25c</p></td>
+</tr>
+</tbody>
+</table>
+<p>At this point, there’s no content that’s shared between <code class="docutils literal notranslate"><span class="pre">mozilla-*</span></code> and
+<code class="docutils literal notranslate"><span class="pre">comm-*</span></code>. Thus we can just convert one repository and its branches at a time.</p>
+</div>
+<div class="section" id="covered-content">
+<h2>Covered Content<a class="headerlink" href="#covered-content" title="Permalink to this headline">¶</a></h2>
+<p>Which content is included in <code class="docutils literal notranslate"><span class="pre">gecko-strings</span></code> is
+controlled by the project configurations of each product, on each branch.
+At this point, those are</p>
+<ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">browser/locales/l10n.toml</span></code>, <code class="file docutils literal notranslate"><span class="pre">mobile/android/locales/l10n.toml</span></code>
+in <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>, and</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">mail/locales/l10n.toml</span></code>, <code class="file docutils literal notranslate"><span class="pre">calendar/locales/l10n.toml</span></code>, and
+<code class="file docutils literal notranslate"><span class="pre">suite/locales/l10n.toml</span></code> in <code class="docutils literal notranslate"><span class="pre">comm-central</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="created-content-structure">
+<h2>Created Content Structure<a class="headerlink" href="#created-content-structure" title="Permalink to this headline">¶</a></h2>
+<p>The created content is laid out in the directory in the same structure as
+the files in <code class="docutils literal notranslate"><span class="pre">l10n-central</span></code>. The localizable files end up like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">browser</span><span class="o">/</span>
+  <span class="n">browser</span><span class="o">/</span>
+    <span class="n">browser</span><span class="o">.</span><span class="n">ftl</span>
+<span class="n">chrome</span><span class="o">/</span>
+  <span class="n">browser</span><span class="o">.</span><span class="n">properties</span>
+<span class="n">toolkit</span><span class="o">/</span>
+  <span class="n">toolkit</span><span class="o">/</span>
+    <span class="n">about</span><span class="o">/</span><span class="n">aboutAbout</span><span class="o">.</span><span class="n">ftl</span>
+</pre></div>
+</div>
+<p>This matches the file locations in <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> with the
+<code class="file docutils literal notranslate"><span class="pre">locales/en-US</span></code> part dropped.</p>
+<p>The project configuration files are also converted and added to the
+created file structure. As they’re commonly in the <code class="file docutils literal notranslate"><span class="pre">locales</span></code> folder
+which we strip, they’re added to the dedicated <code class="file docutils literal notranslate"><span class="pre">_configs</span></code> folder.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ls _configs
+browser.toml   devtools-client.toml  mail.toml            suite.toml
+calendar.toml  devtools-shared.toml  mobile-android.toml  toolkit.toml
+</pre></div>
+</div>
+</div>
+<div class="section" id="l10n-file-contents">
+<h2>L10n File Contents<a class="headerlink" href="#l10n-file-contents" title="Permalink to this headline">¶</a></h2>
+<p>Let’s assume we have a file to localize in several revisions with different
+content.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 35%" />
+<col style="width: 20%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>central</p></th>
+<th class="head"><p>beta</p></th>
+<th class="head"><p>release</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>one</p></td>
+<td><p>one</p></td>
+<td><p>one</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td></td>
+<td><p>two</p></td>
+<td><p>two</p></td>
+</tr>
+<tr class="row-even"><td><p>c</p></td>
+<td><p>three</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>d</p></td>
+<td><p>four</p></td>
+<td><p>old</p></td>
+<td><p>old</p></td>
+</tr>
+</tbody>
+</table>
+<p>The algorithm then creates content, taking localizable values from the left-most
+branch, where <em>central</em> overrides <em>beta</em>, and <em>beta</em> overrides <em>release</em>. This
+creates content as follows:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 78%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>content</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a</p></td>
+<td><p>one</p></td>
+</tr>
+<tr class="row-odd"><td><p>b</p></td>
+<td><p>two</p></td>
+</tr>
+<tr class="row-even"><td><p>c</p></td>
+<td><p>three</p></td>
+</tr>
+<tr class="row-odd"><td><p>d</p></td>
+<td><p>four</p></td>
+</tr>
+</tbody>
+</table>
+<p>If a file doesn’t exist in one of the revisions, that revision is dropped
+from the content generation for this particular file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example of the forth string here highlights the impact that changing
+an existing string has. We ship one translation of <em>four</em> to central,
+beta, and release. That’s only a good idea if it doesn’t matter which of the
+two versions of the English copy got translated.</p>
+</div>
+</div>
+<div class="section" id="project-configurations">
+<h2>Project configurations<a class="headerlink" href="#project-configurations" title="Permalink to this headline">¶</a></h2>
+<p>The TOML files for project configuration are processed, but not unified
+across branches at this point.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The content of the <code class="docutils literal notranslate"><span class="pre">-central</span></code> branch determines what’s localized
+from <code class="docutils literal notranslate"><span class="pre">gecko-strings</span></code>. Thus that TOML file needs to include all
+directories across all branches for now. Removing entries requires
+that the content is obsolete on all branches in cross-channel.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="repositories.html" class="btn btn-neutral float-right" title="gecko-strings and Quarantine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="commits.html" class="btn btn-neutral float-left" title="Commits and Metadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

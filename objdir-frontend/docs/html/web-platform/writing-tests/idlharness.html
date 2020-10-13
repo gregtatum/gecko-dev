@@ -1,0 +1,402 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IDL Tests (idlharness.js) &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="testharness.js tutorial" href="testharness-tutorial.html" />
+    <link rel="prev" title="Testdriver extension tutorial" href="testdriver-extension-tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">web-platform-tests documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#github">GitHub</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Writing Tests</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#test-types">Test Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submitting-tests">Submitting Tests</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reviewing-tests/index.html">Reviewing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">web-platform-tests documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Writing Tests</a> &raquo;</li>
+        
+          <li><a href="testharness.html">JavaScript Tests (testharness.js)</a> &raquo;</li>
+        
+      <li>IDL Tests (idlharness.js)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/web-platform/writing-tests/idlharness.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="idl-tests-idlharness-js">
+<h1>IDL Tests (idlharness.js)<a class="headerlink" href="#idl-tests-idlharness-js" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">idlharness.js</span></code> generates tests for Web IDL fragments, using the
+<a class="reference internal" href="testharness.html"><span class="doc">JavaScript Tests (testharness.js)</span></a> infrastructure. You typically want to use
+<code class="docutils literal notranslate"><span class="pre">.any.js</span></code> or <code class="docutils literal notranslate"><span class="pre">.window.js</span></code> for this to avoid having to write unnessary boilerplate.</p>
+</div>
+<div class="section" id="adding-idl-fragments">
+<h2>Adding IDL fragments<a class="headerlink" href="#adding-idl-fragments" title="Permalink to this headline">¶</a></h2>
+<p>Web IDL is automatically scraped from specifications and added to the <code class="docutils literal notranslate"><span class="pre">/interfaces/</span></code> directory. See
+the <a class="reference external" href="https://github.com/web-platform-tests/wpt/blob/master/interfaces/README">README</a> there for
+details.</p>
+</div>
+<div class="section" id="testing-idl-fragments">
+<h2>Testing IDL fragments<a class="headerlink" href="#testing-idl-fragments" title="Permalink to this headline">¶</a></h2>
+<p>For example, the Fetch API’s IDL is tested in
+<a class="reference external" href="https://github.com/web-platform-tests/wpt/blob/master/fetch/api/idlharness.any.js"><code class="docutils literal notranslate"><span class="pre">/fetch/api/idlharness.any.js</span></code></a>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// META: global=window,worker</span>
+<span class="c1">// META: script=/resources/WebIDLParser.js</span>
+<span class="c1">// META: script=/resources/idlharness.js</span>
+<span class="c1">// META: timeout=long</span>
+
+<span class="nx">idl_test</span><span class="p">(</span>
+  <span class="p">[</span><span class="s1">&#39;fetch&#39;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">&#39;referrer-policy&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="s1">&#39;dom&#39;</span><span class="p">],</span>
+  <span class="nx">idl_array</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">idl_array</span><span class="p">.</span><span class="nx">add_objects</span><span class="p">({</span>
+      <span class="nx">Headers</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;new Headers()&quot;</span><span class="p">],</span>
+      <span class="nx">Request</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;new Request(&#39;about:blank&#39;)&quot;</span><span class="p">],</span>
+      <span class="nx">Response</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;new Response()&quot;</span><span class="p">],</span>
+    <span class="p">});</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">GLOBAL</span><span class="p">.</span><span class="nx">isWindow</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">idl_array</span><span class="p">.</span><span class="nx">add_objects</span><span class="p">({</span> <span class="nx">Window</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;window&#39;</span><span class="p">]</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">GLOBAL</span><span class="p">.</span><span class="nx">isWorker</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">idl_array</span><span class="p">.</span><span class="nx">add_objects</span><span class="p">({</span> <span class="nx">WorkerGlobalScope</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">]</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Note how it includes <code class="docutils literal notranslate"><span class="pre">/resources/WebIDLParser.js</span></code> and <code class="docutils literal notranslate"><span class="pre">/resources/idlharness.js</span></code> in addition to
+<code class="docutils literal notranslate"><span class="pre">testharness.js</span></code> and <code class="docutils literal notranslate"><span class="pre">testharnessreport.js</span></code> (automatically included due to usage of <code class="docutils literal notranslate"><span class="pre">.any.js</span></code>).
+These are needed to make the <code class="docutils literal notranslate"><span class="pre">idl_test</span></code> function work.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">idl_test</span></code> function takes three arguments:</p>
+<ul class="simple">
+<li><p><em>srcs</em>: a list of specifications whose IDL you want to test. The names here need to match the filenames (excluding the extension) in <code class="docutils literal notranslate"><span class="pre">/interfaces/</span></code>.</p></li>
+<li><p><em>deps</em>: a list of specifications the IDL listed in <em>srcs</em> depends upon. Be careful to list them in the order that the dependencies are revealed.</p></li>
+<li><p><em>setup_func</em>: a function or async function that takes care of creating the various objects that you want to test.</p></li>
+</ul>
+</div>
+<div class="section" id="methods-of-idlarray">
+<h2>Methods of <code class="docutils literal notranslate"><span class="pre">IdlArray</span></code><a class="headerlink" href="#methods-of-idlarray" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">IdlArray</span></code> objects can be obtained through the <em>setup_func</em> argument of <code class="docutils literal notranslate"><span class="pre">idl_test</span></code>. Anything not
+documented in this section should be considered an implementation detail, and outside callers should
+not use it.</p>
+<div class="section" id="add-objects-dict">
+<h3><code class="docutils literal notranslate"><span class="pre">add_objects(dict)</span></code><a class="headerlink" href="#add-objects-dict" title="Permalink to this headline">¶</a></h3>
+<p><em>dict</em> should be an object whose keys are the names of interfaces or exceptions, and whose values
+are arrays of strings.  When an interface or exception is tested, every string registered for it
+with <code class="docutils literal notranslate"><span class="pre">add_objects()</span></code> will be evaluated, and tests will be run on the result to verify that it
+correctly implements that interface or exception.  This is the only way to test anything about
+<code class="docutils literal notranslate"><span class="pre">[NoInterfaceObject]</span></code> interfaces, and there are many tests that can’t be run on any interface
+without an object to fiddle with.</p>
+<p>The interface has to be the <em>primary</em> interface of all the objects provided.  For example, don’t
+pass <code class="docutils literal notranslate"><span class="pre">{Node:</span> <span class="pre">[&quot;document&quot;]}</span></code>, but rather <code class="docutils literal notranslate"><span class="pre">{Document:</span> <span class="pre">[&quot;document&quot;]}</span></code>.  Assuming the <code class="docutils literal notranslate"><span class="pre">Document</span></code>
+interface was declared to inherit from <code class="docutils literal notranslate"><span class="pre">Node</span></code>, this will automatically test that document implements
+the <code class="docutils literal notranslate"><span class="pre">Node</span></code> interface too.</p>
+<p>Warning: methods will be called on any provided objects, in a manner that WebIDL requires be safe.
+For instance, if a method has mandatory arguments, the test suite will try calling it with too few
+arguments to see if it throws an exception. If an implementation incorrectly runs the function
+instead of throwing, this might have side effects, possibly even preventing the test suite from
+running correctly.</p>
+</div>
+<div class="section" id="prevent-multiple-testing-name">
+<h3><code class="docutils literal notranslate"><span class="pre">prevent_multiple_testing(name)</span></code><a class="headerlink" href="#prevent-multiple-testing-name" title="Permalink to this headline">¶</a></h3>
+<p>This is a niche method for use in case you’re testing many objects that implement the same
+interfaces, and don’t want to retest the same interfaces every single time. For instance, HTML
+defines many interfaces that all inherit from <code class="docutils literal notranslate"><span class="pre">HTMLElement</span></code>, so the HTML test suite has something
+like</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">add_objects</span><span class="p">({</span>
+  <span class="nx">HTMLHtmlElement</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;document.documentElement&#39;</span><span class="p">],</span>
+  <span class="nx">HTMLHeadElement</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;document.head&#39;</span><span class="p">],</span>
+  <span class="nx">HTMLBodyElement</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;document.body&#39;</span><span class="p">],</span>
+  <span class="p">...</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>and so on for dozens of element types.  This would mean that it would retest that each and every one
+of those elements implements <code class="docutils literal notranslate"><span class="pre">HTMLElement</span></code>, <code class="docutils literal notranslate"><span class="pre">Element</span></code>, and <code class="docutils literal notranslate"><span class="pre">Node</span></code>, which would be thousands of
+basically redundant tests. The test suite therefore calls <code class="docutils literal notranslate"><span class="pre">prevent_multiple_testing(&quot;HTMLElement&quot;)</span></code>.
+This means that once one object has been tested to implement <code class="docutils literal notranslate"><span class="pre">HTMLElement</span></code> and its ancestors, no
+other object will be.  Thus in the example code above, the harness would test that
+<code class="docutils literal notranslate"><span class="pre">document.documentElement</span></code> correctly implements <code class="docutils literal notranslate"><span class="pre">HTMLHtmlElement</span></code>, <code class="docutils literal notranslate"><span class="pre">HTMLElement</span></code>, <code class="docutils literal notranslate"><span class="pre">Element</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Node</span></code>; but <code class="docutils literal notranslate"><span class="pre">document.head</span></code> would only be tested for <code class="docutils literal notranslate"><span class="pre">HTMLHeadElement</span></code>, and so on for further
+objects.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testharness-tutorial.html" class="btn btn-neutral float-right" title="testharness.js tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="testdriver-extension-tutorial.html" class="btn btn-neutral float-left" title="Testdriver extension tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

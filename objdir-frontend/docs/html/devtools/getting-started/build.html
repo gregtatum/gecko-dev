@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Set up to build Firefox Developer Tools &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Setting up a development profile" href="development-profiles.html" />
+    <link rel="prev" title="Get a Bugzilla account" href="bugzilla.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#getting-started">Getting Started</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="README.html">Getting Started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bugzilla.html">Get a Bugzilla account</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Get and build the code</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installing-mercurial">Installing Mercurial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-the-code">Getting the code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-running-locally">Building and running locally</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="development-profiles.html">Create a development profile</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Set up to build Firefox Developer Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/getting-started/build.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="set-up-to-build-firefox-developer-tools">
+<h1>Set up to build Firefox Developer Tools<a class="headerlink" href="#set-up-to-build-firefox-developer-tools" title="Permalink to this headline">¶</a></h1>
+<p>Since the tools are part of Firefox, we need to get and build Firefox’s source code.</p>
+<p>These are the steps we’re going to look at:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#installing-mercurial">Installing Mercurial</a></p></li>
+<li><p><a class="reference external" href="#getting-the-code">Getting the code</a></p></li>
+<li><p><a class="reference external" href="#building-and-running-locally">Building and running locally</a></p>
+<ul>
+<li><p><a class="reference external" href="#rebuilding">Rebuilding</a></p></li>
+<li><p><a class="reference external" href="#building-even-faster-with-artifact-builds">Artifact builds</a> for even faster builds</p></li>
+<li><p><a class="reference external" href="#maybe-you-dont-even-need-to-build">Maybe you don’t even need to build</a></p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="installing-mercurial">
+<h2>Installing Mercurial<a class="headerlink" href="#installing-mercurial" title="Permalink to this headline">¶</a></h2>
+<p>Firefox’s source code is hosted on <a class="reference external" href="https://hg.mozilla.org/mozilla-central/">a Mercurial repository</a>.</p>
+<p>Please <a class="reference external" href="https://www.mercurial-scm.org/">install Mercurial</a> if it’s not already installed in your system. Its website provides <a class="reference external" href="https://www.mercurial-scm.org/downloads">files for downloading</a> and also instructions for the most popular package managers. For example, if using Homebrew in macOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install mercurial
+</pre></div>
+</div>
+<p>Or in Debian/Ubuntu Linux with apt-get:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get install mercurial
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-code">
+<h2>Getting the code<a class="headerlink" href="#getting-the-code" title="Permalink to this headline">¶</a></h2>
+<p>This will take a long time, because the repository is <strong>B  I  G</strong> (Firefox is more than 10 years old and there are lots of commits every day!). So please be patient.</p>
+<p>You will also need a lot of disk space (about ~40Gb free).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~ <span class="c1"># or the folder where you store your projects, for example ~/projects</span>
+hg clone https://hg.mozilla.org/mozilla-central
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-and-running-locally">
+<h2>Building and running locally<a class="headerlink" href="#building-and-running-locally" title="Permalink to this headline">¶</a></h2>
+<p>Although DevTools is written in JavaScript, the core of Firefox is not—we need tools such as compilers to build the C/C++/Rust code and turn it into binaries that our computer can run.</p>
+<p>If you’re a web developer, you might not be familiar with these tools, but fortunately, the Firefox team has made a very good job of automating the process of installing them with bootstrap scripts, and putting <a class="reference external" href="https://developer.mozilla.org/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_build">documentation</a> together. You don’t <em>need</em> to read it now; as we’ll provide a simplified way to build the code, but if you have any issues, please refer to the documentation.</p>
+<p>Try building Firefox and downloading dependencies by running the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach bootstrap
+</pre></div>
+</div>
+<p>This script might ask you questions, so it’s recommended to keep an eye on the terminal while it’s running—otherwise it will never finish!</p>
+<p><em>Please note, when you are prompted for your name and add unicode characters this can crash the process. The workaround here is to use ascii-friendly characters and later on edit your <code class="docutils literal notranslate"><span class="pre">~/.hgrc</span></code> file manually to use the unicode characters in your name.</em></p>
+<p>After it finishes, you might be asked to add some lines to a <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> file. Create this file in the repository folder (i.e. in <code class="docutils literal notranslate"><span class="pre">~/mozilla-central</span></code>), then add the lines.</p>
+<p>Then run this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach configure
+./mach build
+</pre></div>
+</div>
+<p>Please note, if this fails it might be possible you need to run the <code class="docutils literal notranslate"><span class="pre">bootstrap.py</span></code> script first. Download the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py">bootstrap.py script</a> and save it in your project directory. Then run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">bootstrap.py</span></code> and follow the prompted steps.</p>
+<p><strong>Note:</strong> if using Windows, you might need to type the commands without the <code class="docutils literal notranslate"><span class="pre">./</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mach bootstrap
+mach configure
+mach build
+</pre></div>
+</div>
+<p>If your system needs additional dependencies installed (for example, Python, or a compiler, etc) the above commands might fail, and various diagnostic messages will be printed to your screen. Follow their advice and then try running the command that failed again, until the three of them complete successfully.</p>
+<p>Some error messages can be quite cryptic. It is a good idea to consult the <a class="reference external" href="https://developer.mozilla.org/docs/Mozilla/Developer_guide/Build_Instructions/Simple_Firefox_build">documentation</a> specific to the platform you’re using. Sometimes searching in the internet for the specific error message you get can help, and you can also <a class="reference external" href="https://firefox-dev.tools/#getting-in-touch">get in touch</a> if you get stuck.</p>
+<p>Once you complete a first successful build, you should be able to build again by running only this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build
+</pre></div>
+</div>
+<p>By the way, building takes a long time (specially on slow computers).</p>
+<div class="section" id="running-your-own-compiled-version-of-firefox">
+<h3>Running your own compiled version of Firefox<a class="headerlink" href="#running-your-own-compiled-version-of-firefox" title="Permalink to this headline">¶</a></h3>
+<p>To run the Firefox you just compiled:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach run
+</pre></div>
+</div>
+<p>This will run using an empty temporary profile which is discarded when you close the browser. We will look into <a class="reference internal" href="development-profiles.html"><span class="doc">persistent development profiles later</span></a>. But first…</p>
+<p>⭐️  <strong>Time for some congratulations!</strong> You managed to get Firefox’s code, build tools and dependencies, and just run your very own copy of Firefox! Well done! ⭐   ️</p>
+</div>
+<div class="section" id="rebuilding">
+<h3>Rebuilding<a class="headerlink" href="#rebuilding" title="Permalink to this headline">¶</a></h3>
+<!--TODO: it would be valuable to explain how to pull changes! --><p>Suppose you pulled the latest changes from the remote repository (or made some changes, to experiment and see what happens) and want to build again.</p>
+<p>You can ask the <code class="docutils literal notranslate"><span class="pre">mach</span></code> script to build only changed files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach build faster
+</pre></div>
+</div>
+<p>This should be faster (a matter of seconds).</p>
+<p>Sometimes, if you haven’t updated in a while, you’ll be told that you need to <em>clobber</em>, or basically delete precompiled stuff and start from scratch, because there are too many changes. The way to do it is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach clobber
+</pre></div>
+</div>
+<p>It is a bit tedious to do this manually, but fortunately you can add an entry to <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> to have this done automatically for you each time it’s required. Add this and save the file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatically clobber when an incremental build is not possible</span>
+<span class="n">mk_add_options</span> <span class="n">AUTOCLOBBER</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-even-faster-with-artifact-builds">
+<h3>Building even faster with artifact builds<a class="headerlink" href="#building-even-faster-with-artifact-builds" title="Permalink to this headline">¶</a></h3>
+<p>It is unusual to modify C/C++ code when working on DevTools. This means that we can use <em>artifact builds</em>. This method downloads prebuilt binary components, and then the build process becomes faster.</p>
+<p>Add the following content to <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatically download and use compiled C++ components:</span>
+ac_add_options --enable-artifact-builds
+ 
+<span class="c1"># Write build artifacts to:</span>
+mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>./objdir-frontend
+</pre></div>
+</div>
+<p>And then you can follow the normal build process again (only <em>faster</em>!)</p>
+<p><strong>Note</strong>: On macOS you might want to use <code class="docutils literal notranslate"><span class="pre">MOZ_OBJDIR=./objdir-frontend.noindex</span></code> instead. Using the <code class="docutils literal notranslate"><span class="pre">.noindex</span></code> file extension prevents the Spotlight from indexing your <code class="docutils literal notranslate"><span class="pre">objdir</span></code>, which is slow.</p>
+<p>For more information on aspects such as technical limitations of artifact builds, read the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions/Artifact_builds">Artifact Builds</a> page.</p>
+</div>
+<div class="section" id="updating-worker-code-requires-a-few-extra-steps">
+<h3>Updating worker code requires a few extra steps<a class="headerlink" href="#updating-worker-code-requires-a-few-extra-steps" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="prerequisite">
+<h4>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h4>
+<ol class="simple">
+<li><p>Install yarn 1.x globally via <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span> <span class="pre">-g</span> <span class="pre">yarn</span></code> if you do not have it installed globally already.</p></li>
+<li><p>Go to the <code class="docutils literal notranslate"><span class="pre">client/debugger/</span></code> directory and run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code>.</p></li>
+</ol>
+</div>
+<div class="section" id="regenerating-work-bundle">
+<h4>Regenerating work bundle<a class="headerlink" href="#regenerating-work-bundle" title="Permalink to this headline">¶</a></h4>
+<ol class="simple">
+<li><p>Save the modified files.</p></li>
+<li><p>Back in your terminal, under <code class="docutils literal notranslate"><span class="pre">client/debugger/</span></code> directory, execute <code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">bin/build</span></code>.</p></li>
+<li><p>After completion, use the <code class="docutils literal notranslate"><span class="pre">Restart</span> <span class="pre">(Developer)</span></code> option that is available under the <code class="docutils literal notranslate"><span class="pre">File</span></code> menu in local builds (or its respective shortcut).</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="development-profiles.html" class="btn btn-neutral float-right" title="Setting up a development profile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="bugzilla.html" class="btn btn-neutral float-left" title="Get a Bugzilla account" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

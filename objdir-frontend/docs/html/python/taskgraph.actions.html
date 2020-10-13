@@ -1,0 +1,888 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>taskgraph.actions package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>taskgraph.actions package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/taskgraph.actions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="taskgraph-actions-package">
+<h1>taskgraph.actions package<a class="headerlink" href="#taskgraph-actions-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-taskgraph.actions.add_new_jobs">
+<span id="taskgraph-actions-add-new-jobs-module"></span><h2>taskgraph.actions.add_new_jobs module<a class="headerlink" href="#module-taskgraph.actions.add_new_jobs" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.add_new_jobs.add_new_jobs_action">
+<code class="sig-prename descclassname">taskgraph.actions.add_new_jobs.</code><code class="sig-name descname">add_new_jobs_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.add_new_jobs.add_new_jobs_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.add_talos">
+<span id="taskgraph-actions-add-talos-module"></span><h2>taskgraph.actions.add_talos module<a class="headerlink" href="#module-taskgraph.actions.add_talos" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.add_talos.add_all_talos">
+<code class="sig-prename descclassname">taskgraph.actions.add_talos.</code><code class="sig-name descname">add_all_talos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.add_talos.add_all_talos" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.backfill">
+<span id="taskgraph-actions-backfill-module"></span><h2>taskgraph.actions.backfill module<a class="headerlink" href="#module-taskgraph.actions.backfill" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.add_task_with_original_manifests">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">add_task_with_original_manifests</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.add_task_with_original_manifests" title="Permalink to this definition">¶</a></dt>
+<dd><p>This action is normally scheduled by the backfill action. The intent is to schedule a test
+task with the test manifests from the original task (if available).</p>
+<p>The push in which we want to schedule a new task is defined by the parameters object.</p>
+<p>To execute this action locally follow the documentation here:
+<a class="reference external" href="https://firefox-source-docs.mozilla.org/taskcluster/actions.html#testing-the-action-locally">https://firefox-source-docs.mozilla.org/taskcluster/actions.html#testing-the-action-locally</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.backfill_action">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">backfill_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.backfill_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>This action takes a task ID and schedules it on previous pushes (via support action).</p>
+<p>To execute this action locally follow the documentation here:
+<a class="reference external" href="https://firefox-source-docs.mozilla.org/taskcluster/actions.html#testing-the-action-locally">https://firefox-source-docs.mozilla.org/taskcluster/actions.html#testing-the-action-locally</a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.do_not_modify">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">do_not_modify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.do_not_modify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.input_for_support_action">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">input_for_support_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">times</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.input_for_support_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate input for action to be scheduled.</p>
+<p>Define what label to schedule with ‘label’.
+If it is a test task that uses explicit manifests add that information.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.new_label">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">new_label</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">tasks</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.new_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is to handle the case when a previous push does not contain a specific task label
+and we try to find a label we can reuse.</p>
+<p>For instance, we try to backfill chunk #3, however, a previous push does not contain such
+chunk, thus, we try to reuse another task/label.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.backfill.test_manifests_modifier">
+<code class="sig-prename descclassname">taskgraph.actions.backfill.</code><code class="sig-name descname">test_manifests_modifier</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">symbol</span></em>, <em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">test_manifests</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.backfill.test_manifests_modifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the case of test tasks we can modify the test paths they execute.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.cancel">
+<span id="taskgraph-actions-cancel-module"></span><h2>taskgraph.actions.cancel module<a class="headerlink" href="#module-taskgraph.actions.cancel" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.cancel.cancel_action">
+<code class="sig-prename descclassname">taskgraph.actions.cancel.</code><code class="sig-name descname">cancel_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.cancel.cancel_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.cancel_all">
+<span id="taskgraph-actions-cancel-all-module"></span><h2>taskgraph.actions.cancel_all module<a class="headerlink" href="#module-taskgraph.actions.cancel_all" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.cancel_all.cancel_all_action">
+<code class="sig-prename descclassname">taskgraph.actions.cancel_all.</code><code class="sig-name descname">cancel_all_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.cancel_all.cancel_all_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.create_interactive">
+<span id="taskgraph-actions-create-interactive-module"></span><h2>taskgraph.actions.create_interactive module<a class="headerlink" href="#module-taskgraph.actions.create_interactive" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.create_interactive.context">
+<code class="sig-prename descclassname">taskgraph.actions.create_interactive.</code><code class="sig-name descname">context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">params</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.create_interactive.context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.create_interactive.create_interactive_action">
+<code class="sig-prename descclassname">taskgraph.actions.create_interactive.</code><code class="sig-name descname">create_interactive_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.create_interactive.create_interactive_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.gecko_profile">
+<span id="taskgraph-actions-gecko-profile-module"></span><h2>taskgraph.actions.gecko_profile module<a class="headerlink" href="#module-taskgraph.actions.gecko_profile" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.gecko_profile.add_args_to_perf_command">
+<code class="sig-prename descclassname">taskgraph.actions.gecko_profile.</code><code class="sig-name descname">add_args_to_perf_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payload_commands</span></em>, <em class="sig-param"><span class="n">extra_args</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.gecko_profile.add_args_to_perf_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add custom command line args to a given command.
+:param payload_commands: the raw command as seen by taskcluster
+:param extra_args: array of args we want to inject</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.gecko_profile.geckoprofile_action">
+<code class="sig-prename descclassname">taskgraph.actions.gecko_profile.</code><code class="sig-name descname">geckoprofile_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.gecko_profile.geckoprofile_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.isolate_test">
+<span id="taskgraph-actions-isolate-test-module"></span><h2>taskgraph.actions.isolate_test module<a class="headerlink" href="#module-taskgraph.actions.isolate_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.isolate_test.create_isolate_failure_tasks">
+<code class="sig-prename descclassname">taskgraph.actions.isolate_test.</code><code class="sig-name descname">create_isolate_failure_tasks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_definition</span></em>, <em class="sig-param"><span class="n">failures</span></em>, <em class="sig-param"><span class="n">level</span></em>, <em class="sig-param"><span class="n">times</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.isolate_test.create_isolate_failure_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create tasks to re-run the original task plus tasks to test
+each failing test directory and individual path.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.isolate_test.get_failures">
+<code class="sig-prename descclassname">taskgraph.actions.isolate_test.</code><code class="sig-name descname">get_failures</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.isolate_test.get_failures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict containing properties containing a list of
+directories containing test failures and a separate list of
+individual test failures from the errorsummary.log artifact for
+the task.</p>
+<p>Calls the helper function munge_test_path to attempt to find an
+appropriate test path to pass to the task in
+MOZHARNESS_TEST_PATHS.  If no appropriate test path can be
+determined, nothing is returned.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.isolate_test.isolate_test_failures">
+<code class="sig-prename descclassname">taskgraph.actions.isolate_test.</code><code class="sig-name descname">isolate_test_failures</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.isolate_test.isolate_test_failures" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.merge_automation">
+<span id="taskgraph-actions-merge-automation-module"></span><h2>taskgraph.actions.merge_automation module<a class="headerlink" href="#module-taskgraph.actions.merge_automation" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.merge_automation.is_release_promotion_available">
+<code class="sig-prename descclassname">taskgraph.actions.merge_automation.</code><code class="sig-name descname">is_release_promotion_available</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.merge_automation.is_release_promotion_available" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.merge_automation.merge_automation_action">
+<code class="sig-prename descclassname">taskgraph.actions.merge_automation.</code><code class="sig-name descname">merge_automation_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.merge_automation.merge_automation_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.openh264">
+<span id="taskgraph-actions-openh264-module"></span><h2>taskgraph.actions.openh264 module<a class="headerlink" href="#module-taskgraph.actions.openh264" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.openh264.openh264_action">
+<code class="sig-prename descclassname">taskgraph.actions.openh264.</code><code class="sig-name descname">openh264_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.openh264.openh264_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.purge_caches">
+<span id="taskgraph-actions-purge-caches-module"></span><h2>taskgraph.actions.purge_caches module<a class="headerlink" href="#module-taskgraph.actions.purge_caches" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.purge_caches.purge_caches_action">
+<code class="sig-prename descclassname">taskgraph.actions.purge_caches.</code><code class="sig-name descname">purge_caches_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.purge_caches.purge_caches_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.registry">
+<span id="taskgraph-actions-registry-module"></span><h2>taskgraph.actions.registry module<a class="headerlink" href="#module-taskgraph.actions.registry" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="taskgraph.actions.registry.Action">
+<em class="property">class </em><code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">Action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span></em>, <em class="sig-param"><span class="n">cb_name</span></em>, <em class="sig-param"><span class="n">permission</span></em>, <em class="sig-param"><span class="n">action_builder</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.Action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="py attribute">
+<dt id="taskgraph.actions.registry.Action.action_builder">
+<code class="sig-name descname">action_builder</code><a class="headerlink" href="#taskgraph.actions.registry.Action.action_builder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="taskgraph.actions.registry.Action.cb_name">
+<code class="sig-name descname">cb_name</code><a class="headerlink" href="#taskgraph.actions.registry.Action.cb_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="taskgraph.actions.registry.Action.order">
+<code class="sig-name descname">order</code><a class="headerlink" href="#taskgraph.actions.registry.Action.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="taskgraph.actions.registry.Action.permission">
+<code class="sig-name descname">permission</code><a class="headerlink" href="#taskgraph.actions.registry.Action.permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.hash_taskcluster_yml">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">hash_taskcluster_yml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.hash_taskcluster_yml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a hash of the given .taskcluster.yml.  This is the first 10 digits
+of the sha256 of the file’s content, and is used by administrative scripts
+to create a hook based on this content.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.is_json">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">is_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.is_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">True</span></code>, if <code class="docutils literal notranslate"><span class="pre">data</span></code> is a JSON serializable data structure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.read_taskcluster_yml">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">read_taskcluster_yml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.read_taskcluster_yml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parse .taskcluster.yml, memoized to save some time</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.register_callback_action">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">register_callback_action</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">title</em>, <em class="sig-param">symbol</em>, <em class="sig-param">description</em>, <em class="sig-param">order=10000</em>, <em class="sig-param">context=[]</em>, <em class="sig-param">available=&lt;function &lt;lambda&gt;&gt;</em>, <em class="sig-param">schema=None</em>, <em class="sig-param">permission='generic'</em>, <em class="sig-param">cb_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.register_callback_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an action callback that can be triggered from supporting
+user interfaces, such as Treeherder.</p>
+<p>This function is to be used as a decorator for a callback that takes
+parameters as follows:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code>:</dt><dd><p>Decision task parameters, see <code class="docutils literal notranslate"><span class="pre">taskgraph.parameters.Parameters</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">input</span></code>:</dt><dd><p>Input matching specified JSON schema, <code class="docutils literal notranslate"><span class="pre">None</span></code> if no <code class="docutils literal notranslate"><span class="pre">schema</span></code>
+parameter is given to <code class="docutils literal notranslate"><span class="pre">register_callback_action</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_group_id</span></code>:</dt><dd><p>The id of the task-group this was triggered for.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_id</span></code> and <cite>task`</cite>:</dt><dd><p>task identifier and task definition for task the action was triggered
+for, <code class="docutils literal notranslate"><span class="pre">None</span></code> if no <code class="docutils literal notranslate"><span class="pre">context</span></code> parameters was given to
+<code class="docutils literal notranslate"><span class="pre">register_callback_action</span></code>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – An identifier for this action, used by UIs to find the action.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – A human readable title for the action to be used as label on a button
+or text on a link for triggering the action.</p></li>
+<li><p><strong>symbol</strong> (<em>str</em>) – Treeherder symbol for the action callback, this is the symbol that the
+task calling your callback will be displayed as. This is usually 1-3
+letters abbreviating the action title.</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – A human readable description of the action in <strong>markdown</strong>.
+This will be display as tooltip and in dialog window when the action
+is triggered. This is a good place to describe how to use the action.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Order of the action in menus, this is relative to the <code class="docutils literal notranslate"><span class="pre">order</span></code> of
+other actions declared.</p></li>
+<li><p><strong>context</strong> (<em>list of dict</em>) – <p>List of tag-sets specifying which tasks the action is can take as input.
+If no tag-sets is specified as input the action is related to the
+entire task-group, and won’t be triggered with a given task.</p>
+<p>Otherwise, if <code class="docutils literal notranslate"><span class="pre">context</span> <span class="pre">=</span> <span class="pre">[{'k':</span> <span class="pre">'b',</span> <span class="pre">'p':</span> <span class="pre">'l'},</span> <span class="pre">{'k':</span> <span class="pre">'t'}]</span></code> will only
+be displayed in the context menu for tasks that has
+<code class="docutils literal notranslate"><span class="pre">task.tags.k</span> <span class="pre">==</span> <span class="pre">'b'</span> <span class="pre">&amp;&amp;</span> <span class="pre">task.tags.p</span> <span class="pre">=</span> <span class="pre">'l'</span></code> or <code class="docutils literal notranslate"><span class="pre">task.tags.k</span> <span class="pre">=</span> <span class="pre">'t'</span></code>.
+Esentially, this allows filtering on <code class="docutils literal notranslate"><span class="pre">task.tags</span></code>.</p>
+<p>If this is a function, it is given the decision parameters and must return
+a value of the form described above.</p>
+</p></li>
+<li><p><strong>available</strong> (<em>function</em>) – An optional function that given decision parameters decides if the
+action is available. Defaults to a function that always returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>schema</strong> (<em>dict</em>) – JSON schema specifying input accepted by the action.
+This is optional and can be left <code class="docutils literal notranslate"><span class="pre">null</span></code> if no input is taken.</p></li>
+<li><p><strong>permission</strong> (<em>string</em>) – This defaults to <a href="#id1"><span class="problematic" id="id2">``</span></a>generic` and needs to be set for actions that need
+additional permissions. It appears appears in ci-configuration and
+various role and hook
+names.</p></li>
+<li><p><strong>cb_name</strong> (<em>string</em>) – The name under which this function should be registered, defaulting to
+<cite>name</cite>.  Unlike <cite>name</cite>, which can appear multiple times, cb_name must be
+unique among all registered callbacks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>To be used as decorator for the callback function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.render_actions_json">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">render_actions_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">decision_task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.render_actions_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render JSON object for the <code class="docutils literal notranslate"><span class="pre">public/actions.json</span></code> artifact.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<a class="reference internal" href="taskgraph.html#taskgraph.parameters.Parameters" title="taskgraph.parameters.Parameters"><em>taskgraph.parameters.Parameters</em></a>) – Decision task parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>JSON object representation of the <code class="docutils literal notranslate"><span class="pre">public/actions.json</span></code> artifact.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.sanity_check_task_scope">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">sanity_check_task_scope</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.sanity_check_task_scope" title="Permalink to this definition">¶</a></dt>
+<dd><p>If this action is not generic, then verify that this task has the necessary
+scope to run the action. This serves as a backstop preventing abuse by
+running non-generic actions using generic hooks. While scopes should
+prevent serious damage from such abuse, it’s never a valid thing to do.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.registry.trigger_action_callback">
+<code class="sig-prename descclassname">taskgraph.actions.registry.</code><code class="sig-name descname">trigger_action_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">test</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.registry.trigger_action_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger action callback with the given inputs. If <cite>test</cite> is true, then run
+the action callback in testing mode, without actually creating tasks.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.release_promotion">
+<span id="taskgraph-actions-release-promotion-module"></span><h2>taskgraph.actions.release_promotion module<a class="headerlink" href="#module-taskgraph.actions.release_promotion" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.get_flavors">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">get_flavors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">param</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.get_flavors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all flavors with the given parameter enabled.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.get_partner_config">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">get_partner_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">partner_url_config</span></em>, <em class="sig-param"><span class="n">github_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.get_partner_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.get_required_signoffs">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">get_required_signoffs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.get_required_signoffs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.get_signoff_properties">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">get_signoff_properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.get_signoff_properties" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.get_signoff_urls">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">get_signoff_urls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.get_signoff_urls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.is_release_promotion_available">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">is_release_promotion_available</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.is_release_promotion_available" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.release_promotion.release_promotion_action">
+<code class="sig-prename descclassname">taskgraph.actions.release_promotion.</code><code class="sig-name descname">release_promotion_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.release_promotion.release_promotion_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.retrigger">
+<span id="taskgraph-actions-retrigger-module"></span><h2>taskgraph.actions.retrigger module<a class="headerlink" href="#module-taskgraph.actions.retrigger" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger.rerun_action">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger.</code><code class="sig-name descname">rerun_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger.rerun_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger.retrigger_action">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger.</code><code class="sig-name descname">retrigger_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger.retrigger_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger.retrigger_decision_action">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger.</code><code class="sig-name descname">retrigger_decision_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger.retrigger_decision_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a single task, we try to just run exactly the same task once more.
+It’s quite possible that we don’t have the scopes to do so (especially for
+an action), but this is best-effort.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger.retrigger_multiple">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger.</code><code class="sig-name descname">retrigger_multiple</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger.retrigger_multiple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.retrigger_custom">
+<span id="taskgraph-actions-retrigger-custom-module"></span><h2>taskgraph.actions.retrigger_custom module<a class="headerlink" href="#module-taskgraph.actions.retrigger_custom" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger_custom.basic_custom_retrigger_action_basic">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger_custom.</code><code class="sig-name descname">basic_custom_retrigger_action_basic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger_custom.basic_custom_retrigger_action_basic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger_custom.extended_custom_retrigger_action">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger_custom.</code><code class="sig-name descname">extended_custom_retrigger_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger_custom.extended_custom_retrigger_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.retrigger_custom.handle_custom_retrigger">
+<code class="sig-prename descclassname">taskgraph.actions.retrigger_custom.</code><code class="sig-name descname">handle_custom_retrigger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.retrigger_custom.handle_custom_retrigger" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.run_missing_tests">
+<span id="taskgraph-actions-run-missing-tests-module"></span><h2>taskgraph.actions.run_missing_tests module<a class="headerlink" href="#module-taskgraph.actions.run_missing_tests" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.run_missing_tests.run_missing_tests">
+<code class="sig-prename descclassname">taskgraph.actions.run_missing_tests.</code><code class="sig-name descname">run_missing_tests</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.run_missing_tests.run_missing_tests" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.scriptworker_canary">
+<span id="taskgraph-actions-scriptworker-canary-module"></span><h2>taskgraph.actions.scriptworker_canary module<a class="headerlink" href="#module-taskgraph.actions.scriptworker_canary" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.scriptworker_canary.scriptworker_canary">
+<code class="sig-prename descclassname">taskgraph.actions.scriptworker_canary.</code><code class="sig-name descname">scriptworker_canary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.scriptworker_canary.scriptworker_canary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions.util">
+<span id="taskgraph-actions-util-module"></span><h2>taskgraph.actions.util module<a class="headerlink" href="#module-taskgraph.actions.util" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.util.add_args_to_command">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">add_args_to_command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cmd_parts</span></em>, <em class="sig-param"><span class="n">extra_args</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.add_args_to_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add custom command line args to a given command.
+:param cmd_parts: the raw command as seen by taskcluster
+:param extra_args: array of args we want to add</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.combine_task_graph_files">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">combine_task_graph_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">suffixes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.combine_task_graph_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine task-graph-{suffix}.json files into a single task-graph.json file.</p>
+<p>Since Chain of Trust verification requires a task-graph.json file that
+contains all children tasks, we can combine the various task-graph-0.json
+type files into a master task-graph.json file at the end.</p>
+<p>Actions also look for various artifacts, so we combine those in a similar
+fashion.</p>
+<p>In the case where there is only one suffix, we simply rename it to avoid the
+additional cost of uploading two copies of the same data.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.create_task_from_def">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">create_task_from_def</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_def</span></em>, <em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.create_task_from_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new task from a definition rather than from a label
+that is already in the full-task-graph. The task definition will
+have {relative-datestamp’: ‘..’} rendered just like in a decision task.
+Use this for entirely new tasks or ones that change internals of the task.
+It is useful if you want to “edit” the full_task_graph and then hand
+it to this function. No dependencies will be scheduled. You must handle
+this yourself. Seeing how create_tasks handles it might prove helpful.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.create_tasks">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">create_tasks</code><span class="sig-paren">(</span><em class="sig-param">graph_config</em>, <em class="sig-param">to_run</em>, <em class="sig-param">full_task_graph</em>, <em class="sig-param">label_to_taskid</em>, <em class="sig-param">params</em>, <em class="sig-param">decision_task_id</em>, <em class="sig-param">suffix=''</em>, <em class="sig-param">modifier=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.create_tasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create new tasks.  The task definition will have {relative-datestamp’:
+‘..’} rendered just like in a decision task.  Action callbacks should use
+this function to create new tasks,
+allowing easy debugging with <cite>mach taskgraph action-callback –test</cite>.
+This builds up all required tasks to run in order to run the tasks requested.</p>
+<p>Optionally this function takes a <cite>modifier</cite> function that is passed in each
+task before it is put into a new graph. It should return a valid task. Note
+that this is passed _all_ tasks in the graph, not just the set in to_run. You
+may want to skip modifying tasks not in your to_run list.</p>
+<p>If <cite>suffix</cite> is given, then it is used to give unique names to the resulting
+artifacts.  If you call this function multiple times in the same action,
+pass a different suffix each time to avoid overwriting artifacts.</p>
+<p>If you wish to create the tasks in a new group, leave out decision_task_id.</p>
+<p>Returns an updated label_to_taskid containing the new tasks</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.fetch_graph_and_labels">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">fetch_graph_and_labels</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.fetch_graph_and_labels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.get_decision_task_id">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">get_decision_task_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">project</span></em>, <em class="sig-param"><span class="n">push_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.get_decision_task_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.get_parameters">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">get_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decision_task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.get_parameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.get_pushes">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">get_pushes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">project</span></em>, <em class="sig-param"><span class="n">end_id</span></em>, <em class="sig-param"><span class="n">depth</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.get_pushes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.get_pushes_from_params_input">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">get_pushes_from_params_input</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">input</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.get_pushes_from_params_input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.relativize_datestamps">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">relativize_datestamps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_def</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.relativize_datestamps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a task definition as received from the queue, convert all datestamps
+to {relative_datestamp: ..} format, with the task creation time as “now”.
+The result is useful for handing to <code class="docutils literal notranslate"><span class="pre">create_task</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.trigger_action">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">trigger_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">action_name</span></em>, <em class="sig-param"><span class="n">decision_task_id</span></em>, <em class="sig-param"><span class="n">task_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">input</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.trigger_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.update_dependencies">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">update_dependencies</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">graph</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.update_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.util.update_parent">
+<code class="sig-prename descclassname">taskgraph.actions.util.</code><code class="sig-name descname">update_parent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">graph</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.util.update_parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.actions">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-taskgraph.actions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.actions.register_callback_action">
+<code class="sig-prename descclassname">taskgraph.actions.</code><code class="sig-name descname">register_callback_action</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">title</em>, <em class="sig-param">symbol</em>, <em class="sig-param">description</em>, <em class="sig-param">order=10000</em>, <em class="sig-param">context=[]</em>, <em class="sig-param">available=&lt;function &lt;lambda&gt;&gt;</em>, <em class="sig-param">schema=None</em>, <em class="sig-param">permission='generic'</em>, <em class="sig-param">cb_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.register_callback_action" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an action callback that can be triggered from supporting
+user interfaces, such as Treeherder.</p>
+<p>This function is to be used as a decorator for a callback that takes
+parameters as follows:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code>:</dt><dd><p>Decision task parameters, see <code class="docutils literal notranslate"><span class="pre">taskgraph.parameters.Parameters</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">input</span></code>:</dt><dd><p>Input matching specified JSON schema, <code class="docutils literal notranslate"><span class="pre">None</span></code> if no <code class="docutils literal notranslate"><span class="pre">schema</span></code>
+parameter is given to <code class="docutils literal notranslate"><span class="pre">register_callback_action</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_group_id</span></code>:</dt><dd><p>The id of the task-group this was triggered for.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_id</span></code> and <cite>task`</cite>:</dt><dd><p>task identifier and task definition for task the action was triggered
+for, <code class="docutils literal notranslate"><span class="pre">None</span></code> if no <code class="docutils literal notranslate"><span class="pre">context</span></code> parameters was given to
+<code class="docutils literal notranslate"><span class="pre">register_callback_action</span></code>.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – An identifier for this action, used by UIs to find the action.</p></li>
+<li><p><strong>title</strong> (<em>str</em>) – A human readable title for the action to be used as label on a button
+or text on a link for triggering the action.</p></li>
+<li><p><strong>symbol</strong> (<em>str</em>) – Treeherder symbol for the action callback, this is the symbol that the
+task calling your callback will be displayed as. This is usually 1-3
+letters abbreviating the action title.</p></li>
+<li><p><strong>description</strong> (<em>str</em>) – A human readable description of the action in <strong>markdown</strong>.
+This will be display as tooltip and in dialog window when the action
+is triggered. This is a good place to describe how to use the action.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Order of the action in menus, this is relative to the <code class="docutils literal notranslate"><span class="pre">order</span></code> of
+other actions declared.</p></li>
+<li><p><strong>context</strong> (<em>list of dict</em>) – <p>List of tag-sets specifying which tasks the action is can take as input.
+If no tag-sets is specified as input the action is related to the
+entire task-group, and won’t be triggered with a given task.</p>
+<p>Otherwise, if <code class="docutils literal notranslate"><span class="pre">context</span> <span class="pre">=</span> <span class="pre">[{'k':</span> <span class="pre">'b',</span> <span class="pre">'p':</span> <span class="pre">'l'},</span> <span class="pre">{'k':</span> <span class="pre">'t'}]</span></code> will only
+be displayed in the context menu for tasks that has
+<code class="docutils literal notranslate"><span class="pre">task.tags.k</span> <span class="pre">==</span> <span class="pre">'b'</span> <span class="pre">&amp;&amp;</span> <span class="pre">task.tags.p</span> <span class="pre">=</span> <span class="pre">'l'</span></code> or <code class="docutils literal notranslate"><span class="pre">task.tags.k</span> <span class="pre">=</span> <span class="pre">'t'</span></code>.
+Esentially, this allows filtering on <code class="docutils literal notranslate"><span class="pre">task.tags</span></code>.</p>
+<p>If this is a function, it is given the decision parameters and must return
+a value of the form described above.</p>
+</p></li>
+<li><p><strong>available</strong> (<em>function</em>) – An optional function that given decision parameters decides if the
+action is available. Defaults to a function that always returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+<li><p><strong>schema</strong> (<em>dict</em>) – JSON schema specifying input accepted by the action.
+This is optional and can be left <code class="docutils literal notranslate"><span class="pre">null</span></code> if no input is taken.</p></li>
+<li><p><strong>permission</strong> (<em>string</em>) – This defaults to <a href="#id3"><span class="problematic" id="id4">``</span></a>generic` and needs to be set for actions that need
+additional permissions. It appears appears in ci-configuration and
+various role and hook
+names.</p></li>
+<li><p><strong>cb_name</strong> (<em>string</em>) – The name under which this function should be registered, defaulting to
+<cite>name</cite>.  Unlike <cite>name</cite>, which can appear multiple times, cb_name must be
+unique among all registered callbacks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>To be used as decorator for the callback function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.render_actions_json">
+<code class="sig-prename descclassname">taskgraph.actions.</code><code class="sig-name descname">render_actions_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">graph_config</span></em>, <em class="sig-param"><span class="n">decision_task_id</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.render_actions_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Render JSON object for the <code class="docutils literal notranslate"><span class="pre">public/actions.json</span></code> artifact.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>parameters</strong> (<a class="reference internal" href="taskgraph.html#taskgraph.parameters.Parameters" title="taskgraph.parameters.Parameters"><em>taskgraph.parameters.Parameters</em></a>) – Decision task parameters.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>JSON object representation of the <code class="docutils literal notranslate"><span class="pre">public/actions.json</span></code> artifact.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.actions.trigger_action_callback">
+<code class="sig-prename descclassname">taskgraph.actions.</code><code class="sig-name descname">trigger_action_callback</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_group_id</span></em>, <em class="sig-param"><span class="n">task_id</span></em>, <em class="sig-param"><span class="n">input</span></em>, <em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="n">parameters</span></em>, <em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">test</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.actions.trigger_action_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trigger action callback with the given inputs. If <cite>test</cite> is true, then run
+the action callback in testing mode, without actually creating tasks.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

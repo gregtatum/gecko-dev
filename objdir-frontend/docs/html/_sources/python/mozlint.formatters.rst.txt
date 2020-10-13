@@ -1,0 +1,53 @@
+mozlint.formatters package
+==========================
+
+Submodules
+----------
+
+mozlint.formatters.compact module
+---------------------------------
+
+.. automodule:: mozlint.formatters.compact
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozlint.formatters.stylish module
+---------------------------------
+
+.. automodule:: mozlint.formatters.stylish
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozlint.formatters.summary module
+---------------------------------
+
+.. automodule:: mozlint.formatters.summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozlint.formatters.treeherder module
+------------------------------------
+
+.. automodule:: mozlint.formatters.treeherder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozlint.formatters.unix module
+------------------------------
+
+.. automodule:: mozlint.formatters.unix
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozlint.formatters
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sparse Checkouts &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GN support in the build system" href="gn.html" />
+    <link rel="prev" title="Including Rust Code in Firefox" href="rust.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Sparse Checkouts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sparse-checkouts-in-mercurial">Sparse Checkouts in Mercurial</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#in-tree-sparse-profiles">In-Tree Sparse Profiles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mach-support-for-sparse-checkouts">Mach Support for Sparse Checkouts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sparse-checkouts-in-automation">Sparse Checkouts in Automation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pros-and-cons-of-sparse-checkouts">Pros and Cons of Sparse Checkouts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-should-sparse-checkouts-be-used">When Should Sparse Checkouts Be Used?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Sparse Checkouts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/sparse.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sparse-checkouts">
+<span id="build-sparse"></span><h1>Sparse Checkouts<a class="headerlink" href="#sparse-checkouts" title="Permalink to this headline">¶</a></h1>
+<p>The Firefox repository is large: over 230,000 files. That many files
+can put a lot of strain on machines, tools, and processes.</p>
+<p>Some version control tools have the ability to only populate a
+working directory / checkout with a subset of files in the repository.
+This is called <em>sparse checkout</em>.</p>
+<p>Various tools in the Firefox repository are configured to work
+when a sparse checkout is being used.</p>
+<div class="section" id="sparse-checkouts-in-mercurial">
+<h2>Sparse Checkouts in Mercurial<a class="headerlink" href="#sparse-checkouts-in-mercurial" title="Permalink to this headline">¶</a></h2>
+<p>Mercurial 4.3 introduced <strong>experimental</strong> support for sparse checkouts
+in the official distribution (a Facebook-authored extension has
+implemented the feature as a 3rd party extension for years).</p>
+<p>To enable sparse checkout support in Mercurial, enable the <code class="docutils literal notranslate"><span class="pre">sparse</span></code>
+extension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">extensions</span><span class="p">]</span>
+<span class="n">sparse</span> <span class="o">=</span>
+</pre></div>
+</div>
+<p>The <em>sparseness</em> of the working directory is managed using
+<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">debugsparse</span></code>. Run <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">help</span> <span class="pre">debugsparse</span></code> and <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">help</span> <span class="pre">-e</span> <span class="pre">sparse</span></code>
+for more info on the feature.</p>
+<p>When a <em>sparse config</em> is enabled, the working directory only contains
+files matching that config. You cannot <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">add</span></code> or <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">remove</span></code> files
+outside the <em>sparse config</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Sparse support in Mercurial 4.3 does not have any backwards
+compatibility guarantees. Expect things to change. Scripting against
+commands or relying on behavior is strongly discouraged.</p>
+</div>
+</div>
+<div class="section" id="in-tree-sparse-profiles">
+<h2>In-Tree Sparse Profiles<a class="headerlink" href="#in-tree-sparse-profiles" title="Permalink to this headline">¶</a></h2>
+<p>Mercurial supports defining the sparse config using files under version
+control. These are called <em>sparse profiles</em>.</p>
+<p>Essentially, the sparse profiles are managed just like any other file in
+the repository. When you <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">update</span></code>, the sparse configuration is
+evaluated against the sparse profile at the revision being updated to.
+From an end-user perspective, you just need to <em>activate</em> a profile once
+and files will be added or removed as appropriate whenever the versioned
+profile file updates.</p>
+<p>In the Firefox repository, the <code class="docutils literal notranslate"><span class="pre">build/sparse-profiles</span></code> directory
+contains Mercurial <em>sparse profiles</em> files.</p>
+<p>Each <em>sparse profile</em> essentially defines a list of file patterns
+(see <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">help</span> <span class="pre">patterns</span></code>) to include or exclude. See
+<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">help</span> <span class="pre">-e</span> <span class="pre">sparse</span></code> for more.</p>
+</div>
+<div class="section" id="mach-support-for-sparse-checkouts">
+<h2>Mach Support for Sparse Checkouts<a class="headerlink" href="#mach-support-for-sparse-checkouts" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mach</span></code> detects when a sparse checkout is being used and its
+behavior may vary to accommodate this.</p>
+<p>By default it is a fatal error if <code class="docutils literal notranslate"><span class="pre">mach</span></code> can’t load one of the
+<code class="docutils literal notranslate"><span class="pre">mach_commands.py</span></code> files it was told to. But if a sparse checkout
+is being used, <code class="docutils literal notranslate"><span class="pre">mach</span></code> assumes that file isn’t part of the sparse
+checkout and to ignore missing file errors. This means that
+running <code class="docutils literal notranslate"><span class="pre">mach</span></code> inside a sparse checkout will only have access
+to the commands defined in files in the sparse checkout.</p>
+</div>
+<div class="section" id="sparse-checkouts-in-automation">
+<h2>Sparse Checkouts in Automation<a class="headerlink" href="#sparse-checkouts-in-automation" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">robustcheckout</span></code> (the extension/command used to perform clones
+and working directory operations in automation) supports sparse checkout.
+However, it has a number of limitations over Mercurial’s default sparse
+checkout implementation:</p>
+<ul class="simple">
+<li><p>Only supports 1 profile at a time</p></li>
+<li><p>Does not support non-profile sparse configs</p></li>
+<li><p>Does not allow transitioning from a non-sparse to sparse checkout or
+vice-versa</p></li>
+</ul>
+<p>These restrictions ensure that any sparse working directory populated by
+<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">robustcheckout</span></code> is as consistent and robust as possible.</p>
+<p><code class="docutils literal notranslate"><span class="pre">run-task</span></code> (the low-level script for <em>bootstrapping</em> tasks in
+automation) has support for sparse checkouts.</p>
+<p>TaskGraph tasks using <code class="docutils literal notranslate"><span class="pre">run-task</span></code> can specify a <code class="docutils literal notranslate"><span class="pre">sparse-profile</span></code>
+attribute in YAML (or in code) to denote the sparse profile file to
+use. e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">:</span>
+    <span class="n">using</span><span class="p">:</span> <span class="n">run</span><span class="o">-</span><span class="n">command</span>
+    <span class="n">command</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span>
+    <span class="n">sparse</span><span class="o">-</span><span class="n">profile</span><span class="p">:</span> <span class="n">taskgraph</span>
+</pre></div>
+</div>
+<p>This automagically results in <code class="docutils literal notranslate"><span class="pre">run-task</span></code> and <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">robustcheckout</span></code>
+using the sparse profile defined in <code class="docutils literal notranslate"><span class="pre">build/sparse-profiles/&lt;value&gt;</span></code>.</p>
+</div>
+<div class="section" id="pros-and-cons-of-sparse-checkouts">
+<h2>Pros and Cons of Sparse Checkouts<a class="headerlink" href="#pros-and-cons-of-sparse-checkouts" title="Permalink to this headline">¶</a></h2>
+<p>The benefits of sparse checkout are that it makes the repository appear
+to be smaller. This means:</p>
+<ul class="simple">
+<li><p>Less time performing working directory operations -&gt; faster version
+control operations</p></li>
+<li><p>Fewer files to consult -&gt; faster operations</p></li>
+<li><p>Working directories only contain what is needed -&gt; easier to understand
+what everything does</p></li>
+</ul>
+<p>Fewer files in the working directory also contributes to disadvantages:</p>
+<ul class="simple">
+<li><p>Searching may not yield hits because a file isn’t in the sparse
+checkout. e.g. a <em>global</em> search and replace may not actually be
+<em>global</em> after all.</p></li>
+<li><p>Tools performing filesystem walking or path globbing (e.g.
+<code class="docutils literal notranslate"><span class="pre">**/*.js</span></code>) may fail to find files because they don’t exist.</p></li>
+<li><p>Various tools and processes make assumptions that all files in the
+repository are always available.</p></li>
+</ul>
+<p>There can also be problems caused by mixing sparse and non-sparse
+checkouts. For example, if a process in automation is using sparse
+and a local developer is not using sparse, things may work for the
+local developer but fail in automation (because a file isn’t included
+in the sparse configuration and not available to automation.
+Furthermore, if environments aren’t using exactly the same sparse
+configuration, differences can contribute to varying behavior.</p>
+</div>
+<div class="section" id="when-should-sparse-checkouts-be-used">
+<h2>When Should Sparse Checkouts Be Used?<a class="headerlink" href="#when-should-sparse-checkouts-be-used" title="Permalink to this headline">¶</a></h2>
+<p>Developers are discouraged from using sparse checkouts for local work
+until tools for handling sparse checkouts have improved. In particular,
+Mercurial’s support for sparse is still experimental and various Firefox
+tools make assumptions that all files are available. Developers should
+use sparse checkout at their own risk.</p>
+<p>The use of sparse checkouts in automation is a performance versus
+robustness trade-off. Use of sparse checkouts will make automation
+faster because machines will only have to manage a few thousand files
+in a checkout instead of a few hundred thousand. This can potentially
+translate to minutes saved per machine day. At the scale of thousands
+of machines, the savings can be significant. But adopting sparse
+checkouts will open up new avenues for failures. (See section above.)
+If a process is isolated (in terms of file access) and well-understood,
+sparse checkout can likely be leveraged with little risk. But if a
+process is doing things like walking the filesystem and performing
+lots of wildcard matching, the dangers are higher.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gn.html" class="btn btn-neutral float-right" title="GN support in the build system" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rust.html" class="btn btn-neutral float-left" title="Including Rust Code in Firefox" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

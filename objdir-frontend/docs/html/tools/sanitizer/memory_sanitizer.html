@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Memory Sanitizer &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Thread Sanitizer" href="tsan.html" />
+    <link rel="prev" title="ASan Nightly" href="asan_nightly.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Sanitizer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="asan.html">Address Sanitizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asan_nightly.html">ASan Nightly</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Memory Sanitizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-memory-sanitizer">What is Memory Sanitizer?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#public-builds">Public Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#manual-build">Manual Build</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-prerequisites">Build prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-firefox">Building Firefox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-the-javascript-shell">Building the JavaScript shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-llvm-symbolizer-for-faster-better-traces">Using LLVM Symbolizer for faster/better traces</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tsan.html">Thread Sanitizer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Sanitizer</a> &raquo;</li>
+        
+      <li>Memory Sanitizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tools/sanitizer/memory_sanitizer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="memory-sanitizer">
+<h1>Memory Sanitizer<a class="headerlink" href="#memory-sanitizer" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This page is an import from MDN and the contents might be outdated</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="what-is-memory-sanitizer">
+<h2>What is Memory Sanitizer?<a class="headerlink" href="#what-is-memory-sanitizer" title="Permalink to this headline">¶</a></h2>
+<p>Memory Sanitizer (MSan) is a fast detector used for uninitialized memory
+in C/C++ programs. It uses a compile-time instrumentation to ensure that
+all memory access at runtime uses only memory that has been initialized.
+Unlike most other sanitizers, MSan can easily cause false positives if
+not all libraries are instrumented. This happens because MSan is
+not able to observe memory initialization in uninstrumented libraries.
+More information on MSan can be found on <a class="reference external" href="https://github.com/google/sanitizers/wiki/MemorySanitizer">the Memory Sanitizer
+wiki</a>.</p>
+</div>
+<div class="section" id="public-builds">
+<h2>Public Builds<a class="headerlink" href="#public-builds" title="Permalink to this headline">¶</a></h2>
+<p><strong>Note:</strong> No public builds are available at this time yet.</p>
+</div>
+<div class="section" id="manual-build">
+<h2>Manual Build<a class="headerlink" href="#manual-build" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-prerequisites">
+<h3>Build prerequisites<a class="headerlink" href="#build-prerequisites" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> MemorySanitizer requires <strong>64-bit Linux</strong> to work. Other
+platforms/operating systems are not supported.</p>
+<div class="section" id="llvm-clang">
+<h4>LLVM/Clang<a class="headerlink" href="#llvm-clang" title="Permalink to this headline">¶</a></h4>
+<p>The MSan instrumentation is implemented as an LLVM pass and integrated
+into Clang. As MSan is one of the newer sanitizers, we recommend using a
+recent Clang version, such as Clang 3.7+.</p>
+<p>You can find precompiled binaries for LLVM/Clang on <a class="reference external" href="https://releases.llvm.org/download.html">the LLVM releases
+page</a>.</p>
+</div>
+</div>
+<div class="section" id="building-firefox">
+<h3>Building Firefox<a class="headerlink" href="#building-firefox" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Warning: Running Firefox with MemorySanitizer would require all
+external dependencies to be built with MemorySanitizer as well. To
+our knowledge, this has never been attempted yet, so the build
+configuration provided here is untested and without an appropriately
+instrumented userland, it will cause false positives.</strong></p>
+</div>
+<div class="section" id="getting-the-source">
+<h4>Getting the source<a class="headerlink" href="#getting-the-source" title="Permalink to this headline">¶</a></h4>
+<p>If you don’t have a source code repository clone yet, you need to <a class="reference internal" href="../../contributing/vcs/mercurial.html#mercurial-overview"><span class="std std-ref">get
+yourself a clone of Mozilla-central</span></a>.</p>
+</div>
+<div class="section" id="adjusting-the-build-configuration">
+<h4>Adjusting the build configuration<a class="headerlink" href="#adjusting-the-build-configuration" title="Permalink to this headline">¶</a></h4>
+<p>Create the build configuration file <code class="docutils literal notranslate"><span class="pre">.mozconfig</span></code> with the following
+content in your Mozilla-central directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=</span><span class="nd">@TOPSRCDIR</span><span class="o">@/</span><span class="n">objdir</span><span class="o">-</span><span class="n">ff</span><span class="o">-</span><span class="n">msan</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_MAKE_FLAGS</span><span class="o">=-</span><span class="n">j12</span>
+
+<span class="c1"># Enable LLVM specific code and build workarounds</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">memory</span><span class="o">-</span><span class="n">sanitizer</span>
+<span class="c1"># If clang is already in your $PATH, then these can simply be:</span>
+<span class="c1">#   export CC=clang</span>
+<span class="c1">#   export CXX=clang++</span>
+<span class="n">export</span> <span class="n">CC</span><span class="o">=</span><span class="s2">&quot;/path/to/clang&quot;</span>
+<span class="n">export</span> <span class="n">CXX</span><span class="o">=</span><span class="s2">&quot;/path/to/clang++&quot;</span>
+
+<span class="c1"># llvm-symbolizer displays much more complete backtraces when data races are detected.</span>
+<span class="c1"># If it&#39;s not already in your $PATH, then uncomment this next line:</span>
+<span class="c1">#export LLVM_SYMBOLIZER=&quot;/path/to/llvm-symbolizer&quot;</span>
+
+<span class="c1"># Add MSan to our compiler flags</span>
+<span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-fsanitize=memory&quot;</span>
+<span class="n">export</span> <span class="n">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-fsanitize=memory&quot;</span>
+
+<span class="c1"># Additionally, we need the MSan flag during linking. Normally, our C/CXXFLAGS would</span>
+<span class="c1"># be used during linking as well but there is at least one place in our build where</span>
+<span class="c1"># our CFLAGS are not added during linking.</span>
+<span class="c1"># Note: The use of this flag causes Clang to automatically link the MSan runtime :)</span>
+<span class="n">export</span> <span class="n">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-fsanitize=memory&quot;</span>
+
+<span class="c1"># These three are required by MSan</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">jemalloc</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">crashreporter</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">elf</span><span class="o">-</span><span class="n">hack</span>
+
+<span class="c1"># Keep symbols to symbolize MSan traces</span>
+<span class="n">export</span> <span class="n">MOZ_DEBUG_SYMBOLS</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span><span class="o">-</span><span class="n">symbols</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">strip</span>
+
+<span class="c1"># Settings for an opt build</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">optimize</span><span class="o">=</span><span class="s2">&quot;-O2 -gline-tables-only&quot;</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">debug</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-the-build-process">
+<h4>Starting the build process<a class="headerlink" href="#starting-the-build-process" title="Permalink to this headline">¶</a></h4>
+<p>Now you start the build process using the regular <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-f</span> <span class="pre">client.mk</span></code>
+command.</p>
+</div>
+<div class="section" id="starting-firefox">
+<h4>Starting Firefox<a class="headerlink" href="#starting-firefox" title="Permalink to this headline">¶</a></h4>
+<p>After the build has completed, you can start Firefox from the <code class="docutils literal notranslate"><span class="pre">objdir</span></code>
+as usual.</p>
+</div>
+</div>
+<div class="section" id="building-the-javascript-shell">
+<h3>Building the JavaScript shell<a class="headerlink" href="#building-the-javascript-shell" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> Unlike Firefox itself, the JavaScript shell does <strong>not</strong>
+require an instrumented userland. Calls to external libraries like
+zlib are handled with special annotations inside the engine.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Warning: Certain technologies used inside the JavaScript engine are
+incompatible with MSan and must be disabled at runtime to prevent
+false positives. This includes the JITs and asm.js. Therefore always
+make sure to run with
+``–no-ion –no-baseline –no-asmjs –no-native-regexp``.</strong></p>
+</div>
+<p>If you want to build only the JavaScript shell instead of doing a full
+Firefox build, the build script below will probably help you to do so.
+Before using it, you must, of course, adjust the path name for
+<code class="docutils literal notranslate"><span class="pre">LLVM_ROOT</span></code> to match your setup. Once you have adjusted everything,
+execute this script in the <code class="docutils literal notranslate"><span class="pre">js/src/</span></code> subdirectory and pass a directory
+name as the first parameter. The build will then be created in a new
+subdirectory with that name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#! /bin/sh
+
+if [ -z $1 ] ; then
+    echo &quot;usage: $0 &lt;dirname&gt;&quot;
+elif [ -d $1 ] ; then
+    echo &quot;directory $1 already exists&quot;
+else
+    autoconf2.13
+    mkdir $1
+    cd $1
+    LLVM_ROOT=&quot;/path/to/llvm&quot;
+    CC=&quot;$LLVM_ROOT/build/bin/clang&quot; \
+    CXX=&quot;$LLVM_ROOT/build/bin/clang++&quot; \
+    CFLAGS=&quot;-fsanitize=memory&quot; \
+    CXXFLAGS=&quot;-fsanitize=memory&quot; \
+    LDFLAGS=&quot;&quot;-fsanitize=memory&quot; \
+            ../configure --enable-debug --enable-optimize --enable-memory-sanitizer --disable-jemalloc --enable-posix-nspr-emulation
+    make -j 8
+fi
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-llvm-symbolizer-for-faster-better-traces">
+<h3>Using LLVM Symbolizer for faster/better traces<a class="headerlink" href="#using-llvm-symbolizer-for-faster-better-traces" title="Permalink to this headline">¶</a></h3>
+<p>By default, MSan traces are not symbolized.</p>
+<p>LLVM ships with the symbolizer binary <code class="docutils literal notranslate"><span class="pre">llvm-symbolize</span></code> that MSan will
+readily use to immediately output symbolized traces if the program is
+found on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. If your <code class="docutils literal notranslate"><span class="pre">llvm-symbolizer</span></code> lives outside the
+<code class="docutils literal notranslate"><span class="pre">PATH</span></code>, you can set the <code class="docutils literal notranslate"><span class="pre">MSAN_SYMBOLIZER_PATH</span></code> environment variable
+to point to your symbolizer binary.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tsan.html" class="btn btn-neutral float-right" title="Thread Sanitizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="asan_nightly.html" class="btn btn-neutral float-left" title="ASan Nightly" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

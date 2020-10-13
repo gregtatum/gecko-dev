@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Periodic Taskgraphs &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Try" href="try.html" />
+    <link rel="prev" title="Docker Images" href="docker-images.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Periodic Taskgraphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cron-yml">Cron.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-it-works">How It Works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describing-time">Describing Time</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#decision-tasks">Decision Tasks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scopes">Scopes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+      <li>Periodic Taskgraphs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/cron.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="periodic-taskgraphs">
+<h1>Periodic Taskgraphs<a class="headerlink" href="#periodic-taskgraphs" title="Permalink to this headline">¶</a></h1>
+<p>The cron functionality allows in-tree scheduling of task graphs that run
+periodically, instead of on a push.</p>
+<div class="section" id="cron-yml">
+<h2>Cron.yml<a class="headerlink" href="#cron-yml" title="Permalink to this headline">¶</a></h2>
+<p>In the root of the Gecko directory, you will find <cite>.cron.yml</cite>.  This defines
+the periodic tasks (“cron jobs”) run for Gecko.  Each specifies a name, what to
+do, and some parameters to determine when the cron job should occur.</p>
+<p>See <a class="reference external" href="https://hg.mozilla.org/ci/ci-admin/file/default/build-decision/src/build_decision/cron/schema.yml">the scema</a>
+for details on the format and meaning of this file.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://firefox-ci-tc.services.mozilla.com/hooks">TaskCluster Hooks Service</a>
+has a hook configured for each repository supporting periodic task graphs.  The
+hook runs every 15 minutes, and the resulting task is referred to as a “cron task”.
+That cron task runs the <a class="reference external" href="https://hg.mozilla.org/ci/ci-admin/file/default/build-decision">build-decision</a> image in a
+checkout of the Gecko source tree.</p>
+<p>The task reads <code class="docutils literal notranslate"><span class="pre">.cron.yml</span></code>, then consults the current time (actually the time
+the cron task was created, rounded down to the nearest 15 minutes) and creates
+tasks for any cron jobs scheduled at that time.</p>
+<p>Each cron job in <code class="docutils literal notranslate"><span class="pre">.cron.yml</span></code> specifies a <code class="docutils literal notranslate"><span class="pre">job.type</span></code>, corresponding to a
+function responsible for creating TaskCluster tasks when the job runs.</p>
+</div>
+<div class="section" id="describing-time">
+<h2>Describing Time<a class="headerlink" href="#describing-time" title="Permalink to this headline">¶</a></h2>
+<p>This cron implementation understands the following directives when
+describing when to run:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">minute</span></code>: The minute in which to run, must be in 15 minute increments (see above)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hour</span></code>: The hour of the day in which to run, in 24 hour time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">day</span></code>: The day of the month as an integer, such as <cite>1</cite>, <cite>16</cite>. Be cautious above <cite>28</cite>, remember February.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weekday</span></code>: The day of the week, <cite>Monday</cite>, <cite>Tuesday</cite>, etc. Full length ISO compliant words.</p></li>
+</ul>
+<p>Setting both ‘day’ and ‘weekday’ will result in a cron job that won’t run very often,
+and so is undesirable.</p>
+<p><em>Examples</em></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Never</span>
+<span class="nt">when</span><span class="p">:</span> <span class="p p-Indicator">[]</span>
+
+<span class="c1"># 4 AM and 4 PM, on the hour, every day.</span>
+<span class="nt">when</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nt">hour</span><span class="p">:</span> <span class="nv">16</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nt">hour</span><span class="p">:</span> <span class="nv">4</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}</span>
+
+<span class="c1"># The same as above, on a single line</span>
+<span class="nt">when</span><span class="p">:</span> <span class="p p-Indicator">[{</span><span class="nt">hour</span><span class="p">:</span> <span class="nv">16</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">},</span> <span class="p p-Indicator">{</span><span class="nt">hour</span><span class="p">:</span> <span class="nv">4</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}]</span>
+
+<span class="c1"># 4 AM on the second day of every month.</span>
+<span class="nt">when</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nt">day</span><span class="p">:</span> <span class="nv">2</span><span class="p p-Indicator">,</span><span class="nt"> hour</span><span class="p">:</span> <span class="nv">4</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}</span>
+
+<span class="c1"># Mondays and Thursdays at 10 AM</span>
+<span class="nt">when</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nt">weekday</span><span class="p">:</span> <span class="s">&#39;Monday&#39;</span><span class="p p-Indicator">,</span><span class="nt"> hour</span><span class="p">:</span> <span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}</span>
+    <span class="p p-Indicator">-</span> <span class="p p-Indicator">{</span><span class="nt">weekday</span><span class="p">:</span> <span class="s">&#39;Thursday&#39;</span><span class="p p-Indicator">,</span><span class="nt"> hour</span><span class="p">:</span> <span class="nv">10</span><span class="p p-Indicator">,</span><span class="nt"> minute</span><span class="p">:</span> <span class="nv">0</span><span class="p p-Indicator">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Times are expressed in UTC (Coordinated Universal Time)</p>
+</div>
+<div class="section" id="decision-tasks">
+<h3>Decision Tasks<a class="headerlink" href="#decision-tasks" title="Permalink to this headline">¶</a></h3>
+<p>For <code class="docutils literal notranslate"><span class="pre">job.type</span></code> “decision-task”, tasks are created based on
+<code class="docutils literal notranslate"><span class="pre">.taskcluster.yml</span></code> just like the decision tasks that result from a push to a
+repository.  They run with a distinct <code class="docutils literal notranslate"><span class="pre">taskGroupId</span></code>, and are free to create
+additional tasks comprising a task graph.</p>
+</div>
+</div>
+<div class="section" id="scopes">
+<h2>Scopes<a class="headerlink" href="#scopes" title="Permalink to this headline">¶</a></h2>
+<p>The cron task runs with the sum of all cron job scopes for the given repo.  For
+example, for the “sequoia” project, the scope would be
+<code class="docutils literal notranslate"><span class="pre">assume:repo:hg.mozilla.org/projects/sequoia:cron:*</span></code>.  Each cron job creates
+tasks with scopes for that particular job, by name.  For example, the
+<code class="docutils literal notranslate"><span class="pre">check-frob</span></code> cron job on that repo would run with
+<code class="docutils literal notranslate"><span class="pre">assume:repo:hg.mozilla.org/projects/sequoia:cron:check-frob</span></code>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The individual cron scopes are a useful check to ensure that a job is not
+accidentally doing something it should not, but cannot actually <em>prevent</em> a
+job from using any of the scopes afforded to the cron task itself (the
+<code class="docutils literal notranslate"><span class="pre">..cron:*</span></code> scope).  This is simply because the cron task runs arbitrary
+code from the repo, and that code can be easily modified to create tasks
+with any scopes that it possesses.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="try.html" class="btn btn-neutral float-right" title="Try" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="docker-images.html" class="btn btn-neutral float-left" title="Docker Images" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/remote/doc/remote/sting.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<p>The remote agent has unit- and functional tests located under
+<code class="docutils literal notranslate"><span class="pre">remote/test/{unit,browser}</span></code>.</p>
+<p>You may run all the tests under a particular subfolder like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">./</span><span class="n">mach</span> <span class="n">test</span> <span class="n">remote</span>
+</pre></div>
+</div>
+<div class="section" id="unit-tests">
+<h2>Unit tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>Because tests are run in parallel and <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/QA/Writing_xpcshell-based_unit_tests">xpcshell</a> itself is quite
+chatty, it can sometimes be useful to run the tests in sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">./</span><span class="n">mach</span> <span class="n">xpcshell</span><span class="o">-</span><span class="n">test</span> <span class="o">--</span><span class="n">sequential</span> <span class="n">remote</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">unit</span><span class="o">/</span><span class="n">test_DomainCache</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+<p>The unit tests will appear as part of the <code class="docutils literal notranslate"><span class="pre">X</span></code> (for <em>xpcshell</em>) jobs
+on Treeherder.</p>
+</div>
+<div class="section" id="browser-chrome-tests">
+<h2>Browser chrome tests<a class="headerlink" href="#browser-chrome-tests" title="Permalink to this headline">¶</a></h2>
+<p>We also have a set of functional <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Browser_chrome_tests">browser chrome</a> tests located
+under <em>remote/test/browser</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">./</span><span class="n">mach</span> <span class="n">mochitest</span> <span class="n">remote</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">browser</span><span class="o">/</span><span class="n">browser_cdp</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+<p>The functional tests will appear under the <code class="docutils literal notranslate"><span class="pre">M</span></code> (for <em>mochitest</em>)
+category in the <code class="docutils literal notranslate"><span class="pre">remote</span></code> jobs on Treeherder.</p>
+<p>As the functional tests will sporadically pop up new Firefox
+application windows, a helpful tip is to run them in <a class="reference external" href="https://developer.mozilla.org/en-US/Firefox/Headless_mode">headless
+mode</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">./</span><span class="n">mach</span> <span class="n">mochitest</span> <span class="o">--</span><span class="n">headless</span> <span class="n">remote</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="n">browser</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--headless</span></code> flag is equivalent to setting the <code class="docutils literal notranslate"><span class="pre">MOZ_HEADLESS</span></code>
+environment variable.  You can additionally use <code class="docutils literal notranslate"><span class="pre">MOZ_HEADLESS_WIDTH</span></code>
+and <code class="docutils literal notranslate"><span class="pre">MOZ_HEADLESS_HEIGHT</span></code> to control the dimensions of the virtual
+display.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">add_task()</span></code> function used for writing <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Browser_chrome_tests#Test_functions">asynchronous tests</a> is
+replaced to provide some additional test setup and teardown useful
+for writing tests against the remote agent and the targets.</p>
+<p>Before the task is run, the <code class="docutils literal notranslate"><span class="pre">nsIRemoteAgent</span></code> listener is started
+and a <a class="reference external" href="https://github.com/cyrus-and/chrome-remote-interface">CDP client</a> is connected.  You will use this CDP client for
+interacting with the agent just as any other CDP client would.</p>
+<p>Also target discovery is getting enabled, which means that targetCreated,
+targetDestroyed, and targetInfoChanged events will be received by the client.</p>
+<p>The task function you provide in your test will be called with the
+three arguments <code class="docutils literal notranslate"><span class="pre">client</span></code>, <code class="docutils literal notranslate"><span class="pre">CDP</span></code>, and <code class="docutils literal notranslate"><span class="pre">tab</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">client</span></code> is the connection to the <code class="docutils literal notranslate"><span class="pre">nsIRemoteAgent</span></code> listener,
+and it provides the a client CDP API</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CDP</span></code> is the CDP client class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tab</span></code> is a fresh tab opened for each new test, and is automatically
+removed after the test has run</p></li>
+</ul>
+<p>This is what it looks like all put together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_task</span><span class="p">(</span><span class="k">async</span> <span class="n">function</span> <span class="n">testName</span><span class="p">({</span><span class="n">client</span><span class="p">,</span> <span class="n">CDP</span><span class="p">,</span> <span class="n">tab</span><span class="p">})</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">test</span> <span class="n">tab</span> <span class="ow">is</span> <span class="n">implicitly</span> <span class="n">created</span> <span class="k">for</span> <span class="n">us</span>
+  <span class="n">info</span><span class="p">(</span><span class="s2">&quot;Current URL: &quot;</span> <span class="o">+</span> <span class="n">tab</span><span class="o">.</span><span class="n">linkedBrowser</span><span class="o">.</span><span class="n">currentURI</span><span class="o">.</span><span class="n">spec</span><span class="p">);</span>
+
+  <span class="o">//</span> <span class="n">manually</span> <span class="n">connect</span> <span class="n">to</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">target</span>
+  <span class="n">const</span> <span class="p">{</span> <span class="n">mainProcessTarget</span> <span class="p">}</span> <span class="o">=</span> <span class="n">RemoteAgent</span><span class="o">.</span><span class="n">targets</span><span class="p">;</span>
+  <span class="n">const</span> <span class="n">target</span> <span class="o">=</span> <span class="n">mainProcessTarget</span><span class="o">.</span><span class="n">wsDebuggerURL</span><span class="p">;</span>
+  <span class="n">const</span> <span class="n">client</span> <span class="o">=</span> <span class="k">await</span> <span class="n">CDP</span><span class="p">({</span> <span class="n">target</span> <span class="p">});</span>
+
+  <span class="o">//</span> <span class="n">retrieve</span> <span class="n">the</span> <span class="n">Browser</span> <span class="n">domain</span><span class="p">,</span> <span class="ow">and</span> <span class="n">call</span> <span class="n">getVersion</span><span class="p">()</span> <span class="n">on</span> <span class="n">it</span>
+  <span class="n">const</span> <span class="p">{</span> <span class="n">Browser</span> <span class="p">}</span> <span class="o">=</span> <span class="n">client</span><span class="p">;</span>
+  <span class="n">const</span> <span class="n">version</span> <span class="o">=</span> <span class="k">await</span> <span class="n">Browser</span><span class="o">.</span><span class="n">getVersion</span><span class="p">();</span>
+
+       <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">();</span>
+
+  <span class="o">//</span> <span class="n">tab</span> <span class="ow">is</span> <span class="n">implicitly</span> <span class="n">removed</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>You can control the tab creation behaviour with the <code class="docutils literal notranslate"><span class="pre">createTab</span></code>
+option to <code class="docutils literal notranslate"><span class="pre">add_task(taskFunction,</span> <span class="pre">options)</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_task</span><span class="p">(</span><span class="k">async</span> <span class="n">function</span> <span class="n">testName</span><span class="p">({</span><span class="n">client</span><span class="p">})</span> <span class="p">{</span>
+  <span class="o">//</span> <span class="n">tab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">implicitly</span> <span class="n">created</span>
+<span class="p">},</span> <span class="p">{</span> <span class="n">createTab</span><span class="p">:</span> <span class="n">false</span> <span class="p">});</span>
+</pre></div>
+</div>
+<p>If you want to write an asynchronous test <em>without</em> this implicit
+setup you may instead use <code class="docutils literal notranslate"><span class="pre">add_plain_task()</span></code>, which works exactly like the
+original <code class="docutils literal notranslate"><span class="pre">add_task()</span></code>.</p>
+</div>
+<div class="section" id="puppeteer-tests">
+<h2>Puppeteer tests<a class="headerlink" href="#puppeteer-tests" title="Permalink to this headline">¶</a></h2>
+<p>In addition to our own Firefox-specific tests, we run the upstream
+<a class="reference external" href="https://github.com/puppeteer/puppeteer/blob/master/test/README">Puppeteer test suite</a> against our implementation to <a class="reference external" href="https://puppeteer.github.io/ispuppeteerfirefoxready/">track progress</a>
+towards achieving full <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=puppeteer">Puppeteer support</a> in Firefox. The tests are written
+in the behaviour-driven testing framework <a class="reference external" href="https://mochajs.org/">Mocha</a>.</p>
+<p>Puppeteer tests are vendored under <em>remote/test/puppeteer/</em> and are
+run locally like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">./</span><span class="n">mach</span> <span class="n">puppeteer</span><span class="o">-</span><span class="n">test</span>
+</pre></div>
+</div>
+<p>You can also run them against Chrome as:</p>
+<p>% ./mach puppeteer-test –product=chrome –subset</p>
+<p><code class="docutils literal notranslate"><span class="pre">--subset</span></code> disables a check for missing or skipped tests in our log parsing.
+This check is typically not relevant when running against Chrome.</p>
+<p>To schedule the tests on try, look for <code class="docutils literal notranslate"><span class="pre">source-test-remote-puppeteer</span></code> in
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">try</span> <span class="pre">fuzzy</span></code>. On try they appear under the <code class="docutils literal notranslate"><span class="pre">remote(pup)</span></code> symbol.</p>
+<p>Test expectation metadata is collected in <em>remote/puppeteer-expected.json</em>
+via log parsing and a custom Mocha reporter under
+<em>remote/test/puppeteer/json-mocha-reporter.js</em></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

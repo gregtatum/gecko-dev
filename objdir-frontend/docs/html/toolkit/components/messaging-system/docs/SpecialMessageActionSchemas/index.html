@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>User Actions &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Trigger Listeners" href="../TriggerActionSchemas/index.html" />
+    <link rel="prev" title="Messaging System Schemas" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Messaging System Schemas</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#docs">Docs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#triggers-and-actions">Triggers and actions</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">User Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../TriggerActionSchemas/index.html">Trigger Listeners</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Messaging System Schemas</a> &raquo;</li>
+        
+      <li>User Actions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/toolkit/components/messaging-system/docs/SpecialMessageActionSchemas/index.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="user-actions">
+<h1>User Actions<a class="headerlink" href="#user-actions" title="Permalink to this headline">¶</a></h1>
+<p>A subset of actions are available to messages via fields like <code class="docutils literal notranslate"><span class="pre">button_action</span></code> for snippets, or <code class="docutils literal notranslate"><span class="pre">primary_action</span></code> for CFRs.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>For snippets, you should add the action type in <code class="docutils literal notranslate"><span class="pre">button_action</span></code> and any additional parameters in `button_action_args. For example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;button_action&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN_ABOUT_PAGE&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;button_action_args&quot;</span><span class="p">:</span> <span class="s2">&quot;config&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-update">
+<h2>How to update<a class="headerlink" href="#how-to-update" title="Permalink to this headline">¶</a></h2>
+<p>Make a pull request against <a class="reference external" href="https://github.com/mozilla/nimbus-shared/">mozilla/nimbus-shared</a> repo with your changes.
+Build and copy over resulting schema from <code class="docutils literal notranslate"><span class="pre">nimbus-shared/schemas/messaging/</span></code> to <code class="docutils literal notranslate"><span class="pre">toolkit/components/messaging-system/schemas/SpecialMessageActionSchemas.json</span></code>.</p>
+</div>
+<div class="section" id="available-actions">
+<h2>Available Actions<a class="headerlink" href="#available-actions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="open-applications-menu">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_APPLICATIONS_MENU</span></code><a class="headerlink" href="#open-applications-menu" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+<p>Opens the applications menu.</p>
+</div>
+<div class="section" id="open-private-browser-window">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_PRIVATE_BROWSER_WINDOW</span></code><a class="headerlink" href="#open-private-browser-window" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+<p>Opens a new private browsing window.</p>
+</div>
+<div class="section" id="open-url">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_URL</span></code><a class="headerlink" href="#open-url" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: <code class="docutils literal notranslate"><span class="pre">string</span></code> (a url)</p></li>
+</ul>
+<p>Opens a given url.</p>
+<p>Example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;button_action&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN_URL&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;button_action_args&quot;</span><span class="p">:</span> <span class="s2">&quot;https://foo.com&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-about-page">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_ABOUT_PAGE</span></code><a class="headerlink" href="#open-about-page" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args:</p></li>
+</ul>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">args</span>: <span class="kt">string</span><span class="p">,</span> <span class="c1">// (a valid about page without the `about:` prefix)</span>
+  <span class="nx">entrypoint?</span>: <span class="kt">string</span><span class="p">,</span> <span class="c1">// URL search param used for referrals</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Opens a given about page</p>
+<p>Example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;button_action&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN_ABOUT_PAGE&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;button_action_args&quot;</span><span class="p">:</span> <span class="s2">&quot;config&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-preferences-page">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_PREFERENCES_PAGE</span></code><a class="headerlink" href="#open-preferences-page" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>{
+  args?: string, // (a category accessible via a `#`)
+  entrypoint?: string // URL search param used to referrals
+
+Opens `about:preferences` with an optional category accessible via a `#` in the URL (e.g. `about:preferences#home`).
+
+Example:
+
+```json
+{
+  &quot;button_action&quot;: &quot;OPEN_PREFERENCES_PAGE&quot;,
+  &quot;button_action_args&quot;: &quot;home&quot;
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-firefox-accounts">
+<h3><code class="docutils literal notranslate"><span class="pre">SHOW_FIREFOX_ACCOUNTS</span></code><a class="headerlink" href="#show-firefox-accounts" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+<p>Opens Firefox accounts sign-up page. Encodes some information that the origin was from snippets by default.</p>
+</div>
+<div class="section" id="show-migration-wizard">
+<h3><code class="docutils literal notranslate"><span class="pre">SHOW_MIGRATION_WIZARD</span></code><a class="headerlink" href="#show-migration-wizard" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+<p>Opens import wizard to bring in settings and data from another browser.</p>
+</div>
+<div class="section" id="pin-current-tab">
+<h3><code class="docutils literal notranslate"><span class="pre">PIN_CURRENT_TAB</span></code><a class="headerlink" href="#pin-current-tab" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+<p>Pins the currently focused tab.</p>
+</div>
+<div class="section" id="enable-firefox-monitor">
+<h3><code class="docutils literal notranslate"><span class="pre">ENABLE_FIREFOX_MONITOR</span></code><a class="headerlink" href="#enable-firefox-monitor" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>args:</p></li>
+</ul>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">url</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="nx">flowRequestParams</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">entrypoint</span>: <span class="kt">string</span><span class="p">;</span>
+    <span class="nx">utm_term</span>: <span class="kt">string</span><span class="p">;</span>
+    <span class="nx">form_type</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Opens an oauth flow to enable Firefox Monitor at a given <code class="docutils literal notranslate"><span class="pre">url</span></code> and adds Firefox metrics that user given a set of <code class="docutils literal notranslate"><span class="pre">flowRequestParams</span></code>.</p>
+<div class="section" id="url">
+<h4><code class="docutils literal notranslate"><span class="pre">url</span></code><a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h4>
+<p>The URL should start with <code class="docutils literal notranslate"><span class="pre">https://monitor.firefox.com/oauth/init</span></code> and add various metrics tags as search params, including:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">utm_source</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utm_campaign</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">form_type</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entrypoint</span></code></p></li>
+</ul>
+<p>You should verify the values of these search params with whoever is doing the data analysis (e.g. Leif Oines).</p>
+</div>
+<div class="section" id="flowrequestparams">
+<h4><code class="docutils literal notranslate"><span class="pre">flowRequestParams</span></code><a class="headerlink" href="#flowrequestparams" title="Permalink to this headline">¶</a></h4>
+<p>These params are used by Firefox to add information specific to that individual user to the final oauth URL. You should include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">entrypoint</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utm_term</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">form_type</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">entrypoint</span></code> and <code class="docutils literal notranslate"><span class="pre">form_type</span></code> values should match the encoded values in your <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+<p>You should verify the values with whoever is doing the data analysis (e.g. Leif Oines).</p>
+</div>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;button_action&quot;</span><span class="p">:</span> <span class="s2">&quot;ENABLE_FIREFOX_MONITOR&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;button_action_args&quot;</span><span class="p">:</span> <span class="p">{</span>
+     <span class="nt">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://monitor.firefox.com/oauth/init?utm_source=snippets&amp;utm_campaign=monitor-snippet-test&amp;form_type=email&amp;entrypoint=newtab&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;flowRequestParams&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;entrypoint&quot;</span><span class="p">:</span> <span class="s2">&quot;snippets&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;utm_term&quot;</span><span class="p">:</span> <span class="s2">&quot;monitor&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;form_type&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="highlight-feature">
+<h3><code class="docutils literal notranslate"><span class="pre">HIGHLIGHT_FEATURE</span></code><a class="headerlink" href="#highlight-feature" title="Permalink to this headline">¶</a></h3>
+<p>Can be used to highlight (show a light blue overlay) a certain button or part of the browser UI.</p>
+<ul class="simple">
+<li><p>args: <code class="docutils literal notranslate"><span class="pre">string</span></code> a <a class="reference external" href="https://searchfox.org/mozilla-central/rev/7fd1c1c34923ece7ad8c822bee062dd0491d64dc/browser/components/uitour/UITour.jsm#108">valid targeting defined in the UITour</a></p></li>
+</ul>
+</div>
+<div class="section" id="install-addon-from-url">
+<h3><code class="docutils literal notranslate"><span class="pre">INSTALL_ADDON_FROM_URL</span></code><a class="headerlink" href="#install-addon-from-url" title="Permalink to this headline">¶</a></h3>
+<p>Can be used to install an addon from addons.mozilla.org.</p>
+<ul class="simple">
+<li><p>args:</p></li>
+</ul>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">url</span>: <span class="kt">string</span><span class="p">,</span>
+  <span class="nx">telemetrySource?</span>: <span class="kt">string</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-protection-report">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_PROTECTION_REPORT</span></code><a class="headerlink" href="#open-protection-report" title="Permalink to this headline">¶</a></h3>
+<p>Opens <code class="docutils literal notranslate"><span class="pre">about:protections</span></code></p>
+</div>
+<div class="section" id="open-protection-panel">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_PROTECTION_PANEL</span></code><a class="headerlink" href="#open-protection-panel" title="Permalink to this headline">¶</a></h3>
+<p>Opens the protection panel behind on the lock icon of the awesomebar</p>
+</div>
+<div class="section" id="disable-stp-doorhangers">
+<h3><code class="docutils literal notranslate"><span class="pre">DISABLE_STP_DOORHANGERS</span></code><a class="headerlink" href="#disable-stp-doorhangers" title="Permalink to this headline">¶</a></h3>
+<p>Disables all Social Tracking Protection messages</p>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+</div>
+<div class="section" id="open-awesome-bar">
+<h3><code class="docutils literal notranslate"><span class="pre">OPEN_AWESOME_BAR</span></code><a class="headerlink" href="#open-awesome-bar" title="Permalink to this headline">¶</a></h3>
+<p>Focuses and expands the awesome bar.</p>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+</div>
+<div class="section" id="cancel">
+<h3><code class="docutils literal notranslate"><span class="pre">CANCEL</span></code><a class="headerlink" href="#cancel" title="Permalink to this headline">¶</a></h3>
+<p>No-op action used to dismiss CFR notifications (but not remove or block them)</p>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+</div>
+<div class="section" id="disable-doh">
+<h3><code class="docutils literal notranslate"><span class="pre">DISABLE_DOH</span></code><a class="headerlink" href="#disable-doh" title="Permalink to this headline">¶</a></h3>
+<p>User action for turning off the DoH feature</p>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+</div>
+<div class="section" id="accept-doh">
+<h3><code class="docutils literal notranslate"><span class="pre">ACCEPT_DOH</span></code><a class="headerlink" href="#accept-doh" title="Permalink to this headline">¶</a></h3>
+<p>User action for continuing to use the DoH feature</p>
+<ul class="simple">
+<li><p>args: (none)</p></li>
+</ul>
+</div>
+<div class="section" id="configure-homepage">
+<h3><code class="docutils literal notranslate"><span class="pre">CONFIGURE_HOMEPAGE</span></code><a class="headerlink" href="#configure-homepage" title="Permalink to this headline">¶</a></h3>
+<p>Action for configuring the user homepage and restoring defaults.</p>
+<ul class="simple">
+<li><p>args:</p></li>
+</ul>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">homePage</span><span class="o">:</span> <span class="s2">&quot;default&quot;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">newtab</span><span class="o">:</span> <span class="s2">&quot;default&quot;</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">search</span>: <span class="kt">boolean</span><span class="p">;</span>
+    <span class="nx">topsites</span>: <span class="kt">boolean</span><span class="p">;</span>
+    <span class="nx">highlights</span>: <span class="kt">boolean</span><span class="p">;</span>
+    <span class="nx">topstories</span>: <span class="kt">boolean</span><span class="p">;</span>
+    <span class="nx">snippets</span>: <span class="kt">boolean</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../TriggerActionSchemas/index.html" class="btn btn-neutral float-right" title="Trigger Listeners" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Messaging System Schemas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

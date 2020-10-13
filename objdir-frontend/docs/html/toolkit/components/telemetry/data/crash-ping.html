@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Crash ping &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="“backgroundhangmonitor” ping" href="backgroundhangmonitor-ping.html" />
+    <link rel="prev" title="“main” ping" href="main-ping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Data documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="common-ping.html">Common ping format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="environment.html">Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="main-ping.html">“main” ping</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Crash ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backgroundhangmonitor-ping.html">“backgroundhangmonitor” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="anonymous-ping.html">“anonymous” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="first-shutdown-ping.html">“first-shutdown” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="activation-ping.html">“activation” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="addons-malware-ping.html">Add-ons malware ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core-ping.html">“core” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coverage-ping.html">“coverage” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="default-browser-ping.html">“default-browser” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-ping.html">“deletion” ping (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-request-ping.html">“deletion-request” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="downgrade-ping.html">“downgrade” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event-ping.html">“event” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="health-ping.html">“health” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="heartbeat-ping.html">“heartbeat” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install-ping.html">Install Ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="launcher-process-failure-ping.html">Launcher Process Failure ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules-ping.html">“modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="new-profile-ping.html">“new-profile” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prio-ping.html">“prio” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sync-ping.html">“sync” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="third-party-modules-ping.html">“third-party-modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uitour-ping.html">“uitour-tag” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="update-ping.html">“update” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xfocsp-error-report-ping.html">“xfocsp-error-report” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ecosystem-telemetry.html">Ecosystem Telemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Data documentation</a> &raquo;</li>
+        
+      <li>Crash ping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/data/crash-ping.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="crash-ping">
+<h1>Crash ping<a class="headerlink" href="#crash-ping" title="Permalink to this headline">¶</a></h1>
+<p>This ping is captured after the main Firefox process crashes or after a child process
+process crashes, whether or not the crash report is submitted to
+crash-stats.mozilla.org. It includes non-identifying metadata about the crash.</p>
+<p>This ping is sent either by the <code class="docutils literal notranslate"><span class="pre">CrashManager</span></code> or by the crash reporter
+client. The <code class="docutils literal notranslate"><span class="pre">CrashManager</span></code> is responsible for sending crash pings for the
+child processes crashes, which are sent right after the crash is detected,
+as well as for main process crashes, which are sent after Firefox restarts
+successfully. The crash reporter client sends crash pings only for main process
+crashes whether or not the user also reports the crash. The crash reporter
+client will not send the crash ping if telemetry has been disabled in Firefox.</p>
+<p>The environment block that is sent with this ping varies: if Firefox was running
+long enough to record the environment block before the crash, then the environment
+at the time of the crash will be recorded and <code class="docutils literal notranslate"><span class="pre">hasCrashEnvironment</span></code> will be true.
+If Firefox crashed before the environment was recorded, <code class="docutils literal notranslate"><span class="pre">hasCrashEnvironment</span></code> will
+be false and the recorded environment will be the environment at time of submission.</p>
+<p>The client ID is submitted with this ping.</p>
+<p>The metadata field holds a subset of the crash annotations, all field values
+are stored as strings but some may be interpreted either as numbers or
+boolean values. Numbers are integral unless stated otherwise in the
+description. Boolean values are set to “1” when true, “0” when false. If
+they’re absent then they should be interpreted as false.</p>
+<p>Structure:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;crash&quot;</span><span class="p">,</span>
+  <span class="p">...</span> <span class="nx">common</span> <span class="nx">ping</span> <span class="nx">data</span>
+  <span class="nx">clientId</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">UUID</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="nx">environment</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+  <span class="nx">payload</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">crashDate</span><span class="o">:</span> <span class="s2">&quot;YYYY-MM-DD&quot;</span><span class="p">,</span>
+    <span class="nx">crashTime</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">ISO</span> <span class="nb">Date</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// per-hour resolution</span>
+    <span class="nx">version</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">sessionId</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">UUID</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Telemetry ID of crashing session. May be missing for crashes that happen early in startup</span>
+    <span class="nx">crashId</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">UUID</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, ID of the associated crash</span>
+    <span class="nx">minidumpSha256Hash</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">hash</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// SHA256 hash of the minidump file</span>
+    <span class="nx">processType</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Type of process that crashed, see below for a list of types</span>
+    <span class="nx">stackTraces</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="c1">// Optional, see below</span>
+    <span class="nx">metadata</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// Annotations saved while Firefox was running. See CrashAnnotations.yaml for more information</span>
+      <span class="nx">ProductID</span><span class="o">:</span> <span class="s2">&quot;{ec8030f7-c20a-464f-9b0e-13a3a9e97384}&quot;</span><span class="p">,</span>
+      <span class="nx">ProductName</span><span class="o">:</span> <span class="s2">&quot;Firefox&quot;</span><span class="p">,</span>
+      <span class="nx">ReleaseChannel</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">channel</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="nx">Version</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">version</span> <span class="nx">number</span><span class="o">&gt;</span><span class="p">,</span>
+      <span class="nx">BuildID</span><span class="o">:</span> <span class="s2">&quot;YYYYMMDDHHMMSS&quot;</span><span class="p">,</span>
+      <span class="nx">AsyncShutdownTimeout</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">json</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, present when a shutdown blocker failed to respond within a reasonable amount of time</span>
+      <span class="nx">AvailablePageFile</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, available paging file in bytes</span>
+      <span class="nx">AvailablePhysicalMemory</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, available physical memory in bytes</span>
+      <span class="nx">AvailableVirtualMemory</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, available virtual memory in bytes</span>
+      <span class="nx">BlockedDllList</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">list</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, see WindowsDllBlocklist.cpp for details</span>
+      <span class="nx">BlocklistInitFailed</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Windows-only, present only if the DLL blocklist initialization failed</span>
+      <span class="nx">CrashTime</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">time</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Seconds since the Epoch</span>
+      <span class="nx">ContainsMemoryReport</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Optional, if set indicates that the crash had a memory report attached</span>
+      <span class="nx">DOMFissionEnabled</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Optional, if set indicates that a Fission window had been opened</span>
+      <span class="nx">EventLoopNestingLevel</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">levels</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, present only if &gt;0, indicates the nesting level of the event-loop</span>
+      <span class="nx">ExperimentalFeatures</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">features</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, a comma-separated string that specifies the enabled experimental features from about:preferences#experimental</span>
+      <span class="nx">ipc_channel_error</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">error</span> <span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, contains the string processing error reason for an ipc-based content crash</span>
+      <span class="nx">IsGarbageCollecting</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Optional, if set indicates that the crash occurred while the garbage collector was running</span>
+      <span class="nx">LowCommitSpaceEvents</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">num</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, present only if &gt;0, number of low commit space events detected by the available memory tracker</span>
+      <span class="nx">MemoryErrorCorrection</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, indicates the type of ECC memory in use, see below</span>
+      <span class="nx">MozCrashReason</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">reason</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, contains the string passed to MOZ_CRASH()</span>
+      <span class="nx">OOMAllocationSize</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Size of the allocation that caused an OOM</span>
+      <span class="nx">RemoteType</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, type of content process, see below for a list of types</span>
+      <span class="nx">SecondsSinceLastCrash</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">duration</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Seconds elapsed since the last crash occurred</span>
+      <span class="nx">ShutdownProgress</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">phase</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, contains a string describing the shutdown phase in which the crash occurred</span>
+      <span class="nx">SystemMemoryUsePercentage</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">percentage</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, percent of memory in use</span>
+      <span class="nx">StartupCrash</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Optional, if set indicates that Firefox crashed during startup</span>
+      <span class="nx">TextureUsage</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">usage</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, usage of texture memory in bytes</span>
+      <span class="nx">TotalPageFile</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, paging file in use expressed in bytes</span>
+      <span class="nx">TotalPhysicalMemory</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, physical memory in use expressed in bytes</span>
+      <span class="nx">TotalVirtualMemory</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">size</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Windows-only, virtual memory in use expressed in bytes</span>
+      <span class="nx">UptimeTS</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">duration</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Seconds since Firefox was started, this can have a fractional component</span>
+      <span class="nx">User32BeforeBlocklist</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="c1">// Windows-only, present only if user32.dll was loaded before the DLL blocklist has been initialized</span>
+      <span class="nx">MainThreadRunnableName</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Optional, Nightly-only, name of the currently executing nsIRunnable on the main thread</span>
+    <span class="p">},</span>
+    <span class="nx">hasCrashEnvironment</span><span class="o">:</span> <span class="nx">bool</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For “crash” pings generated by the crashreporter we are deliberately truncating the <code class="docutils literal notranslate"><span class="pre">creationTime</span></code>
+field to hours. See <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1345108">bug 1345108</a> for context.</p>
+</div>
+<div class="section" id="process-types">
+<h2>Process Types<a class="headerlink" href="#process-types" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">processType</span></code> field contains the type of process that crashed. There are
+currently multiple process types defined in <code class="docutils literal notranslate"><span class="pre">nsICrashService</span></code> but crash pings
+are sent only for the ones below:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>main</p></td>
+<td><p>Main process, also known as the browser process</p></td>
+</tr>
+<tr class="row-odd"><td><p>content</p></td>
+<td><p>Content process</p></td>
+</tr>
+<tr class="row-even"><td><p>gpu</p></td>
+<td><p>GPU process</p></td>
+</tr>
+<tr class="row-odd"><td><p>vr</p></td>
+<td><p>VR process</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="remote-process-types">
+<span id="id1"></span><h2>Remote Process Types<a class="headerlink" href="#remote-process-types" title="Permalink to this headline">¶</a></h2>
+<p>The optional <code class="docutils literal notranslate"><span class="pre">remoteType</span></code> field contains the type of the content process that
+crashed. As such it is present only if <code class="docutils literal notranslate"><span class="pre">processType</span></code> contains the <code class="docutils literal notranslate"><span class="pre">content</span></code>
+value. The following content process types are currently defined:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>web</p></td>
+<td><p>The content process was running code from a web page</p></td>
+</tr>
+<tr class="row-odd"><td><p>file</p></td>
+<td><p>The content process was running code from a local file</p></td>
+</tr>
+<tr class="row-even"><td><p>extension</p></td>
+<td><p>The content process was running code from an extension</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="stack-traces">
+<h2>Stack Traces<a class="headerlink" href="#stack-traces" title="Permalink to this headline">¶</a></h2>
+<p>The crash ping may contain a <code class="docutils literal notranslate"><span class="pre">stackTraces</span></code> field which has been populated
+with stack traces for all threads in the crashed process. The format of this
+field is similar to the one used by Socorro for representing a crash. The main
+differences are that redundant fields are not stored and that the module a
+frame belongs to is referenced by index in the module array rather than by its
+file name.</p>
+<p>Note that this field does not contain data from the application; only bare
+stack traces and module lists are stored.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">status</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Status of the analysis, &quot;OK&quot; or an error message</span>
+  <span class="nx">crash_info</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// Basic crash information</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Type of crash, SIGSEGV, assertion, etc...</span>
+    <span class="nx">address</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">addr</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Crash address crash, hex format, see the notes below</span>
+    <span class="nx">crashing_thread</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">index</span><span class="o">&gt;</span> <span class="c1">// Index in the thread array below</span>
+  <span class="p">},</span>
+  <span class="nx">main_module</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">index</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Index of Firefox&#39; executable in the module list</span>
+  <span class="nx">modules</span><span class="o">:</span> <span class="p">[{</span>
+    <span class="nx">base_addr</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">addr</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Base address of the module, hex format</span>
+    <span class="nx">end_addr</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">addr</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// End address of the module, hex format</span>
+    <span class="nx">code_id</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Unique ID of this module, see the notes below</span>
+    <span class="nx">debug_file</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Name of the file holding the debug information</span>
+    <span class="nx">debug_id</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// ID or hash of the debug information file</span>
+    <span class="nx">filename</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// File name</span>
+    <span class="nx">version</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Library/executable version</span>
+  <span class="p">},</span>
+  <span class="p">...</span> <span class="c1">// List of modules ordered by base memory address</span>
+  <span class="p">],</span>
+  <span class="nx">threads</span><span class="o">:</span> <span class="p">[{</span> <span class="c1">// Stack traces for every thread</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[{</span>
+      <span class="nx">module_index</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">index</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Index of the module this frame belongs to</span>
+      <span class="nx">ip</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">ip</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Program counter, hex format</span>
+      <span class="nx">trust</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="c1">// Trust of this frame, see the notes below</span>
+    <span class="p">},</span>
+    <span class="p">...</span> <span class="c1">// List of frames, the first frame is the topmost</span>
+    <span class="p">]</span>
+  <span class="p">}]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p>Memory addresses and instruction pointers are always stored as strings in
+hexadecimal format (e.g. “0x4000”). They can be made of up to 16 characters for
+64-bit addresses.</p>
+<p>The crash type is both OS and CPU dependent and can be either a descriptive
+string (e.g. SIGSEGV, EXCEPTION_ACCESS_VIOLATION) or a raw numeric value. The
+crash address meaning depends on the type of crash. In a segmentation fault the
+crash address will be the memory address whose access caused the fault; in a
+crash triggered by an illegal instruction exception the address will be the
+instruction pointer where the invalid instruction resides.
+See <a class="reference external" href="https://chromium.googlesource.com/breakpad/breakpad/+/c99d374dde62654a024840accfb357b2851daea0/src/processor/minidump_processor.cc#675">breakpad</a>’s
+relevant code for further information.</p>
+<p>Since it’s not always possible to establish with certainty the address of the
+previous frame while walking the stack, every frame has a trust value that
+represents how it was found and thus how certain we are that it’s a real frame.
+The trust levels are (from least trusted to most trusted):</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Trust</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>context</p></td>
+<td><p>Given as instruction pointer in a context</p></td>
+</tr>
+<tr class="row-odd"><td><p>prewalked</p></td>
+<td><p>Explicitly provided by some external stack walker</p></td>
+</tr>
+<tr class="row-even"><td><p>cfi</p></td>
+<td><p>Derived from call frame info</p></td>
+</tr>
+<tr class="row-odd"><td><p>frame_pointer</p></td>
+<td><p>Derived from frame pointer</p></td>
+</tr>
+<tr class="row-even"><td><p>cfi_scan</p></td>
+<td><p>Found while scanning stack using call frame info</p></td>
+</tr>
+<tr class="row-odd"><td><p>scan</p></td>
+<td><p>Scanned the stack, found this</p></td>
+</tr>
+<tr class="row-even"><td><p>none</p></td>
+<td><p>Unknown, this is most likely not a valid frame</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">code_id</span></code> field holds a unique ID used to distinguish between different
+versions and builds of the same module. See <a class="reference external" href="https://chromium.googlesource.com/breakpad/breakpad/+/24f5931c5e0120982c0cbf1896641e3ef2bdd52f/src/google_breakpad/processor/code_module.h#60">breakpad</a>’s
+description for further information. This field is populated only on Windows.</p>
+<p>The value of the <code class="docutils literal notranslate"><span class="pre">MemoryErrorCorrection</span></code> metadata field contains the type
+of memory error correction available on the machine, it can be one of the
+following types:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Reserved</p></td>
+<td><p>Should never be set, assume no error correction available</p></td>
+</tr>
+<tr class="row-odd"><td><p>Other</p></td>
+<td><p>Assume no error correction available</p></td>
+</tr>
+<tr class="row-even"><td><p>Unknown</p></td>
+<td><p>Assume no error correction available</p></td>
+</tr>
+<tr class="row-odd"><td><p>None</p></td>
+<td><p>No error correction available</p></td>
+</tr>
+<tr class="row-even"><td><p>Parity</p></td>
+<td><p>Single-bit error detection, no correction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Single-bit ECC</p></td>
+<td><p>SECDED ECC (single-bit correction, double-bit detection)</p></td>
+</tr>
+<tr class="row-even"><td><p>Multi-bit ECC</p></td>
+<td><p>Usually single-device data correction (SDDC, Chipkill)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC</p></td>
+<td><p>Multi-device data correction (DDDC or similar)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="version-history">
+<h2>Version History<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Firefox 58: Added ipc_channel_error (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1410143">bug 1410143</a>).</p></li>
+<li><p>Firefox 62: Added LowCommitSpaceEvents (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1464773">bug 1464773</a>).</p></li>
+<li><p>Firefox 63: Added RecordReplayError (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1481009">bug 1481009</a>).</p></li>
+<li><p>Firefox 64: Added MemoryErrorCorrection (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1498609">bug 1498609</a>).</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="backgroundhangmonitor-ping.html" class="btn btn-neutral float-right" title="“backgroundhangmonitor” ping" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="main-ping.html" class="btn btn-neutral float-left" title="“main” ping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

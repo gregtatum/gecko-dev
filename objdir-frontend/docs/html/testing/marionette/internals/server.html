@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>server module &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="sync module" href="sync.html" />
+    <link rel="prev" title="reftest module" href="reftest.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Prefs.html">Preferences</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">action module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addon.html">addon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html">assert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="browser.html">browser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capabilities.html">capabilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capture.html">capture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cert.html">cert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">cookie module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dom.html">dom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driver.html">driver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html">element module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error.html">error module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate.html">evaluate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event.html">event module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format.html">format module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interaction.html">interaction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listener.html">listener module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">message module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modal.html">modal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navigate.html">navigate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html">packets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefs.html">prefs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy.html">proxy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reftest.html">reftest module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">server module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tcpconnection">TCPConnection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tcplistener">TCPListener</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sync.html">sync module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Marionette</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>server module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/testing/marionette/internals/server.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="server-module">
+<h1>server module<a class="headerlink" href="#server-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tcpconnection">
+<h2>TCPConnection<a class="headerlink" href="#tcpconnection" title="Permalink to this headline">¶</a></h2>
+<dl class="js class">
+<dt id="TCPConnection">
+<em class="property">class </em><code class="sig-name descname">TCPConnection</code><span class="sig-paren">(</span><em class="sig-param">connID</em>, <em class="sig-param">transport</em>, <em class="sig-param">driverFactory</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marionette client connection.</p>
+<p>Dispatches packets received to their correct service destinations
+and sends back the service endpoint’s return values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>connID</strong> (<em>number</em>) – Unique identifier of the connection this dispatcher should handle.</p></li>
+<li><p><strong>transport</strong> (<em>DebuggerTransport</em>) – Debugger transport connection to the client.</p></li>
+<li><p><strong>driverFactory</strong> (<em>function</em>) – Factory function that produces a <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> GeckoDriver}.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="js function">
+<dt id="TCPConnection.createResponse">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">createResponse</code><span class="sig-paren">(</span><em class="sig-param">msgID</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.createResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fail-safe creation of a new instance of <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> Response}.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msgID</strong> (<em>number</em>) – Message ID to respond to.  If it is not a number, -1 is used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Response</strong> – Response to the message with <cite>msgID</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.despatch">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">despatch</code><span class="sig-paren">(</span><em class="sig-param">cmd</em>, <em class="sig-param">resp</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.despatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Despatches command to appropriate Marionette service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd</strong> (<a class="reference internal" href="message.html#Command" title="Command"><em>Command</em></a>) – Command to run.</p></li>
+<li><p><strong>resp</strong> (<a class="reference internal" href="message.html#Response" title="Response"><em>Response</em></a>) – Mutable response where the command’s return value will be assigned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><strong>Error</strong> – A command’s implementation may throw at any time.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.execute">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">cmd</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a Marionette command and sends back a response when it
+has finished executing.</p>
+<p>If the command implementation sends the response itself by calling
+&lt;code&gt;resp.send()&lt;/code&gt;, the response is guaranteed to not be
+sent twice.</p>
+<p>Errors thrown in commands are marshaled and sent back, and if they
+are not <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> WebDriverError} instances, they are additionally
+propagated and reported to <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> Components.utils.reportError}.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmd</strong> (<a class="reference internal" href="message.html#Command" title="Command"><em>Command</em></a>) – Command to execute.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.onClosed">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">onClosed</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.onClosed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Debugger transport callback that cleans up
+after a connection is closed.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.onPacket">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">onPacket</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.onPacket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback that receives data packets from the client.</p>
+<p>If the message is a Response, we look up the command previously
+issued to the client and run its callback, if any.  In case of
+a Command, the corresponding is executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>'Array' ].&lt;number, number, ?, ?&gt; data</strong> (<em>[</em>) – A four element array where the elements, in sequence, signifies message type, message ID, method name or error, and parameters or result.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.sayHello">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">sayHello</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.sayHello" title="Permalink to this definition">¶</a></dt>
+<dd><p>When a client connects we send across a JSON Object defining the
+protocol level.</p>
+<p>This is the only message sent by Marionette that does not follow
+the regular message format.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.send">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegates message to client based on the provided  <a class="reference external" href="mailto:{&#37;&#52;&#48;code">{<span>&#64;</span>code</a> cmdID}.
+The message is sent over the debugger transport socket.</p>
+<p>The command ID is a unique identifier assigned to the client’s request
+that is used to distinguish the asynchronous responses.</p>
+<p>Whilst responses to commands are synchronous and must be sent in the
+correct order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message.html#Message" title="Message"><em>Message</em></a>) – The command or response to send.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.sendMessage">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">sendMessage</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.sendMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marshal message to the Marionette message format and send it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>msg</strong> (<a class="reference internal" href="message.html#Message" title="Message"><em>Message</em></a>) – The message to send.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.sendRaw">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">sendRaw</code><span class="sig-paren">(</span><em class="sig-param">payload</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.sendRaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the given payload over the debugger transport socket to the
+connected client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>'Object' ].&lt;string, ?&gt; payload</strong> (<em>[</em>) – The payload to ship.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPConnection.sendToClient">
+<code class="sig-prename descclassname">TCPConnection.</code><code class="sig-name descname">sendToClient</code><span class="sig-paren">(</span><em class="sig-param">resp</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPConnection.sendToClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send given response to the client over the debugger transport socket.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>resp</strong> (<a class="reference internal" href="message.html#Response" title="Response"><em>Response</em></a>) – The response to send back to the client.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="tcplistener">
+<h2>TCPListener<a class="headerlink" href="#tcplistener" title="Permalink to this headline">¶</a></h2>
+<dl class="js class">
+<dt id="TCPListener">
+<em class="property">class </em><code class="sig-name descname">TCPListener</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="headerlink" href="#TCPListener" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bootstraps Marionette and handles incoming client connections.</p>
+<p>Starting the Marionette server will open a TCP socket sporting the
+debugger transport interface on the provided <cite>port</cite>.  For every
+new connection, a <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> TCPConnection} is created.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>port</strong> (<em>number</em>) – Port for server to listen to.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="js function">
+<dt id="TCPListener.driverFactory">
+<code class="sig-prename descclassname">TCPListener.</code><code class="sig-name descname">driverFactory</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPListener.driverFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function produces a <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> GeckoDriver}.</p>
+<p>Determines the application to initialise the driver with.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>GeckoDriver</strong> – A driver instance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="TCPListener.start">
+<code class="sig-prename descclassname">TCPListener.</code><code class="sig-name descname">start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TCPListener.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bind this listener to <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> #port} and start accepting incoming
+socket connections on <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> #onSocketAccepted}.</p>
+<p>The marionette.port preference will be populated with the value
+of <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> #port}.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sync.html" class="btn btn-neutral float-right" title="sync module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reftest.html" class="btn btn-neutral float-left" title="reftest module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

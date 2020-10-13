@@ -1,0 +1,781 @@
+taskgraph.transforms package
+============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   taskgraph.transforms.job
+
+Submodules
+----------
+
+taskgraph.transforms.balrog\_submit module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.balrog_submit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.balrog\_toplevel module
+--------------------------------------------
+
+.. automodule:: taskgraph.transforms.balrog_toplevel
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.base module
+--------------------------------
+
+.. automodule:: taskgraph.transforms.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover module
+-------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_checksums module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_checksums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_emefree\_checksums module
+---------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_emefree_checksums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_geckoview module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_geckoview
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_langpack\_checksums module
+----------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_langpack_checksums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_push\_to\_release module
+--------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_push_to_release
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_repackage module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_repackage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_repackage\_l10n module
+------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_repackage_l10n
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_repackage\_partner module
+---------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_repackage_partner
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_snap module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_snap
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_source module
+---------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_source
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.beetmover\_source\_checksums module
+--------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.beetmover_source_checksums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.bouncer\_aliases module
+--------------------------------------------
+
+.. automodule:: taskgraph.transforms.bouncer_aliases
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.bouncer\_check module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.bouncer_check
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.bouncer\_locations module
+----------------------------------------------
+
+.. automodule:: taskgraph.transforms.bouncer_locations
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.bouncer\_submission module
+-----------------------------------------------
+
+.. automodule:: taskgraph.transforms.bouncer_submission
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.bouncer\_submission\_partners module
+---------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.bouncer_submission_partners
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.build module
+---------------------------------
+
+.. automodule:: taskgraph.transforms.build
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.build\_attrs module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.build_attrs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.build\_fat\_aar module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.build_fat_aar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.build\_lints module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.build_lints
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.build\_signing module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.build_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.cached\_tasks module
+-----------------------------------------
+
+.. automodule:: taskgraph.transforms.cached_tasks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.chunk\_partners module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.chunk_partners
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.code\_review module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.code_review
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.copy\_attributes\_from\_dependent\_task module
+-------------------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.copy_attributes_from_dependent_task
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.diffoscope module
+--------------------------------------
+
+.. automodule:: taskgraph.transforms.diffoscope
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.docker\_image module
+-----------------------------------------
+
+.. automodule:: taskgraph.transforms.docker_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.fetch module
+---------------------------------
+
+.. automodule:: taskgraph.transforms.fetch
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.final\_verify module
+-----------------------------------------
+
+.. automodule:: taskgraph.transforms.final_verify
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.geckodriver\_signing module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.geckodriver_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.github\_sync module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.github_sync
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.iris module
+--------------------------------
+
+.. automodule:: taskgraph.transforms.iris
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.l10n module
+--------------------------------
+
+.. automodule:: taskgraph.transforms.l10n
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.mac\_notarization\_poller module
+-----------------------------------------------------
+
+.. automodule:: taskgraph.transforms.mac_notarization_poller
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.mar\_signing module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.mar_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.maybe\_release module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.maybe_release
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.merge\_automation module
+---------------------------------------------
+
+.. automodule:: taskgraph.transforms.merge_automation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.name\_sanity module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.name_sanity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.openh264 module
+------------------------------------
+
+.. automodule:: taskgraph.transforms.openh264
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.openh264\_signing module
+---------------------------------------------
+
+.. automodule:: taskgraph.transforms.openh264_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.partials module
+------------------------------------
+
+.. automodule:: taskgraph.transforms.partials
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.partner\_attribution module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.partner_attribution
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.partner\_attribution\_beetmover module
+-----------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.partner_attribution_beetmover
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.partner\_repack module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.partner_repack
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.partner\_signing module
+--------------------------------------------
+
+.. automodule:: taskgraph.transforms.partner_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.per\_platform\_dummy module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.per_platform_dummy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.perftest module
+------------------------------------
+
+.. automodule:: taskgraph.transforms.perftest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.python\_update module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.python_update
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.raptor module
+----------------------------------
+
+.. automodule:: taskgraph.transforms.raptor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release module
+-----------------------------------
+
+.. automodule:: taskgraph.transforms.release
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_beetmover\_signed\_addons module
+--------------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_beetmover_signed_addons
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_deps module
+-----------------------------------------
+
+.. automodule:: taskgraph.transforms.release_deps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_flatpak\_push module
+--------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_flatpak_push
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_flatpak\_repackage module
+-------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_flatpak_repackage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_generate\_checksums module
+--------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_generate_checksums
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_generate\_checksums\_beetmover module
+-------------------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_generate_checksums_beetmover
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_generate\_checksums\_signing module
+-----------------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_generate_checksums_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_mark\_as\_shipped module
+------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_mark_as_shipped
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_notifications module
+--------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_notifications
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_sign\_and\_push\_langpacks module
+---------------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_sign_and_push_langpacks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_snap\_push module
+-----------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_snap_push
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_snap\_repackage module
+----------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_snap_repackage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_started module
+--------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_started
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.release\_version\_bump module
+--------------------------------------------------
+
+.. automodule:: taskgraph.transforms.release_version_bump
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage module
+-------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage\_l10n module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage_l10n
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage\_partner module
+----------------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage_partner
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage\_routes module
+---------------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage_routes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage\_signing module
+----------------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repackage\_signing\_partner module
+-------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.repackage_signing_partner
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.repo\_update module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.repo_update
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.reverse\_chunk\_deps module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.reverse_chunk_deps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.run\_pgo\_profile module
+---------------------------------------------
+
+.. automodule:: taskgraph.transforms.run_pgo_profile
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.scriptworker module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.scriptworker
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.scriptworker\_canary module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.scriptworker_canary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.shippable\_l10n\_signing module
+----------------------------------------------------
+
+.. automodule:: taskgraph.transforms.shippable_l10n_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.signing module
+-----------------------------------
+
+.. automodule:: taskgraph.transforms.signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.source\_checksums\_signing module
+------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.source_checksums_signing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.source\_test module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.source_test
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.spidermonkey module
+----------------------------------------
+
+.. automodule:: taskgraph.transforms.spidermonkey
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.strip\_dependent\_task module
+--------------------------------------------------
+
+.. automodule:: taskgraph.transforms.strip_dependent_task
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.task module
+--------------------------------
+
+.. automodule:: taskgraph.transforms.task
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.tests module
+---------------------------------
+
+.. automodule:: taskgraph.transforms.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.try\_job module
+------------------------------------
+
+.. automodule:: taskgraph.transforms.try_job
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.update\_verify module
+------------------------------------------
+
+.. automodule:: taskgraph.transforms.update_verify
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.update\_verify\_config module
+--------------------------------------------------
+
+.. automodule:: taskgraph.transforms.update_verify_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.upload\_generated\_sources module
+------------------------------------------------------
+
+.. automodule:: taskgraph.transforms.upload_generated_sources
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.upload\_symbols module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.upload_symbols
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.upstream\_artifact\_task module
+----------------------------------------------------
+
+.. automodule:: taskgraph.transforms.upstream_artifact_task
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.visual\_metrics module
+-------------------------------------------
+
+.. automodule:: taskgraph.transforms.visual_metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.transforms.visual\_metrics\_dep module
+------------------------------------------------
+
+.. automodule:: taskgraph.transforms.visual_metrics_dep
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: taskgraph.transforms
+   :members:
+   :undoc-members:
+   :show-inheritance:

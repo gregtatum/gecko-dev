@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Unit testing &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Installer" href="../../../../installer/windows/installer/index.html" />
+    <link rel="prev" title="TippyTop in Activity Stream" href="tippytop.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Firefox Home (New Tab)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#for-jsm-files">For .jsm files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#for-js-jsx-sass-or-css-files">For .js, .jsx, .sass, or .css files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#building-assets-and-running-firefox">Building assets and running Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#continuous-development-debugging">Continuous development / debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#running-tests">Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#code-coverage">Code Coverage</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#detailed-docs">Detailed Docs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="about_home_startup_cache.html">The <code class="docutils literal notranslate"><span class="pre">about:home</span></code> startup cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_dictionary.html">Activity Stream Pings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_events.html">Metrics we collect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geo_locale.html">Custom <code class="docutils literal notranslate"><span class="pre">geo</span></code>, <code class="docutils literal notranslate"><span class="pre">locale</span></code>, and update channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mochitests.html">Mochitests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preferences.html">Preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remote_cfr.html">Remote CFR Messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sections.html">Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry.html">Telemetry checklist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tippytop.html">TippyTop in Activity Stream</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Unit testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox Home (New Tab)</a> &raquo;</li>
+        
+      <li>Unit testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/browser/components/newtab/docs/v2-system-addon/unit_testing_guide.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="unit-testing">
+<h1>Unit testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Our unit tests in Activity Stream are written with mocha, chai, and sinon, and run
+with karma. They include unit tests for both content code (React components, etc.)
+and <code class="docutils literal notranslate"><span class="pre">.jsm</span></code>s.</p>
+<p>You can find unit tests in <code class="docutils literal notranslate"><span class="pre">tests/unit</span></code>.</p>
+</div>
+<div class="section" id="execution">
+<h2>Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h2>
+<p>To run the unit tests once, execute <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">test</span></code>.</p>
+<p>To run unit tests continuously (i.e. in “test-driven development” mode), you can
+run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">run</span> <span class="pre">tddmc</span></code>.</p>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>To debug tests, you should run them in continuous mode with <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">run</span> <span class="pre">tddmc</span></code>.
+In the Firefox window that is opened (it should say “Karma… - connected”),
+click the “debug” button and open your console to see test output, set
+breakpoints, etc.</p>
+<p>Unfortunately, source maps for tests do not currently work in Firefox. If you need
+to see line numbers, you can run the tests with Chrome by running
+<code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span> <span class="pre">--save-dev</span> <span class="pre">karma-chrome-launcher</span> <span class="pre">&amp;&amp;</span> <span class="pre">npm</span> <span class="pre">run</span> <span class="pre">tddmc</span> <span class="pre">--</span> <span class="pre">--browsers</span> <span class="pre">Chrome</span></code></p>
+</div>
+<div class="section" id="where-to-put-new-tests">
+<h2>Where to put new tests<a class="headerlink" href="#where-to-put-new-tests" title="Permalink to this headline">¶</a></h2>
+<p>If you are creating a new test, add it to a subdirectory of the <code class="docutils literal notranslate"><span class="pre">tests/unit</span></code>
+that corresponds to the file you are testing. Tests should end with <code class="docutils literal notranslate"><span class="pre">.test.js</span></code> or
+<code class="docutils literal notranslate"><span class="pre">.test.jsx</span></code> if the test includes any jsx.</p>
+<p>For example, if the file you are testing is <code class="docutils literal notranslate"><span class="pre">lib/Foo.jsm</span></code>, the test
+file should be <code class="docutils literal notranslate"><span class="pre">test/unit/lib/Foo.test.js</span></code></p>
+</div>
+<div class="section" id="mocha-tests">
+<h2>Mocha tests<a class="headerlink" href="#mocha-tests" title="Permalink to this headline">¶</a></h2>
+<p>All our unit tests are written with <a class="reference external" href="https://mochajs.org">mocha</a>, which injects
+globals like <code class="docutils literal notranslate"><span class="pre">describe</span></code>, <code class="docutils literal notranslate"><span class="pre">it</span></code>, <code class="docutils literal notranslate"><span class="pre">beforeEach</span></code>, and others. It can be used to write
+synchronous or asynchronous tests:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;FooModule&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// A synchronous test</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">&quot;should create an instance&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">instanceOf</span><span class="p">(</span><span class="k">new</span> <span class="nx">FooModule</span><span class="p">(),</span> <span class="nx">FooModule</span><span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;#meaningOfLife&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// An asynchronous test</span>
+    <span class="nx">it</span><span class="p">(</span><span class="s2">&quot;should eventually get the meaning of life&quot;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FooModule</span><span class="p">();</span>
+      <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">meaningOfLife</span><span class="p">();</span>
+      <span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="mf">42</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="assertions">
+<h2>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h2>
+<p>To write assertions, use the globally available <code class="docutils literal notranslate"><span class="pre">assert</span></code> object (this is provided
+by karma-chai, so you do not need to <code class="docutils literal notranslate"><span class="pre">require</span></code> it).</p>
+<p>For example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">foo</span><span class="p">,</span> <span class="mf">3</span><span class="p">);</span>
+<span class="nx">assert</span><span class="p">.</span><span class="nx">propertyVal</span><span class="p">(</span><span class="nx">someObj</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="mf">3</span><span class="p">);</span>
+<span class="nx">assert</span><span class="p">.</span><span class="nx">calledOnce</span><span class="p">(</span><span class="nx">someStub</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You can use any of the assertions from:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://chaijs.com/api/assert/"><code class="docutils literal notranslate"><span class="pre">chai</span></code></a>.</p></li>
+<li><p><a class="reference external" href="https://github.com/domenic/sinon-chai#assertions"><code class="docutils literal notranslate"><span class="pre">sinon-chai</span></code></a></p></li>
+</ul>
+<div class="section" id="custom-assertions">
+<h3>Custom assertions<a class="headerlink" href="#custom-assertions" title="Permalink to this headline">¶</a></h3>
+<p>We have some custom assertions for checking various types of actions:</p>
+<div class="section" id="isusereventaction-action">
+<h4><code class="docutils literal notranslate"><span class="pre">.isUserEventAction(action)</span></code><a class="headerlink" href="#isusereventaction-action" title="Permalink to this headline">¶</a></h4>
+<p>Asserts that a given <code class="docutils literal notranslate"><span class="pre">action</span></code> is a valid User Event, i.e. that it contains only
+expected/valid properties for User Events in Activity Stream.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// This will pass</span>
+<span class="nx">assert</span><span class="p">.</span><span class="nx">isUserEventAction</span><span class="p">(</span><span class="nx">ac</span><span class="p">.</span><span class="nx">UserEvent</span><span class="p">({</span><span class="nx">event</span><span class="o">:</span> <span class="s2">&quot;CLICK&quot;</span><span class="p">}));</span>
+
+<span class="c1">// This will fail</span>
+<span class="nx">assert</span><span class="p">.</span><span class="nx">isUserEventAction</span><span class="p">({</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;FOO&quot;</span><span class="p">});</span>
+
+<span class="c1">// This will fail because BLOOP is not a valid event type</span>
+<span class="nx">assert</span><span class="p">.</span><span class="nx">isUserEventAction</span><span class="p">(</span><span class="nx">ac</span><span class="p">.</span><span class="nx">UserEvent</span><span class="p">({</span><span class="nx">event</span><span class="o">:</span> <span class="s2">&quot;BLOOP&quot;</span><span class="p">}));</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="overriding-globals-in-jsms">
+<h2>Overriding globals in <code class="docutils literal notranslate"><span class="pre">.jsm</span></code>s<a class="headerlink" href="#overriding-globals-in-jsms" title="Permalink to this headline">¶</a></h2>
+<p>Most <code class="docutils literal notranslate"><span class="pre">.jsm</span></code>s you will be testing use <code class="docutils literal notranslate"><span class="pre">Cu.import</span></code> or <code class="docutils literal notranslate"><span class="pre">XPCOMUtils</span></code> to inject globals.
+In order to add mocks/stubs/fakes for these globals, you should use the <code class="docutils literal notranslate"><span class="pre">GlobalOverrider</span></code>
+utility in <code class="docutils literal notranslate"><span class="pre">test/unit/utils</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span><span class="nx">GlobalOverrider</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;test/unit/utils&quot;</span><span class="p">);</span>
+<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;MyModule&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">globals</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">sandbox</span><span class="p">;</span>
+  <span class="nx">beforeEach</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">globals</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GlobalOverrider</span><span class="p">();</span>
+    <span class="nx">sandbox</span> <span class="o">=</span> <span class="nx">globals</span><span class="p">.</span><span class="nx">sandbox</span><span class="p">;</span> <span class="c1">// this is a sinon sandbox</span>
+    <span class="c1">// This will inject a &quot;AboutNewTab&quot; global before each test</span>
+    <span class="nx">globals</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;AboutNewTab&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">override</span><span class="o">:</span> <span class="nx">sandbox</span><span class="p">.</span><span class="nx">stub</span><span class="p">()});</span>
+  <span class="p">});</span>
+  <span class="c1">// globals.restore() clears any globals you added as well as the sinon sandbox</span>
+  <span class="nx">afterEach</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="nx">globals</span><span class="p">.</span><span class="nx">restore</span><span class="p">());</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-react-components">
+<h2>Testing React components<a class="headerlink" href="#testing-react-components" title="Permalink to this headline">¶</a></h2>
+<p>You should use the <a class="reference external" href="https://github.com/airbnb/enzyme">enzyme</a> suite of test utilities
+to test React Components for Activity Stream.</p>
+<p>Where possible, use the <a class="reference external" href="https://github.com/airbnb/enzyme/blob/master/docs/api/shallow">shallow rendering method</a> (this will avoid unnecessarily
+rendering child components):</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;react&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span><span class="nx">shallow</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;enzyme&quot;</span><span class="p">);</span>
+
+<span class="nx">describe</span><span class="p">(</span><span class="s2">&quot;&lt;Foo&gt;&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">it</span><span class="p">(</span><span class="s2">&quot;should be hidden by default&quot;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">shallow</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Foo</span> <span class="o">/&gt;</span><span class="p">);</span>
+    <span class="nx">assert</span><span class="p">.</span><span class="nx">isTrue</span><span class="p">(</span><span class="nx">wrapper</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;.wrapper&quot;</span><span class="p">).</span><span class="nx">props</span><span class="p">().</span><span class="nx">hidden</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If you need to, you can also do <a class="reference external" href="https://github.com/airbnb/enzyme/blob/master/docs/api/mount">Full DOM rendering</a>
+with enzyme’s <code class="docutils literal notranslate"><span class="pre">mount</span></code> utility.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;react&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span><span class="nx">mount</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;enzyme&quot;</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="kr">const</span> <span class="nx">wrapper</span> <span class="o">=</span> <span class="nx">mount</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Foo</span> <span class="o">/&gt;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../../installer/windows/installer/index.html" class="btn btn-neutral float-right" title="Installer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tippytop.html" class="btn btn-neutral float-left" title="TippyTop in Activity Stream" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

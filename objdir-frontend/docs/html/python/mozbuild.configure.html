@@ -1,0 +1,1089 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozbuild.configure package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozbuild.configure package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozbuild.configure.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozbuild-configure-package">
+<h1>mozbuild.configure package<a class="headerlink" href="#mozbuild-configure-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozbuild.configure.check_debug_ranges">
+<span id="mozbuild-configure-check-debug-ranges-module"></span><h2>mozbuild.configure.check_debug_ranges module<a class="headerlink" href="#module-mozbuild.configure.check_debug_ranges" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="mozbuild.configure.check_debug_ranges.get_range_for">
+<code class="sig-prename descclassname">mozbuild.configure.check_debug_ranges.</code><code class="sig-name descname">get_range_for</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">compilation_unit</span></em>, <em class="sig-param"><span class="n">debug_info</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.check_debug_ranges.get_range_for" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the range offset for a given compilation unit
+in a given debug_info.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.check_debug_ranges.get_range_length">
+<code class="sig-prename descclassname">mozbuild.configure.check_debug_ranges.</code><code class="sig-name descname">get_range_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">range</span></em>, <em class="sig-param"><span class="n">debug_ranges</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.check_debug_ranges.get_range_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of items in the range starting at the
+given offset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.check_debug_ranges.main">
+<code class="sig-prename descclassname">mozbuild.configure.check_debug_ranges.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bin</span></em>, <em class="sig-param"><span class="n">compilation_unit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.check_debug_ranges.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure.constants">
+<span id="mozbuild-configure-constants-module"></span><h2>mozbuild.configure.constants module<a class="headerlink" href="#module-mozbuild.configure.constants" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozbuild.configure.help">
+<span id="mozbuild-configure-help-module"></span><h2>mozbuild.configure.help module<a class="headerlink" href="#module-mozbuild.configure.help" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.configure.help.HelpFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.help.</code><code class="sig-name descname">HelpFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">argv0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="mozbuild.configure.help.HelpFormatter.RE_FORMAT">
+<code class="sig-name descname">RE_FORMAT</code><em class="property"> = re.compile('{([^|}]*)\\|([^|}]*)}')</em><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter.RE_FORMAT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.help.HelpFormatter.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.help.HelpFormatter.format_help">
+<code class="sig-name descname">format_help</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter.format_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.help.HelpFormatter.format_options_by_category">
+<code class="sig-name descname">format_options_by_category</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">options_by_category</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter.format_options_by_category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.help.HelpFormatter.usage">
+<code class="sig-name descname">usage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">out</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.help.HelpFormatter.usage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure.libstdcxx">
+<span id="mozbuild-configure-libstdcxx-module"></span><h2>mozbuild.configure.libstdcxx module<a class="headerlink" href="#module-mozbuild.configure.libstdcxx" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="mozbuild.configure.libstdcxx.encode_ver">
+<code class="sig-prename descclassname">mozbuild.configure.libstdcxx.</code><code class="sig-name descname">encode_ver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.libstdcxx.encode_ver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode the version as a single number.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.libstdcxx.find_version">
+<code class="sig-prename descclassname">mozbuild.configure.libstdcxx.</code><code class="sig-name descname">find_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.libstdcxx.find_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a base command line for a compiler, find the version of the
+libstdc++ it uses.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.libstdcxx.parse_ld_line">
+<code class="sig-prename descclassname">mozbuild.configure.libstdcxx.</code><code class="sig-name descname">parse_ld_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.libstdcxx.parse_ld_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a line from the output of ld -t. The output of gold is just
+the full path, gnu ld prints “-lstdc++ (path)”.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.libstdcxx.parse_readelf_line">
+<code class="sig-prename descclassname">mozbuild.configure.libstdcxx.</code><code class="sig-name descname">parse_readelf_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.libstdcxx.parse_readelf_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version from a readelf line that looks like:
+0x00ec: Rev: 1  Flags: none  Index: 8  Cnt: 2  Name: GLIBCXX_3.4.6</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.libstdcxx.split_ver">
+<code class="sig-prename descclassname">mozbuild.configure.libstdcxx.</code><code class="sig-name descname">split_ver</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.libstdcxx.split_ver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Covert the string ‘1.2.3’ into the list [1,2,3]</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure.lint">
+<span id="mozbuild-configure-lint-module"></span><h2>mozbuild.configure.lint module<a class="headerlink" href="#module-mozbuild.configure.lint" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.configure.lint.LintSandbox">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.lint.</code><code class="sig-name descname">LintSandbox</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">argv</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stdout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">stderr</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.ConfigureSandbox" title="mozbuild.configure.ConfigureSandbox"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.ConfigureSandbox</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.configure.lint.LintSandbox.imports_impl">
+<code class="sig-name descname">imports_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_import</span></em>, <em class="sig-param"><span class="n">_from</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_as</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox.imports_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of &#64;imports.
+This decorator imports the given _import from the given _from module
+optionally under a different _as name.
+The options correspond to the various forms for the import builtin.</p>
+<blockquote>
+<div><p>&#64;imports(‘sys’)
+&#64;imports(_from=’mozpack’, _import=’path’, _as=’mozpath’)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.lint.LintSandbox.option_impl">
+<code class="sig-name descname">option_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox.option_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of option()
+This function creates and returns an Option() object, passing it the
+resolved arguments (uses the result of functions when functions are
+passed). In most cases, the result of this function is not expected to
+be used.
+Command line argument/environment variable parsing for this Option is
+handled here.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.lint.LintSandbox.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the given file within the sandbox, as well as everything
+pending from any other included file, and ensure the overall
+consistency of the executed script(s).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.lint.LintSandbox.unwrap">
+<code class="sig-name descname">unwrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox.unwrap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.lint.LintSandbox.wraps">
+<code class="sig-name descname">wraps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.lint.LintSandbox.wraps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure.options">
+<span id="mozbuild-configure-options-module"></span><h2>mozbuild.configure.options module<a class="headerlink" href="#module-mozbuild.configure.options" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.configure.options.CommandLineHelper">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">CommandLineHelper</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">environ</span><span class="o">=</span><span class="default_value">environ({'NVM_INC': '/Users/greg/.nvm/versions/node/v12.18.2/include/node', 'TERM_PROGRAM': 'iTerm.app', 'NVM_CD_FLAGS': '', 'SHELL': '/bin/bash', 'TERM': 'xterm-256color', 'HISTSIZE': '2000', 'MACH_NOTIFY_MINTIME': '0', 'CLICOLOR': '1', 'TMPDIR': '/var/folders/y7/0gx4dtxs223gpzqt_6rqjrmm0000gp/T/', 'TERM_PROGRAM_VERSION': '3.4.0beta10', 'PYTHONHTTPSVERIFY': '0', 'TERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'RUST_SRC_PATH': '/usr/local/Cellar/rust/src/src', 'AMO_JWT_ISSUER': 'user:6210320:609', 'USER': 'greg', 'HISTFILESIZE': '5000000', 'NVM_DIR': '/Users/greg/.nvm', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.MhpYHGEYRY/Listeners', 'CCACHE_COMPRESS': '', '__CF_USER_TEXT_ENCODING': '0x1F6:0x0:0x0', 'PYENV_VIRTUALENV_INIT': '1', 'BASH_SILENCE_DEPRECATION_WARNING': '1', 'npm_package_config_firefox': '/Applications/Nightly.app/Contents/MacOS/firefox-bin', 'LSCOLORS': 'GxFxCxDxBxegedabagaced', 'PATH': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv/bin:/Users/greg/dev/gecko-dev/objdir-frontend/_virtualenvs/docs/bin:/Users/greg/.nvm/versions/node/v12.18.2/bin:/opt/local/bin:/opt/local/sbin:/usr/local/opt/python/libexec/bin:/Users/greg/Library/Python/3.7/bin:/Users/greg/Library/Android/sdk/platform-tools:/Users/greg/Library/Android/sdk/emulator:/Users/greg/scripts/phabricator/arcanist/bin:/Applications/Postgres.app/Contents/Versions/10/bin:/Users/greg/.cargo/bin:/Users/greg/dev/gecko-dev:./node_modules/.bin:/Users/greg/scripts/version-control-tools/git/commands:/Users/greg/scripts/moz-git-tools:/Users/greg/scripts/git-cinnabar:/Users/greg/scripts:/usr/local/Cellar/vim/8.0.1700/bin:/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/greg/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin', 'PWD': '/Users/greg/dev/gecko-dev', 'EDITOR': 'vim', 'LANG': 'en_US.UTF-8', 'ITERM_PROFILE': 'Default', 'XPC_FLAGS': '0x0', 'AMO_JWT_SECRET': 'a48e65236b94e670a740692d420825293819a1b2cf843df0767fb0e9cec02a52', 'XPC_SERVICE_NAME': '0', 'HISTCONTROL': 'ignoredups', 'COLORFGBG': '15;0', 'HOME': '/Users/greg', 'SHLVL': '1', 'PYENV_SHELL': 'bash', 'LC_TERMINAL_VERSION': '3.4.0beta10', 'ITERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'LOGNAME': 'greg', 'PYTHONPATH': '/Users/greg/Library/Python/3.7/lib/python/site-packages:', 'NVM_BIN': '/Users/greg/.nvm/versions/node/v12.18.2/bin', 'DISPLAY': '/private/tmp/com.apple.launchd.qA0kqWowAP/org.macosforge.xquartz:0', 'LC_TERMINAL': 'iTerm2', 'COLORTERM': 'truecolor', 'MACH_VIRTUALENV': '1', 'MACH_MAIN_PID': '48561', 'MACH_STDOUT_ISATTY': '1', 'VIRTUAL_ENV': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv', 'DOCUTILSCONFIG': '/Users/greg/dev/gecko-dev/docs/docutils.conf'})</span></em>, <em class="sig-param"><span class="n">argv</span><span class="o">=</span><span class="default_value">['./mach', 'doc']</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.CommandLineHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Helper class to handle the various ways options can be given either
+on the command line of through the environment.</p>
+<p>For instance, an Option(‘–foo’, env=’FOO’) can be passed as –foo on the
+command line, or as FOO=1 in the environment <em>or</em> on the command line.</p>
+<p>If multiple variants are given, command line is prefered over the
+environment, and if different values are given on the command line, the
+last one wins. (This mimicks the behavior of autoconf, avoiding to break
+existing mozconfigs using valid options in weird ways)</p>
+<p>Extra options can be added afterwards through API calls. For those,
+conflicting values will raise an exception.</p>
+<dl class="py method">
+<dt id="mozbuild.configure.options.CommandLineHelper.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">'command-line'</span></em>, <em class="sig-param"><span class="n">args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.CommandLineHelper.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.CommandLineHelper.handle">
+<code class="sig-name descname">handle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.CommandLineHelper.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the OptionValue corresponding to the given Option instance,
+depending on the command line, environment, and extra arguments, and
+the actual option or variable that set it.
+Only works once for a given Option.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozbuild.configure.options.ConflictingOptionError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">ConflictingOptionError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">format_data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.ConflictingOptionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.options.InvalidOptionError" title="mozbuild.configure.options.InvalidOptionError"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.options.InvalidOptionError</span></code></a></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozbuild.configure.options.InvalidOptionError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">InvalidOptionError</code><a class="headerlink" href="#mozbuild.configure.options.InvalidOptionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.options.NegativeOptionValue">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">NegativeOptionValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">'unknown'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.NegativeOptionValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.options.OptionValue" title="mozbuild.configure.options.OptionValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.options.OptionValue</span></code></a></p>
+<p>Represents the value for a negative option (–disable/–without)</p>
+<p>This is effectively an empty tuple with a <cite>origin</cite> attribute.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.options.Option">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">Option</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">env</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nargs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">possible_origins</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">choices</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">category</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">help</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">define_depth</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.Option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a configure option</p>
+<p>A configure option can be a command line flag or an environment variable
+or both.</p>
+<ul class="simple">
+<li><p><cite>name</cite> is the full command line flag (e.g. –enable-foo).</p></li>
+<li><p><cite>env</cite> is the environment variable name (e.g. ENV)</p></li>
+<li><p><cite>nargs</cite> is the number of arguments the option may take. It can be a
+number or the special values ‘?’ (0 or 1), ‘*’ (0 or more), or ‘+’ (1 or
+more).</p></li>
+<li><p><cite>default</cite> can be used to give a default value to the option. When the
+<cite>name</cite> of the option starts with ‘–enable-‘ or ‘–with-‘, the implied
+default is an empty PositiveOptionValue. When it starts with ‘–disable-‘
+or ‘–without-‘, the implied default is a NegativeOptionValue.</p></li>
+<li><p><cite>choices</cite> restricts the set of values that can be given to the option.</p></li>
+<li><p><cite>help</cite> is the option description for use in the –help output.</p></li>
+<li><p><cite>possible_origins</cite> is a tuple of strings that are origins accepted for
+this option. Example origins are ‘mozconfig’, ‘implied’, and ‘environment’.</p></li>
+<li><p><cite>category</cite> is a human-readable string used only for categorizing command-
+line options when displaying the output of <cite>configure –help</cite>. If not
+supplied, the script will attempt to infer an appropriate category based
+on the name of the file where the option was defined. If supplied it must
+be in the _ALL_CATEGORIES list above.</p></li>
+<li><p><cite>define_depth</cite> should generally only be used by templates that are used
+to instantiate an option indirectly. Set this to a positive integer to
+force the script to look into a deeper stack frame when inferring the
+<cite>category</cite>.</p></li>
+</ul>
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.category">
+<code class="sig-name descname">category</code><a class="headerlink" href="#mozbuild.configure.options.Option.category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.choices">
+<code class="sig-name descname">choices</code><a class="headerlink" href="#mozbuild.configure.options.Option.choices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.default">
+<code class="sig-name descname">default</code><a class="headerlink" href="#mozbuild.configure.options.Option.default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.define_depth">
+<code class="sig-name descname">define_depth</code><a class="headerlink" href="#mozbuild.configure.options.Option.define_depth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.env">
+<code class="sig-name descname">env</code><a class="headerlink" href="#mozbuild.configure.options.Option.env" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.Option.get_value">
+<code class="sig-name descname">get_value</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">'unknown'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.Option.get_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a full command line option (e.g. –enable-foo=bar) or a
+variable assignment (FOO=bar), returns the corresponding OptionValue.</p>
+<p>Note: variable assignments can come from either the environment or
+from the command line (e.g. <cite>../configure CFLAGS=-O2</cite>)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.help">
+<code class="sig-name descname">help</code><a class="headerlink" href="#mozbuild.configure.options.Option.help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#mozbuild.configure.options.Option.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.Option.maxargs">
+<em class="property">property </em><code class="sig-name descname">maxargs</code><a class="headerlink" href="#mozbuild.configure.options.Option.maxargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.Option.minargs">
+<em class="property">property </em><code class="sig-name descname">minargs</code><a class="headerlink" href="#mozbuild.configure.options.Option.minargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#mozbuild.configure.options.Option.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.nargs">
+<code class="sig-name descname">nargs</code><a class="headerlink" href="#mozbuild.configure.options.Option.nargs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.Option.option">
+<em class="property">property </em><code class="sig-name descname">option</code><a class="headerlink" href="#mozbuild.configure.options.Option.option" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.possible_origins">
+<code class="sig-name descname">possible_origins</code><a class="headerlink" href="#mozbuild.configure.options.Option.possible_origins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.options.Option.prefix">
+<code class="sig-name descname">prefix</code><a class="headerlink" href="#mozbuild.configure.options.Option.prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.Option.split_option">
+<em class="property">static </em><code class="sig-name descname">split_option</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.Option.split_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split a flag or variable into a prefix, a name and values</p>
+<p>Variables come in the form NAME=values (no prefix).
+Flags come in the form –name=values or –prefix-name=values
+where prefix is one of ‘with’, ‘without’, ‘enable’ or ‘disable’.
+The ‘=values’ part is optional. Values are separated with commas.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.options.OptionValue">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">OptionValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">values</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">'unknown'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.OptionValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<p>Represents the value of a configure option.</p>
+<p>This class is not meant to be used directly. Use its subclasses instead.</p>
+<p>The <cite>origin</cite> attribute holds where the option comes from (e.g. environment,
+command line, or default)</p>
+<dl class="py method">
+<dt id="mozbuild.configure.options.OptionValue.format">
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.OptionValue.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.options.OptionValue.from_">
+<em class="property">static </em><code class="sig-name descname">from_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.OptionValue.from_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.options.PositiveOptionValue">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">PositiveOptionValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">values</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="n">origin</span><span class="o">=</span><span class="default_value">'unknown'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.PositiveOptionValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.options.OptionValue" title="mozbuild.configure.options.OptionValue"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.options.OptionValue</span></code></a></p>
+<p>Represents the value for a positive option (–enable/–with/–foo)
+in the form of a tuple for when values are given to the option (in the form
+–option=value[,value2…].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.options.istupleofstrings">
+<code class="sig-prename descclassname">mozbuild.configure.options.</code><code class="sig-name descname">istupleofstrings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.options.istupleofstrings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure.util">
+<span id="mozbuild-configure-util-module"></span><h2>mozbuild.configure.util module<a class="headerlink" href="#module-mozbuild.configure.util" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.util.</code><code class="sig-name descname">ConfigureOutputHandler</code><span class="sig-paren">(</span><em class="sig-param">stdout=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em class="sig-param">stderr=&lt;_io.TextIOWrapper name='&lt;stderr&gt;' mode='w' encoding='utf-8'&gt;</em>, <em class="sig-param">maxlen=20</em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></p>
+<p>A logging handler class that sends info messages to stdout and other
+messages to stderr.</p>
+<p>Messages sent to stdout are not formatted with the attached Formatter.
+Additionally, if they end with ‘… ‘, no newline character is printed,
+making the next message printed follow the ‘… ‘.</p>
+<p>Only messages above log level INFO (included) are logged.</p>
+<p>Messages below that level can be kept until an ERROR message is received,
+at which point the last <cite>maxlen</cite> accumulated messages below INFO are
+printed out. This feature is only enabled under the <cite>queue_debug</cite> context
+manager.</p>
+<dl class="py attribute">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.INTERRUPTED">
+<code class="sig-name descname">INTERRUPTED</code><em class="property"> = 2</em><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.INTERRUPTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.KEEP">
+<code class="sig-name descname">KEEP</code><em class="property"> = 1</em><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.KEEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.PRINT">
+<code class="sig-name descname">PRINT</code><em class="property"> = 2</em><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.PRINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.THROW">
+<code class="sig-name descname">THROW</code><em class="property"> = 0</em><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.THROW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.WAITING">
+<code class="sig-name descname">WAITING</code><em class="property"> = 1</em><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.WAITING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.emit">
+<code class="sig-name descname">emit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever it takes to actually log the specified logging record.</p>
+<p>This version is intended to be implemented by subclasses and so
+raises a NotImplementedError.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.util.ConfigureOutputHandler.queue_debug">
+<code class="sig-name descname">queue_debug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.ConfigureOutputHandler.queue_debug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.util.LineIO">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.util.</code><code class="sig-name descname">LineIO</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">callback</span></em>, <em class="sig-param"><span class="n">errors</span><span class="o">=</span><span class="default_value">'strict'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.LineIO" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>File-like class that sends each line of the written data to a callback
+(without carriage returns).</p>
+<dl class="py method">
+<dt id="mozbuild.configure.util.LineIO.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.LineIO.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.util.LineIO.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">buf</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.LineIO.write" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.util.Version">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.util.</code><code class="sig-name descname">Version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.Version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">distutils.version.LooseVersion</span></code></p>
+<p>A simple subclass of distutils.version.LooseVersion.
+Adds attributes for <cite>major</cite>, <cite>minor</cite>, <cite>patch</cite> for the first three
+version components so users can easily pull out major/minor
+versions, like:</p>
+<p>v = Version(‘1.2b’)
+v.major == 1
+v.minor == 2
+v.patch == 0</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.util.getpreferredencoding">
+<code class="sig-prename descclassname">mozbuild.configure.util.</code><code class="sig-name descname">getpreferredencoding</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.util.getpreferredencoding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.configure">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozbuild.configure" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.configure.CombinedDependsFunction">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">CombinedDependsFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sandbox</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">dependencies</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.DependsFunction" title="mozbuild.configure.DependsFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.DependsFunction</span></code></a></p>
+<dl class="py attribute">
+<dt id="mozbuild.configure.CombinedDependsFunction.dependencies">
+<code class="sig-name descname">dependencies</code><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.CombinedDependsFunction.result">
+<code class="sig-name descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.CombinedDependsFunction.sandbox">
+<code class="sig-name descname">sandbox</code><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction.sandbox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.CombinedDependsFunction.sandboxed">
+<code class="sig-name descname">sandboxed</code><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction.sandboxed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.CombinedDependsFunction.when">
+<code class="sig-name descname">when</code><a class="headerlink" href="#mozbuild.configure.CombinedDependsFunction.when" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozbuild.configure.ConfigureError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">ConfigureError</code><a class="headerlink" href="#mozbuild.configure.ConfigureError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.ConfigureSandbox">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">ConfigureSandbox</code><span class="sig-paren">(</span><em class="sig-param">config, environ=environ({'NVM_INC': '/Users/greg/.nvm/versions/node/v12.18.2/include/node', 'TERM_PROGRAM': 'iTerm.app', 'NVM_CD_FLAGS': '', 'SHELL': '/bin/bash', 'TERM': 'xterm-256color', 'HISTSIZE': '2000', 'MACH_NOTIFY_MINTIME': '0', 'CLICOLOR': '1', 'TMPDIR': '/var/folders/y7/0gx4dtxs223gpzqt_6rqjrmm0000gp/T/', 'TERM_PROGRAM_VERSION': '3.4.0beta10', 'PYTHONHTTPSVERIFY': '0', 'TERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'RUST_SRC_PATH': '/usr/local/Cellar/rust/src/src', 'AMO_JWT_ISSUER': 'user:6210320:609', 'USER': 'greg', 'HISTFILESIZE': '5000000', 'NVM_DIR': '/Users/greg/.nvm', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.MhpYHGEYRY/Listeners', 'CCACHE_COMPRESS': '', '__CF_USER_TEXT_ENCODING': '0x1F6:0x0:0x0', 'PYENV_VIRTUALENV_INIT': '1', 'BASH_SILENCE_DEPRECATION_WARNING': '1', 'npm_package_config_firefox': '/Applications/Nightly.app/Contents/MacOS/firefox-bin', 'LSCOLORS': 'GxFxCxDxBxegedabagaced', 'PATH': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv/bin:/Users/greg/dev/gecko-dev/objdir-frontend/_virtualenvs/docs/bin:/Users/greg/.nvm/versions/node/v12.18.2/bin:/opt/local/bin:/opt/local/sbin:/usr/local/opt/python/libexec/bin:/Users/greg/Library/Python/3.7/bin:/Users/greg/Library/Android/sdk/platform-tools:/Users/greg/Library/Android/sdk/emulator:/Users/greg/scripts/phabricator/arcanist/bin:/Applications/Postgres.app/Contents/Versions/10/bin:/Users/greg/.cargo/bin:/Users/greg/dev/gecko-dev:./node_modules/.bin:/Users/greg/scripts/version-control-tools/git/commands:/Users/greg/scripts/moz-git-tools:/Users/greg/scripts/git-cinnabar:/Users/greg/scripts:/usr/local/Cellar/vim/8.0.1700/bin:/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/greg/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin', 'PWD': '/Users/greg/dev/gecko-dev', 'EDITOR': 'vim', 'LANG': 'en_US.UTF-8', 'ITERM_PROFILE': 'Default', 'XPC_FLAGS': '0x0', 'AMO_JWT_SECRET': 'a48e65236b94e670a740692d420825293819a1b2cf843df0767fb0e9cec02a52', 'XPC_SERVICE_NAME': '0', 'HISTCONTROL': 'ignoredups', 'COLORFGBG': '15;0', 'HOME': '/Users/greg', 'SHLVL': '1', 'PYENV_SHELL': 'bash', 'LC_TERMINAL_VERSION': '3.4.0beta10', 'ITERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'LOGNAME': 'greg', 'PYTHONPATH': '/Users/greg/Library/Python/3.7/lib/python/site-packages:', 'NVM_BIN': '/Users/greg/.nvm/versions/node/v12.18.2/bin', 'DISPLAY': '/private/tmp/com.apple.launchd.qA0kqWowAP/org.macosforge.xquartz:0', 'LC_TERMINAL': 'iTerm2', 'COLORTERM': 'truecolor', 'MACH_VIRTUALENV': '1', 'MACH_MAIN_PID': '48561', 'MACH_STDOUT_ISATTY': '1', 'VIRTUAL_ENV': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv', 'DOCUTILSCONFIG': '/Users/greg/dev/gecko-dev/docs/docutils.conf'}), argv=['./mach', 'doc'], stdout=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;, stderr=&lt;_io.TextIOWrapper name='&lt;stderr&gt;' mode='w' encoding='utf-8'&gt;, logger=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Represents a sandbox for executing Python code for build configuration.
+This is a different kind of sandboxing than the one used for moz.build
+processing.</p>
+<p>The sandbox has 9 primitives:
+- option
+- depends
+- template
+- imports
+- include
+- set_config
+- set_define
+- imply_option
+- only_when</p>
+<p><cite>option</cite>, <cite>include</cite>, <cite>set_config</cite>, <cite>set_define</cite> and <cite>imply_option</cite> are
+functions. <cite>depends</cite>, <cite>template</cite>, and <cite>imports</cite> are decorators. <cite>only_when</cite>
+is a context_manager.</p>
+<p>These primitives are declared as name_impl methods to this class and
+the mapping name -&gt; name_impl is done automatically in __getitem__.</p>
+<p>Additional primitives should be frowned upon to keep the sandbox itself as
+simple as possible. Instead, helpers should be created within the sandbox
+with the existing primitives.</p>
+<p>The sandbox is given, at creation, a dict where the yielded configuration
+will be stored.</p>
+<blockquote>
+<div><p>config = {}
+sandbox = ConfigureSandbox(config)
+sandbox.run(path)
+do_stuff(config)</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt id="mozbuild.configure.ConfigureSandbox.BUILTINS">
+<code class="sig-name descname">BUILTINS</code><em class="property"> = {'AssertionError': &lt;class 'AssertionError'&gt;, 'False': False, 'ImportError': &lt;class 'ImportError'&gt;, 'None': None, 'True': True, '__build_class__': &lt;built-in function __build_class__&gt;, '__import__': &lt;function forbidden_import&gt;, 'all': &lt;built-in function all&gt;, 'any': &lt;built-in function any&gt;, 'bool': &lt;class 'bool'&gt;, 'dict': &lt;class 'dict'&gt;, 'enumerate': &lt;class 'enumerate'&gt;, 'getattr': &lt;built-in function getattr&gt;, 'hasattr': &lt;built-in function hasattr&gt;, 'int': &lt;class 'int'&gt;, 'isinstance': &lt;built-in function isinstance&gt;, 'len': &lt;built-in function len&gt;, 'list': &lt;class 'list'&gt;, 'range': &lt;class 'range'&gt;, 'set': &lt;class 'set'&gt;, 'str': &lt;class 'str'&gt;, 'tuple': &lt;class 'tuple'&gt;, 'zip': &lt;class 'zip'&gt;}</em><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.BUILTINS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.ConfigureSandbox.OS">
+<code class="sig-name descname">OS</code><em class="property"> = &lt;ReadOnlyNamespace {'path': &lt;ReadOnlyNamespace {'abspath': &lt;function abspath&gt;, 'basename': &lt;function basename&gt;, 'dirname': &lt;function dirname&gt;, 'isabs': &lt;function isabs&gt;, 'join': &lt;function join&gt;, 'normcase': &lt;function normcase&gt;, 'normpath': &lt;function normpath&gt;, 'realpath': &lt;function realpath&gt;, 'relpath': &lt;function relpath&gt;}&gt;}&gt;</em><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.OS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.ConfigureSandbox.RE_MODULE">
+<code class="sig-name descname">RE_MODULE</code><em class="property"> = re.compile('^[a-zA-Z0-9_\\.]+$')</em><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.RE_MODULE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.depends_impl">
+<code class="sig-name descname">depends_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.depends_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of &#64;depends()
+This function is a decorator. It returns a function that subsequently
+takes a function and returns a dummy function. The dummy function
+identifies the actual function for the sandbox, while preventing
+further function calls from within the sandbox.</p>
+<p>&#64;depends() takes a variable number of option strings or dummy function
+references. The decorated function is called as soon as the decorator
+is called, and the arguments it receives are the OptionValue or
+function results corresponding to each of the arguments to &#64;depends.
+As an exception, when a HelpFormatter is attached, only functions that
+have ‘–help’ in their &#64;depends argument list are called.</p>
+<p>The decorated function is altered to use a different global namespace
+for its execution. This different global namespace exposes a limited
+set of functions from os.path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.imply_option_impl">
+<code class="sig-name descname">imply_option_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">option</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">reason</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.imply_option_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of imply_option().
+Injects additional options as if they had been passed on the command
+line. The <cite>option</cite> argument is a string as in option()’s <cite>name</cite> or
+<cite>env</cite>. The option must be declared after <cite>imply_option</cite> references it.
+The <cite>value</cite> argument indicates the value to pass to the option.
+It can be:
+- True. In this case <cite>imply_option</cite> injects the positive option</p>
+<blockquote>
+<div><dl class="simple">
+<dt>(–enable-foo/–with-foo).</dt><dd><p>imply_option(‘–enable-foo’, True)
+imply_option(‘–disable-foo’, True)</p>
+</dd>
+</dl>
+<p>are both equivalent to <cite>–enable-foo</cite> on the command line.</p>
+</div></blockquote>
+<ul>
+<li><p>False. In this case <cite>imply_option</cite> injects the negative option</p>
+<dl class="simple">
+<dt>(–disable-foo/–without-foo).</dt><dd><p>imply_option(‘–enable-foo’, False)
+imply_option(‘–disable-foo’, False)</p>
+</dd>
+</dl>
+<p>are both equivalent to <cite>–disable-foo</cite> on the command line.</p>
+</li>
+<li><dl class="simple">
+<dt>None. In this case <cite>imply_option</cite> does nothing.</dt><dd><p>imply_option(‘–enable-foo’, None)
+imply_option(‘–disable-foo’, None)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>are both equivalent to not passing any flag on the command line.</p>
+<ul>
+<li><p>a string or a tuple. In this case <cite>imply_option</cite> injects the positive
+option with the given value(s).</p>
+<blockquote>
+<div><p>imply_option(‘–enable-foo’, ‘a’)
+imply_option(‘–disable-foo’, ‘a’)</p>
+</div></blockquote>
+<dl class="simple">
+<dt>are both equivalent to <cite>–enable-foo=a</cite> on the command line.</dt><dd><p>imply_option(‘–enable-foo’, (‘a’, ‘b’))
+imply_option(‘–disable-foo’, (‘a’, ‘b’))</p>
+</dd>
+</dl>
+<p>are both equivalent to <cite>–enable-foo=a,b</cite> on the command line.</p>
+</li>
+</ul>
+<p>Because imply_option(‘–disable-foo’, …) can be misleading, it is
+recommended to use the positive form (‘–enable’ or ‘–with’) for
+<cite>option</cite>.</p>
+<p>The <cite>value</cite> argument can also be (and usually is) a reference to a
+&#64;depends function, in which case the result of that function will be
+used as per the descripted mapping above.</p>
+<p>The <cite>reason</cite> argument indicates what caused the option to be implied.
+It is necessary when it cannot be inferred from the <cite>value</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.imports_impl">
+<code class="sig-name descname">imports_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">_import</span></em>, <em class="sig-param"><span class="n">_from</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">_as</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.imports_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of &#64;imports.
+This decorator imports the given _import from the given _from module
+optionally under a different _as name.
+The options correspond to the various forms for the import builtin.</p>
+<blockquote>
+<div><p>&#64;imports(‘sys’)
+&#64;imports(_from=’mozpack’, _import=’path’, _as=’mozpath’)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.include_file">
+<code class="sig-name descname">include_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.include_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Include one file in the sandbox. Users of this class probably want
+to use <cite>run</cite> instead.</p>
+<p>Note: this will execute all template invocations, as well as &#64;depends
+functions that depend on ‘–help’, but nothing else.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.include_impl">
+<code class="sig-name descname">include_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">what</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.include_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of include().
+Allows to include external files for execution in the sandbox.
+It is possible to use a &#64;depends function as argument, in which case
+the result of the function is the file name to include. This latter
+feature is only really meant for –enable-application/–enable-project.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.only_when_impl">
+<code class="sig-name descname">only_when_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">when</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.only_when_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of only_when()</p>
+<p><cite>only_when</cite> is a context manager that essentially makes calls to
+other sandbox functions within the context block ignored.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.option_impl">
+<code class="sig-name descname">option_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.option_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of option()
+This function creates and returns an Option() object, passing it the
+resolved arguments (uses the result of functions when functions are
+passed). In most cases, the result of this function is not expected to
+be used.
+Command line argument/environment variable parsing for this Option is
+handled here.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.run">
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the given file within the sandbox, as well as everything
+pending from any other included file, and ensure the overall
+consistency of the executed script(s).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.set_config_impl">
+<code class="sig-name descname">set_config_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.set_config_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of set_config().
+Set the configuration items with the given name to the given value.
+Both <cite>name</cite> and <cite>value</cite> can be references to &#64;depends functions,
+in which case the result from these functions is used. If the result
+of either function is None, the configuration item is not set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.set_define_impl">
+<code class="sig-name descname">set_define_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.set_define_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of set_define().
+Set the define with the given name to the given value. Both <cite>name</cite> and
+<cite>value</cite> can be references to &#64;depends functions, in which case the
+result from these functions is used. If the result of either function
+is None, the define is not set. If the result is False, the define is
+explicitly undefined (-U).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.template_impl">
+<code class="sig-name descname">template_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.template_impl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of &#64;template.
+This function is a decorator. Template functions are called
+immediately. They are altered so that their global namespace exposes
+a limited set of functions from os.path, as well as <cite>depends</cite> and
+<cite>option</cite>.
+Templates allow to simplify repetitive constructs, or to implement
+helper decorators and somesuch.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.ConfigureSandbox.wraps">
+<code class="sig-name descname">wraps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.ConfigureSandbox.wraps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.DependsFunction">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">DependsFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sandbox</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">dependencies</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.DependsFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.configure.DependsFunction.and_impl">
+<em class="property">static </em><code class="sig-name descname">and_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.DependsFunction.and_impl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.DependsFunction.dependencies">
+<code class="sig-name descname">dependencies</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.DependsFunction.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.DependsFunction.or_impl">
+<em class="property">static </em><code class="sig-name descname">or_impl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.DependsFunction.or_impl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.DependsFunction.result">
+<code class="sig-name descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.DependsFunction.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.DependsFunction.sandbox">
+<code class="sig-name descname">sandbox</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.sandbox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.DependsFunction.sandboxed">
+<code class="sig-name descname">sandboxed</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.sandboxed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.configure.DependsFunction.sandboxed_dependencies">
+<em class="property">property </em><code class="sig-name descname">sandboxed_dependencies</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.sandboxed_dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.DependsFunction.when">
+<code class="sig-name descname">when</code><a class="headerlink" href="#mozbuild.configure.DependsFunction.when" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.SandboxDependsFunction">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">SandboxDependsFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">unsandboxed</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.SandboxDependsFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Sandbox-visible representation of &#64;depends functions.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.SandboxedGlobal">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">SandboxedGlobal</code><a class="headerlink" href="#mozbuild.configure.SandboxedGlobal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Identifiable dict type for use as function global</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.configure.TrivialDependsFunction">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">TrivialDependsFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sandbox</span></em>, <em class="sig-param"><span class="n">func</span></em>, <em class="sig-param"><span class="n">dependencies</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.TrivialDependsFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozbuild.configure.DependsFunction" title="mozbuild.configure.DependsFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.configure.DependsFunction</span></code></a></p>
+<p>Like a DependsFunction, but the linter won’t expect it to have a
+dependency on –help ever.</p>
+<dl class="py attribute">
+<dt id="mozbuild.configure.TrivialDependsFunction.dependencies">
+<code class="sig-name descname">dependencies</code><a class="headerlink" href="#mozbuild.configure.TrivialDependsFunction.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.TrivialDependsFunction.sandbox">
+<code class="sig-name descname">sandbox</code><a class="headerlink" href="#mozbuild.configure.TrivialDependsFunction.sandbox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.TrivialDependsFunction.sandboxed">
+<code class="sig-name descname">sandboxed</code><a class="headerlink" href="#mozbuild.configure.TrivialDependsFunction.sandboxed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.configure.TrivialDependsFunction.when">
+<code class="sig-name descname">when</code><a class="headerlink" href="#mozbuild.configure.TrivialDependsFunction.when" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.configure.forbidden_import">
+<code class="sig-prename descclassname">mozbuild.configure.</code><code class="sig-name descname">forbidden_import</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.configure.forbidden_import" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

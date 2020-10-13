@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozpower — Power-usage testing &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mozprofile — Create and modify Mozilla application profiles" href="mozprofile.html" />
+    <link rel="prev" title="mozinstall — Install and uninstall Gecko-based applications" href="mozinstall.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">mozbase</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manifestparser.html">Managing lists of tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettinginfo.html">Getting information on the system under test</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="setuprunning.html">Set up and running</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mozfile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozfile</span></code> — File utilities for use in Mozilla testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozgeckoprofiler.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozgeckoprofiler.rst</span></code> — Gecko Profiler utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinstall.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozinstall</span></code> — Install and uninstall Gecko-based applications</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozpower</span></code> — Power-usage testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-usage">Basic Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozpower-interface">MozPower Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mozprofile.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozprofile</span></code> — Create and modify Mozilla application profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozprocess.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozprocess</span></code> — Launch and manage processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozrunner.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozrunner</span></code> — Manage remote and local gecko processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozcrash.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozcrash</span></code> — Print stack traces from minidumps left behind by crashed processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozdebug.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozdebug</span></code> — Configure and launch compatible debuggers.</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="servingcontent.html">Handling content for the browser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loggingreporting.html">Logging and reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devicemanagement.html">Device management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">mozbase</a> &raquo;</li>
+        
+          <li><a href="setuprunning.html">Set up and running</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozpower</span></code> — Power-usage testing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mozbase/mozpower.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozpower-power-usage-testing">
+<h1><a class="reference internal" href="#module-mozpower" title="mozpower"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozpower</span></code></a> — Power-usage testing<a class="headerlink" href="#mozpower-power-usage-testing" title="Permalink to this headline">¶</a></h1>
+<p>Mozpower provides an interface through which power usage measurements
+can be done on any OS and CPU combination (auto-detected) that has
+been implemented within the module. It provides 2 methods to start
+and stop the measurement gathering as well as methods to get the
+result that can also be formatted into a perfherder data blob.</p>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>Although multiple classes exist within the mozpower module,
+the only one that should be used is MozPower which is accessible
+from the top-level of the module. It handles which subclasses
+should be used depending on the detected OS and CPU combination.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mozpower</span> <span class="kn">import</span> <span class="n">MozPower</span>
+
+<span class="n">mp</span> <span class="o">=</span> <span class="n">MozPower</span><span class="p">(</span>
+    <span class="n">ipg_measure_duration</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+    <span class="n">sampling_rate</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">output_file_path</span><span class="o">=</span><span class="s1">&#39;tempdir/dataprefix&#39;</span>
+<span class="p">)</span>
+<span class="n">mp</span><span class="o">.</span><span class="n">initialize_power_measurements</span><span class="p">()</span>
+
+<span class="c1"># Run test TEST_NAME</span>
+
+<span class="n">mp</span><span class="o">.</span><span class="n">finalize_power_measurements</span><span class="p">(</span>
+    <span class="n">test_name</span><span class="o">=</span><span class="n">TEST_NAME</span><span class="p">,</span>
+    <span class="n">output_dir_path</span><span class="o">=</span><span class="n">env</span><span class="p">[</span><span class="s1">&#39;MOZ_UPLOAD_DIR&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Get complete PERFHERDER_DATA</span>
+<span class="n">perfherder_data</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_full_perfherder_data</span><span class="p">(</span><span class="s1">&#39;raptor&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All the possible known errors that can occur are also provided
+at the top-level of the module.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mozpower</span> <span class="kn">import</span> <span class="n">MozPower</span><span class="p">,</span> <span class="n">IPGExecutableMissingError</span><span class="p">,</span> <span class="n">OsCpuComboMissingError</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">mp</span> <span class="o">=</span> <span class="n">MozPower</span><span class="p">(</span><span class="n">ipg_measure_duration</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">sampling_rate</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">IPGExecutableMissingError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="k">except</span> <span class="n">OsCpuComboMissingError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<span class="target" id="module-mozpower"></span></div>
+<div class="section" id="mozpower-interface">
+<span id="mozpower"></span><h2>MozPower Interface<a class="headerlink" href="#mozpower-interface" title="Permalink to this headline">¶</a></h2>
+<p>The following class provides a basic interface to interact with the
+power measurement tools that have been implemented. The tool used
+to measure power depends on the OS and CPU combination, i.e. Intel-based
+MacOS machines would use Intel Power Gadget, while ARM64-based Windows
+machines would use the native Windows tool powercfg.</p>
+<div class="section" id="id1">
+<h3>MozPower<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="mozpower.MozPower">
+<em class="property">class </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">MozPower</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">android</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">logger_name</span><span class="o">=</span><span class="default_value">'mozpower'</span></em>, <em class="sig-param"><span class="n">output_file_path</span><span class="o">=</span><span class="default_value">'power-testing'</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpower.MozPower" title="Permalink to this definition">¶</a></dt>
+<dd><p>MozPower provides an OS and CPU independent interface
+for initializing, finalizing, and gathering power measurement
+data from OS+CPU combo-dependent measurement classes. The combo
+is detected automatically, and the correct class is instantiated
+based on the OSCPU_COMBOS list. If it cannot be found, an
+OsCpuComboMissingError will be raised.</p>
+<p>If a newly added power measurer does not have the required functions
+<cite>initialize_power_measurements</cite>, <cite>finalize_power_measurements</cite>,
+or <cite>get_perfherder_data</cite>, then a NotImplementedError will be
+raised.</p>
+<p>Android power measurements are currently not supported by this
+module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mozpower</span> <span class="kn">import</span> <span class="n">MozPower</span>
+
+<span class="n">mp</span> <span class="o">=</span> <span class="n">MozPower</span><span class="p">(</span><span class="n">output_file_path</span><span class="o">=</span><span class="s1">&#39;dir/power-testing&#39;</span><span class="p">)</span>
+
+<span class="n">mp</span><span class="o">.</span><span class="n">initialize_power_measurements</span><span class="p">()</span>
+<span class="c1"># Run test...</span>
+<span class="n">mp</span><span class="o">.</span><span class="n">finalize_power_measurements</span><span class="p">(</span><span class="n">test_name</span><span class="o">=</span><span class="s1">&#39;raptor-test-name&#39;</span><span class="p">)</span>
+
+<span class="n">perfherder_data</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_perfherder_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="section" id="measurement-methods">
+<h4>Measurement methods<a class="headerlink" href="#measurement-methods" title="Permalink to this headline">¶</a></h4>
+<dl class="py method">
+<dt id="mozpower.MozPower.initialize_power_measurements">
+<code class="sig-prename descclassname">MozPower.</code><code class="sig-name descname">initialize_power_measurements</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpower.MozPower.initialize_power_measurements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the power measurements by calling the power measurer’s
+<cite>initialize_power_measurements</cite> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments for power measurer initialization
+function if they are needed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpower.MozPower.finalize_power_measurements">
+<code class="sig-prename descclassname">MozPower.</code><code class="sig-name descname">finalize_power_measurements</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpower.MozPower.finalize_power_measurements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the power measurements by calling the power measurer’s
+<cite>finalize_power_measurements</cite> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments for power measurer finalization
+function if they are needed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="informational-methods">
+<h4>Informational methods<a class="headerlink" href="#informational-methods" title="Permalink to this headline">¶</a></h4>
+<dl class="py method">
+<dt id="mozpower.MozPower.get_perfherder_data">
+<code class="sig-prename descclassname">MozPower.</code><code class="sig-name descname">get_perfherder_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpower.MozPower.get_perfherder_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the partial perfherder data output produced by the measurer.
+For a complete perfherder data blob, see get_full_perfherder_data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpower.MozPower.get_full_perfherder_data">
+<code class="sig-prename descclassname">MozPower.</code><code class="sig-name descname">get_full_perfherder_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">framework</span></em>, <em class="sig-param"><span class="n">lowerisbetter</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">alertthreshold</span><span class="o">=</span><span class="default_value">2.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpower.MozPower.get_full_perfherder_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of complete perfherder data blobs compiled from the
+partial perfherder data blob returned from the measurer. Each key entry
+(measurement type) in the partial perfherder data is parsed into its
+own suite within a single perfherder data blob.</p>
+<p>For example, a partial perfherder data blob such as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;utilization&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">&lt;</span><span class="n">perfherder_data</span><span class="o">&gt;</span><span class="p">},</span>
+    <span class="s1">&#39;power-usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="o">&lt;</span><span class="n">perfherder_data</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>would produce two suites within a single perfherder data blobs -
+one for utilization, and one for power-usage.</p>
+<p>Note that the ‘values’ entry must exist, otherwise the measurement
+type is skipped. Furthermore, if ‘name’, ‘unit’, or ‘type’ is missing
+we default to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;mozpower&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;mWh&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;power&#39;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Subtests produced for each sub-suite (measurement type), have the naming
+pattern: &lt;measurement_type&gt;-&lt;measured_name&gt;</p>
+<p>Utilization of cpu would have the following name: ‘utilization-cpu’
+Power-usage for cpu has the following name: ‘power-usage-cpu’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>framework</strong> (<em>str</em>) – name of the framework being tested, i.e. ‘raptor’.</p></li>
+<li><p><strong>lowerisbetter</strong> (<em>bool</em>) – if set to true, low values are better than high ones.</p></li>
+<li><p><strong>alertthreshold</strong> (<em>float</em>) – determines the crossing threshold at
+which an alert is generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="ipgemptyfileerror">
+<h3>IPGEmptyFileError<a class="headerlink" href="#ipgemptyfileerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.IPGEmptyFileError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">IPGEmptyFileError</code><a class="headerlink" href="#mozpower.IPGEmptyFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPGEmptyFileError is raised when a file path is given
+to _clean_ipg_file and it exists but it is empty (contains
+no results to clean).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ipgexecutablemissingerror">
+<h3>IPGExecutableMissingError<a class="headerlink" href="#ipgexecutablemissingerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.IPGExecutableMissingError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">IPGExecutableMissingError</code><a class="headerlink" href="#mozpower.IPGExecutableMissingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPGExecutableMissingError is raised when we cannot find
+the executable for Intel Power Gadget at the expected location.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ipgmissingoutputfileerror">
+<h3>IPGMissingOutputFileError<a class="headerlink" href="#ipgmissingoutputfileerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.IPGMissingOutputFileError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">IPGMissingOutputFileError</code><a class="headerlink" href="#mozpower.IPGMissingOutputFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPGMissingOutputFile is raised when a file path is given
+to _clean_ipg_file but it does not exist or cannot be found
+at the expected location.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ipgtimeouterror">
+<h3>IPGTimeoutError<a class="headerlink" href="#ipgtimeouterror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.IPGTimeoutError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">IPGTimeoutError</code><a class="headerlink" href="#mozpower.IPGTimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPGTimeoutError is raised when we cannot stop Intel Power
+Gadget from running. One possble cause of this is not calling
+<cite>stop_ipg</cite> through a <cite>finalize_power_measurements</cite> call. The
+other possiblity is that IPG failed to stop.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="ipgunknownvaluetypeerror">
+<h3>IPGUnknownValueTypeError<a class="headerlink" href="#ipgunknownvaluetypeerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.IPGUnknownValueTypeError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">IPGUnknownValueTypeError</code><a class="headerlink" href="#mozpower.IPGUnknownValueTypeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>IPGUnknownValueTypeError is raised when a value within a
+given results file (that was cleaned) cannot be converted to
+its column’s expected data type.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="missingprocessorinfoerror">
+<h3>MissingProcessorInfoError<a class="headerlink" href="#missingprocessorinfoerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.MissingProcessorInfoError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">MissingProcessorInfoError</code><a class="headerlink" href="#mozpower.MissingProcessorInfoError" title="Permalink to this definition">¶</a></dt>
+<dd><p>MissingProcessorInfoError is raised when we cannot find
+the processor information on the machine. This is raised when
+the file is missing (mentioned in the error message) or if
+an exception occurs when we try to gather the information
+from the file.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="oscpucombomissingerror">
+<h3>OsCpuComboMissingError<a class="headerlink" href="#oscpucombomissingerror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.OsCpuComboMissingError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">OsCpuComboMissingError</code><a class="headerlink" href="#mozpower.OsCpuComboMissingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>OsCpuComboMissingError is raised when we cannot find
+a class responsible for the OS, and CPU combination that
+was detected.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="platformunsupportederror">
+<h3>PlatformUnsupportedError<a class="headerlink" href="#platformunsupportederror" title="Permalink to this headline">¶</a></h3>
+<dl class="py exception">
+<dt id="mozpower.PlatformUnsupportedError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozpower.</code><code class="sig-name descname">PlatformUnsupportedError</code><a class="headerlink" href="#mozpower.PlatformUnsupportedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>PlatformUnsupportedError is raised when we cannot find
+an expected IPG path for the OS being tested.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mozprofile.html" class="btn btn-neutral float-right" title="mozprofile — Create and modify Mozilla application profiles" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mozinstall.html" class="btn btn-neutral float-left" title="mozinstall — Install and uninstall Gecko-based applications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

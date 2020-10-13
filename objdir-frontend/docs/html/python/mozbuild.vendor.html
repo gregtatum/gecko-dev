@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozbuild.vendor package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozbuild.vendor package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozbuild.vendor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozbuild-vendor-package">
+<h1>mozbuild.vendor package<a class="headerlink" href="#mozbuild-vendor-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozbuild.vendor.host_github">
+<span id="mozbuild-vendor-host-github-module"></span><h2>mozbuild.vendor.host_github module<a class="headerlink" href="#module-mozbuild.vendor.host_github" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.host_github.GitHubHost">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.host_github.</code><code class="sig-name descname">GitHubHost</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manifest</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_github.GitHubHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.vendor.host_github.GitHubHost.upstream_commit">
+<code class="sig-name descname">upstream_commit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_github.GitHubHost.upstream_commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the github api for a git commit id and timestamp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.host_github.GitHubHost.upstream_snapshot">
+<code class="sig-name descname">upstream_snapshot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_github.GitHubHost.upstream_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.host_gitlab">
+<span id="mozbuild-vendor-host-gitlab-module"></span><h2>mozbuild.vendor.host_gitlab module<a class="headerlink" href="#module-mozbuild.vendor.host_gitlab" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.host_gitlab.GitLabHost">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.host_gitlab.</code><code class="sig-name descname">GitLabHost</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manifest</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_gitlab.GitLabHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.vendor.host_gitlab.GitLabHost.upstream_commit">
+<code class="sig-name descname">upstream_commit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_gitlab.GitLabHost.upstream_commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the gitlab api for a git commit id and timestamp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.host_gitlab.GitLabHost.upstream_snapshot">
+<code class="sig-name descname">upstream_snapshot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_gitlab.GitLabHost.upstream_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.host_googlesource">
+<span id="mozbuild-vendor-host-googlesource-module"></span><h2>mozbuild.vendor.host_googlesource module<a class="headerlink" href="#module-mozbuild.vendor.host_googlesource" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.host_googlesource.GoogleSourceHost">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.host_googlesource.</code><code class="sig-name descname">GoogleSourceHost</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manifest</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_googlesource.GoogleSourceHost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.vendor.host_googlesource.GoogleSourceHost.upstream_commit">
+<code class="sig-name descname">upstream_commit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_googlesource.GoogleSourceHost.upstream_commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query for a git commit and timestamp.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.host_googlesource.GoogleSourceHost.upstream_snapshot">
+<code class="sig-name descname">upstream_snapshot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.host_googlesource.GoogleSourceHost.upstream_snapshot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.mach_commands">
+<span id="mozbuild-vendor-mach-commands-module"></span><h2>mozbuild.vendor.mach_commands module<a class="headerlink" href="#module-mozbuild.vendor.mach_commands" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.mach_commands.Vendor">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.mach_commands.</code><code class="sig-name descname">Vendor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">virtualenv_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">metrics</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.mach_commands.Vendor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mozbuild.html#mozbuild.base.MachCommandBase" title="mozbuild.base.MachCommandBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.base.MachCommandBase</span></code></a></p>
+<p>Vendor third-party dependencies into the source repository.</p>
+<dl class="py method">
+<dt id="mozbuild.vendor.mach_commands.Vendor.check_modified_files">
+<code class="sig-name descname">check_modified_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.mach_commands.Vendor.check_modified_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that there aren’t any uncommitted changes to files
+in the working copy, since we’re going to change some state
+on the user.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.mach_commands.Vendor.vendor">
+<code class="sig-name descname">vendor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">library</span></em>, <em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">ignore_modified</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">check_for_update</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verify</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.mach_commands.Vendor.vendor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vendor third-party dependencies into the source repository.</p>
+<p>Vendoring rust and python can be done with ./mach vendor [rust/python].
+Vendoring other libraries can be done with ./mach vendor [arguments] path/to/file.yaml</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.mach_commands.Vendor.vendor_python">
+<code class="sig-name descname">vendor_python</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.mach_commands.Vendor.vendor_python" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.mach_commands.Vendor.vendor_rust">
+<code class="sig-name descname">vendor_rust</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.mach_commands.Vendor.vendor_rust" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.moz_yaml">
+<span id="mozbuild-vendor-moz-yaml-module"></span><h2>mozbuild.vendor.moz_yaml module<a class="headerlink" href="#module-mozbuild.vendor.moz_yaml" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.moz_yaml.License">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">License</code><a class="headerlink" href="#mozbuild.vendor.moz_yaml.License" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Voluptuous validator which verifies the license(s) are valid as per our
+allow list.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozbuild.vendor.moz_yaml.MozYamlVerifyError">
+<em class="property">exception </em><code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">MozYamlVerifyError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.moz_yaml.MozYamlVerifyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.vendor.moz_yaml.RE_FIELD">
+<code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">RE_FIELD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">pos</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endpos</span><span class="o">=</span><span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.moz_yaml.RE_FIELD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan through string looking for a match, and return a corresponding match object instance.</p>
+<p>Return None if no position in the string matches.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.vendor.moz_yaml.RE_SECTION">
+<code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">RE_SECTION</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">string</span></em>, <em class="sig-param"><span class="n">pos</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endpos</span><span class="o">=</span><span class="default_value">9223372036854775807</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.moz_yaml.RE_SECTION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scan through string looking for a match, and return a corresponding match object instance.</p>
+<p>Return None if no position in the string matches.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozbuild.vendor.moz_yaml.UpdateActions">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">UpdateActions</code><a class="headerlink" href="#mozbuild.vendor.moz_yaml.UpdateActions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Voluptuous validator which verifies the update actions(s) are valid.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="mozbuild.vendor.moz_yaml.VALID_SOURCE_HOSTS">
+<code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">VALID_SOURCE_HOSTS</code><em class="property"> = ['gitlab', 'googlesource', 'github']</em><a class="headerlink" href="#mozbuild.vendor.moz_yaml.VALID_SOURCE_HOSTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>—
+# Third-Party Library Template
+# All fields are mandatory unless otherwise noted</p>
+<p># Version of this schema
+schema: 1</p>
+<dl class="simple">
+<dt>bugzilla:</dt><dd><p># Bugzilla product and component for this directory and subdirectories
+product: product name
+component: component name</p>
+</dd>
+</dl>
+<p># Document the source of externally hosted code
+origin:</p>
+<blockquote>
+<div><p># Short name of the package/library
+name: name of the package</p>
+<p>description: short (one line) description</p>
+<p># Full URL for the package’s homepage/etc
+# Usually different from repository url
+url: package’s homepage url</p>
+<p># Human-readable identifier for this version/release
+# Generally “version NNN”, “tag SSS”, “bookmark SSS”
+release: identifier</p>
+<p># Revision to pull in
+# Must be a long or short commit SHA (long preferred)
+revision: sha</p>
+<p># The package’s license, where possible using the mnemonic from
+# <a class="reference external" href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>
+# Multiple licenses can be specified (as a YAML list)
+# A “LICENSE” file must exist containing the full license text
+license: MPL-2.0</p>
+<p># If the package’s license is specified in a particular file,
+# this is the name of the file.
+# optional
+license-file: COPYING</p>
+</div></blockquote>
+<p># Configuration for the automated vendoring system.
+# optional
+vendoring:</p>
+<blockquote>
+<div><p># Repository URL to vendor from
+# eg. <a class="reference external" href="https://github.com/kinetiknz/nestegg.git">https://github.com/kinetiknz/nestegg.git</a>
+# Any repository host can be specified here, however initially we’ll only
+# support automated vendoring from selected sources initially.
+url: source url (generally repository clone url)</p>
+<p># Type of hosting for the upstream repository
+# Valid values are ‘gitlab’, ‘github’
+source-hosting: gitlab</p>
+<p># Base directory of the location where the source files will live in-tree.
+# If omitted, will default to the location the moz.yaml file is in.
+vendor-directory: third_party/directory</p>
+<p># List of patch files to apply after vendoring. Applied in the order
+# specified, and alphabetically if globbing is used. Patches must apply
+# cleanly before changes are pushed
+# All patch files are implicitly added to the keep file list.
+# optional
+patches:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>file</p></li>
+<li><p>path/to/file</p></li>
+<li><p>path/<a href="#id1"><span class="problematic" id="id2">*</span></a>.patch</p></li>
+</ul>
+</div></blockquote>
+<p># List of files that are not deleted while vendoring
+# Implicitly contains “moz.yaml”, any files referenced as patches
+# optional
+keep:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>file</p></li>
+<li><p>path/to/file</p></li>
+<li><p>another/path</p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">*</span></a>.mozilla</p></li>
+</ul>
+</div></blockquote>
+<p># Files/paths that will not be vendored from source repository
+# Implicitly contains “.git”, and “.gitignore”
+# optional
+exclude:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>file</p></li>
+<li><p>path/to/file</p></li>
+<li><p>another/path</p></li>
+<li><p>docs</p></li>
+<li><p>src/<a href="#id5"><span class="problematic" id="id6">*</span></a>.test</p></li>
+</ul>
+</div></blockquote>
+<p># Files/paths that will always be vendored, even if they would
+# otherwise be excluded by “exclude”.
+# optional
+include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>file</p></li>
+<li><p>path/to/file</p></li>
+<li><p>another/path</p></li>
+<li><p>docs/LICENSE.*</p></li>
+</ul>
+</div></blockquote>
+<p># If neither “exclude” or “include” are set, all files will be vendored
+# Files/paths in “include” will always be vendored, even if excluded
+# eg. excluding “docs/” then including “docs/LICENSE” will vendor just the
+#     LICENSE file from the docs directory</p>
+<p># All three file/path parameters (“keep”, “exclude”, and “include”) support
+# filenames, directory names, and globs/wildcards.</p>
+<p># Actions to take after updating. Applied in order.
+# The action subfield is required. It must be one of:
+#   - copy-file
+#   - replace-in-file
+#   - delete-path
+#   - run-script
+# Unless otherwise noted, all subfields of action are required.
+#
+# If the action is copy-file:
+#   from is the source file
+#   to is the destination
+#
+# If the action is replace-in-file:
+#   pattern is what in the file to search for. It is an exact strng match.
+#   with is the string to replace it with. Accepts the special keyword
+#     ‘{revision}’ for the commit we are updating to.
+#   File is the file to replace it in.
+#
+# If the action is delete-path
+#   path is the file or directory to recursively delete
+#
+# If the action is run-script:
+#   script is the script to run
+#   cwd is the directory the script should run with as its cwd
+#
+# Unless specified otherwise, all files/directories are relative to the
+#     vendor-directory. If the vendor-directory is different from the
+#     directory of the yaml file, the keyword ‘{yaml_dir}’ may be used
+#     to make the path relative to that directory.
+# ‘run-script’ supports the addictional keyword {cwd} which, if used,
+#     must only be used at the beginning of the path.
+#
+# optional
+update-actions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>action: copy-file
+from: include/vcs_version.h.in
+to: ‘{yaml_dir}/vcs_version.h’</p></li>
+<li><p>action: replace-in-file
+pattern: ‘&#64;VCS_TAG&#64;’
+with: ‘{revision}’
+file: ‘{yaml_dir}/vcs_version.h’</p></li>
+<li><p>action: delete-path
+path: ‘{yaml_dir}/config’</p></li>
+<li><p>action: run-script
+script: ‘{cwd}/generate_sources.sh’
+cwd: ‘{yaml_dir}’</p></li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.vendor.moz_yaml.load_moz_yaml">
+<code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">load_moz_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">verify</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">require_license_file</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.moz_yaml.load_moz_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads and verifies the specified manifest.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozbuild.vendor.moz_yaml.update_moz_yaml">
+<code class="sig-prename descclassname">mozbuild.vendor.moz_yaml.</code><code class="sig-name descname">update_moz_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">release</span></em>, <em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">verify</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">write</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.moz_yaml.update_moz_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update origin:release and vendoring:revision without stripping
+comments or reordering fields.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.vendor_manifest">
+<span id="mozbuild-vendor-vendor-manifest-module"></span><h2>mozbuild.vendor.vendor_manifest module<a class="headerlink" href="#module-mozbuild.vendor.vendor_manifest" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.vendor_manifest.</code><code class="sig-name descname">VendorManifest</code><span class="sig-paren">(</span><em class="sig-param">topsrcdir</em>, <em class="sig-param">settings</em>, <em class="sig-param">log_manager</em>, <em class="sig-param">topobjdir=None</em>, <em class="sig-param">mozconfig=&lt;object object&gt;</em>, <em class="sig-param">virtualenv_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mozbuild.html#mozbuild.base.MozbuildObject" title="mozbuild.base.MozbuildObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.base.MozbuildObject</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.clean_upstream">
+<code class="sig-name descname">clean_upstream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.clean_upstream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove files we don’t want to import.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.fetch_and_unpack">
+<code class="sig-name descname">fetch_and_unpack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.fetch_and_unpack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetch and unpack upstream source</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.get_source_host">
+<code class="sig-name descname">get_source_host</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.get_source_host" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.update_files">
+<code class="sig-name descname">update_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">yaml_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.update_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.update_moz_build">
+<code class="sig-name descname">update_moz_build</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yaml_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.update_moz_build" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.update_yaml">
+<code class="sig-name descname">update_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yaml_file</span></em>, <em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">timestamp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.update_yaml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_manifest.VendorManifest.vendor">
+<code class="sig-name descname">vendor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">yaml_file</span></em>, <em class="sig-param"><span class="n">manifest</span></em>, <em class="sig-param"><span class="n">revision</span></em>, <em class="sig-param"><span class="n">check_for_update</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_manifest.VendorManifest.vendor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.vendor_python">
+<span id="mozbuild-vendor-vendor-python-module"></span><h2>mozbuild.vendor.vendor_python module<a class="headerlink" href="#module-mozbuild.vendor.vendor_python" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.vendor_python.VendorPython">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.vendor_python.</code><code class="sig-name descname">VendorPython</code><span class="sig-paren">(</span><em class="sig-param">topsrcdir</em>, <em class="sig-param">settings</em>, <em class="sig-param">log_manager</em>, <em class="sig-param">topobjdir=None</em>, <em class="sig-param">mozconfig=&lt;object object&gt;</em>, <em class="sig-param">virtualenv_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_python.VendorPython" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mozbuild.html#mozbuild.base.MozbuildObject" title="mozbuild.base.MozbuildObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.base.MozbuildObject</span></code></a></p>
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_python.VendorPython.vendor">
+<code class="sig-name descname">vendor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">with_windows_wheel</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">keep_extra_files</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_python.VendorPython.vendor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor.vendor_rust">
+<span id="mozbuild-vendor-vendor-rust-module"></span><h2>mozbuild.vendor.vendor_rust module<a class="headerlink" href="#module-mozbuild.vendor.vendor_rust" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.vendor.vendor_rust.</code><code class="sig-name descname">VendorRust</code><span class="sig-paren">(</span><em class="sig-param">topsrcdir</em>, <em class="sig-param">settings</em>, <em class="sig-param">log_manager</em>, <em class="sig-param">topobjdir=None</em>, <em class="sig-param">mozconfig=&lt;object object&gt;</em>, <em class="sig-param">virtualenv_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="mozbuild.html#mozbuild.base.MozbuildObject" title="mozbuild.base.MozbuildObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozbuild.base.MozbuildObject</span></code></a></p>
+<dl class="py attribute">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.BUILDTIME_LICENSE_WHITELIST">
+<code class="sig-name descname">BUILDTIME_LICENSE_WHITELIST</code><em class="property"> = {'BSD-3-Clause': ['bindgen', 'fuchsia-zircon', 'fuchsia-zircon-sys', 'fuchsia-cprng', 'glsl']}</em><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.BUILDTIME_LICENSE_WHITELIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_FILE_PACKAGE_WHITELIST">
+<code class="sig-name descname">RUNTIME_LICENSE_FILE_PACKAGE_WHITELIST</code><em class="property"> = {'deque': '6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb', 'fuchsia-cprng': '03b114f53e6587a398931762ee11e2395bfdba252a329940e2c8c9e81813845b'}</em><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_FILE_PACKAGE_WHITELIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_PACKAGE_WHITELIST">
+<code class="sig-name descname">RUNTIME_LICENSE_PACKAGE_WHITELIST</code><em class="property"> = {'BSD-2-Clause': ['arrayref', 'cloudabi', 'Inflector', 'mach', 'qlog'], 'BSD-3-Clause': []}</em><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_PACKAGE_WHITELIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_WHITELIST">
+<code class="sig-name descname">RUNTIME_LICENSE_WHITELIST</code><em class="property"> = ['Apache-2.0', 'Apache-2.0 WITH LLVM-exception', 'CC0-1.0', 'ISC', 'MIT', 'MPL-2.0', 'Unlicense', 'Zlib']</em><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.RUNTIME_LICENSE_WHITELIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.check_cargo_version">
+<code class="sig-name descname">check_cargo_version</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cargo</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.check_cargo_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that cargo is new enough. cargo 1.42 fixed some issue with
+the vendor command. cargo 1.47 similarly did so for windows, but as of
+this writing is the current nightly, so we restrict this check only to
+the platform it’s actually required on</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.check_modified_files">
+<code class="sig-name descname">check_modified_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.check_modified_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that there aren’t any uncommitted changes to files
+in the working copy, since we’re going to change some state
+on the user. Allow changes to Cargo.{toml,lock} since that’s
+likely to be a common use case.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.check_openssl">
+<code class="sig-name descname">check_openssl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.check_openssl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set environment flags for building with openssl.</p>
+<p>MacOS doesn’t include openssl, but the openssl-sys crate used by
+mach-vendor expects one of the system. It’s common to have one
+installed in /usr/local/opt/openssl by homebrew, but custom link
+flags are necessary to build against it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.get_cargo_path">
+<code class="sig-name descname">get_cargo_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.get_cargo_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.runtime_license">
+<em class="property">static </em><code class="sig-name descname">runtime_license</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span></em>, <em class="sig-param"><span class="n">license_string</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.runtime_license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cargo docs say:
+—
+<a class="reference external" href="https://doc.rust-lang.org/cargo/reference/manifest.html">https://doc.rust-lang.org/cargo/reference/manifest.html</a></p>
+<p>This is an SPDX 2.1 license expression for this package.  Currently
+crates.io will validate the license provided against a whitelist of
+known license and exception identifiers from the SPDX license list
+2.4.  Parentheses are not currently supported.</p>
+<p>Multiple licenses can be separated with a <cite>/</cite>, although that usage
+is deprecated.  Instead, use a license expression with AND and OR
+operators to get more explicit semantics.
+—
+But I have no idea how you can meaningfully AND licenses, so
+we will abort if that is detected. We’ll handle <cite>/</cite> and OR as
+equivalent and approve is any is in our approved list.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.vendor.vendor_rust.VendorRust.vendor">
+<code class="sig-name descname">vendor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ignore_modified</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">build_peers_said_large_imports_were_ok</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.vendor.vendor_rust.VendorRust.vendor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.vendor">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozbuild.vendor" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

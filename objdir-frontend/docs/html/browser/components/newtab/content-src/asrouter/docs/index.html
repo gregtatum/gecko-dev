@@ -1,0 +1,432 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Messaging System &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../../" src="../../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../../_static/jquery.js"></script>
+        <script src="../../../../../../_static/underscore.js"></script>
+        <script src="../../../../../../_static/doctools.js"></script>
+        <script src="../../../../../../_static/language_data.js"></script>
+        <script src="../../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+    <link rel="next" title="Simple CFR Template" href="simple-cfr-template.html" />
+    <link rel="prev" title="Default Browser Agent" href="../../../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Messaging System</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vision">Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-does-messaging-system-support">What does Messaging System support?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#messaging-system-overview">Messaging System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#message-routing">Message Routing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ui-templates">UI Templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-docs">Detailed Docs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="simple-cfr-template.html">Simple CFR Template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="debugging-docs.html">Using ASRouter Devtools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experiment-guide.html">How to run experiments with ASRouter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="first-run.html">First run on-boarding flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="targeting-attributes.html">Targeting attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="targeting-guide.html">Guide to targeting with JEXL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../../index.html">Firefox</a> &raquo;</li>
+        
+      <li>Messaging System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../../_sources/browser/components/newtab/content-src/asrouter/docs/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="messaging-system">
+<h1>Messaging System<a class="headerlink" href="#messaging-system" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="vision">
+<h2>Vision<a class="headerlink" href="#vision" title="Permalink to this headline">¶</a></h2>
+<p>Firefox must be an opinionated user agent that keeps folks safe, informed and
+effective while browsing the Web. In order to have an opinion, Firefox must
+have a voice.</p>
+<p>That voice will <strong>respect the user’s attention</strong> while surfacing contextually
+relevant and timely information tailored to their individual needs and choices.</p>
+</div>
+<div class="section" id="what-does-messaging-system-support">
+<h2>What does Messaging System support?<a class="headerlink" href="#what-does-messaging-system-support" title="Permalink to this headline">¶</a></h2>
+<p>There are several key windows of opportunity, such as the first-run activation
+phase or coordinated feature releases, where Firefox engages with users.</p>
+<p>The Firefox Messaging System supports this engagement by targeting messages
+exactly to the users who need to see them and enables the development of new
+user messages that can be easily tested and deployed. It offers standard
+mechanisms to measure user engagement and to perform user messaging experiments
+with reduced effort across engineering teams and a faster delivery cycle from
+ideation to analysis of results.</p>
+<p>This translates to <strong>users seeing fewer and more relevant in-product
+messages</strong>, while supporting fast delivery, experimentation, and protection of
+our users time and attention.</p>
+</div>
+<div class="section" id="messaging-system-overview">
+<h2>Messaging System Overview<a class="headerlink" href="#messaging-system-overview" title="Permalink to this headline">¶</a></h2>
+<p>At the core of the Firefox Messaging System is the Messaging System Router
+(called ASRouter for historical reasons). The router is a generalized Firefox
+component and set of conventions that provides:</p>
+<ul class="simple">
+<li><p>Flexible and configurable routing of local or remote Messages to UI
+Templates. This allows new message campaigns to be started and controlled
+on or off-trains</p></li>
+<li><p>Traffic Cop message sequencing and intermediation to prevent multiple
+messages being concurrently shown</p></li>
+<li><p>Programmable message targeting language to show the right message to the
+right user at the right time</p></li>
+<li><p>A template library of reusable Message and Notification UIs</p></li>
+<li><p>Full compatibility with Normandy pref-flip experiments</p></li>
+<li><p>Generalized and privacy conscious event telemetry</p></li>
+<li><p>Flexible Frequency Capping to mitigate user message fatigue</p></li>
+<li><p>Localized off train Messages</p></li>
+<li><p>Powerful development/debugging/QA tools on <a class="reference external" href="about:newtab#devtools">about:newtab#devtools</a></p></li>
+</ul>
+</div>
+<div class="section" id="message-routing">
+<h2>Message Routing<a class="headerlink" href="#message-routing" title="Permalink to this headline">¶</a></h2>
+<img alt="Message Routing Overview" class="align-center" src="../../../../../../_images/message-routing-overview.png" />
+<p>The Firefox Messaging System implements a separation-of-concerns pattern for
+Messages, UI Templates, and Timing/Targeting mechanisms. This allows us to
+maintain a high standard of security and quality while still allowing for
+maximum flexibility around content creation.</p>
+</div>
+<div class="section" id="ui-templates">
+<h2>UI Templates<a class="headerlink" href="#ui-templates" title="Permalink to this headline">¶</a></h2>
+<p>We have built a library of reusable Notification and Message interfaces which
+land in the Firefox codebase and ride the trains. These templates have a
+defined schema according to the available design components (e.g. titles, text,
+icons) and access to a set of enhanced user actions such as triggering URLs,
+launching menus, or installing addons, which can be attached to interactive
+elements (such as buttons).</p>
+<p>Current templates include:</p>
+<ul class="simple">
+<li><p>What’s New Panel - an icon in the toolbar and menu item that appears if a
+message is available in the panel, usually after major Firefox releases</p></li>
+<li><p>Moments Page - appears on start-up as a full content page</p></li>
+<li><p>Contextual Feature Recommendation - highlighted word in the Location Bar
+that, if clicked, drops down a panel with information about a feature
+relevant to that user at that time</p></li>
+<li><p>First Run - shown on startup in a content page as a set of onboarding cards
+with calls to action that persist for several days</p></li>
+<li><p>Snippets - short messages that appear on New Tab Page to highlight products,
+features and initiatives</p></li>
+<li><p>Badging - A colorful dot to highlight icons in the toolbar or menu items in
+order to draw attention with minimal interruption</p></li>
+</ul>
+</div>
+<div class="section" id="detailed-docs">
+<h2>Detailed Docs<a class="headerlink" href="#detailed-docs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Read more about <a class="reference external" href="/toolkit/components/messaging-system/docs">trigger listeners and user action schemas</a>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="simple-cfr-template.html">Simple CFR Template</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="simple-cfr-template.html#doorhanger-configuration">Doorhanger Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="debugging-docs.html">Using ASRouter Devtools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#how-to-enable-asrouter-devtools">How to enable ASRouter devtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#overview-of-asrouter-devtools">Overview of ASRouter devtools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#how-to-enable-disable-a-provider">How to enable/disable a provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#how-to-see-all-messages-from-a-provider">How to see all messages from a provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#how-to-test-telemetry-pings">How to test telemetry pings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging-docs.html#snippets-debugging">Snippets debugging</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experiment-guide.html">How to run experiments with ASRouter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experiment-guide.html#why-run-an-experiment">Why run an experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiment-guide.html#choose-cohort-ids-and-request-an-experiment">Choose cohort IDs and request an experiment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experiment-guide.html#add-targeting-to-your-messages">Add targeting to your messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first-run.html">First run on-boarding flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="first-run.html#first-run-multistage">First Run Multistage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first-run.html#triplets">Triplets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="targeting-attributes.html">Targeting attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="targeting-attributes.html#available-attributes">Available attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="targeting-attributes.html#detailed-usage">Detailed usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="targeting-guide.html">Guide to targeting with JEXL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="targeting-guide.html#how-to-write-jexl-targeting-expressions">How to write JEXL targeting expressions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="simple-cfr-template.html" class="btn btn-neutral float-right" title="Simple CFR Template" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../../../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html" class="btn btn-neutral float-left" title="Default Browser Agent" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

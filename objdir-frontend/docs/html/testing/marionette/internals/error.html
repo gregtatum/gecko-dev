@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>error module &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="evaluate module" href="evaluate.html" />
+    <link rel="prev" title="element module" href="element.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Prefs.html">Preferences</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">action module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addon.html">addon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html">assert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="browser.html">browser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capabilities.html">capabilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capture.html">capture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cert.html">cert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">cookie module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dom.html">dom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driver.html">driver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html">element module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">error module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="evaluate.html">evaluate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event.html">event module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format.html">format module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interaction.html">interaction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listener.html">listener module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">message module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modal.html">modal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navigate.html">navigate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html">packets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefs.html">prefs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy.html">proxy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reftest.html">reftest module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">server module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync.html">sync module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Marionette</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>error module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/testing/marionette/internals/error.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="error-module">
+<h1>error module<a class="headerlink" href="#error-module" title="Permalink to this headline">¶</a></h1>
+<dl class="js function">
+<dt id="error.isError">
+<code class="sig-prename descclassname">error.</code><code class="sig-name descname">isError</code><span class="sig-paren">(</span><em class="sig-param">val</em><span class="sig-paren">)</span><a class="headerlink" href="#error.isError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if <code class="docutils literal notranslate"><span class="pre">val</span></code> is an instance of the <code class="docutils literal notranslate"><span class="pre">Error</span></code> prototype.</p>
+<p>Because error objects may originate from different globals, comparing
+the prototype of the left hand side with the prototype property from
+the right hand side, which is what <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> does, will not work.
+If the LHS and RHS come from different globals, this check will always
+fail because the two objects will not have the same identity.</p>
+<p>Therefore it is not safe to use <code class="docutils literal notranslate"><span class="pre">instanceof</span></code> in any multi-global
+situation, e.g. in content across multiple <code class="docutils literal notranslate"><span class="pre">Window</span></code> objects or anywhere
+in chrome scope.</p>
+<p>This function also contains a special check if <code class="docutils literal notranslate"><span class="pre">val</span></code> is an XPCOM
+<code class="docutils literal notranslate"><span class="pre">nsIException</span></code> because they are special snowflakes and may indeed
+cause Firefox to crash if used with <code class="docutils literal notranslate"><span class="pre">instanceof</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>val</strong> (<em>*</em>) – Any value that should be undergo the test for errorness.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if error, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="error.isWebDriverError">
+<code class="sig-prename descclassname">error.</code><code class="sig-name descname">isWebDriverError</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#error.isWebDriverError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an object in the <a class="reference internal" href="#WebDriverError" title="WebDriverError"><code class="xref js js-class docutils literal notranslate"><span class="pre">WebDriverError()</span></code></a>
+prototypal chain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>*</em>) – Arbitrary object to test.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is of the WebDriverError prototype chain, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="error.wrap">
+<code class="sig-prename descclassname">error.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">err</em><span class="sig-paren">)</span><a class="headerlink" href="#error.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures error instance is a <a class="reference internal" href="#WebDriverError" title="WebDriverError"><code class="xref js js-class docutils literal notranslate"><span class="pre">WebDriverError()</span></code></a>.</p>
+<p>If the given error is already in the WebDriverError prototype
+chain, <code class="docutils literal notranslate"><span class="pre">err</span></code> is returned unmodified.  If it is not, it is wrapped
+in <a class="reference internal" href="#UnknownError" title="UnknownError"><code class="xref js js-class docutils literal notranslate"><span class="pre">UnknownError()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>err</strong> (<em>Error</em>) – Error to conditionally turn into a WebDriverError.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>WebDriverError</strong> – If <code class="docutils literal notranslate"><span class="pre">err</span></code> is a WebDriverError, it is returned unmodified. Otherwise an UnknownError type is returned.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="error.report">
+<code class="sig-prename descclassname">error.</code><code class="sig-name descname">report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#error.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unhandled error reporter.  Dumps the error and its stacktrace to console,
+and reports error to the Browser Console.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="error.stringify">
+<code class="sig-prename descclassname">error.</code><code class="sig-name descname">stringify</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#error.stringify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prettifies an instance of Error and its stacktrace to a string.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt id="stack">
+<code class="sig-name descname">stack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a stacktrace to the current line in the program.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="ElementClickInterceptedError">
+<em class="property">class </em><code class="sig-name descname">ElementClickInterceptedError</code><span class="sig-paren">(</span><em class="sig-param">obscuredEl</em>, <em class="sig-param">coords</em><span class="sig-paren">)</span><a class="headerlink" href="#ElementClickInterceptedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An element click could not be completed because the element receiving
+the events is obscuring the element that was requested clicked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obscuredEl</strong> (<em>Element</em>) – Element obscuring the element receiving the click.  Providing this is not required, but will produce a nicer error message.</p></li>
+<li><p><strong>'Map' ].&lt;string, number&gt; coords</strong> (<em>[</em>) – Original click location.  Providing this is not required, but will produce a nicer error message.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js class">
+<dt id="ElementNotAccessibleError">
+<em class="property">class </em><code class="sig-name descname">ElementNotAccessibleError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#ElementNotAccessibleError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Gecko a11y API indicates that the element is not accessible.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="ElementNotInteractableError">
+<em class="property">class </em><code class="sig-name descname">ElementNotInteractableError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#ElementNotInteractableError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command could not be completed because the element is not pointer-
+or keyboard interactable.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InsecureCertificateError">
+<em class="property">class </em><code class="sig-name descname">InsecureCertificateError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InsecureCertificateError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Navigation caused the user agent to hit a certificate warning, which
+is usually the result of an expired or invalid TLS certificate.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InvalidArgumentError">
+<em class="property">class </em><code class="sig-name descname">InvalidArgumentError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InvalidArgumentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The arguments passed to a command are either invalid or malformed.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InvalidCookieDomainError">
+<em class="property">class </em><code class="sig-name descname">InvalidCookieDomainError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InvalidCookieDomainError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An illegal attempt was made to set a cookie under a different
+domain than the current page.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InvalidElementStateError">
+<em class="property">class </em><code class="sig-name descname">InvalidElementStateError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InvalidElementStateError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command could not be completed because the element is in an
+invalid state, e.g. attempting to clear an element that isn’t both
+editable and resettable.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InvalidSelectorError">
+<em class="property">class </em><code class="sig-name descname">InvalidSelectorError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InvalidSelectorError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Argument was an invalid selector.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="InvalidSessionIDError">
+<em class="property">class </em><code class="sig-name descname">InvalidSessionIDError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#InvalidSessionIDError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Occurs if the given session ID is not in the list of active sessions,
+meaning the session either does not exist or that it’s not active.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="JavaScriptError">
+<em class="property">class </em><code class="sig-name descname">JavaScriptError</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="headerlink" href="#JavaScriptError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An error occurred whilst executing JavaScript supplied by the user.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="MoveTargetOutOfBoundsError">
+<em class="property">class </em><code class="sig-name descname">MoveTargetOutOfBoundsError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#MoveTargetOutOfBoundsError" title="Permalink to this definition">¶</a></dt>
+<dd><p>The target for mouse interaction is not in the browser’s viewport
+and cannot be brought into that viewport.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="NoSuchAlertError">
+<em class="property">class </em><code class="sig-name descname">NoSuchAlertError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#NoSuchAlertError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An attempt was made to operate on a modal dialog when one was
+not open.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="NoSuchElementError">
+<em class="property">class </em><code class="sig-name descname">NoSuchElementError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#NoSuchElementError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An element could not be located on the page using the given
+search parameters.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="NoSuchFrameError">
+<em class="property">class </em><code class="sig-name descname">NoSuchFrameError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#NoSuchFrameError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command to switch to a frame could not be satisfied because
+the frame could not be found.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="NoSuchWindowError">
+<em class="property">class </em><code class="sig-name descname">NoSuchWindowError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#NoSuchWindowError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command to switch to a window could not be satisfied because
+the window could not be found.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="ScriptTimeoutError">
+<em class="property">class </em><code class="sig-name descname">ScriptTimeoutError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#ScriptTimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A script did not complete before its timeout expired.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="SessionNotCreatedError">
+<em class="property">class </em><code class="sig-name descname">SessionNotCreatedError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#SessionNotCreatedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A new session could not be created.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="StaleElementReferenceError">
+<em class="property">class </em><code class="sig-name descname">StaleElementReferenceError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#StaleElementReferenceError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command failed because the referenced element is no longer
+attached to the DOM.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="TimeoutError">
+<em class="property">class </em><code class="sig-name descname">TimeoutError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#TimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An operation did not complete before its timeout expired.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="UnableToSetCookieError">
+<em class="property">class </em><code class="sig-name descname">UnableToSetCookieError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#UnableToSetCookieError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command to set a cookie’s value could not be satisfied.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="UnexpectedAlertOpenError">
+<em class="property">class </em><code class="sig-name descname">UnexpectedAlertOpenError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#UnexpectedAlertOpenError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A modal dialog was open, blocking this operation.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="UnknownCommandError">
+<em class="property">class </em><code class="sig-name descname">UnknownCommandError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#UnknownCommandError" title="Permalink to this definition">¶</a></dt>
+<dd><p>A command could not be executed because the remote end is not
+aware of it.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="UnknownError">
+<em class="property">class </em><code class="sig-name descname">UnknownError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#UnknownError" title="Permalink to this definition">¶</a></dt>
+<dd><p>An unknown error occurred in the remote end while processing
+the command.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="UnsupportedOperationError">
+<em class="property">class </em><code class="sig-name descname">UnsupportedOperationError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#UnsupportedOperationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that a command that should have executed properly
+cannot be supported for some reason.</p>
+</dd></dl>
+
+<dl class="js class">
+<dt id="WebDriverError">
+<em class="property">class </em><code class="sig-name descname">WebDriverError</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="headerlink" href="#WebDriverError" title="Permalink to this definition">¶</a></dt>
+<dd><p>WebDriverError is the prototypal parent of all WebDriver errors.
+It should not be used directly, as it does not correspond to a real
+error in the specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>string|Error</em>) – Optional string describing error situation or Error instance to propagate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="evaluate.html" class="btn btn-neutral float-right" title="evaluate module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="element.html" class="btn btn-neutral float-left" title="element module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

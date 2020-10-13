@@ -1,0 +1,21 @@
+mozbuild.analyze package
+========================
+
+Submodules
+----------
+
+mozbuild.analyze.hg module
+--------------------------
+
+.. automodule:: mozbuild.analyze.hg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozbuild.analyze
+   :members:
+   :undoc-members:
+   :show-inheritance:

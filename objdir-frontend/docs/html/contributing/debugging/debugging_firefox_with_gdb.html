@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugging Firefox with GDB &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugging Firefox with LLDB" href="debugging_firefox_with_lldb.html" />
+    <link rel="prev" title="Debugging A Minidump" href="debugging_a_minidump.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capturing_minidump.html">Capturing a minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Debugging Firefox with GDB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#where-can-i-find-general-gdb-documentation">Where can I find general gdb documentation?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-run-firefox-under-gdb">How do I run Firefox under gdb?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-pass-arguments-in-prun">How do I pass arguments in prun?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-set-a-breakpoint-in-a-library-that-hasn-t-been-loaded">How do I set a breakpoint in a library that hasn’t been loaded?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-set-a-breakpoint-when-a-component-is-loaded">How do I set a breakpoint when a component is loaded?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-can-t-i-set-a-breakpoint">Why can’t I set a breakpoint?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-display-prunichar-s">How do I display PRUnichar’s?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-display-an-nsstring">How do I display an nsString?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#this-is-hard-give-me-a-gdbinit-that-works">This is hard. Give me a .gdbinit that works.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-determine-the-concrete-type-of-an-object-pointed-to-by-an-interface-pointer">How do I determine the concrete type of an object pointed to by an interface pointer?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-i-debug-javascript-from-gdb">How can I debug JavaScript from gdb?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-i-debug-race-conditions-and-or-how-can-i-make-something-different-happen-at-ns-assertion-time">How can I debug race conditions and/or how can I make something different happen at NS_ASSERTION time?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-run-the-debugger-in-emacs-xemacs">How do I run the debugger in emacs/xemacs?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdb-5-used-to-work-for-me-but-now-firefox-won-t-start-what-can-i-do">GDB 5 used to work for me, but now Firefox won’t start. What can I do?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-or-prun-in-gdb-fails-with-error-in-loading-shared-libraries">“run” or “prun” in GDB fails with “error in loading shared libraries.”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debian-s-gdb-doesn-t-work-what-do-i-do">Debian’s GDB doesn’t work. What do I do?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#firefox-is-aborting-where-do-i-set-a-breakpoint-to-find-out-where-it-is-exiting">Firefox is aborting. Where do I set a breakpoint to find out where it is exiting?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-keep-getting-a-sigsegv-in-js-jit-code-under-gdb-even-though-there-is-no-crash-when-gdb-is-not-attached-how-do-i-fix-it">I keep getting a SIGSEGV in JS/JIT code under gdb even though there is no crash when gdb is not attached.  How do I fix it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#i-keep-getting-a-sig32-in-the-debugger-how-do-i-fix-it">I keep getting a SIG32 in the debugger. How do I fix it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-do-i-get-useful-stack-traces-inside-system-libraries">How do I get useful stack traces inside system libraries?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fedora">Fedora</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-electrolysis-e10s">Debugging electrolysis (e10s)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_rr.html">Debugging Firefox with rr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_report.html">How to get a stacktrace for a bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/artifact_builds.html">Understanding Artifact Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/building_mobile_firefox.html">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>Debugging Firefox with GDB</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/debugging/debugging_firefox_with_gdb.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging-firefox-with-gdb">
+<h1>Debugging Firefox with GDB<a class="headerlink" href="#debugging-firefox-with-gdb" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>This page is an import from MDN and the contents might be outdated</p></td>
+</tr>
+</tbody>
+</table>
+<p>This page details how you can more easily debug Firefox and work around
+some GDB problems.</p>
+<p>Use GDB 5, or higher. A more recent version of GDB can be obtained from
+<a class="reference external" href="https://sourceware.org/gdb/">sourceware</a> or your Linux distro repo.
+If you are running less than 256 MB of RAM, be sure to see <a class="reference external" href="https://developer.mozilla.org/en/Using_gdb_on_wimpy_computers">Using gdb on
+wimpy computers</a>.</p>
+<div class="section" id="where-can-i-find-general-gdb-documentation">
+<h2>Where can I find general gdb documentation?<a class="headerlink" href="#where-can-i-find-general-gdb-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Using GDB is beyond the scope of this document. Documentation is likely
+available on your system if you have GDB installed, in the form of
+<strong>info,</strong> <strong>man</strong> pages, or the gnome help browser. Additionally, you
+can use a graphical front-end to GDB like
+<a class="reference external" href="https://www.gnu.org/software/ddd/">ddd</a> or
+<a class="reference external" href="https://sourceware.org/insight/">insight</a>. For more information see
+<a class="reference external" href="https://sourceware.org/gdb/current/onlinedocs/gdb/">https://sourceware.org/gdb/current/onlinedocs/gdb/</a></p>
+</div>
+<div class="section" id="how-do-i-run-firefox-under-gdb">
+<h2>How do I run Firefox under gdb?<a class="headerlink" href="#how-do-i-run-firefox-under-gdb" title="Permalink to this headline">¶</a></h2>
+<p>The preferred method, is using the
+<a class="reference internal" href="../../mach/index.html#mach"><span class="std std-ref">Mach</span></a> command-line tool to run the
+debugger, which can bypass several optional defaults. Use “mach help
+run” to get more details. If inside the source directory, you would use
+“./mach”. If you have previously <span class="xref std std-ref">added mach to your path</span>,
+then just use “mach”. Please note that <span class="xref std std-ref">mach is aware of mozconfigs</span>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./mach run --debug <span class="o">[</span>arguments to pass to firefox<span class="o">]</span>
+</pre></div>
+</div>
+<p>If you need to direct arguments to gdb, you can use ‘–debugger-args’
+options via the command line parser, taking care to adhere to shell
+splitting rules. For example, if you wanted to run the command ‘show
+args’ when gdb starts, you would use:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./mach run --debug --debugger-args <span class="s2">&quot;-ex &#39;show args&#39;&quot;</span>
+</pre></div>
+</div>
+<p>Alternatively, you can run gdb directly against Firefox. However, you
+won’t get some of the more useful capabilities this way. For example,
+mach sets an environment variable (see below) to stop the JS engine from
+generating synthetic segfaults to support the slower script dialoging
+mechanism.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">OBJDIR</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">firefox</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-do-i-pass-arguments-in-prun">
+<h2>How do I pass arguments in prun?<a class="headerlink" href="#how-do-i-pass-arguments-in-prun" title="Permalink to this headline">¶</a></h2>
+<p>Set the arguments in GDB before calling prun. Here’s an example on how
+to do that:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="nb">set</span> <span class="n">args</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">prun</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-do-i-set-a-breakpoint-in-a-library-that-hasn-t-been-loaded">
+<h2>How do I set a breakpoint in a library that hasn’t been loaded?<a class="headerlink" href="#how-do-i-set-a-breakpoint-in-a-library-that-hasn-t-been-loaded" title="Permalink to this headline">¶</a></h2>
+<p>GDB 6.1 and above has support for “pending breakpoints”. This is
+controlled by the “<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">breakpoint</span> <span class="pre">pending</span></code>” setting, and is enabled
+by default.  If a breakpoint cannot be immediately resolved, it will be
+re-checked each time a shared library is loaded, by the process being
+debugged. If your GDB is older than this, you should upgrade.</p>
+<p>In older versions, there isn’t a way to set breakpoints in a library
+that has not yet been loaded. See more on <a class="reference external" href="#How_do_I_set_a_breakpoint_when_a_component_is_loaded.3F">setting a breakpoint when a
+component is
+loaded</a>. If
+you have to set a breakpoint you can set a breakpoint in <code class="docutils literal notranslate"><span class="pre">_dl_open</span></code>.
+This function is called when a new library is loaded, when you can
+finally set your breakpoint.</p>
+</div>
+<div class="section" id="how-do-i-set-a-breakpoint-when-a-component-is-loaded">
+<h2>How do I set a breakpoint when a component is loaded?<a class="headerlink" href="#how-do-i-set-a-breakpoint-when-a-component-is-loaded" title="Permalink to this headline">¶</a></h2>
+<p>In Firefox Version 57 (and possibly earlier) XPCOM_BREAK_ON_LOAD does
+not seem to exist.</p>
+<p>There’s a facility in XPCOM which allows you to set an environment
+variable to drop into the debugger when loading a certain component. You
+have to set <code class="docutils literal notranslate"><span class="pre">XPCOM_BREAK_ON_LOAD</span></code> variable before you run Firefox,
+setting it to a string containing the names of libraries you want to
+load. For example, if you wish to stop when a library named <code class="docutils literal notranslate"><span class="pre">raptor</span></code>
+or <code class="docutils literal notranslate"><span class="pre">necko</span></code> is loaded, you set the variable to <code class="docutils literal notranslate"><span class="pre">raptor:necko</span></code>. Here’s
+an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="nb">set</span> <span class="n">env</span> <span class="n">XPCOM_BREAK_ON_LOAD</span> <span class="n">raptor</span><span class="p">:</span><span class="n">necko</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">prun</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="why-can-t-i-set-a-breakpoint">
+<h2>Why can’t I set a breakpoint?<a class="headerlink" href="#why-can-t-i-set-a-breakpoint" title="Permalink to this headline">¶</a></h2>
+<p>You probably can’t set a breakpoint because its library hasn’t been
+loaded. Most Firefox functionality is in libraries loaded mid-way
+through the <code class="docutils literal notranslate"><span class="pre">main()</span></code>function. If you break on <code class="docutils literal notranslate"><span class="pre">main(),</span></code>and step
+through until the libraries are loaded, with a call to
+<code class="docutils literal notranslate"><span class="pre">InitCOMGlue()</span></code>, you should be able to set breakpoints on many more
+symbols, source files, and continue running.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">main</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">run</span>
+<span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="n">main</span><span class="p">(</span><span class="n">argc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="mh">0x7fffffffde98</span><span class="p">,</span> <span class="n">envp</span><span class="o">=</span><span class="mh">0x7ffffffffdec0</span><span class="p">)</span> <span class="o">.....</span>
+<span class="mi">256</span>    <span class="p">{</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="nb">next</span>
+<span class="o">...</span>
+<span class="mi">293</span>      <span class="n">nsresult</span> <span class="n">rv</span> <span class="o">=</span> <span class="n">InitXPCOMGlue</span><span class="p">()</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="nb">next</span>
+</pre></div>
+</div>
+<p>If you still can’t set the breakpoints, you need to confirm the library
+has loaded. You can’t proceed until the library loads. See more on
+<a class="reference external" href="#How_do_I_load_shared_libraries.3F">loading shared libraries</a>. If
+you wish to break as soon as the library is loaded, see the section on
+<a class="reference external" href="#How_do_I_set_a_breakpoint_when_a_component_is_loaded.3F">breaking when a component is
+loaded</a> and
+<a class="reference external" href="#How_do_I_set_a_breakpoint_when_a_component_is_loaded.3F">breaking on a library
+load</a>.</p>
+</div>
+<div class="section" id="how-do-i-display-prunichar-s">
+<h2>How do I display PRUnichar’s?<a class="headerlink" href="#how-do-i-display-prunichar-s" title="Permalink to this headline">¶</a></h2>
+<p>One suggestion is this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) print ((PRUnichar*)uri.mBuffer)[0]@16
+$47 = {114, 100, 102, 58, 110, 117, 108, 108, 0, 0, 8, 0, 0, 0, 37432,
+16514}
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) print aURI
+$1 = (const PRUnichar *) 0x855e6e0
+(gdb) x/32ch aURI
+0x855e6e0:      104 &#39;h&#39; 116 &#39;t&#39; 116 &#39;t&#39; 112 &#39;p&#39; 58 &#39;:&#39;  47 &#39;/&#39;  47 &#39;/&#39;  119 &#39;w&#39;
+0x855e6f0:      119 &#39;w&#39; 119 &#39;w&#39; 46 &#39;.&#39;  109 &#39;m&#39; 111 &#39;o&#39; 122 &#39;z&#39; 105 &#39;i&#39; 108 &#39;l&#39;
+0x855e700:      108 &#39;l&#39; 97 &#39;a&#39;  46 &#39;.&#39;  111 &#39;o&#39; 114 &#39;r&#39; 103 &#39;g&#39; 47 &#39;/&#39;  115 &#39;s&#39;
+0x855e710:      116 &#39;t&#39; 97 &#39;a&#39;  114 &#39;r&#39; 116 &#39;t&#39; 47 &#39;/&#39;  0 &#39;\0&#39;  25 &#39;\031&#39;       0 &#39;\0&#39;
+(gdb)
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Define helper functions in your .gdbinit</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Define a &quot;pu&quot; command to display PRUnichar * strings (100 chars max)
+# Also allows an optional argument for how many chars to print as long as
+# it&#39;s less than 100.
+def pu
+  set $uni = $arg0
+  if $argc == 2
+    set $limit = $arg1
+    if $limit &gt; 100
+      set $limit = 100
+    end
+  else
+    set $limit = 100
+  end
+  # scratch array with space for 100 chars plus null terminator.  Make
+  # sure to not use &#39; &#39; as the char so this copy/pastes well.
+  set $scratch = &quot;____________________________________________________________________________________________________&quot;
+  set $i = 0
+  set $scratch_idx = 0
+  while (*$uni &amp;&amp; $i++ &lt; $limit)
+    if (*$uni &lt; 0x80)
+      set $scratch[$scratch_idx++] = *(char*)$uni++
+    else
+      if ($scratch_idx &gt; 0)
+    set $scratch[$scratch_idx] = &#39;\0&#39;
+    print $scratch
+    set $scratch_idx = 0
+      end
+      print /x *(short*)$uni++
+    end
+  end
+  if ($scratch_idx &gt; 0)
+    set $scratch[$scratch_idx] = &#39;\0&#39;
+    print $scratch
+  end
+end
+
+# Define a &quot;ps&quot; command to display subclasses of nsAC?String.  Note that
+# this assumes strings as of Gecko 1.9 (well, and probably a few
+# releases before that as well); going back far enough will get you
+# to string classes that this function doesn&#39;t work for.
+def ps
+  set $str = $arg0
+  if (sizeof(*$str.mData) == 1 &amp;&amp; ($str.mFlags &amp; 1) != 0)
+    print $str.mData
+  else
+    pu $str.mData $str.mLength
+  end
+end
+</pre></div>
+</div>
+<p><a class="reference external" href="#This_is_hard._Give_me_a_.gdbinit_that_works.">This is hard. Give me a .gdbinit that already has the
+functions.</a></p>
+<ul class="simple">
+<li><p>Define a small helper function “punichar” in #ifdef NS_DEBUG code
+somewhere.</p></li>
+</ul>
+</div>
+<div class="section" id="how-do-i-display-an-nsstring">
+<h2>How do I display an nsString?<a class="headerlink" href="#how-do-i-display-an-nsstring" title="Permalink to this headline">¶</a></h2>
+<p>You can call the ToNewCString() method on the nsString. It leaks a
+little memory but it shouldn’t hurt anything if you only do it a few
+times in one gdb session. (via <a class="reference external" href="mailto:akkana&#37;&#52;&#48;netscape&#46;com">akkana<span>&#64;</span>netscape<span>&#46;</span>com</a>)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span> <span class="n">string</span><span class="o">.</span><span class="n">ToNewCString</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Another method (via bent) is the following (replace <code class="docutils literal notranslate"><span class="pre">n</span></code> with: the
+returned length of your string):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) p string.Length()
+$1 = n
+(gdb) x/ns string.BeginReading()
+</pre></div>
+</div>
+<p>You can of course use any of the above unichar-printing routines instead
+of x/s.</p>
+</div>
+<div class="section" id="this-is-hard-give-me-a-gdbinit-that-works">
+<h2>This is hard. Give me a .gdbinit that works.<a class="headerlink" href="#this-is-hard-give-me-a-gdbinit-that-works" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="http://web.mit.edu/bzbarsky/www/gdbinit">Boris Zbarsky’s
+.gdbinit</a>. It contained
+several function definitions including:</p>
+<ul class="simple">
+<li><p>“prun” to start the browser and disable library loading.</p></li>
+<li><p>“pu” which will display a (PRUnichar *) string.</p></li>
+<li><p>“ps” which will display a nsString.</p></li>
+</ul>
+</div>
+<div class="section" id="how-do-i-determine-the-concrete-type-of-an-object-pointed-to-by-an-interface-pointer">
+<h2>How do I determine the concrete type of an object pointed to by an interface pointer?<a class="headerlink" href="#how-do-i-determine-the-concrete-type-of-an-object-pointed-to-by-an-interface-pointer" title="Permalink to this headline">¶</a></h2>
+<p>You can determine the concrete type of any object pointed to, by an
+XPCOM interface pointer, by looking at the mangled name of the symbol
+for the object’s vtable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(gdb) p aKidFrame
+$1 = (nsIFrame *) 0x85058d4
+(gdb) x/wa *(void**)aKidFrame
+0x4210d380 &lt;__vt_14nsRootBoxFrame&gt;: 0x0
+(gdb) p *(nsRootBoxFrame*)aKidFrame
+ [ all the member variables of aKidFrame ]
+</pre></div>
+</div>
+<p>If you’re using gcc 3.x, the output is slightly different from the gcc
+2.9x output above. Pay particular attention to the vtable symbol, in
+this case <code class="docutils literal notranslate"><span class="pre">__vt_14nsRootBoxFrame</span></code>. You won’t get anything useful if
+the shared library containing the object is not loaded. See <a class="reference external" href="#How_do_I_load_shared_libraries.3F">How do I
+load shared libraries?</a> and <a class="reference external" href="#How_do_I_see_what_libraries_I_already_have_loaded.3F">How
+do I see what libraries I already have
+loaded?</a></p>
+<p>Or use the gdb command <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">print</span> <span class="pre">object</span> <span class="pre">on</span></code>.</p>
+</div>
+<div class="section" id="how-can-i-debug-javascript-from-gdb">
+<h2>How can I debug JavaScript from gdb?<a class="headerlink" href="#how-can-i-debug-javascript-from-gdb" title="Permalink to this headline">¶</a></h2>
+<p>If you have JavaScript Engine code on the stack, you’ll probably want a
+JS stack in addition to the C++ stack.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">call</span> <span class="n">DumpJSStack</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/Debugging_JavaScript">https://developer.mozilla.org/en-US/docs/Mozilla/Debugging/Debugging_JavaScript</a>
+for more JS debugging tricks.</p>
+</div>
+<div class="section" id="how-can-i-debug-race-conditions-and-or-how-can-i-make-something-different-happen-at-ns-assertion-time">
+<h2>How can I debug race conditions and/or how can I make something different happen at NS_ASSERTION time?<a class="headerlink" href="#how-can-i-debug-race-conditions-and-or-how-can-i-make-something-different-happen-at-ns-assertion-time" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">[submitted by Dan Mosedale]</div>
+<div class="line">As Linux is unable to generate useful core files for multi-threaded
+applications, tracking down race-conditions which don’t show up under
+the debugger can be a bit tricky. Unless you’ve given the
+<code class="docutils literal notranslate"><span class="pre">--enable-crash-on-assert</span></code> switch to <code class="docutils literal notranslate"><span class="pre">configure</span></code>, you can now
+change the behavior of <code class="docutils literal notranslate"><span class="pre">NS_ASSERTION</span></code> (nsDebug::Break) using the
+<code class="docutils literal notranslate"><span class="pre">XPCOM_DEBUG_BREAK</span></code> environment variable.</div>
+</div>
+</div>
+<div class="section" id="how-do-i-run-the-debugger-in-emacs-xemacs">
+<h2>How do I run the debugger in emacs/xemacs?<a class="headerlink" href="#how-do-i-run-the-debugger-in-emacs-xemacs" title="Permalink to this headline">¶</a></h2>
+<p>Emacs and XEmacs contain modes for doing visual debugging. However, you
+might want to set up environment variables, specifying the loading of
+symbols and components. The easiest way to set up these is to use the
+<code class="docutils literal notranslate"><span class="pre">run-mozilla.sh</span></code> script, located in the dist/bin directory of your
+build. This script sets up the environment to run the editor, shell,
+debugger, or defining a preferred setup and running any commands you
+wish. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./run-mozilla.sh /bin/bash
+<span class="nv">MOZILLA_FIVE_HOME</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+  <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+     <span class="nv">LIBRARY_PATH</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+       <span class="nv">SHLIB_PATH</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+          <span class="nv">LIBPATH</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+       <span class="nv">ADDON_PATH</span><span class="o">=</span>/home/USER/src/mozilla/build/dist/bin
+      <span class="nv">MOZ_PROGRAM</span><span class="o">=</span>/bin/bash
+      <span class="nv">MOZ_TOOLKIT</span><span class="o">=</span>
+        <span class="nv">moz_debug</span><span class="o">=</span><span class="m">0</span>
+     <span class="nv">moz_debugger</span><span class="o">=</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gdb-5-used-to-work-for-me-but-now-firefox-won-t-start-what-can-i-do">
+<h2>GDB 5 used to work for me, but now Firefox won’t start. What can I do?<a class="headerlink" href="#gdb-5-used-to-work-for-me-but-now-firefox-won-t-start-what-can-i-do" title="Permalink to this headline">¶</a></h2>
+<p>A recent threading change (see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=57051">bug
+57051</a> for
+details) caused a problem on some systems. Firefox would get part-way
+through its initialization, then stop before showing a window. A recent
+change to gdb has fixed this. Download and build <a class="reference external" href="https://sources.redhat.com/insight/">the latest version of
+Insight</a>, or if you don’t want a
+GUI, <a class="reference external" href="https://sources.redhat.com/gdb/">the latest version of gdb</a>.</p>
+</div>
+<div class="section" id="run-or-prun-in-gdb-fails-with-error-in-loading-shared-libraries">
+<h2>“run” or “prun” in GDB fails with “error in loading shared libraries.”<a class="headerlink" href="#run-or-prun-in-gdb-fails-with-error-in-loading-shared-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Running mozilla-bin inside GDB fails with an error message like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Starting</span> <span class="n">program</span><span class="p">:</span>
+<span class="o">/</span><span class="n">u</span><span class="o">/</span><span class="n">dmose</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">mozilla</span><span class="o">-</span><span class="nb">all</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="nb">bin</span><span class="o">/./</span><span class="n">mozilla</span><span class="o">-</span><span class="nb">bin</span>
+<span class="o">/</span><span class="n">u</span><span class="o">/</span><span class="n">dmose</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">mozilla</span><span class="o">-</span><span class="nb">all</span><span class="o">/</span><span class="n">mozilla</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="nb">bin</span><span class="o">/./</span><span class="n">mozilla</span><span class="o">-</span><span class="nb">bin</span><span class="p">:</span> <span class="n">error</span>
+<span class="ow">in</span> <span class="n">loading</span> <span class="n">shared</span> <span class="n">libraries</span><span class="p">:</span> <span class="n">libraptorgfx</span><span class="o">.</span><span class="n">so</span><span class="p">:</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">shared</span>
+<span class="nb">object</span> <span class="n">file</span><span class="p">:</span> <span class="n">No</span> <span class="n">such</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">directory</span>
+</pre></div>
+</div>
+<p>Your LD_LIBRARY_PATH is probably being reset by your .cshrc or .profile.
+From the GDB manual:</p>
+<p><em>*Warning:* GDB runs your program using the shell indicated by your
+‘SHELL’ environment variable if it exists (or ‘/bin/sh’ if not). If your
+‘SHELL’ variable names a shell that runs an initialization file – such
+as ‘.cshrc’ for C-shell, or ‘.bashrc’ for BASH–any variables you set in
+that file affect your program. You may wish to move the setting of
+environment variables to files that are only run when you sign on, such
+as ‘.login’ or ‘.profile’.</em></p>
+</div>
+<div class="section" id="debian-s-gdb-doesn-t-work-what-do-i-do">
+<h2>Debian’s GDB doesn’t work. What do I do?<a class="headerlink" href="#debian-s-gdb-doesn-t-work-what-do-i-do" title="Permalink to this headline">¶</a></h2>
+<p>Debian’s unstable distribution currently uses glibc 2.1 and GDB 4.18.
+However, there is no package of GDB for Debian with the appropriate
+threads patches that will work with glibc 2.1. I was able to get this to
+work by getting the GDB 4.18 RPM from Red Hat’s rawhide server and
+installing that. It has all of the patches necessary for debugging
+threaded software. These fixes are expected to be merged into GDB, which
+will fix the problem for Debian Linux. (via <a class="reference external" href="mailto:bruce&#37;&#52;&#48;cybersight&#46;com">Bruce
+Mitchener</a>)</p>
+</div>
+<div class="section" id="firefox-is-aborting-where-do-i-set-a-breakpoint-to-find-out-where-it-is-exiting">
+<h2>Firefox is aborting. Where do I set a breakpoint to find out where it is exiting?<a class="headerlink" href="#firefox-is-aborting-where-do-i-set-a-breakpoint-to-find-out-where-it-is-exiting" title="Permalink to this headline">¶</a></h2>
+<p>On Linux there are two possible symbols that are causing this:
+<code class="docutils literal notranslate"><span class="pre">PR_ASSERT()</span></code> and <code class="docutils literal notranslate"><span class="pre">NS_ASSERTION()</span></code>. To see where it’s asserting you
+can stop at two places:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">b</span> <span class="n">abort</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">b</span> <span class="n">exit</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="i-keep-getting-a-sigsegv-in-js-jit-code-under-gdb-even-though-there-is-no-crash-when-gdb-is-not-attached-how-do-i-fix-it">
+<h2>I keep getting a SIGSEGV in JS/JIT code under gdb even though there is no crash when gdb is not attached.  How do I fix it?<a class="headerlink" href="#i-keep-getting-a-sigsegv-in-js-jit-code-under-gdb-even-though-there-is-no-crash-when-gdb-is-not-attached-how-do-i-fix-it" title="Permalink to this headline">¶</a></h2>
+<p>Set the JS_DISABLE_SLOW_SCRIPT_SIGNALS environment variable (in FF33,
+the shorter and easier-to-remember JS_NO_SIGNALS).  For an explanation,
+read <a class="reference external" href="https://www.jandemooij.nl/blog/2014/02/18/using-segfaults-to-interrupt-jit-code/">Jan’s blog
+post</a>.</p>
+</div>
+<div class="section" id="i-keep-getting-a-sig32-in-the-debugger-how-do-i-fix-it">
+<h2>I keep getting a SIG32 in the debugger. How do I fix it?<a class="headerlink" href="#i-keep-getting-a-sig32-in-the-debugger-how-do-i-fix-it" title="Permalink to this headline">¶</a></h2>
+<p>If you are getting a SIG32 while trying to debug Firefox you might have
+turned off shared library loading before the pthreads library was
+loaded. For example, <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">auto-solib-add</span> <span class="pre">0</span></code> in your <code class="docutils literal notranslate"><span class="pre">.gdbinit</span></code> file.
+In this case, you can either:</p>
+<ul class="simple">
+<li><p>Remove it and use the method explained in the section about <a class="reference external" href="#The_debugger_uses_a_lot_of_memory._How_do_I_fix_it.3F">GDB’s
+memory
+usage</a></p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">handle</span> <span class="pre">SIG32</span> <span class="pre">noprint</span></code> either in gdb or in your <code class="docutils literal notranslate"><span class="pre">.gdbinit</span></code>
+file</p></li>
+</ul>
+<p>Alternatively, the problem might lie in your pthread library. If this
+library has its symbols stripped, then GDB can’t hook into thread
+events, and you end up with SIG32 signals. You can check if your
+libpthread is stripped in <code class="docutils literal notranslate"><span class="pre">file</span> <span class="pre">/lib/libpthread*</span></code> and looking for
+<code class="docutils literal notranslate"><span class="pre">'stripped'.</span></code>To fix this problem on Gentoo Linux, you can re-emerge
+glibc after adding <code class="docutils literal notranslate"><span class="pre">&quot;nostrip&quot;</span></code> to your <code class="docutils literal notranslate"><span class="pre">FEATURES</span></code> in
+<code class="docutils literal notranslate"><span class="pre">/etc/make.conf</span></code>.</p>
+</div>
+<div class="section" id="how-do-i-get-useful-stack-traces-inside-system-libraries">
+<h2>How do I get useful stack traces inside system libraries?<a class="headerlink" href="#how-do-i-get-useful-stack-traces-inside-system-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Many Linux distributions provide separate packages with debugging
+information for system libraries, such as gdb, Valgrind, profiling
+tools, etc., to give useful stack traces via system libraries.</p>
+<div class="section" id="fedora">
+<h3>Fedora<a class="headerlink" href="#fedora" title="Permalink to this headline">¶</a></h3>
+<p>On Fedora, you need to enable the debuginfo repositories, as the
+packages are in separate repositories. Enable them permanently, so when
+you get updates you also get security updates for these packages. A way
+to do this is edit <code class="docutils literal notranslate"><span class="pre">/etc/yum.repos.d/fedora.repo</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fedora-updates.repo</span></code> to change the <code class="docutils literal notranslate"><span class="pre">enabled=0</span></code> line in the
+debuginfo section to <code class="docutils literal notranslate"><span class="pre">enabled=1</span></code>. This may then flag a conflict when
+upgrading to a new distribution version. You would the need to perform
+this edit again.</p>
+<p>You can finally install debuginfo packages with yum or other package
+management tools. The best way is install the <code class="docutils literal notranslate"><span class="pre">yum-utils</span></code> package, and
+then use the <code class="docutils literal notranslate"><span class="pre">debuginfo-install</span></code> command to install all the debuginfo:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ yum install yum-utils
+$ debuginfo-install firefox
+</pre></div>
+</div>
+<p>This can be done manually using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ yum install GConf2-debuginfo ORBit2-debuginfo atk-debuginfo <span class="se">\</span>
+cairo-debuginfo dbus-debuginfo dbus-glib-debuginfo expat-debuginfo <span class="se">\</span>
+fontconfig-debuginfo freetype-debuginfo gcc-debuginfo glib2-debuginfo <span class="se">\</span>
+glibc-debuginfo gnome-vfs2-debuginfo gtk2-debuginfo gtk2-engines-debuginfo <span class="se">\</span>
+hal-debuginfo libX11-debuginfo libXcursor-debuginfo libXext-debuginfo <span class="se">\</span>
+libXfixes-debuginfo libXft-debuginfo libXi-debuginfo libXinerama-debuginfo <span class="se">\</span>
+libXrender-debuginfo libbonobo-debuginfo libgnome-debuginfo <span class="se">\</span>
+libselinux-debuginfo pango-debuginfo popt-debuginfo scim-bridge-debuginfo
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="debugging-electrolysis-e10s">
+<h2>Debugging electrolysis (e10s)<a class="headerlink" href="#debugging-electrolysis-e10s" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">test</span></code> both accept a <code class="docutils literal notranslate"><span class="pre">--disable-e10s</span></code>
+argument. Some debuggers can’t catch child-process crashes without it.</p>
+<p>You can find some (outdated) information on
+<a class="reference external" href="https://wiki.mozilla.org/Electrolysis/Debugging">https://wiki.mozilla.org/Electrolysis/Debugging</a>. You may also like to
+read
+<a class="reference external" href="https://mikeconley.ca/blog/2014/04/25/electrolysis-debugging-child-processes-of-content-for-make-benefit-glorious-browser-of-firefox">https://mikeconley.ca/blog/2014/04/25/electrolysis-debugging-child-processes-of-content-for-make-benefit-glorious-browser-of-firefox</a>
+for a more up-to-date blog post.</p>
+<p>To get the child process id use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MOZ_DEBUG_CHILD_PROCESS</span><span class="o">=</span><span class="mi">1</span> <span class="n">mach</span> <span class="n">run</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.mozilla.org/En/Debugging">Debugging</a></p></li>
+<li><p><a class="reference external" href="https://wiki.mozilla.org/Performance:Tools">Performance tools</a></p></li>
+<li><p><a class="reference external" href="https://blog.mozilla.com/sfink/2011/02/22/fun-with-gdb/">Fun with
+gdb</a> by
+Steve Fink</p></li>
+<li><p><a class="reference external" href="https://hg.mozilla.org/users/jblandy_mozilla.com/archer-mozilla">Archer pretty printers for
+SpiderMonkey</a>
+(<a class="reference external" href="https://itcouldbesomuchbetter.wordpress.com/2010/12/20/debugging-spidermonkey-with-archer-2/">blog
+post</a>)</p></li>
+<li><p><a class="reference external" href="https://hg.mozilla.org/users/josh_joshmatthews.net/archer-mozilla/">More pretty
+printers</a>
+for Gecko internals (<a class="reference external" href="https://www.joshmatthews.net/blog/2011/06/nscomptr-has-never-been-so-pretty/">blog
+post</a>)</p></li>
+</ul>
+<div class="originaldocinfo docutils container">
+<p class="rubric" id="original-document-information">Original Document Information</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://bonsai-www.mozilla.org/cvslog.cgi?file=mozilla-org/html/unix/debugging-faq.html&amp;rev=&amp;root=/www/">History</a></p></li>
+<li><p>Copyright Information: © 1998-2008 by individual mozilla.org
+contributors; content available under a <a class="reference external" href="https://www.mozilla.org/foundation/licensing/website-content.html">Creative Commons
+license</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging_firefox_with_lldb.html" class="btn btn-neutral float-right" title="Debugging Firefox with LLDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="debugging_a_minidump.html" class="btn btn-neutral float-left" title="Debugging A Minidump" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

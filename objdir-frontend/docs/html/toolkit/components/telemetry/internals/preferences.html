@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Preferences &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Telemetry review guidelines" href="review.html" />
+    <link rel="prev" title="Ping Sender" href="pingsender.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data documentation</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="geckoview-streaming.html">GeckoView Streaming API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geckoview-streaming.html#details">Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mentored-bugs.html">Template for Mentored Bugs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pingsender.html">Ping Sender</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="review.html">Telemetry review guidelines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tests.html">Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>Preferences</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/internals/preferences.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="preferences">
+<h1>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h1>
+<p>Telemetry behaviour is controlled through the mozconfig defines and preferences listed here.</p>
+<div class="section" id="mozconfig-defines">
+<h2>mozconfig Defines<a class="headerlink" href="#mozconfig-defines" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_REPORTING</span></code></p>
+<blockquote>
+<div><p>When Defined (which it is for official builds):</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">RELEASE_OR_BETA</span></code> is not defined, defines <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_ON_BY_DEFAULT</span></code></p></li>
+</ul>
+<p>When Not Defined:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">datareporting.healthreport.uploadEnabled</span></code> is locked, we print a message in the Privacy settings that you cannot turn on data submission and disabled the checkbox so you don’t try.</p></li>
+<li><p>Android: hides the data submission UI to prevent users from thinking they can turn it on</p></li>
+<li><p>Disables Telemetry from being sent (due to <code class="docutils literal notranslate"><span class="pre">Telemetry::IsOfficialTelemetry</span></code>)</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_ON_BY_DEFAULT</span></code></p>
+<blockquote>
+<div><p>When Defined:</p>
+<ul class="simple">
+<li><p>Android: enables <code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code></p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">MOZ_SERVICES_HEALTHREPORT</span></code></p>
+<blockquote>
+<div><p>When Defined (which it is on most platforms):</p>
+<ul class="simple">
+<li><p>Sets <code class="docutils literal notranslate"><span class="pre">datareporting.healthreport.{infoURL|uploadEnabled}</span></code> in <code class="docutils literal notranslate"><span class="pre">modules/libpref/init/all.js</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">MOZ_DATA_REPORTING</span></code></p>
+<blockquote>
+<div><p>When Defined (which it is when <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_REPORTING</span></code>, <code class="docutils literal notranslate"><span class="pre">MOZ_SERVICES_HEALTHREPORT</span></code>, or <code class="docutils literal notranslate"><span class="pre">MOZ_CRASHREPORTER</span></code> is defined (so, on most platforms, but not typically on developer builds)):</p>
+<ul class="simple">
+<li><p>Enables <code class="docutils literal notranslate"><span class="pre">app.shield.optoutstudies.enabled</span></code></p></li>
+</ul>
+<p>When Not Defined:</p>
+<ul class="simple">
+<li><p>Disables <code class="docutils literal notranslate"><span class="pre">app.shield.optoutstudies.enabled</span></code></p></li>
+<li><p>Removes the Data Collection Preferences UI in <code class="docutils literal notranslate"><span class="pre">privacy.xhtml</span></code></p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">MOZILLA_OFFICIAL</span></code></p>
+<blockquote>
+<div><p>When Not Defined (defined on our own external builds and builds from several Linux distros, but not typically on defeloper builds):</p>
+<ul class="simple">
+<li><p>Disables Telemetry from being sent (due to <code class="docutils literal notranslate"><span class="pre">Telemetry::IsOfficialTelemetry</span></code>)</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code></p>
+<blockquote>
+<div><p>When not <code class="docutils literal notranslate"><span class="pre">release</span></code> or <code class="docutils literal notranslate"><span class="pre">beta</span></code>:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_REPORTING</span></code> is also defined, defines <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_ON_BY_DEFAULT</span></code></p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">beta</span></code>:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code> is otherwise unset at startup, <code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code> is defaulted to <code class="docutils literal notranslate"><span class="pre">true</span></code> (this is irrespective of <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_REPORTING</span></code>)</p></li>
+</ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">nightly</span></code> or <code class="docutils literal notranslate"><span class="pre">aurora</span></code> or <code class="docutils literal notranslate"><span class="pre">beta</span></code> or <code class="docutils literal notranslate"><span class="pre">default</span></code>:</p>
+<ul class="simple">
+<li><p>Desktop: Locks <code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. All other values for <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> on Desktop locks <code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p>Desktop: Defaults <code class="docutils literal notranslate"><span class="pre">Telemetry::CanRecordExtended</span></code> (and, thus <code class="docutils literal notranslate"><span class="pre">Telemetry::CanRecordReleaseData</span></code>) to <code class="docutils literal notranslate"><span class="pre">true</span></code>. All other values of <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> on Desktop defaults these to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code></p>
+<blockquote>
+<div><p>When Defined:</p>
+<ul class="simple">
+<li><p>Disables Telemetry from being sent (due to <code class="docutils literal notranslate"><span class="pre">Telemetry::IsOfficialTelemetry</span></code>)</p></li>
+</ul>
+</div></blockquote>
+<p><strong>In Short:</strong></p>
+<blockquote>
+<div><p>For builds downloaded from mozilla.com <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_REPORTING</span></code> is defined, <code class="docutils literal notranslate"><span class="pre">MOZ_TELEMETRY_ON_BY_DEFAULT</span></code> is on if you downloaded Nightly or Developer Edition, <code class="docutils literal notranslate"><span class="pre">MOZ_SERVICES_HEALTHREPORT</span></code> is defined, <code class="docutils literal notranslate"><span class="pre">MOZ_DATA_REPORTING</span></code> is defined, <code class="docutils literal notranslate"><span class="pre">MOZILLA_OFFICIAL</span></code> is defined, <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> is set to the channel you downloaded, and <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> is false. This means Telemetry is, by default, collecting some amount of information and is sending it to Mozilla.</p>
+<p>For builds you make yourself with a blank mozconfig, <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> is set to <code class="docutils literal notranslate"><span class="pre">default</span></code> and everything else is undefined. This means Telemetry is, by default, collecting an extended amount of information but isn’t sending it anywhere.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id1">
+<h2>Preferences<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.unified</span></code></p>
+<blockquote>
+<div><p>This controls whether unified behavior is enabled. If true:</p>
+<ul class="simple">
+<li><p>Telemetry is always enabled and recording <em>base</em> data.</p></li>
+<li><p>Telemetry will send additional <code class="docutils literal notranslate"><span class="pre">main</span></code> pings.</p></li>
+</ul>
+<p>It defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>, but is <code class="docutils literal notranslate"><span class="pre">false</span></code> on Android (Fennec) builds.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.enabled</span></code></p>
+<blockquote>
+<div><p>If <code class="docutils literal notranslate"><span class="pre">unified</span></code> is off, this controls whether the Telemetry module is enabled. It can be set or unset via the <cite>Preferences</cite> dialog in Firefox for Android (Fennec).
+If <code class="docutils literal notranslate"><span class="pre">unified</span></code> is on, this is locked to <code class="docutils literal notranslate"><span class="pre">true</span></code> if <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> is <code class="docutils literal notranslate"><span class="pre">nightly</span></code> or <code class="docutils literal notranslate"><span class="pre">aurora</span></code> or <code class="docutils literal notranslate"><span class="pre">beta</span></code> or <code class="docutils literal notranslate"><span class="pre">default</span></code> (which is the default value of <code class="docutils literal notranslate"><span class="pre">MOZ_UPDATE_CHANNEL</span></code> for developer builds). Otherwise it is locked to <code class="docutils literal notranslate"><span class="pre">false</span></code>. This controls a diminishing number of things and is intended to be deprecated, and then removed.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.healthreport.uploadEnabled</span></code></p>
+<blockquote>
+<div><p>If <code class="docutils literal notranslate"><span class="pre">unified</span></code> is true, this controls whether we send Telemetry data.
+If <code class="docutils literal notranslate"><span class="pre">unified</span></code> is false, we don’t use this value.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.archive.enabled</span></code></p>
+<blockquote>
+<div><p>Allow pings to be archived locally. This can only be enabled if <code class="docutils literal notranslate"><span class="pre">unified</span></code> is on.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.server</span></code></p>
+<blockquote>
+<div><p>The server Telemetry pings are sent to. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.log.level</span></code></p>
+<blockquote>
+<div><p>This sets the Telemetry logging verbosity per <code class="docutils literal notranslate"><span class="pre">Log.jsm</span></code>. The available levels, in descending order of verbosity, are <code class="docutils literal notranslate"><span class="pre">Trace</span></code>, <code class="docutils literal notranslate"><span class="pre">Debug</span></code>, <code class="docutils literal notranslate"><span class="pre">Config</span></code>, <code class="docutils literal notranslate"><span class="pre">Info</span></code>, <code class="docutils literal notranslate"><span class="pre">Warn</span></code>, <code class="docutils literal notranslate"><span class="pre">Error</span></code> and <code class="docutils literal notranslate"><span class="pre">Fatal</span></code> with the default being <code class="docutils literal notranslate"><span class="pre">Warn</span></code>.</p>
+<p>By default logging goes only the console service.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.log.dump</span></code></p>
+<blockquote>
+<div><p>Sets whether to dump Telemetry log messages to <code class="docutils literal notranslate"><span class="pre">stdout</span></code> too.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.shutdownPingSender.enabled</span></code></p>
+<blockquote>
+<div><p>Allow the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> ping to be sent when the browser shuts down, from the second browsing session on, instead of the next restart, using the <a class="reference internal" href="pingsender.html"><span class="doc">ping sender</span></a>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.shutdownPingSender.enabledFirstSession</span></code></p>
+<blockquote>
+<div><p>Allow the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> ping to be sent using the <a class="reference internal" href="pingsender.html"><span class="doc">ping sender</span></a> from the first browsing session.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.firstShutdownPing.enabled</span></code></p>
+<blockquote>
+<div><p>Allow a duplicate of the <code class="docutils literal notranslate"><span class="pre">main</span></code> shutdown ping from the first browsing session to be sent as a separate <code class="docutils literal notranslate"><span class="pre">first-shutdown</span></code> ping.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.newProfilePing.enabled</span></code></p>
+<blockquote>
+<div><p>Enable the <a class="reference internal" href="../data/new-profile-ping.html"><span class="doc">“new-profile” ping</span></a> on new profiles.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.newProfilePing.delay</span></code></p>
+<blockquote>
+<div><p>Controls the delay after which the <a class="reference internal" href="../data/new-profile-ping.html"><span class="doc">“new-profile” ping</span></a> is sent on new profiles.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.updatePing.enabled</span></code></p>
+<blockquote>
+<div><p>Enable the <a class="reference internal" href="../data/update-ping.html"><span class="doc">“update” ping</span></a> on browser updates.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.maxEventSummaryKeys</span></code></p>
+<blockquote>
+<div><p>Set the maximum number of keys per process of the <a class="reference internal" href="../collection/events.html#events-event-summary"><span class="std std-ref">Event Summary</span></a>
+<span class="xref std std-ref">keyed scalars</span>. Default is 500. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.eventping.enabled</span></code></p>
+<blockquote>
+<div><p>Whether the <a class="reference internal" href="../data/event-ping.html"><span class="doc">“event” ping</span></a> is enabled.
+Default is true except for GeckoView where it defaults to false. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.eventping.eventLimit</span></code></p>
+<blockquote>
+<div><p>The maximum number of event records permitted in the <a class="reference internal" href="../data/event-ping.html"><span class="doc">“event” ping</span></a>.
+Default is 1000.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.eventping.minimumFrequency</span></code></p>
+<blockquote>
+<div><p>The minimum frequency at which an <a class="reference internal" href="../data/event-ping.html"><span class="doc">“event” ping</span></a> will be sent.
+Default is 60 (minutes).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.eventping.maximumFrequency</span></code></p>
+<blockquote>
+<div><p>The maximum frequency at which an <a class="reference internal" href="../data/event-ping.html"><span class="doc">“event” ping</span></a> will be sent.
+Default is 10 (minutes).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.ecosystemtelemetry.enabled</span></code></p>
+<blockquote>
+<div><p>Whether <a class="reference internal" href="../data/ecosystem-telemetry.html"><span class="doc">Ecosystem Telemetry</span></a> is enabled.
+Default is false. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.ecosystemtelemetry.allowForNonProductionFx</span></code></p>
+<blockquote>
+<div><p>Whether <a class="reference internal" href="../data/ecosystem-telemetry.html"><span class="doc">Ecosystem Telemetry</span></a> will be submitted if Firefox is
+configured to use non-production FxA servers. Non-production servers includes
+servers run by Mozilla (eg, the “staging” or “dev” instances) and servers run
+externally (eg, self-hosted users). The expectation is that this will
+primarily be used for QA.
+Default is false. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.overrideUpdateChannel</span></code></p>
+<blockquote>
+<div><p>Override the <code class="docutils literal notranslate"><span class="pre">channel</span></code> value that is reported via Telemetry.
+This is useful for distinguishing different types of builds that otherwise still report as the same update channel.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.ipcBatchTimeout</span></code></p>
+<blockquote>
+<div><p>How long, in milliseconds, we batch accumulations from child processes before
+sending them to the parent process.
+Default is 2000 (milliseconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.pioneerId</span></code></p>
+<blockquote>
+<div><p>If a user has opted into the Pioneer program, this will contain their Pioneer ID.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.prioping.enabled</span></code></p>
+<blockquote>
+<div><p>Whether the <a class="reference internal" href="../data/prio-ping.html"><span class="doc">“prio” ping</span></a> is enabled.
+Defaults to true. Change requires restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.prioping.dataLimit</span></code></p>
+<blockquote>
+<div><p>The number of encoded prio payloads which triggers an immediate <a class="reference internal" href="../data/prio-ping.html"><span class="doc">“prio” ping</span></a> with reason “max”.
+Default is 10 payloads.</p>
+</div></blockquote>
+</div>
+<div class="section" id="data-choices-notification">
+<h2>Data-choices notification<a class="headerlink" href="#data-choices-notification" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.reportingpolicy.firstRun</span></code></p>
+<blockquote>
+<div><p>This preference is not present until the first run. After, its value is set to false. This is used to show the infobar with a more aggressive timeout if it wasn’t shown yet.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.firstRunURL</span></code></p>
+<blockquote>
+<div><p>If set, a browser tab will be opened on first run instead of the infobar.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.dataSubmissionEnabled</span></code></p>
+<blockquote>
+<div><p>This is the data submission master kill switch. If disabled, no policy is shown or upload takes place, ever.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.dataSubmissionPolicyNotifiedTime</span></code></p>
+<blockquote>
+<div><p>Records the date user was shown the policy. This preference is also used on Android.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.dataSubmissionPolicyAcceptedVersion</span></code></p>
+<blockquote>
+<div><p>Records the version of the policy notified to the user. This preference is also used on Android.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.dataSubmissionPolicyBypassNotification</span></code></p>
+<blockquote>
+<div><p>Used in tests, it allows to skip the notification check.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.currentPolicyVersion</span></code></p>
+<blockquote>
+<div><p>Stores the current policy version, overrides the default value defined in TelemetryReportingPolicy.jsm.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.minimumPolicyVersion</span></code></p>
+<blockquote>
+<div><p>The minimum policy version that is accepted for the current policy. This can be set per channel.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">datareporting.policy.minimumPolicyVersion.channel-NAME</span></code></p>
+<blockquote>
+<div><p>This is the only channel-specific version that we currently use for the minimum policy version.</p>
+</div></blockquote>
+</div>
+<div class="section" id="geckoview">
+<h2>GeckoView<a class="headerlink" href="#geckoview" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.geckoview.streaming</span></code></p>
+<blockquote>
+<div><p>Whether the GeckoView mode we’re running in is the variety that uses the <a class="reference internal" href="geckoview-streaming.html"><span class="doc">GeckoView Streaming Telemetry API</span></a> or not.
+Defaults to false.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.geckoview.batchDurationMS</span></code></p>
+<blockquote>
+<div><p>The duration in milliseconds over which <a class="reference internal" href="geckoview-streaming.html"><span class="doc">GeckoView Streaming Telemetry</span></a> will batch accumulations before passing it on to its delegate.
+Defaults to 5000.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.geckoview.maxBatchStalenessMS</span></code></p>
+<blockquote>
+<div><p>The maximum time (in milliseconds) between flushes of the
+<a class="reference internal" href="geckoview-streaming.html"><span class="doc">GeckoView Streaming Telemetry</span></a>
+batch to its delegate.
+Defaults to 60000.</p>
+</div></blockquote>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>The following prefs are for testing purpose only.</p>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.initDelay</span></code></p>
+<blockquote>
+<div><p>Delay before initializing telemetry (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.minSubsessionLength</span></code></p>
+<blockquote>
+<div><p>Minimum length of a telemetry subsession and throttling time for common environment changes (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.collectInterval</span></code></p>
+<blockquote>
+<div><p>Minimum interval between data collection (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.scheduler.tickInterval</span></code></p>
+<blockquote>
+<div><p>Interval between scheduler ticks (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.scheduler.idleTickInterval</span></code></p>
+<blockquote>
+<div><p>Interval between scheduler ticks when the user is idle (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.idleTimeout</span></code></p>
+<blockquote>
+<div><p>Timeout until we decide whether a user is idle or not (seconds).</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.modulesPing.interval</span></code></p>
+<blockquote>
+<div><p>Interval between “modules” ping transmissions.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.send.overrideOfficialCheck</span></code></p>
+<blockquote>
+<div><p>If true, allows sending pings on unofficial builds. Requires a restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.testing.overridePreRelease</span></code></p>
+<blockquote>
+<div><p>If true, allows recording opt-in Telemetry on the Release channel. Requires a restart.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.untrustedModulesPing.frequency</span></code></p>
+<blockquote>
+<div><p>Interval, in seconds, between “untrustedModules” ping transmissions.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.healthping.enabled</span></code></p>
+<blockquote>
+<div><p>If false, sending health pings is disabled. Defaults to true.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.testing.disableFuzzingDelay</span></code></p>
+<blockquote>
+<div><p>If true, ping sending is not delayed when sending between 0am and 1am local time.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">toolkit.telemetry.testing.overrideProductsCheck</span></code></p>
+<blockquote>
+<div><p>If true, allow all probes to be recorded no matter what the current product is.</p>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="review.html" class="btn btn-neutral float-right" title="Telemetry review guidelines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pingsender.html" class="btn btn-neutral float-left" title="Ping Sender" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

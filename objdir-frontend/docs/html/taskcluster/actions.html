@@ -1,0 +1,558 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Actions &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release Promotion" href="release-promotion.html" />
+    <link rel="prev" title="Try" href="try.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Actions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defining-action-tasks">Defining Action Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-callback-action">Creating a Callback Action</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-the-action-context">Setting the Action Context</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specifying-an-input-schema">Specifying an Input Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-availability">Conditional Availability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-tasks">Creating Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-information">More Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+      <li>Actions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/actions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="actions">
+<h1>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h1>
+<p>This document shows how to define an action in-tree such that it shows up in
+supported user interfaces like Treeherder. For details on interface between
+in-tree logic and external user interfaces, see <a class="reference external" href="https://firefox-ci-tc.services.mozilla.com/docs/manual/tasks/actions/spec">the actions.json spec</a>.</p>
+<p>At a very high level, the process looks like this:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The decision task produces an artifact, <code class="docutils literal notranslate"><span class="pre">public/actions.json</span></code>, indicating
+what actions are available.</p></li>
+<li><p>A user interface (for example, Treeherder or the Taskcluster tools) consults
+<code class="docutils literal notranslate"><span class="pre">actions.json</span></code> and presents appropriate choices to the user, if necessary
+gathering additional data from the user, such as the number of times to
+re-trigger a test case.</p></li>
+<li><p>The user interface follows the action description to carry out the action.
+In most cases (<code class="docutils literal notranslate"><span class="pre">action.kind</span> <span class="pre">==</span> <span class="pre">'task'</span></code>), that entails creating an “action
+task”, including the provided information. That action task is responsible
+for carrying out the named action, and may create new sub-tasks if necessary
+(for example, to re-trigger a task).</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="defining-action-tasks">
+<h2>Defining Action Tasks<a class="headerlink" href="#defining-action-tasks" title="Permalink to this headline">¶</a></h2>
+<p>There is one options for defining actions: creating a callback action.
+A callback action automatically defines an action task that will invoke a
+Python function of your devising.</p>
+</div>
+<div class="section" id="creating-a-callback-action">
+<h2>Creating a Callback Action<a class="headerlink" href="#creating-a-callback-action" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can generate <code class="docutils literal notranslate"><span class="pre">actions.json</span></code> on the command line with <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">taskgraph</span> <span class="pre">actions</span></code>.</p>
+</div>
+<p>A <em>callback action</em> is an action that calls back into in-tree logic. That is,
+you register the action with name, title, description, context, input schema and a
+python callback. When the action is triggered in a user interface,
+input matching the schema is collected, passed to a new task which then calls
+your python callback, enabling it to do pretty much anything it wants to.</p>
+<p>To create a new callback action you must create a file
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/actions/my-action.py</span></code>, that at minimum contains:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">.registry</span> <span class="kn">import</span> <span class="n">register_callback_action</span>
+
+<span class="nd">@register_callback_action</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Say Hello&#39;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;hw&#39;</span><span class="p">,</span>  <span class="c1"># Show the callback task in treeherder as &#39;hw&#39;</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Simple **proof-of-concept** callback action&quot;</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>  <span class="c1"># Order in which it should appear relative to other actions</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello_world_action</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">graph_config</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">task_group_id</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello was triggered from taskGroupId: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_group_id</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The arguments are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">parameters</span></code></dt><dd><p>an instance of <code class="docutils literal notranslate"><span class="pre">taskgraph.parameters.Parameters</span></code>, carrying decision task parameters from the original decision task.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">graph_config</span></code></dt><dd><p>an instance of <code class="docutils literal notranslate"><span class="pre">taskgraph.config.GraphConfig</span></code>, carrying configuration for this tree</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">input</span></code></dt><dd><p>the input from the user triggering the action (if any)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_group_id</span></code></dt><dd><p>the target task group on which this action should operate</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task_id</span></code></dt><dd><p>the target task on which this action should operate (or None if it is operating on the whole group)</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">task</span></code></dt><dd><p>the definition of the target task (or None, as for <code class="docutils literal notranslate"><span class="pre">task_id</span></code>)</p>
+</dd>
+</dl>
+<p>The example above defines an action that is available in the context-menu for
+the entire task-group (result-set or push in Treeherder terminology). To create
+an action that shows up in the context menu for a task we would specify the
+<code class="docutils literal notranslate"><span class="pre">context</span></code> parameter.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">order</span></code> value is the sort key defining the order of actions in the
+resulting <code class="docutils literal notranslate"><span class="pre">actions.json</span></code> file.  If multiple actions have the same name and
+match the same task, the action with the smallest <code class="docutils literal notranslate"><span class="pre">order</span></code> will be used.</p>
+<div class="section" id="setting-the-action-context">
+<h3>Setting the Action Context<a class="headerlink" href="#setting-the-action-context" title="Permalink to this headline">¶</a></h3>
+<p>The context parameter should be a list of tag-sets, such as
+<code class="docutils literal notranslate"><span class="pre">context=[{&quot;platform&quot;:</span> <span class="pre">&quot;linux&quot;}]</span></code>, which will make the task show up in the
+context-menu for any task with <code class="docutils literal notranslate"><span class="pre">task.tags.platform</span> <span class="pre">=</span> <span class="pre">'linux'</span></code>. Below is
+some examples of context parameters and the resulting conditions on
+<code class="docutils literal notranslate"><span class="pre">task.tags</span></code> (tags used below are just illustrative).</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">context=[{&quot;platform&quot;:</span> <span class="pre">&quot;linux&quot;}]</span></code>:</dt><dd><p>Requires <code class="docutils literal notranslate"><span class="pre">task.tags.platform</span> <span class="pre">=</span> <span class="pre">'linux'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context=[{&quot;kind&quot;:</span> <span class="pre">&quot;test&quot;,</span> <span class="pre">&quot;platform&quot;:</span> <span class="pre">&quot;linux&quot;}]</span></code>:</dt><dd><p>Requires <code class="docutils literal notranslate"><span class="pre">task.tags.platform</span> <span class="pre">=</span> <span class="pre">'linux'</span></code> <strong>and</strong> <code class="docutils literal notranslate"><span class="pre">task.tags.kind</span> <span class="pre">=</span> <span class="pre">'test'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context=[{&quot;kind&quot;:</span> <span class="pre">&quot;test&quot;},</span> <span class="pre">{&quot;platform&quot;:</span> <span class="pre">&quot;linux&quot;}]</span></code>:</dt><dd><p>Requires <code class="docutils literal notranslate"><span class="pre">task.tags.platform</span> <span class="pre">=</span> <span class="pre">'linux'</span></code> <strong>or</strong> <code class="docutils literal notranslate"><span class="pre">task.tags.kind</span> <span class="pre">=</span> <span class="pre">'test'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context=[{}]</span></code>:</dt><dd><p>Requires nothing and the action will show up in the context menu for all tasks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">context=[]</span></code>:</dt><dd><p>Is the same as not setting the context parameter, which will make the action
+show up in the context menu for the task-group.
+(i.e., the action is not specific to some task)</p>
+</dd>
+</dl>
+<p>The example action below will be shown in the context-menu for tasks with
+<code class="docutils literal notranslate"><span class="pre">task.tags.platform</span> <span class="pre">=</span> <span class="pre">'linux'</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">registry</span> <span class="kn">import</span> <span class="n">register_callback_action</span>
+
+<span class="nd">@register_callback_action</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;retrigger&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Retrigger&#39;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;re-c&#39;</span><span class="p">,</span>  <span class="c1"># Show the callback task in treeherder as &#39;re-c&#39;</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Create a clone of the task&quot;</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;platform&#39;</span><span class="p">:</span> <span class="s1">&#39;linux&#39;</span><span class="p">}]</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">retrigger_action</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">graph_config</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">task_group_id</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+    <span class="c1"># input will be None</span>
+    <span class="nb">print</span> <span class="s2">&quot;Retriggering: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="s2">&quot;task definition: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">context</span></code> parameter is set, the <code class="docutils literal notranslate"><span class="pre">task_id</span></code> and <code class="docutils literal notranslate"><span class="pre">task</span></code> parameters
+will provided to the callback. In this case the <code class="docutils literal notranslate"><span class="pre">task_id</span></code> and <code class="docutils literal notranslate"><span class="pre">task</span></code>
+parameters will be the <code class="docutils literal notranslate"><span class="pre">taskId</span></code> and <em>task definition</em> of the task from whose
+context-menu the action was triggered.</p>
+<p>Typically, the <code class="docutils literal notranslate"><span class="pre">context</span></code> parameter is used for actions that operate on
+tasks, such as retriggering, running a specific test case, creating a loaner,
+bisection, etc. You can think of the context as a place the action should
+appear, but it’s also very much a form of input the action can use.</p>
+</div>
+<div class="section" id="specifying-an-input-schema">
+<h3>Specifying an Input Schema<a class="headerlink" href="#specifying-an-input-schema" title="Permalink to this headline">¶</a></h3>
+<p>In call examples so far the <code class="docutils literal notranslate"><span class="pre">input</span></code> parameter for the callbacks has been
+<code class="docutils literal notranslate"><span class="pre">None</span></code>. To make an action that takes input you must specify an input schema.
+This is done by passing a JSON schema as the <code class="docutils literal notranslate"><span class="pre">schema</span></code> parameter.</p>
+<p>When designing a schema for the input it is important to exploit as many of the
+JSON schema validation features as reasonably possible. Furthermore, it is
+<em>strongly</em> encouraged that the <code class="docutils literal notranslate"><span class="pre">title</span></code> and <code class="docutils literal notranslate"><span class="pre">description</span></code> properties in
+JSON schemas is used to provide a detailed explanation of what the input
+value will do. Authors can reasonably expect JSON schema <code class="docutils literal notranslate"><span class="pre">description</span></code>
+properties to be rendered as markdown before being presented.</p>
+<p>The example below illustrates how to specify an input schema. Notice that while
+this example doesn’t specify a <code class="docutils literal notranslate"><span class="pre">context</span></code> it is perfectly legal to specify
+both <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">context</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">registry</span> <span class="kn">import</span> <span class="n">register_callback_action</span>
+
+<span class="nd">@register_callback_action</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;run-all&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Run All Tasks&#39;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;ra-c&#39;</span><span class="p">,</span>  <span class="c1"># Show the callback task in treeherder as &#39;ra-c&#39;</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;**Run all tasks** that have been _optimized_ away.&quot;</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nb">input</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Action Options&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Options for how you wish to run all tasks&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;priority&#39;</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Priority that should be given to the tasks&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;enum&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;runTalos&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Run Talos&#39;</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Do you wish to also include talos tasks?&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;boolean&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="s1">&#39;false&#39;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">,</span> <span class="s1">&#39;runTalos&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;additionalProperties&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">retrigger_action</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">graph_config</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">task_group_id</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s2">&quot;Create all pruned tasks with priority: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">input</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">input</span><span class="p">[</span><span class="s1">&#39;runTalos&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span> <span class="s2">&quot;Also running talos jobs...&quot;</span>
+</pre></div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">schema</span></code> parameter is given the callback will always be called with
+an <code class="docutils literal notranslate"><span class="pre">input</span></code> parameter that satisfies the previously given JSON schema.
+It is encouraged to set <code class="docutils literal notranslate"><span class="pre">additionalProperties:</span> <span class="pre">false</span></code>, as well as specifying
+all properties as <code class="docutils literal notranslate"><span class="pre">required</span></code> in the JSON schema. Furthermore, it’s good
+practice to provide <code class="docutils literal notranslate"><span class="pre">default</span></code> values for properties, as user interface generators
+will often take advantage of such properties.</p>
+<p>It is possible to specify the <code class="docutils literal notranslate"><span class="pre">schema</span></code> parameter as a callable that returns
+the JSON schema. It will be called with a keyword parameter <code class="docutils literal notranslate"><span class="pre">graph_config</span></code>
+with the <cite>graph configuration &lt;taskgraph-graph-config&gt;</cite> of the current
+taskgraph.</p>
+<p>Once you have specified input and context as applicable for your action you can
+do pretty much anything you want from within your callback. Whether you want
+to create one or more tasks or run a specific piece of code like a test.</p>
+</div>
+<div class="section" id="conditional-availability">
+<h3>Conditional Availability<a class="headerlink" href="#conditional-availability" title="Permalink to this headline">¶</a></h3>
+<p>The decision parameters <code class="docutils literal notranslate"><span class="pre">taskgraph.parameters.Parameters</span></code> passed to
+the callback are also available when the decision task generates the list of
+actions to be displayed in the user interface. When registering an action
+callback the <code class="docutils literal notranslate"><span class="pre">availability</span></code> option can be used to specify a callable
+which, given the decision parameters, determines if the action should be available.
+The feature is illustrated below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">registry</span> <span class="kn">import</span> <span class="n">register_callback_action</span>
+
+<span class="nd">@register_callback_action</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Say Hello&#39;</span><span class="p">,</span>
+    <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;hw&#39;</span><span class="p">,</span>  <span class="c1"># Show the callback task in treeherder as &#39;hw&#39;</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Simple **proof-of-concept** callback action&quot;</span><span class="p">,</span>
+    <span class="n">order</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="c1"># Define an action that is only included if this is a push to try</span>
+    <span class="n">available</span><span class="o">=</span><span class="k">lambda</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;try&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">try_only_action</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">graph_config</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">task_group_id</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="s2">&quot;My try-only action&quot;</span>
+</pre></div>
+</div>
+<p>Properties of <code class="docutils literal notranslate"><span class="pre">parameters</span></code>  are documented in the
+<a class="reference internal" href="parameters.html"><span class="doc">parameters section</span></a>. You can also examine the
+<code class="docutils literal notranslate"><span class="pre">parameters.yml</span></code> artifact created by decisions tasks.</p>
+<p>Context can be similarly conditionalized by passing a function which returns
+the appropriate context:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">context</span><span class="o">=</span><span class="k">lambda</span> <span class="n">params</span><span class="p">:</span>
+    <span class="p">[{}]</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;level&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="p">[{</span><span class="s1">&#39;worker-implementation&#39;</span><span class="p">:</span> <span class="s1">&#39;docker-worker&#39;</span><span class="p">}],</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-tasks">
+<h2>Creating Tasks<a class="headerlink" href="#creating-tasks" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">create_tasks</span></code> utility function provides a full-featured way to create
+new tasks.  Its features include creating prerequisite tasks, operating in a
+“testing” mode with <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">taskgraph</span> <span class="pre">test-action-callback</span></code>, and generating
+artifacts that can be used by later action tasks to figure out what happened.
+See the source for more detailed docmentation.</p>
+<p>The artifacts are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">task-graph.json</span></code> (or <code class="docutils literal notranslate"><span class="pre">task-graph-&lt;suffix&gt;.json</span></code>:</dt><dd><p>The graph of all tasks created by the action task. Includes tasks
+created to satisfy requirements.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">to-run.json</span></code> (or <code class="docutils literal notranslate"><span class="pre">to-run-&lt;suffix&gt;.json</span></code>:</dt><dd><p>The set of tasks that the action task requested to build. This does not
+include the requirements.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">label-to-taskid.json</span></code> (or <code class="docutils literal notranslate"><span class="pre">label-to-taskid-&lt;suffix&gt;.json</span></code>:</dt><dd><p>This is the mapping from label to <code class="docutils literal notranslate"><span class="pre">taskid</span></code> for all tasks involved in
+the task-graph. This includes dependencies.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="more-information">
+<h2>More Information<a class="headerlink" href="#more-information" title="Permalink to this headline">¶</a></h2>
+<p>For further details on actions in general, see <a class="reference external" href="https://firefox-ci-tc.services.mozilla.com/docs/manual/tasks/actions/spec">the actions.json spec</a>.
+The hooks used for in-tree actions are set up by <a class="reference external" href="http://hg.mozilla.org/ci/ci-admin/">ci-admin</a> based on configuration in <a class="reference external" href="http://hg.mozilla.org/ci/ci-configuration/">ci-configuration</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="release-promotion.html" class="btn btn-neutral float-right" title="Release Promotion" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="try.html" class="btn btn-neutral float-left" title="Try" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

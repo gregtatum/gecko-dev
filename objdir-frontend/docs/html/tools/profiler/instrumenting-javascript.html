@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Instrumenting JavaScript &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Instrumenting Rust" href="instrumenting-rust.html" />
+    <link rel="prev" title="Instrumenting Java" href="instrumenting-java.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gecko Profiler</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="buffer.html">Buffers and Memory Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ci-automation.html">CI Automation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrumenting-java.html">Instrumenting Java</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Instrumenting JavaScript</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#markers-in-browser-chrome">Markers in Browser Chrome</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#markers-in-content-code">Markers in Content Code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="instrumenting-rust.html">Instrumenting Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jstracer.html">JS Tracer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LUL.html">LUL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers-guide.html">Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">Profiling Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registering-threads.html">Registering Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samples-stackwalking.html">Samples and Stack Walking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialization.html">Serialization</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Gecko Profiler</a> &raquo;</li>
+        
+      <li>Instrumenting JavaScript</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tools/profiler/instrumenting-javascript.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="instrumenting-javascript">
+<h1>Instrumenting JavaScript<a class="headerlink" href="#instrumenting-javascript" title="Permalink to this headline">¶</a></h1>
+<p>There are multiple ways to use the profiler with JavaScript. There is the “JavaScript”
+profiler feature (via <a class="reference external" href="about:profiling">about:profiling</a>), which enables stack walking for JavaScript code.
+This is most likely turned on already for every profiler preset.</p>
+<p>In addition, markers can be created to specifically marker an instant in time, or a
+duration. This can be helpful to make sense of a particular piece of the front-end,
+or record events that normally wouldn’t show up in samples.</p>
+<div class="section" id="markers-in-browser-chrome">
+<h2>Markers in Browser Chrome<a class="headerlink" href="#markers-in-browser-chrome" title="Permalink to this headline">¶</a></h2>
+<p>If you have access to ChromeUtils, then adding a marker is relatively easily.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Add an instant marker, representing a single point in time</span>
+<span class="nx">ChromeUtils</span><span class="p">.</span><span class="nx">addProfilerMarker</span><span class="p">(</span><span class="s2">&quot;MarkerName&quot;</span><span class="p">);</span>
+
+<span class="c1">// Add a duration marker, representing a span of time.</span>
+<span class="kr">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">Cu</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="nx">doWork</span><span class="p">();</span>
+<span class="nx">ChromeUtils</span><span class="p">.</span><span class="nx">addProfilerMarker</span><span class="p">(</span><span class="s2">&quot;MarkerName&quot;</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">);</span>
+
+<span class="c1">// Add a duration marker, representing a span of time, with some additional tex</span>
+<span class="kr">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">Cu</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="nx">doWork</span><span class="p">();</span>
+<span class="nx">ChromeUtils</span><span class="p">.</span><span class="nx">addProfilerMarker</span><span class="p">(</span><span class="s2">&quot;MarkerName&quot;</span><span class="p">,</span> <span class="nx">startTime</span><span class="p">,</span> <span class="s2">&quot;Details about this event&quot;</span><span class="p">);</span>
+
+<span class="c1">// Add an instant marker, with some additional tex</span>
+<span class="kr">const</span> <span class="nx">startTime</span> <span class="o">=</span> <span class="nx">Cu</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="nx">doWork</span><span class="p">();</span>
+<span class="nx">ChromeUtils</span><span class="p">.</span><span class="nx">addProfilerMarker</span><span class="p">(</span><span class="s2">&quot;MarkerName&quot;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="s2">&quot;Details about this event&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="markers-in-content-code">
+<h2>Markers in Content Code<a class="headerlink" href="#markers-in-content-code" title="Permalink to this headline">¶</a></h2>
+<p>If instrumenting content code, then the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API">UserTiming</a> API is the best bet.
+<code class="code docutils literal notranslate"><span class="pre">performance.mark</span></code> will create an instant marker, and a <code class="code docutils literal notranslate"><span class="pre">performance.measure</span></code>
+will create a duration marker. These markers will show up under UserTiming in
+the profiler UI.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Create an instant marker.</span>
+<span class="nx">performance</span><span class="p">.</span><span class="nx">mark</span><span class="p">(</span><span class="s2">&quot;InstantMarkerName&quot;</span><span class="p">);</span>
+
+<span class="nx">doWork</span><span class="p">();</span>
+
+<span class="c1">// Measuring with the performance API will also create duration markers.</span>
+<span class="nx">performance</span><span class="p">.</span><span class="nx">measure</span><span class="p">(</span><span class="s2">&quot;DurationMarkerName&quot;</span><span class="p">,</span> <span class="s2">&quot;InstantMarkerName&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="instrumenting-rust.html" class="btn btn-neutral float-right" title="Instrumenting Rust" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="instrumenting-java.html" class="btn btn-neutral float-left" title="Instrumenting Java" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

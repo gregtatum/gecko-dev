@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugging Firefox with rr &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugging Firefox with Valgrind" href="debugging_firefox_with_valgrind.html" />
+    <link rel="prev" title="Debugging Firefox with LLDB" href="debugging_firefox_with_lldb.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capturing_minidump.html">Capturing a minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_gdb.html">Debugging Firefox with GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Debugging Firefox with rr</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recording-firefox">Recording Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sigsys">SIGSYS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recording-test-suites">Recording test suites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recording-firefox-in-e10s-mode">Recording Firefox in e10s mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_report.html">How to get a stacktrace for a bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/artifact_builds.html">Understanding Artifact Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/building_mobile_firefox.html">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>Debugging Firefox with rr</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/debugging/debugging_firefox_with_rr.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging-firefox-with-rr">
+<h1>Debugging Firefox with rr<a class="headerlink" href="#debugging-firefox-with-rr" title="Permalink to this headline">¶</a></h1>
+<p>This page is intended to help Firefox/Gecko developers get started using rr to debug Firefox.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>You must have Linux installed with a recent kernel. If you’re not running Linux already, an option is set up a virtual machine in which to record Firefox. Be forewarned though that</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>rr requires a VM hypervisor that virtualizes CPU performance counters. VMWare Workstation supports that.</p></li>
+<li><p>there’s a 20% or so performance hit from running in a VM; generally speaking recorder overhead increases from ~1.2x to ~1.4x. (It’s a feather in the cap of the hypervisor authors that the hit is that small, though!)</p></li>
+<li><p>Some features (reverse execution) <a class="reference external" href="https://robert.ocallahan.org/2014/09/vmware-cpuid-conditional-branch.html">may not work well in VMWare</a> due to a VMWare optimization that can be disabled <a class="reference external" href="http://robert.ocallahan.org/2015/11/rr-in-vmware-solved.html">this way</a>.</p></li>
+</ul>
+</div></blockquote>
+<p>Ensure that you’ve <a class="reference external" href="http://rr-project.org/">installed</a> or <a class="reference external" href="https://github.com/mozilla/rr/wiki/Building-And-Installing">built</a> rr and have <a class="reference external" href="https://github.com/mozilla/rr/wiki/Usage">used it successfully</a>.</p>
+<p>Firefox developers are strongly encouraged to build rr from source. If your Firefox patch triggers a bug in rr, rr developers will fix that bug with high priority. You might be able to pull a fix within a few hours or days instead of waiting for the next release.</p>
+</div>
+<div class="section" id="recording-firefox">
+<h2>Recording Firefox<a class="headerlink" href="#recording-firefox" title="Permalink to this headline">¶</a></h2>
+<p>To record Firefox running normally, simply launch it under rr as you would if running it under valgrind or gdb</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ rr <span class="nv">$ff</span>-objdir/dist/bin/firefox ...
+</pre></div>
+</div>
+<p>This will save a trace to your working directory as described in the <a class="reference external" href="https://github.com/mozilla/rr/wiki/Usage">usage instructions</a>. Please refer to <a class="reference external" href="https://github.com/mozilla/rr/wiki/Usage">those instructions</a> for details on how to debug the recording, which isn’t covered in this document.</p>
+</div>
+<div class="section" id="sigsys">
+<h2>SIGSYS<a class="headerlink" href="#sigsys" title="Permalink to this headline">¶</a></h2>
+<p>When recording and replaying Firefox running with the Linux sandbox, you will get SIGSYS signals frequently. This is expected behavior caused by the sandbox. In gdb, use handle SIGSYS noprint nostop to suppress the signals.</p>
+</div>
+<div class="section" id="recording-test-suites">
+<h2>Recording test suites<a class="headerlink" href="#recording-test-suites" title="Permalink to this headline">¶</a></h2>
+<p>You can use the test runners’ –debugger feature to punch rr down through the layers of python script to where Firefox is launched. This is used in the same way you would use –debugger to run valgrind or gdb, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./mach mochitest --debugger<span class="o">=</span>rr ...
+</pre></div>
+</div>
+<p>The test harnesses disable the slow-script timeout when the –debugger argument is passed. That’s usually sensible, because you don’t want those warnings being generated while Firefox is stopped in gdb. However, this has been <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=986673">observed to change Gecko behavior</a>. rr doesn’t need to have the slow-script timeout disabled, so to avoid those kinds of pitfalls, pass the –slowscript argument to the test harness.</p>
+<p>To run rr in chaos mode:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./mach mochitest --debugger<span class="o">=</span>rr --debugger-args<span class="o">=</span><span class="s2">&quot;record --chaos&quot;</span>
+</pre></div>
+</div>
+<p>You can also run the entire test harness in rr:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ rr ./mach mochitest ...
+</pre></div>
+</div>
+<p>The trace will contain many processes, so to debug the correct one, you’ll want to use rr ps or rr replay -p firefox etc.</p>
+</div>
+<div class="section" id="recording-firefox-in-e10s-mode">
+<h2>Recording Firefox in e10s mode<a class="headerlink" href="#recording-firefox-in-e10s-mode" title="Permalink to this headline">¶</a></h2>
+<p>rr should work out of the box with multi-process Firefox. Once you have a recording you can use rr ps to show all the process that were recorded and rr replay -p &lt;pid&gt; to attach to a particular process.</p>
+<p>You can combine that with the -M and -g flags to jump to a particular point in a particular process’s lifetime.
+Get help!</p>
+<p>If you encounter a problem with rr, please <a class="reference external" href="https://github.com/mozilla/rr/issues">file an issue</a>. Firefox bugs are high priority, so usually your issue can be fixed very quickly.</p>
+<p>If you want to chat with rr developers, because you need more help or want to contribute or want to complain, we hang out in the <a class="reference external" href="https://chat.mozilla.org/#/room/#rr:mozilla.org">#rr channel</a>.</p>
+<p>You also may find <a class="reference external" href="https://github.com/mozilla/rr/wiki/Debugging-protips">these debugging protips</a> helpful, though many are for rr developers, not users.</p>
+<p>Happy debugging!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging_firefox_with_valgrind.html" class="btn btn-neutral float-right" title="Debugging Firefox with Valgrind" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="debugging_firefox_with_lldb.html" class="btn btn-neutral float-left" title="Debugging Firefox with LLDB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

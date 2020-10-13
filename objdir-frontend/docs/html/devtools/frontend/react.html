@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Intro &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Guidelines for Writing React" href="react-guidelines.html" />
+    <link rel="prev" title="Panel SVGs" href="svgs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#frontend">Frontend</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="svgs.html">Panel SVGs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">React</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rendering-and-updating-components">Rendering and Updating Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dom-diffing">DOM Diffing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#next">Next</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="react-guidelines.html">React Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux.html">Redux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux-guidelines.html">Redux Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html">Current DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#scope-of-the-devtools-csp">Scope of the DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#recognizing-csp-issues">Recognizing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#fixing-csp-issues">Fixing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#fixing-csp-issues-in-tests">Fixing CSP issues in tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Quick Intro</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/frontend/react.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>We use <a class="reference external" href="http://facebook.github.io/react/">React</a> to write our user
+interfaces. In here you can find an explanation of why we chose React
+and a short primer on it. Additionally, we list best practices that
+all devtools code should adhere to when writing React.</p>
+<div class="section" id="quick-intro">
+<h1>Quick Intro<a class="headerlink" href="#quick-intro" title="Permalink to this headline">¶</a></h1>
+<p>This is a very quick introduction on how to <em>use</em> React, but does not
+explain in-depth the concepts behind it. If you want more in-depth
+articles, I recommend the following links:</p>
+<ul class="simple">
+<li><p>http://facebook.github.io/react/docs/tutorial.html - the official tutorial</p></li>
+<li><p>https://github.com/petehunt/react-howto - how to learn React</p></li>
+<li><p>http://jlongster.com/Removing-User-Interface-Complexity,-or-Why-React-is-Awesome - long read but explains the concepts in depth</p></li>
+</ul>
+<p>React embraces components as a way of thinking about UIs. Components
+are the center of everything: they are composable like functions,
+testable like JSON data, and provide lifecycle APIs for more complex
+scenarios.</p>
+<p>A component can represent anything from a single item in a list to a
+complete virtualized grid that is made up of sub-components. They can
+be used to abstract out “behaviors” instead of UI elements (think of a
+<code class="docutils literal notranslate"><span class="pre">Selectable</span></code> component). React’s API makes it easy to break up your UI
+into whatever abstractions you need.</p>
+<p>The core idea of a component is simple: it’s something that takes
+properties and returns a DOM-like structure.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Item</span><span class="p">({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">iconURL</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">div</span><span class="p">({</span> <span class="nx">className</span><span class="o">:</span> <span class="s2">&quot;item&quot;</span> <span class="p">},</span>
+             <span class="nx">img</span><span class="p">({</span> <span class="nx">className</span><span class="o">:</span> <span class="s2">&quot;icon&quot;</span><span class="p">,</span> <span class="nx">href</span><span class="o">:</span> <span class="nx">iconURL</span> <span class="p">}),</span>
+             <span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">div</span></code> and <code class="docutils literal notranslate"><span class="pre">span</span></code> functions refer to <code class="docutils literal notranslate"><span class="pre">React.DOM.div</span></code> and
+<code class="docutils literal notranslate"><span class="pre">React.DOM.span</span></code>. React provides constructors for all DOM elements on
+<code class="docutils literal notranslate"><span class="pre">React.DOM</span></code>. These conform to the standard API for creating elements:
+the first argument takes properties, and the rest are children.</p>
+<p>You can see component composition kick in when using <code class="docutils literal notranslate"><span class="pre">Item</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">Item</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createFactory</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./Item&#39;</span><span class="p">));</span>
+
+<span class="kd">function</span> <span class="nx">List</span><span class="p">({</span> <span class="nx">items</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">div</span><span class="p">({</span> <span class="nx">className</span><span class="o">:</span> <span class="s2">&quot;list&quot;</span> <span class="p">},</span>
+             <span class="nx">items</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">Item</span><span class="p">({</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">icon</span><span class="o">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">iconURL</span><span class="p">)));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can use custom components exactly the same way you use native
+ones! The only difference is we wrapped it in a factory when importing
+instead of using the React.DOM functions. Factories are just a way of
+turning a component into a convenient function. Without factories, you
+need to do do <code class="docutils literal notranslate"><span class="pre">React.createElement(Item,</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">})</span></code>, which is exactly
+the same as <code class="docutils literal notranslate"><span class="pre">Item({</span> <span class="pre">...</span> <span class="pre">})</span></code> if using a factory.</p>
+<div class="section" id="rendering-and-updating-components">
+<h2>Rendering and Updating Components<a class="headerlink" href="#rendering-and-updating-components" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have some components, how do we render them? You use
+<code class="docutils literal notranslate"><span class="pre">React.render</span></code> for that:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Dubois&quot;</span><span class="p">,</span> <span class="nx">iconURL</span><span class="o">:</span> <span class="s2">&quot;dubois.png&quot;</span> <span class="p">},</span>
+             <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Ivy&quot;</span><span class="p">,</span> <span class="nx">iconURL</span><span class="o">:</span> <span class="s2">&quot;ivy.png&quot;</span> <span class="p">}];</span>
+
+<span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">List</span><span class="p">({</span> <span class="nx">items</span><span class="o">:</span> <span class="nx">items</span> <span class="p">}),</span>
+             <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#mount&quot;</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This renders a <code class="docutils literal notranslate"><span class="pre">List</span></code> component, given <code class="docutils literal notranslate"><span class="pre">items</span></code>, to a DOM node with an
+id of <code class="docutils literal notranslate"><span class="pre">mount</span></code>. Typically you have a top-level <code class="docutils literal notranslate"><span class="pre">App</span></code> component that is
+the root of everything, and you would render it like so.</p>
+<p>What about updating? First, let’s talk about data. The above
+components take data from above and render out DOM structure. If any
+user events were involved, the components would call callbacks passed
+as props, so events walk back up the hierarchy. The conceptual model
+is data goes down, and events come up.</p>
+<p>You usually want to change data in response to events, and rerender
+the UI with the new data. What does that look like? There are two
+places where React will rerender components:</p>
+<p>1. Any additional <code class="docutils literal notranslate"><span class="pre">React.render</span></code> calls. Once a component is mounted,
+you can call <code class="docutils literal notranslate"><span class="pre">React.render</span></code> again to the same place and React will see
+that it’s already mounted and perform an update instead of a full
+render. For example, this code adds an item in response to an event
+and updates the UI, and will perform optimal incremental updates:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">addItem</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">([...</span><span class="nx">items</span><span class="p">,</span> <span class="nx">item</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">render</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">React</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">List</span><span class="p">({</span> <span class="nx">items</span><span class="o">:</span> <span class="nx">items</span><span class="p">,</span>
+                      <span class="nx">onAddItem</span><span class="o">:</span> <span class="nx">addItem</span> <span class="p">}),</span>
+               <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;#mount&quot;</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="nx">render</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>2. Changing component local state. This is much more common. React
+allows components to have local state, and whenever the state is
+changed with the <code class="docutils literal notranslate"><span class="pre">setState</span></code> API it will rerender that specific
+component. If you use component local state, you need to create a
+component with <code class="docutils literal notranslate"><span class="pre">createClass</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+  <span class="nx">getInitialState</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="nx">items</span><span class="o">:</span> <span class="p">[]</span> <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="nx">handleAddItem</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[...</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span> <span class="nx">item</span><span class="p">];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">items</span><span class="o">:</span> <span class="nx">items</span> <span class="p">});</span>
+  <span class="p">},</span>
+
+  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">List</span><span class="p">({</span> <span class="nx">items</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">items</span><span class="p">,</span>
+                  <span class="nx">onAddItem</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleAddItem</span> <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If you are using something like Redux to manage state this is handled
+automatically for you with the library you use to bind Redux with
+React. See more in <a class="reference external" href="redux.html">Redux</a>.</p>
+</div>
+<div class="section" id="dom-diffing">
+<h2>DOM Diffing<a class="headerlink" href="#dom-diffing" title="Permalink to this headline">¶</a></h2>
+<p>What does it mean when React “updates” a component, and how does it
+know which DOM to change? React achieves this with a technique called
+DOM diffing. This alleviates the need for the programmer to worry
+about how updates are actually applied to the DOM, and components can
+render DOM structure declaratively in response to data. In the above
+examples, when adding an item, React knows to only add a new DOM node
+instead of recreating the whole list each time.</p>
+<p>DOM diffing is possible because our components return what’s called
+“virtual DOM”: a lightweight JSON structure that React can use to diff
+against previous versions, and generate minimal changes to the real DOM.</p>
+<p>This also makes it really east to test components with a real DOM:
+just make sure the virtual DOM has what it should.</p>
+</div>
+<div class="section" id="next">
+<h2>Next<a class="headerlink" href="#next" title="Permalink to this headline">¶</a></h2>
+<p>Read the <a class="reference internal" href="react-guidelines.html"><span class="doc">React Guidelines</span></a> next to learn how to
+write React code specifically for the devtools.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="react-guidelines.html" class="btn btn-neutral float-right" title="Guidelines for Writing React" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="svgs.html" class="btn btn-neutral float-left" title="Panel SVGs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

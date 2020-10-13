@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started with GeckoView &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Interacting with Web content" href="web-extensions.html" />
+    <link rel="prev" title="Using GeckoView" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Using GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#usage-documentation">Usage Documentation</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Getting Started with GeckoView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web-extensions.html">Interacting with Web content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="permissions.html">Working with Site Permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html">Configuring GeckoView for Automation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributor/index.html">Contributing to GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Using GeckoView</a> &raquo;</li>
+        
+      <li>Getting Started with GeckoView</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/consumer/geckoview-quick-start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started-with-geckoview">
+<h1>Getting Started with GeckoView<a class="headerlink" href="#getting-started-with-geckoview" title="Permalink to this headline">¶</a></h1>
+<p>How to use GeckoView in your Android app.</p>
+<p><em>Building a browser? Check out</em> <a class="reference external" href="https://mozilla-mobile.github.io/android-components/">Android Components</a>, <em>our collection of ready-to-use support libraries!</em></p>
+<p>The following article is a brief guide to embedding GeckoView in an app. For a more in depth tutorial on getting started with GeckoView please read the article we have published on <a class="reference external" href="https://www.raywenderlich.com/1381698-android-tutorial-for-geckoview-getting-started">raywenderlich.com</a>.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#configure-gradle" id="id1">Configure Gradle</a></p></li>
+<li><p><a class="reference internal" href="#add-geckoview-to-a-layout" id="id2">Add GeckoView to a Layout</a></p></li>
+<li><p><a class="reference internal" href="#initialize-geckoview-in-an-activity" id="id3">Initialize GeckoView in an Activity</a></p></li>
+<li><p><a class="reference internal" href="#you-re-done" id="id4">You’re done!</a></p></li>
+</ul>
+</div>
+<div class="section" id="configure-gradle">
+<h2><a class="toc-backref" href="#id1">Configure Gradle</a><a class="headerlink" href="#configure-gradle" title="Permalink to this headline">¶</a></h2>
+<p>You need to add or edit four stanzas inside your module’s <code class="docutils literal notranslate"><span class="pre">build.gradle</span></code> file.</p>
+<p><strong>1. Set the GeckoView version</strong></p>
+<p><em>Like Firefox, GeckoView has three release channels: Stable, Beta, and Nightly. Browse the</em> <a class="reference external" href="https://maven.mozilla.org/?prefix=maven2/org/mozilla/geckoview/">Maven Repository</a> <em>to see currently available builds.</em></p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">ext</span> <span class="o">{</span>
+    <span class="n">geckoviewChannel</span> <span class="o">=</span> <span class="s2">&quot;nightly&quot;</span>
+    <span class="n">geckoviewVersion</span> <span class="o">=</span> <span class="s2">&quot;70.0.20190712095934&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>2. Add Mozilla’s Maven repository</strong></p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">maven</span> <span class="o">{</span>
+        <span class="n">url</span> <span class="s2">&quot;https://maven.mozilla.org/maven2/&quot;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>3. Java 8 required support</strong></p>
+<p>As GeckoView uses some Java 8 APIs, it requires these compatibility flags:</p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">compileOptions</span> <span class="o">{</span>
+    <span class="n">sourceCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
+    <span class="n">targetCompatibility</span> <span class="n">JavaVersion</span><span class="o">.</span><span class="na">VERSION_1_8</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><strong>4. Add GeckoView Implementations</strong></p>
+<div class="highlight-groovy notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="c1">// ...</span>
+  <span class="n">implementation</span> <span class="s2">&quot;org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}&quot;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-geckoview-to-a-layout">
+<h2><a class="toc-backref" href="#id2">Add GeckoView to a Layout</a><a class="headerlink" href="#add-geckoview-to-a-layout" title="Permalink to this headline">¶</a></h2>
+<p>Inside a layout <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file, add the following:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;org.mozilla.geckoview.GeckoView</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">android:id=</span><span class="s">&quot;@+id/geckoview&quot;</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;fill_parent&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;fill_parent&quot;</span> <span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialize-geckoview-in-an-activity">
+<h2><a class="toc-backref" href="#id3">Initialize GeckoView in an Activity</a><a class="headerlink" href="#initialize-geckoview-in-an-activity" title="Permalink to this headline">¶</a></h2>
+<p><strong>1. Import the GeckoView classes inside an Activity:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.mozilla.geckoview.GeckoRuntime</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.mozilla.geckoview.GeckoSession</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.mozilla.geckoview.GeckoView</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>2. In that activity’s</strong> <code class="docutils literal notranslate"><span class="pre">onCreate</span></code> <strong>function, add the following:</strong></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">GeckoView</span> <span class="n">view</span> <span class="o">=</span> <span class="n">findViewById</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">geckoview</span><span class="p">);</span>
+<span class="n">GeckoSession</span> <span class="n">session</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GeckoSession</span><span class="p">();</span>
+<span class="n">GeckoRuntime</span> <span class="n">runtime</span> <span class="o">=</span> <span class="n">GeckoRuntime</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+
+<span class="n">session</span><span class="p">.</span><span class="na">open</span><span class="p">(</span><span class="n">runtime</span><span class="p">);</span>
+<span class="n">view</span><span class="p">.</span><span class="na">setSession</span><span class="p">(</span><span class="n">session</span><span class="p">);</span>
+<span class="n">session</span><span class="p">.</span><span class="na">loadUri</span><span class="p">(</span><span class="s">&quot;about:buildconfig&quot;</span><span class="p">);</span> <span class="c1">// Or any other URL...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="you-re-done">
+<h2><a class="toc-backref" href="#id4">You’re done!</a><a class="headerlink" href="#you-re-done" title="Permalink to this headline">¶</a></h2>
+<p>Your application should now load and display a webpage inside of GeckoView.</p>
+<p>To learn more about GeckoView’s capabilities, review GeckoView’s <a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/">JavaDoc</a> or the <a class="reference external" href="https://searchfox.org/mozilla-central/source/mobile/android/geckoview_example">reference application</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="web-extensions.html" class="btn btn-neutral float-right" title="Interacting with Web content" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Using GeckoView" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

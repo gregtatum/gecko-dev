@@ -1,0 +1,369 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>New contributors &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Submitting patches" href="Patches.html" />
+    <link rel="prev" title="Contributing" href="Contributing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">New contributors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#accounts-communication">Accounts, communication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-the-code-running-tests">Getting the code, running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#work-on-bugs-and-get-code-review">Work on bugs and get code review</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefs.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internals/index.html">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Marionette</a> &raquo;</li>
+        
+      <li>New contributors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/marionette/NewContributors.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="new-contributors">
+<h1>New contributors<a class="headerlink" href="#new-contributors" title="Permalink to this headline">¶</a></h1>
+<p>This page is aimed at people who are new to Mozilla and want to contribute
+to Mozilla source code related to Marionette Python tests, WebDriver
+spec tests and related test harnesses and tools. Mozilla has both
+git and Mercurial repositories, but this guide only describes Mercurial.</p>
+<p>If you run into issues or have doubts, check out the <a class="reference external" href="#resources">Resources</a>
+section below and <strong>don’t hesitate to ask questions</strong>. :) The goal of these
+steps is to make sure you have the basics of your development environment
+working. Once you do, we can get you started with working on an
+actual bug, yay!</p>
+<div class="section" id="accounts-communication">
+<h2>Accounts, communication<a class="headerlink" href="#accounts-communication" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Set up a <a class="reference external" href="https://bugzilla.mozilla.org/">Bugzilla</a> account (and, if you like, a <a class="reference external" href="https://mozillians.org/">Mozillians</a> profile).
+Please include your Matrix nickname in both of these accounts so we can work
+with you more easily. For example, Eve Smith would set the Bugzilla name
+to “Eve Smith (:esmith)”, where “esmith” is the Matrix nick.</p></li>
+<li><p>For a direct communication with us it will be beneficial to setup <a class="reference external" href="https://chat.mozilla.org">Matrix</a>.
+Make sure to also register your nickname as described in the linked document.</p></li>
+<li><p>Join our #interop channel, and introduce yourself to the team. :jgraham,
+:maja_zf, and :whimboo are all familiar with Marionette.
+We’re nice, I promise, but we might not answer right away due to different
+time zones, time off, etc. So please be patient.</p></li>
+<li><p>When you want to ask a question on Matrix, just go ahead an ask it even if
+no one appears to be around/responding.
+Provide lots of detail so that we have a better chance of helping you.
+If you don’t get an answer right away, check again in a few hours –
+someone may have answered you in the mean time.</p></li>
+<li><p>If you’re having trouble reaching us over Matrix, you are welcome to send an
+email to our <a class="reference external" href="index.html#communication">mailing list</a> instead. It’s a good
+idea to include your Matrix nick in your email message.</p></li>
+</ol>
+</div>
+<div class="section" id="getting-the-code-running-tests">
+<h2>Getting the code, running tests<a class="headerlink" href="#getting-the-code-running-tests" title="Permalink to this headline">¶</a></h2>
+<p>Follow the documentation on <a class="reference external" href="Contributing.html">Contributing</a> to get a sense of
+our projects, and which is of most interest for you. You will also learn how to
+get the Firefox source code, build your custom Firefox build, and how to run the
+tests.</p>
+</div>
+<div class="section" id="work-on-bugs-and-get-code-review">
+<h2>Work on bugs and get code review<a class="headerlink" href="#work-on-bugs-and-get-code-review" title="Permalink to this headline">¶</a></h2>
+<p>Once you are familiar with the code of the test harnesses, and the tests you might
+want to start with your first contribution. The necessary steps to submit and verify
+your patches are laid out in <a class="reference external" href="Patches.html">Patches.md</a>.</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Search Mozilla’s code repositories with <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/marionette/">searchfox</a>.</p></li>
+<li><p>Another <a class="reference external" href="https://ateam-bootcamp.readthedocs.org/en/latest/guide/index.html#new-contributor-guide">guide for new contributors</a>.  It has not been updated in a long
+time but it’s a good general resource if you ever get stuck on something.
+The most relevant sections to you are about Bugzilla, Mercurial, Python and the
+Development Process.</p></li>
+<li><p><a class="reference external" href="https://mozilla-version-control-tools.readthedocs.org/en/latest/hgmozilla/index.html">Mercurial for Mozillians</a></p></li>
+<li><p>More general resources are available in this little <a class="reference external" href="https://gist.github.com/mjzffr/d2adef328a416081f543">guide</a> :maja_zf wrote
+in 2015 to help a student get started with open source contributions.</p></li>
+<li><p>Textbook about general open source practices: <a class="reference external" href="https://quaid.fedorapeople.org/TOS/Practical_Open_Source_Software_Exploration/html/index.html">Practical Open Source Software Exploration</a></p></li>
+<li><p>If you’d rather use git instead of hg, see <a class="reference external" href="https://github.com/glandium/git-cinnabar/wiki/Mozilla:-A-git-workflow-for-Gecko-development">git workflow for
+Gecko development</a> and/or <a class="reference external" href="https://sny.no/2016/03/geckogit">this blog post by :ato</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Patches.html" class="btn btn-neutral float-right" title="Submitting patches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Contributing.html" class="btn btn-neutral float-left" title="Contributing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozversioncontrol package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozversioncontrol package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozversioncontrol.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozversioncontrol-package">
+<h1>mozversioncontrol package<a class="headerlink" href="#mozversioncontrol-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozversioncontrol.repoupdate">
+<span id="mozversioncontrol-repoupdate-module"></span><h2>mozversioncontrol.repoupdate module<a class="headerlink" href="#module-mozversioncontrol.repoupdate" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="mozversioncontrol.repoupdate.update_git_repo">
+<code class="sig-prename descclassname">mozversioncontrol.repoupdate.</code><code class="sig-name descname">update_git_repo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">git</span></em>, <em class="sig-param"><span class="n">repo</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">revision</span><span class="o">=</span><span class="default_value">'origin/master'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.repoupdate.update_git_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure a Git repository exists at a path and is up to date.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozversioncontrol.repoupdate.update_mercurial_repo">
+<code class="sig-prename descclassname">mozversioncontrol.repoupdate.</code><code class="sig-name descname">update_mercurial_repo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hg</span></em>, <em class="sig-param"><span class="n">repo</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">revision</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">hostfingerprints</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">global_args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.repoupdate.update_mercurial_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure a HG repository exists at a path and is up to date.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozversioncontrol">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozversioncontrol" title="Permalink to this headline">¶</a></h2>
+<dl class="py exception">
+<dt id="mozversioncontrol.CannotDeleteFromRootOfRepositoryException">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">CannotDeleteFromRootOfRepositoryException</code><a class="headerlink" href="#mozversioncontrol.CannotDeleteFromRootOfRepositoryException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Represents that the code attempted to delete all files from the root of
+the repository, which is not permitted.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozversioncontrol.GitRepository">
+<em class="property">class </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">GitRepository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">git</span><span class="o">=</span><span class="default_value">'git'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozversioncontrol.Repository" title="mozversioncontrol.Repository"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozversioncontrol.Repository</span></code></a></p>
+<p>An implementation of <cite>Repository</cite> for Git repositories.</p>
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.add_remove_files">
+<code class="sig-name descname">add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add and remove files under <cite>paths</cite> in this repository’s working copy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.base_ref">
+<em class="property">property </em><code class="sig-name descname">base_ref</code><a class="headerlink" href="#mozversioncontrol.GitRepository.base_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of revision the current topic branch is based on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.clean_directory">
+<code class="sig-name descname">clean_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.clean_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo all changes (including removing new untracked files) in the
+given <cite>path</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.forget_add_remove_files">
+<code class="sig-name descname">forget_add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.forget_add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo the effects of a previous add_remove_files call for <cite>paths</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_changed_files">
+<code class="sig-name descname">get_changed_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span><span class="o">=</span><span class="default_value">'ADM'</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'unstaged'</span></em>, <em class="sig-param"><span class="n">rev</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_changed_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of files that are changed in this repository’s
+working copy.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> controls which kinds of modifications are returned.
+It is a string which may only contain the following characters:</p>
+<blockquote>
+<div><p>A - Include files that were added
+D - Include files that were deleted
+M - Include files that were modified</p>
+</div></blockquote>
+<p>By default, all three will be included.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> can be one of ‘unstaged’, ‘staged’ or ‘all’. Only has an
+effect on git. Defaults to ‘unstaged’.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rev</span></code> is a specifier for which changesets to consider for
+changes. The exact meaning depends on the vcs system being used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_commit_time">
+<code class="sig-name descname">get_commit_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_commit_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Unix time of the HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_outgoing_files">
+<code class="sig-name descname">get_outgoing_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span><span class="o">=</span><span class="default_value">'ADM'</span></em>, <em class="sig-param"><span class="n">upstream</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_outgoing_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of changed files compared to upstream.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> works the same as <cite>get_changed_files</cite>.
+<code class="docutils literal notranslate"><span class="pre">upstream</span></code> is a remote ref to compare against. If unspecified,
+this will be determined automatically. If there is no remote ref,
+a MissingUpstreamRepo exception will be raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_tracked_files_finder">
+<code class="sig-name descname">get_tracked_files_finder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_tracked_files_finder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a mozpack.files.BaseFinder of managed files in the working
+directory.</p>
+<p>The Finder will have its list of all files in the repo cached for its
+entire lifetime, so operations on the Finder will not track with, for
+example, commits to the repo during the Finder’s lifetime.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_upstream">
+<code class="sig-name descname">get_upstream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_upstream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference to the upstream remote.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.get_user_email">
+<code class="sig-name descname">get_user_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.get_user_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user’s email address.</p>
+<p>If no email is configured, then None is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.has_git_cinnabar">
+<em class="property">property </em><code class="sig-name descname">has_git_cinnabar</code><a class="headerlink" href="#mozversioncontrol.GitRepository.has_git_cinnabar" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the repository is using git cinnabar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.head_ref">
+<em class="property">property </em><code class="sig-name descname">head_ref</code><a class="headerlink" href="#mozversioncontrol.GitRepository.head_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#mozversioncontrol.GitRepository.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the tool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.push_to_try">
+<code class="sig-name descname">push_to_try</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.push_to_try" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a temporary commit, push it to try and clean it up
+afterwards.</p>
+<p>With mercurial, MissingVCSExtension will be raised if the <cite>push-to-try</cite>
+extension is not installed. On git, MissingVCSExtension will be raised
+if git cinnabar is not present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.set_config">
+<code class="sig-name descname">set_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.set_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.sparse_checkout_present">
+<code class="sig-name descname">sparse_checkout_present</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.sparse_checkout_present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the working directory is using a sparse checkout.</p>
+<p>A sparse checkout is defined as a working directory that only
+materializes a subset of files in a given revision.</p>
+<p>Returns a bool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.GitRepository.working_directory_clean">
+<code class="sig-name descname">working_directory_clean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">untracked</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ignored</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.GitRepository.working_directory_clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the working directory is free of modifications.</p>
+<p>Returns True if the working directory does not have any file
+modifications. False otherwise.</p>
+<p>By default, untracked and ignored files are not considered. If
+<code class="docutils literal notranslate"><span class="pre">untracked</span></code> or <code class="docutils literal notranslate"><span class="pre">ignored</span></code> are set, they influence the clean check
+to factor these file classes into consideration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozversioncontrol.HgRepository">
+<em class="property">class </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">HgRepository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">hg</span><span class="o">=</span><span class="default_value">'hg'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozversioncontrol.Repository" title="mozversioncontrol.Repository"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozversioncontrol.Repository</span></code></a></p>
+<p>An implementation of <cite>Repository</cite> for Mercurial repositories.</p>
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.add_remove_files">
+<code class="sig-name descname">add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add and remove files under <cite>paths</cite> in this repository’s working copy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.base_ref">
+<em class="property">property </em><code class="sig-name descname">base_ref</code><a class="headerlink" href="#mozversioncontrol.HgRepository.base_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of revision the current topic branch is based on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.clean_directory">
+<code class="sig-name descname">clean_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.clean_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo all changes (including removing new untracked files) in the
+given <cite>path</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.forget_add_remove_files">
+<code class="sig-name descname">forget_add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.forget_add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo the effects of a previous add_remove_files call for <cite>paths</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_changed_files">
+<code class="sig-name descname">get_changed_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span><span class="o">=</span><span class="default_value">'ADM'</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'unstaged'</span></em>, <em class="sig-param"><span class="n">rev</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_changed_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of files that are changed in this repository’s
+working copy.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> controls which kinds of modifications are returned.
+It is a string which may only contain the following characters:</p>
+<blockquote>
+<div><p>A - Include files that were added
+D - Include files that were deleted
+M - Include files that were modified</p>
+</div></blockquote>
+<p>By default, all three will be included.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> can be one of ‘unstaged’, ‘staged’ or ‘all’. Only has an
+effect on git. Defaults to ‘unstaged’.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rev</span></code> is a specifier for which changesets to consider for
+changes. The exact meaning depends on the vcs system being used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_commit_time">
+<code class="sig-name descname">get_commit_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_commit_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Unix time of the HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_outgoing_files">
+<code class="sig-name descname">get_outgoing_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span><span class="o">=</span><span class="default_value">'ADM'</span></em>, <em class="sig-param"><span class="n">upstream</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_outgoing_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of changed files compared to upstream.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> works the same as <cite>get_changed_files</cite>.
+<code class="docutils literal notranslate"><span class="pre">upstream</span></code> is a remote ref to compare against. If unspecified,
+this will be determined automatically. If there is no remote ref,
+a MissingUpstreamRepo exception will be raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_tracked_files_finder">
+<code class="sig-name descname">get_tracked_files_finder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_tracked_files_finder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a mozpack.files.BaseFinder of managed files in the working
+directory.</p>
+<p>The Finder will have its list of all files in the repo cached for its
+entire lifetime, so operations on the Finder will not track with, for
+example, commits to the repo during the Finder’s lifetime.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_upstream">
+<code class="sig-name descname">get_upstream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_upstream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference to the upstream remote.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.get_user_email">
+<code class="sig-name descname">get_user_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.get_user_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user’s email address.</p>
+<p>If no email is configured, then None is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.head_ref">
+<em class="property">property </em><code class="sig-name descname">head_ref</code><a class="headerlink" href="#mozversioncontrol.HgRepository.head_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#mozversioncontrol.HgRepository.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the tool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.push_to_try">
+<code class="sig-name descname">push_to_try</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.push_to_try" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a temporary commit, push it to try and clean it up
+afterwards.</p>
+<p>With mercurial, MissingVCSExtension will be raised if the <cite>push-to-try</cite>
+extension is not installed. On git, MissingVCSExtension will be raised
+if git cinnabar is not present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.sparse_checkout_present">
+<code class="sig-name descname">sparse_checkout_present</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.sparse_checkout_present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the working directory is using a sparse checkout.</p>
+<p>A sparse checkout is defined as a working directory that only
+materializes a subset of files in a given revision.</p>
+<p>Returns a bool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.HgRepository.working_directory_clean">
+<code class="sig-name descname">working_directory_clean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">untracked</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ignored</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.HgRepository.working_directory_clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the working directory is free of modifications.</p>
+<p>Returns True if the working directory does not have any file
+modifications. False otherwise.</p>
+<p>By default, untracked and ignored files are not considered. If
+<code class="docutils literal notranslate"><span class="pre">untracked</span></code> or <code class="docutils literal notranslate"><span class="pre">ignored</span></code> are set, they influence the clean check
+to factor these file classes into consideration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.InvalidRepoPath">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">InvalidRepoPath</code><a class="headerlink" href="#mozversioncontrol.InvalidRepoPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Represents a failure to find a VCS repo at a specified path.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.MissingConfigureInfo">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">MissingConfigureInfo</code><a class="headerlink" href="#mozversioncontrol.MissingConfigureInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozversioncontrol.MissingVCSInfo" title="mozversioncontrol.MissingVCSInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozversioncontrol.MissingVCSInfo</span></code></a></p>
+<p>Represents error finding VCS info from configure data.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.MissingUpstreamRepo">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">MissingUpstreamRepo</code><a class="headerlink" href="#mozversioncontrol.MissingUpstreamRepo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Represents a failure to automatically detect an upstream repo.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.MissingVCSExtension">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">MissingVCSExtension</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ext</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.MissingVCSExtension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozversioncontrol.MissingVCSInfo" title="mozversioncontrol.MissingVCSInfo"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozversioncontrol.MissingVCSInfo</span></code></a></p>
+<p>Represents error finding a required VCS extension.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.MissingVCSInfo">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">MissingVCSInfo</code><a class="headerlink" href="#mozversioncontrol.MissingVCSInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Represents a general failure to resolve a VCS interface.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="mozversioncontrol.MissingVCSTool">
+<em class="property">exception </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">MissingVCSTool</code><a class="headerlink" href="#mozversioncontrol.MissingVCSTool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Represents a failure to find a version control tool binary.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozversioncontrol.Repository">
+<em class="property">class </em><code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">Repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">tool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class wrapping utility methods around version control repositories.</p>
+<p>This class is abstract and never instantiated. Obtain an instance by
+calling a <code class="docutils literal notranslate"><span class="pre">get_repository_*()</span></code> helper function.</p>
+<p>Clients are recommended to use the object as a context manager. But not
+all methods require this.</p>
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.add_remove_files">
+<em class="property">abstract </em><code class="sig-name descname">add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add and remove files under <cite>paths</cite> in this repository’s working copy.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.base_ref">
+<em class="property">abstract property </em><code class="sig-name descname">base_ref</code><a class="headerlink" href="#mozversioncontrol.Repository.base_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of revision the current topic branch is based on.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.clean_directory">
+<em class="property">abstract </em><code class="sig-name descname">clean_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.clean_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo all changes (including removing new untracked files) in the
+given <cite>path</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.commit">
+<code class="sig-name descname">commit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">author</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">date</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">paths</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.commit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a commit using the provided commit message. The author, date,
+and files/paths to be included may also be optionally provided. The
+message, author and date arguments must be strings, and are passed as-is
+to the commit command. Multiline commit messages are supported. The
+paths argument must be None or an array of strings that represents the
+set of files and folders to include in the commit.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.forget_add_remove_files">
+<em class="property">abstract </em><code class="sig-name descname">forget_add_remove_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">paths</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.forget_add_remove_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Undo the effects of a previous add_remove_files call for <cite>paths</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_changed_files">
+<em class="property">abstract </em><code class="sig-name descname">get_changed_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span></em>, <em class="sig-param"><span class="n">mode</span><span class="o">=</span><span class="default_value">'unstaged'</span></em>, <em class="sig-param"><span class="n">rev</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_changed_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of files that are changed in this repository’s
+working copy.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> controls which kinds of modifications are returned.
+It is a string which may only contain the following characters:</p>
+<blockquote>
+<div><p>A - Include files that were added
+D - Include files that were deleted
+M - Include files that were modified</p>
+</div></blockquote>
+<p>By default, all three will be included.</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode</span></code> can be one of ‘unstaged’, ‘staged’ or ‘all’. Only has an
+effect on git. Defaults to ‘unstaged’.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rev</span></code> is a specifier for which changesets to consider for
+changes. The exact meaning depends on the vcs system being used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_commit_time">
+<em class="property">abstract </em><code class="sig-name descname">get_commit_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_commit_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the Unix time of the HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_outgoing_files">
+<em class="property">abstract </em><code class="sig-name descname">get_outgoing_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diff_filter</span></em>, <em class="sig-param"><span class="n">upstream</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_outgoing_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of changed files compared to upstream.</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_filter</span></code> works the same as <cite>get_changed_files</cite>.
+<code class="docutils literal notranslate"><span class="pre">upstream</span></code> is a remote ref to compare against. If unspecified,
+this will be determined automatically. If there is no remote ref,
+a MissingUpstreamRepo exception will be raised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_tracked_files_finder">
+<em class="property">abstract </em><code class="sig-name descname">get_tracked_files_finder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_tracked_files_finder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a mozpack.files.BaseFinder of managed files in the working
+directory.</p>
+<p>The Finder will have its list of all files in the repo cached for its
+entire lifetime, so operations on the Finder will not track with, for
+example, commits to the repo during the Finder’s lifetime.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_upstream">
+<em class="property">abstract </em><code class="sig-name descname">get_upstream</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_upstream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference to the upstream remote.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.get_user_email">
+<em class="property">abstract </em><code class="sig-name descname">get_user_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.get_user_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the user’s email address.</p>
+<p>If no email is configured, then None is returned.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.has_git_cinnabar">
+<em class="property">property </em><code class="sig-name descname">has_git_cinnabar</code><a class="headerlink" href="#mozversioncontrol.Repository.has_git_cinnabar" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if the repository is using git cinnabar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.head_ref">
+<em class="property">abstract property </em><code class="sig-name descname">head_ref</code><a class="headerlink" href="#mozversioncontrol.Repository.head_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hash of HEAD revision.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.name">
+<em class="property">abstract property </em><code class="sig-name descname">name</code><a class="headerlink" href="#mozversioncontrol.Repository.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the tool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.push_to_try">
+<em class="property">abstract </em><code class="sig-name descname">push_to_try</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.push_to_try" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a temporary commit, push it to try and clean it up
+afterwards.</p>
+<p>With mercurial, MissingVCSExtension will be raised if the <cite>push-to-try</cite>
+extension is not installed. On git, MissingVCSExtension will be raised
+if git cinnabar is not present.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.sparse_checkout_present">
+<em class="property">abstract </em><code class="sig-name descname">sparse_checkout_present</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.sparse_checkout_present" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the working directory is using a sparse checkout.</p>
+<p>A sparse checkout is defined as a working directory that only
+materializes a subset of files in a given revision.</p>
+<p>Returns a bool.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.tool_version">
+<em class="property">property </em><code class="sig-name descname">tool_version</code><a class="headerlink" href="#mozversioncontrol.Repository.tool_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version of the VCS tool in use as a string.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozversioncontrol.Repository.working_directory_clean">
+<em class="property">abstract </em><code class="sig-name descname">working_directory_clean</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">untracked</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ignored</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.Repository.working_directory_clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the working directory is free of modifications.</p>
+<p>Returns True if the working directory does not have any file
+modifications. False otherwise.</p>
+<p>By default, untracked and ignored files are not considered. If
+<code class="docutils literal notranslate"><span class="pre">untracked</span></code> or <code class="docutils literal notranslate"><span class="pre">ignored</span></code> are set, they influence the clean check
+to factor these file classes into consideration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozversioncontrol.get_repository_from_build_config">
+<code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">get_repository_from_build_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.get_repository_from_build_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a repository from the build configuration.</p>
+<p>Accepts an object that has a <code class="docutils literal notranslate"><span class="pre">topsrcdir</span></code> and <code class="docutils literal notranslate"><span class="pre">subst</span></code> attribute.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozversioncontrol.get_repository_from_env">
+<code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">get_repository_from_env</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.get_repository_from_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain a repository object by looking at the environment.</p>
+<p>If inside a build environment (denoted by presence of a <code class="docutils literal notranslate"><span class="pre">buildconfig</span></code>
+module), VCS info is obtained from it, as found via configure. This allows
+us to respect what was passed into configure. Otherwise, we fall back to
+scanning the filesystem.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozversioncontrol.get_repository_object">
+<code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">get_repository_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">hg</span><span class="o">=</span><span class="default_value">'hg'</span></em>, <em class="sig-param"><span class="n">git</span><span class="o">=</span><span class="default_value">'git'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.get_repository_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a repository object for the repository at <cite>path</cite>.
+If <cite>path</cite> is not a known VCS repository, raise an exception.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozversioncontrol.get_tool_path">
+<code class="sig-prename descclassname">mozversioncontrol.</code><code class="sig-name descname">get_tool_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tool</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozversioncontrol.get_tool_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain the path of <cite>tool</cite>.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

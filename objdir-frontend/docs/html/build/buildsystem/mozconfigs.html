@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozconfig Files &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="moz.build Files" href="mozbuild-files.html" />
+    <link rel="prev" title="Supported build targets" href="supported-configurations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mozconfig Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finding-the-active-mozconfig">Finding the active mozconfig</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>mozconfig Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/mozconfigs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozconfig-files">
+<span id="mozconfig"></span><h1>mozconfig Files<a class="headerlink" href="#mozconfig-files" title="Permalink to this headline">¶</a></h1>
+<p>mozconfig files are used to configure how a build works.</p>
+<p>mozconfig files are actually shell scripts. They are executed in a
+special context with specific variables and functions exposed to them.</p>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<p>The following special functions are available to a mozconfig script.</p>
+<div class="section" id="ac-add-options">
+<h4>ac_add_options<a class="headerlink" href="#ac-add-options" title="Permalink to this headline">¶</a></h4>
+<p>This function is used to declare extra options/arguments to pass into
+configure.</p>
+<p>e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">tests</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">optimize</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mk-add-options">
+<h4>mk_add_options<a class="headerlink" href="#mk-add-options" title="Permalink to this headline">¶</a></h4>
+<p>This function is used to inject statements into client.mk for execution.
+It is typically used to define variables, notably the object directory.</p>
+<p>e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mk_add_options</span> <span class="n">AUTOCLOBBER</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="special-mk-add-options-variables">
+<h3>Special mk_add_options Variables<a class="headerlink" href="#special-mk-add-options-variables" title="Permalink to this headline">¶</a></h3>
+<p>For historical reasons, the method for communicating certain
+well-defined variables is via mk_add_options(). In this section, we
+document what those special variables are.</p>
+<div class="section" id="moz-objdir">
+<h4>MOZ_OBJDIR<a class="headerlink" href="#moz-objdir" title="Permalink to this headline">¶</a></h4>
+<p>This variable is used to define the <a class="reference internal" href="glossary.html#term-object-directory"><span class="xref std std-term">object directory</span></a> for the current
+build.</p>
+</div>
+</div>
+</div>
+<div class="section" id="finding-the-active-mozconfig">
+<h2>Finding the active mozconfig<a class="headerlink" href="#finding-the-active-mozconfig" title="Permalink to this headline">¶</a></h2>
+<p>Multiple mozconfig files can exist to provide different configuration
+options for different tasks. The rules for finding the active mozconfig
+are defined in the
+<a class="reference internal" href="#mozboot.mozconfig.find_mozconfig" title="mozboot.mozconfig.find_mozconfig"><code class="xref py py-func docutils literal notranslate"><span class="pre">mozboot.mozconfig.find_mozconfig()</span></code></a> method.</p>
+<span class="target" id="module-mozboot.mozconfig"></span><dl class="py function">
+<dt id="mozboot.mozconfig.find_mozconfig">
+<code class="sig-prename descclassname">mozboot.mozconfig.</code><code class="sig-name descname">find_mozconfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">topsrcdir</span></em>, <em class="sig-param"><span class="n">env</span><span class="o">=</span><span class="default_value">environ({'NVM_INC': '/Users/greg/.nvm/versions/node/v12.18.2/include/node', 'TERM_PROGRAM': 'iTerm.app', 'NVM_CD_FLAGS': '', 'SHELL': '/bin/bash', 'TERM': 'xterm-256color', 'HISTSIZE': '2000', 'MACH_NOTIFY_MINTIME': '0', 'CLICOLOR': '1', 'TMPDIR': '/var/folders/y7/0gx4dtxs223gpzqt_6rqjrmm0000gp/T/', 'TERM_PROGRAM_VERSION': '3.4.0beta10', 'PYTHONHTTPSVERIFY': '0', 'TERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'RUST_SRC_PATH': '/usr/local/Cellar/rust/src/src', 'AMO_JWT_ISSUER': 'user:6210320:609', 'USER': 'greg', 'HISTFILESIZE': '5000000', 'NVM_DIR': '/Users/greg/.nvm', 'SSH_AUTH_SOCK': '/private/tmp/com.apple.launchd.MhpYHGEYRY/Listeners', 'CCACHE_COMPRESS': '', '__CF_USER_TEXT_ENCODING': '0x1F6:0x0:0x0', 'PYENV_VIRTUALENV_INIT': '1', 'BASH_SILENCE_DEPRECATION_WARNING': '1', 'npm_package_config_firefox': '/Applications/Nightly.app/Contents/MacOS/firefox-bin', 'LSCOLORS': 'GxFxCxDxBxegedabagaced', 'PATH': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv/bin:/Users/greg/dev/gecko-dev/objdir-frontend/_virtualenvs/docs/bin:/Users/greg/.nvm/versions/node/v12.18.2/bin:/opt/local/bin:/opt/local/sbin:/usr/local/opt/python/libexec/bin:/Users/greg/Library/Python/3.7/bin:/Users/greg/Library/Android/sdk/platform-tools:/Users/greg/Library/Android/sdk/emulator:/Users/greg/scripts/phabricator/arcanist/bin:/Applications/Postgres.app/Contents/Versions/10/bin:/Users/greg/.cargo/bin:/Users/greg/dev/gecko-dev:./node_modules/.bin:/Users/greg/scripts/version-control-tools/git/commands:/Users/greg/scripts/moz-git-tools:/Users/greg/scripts/git-cinnabar:/Users/greg/scripts:/usr/local/Cellar/vim/8.0.1700/bin:/usr/local/Cellar/pyenv-virtualenv/1.1.5/shims:/Users/greg/.pyenv/shims:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Apple/usr/bin', 'PWD': '/Users/greg/dev/gecko-dev', 'EDITOR': 'vim', 'LANG': 'en_US.UTF-8', 'ITERM_PROFILE': 'Default', 'XPC_FLAGS': '0x0', 'AMO_JWT_SECRET': 'a48e65236b94e670a740692d420825293819a1b2cf843df0767fb0e9cec02a52', 'XPC_SERVICE_NAME': '0', 'HISTCONTROL': 'ignoredups', 'COLORFGBG': '15;0', 'HOME': '/Users/greg', 'SHLVL': '1', 'PYENV_SHELL': 'bash', 'LC_TERMINAL_VERSION': '3.4.0beta10', 'ITERM_SESSION_ID': 'w0t3p0:95B82EF0-FCC5-4874-99AB-B16FCBC8292C', 'LOGNAME': 'greg', 'PYTHONPATH': '/Users/greg/Library/Python/3.7/lib/python/site-packages:', 'NVM_BIN': '/Users/greg/.nvm/versions/node/v12.18.2/bin', 'DISPLAY': '/private/tmp/com.apple.launchd.qA0kqWowAP/org.macosforge.xquartz:0', 'LC_TERMINAL': 'iTerm2', 'COLORTERM': 'truecolor', 'MACH_VIRTUALENV': '1', 'MACH_MAIN_PID': '48561', 'MACH_STDOUT_ISATTY': '1', 'VIRTUAL_ENV': '/Users/greg/dev/gecko-dev/objdir-frontend/docs/html/_venv', 'DOCUTILSCONFIG': '/Users/greg/dev/gecko-dev/docs/docutils.conf'})</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozboot.mozconfig.find_mozconfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the active mozconfig file for the current environment.</p>
+<p>This emulates the logic in mozconfig-find.</p>
+<ol class="arabic simple">
+<li><p>If ENV[MOZCONFIG] is set, use that</p></li>
+<li><p>If $TOPSRCDIR/mozconfig or $TOPSRCDIR/.mozconfig exists, use it.</p></li>
+<li><p>If both exist or if there are legacy locations detected, error out.</p></li>
+</ol>
+<p>The absolute path to the found mozconfig will be returned on success.
+None will be returned if no mozconfig could be found. A
+MozconfigFindException will be raised if there is a bad state,
+including conditions from #3 above.</p>
+</dd></dl>
+
+<div class="section" id="loading-the-active-mozconfig">
+<h3>Loading the active mozconfig<a class="headerlink" href="#loading-the-active-mozconfig" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="mozbuild.mozconfig.MozconfigLoader">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.mozconfig.</code><code class="sig-name descname">MozconfigLoader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">topsrcdir</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.mozconfig.MozconfigLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles loading and parsing of mozconfig files.</p>
+<dl class="py method">
+<dt id="mozbuild.mozconfig.MozconfigLoader.read_mozconfig">
+<code class="sig-name descname">read_mozconfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.mozconfig.MozconfigLoader.read_mozconfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read the contents of a mozconfig into a data structure.</p>
+<p>This takes the path to a mozconfig to load. If the given path is
+AUTODETECT, will try to find a mozconfig from the environment using
+find_mozconfig().</p>
+<p>mozconfig files are shell scripts. So, we can’t just parse them.
+Instead, we run the shell script in a wrapper which allows us to record
+state from execution. Thus, the output from a mozconfig is a friendly
+static data structure.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mozbuild-files.html" class="btn btn-neutral float-right" title="moz.build Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="supported-configurations.html" class="btn btn-neutral float-left" title="Supported build targets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

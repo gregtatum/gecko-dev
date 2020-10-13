@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python and the Build System &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Test Manifests" href="test_manifests.html" />
+    <link rel="prev" title="Build Targets" href="build-targets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Python and the Build System</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-requirements">Python Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiled-python-packages">Compiled Python Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#issues-with-os-x-system-python">Issues with OS X System Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#virtualenvs">Virtualenvs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-python-manually">Installing Python Manually</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-issues-with-python">Common Issues with Python</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Python and the Build System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/python.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-and-the-build-system">
+<span id="python"></span><h1>Python and the Build System<a class="headerlink" href="#python-and-the-build-system" title="Permalink to this headline">¶</a></h1>
+<p>The Python programming language is used significantly in the build
+system. If we need to write code for the build system or for a tool
+related to the build system, Python is typically the first choice.</p>
+<div class="section" id="python-requirements">
+<h2>Python Requirements<a class="headerlink" href="#python-requirements" title="Permalink to this headline">¶</a></h2>
+<p>The tree requires Python 2.7.3 or greater but not Python 3 to build.
+All Python packages not in the Python distribution are included in the
+source tree. So all you should need is a vanilla Python install and you
+should be good to go.</p>
+<p>Only CPython (the Python distribution available from www.python.org) is
+supported.</p>
+<p>We require Python 2.7.3 (and not say 2.7.2) to build because Python
+2.7.3 contains numerous bug fixes, especially around the area of Unicode
+handling. These bug fixes are extremely annoying and have to be worked
+around. The build maintainers were tired of doing this, so the minimum
+version requirement was upped (bug 870420).</p>
+<p>We intend to eventually support Python 3. This will come by way of dual
+2.7/3.x compatibility because a single flag day conversion to 3.x will
+be too cumbersome given the amount of Python that would need converted.
+We will not know which 3.x minor release we are targeting until this
+effort is underway. This is tracked in bug 636155.</p>
+</div>
+<div class="section" id="compiled-python-packages">
+<h2>Compiled Python Packages<a class="headerlink" href="#compiled-python-packages" title="Permalink to this headline">¶</a></h2>
+<p>There are some features of the build that rely on compiled Python packages
+(packages containing C source). These features are currently all
+optional because not every system contains the Python development
+headers required to build these extensions.</p>
+<p>We recommend you have the Python development headers installed (<code class="docutils literal notranslate"><span class="pre">mach</span>
+<span class="pre">bootstrap</span></code> should do this for you) so you can take advantage of these
+features.</p>
+</div>
+<div class="section" id="issues-with-os-x-system-python">
+<h2>Issues with OS X System Python<a class="headerlink" href="#issues-with-os-x-system-python" title="Permalink to this headline">¶</a></h2>
+<p>The Python that ships with OS X has historically been littered with
+subtle bugs and suboptimalities. Furthermore, OS X up through 10.8 don’t
+ship with Python 2.7.3 (10.8 ships with 2.7.2).</p>
+<p>OS X 10.8 and below users will be required to install a new Python
+distribution. This may not be necessary for OS X 10.9+. However, we
+still recommend installing a separate Python because of the history with
+OS X’s system Python issues.</p>
+<p>We recommend installing Python through Homebrew or MacPorts. If you run
+<code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">bootstrap</span></code>, this should be done for you.</p>
+</div>
+<div class="section" id="virtualenvs">
+<h2>Virtualenvs<a class="headerlink" href="#virtualenvs" title="Permalink to this headline">¶</a></h2>
+<p>The build system relies heavily on
+<a class="reference external" href="http://www.virtualenv.org/en/latest/">virtualenvs</a>. Virtualenvs are
+standalone and isolated Python environments. The problem a virtualenv
+solves is that of dependencies across multiple Python components. If two
+components on a system relied on different versions of a package, there
+could be a conflict. Instead of managing multiple versions of a package
+simultaneously, Python and virtualenvs take the route that it is easier
+to just keep them separate so there is no potential for conflicts.</p>
+<p>Very early in the build process, a virtualenv is created inside the
+<a class="reference internal" href="glossary.html#term-object-directory"><span class="xref std std-term">object directory</span></a>. The virtualenv is configured such that it can
+find all the Python packages in the source tree. The code for this lives
+in <a class="reference internal" href="../../python/mozbuild.html#module-mozbuild.virtualenv" title="mozbuild.virtualenv"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozbuild.virtualenv</span></code></a>.</p>
+<div class="section" id="deficiencies">
+<h3>Deficiencies<a class="headerlink" href="#deficiencies" title="Permalink to this headline">¶</a></h3>
+<p>There are numerous deficiencies with the way virtualenvs are handled in
+the build system.</p>
+<ul>
+<li><p>mach reinvents the virtualenv.</p>
+<p>There is code in <code class="docutils literal notranslate"><span class="pre">build/mach_bootstrap.py</span></code> that configures <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>
+much the same way the virtualenv does. There are various bugs tracking
+this. However, no clear solution has yet been devised. It’s not a huge
+problem and thus not a huge priority.</p>
+</li>
+<li><p>They aren’t preserved across copies and packaging.</p>
+<p>If you attempt to copy an entire tree from one machine to another or
+from one directory to another, chances are the virtualenv will fall
+apart. It would be nice if we could preserve it somehow. Instead of
+actually solving portable virtualenvs, all we really need to solve is
+encapsulating the logic for populating the virtualenv along with all
+dependent files in the appropriate place.</p>
+</li>
+<li><p>.pyc files written to source directory.</p>
+<p>We rely heavily on <code class="docutils literal notranslate"><span class="pre">.pth</span></code> files in our virtualenv. A <code class="docutils literal notranslate"><span class="pre">.pth</span></code> file
+is a special file that contains a list of paths. Python will take the
+set of listed paths encountered in <code class="docutils literal notranslate"><span class="pre">.pth</span></code> files and add them to
+<code class="docutils literal notranslate"><span class="pre">sys.path</span></code>.</p>
+<p>When Python compiles a <code class="docutils literal notranslate"><span class="pre">.py</span></code> file to bytecode, it writes out a
+<code class="docutils literal notranslate"><span class="pre">.pyc</span></code> file so it doesn’t have to perform this compilation again.
+It puts these <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files alongside the <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> file. Python
+provides very little control for determining where these <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files
+go, even in Python 3 (which offers customer importers).</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">.pth</span></code> files pointing back to directories in the source tree
+and not the object directory, <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> files are created in the source
+tree. This is bad because when Python imports a module, it first looks
+for a <code class="docutils literal notranslate"><span class="pre">.pyc</span></code> file before the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. If there is a <code class="docutils literal notranslate"><span class="pre">.pyc</span></code>
+file but no <code class="docutils literal notranslate"><span class="pre">.py</span></code> file, it will happily import the module. This
+wreaks havoc during file moves, refactoring, etc.</p>
+<p>There are various proposals for fixing this. See bug 795995.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="installing-python-manually">
+<h2>Installing Python Manually<a class="headerlink" href="#installing-python-manually" title="Permalink to this headline">¶</a></h2>
+<p>We highly recommend you use your system’s package manager or a
+well-supported 3rd party package manager to install Python for you. If
+these are not available to you, we recommend the following tools for
+installing Python:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/collective/buildout.python">buildout.python</a></p></li>
+<li><p><a class="reference external" href="https://github.com/yyuu/pyenv">pyenv</a></p></li>
+<li><p>An official installer from <a class="reference external" href="http://www.python.org">http://www.python.org</a>.</p></li>
+</ul>
+<p>If all else fails, consider compiling Python from source manually. But this
+should be viewed as the least desirable option.</p>
+</div>
+<div class="section" id="common-issues-with-python">
+<h2>Common Issues with Python<a class="headerlink" href="#common-issues-with-python" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="upgrading-your-python-distribution-breaks-the-virtualenv">
+<h3>Upgrading your Python distribution breaks the virtualenv<a class="headerlink" href="#upgrading-your-python-distribution-breaks-the-virtualenv" title="Permalink to this headline">¶</a></h3>
+<p>If you upgrade the Python distribution (e.g. install Python 2.7.5
+from 2.7.3, chances are parts of the virtualenv will break.
+This commonly manifests as a cryptic <code class="docutils literal notranslate"><span class="pre">Cannot</span> <span class="pre">import</span> <span class="pre">XXX</span></code> exception.
+More often than not, the module being imported contains binary/compiled
+components.</p>
+<p>If you upgrade or reinstall your Python distribution, we recommend
+clobbering your build.</p>
+</div>
+<div class="section" id="packages-installed-at-the-system-level-conflict-with-build-system-s">
+<h3>Packages installed at the system level conflict with build system’s<a class="headerlink" href="#packages-installed-at-the-system-level-conflict-with-build-system-s" title="Permalink to this headline">¶</a></h3>
+<p>It is common for people to install Python packages using <code class="docutils literal notranslate"><span class="pre">sudo</span></code> (e.g.
+<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">psutil</span></code>) or with the system’s package manager
+(e.g. <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">python-mysql</span></code>.</p>
+<p>A problem with this is that packages installed at the system level may
+conflict with the package provided by the source tree. As of bug 907902
+and changeset f18eae7c3b27 (September 16, 2013), this should no longer
+be an issue since the virtualenv created as part of the build doesn’t
+add the system’s <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> directory to <code class="docutils literal notranslate"><span class="pre">sys.path</span></code>. However,
+poorly installed packages may still find a way to creep into the mix and
+interfere with our virtualenv.</p>
+<p>As a general principle, we recommend against using your system’s package
+manager or using <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to install Python packages. Instead, create
+virtualenvs and isolated Python environments for all of your Python
+projects.</p>
+</div>
+<div class="section" id="python-on-path-is-not-appropriate">
+<h3>Python on $PATH is not appropriate<a class="headerlink" href="#python-on-path-is-not-appropriate" title="Permalink to this headline">¶</a></h3>
+<p>Tools like <code class="docutils literal notranslate"><span class="pre">mach</span></code> will look for Python by performing <code class="docutils literal notranslate"><span class="pre">/usr/bin/env</span>
+<span class="pre">python</span></code> or equivalent. Please be sure the appropriate Python 2.7.3+
+path is on $PATH. On OS X, this likely means you’ll need to modify your
+shell’s init script to put something ahead of <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test_manifests.html" class="btn btn-neutral float-right" title="Test Manifests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="build-targets.html" class="btn btn-neutral float-left" title="Build Targets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

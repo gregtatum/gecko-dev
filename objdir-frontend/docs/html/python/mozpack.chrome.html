@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozpack.chrome package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozpack.chrome package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozpack.chrome.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozpack-chrome-package">
+<h1>mozpack.chrome package<a class="headerlink" href="#mozpack-chrome-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozpack.chrome.flags">
+<span id="mozpack-chrome-flags-module"></span><h2>mozpack.chrome.flags module<a class="headerlink" href="#module-mozpack.chrome.flags" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozpack.chrome.flags.Flag">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.flags.</code><code class="sig-name descname">Flag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.Flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Class for flags in manifest entries in the form:</dt><dd><p>“flag”   (same as “flag=true”)
+“flag=yes|true|1”
+“flag=no|false|0”</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mozpack.chrome.flags.Flag.add_definition">
+<code class="sig-name descname">add_definition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">definition</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.Flag.add_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a flag value definition. Replaces any previously set value.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.flags.Flag.matches">
+<code class="sig-name descname">matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.Flag.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the flag value matches the given value. The values
+are canonicalized for comparison.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.flags.Flags">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.flags.</code><code class="sig-name descname">Flags</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.Flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">collections.OrderedDict</span></code></p>
+<p>Class to handle a set of flags definitions given on a single manifest
+entry.</p>
+<dl class="py attribute">
+<dt id="mozpack.chrome.flags.Flags.FLAGS">
+<code class="sig-name descname">FLAGS</code><em class="property"> = {'abi': &lt;class 'mozpack.chrome.flags.StringFlag'&gt;, 'application': &lt;class 'mozpack.chrome.flags.StringFlag'&gt;, 'appversion': &lt;class 'mozpack.chrome.flags.VersionFlag'&gt;, 'contentaccessible': &lt;class 'mozpack.chrome.flags.Flag'&gt;, 'os': &lt;class 'mozpack.chrome.flags.StringFlag'&gt;, 'osversion': &lt;class 'mozpack.chrome.flags.VersionFlag'&gt;, 'platform': &lt;class 'mozpack.chrome.flags.Flag'&gt;, 'platformversion': &lt;class 'mozpack.chrome.flags.VersionFlag'&gt;, 'process': &lt;class 'mozpack.chrome.flags.StringFlag'&gt;, 'tablet': &lt;class 'mozpack.chrome.flags.Flag'&gt;, 'xpcnativewrappers': &lt;class 'mozpack.chrome.flags.Flag'&gt;}</em><a class="headerlink" href="#mozpack.chrome.flags.Flags.FLAGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.flags.Flags.RE">
+<code class="sig-name descname">RE</code><em class="property"> = re.compile('([!&lt;&gt;=]+)')</em><a class="headerlink" href="#mozpack.chrome.flags.Flags.RE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.flags.Flags.match">
+<code class="sig-name descname">match</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">filter</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.Flags.match" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Return whether the set of flags match the set of given filters.</dt><dd><dl class="simple">
+<dt>flags = Flags(‘contentaccessible=yes’, ‘appversion&gt;=3.5’,</dt><dd><p>‘application=foo’)</p>
+</dd>
+</dl>
+<p>flags.match(application=’foo’) returns True
+flags.match(application=’foo’, appversion=’3.5’) returns True
+flags.match(application=’foo’, appversion=’3.0’) returns False</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.flags.StringFlag">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.flags.</code><code class="sig-name descname">StringFlag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.StringFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Class for string flags in manifest entries in the form:</dt><dd><p>“flag=string”
+“flag!=string”</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mozpack.chrome.flags.StringFlag.add_definition">
+<code class="sig-name descname">add_definition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">definition</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.StringFlag.add_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a string flag definition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.flags.StringFlag.matches">
+<code class="sig-name descname">matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.StringFlag.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether one of the string flag definitions matches the given
+value.
+For example,</p>
+<blockquote>
+<div><p>flag = StringFlag(‘foo’)
+flag.add_definition(‘foo!=bar’)
+flag.matches(‘bar’) returns False
+flag.matches(‘qux’) returns True
+flag = StringFlag(‘foo’)
+flag.add_definition(‘foo=bar’)
+flag.add_definition(‘foo=baz’)
+flag.matches(‘bar’) returns True
+flag.matches(‘baz’) returns True
+flag.matches(‘qux’) returns False</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.flags.VersionFlag">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.flags.</code><code class="sig-name descname">VersionFlag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.VersionFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Class for version flags in manifest entries in the form:</dt><dd><p>“flag=version”
+“flag&lt;=version”
+“flag&lt;version”
+“flag&gt;=version”
+“flag&gt;version”</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mozpack.chrome.flags.VersionFlag.add_definition">
+<code class="sig-name descname">add_definition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">definition</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.VersionFlag.add_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a version flag definition.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.flags.VersionFlag.matches">
+<code class="sig-name descname">matches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.flags.VersionFlag.matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether one of the version flag definitions matches the given
+value.
+For example,</p>
+<blockquote>
+<div><p>flag = VersionFlag(‘foo’)
+flag.add_definition(‘foo&gt;=1.0’)
+flag.matches(‘1.0’) returns True
+flag.matches(‘1.1’) returns True
+flag.matches(‘0.9’) returns False
+flag = VersionFlag(‘foo’)
+flag.add_definition(‘foo&gt;=1.0’)
+flag.add_definition(‘foo&lt;0.5’)
+flag.matches(‘0.4’) returns True
+flag.matches(‘1.0’) returns True
+flag.matches(‘0.6’) returns False</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozpack.chrome.manifest">
+<span id="mozpack-chrome-manifest-module"></span><h2>mozpack.chrome.manifest module<a class="headerlink" href="#module-mozpack.chrome.manifest" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.Manifest">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">Manifest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.Manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="mozpack.chrome.manifest.ManifestEntryWithRelPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntryWithRelPath</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘manifest’ entries.</dt><dd><p>manifest some/path/to/another.manifest</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.Manifest.type">
+<code class="sig-name descname">type</code><em class="property"> = 'manifest'</em><a class="headerlink" href="#mozpack.chrome.manifest.Manifest.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestBinaryComponent">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestBinaryComponent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestBinaryComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="mozpack.chrome.manifest.ManifestEntryWithRelPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntryWithRelPath</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘binary-component’ entries.</dt><dd><p>binary-component some/path/to/a/component.dll</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestBinaryComponent.type">
+<code class="sig-name descname">type</code><em class="property"> = 'binary-component'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestBinaryComponent.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestCategory">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestCategory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">category</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestCategory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntry" title="mozpack.chrome.manifest.ManifestEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntry</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘category’ entries.</dt><dd><p>category command-line-handler m-browser &#64;mozilla.org/browser/clh;</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestCategory.type">
+<code class="sig-name descname">type</code><em class="property"> = 'category'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestCategory.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestChrome">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestChrome</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestChrome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="mozpack.chrome.manifest.ManifestEntryWithRelPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntryWithRelPath</span></code></a></p>
+<p>Abstract class for chrome entries.</p>
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestChrome.location">
+<em class="property">property </em><code class="sig-name descname">location</code><a class="headerlink" href="#mozpack.chrome.manifest.ManifestChrome.location" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestComponent">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestComponent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">cid</span></em>, <em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestComponent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="mozpack.chrome.manifest.ManifestEntryWithRelPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntryWithRelPath</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘component’ entries.</dt><dd><p>component {b2bba4df-057d-41ea-b6b1-94a10a8ede68} foo.js</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestComponent.type">
+<code class="sig-name descname">type</code><em class="property"> = 'component'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestComponent.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestContent">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestContent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestChrome" title="mozpack.chrome.manifest.ManifestChrome"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestChrome</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘content’ entries.</dt><dd><p>content global content/global/</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestContent.allowed_flags">
+<code class="sig-name descname">allowed_flags</code><em class="property"> = ['application', 'platformversion', 'os', 'osversion', 'abi', 'xpcnativewrappers', 'tablet', 'process', 'contentaccessible', 'contentaccessible', 'platform']</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestContent.allowed_flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestContent.type">
+<code class="sig-name descname">type</code><em class="property"> = 'content'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestContent.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestContract">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestContract</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">contractID</span></em>, <em class="sig-param"><span class="n">cid</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestContract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntry" title="mozpack.chrome.manifest.ManifestEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntry</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘contract’ entries.</dt><dd><p>contract &#64;mozilla.org/foo;1 {b2bba4df-057d-41ea-b6b1-94a10a8ede68}</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestContract.type">
+<code class="sig-name descname">type</code><em class="property"> = 'contract'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestContract.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestEntry">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestEntry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for all manifest entry types.
+Subclasses may define the following class or member variables:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>localized: indicates whether the manifest entry is used for localized
+data.</p></li>
+<li><p>type: the manifest entry type (e.g. ‘content’ in
+‘content global content/global/’)</p></li>
+<li><p>allowed_flags: a set of flags allowed to be defined for the given
+manifest entry type.</p></li>
+</ul>
+</div></blockquote>
+<p>A manifest entry is attached to a base path, defining where the manifest
+entry is bound to, and that is used to find relative paths defined in
+entries.</p>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestEntry.allowed_flags">
+<code class="sig-name descname">allowed_flags</code><em class="property"> = ['application', 'platformversion', 'os', 'osversion', 'abi', 'xpcnativewrappers', 'tablet', 'process', 'contentaccessible']</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.allowed_flags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestEntry.localized">
+<code class="sig-name descname">localized</code><em class="property"> = False</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.localized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestEntry.move">
+<code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new manifest entry with a different base path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestEntry.rebase">
+<code class="sig-name descname">rebase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.rebase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new manifest entry with all relative paths defined in the
+entry relative to a new base directory.
+The base class doesn’t define relative paths, so it is equivalent to
+move().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestEntry.serialize">
+<code class="sig-name descname">serialize</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serialize the manifest entry.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestEntry.type">
+<code class="sig-name descname">type</code><em class="property"> = None</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntry.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestEntryWithRelPath">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestEntryWithRelPath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntry" title="mozpack.chrome.manifest.ManifestEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntry</span></code></a></p>
+<p>Abstract manifest entry type with a relative path definition.</p>
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestEntryWithRelPath.path">
+<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestEntryWithRelPath.rebase">
+<code class="sig-name descname">rebase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath.rebase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new manifest entry with all relative paths defined in the
+entry relative to a new base directory.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestInterfaces">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestInterfaces</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestInterfaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntryWithRelPath" title="mozpack.chrome.manifest.ManifestEntryWithRelPath"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntryWithRelPath</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘interfaces’ entries.</dt><dd><p>interfaces foo.xpt</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestInterfaces.type">
+<code class="sig-name descname">type</code><em class="property"> = 'interfaces'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestInterfaces.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestLocale">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestLocale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestLocale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestMultiContent" title="mozpack.chrome.manifest.ManifestMultiContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestMultiContent</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘locale’ entries.</dt><dd><p>locale global en-US content/en-US/
+locale global fr content/fr/</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestLocale.localized">
+<code class="sig-name descname">localized</code><em class="property"> = True</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestLocale.localized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestLocale.type">
+<code class="sig-name descname">type</code><em class="property"> = 'locale'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestLocale.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestMultiContent">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestMultiContent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestMultiContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestChrome" title="mozpack.chrome.manifest.ManifestChrome"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestChrome</span></code></a></p>
+<p>Abstract class for chrome entries with multiple definitions.
+Used for locale and skin entries.</p>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestMultiContent.type">
+<code class="sig-name descname">type</code><em class="property"> = None</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestMultiContent.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestOverlay">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestOverlay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">overloaded</span></em>, <em class="sig-param"><span class="n">overload</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverlay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestOverload" title="mozpack.chrome.manifest.ManifestOverload"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestOverload</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘overlay’ entries.</dt><dd><p>overlay chrome://global/content/viewSource.xul             chrome://browser/content/viewSourceOverlay.xul</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestOverlay.type">
+<code class="sig-name descname">type</code><em class="property"> = 'overlay'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverlay.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestOverload">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestOverload</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">overloaded</span></em>, <em class="sig-param"><span class="n">overload</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntry" title="mozpack.chrome.manifest.ManifestEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntry</span></code></a></p>
+<p>Abstract class for chrome entries defining some kind of overloading.
+Used for overlay, override or style entries.</p>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestOverload.type">
+<code class="sig-name descname">type</code><em class="property"> = None</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverload.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestOverride">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestOverride</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">overloaded</span></em>, <em class="sig-param"><span class="n">overload</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverride" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestOverload" title="mozpack.chrome.manifest.ManifestOverload"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestOverload</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘override’ entries.</dt><dd><p>override chrome://global/locale/netError.dtd             chrome://browser/locale/netError.dtd</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestOverride.type">
+<code class="sig-name descname">type</code><em class="property"> = 'override'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestOverride.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestResource">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestResource</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">target</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestEntry" title="mozpack.chrome.manifest.ManifestEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestEntry</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘resource’ entries.</dt><dd><p>resource gre-resources toolkit/res/
+resource services-sync resource://gre/modules/services-sync/</p>
+</dd>
+</dl>
+<p>The target may be a relative path or a resource or chrome url.</p>
+<dl class="py method">
+<dt id="mozpack.chrome.manifest.ManifestResource.rebase">
+<code class="sig-name descname">rebase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestResource.rebase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new manifest entry with all relative paths defined in the
+entry relative to a new base directory.
+The base class doesn’t define relative paths, so it is equivalent to
+move().</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestResource.type">
+<code class="sig-name descname">type</code><em class="property"> = 'resource'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestResource.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestSkin">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestSkin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">relpath</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestSkin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestMultiContent" title="mozpack.chrome.manifest.ManifestMultiContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestMultiContent</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘skin’ entries.</dt><dd><p>skin global classic/1.0 content/skin/classic/</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestSkin.type">
+<code class="sig-name descname">type</code><em class="property"> = 'skin'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestSkin.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozpack.chrome.manifest.ManifestStyle">
+<em class="property">class </em><code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">ManifestStyle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">overloaded</span></em>, <em class="sig-param"><span class="n">overload</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">flags</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.ManifestStyle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mozpack.chrome.manifest.ManifestOverload" title="mozpack.chrome.manifest.ManifestOverload"><code class="xref py py-class docutils literal notranslate"><span class="pre">mozpack.chrome.manifest.ManifestOverload</span></code></a></p>
+<dl class="simple">
+<dt>Class for ‘style’ entries.</dt><dd><p>style chrome://global/content/viewSource.xul             chrome://browser/skin/</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="mozpack.chrome.manifest.ManifestStyle.type">
+<code class="sig-name descname">type</code><em class="property"> = 'style'</em><a class="headerlink" href="#mozpack.chrome.manifest.ManifestStyle.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozpack.chrome.manifest.is_manifest">
+<code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">is_manifest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.is_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return whether the given path is that of a manifest file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozpack.chrome.manifest.parse_manifest">
+<code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">parse_manifest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">fileobj</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.parse_manifest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a manifest file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozpack.chrome.manifest.parse_manifest_line">
+<code class="sig-prename descclassname">mozpack.chrome.manifest.</code><code class="sig-name descname">parse_manifest_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base</span></em>, <em class="sig-param"><span class="n">line</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozpack.chrome.manifest.parse_manifest_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a line from a manifest file with the given base directory and
+return the corresponding ManifestEntry instance.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozpack.chrome">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozpack.chrome" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

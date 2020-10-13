@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Crash Events &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Crash Reporter" href="../../../crashreporter/crashreporter/index.html" />
+    <link rel="prev" title="Crash Manager" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Crash Manager</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#other-documents">Other Documents</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Crash Events</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">Crash Manager</a> &raquo;</li>
+        
+      <li>Crash Events</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/crashes/crash-manager/crash-events.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="crash-events">
+<h1>Crash Events<a class="headerlink" href="#crash-events" title="Permalink to this headline">¶</a></h1>
+<p><strong>Crash Events</strong> refers to a special subsystem of Gecko that aims to capture
+events of interest related to process crashing and hanging.</p>
+<p>When an event worthy of recording occurs, a file containing that event’s
+information is written to a well-defined location on the filesystem. The Gecko
+process periodically scans for produced files and consolidates information
+into a more unified and efficient backend store.</p>
+<div class="section" id="crash-event-files">
+<h2>Crash Event Files<a class="headerlink" href="#crash-event-files" title="Permalink to this headline">¶</a></h2>
+<p>When a crash-related event occurs, a file describing that event is written
+to a well-defined directory. That directory is likely in the directory of
+the currently-active profile. However, if a profile is not yet active in
+the Gecko process, that directory likely resides in the user’s <em>app data</em>
+directory (<em>UAppData</em> from the directory service).</p>
+<p>The filename of the event file is not relevant. However, producers need
+to choose a filename intelligently to avoid name collisions and race
+conditions. Since file locking is potentially dangerous at crash time,
+the convention of generating a UUID and using it as a filename has been
+adopted.</p>
+<div class="section" id="file-format">
+<h3>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h3>
+<p>All crash event files share the same high-level file format. The format
+consists of the following fields delimited by a UNIX newline (<em>n</em>)
+character:</p>
+<ul class="simple">
+<li><p>String event name (valid UTF-8, but likely ASCII)</p></li>
+<li><p>String representation of integer seconds since UNIX epoch</p></li>
+<li><p>Payload</p></li>
+</ul>
+<p>The payload is event specific and may contain UNIX newline characters.
+The recommended method for parsing is to split at most 3 times on UNIX
+newline and then dispatch to an event-specific parsed based on the
+event name.</p>
+<p>If an unknown event type is encountered, the event can safely be ignored
+until later. This helps ensure that application downgrades (potentially
+due to elevated crash rate) don’t result in data loss.</p>
+<p>The format and semantics of each event type are meant to be constant once
+that event type is committed to the main Firefox repository. If new metadata
+needs to be captured or the meaning of data captured in an event changes,
+that change should be expressed through the invention of a new event type.
+For this reason, event names are highly recommended to contain a version.
+e.g. instead of a <em>Gecko process crashed</em> event, we prefer a <em>Gecko process
+crashed v1</em> event.</p>
+</div>
+<div class="section" id="event-types">
+<h3>Event Types<a class="headerlink" href="#event-types" title="Permalink to this headline">¶</a></h3>
+<p>Each subsection documents the different types of crash events that may be
+produced. Each section name corresponds to the first line of the crash
+event file.</p>
+<p>Currently only main process crashes produce event files. Because crashes and
+hangs in child processes can be easily recorded by the main process, we do not
+foresee the need for writing event files for child processes, design
+considerations below notwithstanding.</p>
+<div class="section" id="crash-main-3">
+<h4>crash.main.3<a class="headerlink" href="#crash-main-3" title="Permalink to this headline">¶</a></h4>
+<p>This event is produced when the main process crashes.</p>
+<p>The payload of this event is delimited by UNIX newlines (<em>n</em>) and contains the
+following fields:</p>
+<ul class="simple">
+<li><p>The crash ID string, very likely a UUID</p></li>
+<li><p>One line holding the crash metadata serialized as a JSON string</p></li>
+</ul>
+</div>
+<div class="section" id="crash-main-2">
+<h4>crash.main.2<a class="headerlink" href="#crash-main-2" title="Permalink to this headline">¶</a></h4>
+<p>This event is produced when the main process crashes.</p>
+<p>The payload of this event is delimited by UNIX newlines (<em>n</em>) and contains the
+following fields:</p>
+<ul class="simple">
+<li><p>The crash ID string, very likely a UUID</p></li>
+<li><p>0 or more lines of metadata, each containing one key=value pair of text</p></li>
+</ul>
+<p>This event is obsolete.</p>
+</div>
+<div class="section" id="crash-main-1">
+<h4>crash.main.1<a class="headerlink" href="#crash-main-1" title="Permalink to this headline">¶</a></h4>
+<p>This event is produced when the main process crashes.</p>
+<p>The payload of this event is the string crash ID, very likely a UUID.
+There should be <code class="docutils literal notranslate"><span class="pre">UUID.dmp</span></code> and <code class="docutils literal notranslate"><span class="pre">UUID.extra</span></code> files on disk, saved by
+Breakpad.</p>
+<p>This event is obsolete.</p>
+</div>
+<div class="section" id="crash-submission-1">
+<h4>crash.submission.1<a class="headerlink" href="#crash-submission-1" title="Permalink to this headline">¶</a></h4>
+<p>This event is produced when a crash is submitted.</p>
+<p>The payload of this event is delimited by UNIX newlines (<em>n</em>) and contains the
+following fields:</p>
+<ul class="simple">
+<li><p>The crash ID string</p></li>
+<li><p>“true” if the submission succeeded or “false” otherwise</p></li>
+<li><p>The remote crash ID string if the submission succeeded</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="aggregated-event-log">
+<h2>Aggregated Event Log<a class="headerlink" href="#aggregated-event-log" title="Permalink to this headline">¶</a></h2>
+<p>Crash events are aggregated together into a unified event <em>log</em>. Currently,
+this <em>log</em> is really a JSON file. However, this is an implementation detail
+and it could change at any time. The interface to crash data provided by
+the JavaScript API is the only supported interface.</p>
+</div>
+<div class="section" id="design-considerations">
+<h2>Design Considerations<a class="headerlink" href="#design-considerations" title="Permalink to this headline">¶</a></h2>
+<p>There are many considerations influencing the design of this subsystem.
+We attempt to document them in this section.</p>
+<div class="section" id="decoupling-of-event-files-from-final-data-structure">
+<h3>Decoupling of Event Files from Final Data Structure<a class="headerlink" href="#decoupling-of-event-files-from-final-data-structure" title="Permalink to this headline">¶</a></h3>
+<p>While it is certainly possible for the Gecko process to write directly to
+the final data structure on disk, there is an intentional decoupling between
+the production of events and their transition into final storage. Along the
+same vein, the choice to have events written to multiple files by producers
+is deliberate.</p>
+<p>Some recorded events are written immediately after a process crash. This is
+a very uncertain time for the host system. There is a high liklihood the
+system is in an exceptional state, such as memory exhaustion. Therefore, any
+action taken after crashing needs to be very deliberate about what it does.
+Excessive memory allocation and certain system calls may cause the system
+to crash again or the machine’s condition to worsen. This means that the act
+of recording a crash event must be very light weight. Writing a new file from
+nothing is very light weight. This is one reason we write separate files.</p>
+<p>Another reason we write separate files is because if the main Gecko process
+itself crashes (as opposed to say a plugin process), the crash reporter (not
+Gecko) is running and the crash reporter needs to handle the writing of the
+event info. If this writing is involved (say loading, parsing, updating, and
+reserializing back to disk), this logic would need to be implemented in both
+Gecko and the crash reporter or would need to be implemented in such a way
+that both could use. Neither of these is very practical from a software
+lifecycle management perspective. It’s much easier to have separate processes
+write a simple file and to let a single implementation do all the complex
+work.</p>
+</div>
+</div>
+<div class="section" id="idempotent-event-processing">
+<h2>Idempotent Event Processing<a class="headerlink" href="#idempotent-event-processing" title="Permalink to this headline">¶</a></h2>
+<p>Processing of event files has been designed such that the result is
+idempotent regardless of what order those files are processed in. This is
+not only a good design decision, but it is arguably necessary. While event
+files are processed in order by file mtime, filesystem times may not have
+the resolution required for proper sorting. Therefore, processing order is
+merely an optimistic assumption.</p>
+</div>
+<div class="section" id="aggregated-storage-format">
+<h2>Aggregated Storage Format<a class="headerlink" href="#aggregated-storage-format" title="Permalink to this headline">¶</a></h2>
+<p>Crash events are aggregated into a unified data structure on disk. That data
+structure is currently LZ4-compressed JSON and is represented by a single file.</p>
+<p>The choice of a single JSON file was initially driven by time and complexity
+concerns. Before changing the format or adding significant amounts of new
+data, some considerations must be taken into account.</p>
+<p>First, in well-behaving installs, crash data should be minimal. Crashes and
+hangs will be rare and thus the size of the crash data should remain small
+over time.</p>
+<p>The choice of a single JSON file has larger implications as the amount of
+crash data grows. As new data is accumulated, we need to read and write
+an entire file to make small updates. LZ4 compression helps reduce I/O.
+But, there is a potential for unbounded file growth. We establish a
+limit for the max age of records. Anything older than that limit is
+pruned. We also establish a daily limit on the number of crashes we will
+store. All crashes beyond the first N in a day have no payload and are
+only recorded by the presence of a count. This count ensures we can
+distinguish between <code class="docutils literal notranslate"><span class="pre">N</span></code> and <code class="docutils literal notranslate"><span class="pre">100</span> <span class="pre">*</span> <span class="pre">N</span></code>, which are very different
+values!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../crashreporter/crashreporter/index.html" class="btn btn-neutral float-right" title="Crash Reporter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Crash Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

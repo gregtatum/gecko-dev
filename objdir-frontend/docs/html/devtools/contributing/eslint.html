@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using ESLint in DevTools &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Using ESLint in DevTools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/contributing/eslint.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-eslint-in-devtools">
+<h1>Using ESLint in DevTools<a class="headerlink" href="#using-eslint-in-devtools" title="Permalink to this headline">¶</a></h1>
+<!--TODO paths, executables and everything here should be reviewed when we go to GitHub--><p>The main rule set is in <code class="docutils literal notranslate"><span class="pre">devtools/.eslintrc</span></code>. It is meant to be used with ESLint 3.5.0.</p>
+<p>Note that the file <code class="docutils literal notranslate"><span class="pre">.eslintignore</span></code> at the root of the repository contains a list of paths to ignore. This is because a lot of the code isn’t ESLint compliant yet. We’re in the process of making code free of ESLint warnings and errors, but this takes time. In the meantime, make sure the file or folder you are running ESLint on isn’t ignored.</p>
+<div class="section" id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>From the root of the project type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">eslint</span> <span class="pre">--setup</span></code></p>
+<p>ESLint, <code class="docutils literal notranslate"><span class="pre">eslint-plugin-html</span></code>, <code class="docutils literal notranslate"><span class="pre">eslint-plugin-mozilla</span></code> and <code class="docutils literal notranslate"><span class="pre">eslint-plugin-react</span></code> will be automatically downloaded and installed.</p>
+</div>
+<div class="section" id="running-eslint">
+<h2>Running ESLint<a class="headerlink" href="#running-eslint" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="from-the-command-line">
+<h3>From the command line<a class="headerlink" href="#from-the-command-line" title="Permalink to this headline">¶</a></h3>
+<p>The preferred way of running ESLint from the command line is by using <code class="docutils literal notranslate"><span class="pre">mach</span></code> like this:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach eslint path/to/directory
+</pre></div>
+</div>
+<p>This ensures that ESLint runs with the same configuration that our CI environment (see the next section).</p>
+</div>
+<div class="section" id="in-continuous-integration">
+<h3>In continuous integration<a class="headerlink" href="#in-continuous-integration" title="Permalink to this headline">¶</a></h3>
+<p>Relying only on people to run ESLint isn’t enough to guarantee new warnings or errors aren’t introduced in the code. Therefore, ESLint also runs automatically in our Continuous Integration environment.</p>
+<p>This means that every time a commit is pushed to one of the repositories, a job runs ESLint on the whole code.</p>
+<p>If you are pushing a patch to the <a class="reference external" href="https://wiki.mozilla.org/ReleaseEngineering/TryServer"><code class="docutils literal notranslate"><span class="pre">try</span></code> repository</a> to run the tests, then you can also tell it to run the ESLint job and therefore verify that you did not introduce new errors.</p>
+<p>If you build on all platforms, then the ESLint job will run by default, but if you selected a few platforms only in your  <a class="reference external" href="https://wiki.mozilla.org/Build:TryChooser">trysyntax</a>, then you need to also add <code class="docutils literal notranslate"><span class="pre">eslint-gecko</span></code> as a target platform for ESLint to run.</p>
+</div>
+<div class="section" id="running-eslint-in-sublimetext">
+<h3>Running ESLint in SublimeText<a class="headerlink" href="#running-eslint-in-sublimetext" title="Permalink to this headline">¶</a></h3>
+<p>SublimeText is a popular code editor and it supports ESLint via a couple of plugins. Here are some pointers to get started:</p>
+<ul class="simple">
+<li><p>make sure you have <a class="reference external" href="http://www.sublimetext.com/3">SublimeText 3</a>, the linter plugin doesn’t work with ST2,</p></li>
+<li><p>install <a class="reference external" href="http://www.sublimelinter.com/en/latest/installation.html">SublimeLinter 3</a>, this is a framework for linters that supports, among others, ESLint. Installing SublimeLinter via <a class="reference external" href="https://packagecontrol.io/installation">Package Control</a> is the easiest way)</p></li>
+<li><p>with SublimeLinter installed, you can now <a class="reference external" href="https://github.com/roadhump/SublimeLinter-eslint#linter-installation">install the specific ESLint plugin</a>. The installation instructions provide details about how to install node, npm, eslint which are required).</p></li>
+<li><p>make sure to configure SublimeLinter with the <code class="docutils literal notranslate"><span class="pre">--no-ignore</span></code> option so that errors are also shown for source files that are ignored. To do this, open the SublimeLinter user configuration at: Preferences / Package Settings / SublimeLinter / Settings - User, and add <code class="docutils literal notranslate"><span class="pre">&quot;args&quot;:</span> <span class="pre">&quot;--no-ignore&quot;</span></code> to the eslint linter object.</p></li>
+</ul>
+<p>You will also need to point SublimeLinter at the local eslint installation by setting the path to whatever <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">eslint</span> <span class="pre">--setup</span></code> gives you when you run it (include a trailing slash but remove the eslint binary filename) e.g.</p>
+<p>NOTE: Your local eslint binary is at /some-project-path/tools/lint/eslint/node_modules/.bin/eslint</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;linux&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;osx&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;/some-project-path/tools/lint/eslint/node_modules/.bin&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;windows&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">some-project-path</span><span class="se">\\</span><span class="s2">tools</span><span class="se">\\</span><span class="s2">lint</span><span class="se">\\</span><span class="s2">eslint</span><span class="se">\\</span><span class="s2">node_modules</span><span class="se">\\</span><span class="s2">.bin&quot;</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+</pre></div>
+</div>
+<p>Once done, open the mozilla project in SublimeText and open any JS file in the <code class="docutils literal notranslate"><span class="pre">/devtools</span></code> directory. You can then trigger the linter via the contextual menu (right click on the file itself) or with a keyboard shortcut (ctrl+option+L on Mac).</p>
+<p>You should see errors and warnings in the gutter as shown in the screenshot below. You can also see all errors listed with ctrl+option+A, and individual errors by clicking in the gutter marker.</p>
+<p><img alt="ESLint in SublimeText 3" src="../../_images/eslint-sublimetext3.png" /></p>
+</div>
+<div class="section" id="running-eslint-in-emacs">
+<h3>Running ESLint in Emacs<a class="headerlink" href="#running-eslint-in-emacs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First, install the flycheck package (flymake doesn’t support ESLint yet).  You can get flycheck from the <a class="reference external" href="https://marmalade-repo.org/">marmalade</a> or <a class="reference external" href="http://stable.melpa.org/#/">melpa-stable</a> repositories.</p></li>
+<li><p>Tell flycheck to disable jslint, and enable flycheck in your javascript mode.  Some care is needed to find the eslint installed in the source tree.  This snippet assumes the built-in javascript mode, but with minor changes (just the name of the hook) should work fine with js2-mode as well:</p></li>
+</ul>
+<div class="highlight-lisp notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-js-mode-hacks</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">mode-name</span> <span class="s">&quot;JS&quot;</span><span class="p">)</span>
+  <span class="c1">;; Set this locally so that the head.js rule continues to work</span>
+  <span class="c1">;; properly.  In particular for a mochitest we want to preserve the</span>
+  <span class="c1">;; &quot;browser_&quot; prefix.</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">base</span> <span class="p">(</span><span class="nv">file-name-nondirectory</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;^\\([a-z]+_\\)&quot;</span> <span class="nv">base</span><span class="p">)</span>
+	<span class="p">(</span><span class="nv">setq-local</span> <span class="nv">flycheck-temp-prefix</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span> <span class="nv">base</span><span class="p">))))</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">base-dir</span> <span class="p">(</span><span class="nv">locate-dominating-file</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span>
+					    <span class="s">&quot;.eslintignore&quot;</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nb">when</span> <span class="nv">base-dir</span>
+	<span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">eslint</span> <span class="p">(</span><span class="nv">expand-file-name</span>
+		       <span class="s">&quot;tools/lint/eslint/node_modules/.bin/eslint&quot;</span> <span class="nv">base-dir</span><span class="p">)))</span>
+	  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">eslint</span><span class="p">)</span>
+	    <span class="p">(</span><span class="nv">setq-local</span> <span class="nv">flycheck-javascript-eslint-executable</span> <span class="nv">eslint</span><span class="p">))))))</span>
+  <span class="p">(</span><span class="nv">flycheck-mode</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;flycheck</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">setq-default</span> <span class="nv">flycheck-disabled-checkers</span>
+	      <span class="p">(</span><span class="nb">append</span> <span class="nv">flycheck-disabled-checkers</span>
+		      <span class="o">&#39;</span><span class="p">(</span><span class="nv">javascript-jshint</span><span class="p">)))</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;js-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">my-js-mode-hacks</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>flycheck puts its bindings on <code class="docutils literal notranslate"><span class="pre">C-c</span> <span class="pre">!</span></code> by default, so use <code class="docutils literal notranslate"><span class="pre">C-c</span> <span class="pre">!</span> <span class="pre">C-h</span></code> to see what is available.  There are key bindings to list all the errors and to move through the errors, among other things.</p></li>
+<li><p>To make sure flycheck is finding eslint, open a .js file and run <code class="docutils literal notranslate"><span class="pre">M-x</span> <span class="pre">flycheck-verify-setup</span></code>. It should show the path to your eslint installation.</p></li>
+</ul>
+</div>
+<div class="section" id="running-eslint-in-atom">
+<h3>Running ESLint in Atom<a class="headerlink" href="#running-eslint-in-atom" title="Permalink to this headline">¶</a></h3>
+<p>From the root of the project type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">eslint</span> <span class="pre">--setup</span></code></p>
+<p>Install the <a class="reference external" href="https://atom.io/packages/linter-eslint">linter-eslint</a> package v.8.00 or above. Then go to the package settings and enable the following options:</p>
+<p><img alt="linter-eslint settings in Atom" src="../../_images/eslint-atom-settings.png" /></p>
+<p>Once done, you should see errors and warnings as shown in the screenshot below.</p>
+<p><img alt="ESLint in Atom" src="../../_images/eslint-atom.png" /></p>
+</div>
+<div class="section" id="running-eslint-in-vim">
+<h3>Running ESLint in ViM<a class="headerlink" href="#running-eslint-in-vim" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t use Syntastic yet, the instructions here should get you started: https://wiki.mozilla.org/WebExtensions/Hacking#Vim</p>
+<p>Alternatively, if you do use Syntastic already, add this to your <code class="docutils literal notranslate"><span class="pre">.vimrc</span></code> to get ESLint working where the path contains <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> (adjust the path to reflect the one in your computer):</p>
+<div class="highlight-vim notranslate"><div class="highlight"><pre><span></span> autocmd <span class="nb">FileType</span> javascript<span class="p">,</span>html
+    \ <span class="k">if</span> stridx<span class="p">(</span>expand<span class="p">(</span><span class="s2">&quot;%:p&quot;</span><span class="p">),</span> <span class="s2">&quot;/mozilla-central/&quot;</span><span class="p">)</span> <span class="p">!=</span> <span class="m">-1</span> <span class="p">|</span>
+    \    <span class="k">let</span> <span class="k">b</span>:syntastic_checkers <span class="p">=</span> [<span class="s1">&#39;eslint&#39;</span>] <span class="p">|</span>
+    \    <span class="k">let</span> <span class="k">b</span>:syntastic_eslint_exec <span class="p">=</span> <span class="s1">&#39;/path/to/mozilla-central/tools/lint/eslint/node_modules/.bin/eslint&#39;</span> <span class="p">|</span>
+    \    <span class="k">let</span> <span class="k">b</span>:syntastic_html_eslint_args <span class="p">=</span> [<span class="s1">&#39;--plugin&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span>] <span class="p">|</span>
+    \ <span class="k">endif</span>
+</pre></div>
+</div>
+<p>You probably need to close and reopen ViM for the changes to take effect. Then, open any file and try to edit it to cause an error, then save it. If all goes well, you will get some distinctive arrows pointing to the error. Hovering with the mouse will produce a sort of tooltip with more information about the error.</p>
+</div>
+<div class="section" id="running-eslint-in-visual-studio-code">
+<h3>Running ESLint in Visual Studio Code<a class="headerlink" href="#running-eslint-in-visual-studio-code" title="Permalink to this headline">¶</a></h3>
+<p>From the root of the project type:</p>
+<p><code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">eslint</span> <span class="pre">--setup</span></code></p>
+<p>Install the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">dbaeumer.vscode-eslint</a> package. Then go to the package settings and set the following option:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;eslint.nodePath&quot;:</span> <span class="pre">&quot;tools/lint/eslint/node_modules/.bin&quot;</span></code></p>
+<p>Once done, you should see errors and warnings as shown in the screenshot below:</p>
+<p><img alt="ESLint in VS Code" src="../../_images/eslint-vscode.png" /></p>
+</div>
+<div class="section" id="fixing-eslint-errors">
+<h3>Fixing ESLint Errors<a class="headerlink" href="#fixing-eslint-errors" title="Permalink to this headline">¶</a></h3>
+<p>This should help you write eslint-clean code:</p>
+<ul class="simple">
+<li><p>When moving or refactoring a piece of code, consider this as an opportunity to remove all ESlint errors from this piece of code. In fact, it may even be a good opportunity to remove all ESLint errors from the entire file.</p></li>
+<li><p>When doing ESLint-only changes, please do them in a separate patch from the actual functionality changes or bug fix. This helps make the review easier, and isolate the actual changes when looking at the source history.</p></li>
+<li><p>When cleaning an entire file or folder from ESLint errors, do not forget to remove the corresponding entry from the <code class="docutils literal notranslate"><span class="pre">.eslintignore</span></code> file.</p></li>
+<li><p>When writing new code, from scratch, please make it ESLint compliant from the start. This is a lot easier than having to revisit it later.</p></li>
+<li><p>ESLint also runs on <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> tags in HTML files, so if you create new HTML test files for mochitests for example, make sure that JavaScript code in those files is free of ESLint errors.</p></li>
+<li><p>Depending on how a dependency is loaded into a file, the symbols this dependency exports might not be considered as defined by ESLint. For instance, using <code class="docutils literal notranslate"><span class="pre">Cu.import(&quot;some.jsm&quot;)</span></code> doesn’t explicitly say which symbols are now available in the scope of the file, and so using those symbols will be consider by ESLint as using undefined variables. When this happens, please avoid using the <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">globals</span> <span class="pre">...</span> <span class="pre">*/</span></code> ESLint comment (which tells it that these variables are defined). Instead, please use <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">import-globals-from</span> <span class="pre">relative/path/to/file.js</span> <span class="pre">*/</span></code>. This way, you won’t have a list of variables to maintain manually, the globals are going to be imported dynamically instead.</p></li>
+<li><p>In test files (xpcshell and mochitest), all globals from the corresponding <code class="docutils literal notranslate"><span class="pre">head.js</span></code> file are imported automatically, so you don’t need to define them using a <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">globals</span> <span class="pre">...</span> <span class="pre">*/</span></code> comment or a <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">import-globals-from</span> <span class="pre">head.js</span> <span class="pre">*/</span></code> comment.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

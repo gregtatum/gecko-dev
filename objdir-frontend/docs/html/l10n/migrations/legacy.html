@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Migrating Legacy Formats &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fluent to Fluent Migrations" href="fluent.html" />
+    <link rel="prev" title="Migration Recipes and Their Lifecycle" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Localization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Localization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fluent/index.html">Fluent</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Migrating Strings From Legacy or Fluent Files</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Migration Recipes and Their Lifecycle</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Migrating Legacy Formats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-migration">Basic Migration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#replacing-content-in-legacy-strings">Replacing Content in Legacy Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trimming-unnecessary-whitespaces-in-translations">Trimming Unnecessary Whitespaces in Translations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#concatenating-strings">Concatenating Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#plural-strings">Plural Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#explicit-variants">Explicit Variants</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fluent.html">Fluent to Fluent Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing.html">How to Test Migration Recipes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="localizations.html">How Migrations Are Run on l10n Repositories</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#how-to-get-help">How to Get Help</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../crosschannel/index.html">Cross-channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html">L10N Glossary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Localization</a> &raquo;</li>
+        
+          <li><a href="index.html">Migrating Strings From Legacy or Fluent Files</a> &raquo;</li>
+        
+      <li>Migrating Legacy Formats</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/l10n/migrations/legacy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="migrating-legacy-formats">
+<h1>Migrating Legacy Formats<a class="headerlink" href="#migrating-legacy-formats" title="Permalink to this headline">¶</a></h1>
+<p>Migrating from legacy formats is different from migrating Fluent to Fluent.
+When migrating legacy code paths, you’ll need to adjust the Fluent strings
+for the quirks Mozilla uses in the legacy code paths. You’ll find a number
+of specialized functionalities here.</p>
+<div class="section" id="basic-migration">
+<h2>Basic Migration<a class="headerlink" href="#basic-migration" title="Permalink to this headline">¶</a></h2>
+<p>Let’s consider a basic example: one string needs to be migrated, without
+any further change, from a DTD file to Fluent.</p>
+<p>The legacy string is stored in <code class="code bash docutils literal notranslate"><span class="pre">toolkit/locales/en-US/chrome/global/findbar.dtd</span></code>:</p>
+<div class="highlight-dtd notranslate"><div class="highlight"><pre><span></span><span class="k">&lt;!ENTITY</span> <span class="ni">next.tooltip</span> <span class="s2">&quot;Find the next occurrence of the phrase&quot;</span><span class="k">&gt;</span>
+</pre></div>
+</div>
+<p>The new Fluent string is stored in <code class="code bash docutils literal notranslate"><span class="pre">toolkit/locales/en-US/toolkit/main-window/findbar.ftl</span></code>:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">findbar-next</span> <span class="o">=</span>
+<span class="na">    .tooltiptext</span> <span class="o">=</span> <span class="s">Find the next occurrence of the phrase</span>
+</pre></div>
+</div>
+<p>This is how the migration recipe looks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Any copyright is dedicated to the Public Domain.</span>
+<span class="c1"># http://creativecommons.org/publicdomain/zero/1.0/</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">import</span> <span class="nn">fluent.syntax.ast</span> <span class="k">as</span> <span class="nn">FTL</span>
+<span class="kn">from</span> <span class="nn">fluent.migrate.helpers</span> <span class="kn">import</span> <span class="n">transforms_from</span>
+
+<span class="k">def</span> <span class="nf">migrate</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Bug 1411707 - Migrate the findbar XBL binding to a Custom Element, part {index}.&quot;&quot;&quot;</span>
+
+    <span class="n">ctx</span><span class="o">.</span><span class="n">add_transforms</span><span class="p">(</span>
+        <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+        <span class="n">transforms_from</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">findbar-next =</span>
+<span class="sd">    .tooltiptext = { COPY(from_path, &quot;next.tooltip&quot;) }</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">from_path</span><span class="o">=</span><span class="s2">&quot;toolkit/chrome/global/findbar.dtd&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The first important thing to notice is that the migration recipe needs file
+paths relative to a localization repository, losing <code class="code bash docutils literal notranslate"><span class="pre">locales/en-US/</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code bash docutils literal notranslate"><span class="pre">toolkit/locales/en-US/chrome/global/findbar.dtd</span></code> becomes
+<code class="code bash docutils literal notranslate"><span class="pre">toolkit/chrome/global/findbar.dtd</span></code>.</p></li>
+<li><p><code class="code bash docutils literal notranslate"><span class="pre">toolkit/locales/en-US/toolkit/main-window/findbar.ftl</span></code> becomes
+<code class="code bash docutils literal notranslate"><span class="pre">toolkit/toolkit/main-window/findbar.ftl</span></code>.</p></li>
+</ul>
+</div></blockquote>
+<p>The <code class="code python docutils literal notranslate"><span class="name"><span class="pre">context</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">add_transforms</span></span></code> function takes 3 arguments:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Path to the target l10n file.</p></li>
+<li><p>Path to the reference (en-US) file.</p></li>
+<li><p>An array of Transforms. Transforms are AST nodes which describe how legacy
+translations should be migrated.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For migrations of Firefox localizations, the target and reference path
+are the same. This isn’t true for all projects that use Fluent, so both
+arguments are required.</p>
+</div>
+<p>In this case there is only one Transform that migrates the string with ID
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">next</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">tooltip</span></span></code> from <code class="code bash docutils literal notranslate"><span class="pre">toolkit/chrome/global/findbar.dtd</span></code>, and injects
+it in the FTL fragment. The <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span></code> Transform allows to copy the string
+from an existing file as is, while <code class="code python docutils literal notranslate"><span class="name"><span class="pre">from_path</span></span></code> is used to avoid
+repeating the same path multiple times, making the recipe more readable. Without
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">from_path</span></span></code>, this could be written as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ctx</span><span class="o">.</span><span class="n">add_transforms</span><span class="p">(</span>
+    <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+    <span class="n">transforms_from</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">findbar-next =</span>
+<span class="sd">    .tooltiptext = { COPY(&quot;toolkit/chrome/global/findbar.dtd&quot;, &quot;next.tooltip&quot;) }</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This method of writing migration recipes allows to take the original FTL
+strings, and simply replace the value of each message with a <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span></code>
+Transform. <code class="code python docutils literal notranslate"><span class="name"><span class="pre">transforms_from</span></span></code> takes care of converting the FTL syntax
+into an array of Transforms describing how the legacy translations should be
+migrated. This manner of defining migrations is only suitable to simple strings
+where a copy operation is sufficient. For more complex use-cases which require
+some additional logic in Python, it’s necessary to resort to the raw AST.</p>
+<p>The example above is equivalent to the following syntax, which exposes
+the underlying AST structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ctx</span><span class="o">.</span><span class="n">add_transforms</span><span class="p">(</span>
+    <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;toolkit/toolkit/main-window/findbar.ftl&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;findbar-next&quot;</span><span class="p">),</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">FTL</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;tooltiptext&quot;</span><span class="p">),</span>
+                    <span class="n">value</span><span class="o">=</span><span class="n">COPY</span><span class="p">(</span>
+                        <span class="s2">&quot;toolkit/chrome/global/findbar.dtd&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;next.tooltip&quot;</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This creates a <code class="code python docutils literal notranslate"><span class="name"><span class="pre">Message</span></span></code>, taking the value from the legacy string
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">findbar</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">next</span></span></code>. A message can have an array of attributes, each with an ID
+and a value: in this case there is only one attribute, with ID <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">tooltiptext</span></span></code>
+and <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">value</span></span></code> copied from the legacy string.</p>
+<p>Notice how both the ID of the message and the ID of the attribute are
+defined as an <code class="code python docutils literal notranslate"><span class="name"><span class="pre">FTL</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">Identifier</span></span></code>, not simply as a string.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It’s possible to concatenate arrays of Transforms defined manually, like in
+the last example, with those coming from <code class="code python docutils literal notranslate"><span class="name"><span class="pre">transforms_from</span></span></code>, by using
+the <code class="code python docutils literal notranslate"><span class="operator"><span class="pre">+</span></span></code> operator. Alternatively, it’s possible to use multiple
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">add_transforms</span></span></code>.</p>
+<p>The order of Transforms provided in the recipe is not relevant, the reference
+file is used for ordering messages.</p>
+</div>
+</div>
+<div class="section" id="replacing-content-in-legacy-strings">
+<h2>Replacing Content in Legacy Strings<a class="headerlink" href="#replacing-content-in-legacy-strings" title="Permalink to this headline">¶</a></h2>
+<p>While <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span></code> allows to copy a legacy string as is, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code>
+(from <cite>fluent.migrate</cite>) allows to replace content while performing the
+migration. This is necessary, for example, when migrating strings that include
+placeholders or entities that need to be replaced to adapt to Fluent syntax.</p>
+<p>Consider for example the following string:</p>
+<div class="highlight-DTD notranslate"><div class="highlight"><pre><span></span><span class="k">&lt;!ENTITY</span> <span class="ni">aboutSupport.featuresTitle</span> <span class="s2">&quot;&amp;brandShortName; Features&quot;</span><span class="k">&gt;</span>
+</pre></div>
+</div>
+<p>Which needs to be migrated to:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>features-title = { -brand-short-name } Features
+</pre></div>
+</div>
+<p>The entity <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">&amp;</span></span><span class="name other"><span class="pre">brandShortName</span></span><span class="punctuation"><span class="pre">;</span></span></code> needs to be replaced with a term reference:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;features-title&quot;</span><span class="p">),</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">REPLACE</span><span class="p">(</span>
+        <span class="s2">&quot;toolkit/chrome/global/aboutSupport.dtd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;aboutSupport.featuresTitle&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;&amp;brandShortName;&quot;</span><span class="p">:</span> <span class="n">TERM_REFERENCE</span><span class="p">(</span><span class="s2">&quot;brand-short-name&quot;</span><span class="p">),</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+<span class="p">),</span>
+</pre></div>
+</div>
+<p>This creates an <code class="code python docutils literal notranslate"><span class="name"><span class="pre">FTL</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">Message</span></span></code>, taking the value from the legacy string
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">aboutSupport</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">featuresTitle</span></span></code>, but replacing the specified text with a
+Fluent term reference.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code> replaces all occurrences of the specified text.</p>
+</div>
+<p>It’s also possible to replace content with a specific text: in that case, it
+needs to be defined as a <code class="code python docutils literal notranslate"><span class="name"><span class="pre">TextElement</span></span></code>. For example, to replace
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">example</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">com</span></span></code> with HTML markup:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="o">=</span><span class="n">REPLACE</span><span class="p">(</span>
+    <span class="s2">&quot;browser/chrome/browser/preferences/preferences.properties&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;searchResults.sorryMessageWin&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;example.com&quot;</span><span class="p">:</span> <span class="n">FTL</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s1">&#39;&lt;span data-l10n-name=&quot;example&quot;&gt;&lt;/span&gt;&#39;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The situation is more complex when a migration recipe needs to replace
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">printf</span></span></code> arguments like <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code>. In fact, the format used for localized
+and source strings doesn’t need to match, and the two following strings using
+unordered and ordered argument are perfectly equivalent:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">btn-quit</span> <span class="o">=</span> <span class="s">Quit %S</span>
+<span class="na">btn-quit</span> <span class="o">=</span> <span class="s">Quit %1$S</span>
+</pre></div>
+</div>
+<p>In this scenario, replacing <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code> would work on the first version, but not
+on the second, and there’s no guarantee that the localized string uses the
+same format as the source string.</p>
+<p>Consider also the following string that uses <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code> for two different
+variables, implicitly relying on the order in which the arguments appear:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">updateFullName</span> <span class="o">=</span> <span class="s">%S (%S)</span>
+</pre></div>
+</div>
+<p>And the target Fluent string:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>update-full-name = { $name } ({ $buildID })
+</pre></div>
+</div>
+<p>As indicated, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code> would replace all occurrences of <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code>, so
+only one variable could be set. The string needs to be normalized and treated
+like:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">updateFullName</span> <span class="o">=</span> <span class="s">%1$S (%2$S)</span>
+</pre></div>
+</div>
+<p>This can be obtained by calling <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code> with
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">normalize_printf</span></span><span class="operator"><span class="pre">=</span></span><span class="keyword constant"><span class="pre">True</span></span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;update-full-name&quot;</span><span class="p">),</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">REPLACE</span><span class="p">(</span>
+        <span class="s2">&quot;toolkit/chrome/mozapps/update/updates.properties&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;updateFullName&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;%1$S&quot;</span><span class="p">:</span> <span class="n">VARIABLE_REFERENCE</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;%2$S&quot;</span><span class="p">:</span> <span class="n">VARIABLE_REFERENCE</span><span class="p">(</span><span class="s2">&quot;buildID&quot;</span><span class="p">),</span>
+        <span class="p">},</span>
+        <span class="n">normalize_printf</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>To avoid any issues <code class="code python docutils literal notranslate"><span class="name"><span class="pre">normalize_printf</span></span><span class="operator"><span class="pre">=</span></span><span class="keyword constant"><span class="pre">True</span></span></code> should always be used when
+replacing <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">printf</span></span></code> arguments.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="code python docutils literal notranslate"><span class="name"><span class="pre">VARIABLE_REFERENCE</span></span></code>, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">MESSAGE_REFERENCE</span></span></code>, and
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">TERM_REFERENCE</span></span></code> are helper Transforms which can be used to save
+keystrokes in common cases where using the raw AST is too verbose.</p>
+<p><code class="code python docutils literal notranslate"><span class="name"><span class="pre">VARIABLE_REFERENCE</span></span></code> is used to create a reference to a variable, e.g.
+<code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">{</span></span> <span class="name other"><span class="pre">$variable</span></span> <span class="punctuation"><span class="pre">}</span></span></code>.</p>
+<p><code class="code python docutils literal notranslate"><span class="name"><span class="pre">MESSAGE_REFERENCE</span></span></code> is used to create a reference to another message,
+e.g. <code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">{</span></span> <span class="name other"><span class="pre">another</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">string</span></span> <span class="punctuation"><span class="pre">}</span></span></code>.</p>
+<p><code class="code python docutils literal notranslate"><span class="name"><span class="pre">TERM_REFERENCE</span></span></code> is used to create a reference to a <a class="reference external" href="https://projectfluent.org/fluent/guide/terms.html">term</a>,
+e.g. <code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">{</span></span> <span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">brand</span></span><span class="operator"><span class="pre">-</span></span><span class="keyword reserved"><span class="pre">short</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">name</span></span> <span class="punctuation"><span class="pre">}</span></span></code>.</p>
+<p>Both Transforms need to be imported at the beginning of the recipe, e.g.
+<code class="code python docutils literal notranslate"><span class="keyword namespace"><span class="pre">from</span></span> <span class="name namespace"><span class="pre">fluent.migrate.helpers</span></span> <span class="keyword namespace"><span class="pre">import</span></span> <span class="name"><span class="pre">VARIABLE_REFERENCE</span></span></code></p>
+</div>
+</div>
+<div class="section" id="trimming-unnecessary-whitespaces-in-translations">
+<h2>Trimming Unnecessary Whitespaces in Translations<a class="headerlink" href="#trimming-unnecessary-whitespaces-in-translations" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This section was updated in May 2020 to reflect the change to the default
+behavior: legacy translations are now trimmed, unless the <code class="code python docutils literal notranslate"><span class="name"><span class="pre">trim</span></span></code>
+parameter is set explicitly.</p>
+</div>
+<p>It’s not uncommon to have strings with unnecessary leading or trailing spaces
+in legacy translations. These are not meaningful, don’t have practical results
+on the way the string is displayed in products, and are added mostly for
+formatting reasons. For example, consider this DTD string:</p>
+<div class="highlight-DTD notranslate"><div class="highlight"><pre><span></span><span class="k">&lt;!ENTITY</span> <span class="ni">aboutAbout.note</span>   <span class="s2">&quot;This is a list of “about” pages for your convenience.&lt;br/&gt;</span>
+<span class="s2">                            Some of them might be confusing. Some are for diagnostic purposes only.&lt;br/&gt;</span>
+<span class="s2">                            And some are omitted because they require query strings.&quot;</span><span class="k">&gt;</span>
+</pre></div>
+</div>
+<p>By default, the <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span></code>, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code>, and <code class="code python docutils literal notranslate"><span class="name"><span class="pre">PLURALS</span></span></code>
+transforms will strip the leading and trailing whitespace from each line of the
+translation, as well as the empty leading and trailing lines. The above string
+will be migrated as the following Fluent message, despite copious indentation
+on the second and the third line in the original:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>about-about-note =
+    This is a list of “about” pages for your convenience.&lt;br/&gt;
+    Some of them might be confusing. Some are for diagnostic purposes only.&lt;br/&gt;
+    And some are omitted because they require query strings.
+</pre></div>
+</div>
+<p>To disable the default trimming behavior, set <code class="code python docutils literal notranslate"><span class="name"><span class="pre">trim</span></span><span class="punctuation"><span class="pre">:</span></span><span class="literal string double"><span class="pre">”False”</span></span></code> or
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">trim</span></span><span class="operator"><span class="pre">=</span></span><span class="keyword constant"><span class="pre">False</span></span></code>, depending on the context:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transforms_from</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">about-about-note = { COPY(&quot;toolkit/chrome/global/aboutAbout.dtd&quot;, &quot;aboutAbout.note&quot;, trim:&quot;False&quot;) }</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;discover-description&quot;</span><span class="p">),</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">REPLACE</span><span class="p">(</span>
+        <span class="s2">&quot;toolkit/chrome/mozapps/extensions/extensions.dtd&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;discover.description2&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;&amp;brandShortName;&quot;</span><span class="p">:</span> <span class="n">TERM_REFERENCE</span><span class="p">(</span><span class="s2">&quot;-brand-short-name&quot;</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="n">trim</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+<span class="p">),</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="concatenating-strings">
+<h2>Concatenating Strings<a class="headerlink" href="#concatenating-strings" title="Permalink to this headline">¶</a></h2>
+<p>It’s best practice to only expose complete phrases to localization, and to avoid
+stitching localized strings together in code. With <cite>DTD</cite> and <cite>properties</cite>,
+there were few options. So when migrating to Fluent, you’ll find
+it quite common to concatenate multiple strings coming from <cite>DTD</cite> and
+<cite>properties</cite>, for example to create sentences with HTML markup. It’s possible to
+concatenate strings and text elements in a migration recipe using the
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">CONCAT</span></span></code> Transform.</p>
+<p>Note that in case of simple migrations using <code class="code python docutils literal notranslate"><span class="name"><span class="pre">transforms_from</span></span></code>, the
+concatenation is carried out implicitly by using the Fluent syntax interleaved
+with <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span><span class="punctuation"><span class="pre">()</span></span></code> transform calls to define the migration recipe.</p>
+<p>Consider the following example:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="c"># %S is replaced by a link, using searchResults.needHelpSupportLink as text</span>
+<span class="na">searchResults.needHelp</span> <span class="o">=</span> <span class="s">Need help? Visit %S</span>
+
+<span class="c"># %S is replaced by &quot;Firefox&quot;</span>
+<span class="na">searchResults.needHelpSupportLink</span> <span class="o">=</span> <span class="s">%S Support</span>
+</pre></div>
+</div>
+<p>In Fluent:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>search-results-need-help-support-link = Need help? Visit &lt;a data-l10n-name=&quot;url&quot;&gt;{ -brand-short-name } Support&lt;/a&gt;
+</pre></div>
+</div>
+<p>This is quite a complex migration: it requires to take 2 legacy strings, and
+concatenate their values with HTML markup. Here’s how the Transform is defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;search-results-help-link&quot;</span><span class="p">),</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">REPLACE</span><span class="p">(</span>
+        <span class="s2">&quot;browser/chrome/browser/preferences/preferences.properties&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;searchResults.needHelp&quot;</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;%S&quot;</span><span class="p">:</span> <span class="n">CONCAT</span><span class="p">(</span>
+                <span class="n">FTL</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s1">&#39;&lt;a data-l10n-name=&quot;url&quot;&gt;&#39;</span><span class="p">),</span>
+                <span class="n">REPLACE</span><span class="p">(</span>
+                    <span class="s2">&quot;browser/chrome/browser/preferences/preferences.properties&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;searchResults.needHelpSupportLink&quot;</span><span class="p">,</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;%1$S&quot;</span><span class="p">:</span> <span class="n">TERM_REFERENCE</span><span class="p">(</span><span class="s2">&quot;brand-short-name&quot;</span><span class="p">),</span>
+                    <span class="p">},</span>
+                    <span class="n">normalize_printf</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">),</span>
+                <span class="n">FTL</span><span class="o">.</span><span class="n">TextElement</span><span class="p">(</span><span class="s2">&quot;&lt;/a&gt;&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">),</span>
+</pre></div>
+</div>
+<p><code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code> in <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">searchResults</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">needHelpSupportLink</span></span></code> is replaced by a reference
+to the term <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">brand</span></span><span class="operator"><span class="pre">-</span></span><span class="keyword reserved"><span class="pre">short</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">name</span></span></code>, migrating from <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span> <span class="name other"><span class="pre">Support</span></span></code> to <code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">{</span></span>
+<span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">brand</span></span><span class="operator"><span class="pre">-</span></span><span class="keyword reserved"><span class="pre">short</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">name</span></span> <span class="punctuation"><span class="pre">}</span></span> <span class="name other"><span class="pre">Support</span></span></code>. The result of this operation is then inserted
+between two text elements to create the anchor markup. The resulting text is
+finally  used to replace <code class="code js javascript docutils literal notranslate"><span class="operator"><span class="pre">%</span></span><span class="name other"><span class="pre">S</span></span></code> in <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">searchResults</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">needHelp</span></span></code>, and used as
+value for the FTL message.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When concatenating existing strings, avoid introducing changes to the original
+text, for example adding spaces or punctuation. Each language has its own
+rules, and this might result in poor migrated strings. In case of doubt,
+always ask for feedback.</p>
+</div>
+<p>When more than 1 element is passed in to concatenate, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">CONCAT</span></span></code>
+disables whitespace trimming described in the section above on all legacy
+Transforms passed into it: <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span></code>, <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code>, and
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">PLURALS</span></span></code>, unless the <code class="code python docutils literal notranslate"><span class="name"><span class="pre">trim</span></span></code> parameters has been set
+explicitly on them. This helps ensure that spaces around segments are not
+lost during the concatenation.</p>
+<p>When only a single element is passed into <code class="code python docutils literal notranslate"><span class="name"><span class="pre">CONCAT</span></span></code>, however, the
+trimming behavior is not altered, and follows the rules described in the
+previous section. This is meant to make <code class="code python docutils literal notranslate"><span class="name"><span class="pre">CONCAT</span></span><span class="punctuation"><span class="pre">(</span></span><span class="name"><span class="pre">COPY</span></span><span class="punctuation"><span class="pre">())</span></span></code> equivalent
+to a bare <code class="code python docutils literal notranslate"><span class="name"><span class="pre">COPY</span></span><span class="punctuation"><span class="pre">()</span></span></code>.</p>
+</div>
+<div class="section" id="plural-strings">
+<h2>Plural Strings<a class="headerlink" href="#plural-strings" title="Permalink to this headline">¶</a></h2>
+<p>Migrating plural strings from <cite>.properties</cite> files usually involves two
+Transforms from <code class="code python docutils literal notranslate"><span class="name"><span class="pre">fluent</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">migrate</span></span><span class="operator"><span class="pre">.</span></span><span class="name"><span class="pre">transforms</span></span></code>: the
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE_IN_TEXT</span></span></code> Transform takes TextElements as input, making it
+possible to pass it as the foreach function of the <code class="code python docutils literal notranslate"><span class="name"><span class="pre">PLURALS</span></span></code> Transform.</p>
+<p>Consider the following legacy string:</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="c"># LOCALIZATION NOTE (disableContainersOkButton): Semi-colon list of plural forms.</span>
+<span class="c"># See: http://developer.mozilla.org/en/docs/Localization_and_Plurals</span>
+<span class="c"># #1 is the number of container tabs</span>
+<span class="na">disableContainersOkButton</span> <span class="o">=</span> <span class="s">Close #1 Container Tab;Close #1 Container Tabs</span>
+</pre></div>
+</div>
+<p>In Fluent:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>containers-disable-alert-ok-button =
+    { $tabCount -&gt;
+        [one] Close { $tabCount } Container Tab
+       *[other] Close { $tabCount } Container Tabs
+    }
+</pre></div>
+</div>
+<p>This is how the Transform for this string is defined:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;containers-disable-alert-ok-button&quot;</span><span class="p">),</span>
+    <span class="n">value</span><span class="o">=</span><span class="n">PLURALS</span><span class="p">(</span>
+        <span class="s2">&quot;browser/chrome/browser/preferences/preferences.properties&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;disableContainersOkButton&quot;</span><span class="p">,</span>
+        <span class="n">VARIABLE_REFERENCE</span><span class="p">(</span><span class="s2">&quot;tabCount&quot;</span><span class="p">),</span>
+        <span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">REPLACE_IN_TEXT</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;#1&quot;</span><span class="p">:</span> <span class="n">VARIABLE_REFERENCE</span><span class="p">(</span><span class="s2">&quot;tabCount&quot;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>PLURALS</cite> Transform will take care of creating the correct number of plural
+categories for each language. Notice how <cite>#1</cite> is replaced for each of these
+variants with <code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">{</span></span> <span class="name other"><span class="pre">$tabCount</span></span> <span class="punctuation"><span class="pre">}</span></span></code>, using <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE_IN_TEXT</span></span></code> and
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">VARIABLE_REFERENCE</span></span><span class="punctuation"><span class="pre">(</span></span><span class="literal string double"><span class="pre">“tabCount”</span></span><span class="punctuation"><span class="pre">)</span></span></code>.</p>
+<p>In this case it’s not possible to use <code class="code python docutils literal notranslate"><span class="name"><span class="pre">REPLACE</span></span></code> because it takes a file
+path and a message ID as arguments, whereas here the recipe needs to operate on
+regular text. The replacement is performed on each plural form of the original
+string, where plural forms are separated by a semicolon.</p>
+</div>
+<div class="section" id="explicit-variants">
+<h2>Explicit Variants<a class="headerlink" href="#explicit-variants" title="Permalink to this headline">¶</a></h2>
+<p>Explicitly creating variants of a string is useful for platform-dependent
+terminology, but also in cases where you want a one-vs-many split of a string.
+It’s always possible to migrate strings by manually creating the underlying AST
+structure. Consider the following complex Fluent string:</p>
+<div class="highlight-fluent notranslate"><div class="highlight"><pre><span></span>use-current-pages =
+    .label =
+        { $tabCount -&gt;
+            [1] Use Current Page
+           *[other] Use Current Pages
+        }
+    .accesskey = C
+</pre></div>
+</div>
+<p>The migration for this string is quite complex: the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">label</span></span></code> attribute is
+created from 2 different legacy strings, and it’s not a proper plural form.
+Notice how the first string is associated to the <code class="code js javascript docutils literal notranslate"><span class="literal number float"><span class="pre">1</span></span></code> case, not the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">one</span></span></code>
+category used in plural forms. For these reasons, it’s not possible to use
+<code class="code python docutils literal notranslate"><span class="name"><span class="pre">PLURALS</span></span></code>, the Transform needs to be crafted recreating the AST.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FTL</span><span class="o">.</span><span class="n">Message</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;use-current-pages&quot;</span><span class="p">),</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">FTL</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span>
+                <span class="n">elements</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">FTL</span><span class="o">.</span><span class="n">Placeable</span><span class="p">(</span>
+                        <span class="n">expression</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">SelectExpression</span><span class="p">(</span>
+                            <span class="n">selector</span><span class="o">=</span><span class="n">VARIABLE_REFERENCE</span><span class="p">(</span><span class="s2">&quot;tabCount&quot;</span><span class="p">),</span>
+                            <span class="n">variants</span><span class="o">=</span><span class="p">[</span>
+                                <span class="n">FTL</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span>
+                                    <span class="n">key</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">NumberLiteral</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">),</span>
+                                    <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                    <span class="n">value</span><span class="o">=</span><span class="n">COPY</span><span class="p">(</span>
+                                        <span class="s2">&quot;browser/chrome/browser/preferences/main.dtd&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;useCurrentPage.label&quot;</span><span class="p">,</span>
+                                    <span class="p">)</span>
+                                <span class="p">),</span>
+                                <span class="n">FTL</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span>
+                                    <span class="n">key</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;other&quot;</span><span class="p">),</span>
+                                    <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">value</span><span class="o">=</span><span class="n">COPY</span><span class="p">(</span>
+                                        <span class="s2">&quot;browser/chrome/browser/preferences/main.dtd&quot;</span><span class="p">,</span>
+                                        <span class="s2">&quot;useMultiple.label&quot;</span><span class="p">,</span>
+                                    <span class="p">)</span>
+                                <span class="p">)</span>
+                            <span class="p">]</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">FTL</span><span class="o">.</span><span class="n">Attribute</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">FTL</span><span class="o">.</span><span class="n">Identifier</span><span class="p">(</span><span class="s2">&quot;accesskey&quot;</span><span class="p">),</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">COPY</span><span class="p">(</span>
+                <span class="s2">&quot;browser/chrome/browser/preferences/main.dtd&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;useCurrentPage.accesskey&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">),</span>
+</pre></div>
+</div>
+<p>This Transform uses several concepts already described in this document. Notable
+is the <code class="code python docutils literal notranslate"><span class="name"><span class="pre">SelectExpression</span></span></code> inside a <code class="code python docutils literal notranslate"><span class="name"><span class="pre">Placeable</span></span></code>, with an array
+of <code class="code python docutils literal notranslate"><span class="name"><span class="pre">Variant</span></span></code> objects. Exactly one of those variants needs to have
+<code class="docutils literal notranslate"><span class="pre">default=True</span></code>.</p>
+<p>This example can still use <code class="xref py py-func docutils literal notranslate"><span class="pre">transforms_from()`()</span></code>, since existing strings
+are copied without interpolation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transforms_from</span><span class="p">(</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">use-current-pages =</span>
+<span class="sd">    .label =</span>
+<span class="sd">        { $tabCount -&gt;</span>
+<span class="sd">            [1] { COPY(main_dtd, &quot;useCurrentPage.label&quot;) }</span>
+<span class="sd">           *[other] { COPY(main_dtd, &quot;useMultiple.label&quot;) }</span>
+<span class="sd">        }</span>
+<span class="sd">    .accesskey = { COPY(main_dtd, &quot;useCurrentPage.accesskey&quot;) }</span>
+<span class="sd">&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">main_dtd</span><span class="o">=</span><span class="s2">&quot;browser/chrome/browser/preferences/main.dtd&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fluent.html" class="btn btn-neutral float-right" title="Fluent to Fluent Migrations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="Migration Recipes and Their Lifecycle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UI Telemetry &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>UI Telemetry</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/mobile/android/uitelemetry.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ui-telemetry">
+<h1>UI Telemetry<a class="headerlink" href="#ui-telemetry" title="Permalink to this headline">¶</a></h1>
+<p>Fennec records UI events using a telemetry framework called UITelemetry.</p>
+<p>Some links:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://wiki.mozilla.org/Mobile/Projects/Telemetry_probes_for_Fennec_UI_elements">Project page</a></p></li>
+<li><p><a class="reference external" href="https://wiki.mozilla.org/Mobile/Fennec/Android/UITelemetry">Wiki page</a></p></li>
+<li><p><a class="reference external" href="https://wiki.mozilla.org/Mobile/User_Experience/Research">User research notes</a></p></li>
+</ul>
+<div class="section" id="sessions">
+<h2>Sessions<a class="headerlink" href="#sessions" title="Permalink to this headline">¶</a></h2>
+<p><strong>Sessions</strong> are essentially scopes. They are meant to provide context to
+events; this allows events to be simpler and more reusable. Sessions are
+usually bound to some component of the UI, some user action with a duration, or
+some transient state.</p>
+<p>For example, a session might be begun when a user begins interacting with a
+menu, and stopped when the interaction ends. Or a session might encapsulate
+period of no network connectivity, the first five seconds after the browser
+launched, the time spent with an active download, or a guest mode session.</p>
+<p>Sessions implicitly record the duration of the interaction.</p>
+<p>A simple use-case for sessions is the bookmarks panel in <a class="reference external" href="about:home">about:home</a>. We start a
+session when the user swipes into the panel, and stop it when they swipe away.
+This bookmarks session does two things: firstly, it gives scope to any generic
+event that may occur within the panel (<em>e.g.</em>, loading a URL). Secondly, it
+allows us to figure out how much time users are spending in the bookmarks
+panel.</p>
+<p>To start a session, call <code class="docutils literal notranslate"><span class="pre">Telemetry.startUISession(String</span> <span class="pre">sessionName)</span></code>.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">sessionName</span></code></dt><dd><p>The name of the session. Session names should be brief, lowercase, and should describe which UI
+component the user is interacting with. In certain cases where the UI component is dynamic, they could include an ID, essential to identifying that component. An example of this is dynamic home panels: we use session names of the format <code class="docutils literal notranslate"><span class="pre">homepanel:&lt;panel_id&gt;</span></code> to identify home panel sessions.</p>
+</dd>
+</dl>
+<p>To stop a session, call <code class="docutils literal notranslate"><span class="pre">Telemetry.stopUISession(String</span> <span class="pre">sessionName,</span> <span class="pre">String</span> <span class="pre">reason)</span></code>.</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">sessionName</span></code></dt><dd><p>The name of the open session</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reason</span></code> (Optional)</dt><dd><p>A descriptive cause for ending the session. It should be brief, lowercase, and generic so it can be reused in different places. Examples reasons are:</p>
+<blockquote>
+<div><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">switched</span></code></dt><dd><p>The user transitioned to a UI element of equal level.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">exit</span></code></dt><dd><p>The user left for an entirely different element.</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<div class="section" id="experiments">
+<h2>Experiments<a class="headerlink" href="#experiments" title="Permalink to this headline">¶</a></h2>
+<p><strong>Experiment</strong> is a special type of a session. Experiments denote an “experiment scope”.
+Just like sessions, multiple experiments might be active at the same time. Experiments are recorded
+by tagging events with an <code class="docutils literal notranslate"><span class="pre">experiment.1:varying_experiment_name</span></code> session. However, on the data
+pipeline side, experiment’s name is parsed and stored separately (in the <code class="docutils literal notranslate"><span class="pre">experiments</span></code> column).
+Original <code class="docutils literal notranslate"><span class="pre">experiment.1</span></code> substring of the session name is stripped away.</p>
+<p>For example, the following telemetry data:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="nx">sessions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;awesomebar.1&quot;</span><span class="p">,</span> <span class="s2">&quot;experiment.1:onboarding_a&quot;</span><span class="p">]</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Will be stored as:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="nx">experiments</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;onboarding_a&quot;</span><span class="p">],</span>
+<span class="nx">sessions</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;awesomebar.1&quot;</span><span class="p">]</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>Consider a case of A/B testing different variations of Activity Stream. We might want to run two
+experimental cohorts, each of them seeing a unique variation of the functionality. Depending on which
+cohort the user is in, their events while interacting with the experiments will be tagged accordingly
+with a current experiment name, while also retaining session information.
+On the analytics side it’s then possible to compare performance of various metrics between cohorts.</p>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>Events capture key occurrences. They should be brief and simple, and should not contain sensitive or excess information. Context for events should come from the session (scope). An event can be created with four fields (via <code class="docutils literal notranslate"><span class="pre">Telemetry.sendUIEvent</span></code>): <code class="docutils literal notranslate"><span class="pre">action</span></code>, <code class="docutils literal notranslate"><span class="pre">method</span></code>, <code class="docutils literal notranslate"><span class="pre">extras</span></code>, and <code class="docutils literal notranslate"><span class="pre">timestamp</span></code>.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">action</span></code></dt><dd><p>The name of the event. Should be brief and lowercase. If needed, you can make use of namespacing with a ‘<code class="docutils literal notranslate"><span class="pre">.</span></code>’ separator. Example event names: <code class="docutils literal notranslate"><span class="pre">panel.switch</span></code>, <code class="docutils literal notranslate"><span class="pre">panel.enable</span></code>, <code class="docutils literal notranslate"><span class="pre">panel.disable</span></code>, <code class="docutils literal notranslate"><span class="pre">panel.install</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">method</span></code> (Optional)</dt><dd><p>Used for user actions that can be performed in many ways. This field specifies the method by which the action was performed. For example, users can add an item to their reading list either by long-tapping the reader icon in the address bar, or from within reader mode. We would use the same event name for both user actions but specify two methods: <code class="docutils literal notranslate"><span class="pre">addressbar</span></code> and <code class="docutils literal notranslate"><span class="pre">readermode</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">extras</span></code> (Optional)</dt><dd><p>For extra information that may be useful in understanding the event (such as a short string, a json blob, etc).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">timestamp</span></code> (Optional)</dt><dd><p>The time at which the event occurred. If not specified, this field defaults to the current value of the realtime clock.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="versioning">
+<h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
+<p>As a we improve on our Telemetry methods, it is foreseeable that our probes will change over time. Different versions of a probe could carry different data or have different interpretations on the server-side. To make it easier for the server to handle these changes, you should add version numbers to your event and session names. An example of a versioned session is <code class="docutils literal notranslate"><span class="pre">homepanel.1</span></code>; this is version 1 of the <code class="docutils literal notranslate"><span class="pre">homepanel</span></code> session. This approach should also be applied to event names, an example being: <code class="docutils literal notranslate"><span class="pre">panel.enable.1</span></code> and <code class="docutils literal notranslate"><span class="pre">panel.enable.2</span></code>.</p>
+</div>
+<div class="section" id="clock">
+<h2>Clock<a class="headerlink" href="#clock" title="Permalink to this headline">¶</a></h2>
+<p>Times are relative to either elapsed realtime (an arbitrary monotonically increasing clock that continues to tick when the device is asleep), or elapsed uptime (which doesn’t tick when the device is in deep sleep). We default to elapsed realtime.</p>
+<p>See the documentation in <a class="reference external" href="https://searchfox.org/mozilla-central/source/mobile/android/geckoview/src/main/java/org/mozilla/geckoview/RuntimeTelemetry.java">the source</a> for more details.</p>
+</div>
+<div class="section" id="dictionary">
+<h2>Dictionary<a class="headerlink" href="#dictionary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Events<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">action.1</span></code></dt><dd><p>Generic action, usually for tracking menu and toolbar actions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cancel.1</span></code></dt><dd><p>Cancel a state, action, etc.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cast.1</span></code></dt><dd><p>Start casting a video.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">edit.1</span></code></dt><dd><p>Sent when the user edits a top site.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">launch.1</span></code></dt><dd><p>Launching (opening) an external application.
+Note: Only used in JavaScript for now.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">loadurl.1</span></code></dt><dd><p>Loading a URL.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">locale.browser.reset.1</span></code></dt><dd><p>When the user chooses “System default” in the browser locale picker.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">locale.browser.selected.1</span></code></dt><dd><p>When the user chooses a locale in the browser locale picker. The selected
+locale is provided as the extra.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">locale.browser.unselected.1</span></code></dt><dd><p>When the user chose a different locale in the browser locale picker, this
+event is fired with the previous locale as the extra. If the previous locale
+could not be determined, “unknown” is provided.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">neterror.1</span></code></dt><dd><p>When the user performs actions on the in-content network error page. This should probably be a <code class="docutils literal notranslate"><span class="pre">Session</span></code>, but it’s difficult to start and stop the session reliably.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">panel.hide.1</span></code></dt><dd><p>Hide a built-in home panel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">panel.move.1</span></code></dt><dd><p>Move a home panel up or down.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">panel.remove.1</span></code></dt><dd><p>Remove a custom home panel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">panel.setdefault.1</span></code></dt><dd><p>Set default home panel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">panel.show.1</span></code></dt><dd><p>Show a hidden built-in home panel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pin.1</span></code>, <code class="docutils literal notranslate"><span class="pre">unpin.1</span></code></dt><dd><p>Sent when the user pinned or unpinned a top site.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">policynotification.success.1:true</span></code></dt><dd><p>Sent when a user has accepted the data notification policy. Can be <code class="docutils literal notranslate"><span class="pre">false</span></code>
+instead of <code class="docutils literal notranslate"><span class="pre">true</span></code> if an error occurs.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pwa.1</span></code></dt><dd><p>When the user interacts with a Progressive Web Application</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sanitize.1</span></code></dt><dd><p>Sent when the user chooses to clear private data.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">save.1</span></code>, <code class="docutils literal notranslate"><span class="pre">unsave.1</span></code></dt><dd><p>Saving or unsaving a resource (reader, bookmark, etc.) for viewing later.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">search.1</span></code></dt><dd><p>Sent when the user performs a search. Currently used in the search activity.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">search.remove.1</span></code></dt><dd><p>Sent when the user removes a search engine.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">search.restore.1</span></code></dt><dd><p>Sent when the user restores the search engine configuration back to the built-in configuration.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">search.setdefault.1</span></code></dt><dd><p>Sent when the user sets a search engine to be the default.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">search.widget.1</span></code></dt><dd><p>Sent when the user initiates a search through the widget.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">share.1</span></code></dt><dd><p>Sharing content.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">show.1</span></code></dt><dd><p>Sent when a contextual UI element is shown to the user.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">undo.1</span></code></dt><dd><p>Sent when performing an undo-style action, like undoing a closed tab.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">actionbar</span></code></dt><dd><p>Action triggered from an ActionBar UI.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">back</span></code></dt><dd><p>Action triggered from the back button.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">banner</span></code></dt><dd><p>Action triggered from a banner (such as HomeBanner).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">button</span></code></dt><dd><p>Action triggered from a button.
+Note: Only used in JavaScript for now.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">content</span></code></dt><dd><p>Action triggered from a content page.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">contextmenu</span></code></dt><dd><p>Action triggered from a contextmenu. Could be from chrome or content.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dialog</span></code></dt><dd><p>Action triggered from a dialog.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">doorhanger</span></code></dt><dd><p>Action triggered from a doorhanger popup prompt.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">griditem</span></code></dt><dd><p>Action triggered from a griditem, such as those used in Top Sites panel.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">homescreen</span></code></dt><dd><p>Action triggered from a homescreen shortcut icon.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">intent</span></code></dt><dd><p>Action triggered from a system Intent, usually sent from the OS.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">list</span></code></dt><dd><p>Action triggered from an unmanaged list of items, usually provided by the OS.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">listitem</span></code></dt><dd><p>Action triggered from a listitem.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">menu</span></code></dt><dd><p>Action triggered from the main menu.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">notification</span></code></dt><dd><p>Action triggered from a system notification.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pageaction</span></code></dt><dd><p>Action triggered from a pageaction, displayed in the URL bar.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">service</span></code></dt><dd><p>Action triggered from an automatic system making a decision.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">settings</span></code></dt><dd><p>Action triggered from a content page.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">shareoverlay</span></code></dt><dd><p>Action triggered from a content page.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">suggestion</span></code></dt><dd><p>Action triggered from a suggested result, like those from search engines or default tiles.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">system</span></code></dt><dd><p>Action triggered from an OS level action, like application foreground / background.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">toast</span></code></dt><dd><p>Action triggered from an unobtrusive, temporary notification.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">widget</span></code></dt><dd><p>Action triggered from a widget placed on the homescreen.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="buttons">
+<h3>Buttons<a class="headerlink" href="#buttons" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">preferences</span></code></dt><dd><p>Button action triggered by the “Sign in” Settings menu item.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">notification</span></code></dt><dd><p>Button action triggered by signing in from a Leanplum notification.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firstrun-welcome</span></code></dt><dd><p>Button action triggered by the Onboarding “WELCOME” panel’s “Sign up” button.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firstrun-sync</span></code></dt><dd><p>Button action triggered by the Onboarding “SYNC” panel’s “Sign up” button.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firstrun-sendtab</span></code></dt><dd><p>Button action triggered by the Onboarding “SEND TAB” panel’s “Sign up” button.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">awesomescreen-signin</span></code></dt><dd><p>Button action triggered by the Awesomescreen’s “Sign in” link.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">awesomescreen-signup</span></code></dt><dd><p>Button action triggered by the Awesomescreen’s “Sign up” button.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">awesomescreen-signup-dismiss</span></code></dt><dd><p>Button action triggered by dismissing the Awesomescreen’s “Welcome to Firefox” panel</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firefox_promo_open</span></code></dt><dd><p>Button action triggered by the opening the promo webpage from Awesomescreen’s Firefox promo banner.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firefox_promo_dismiss</span></code></dt><dd><p>Button action triggered by dismissing the Awesomescreen’s Firefox promo banner.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h3>Sessions<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">activitystream.1</span></code></dt><dd><p>Activity Stream is active.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">awesomescreen.1</span></code></dt><dd><p>Awesomescreen (including frecency search) is active.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">experiment.1</span></code></dt><dd><p>Special, non-recorded session which is used to denote experiments. See <code class="docutils literal notranslate"><span class="pre">Experiments</span></code> section above.
+Must be used in conjunction with an experiment’s name, e.g. <code class="docutils literal notranslate"><span class="pre">experiment.1:varying_experiment_name</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">firstrun.1</span></code></dt><dd><p>Started the very first time we believe the application has been launched.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">frecency.1</span></code></dt><dd><p>Awesomescreen frecency search is active.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">homepanel.1</span></code></dt><dd><p>Started when a user enters a given home panel.
+Session name is dynamic, encoded as “homepanel.1:&lt;panel_id&gt;”
+Built-in home panels have fixed IDs</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">reader.1</span></code></dt><dd><p>Reader viewer becomes active in the foreground.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">searchactivity.1</span></code></dt><dd><p>Started when the user launches the search activity (onStart) and stopped
+when they leave the search activity.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">settings.1</span></code></dt><dd><p>Settings activity is active.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

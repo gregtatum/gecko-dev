@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Defect Severity &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Release Status Flags" href="status-flags.html" />
+    <link rel="prev" title="Priority Definitions" href="priority.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bug Handling</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#guides">Guides</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bug-types.html">Bug Types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other-metadata.html">Other Bug Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="priority.html">Priority Definitions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Defect Severity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#definition">Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#values">Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rules-of-thumb">Rules of thumb</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="status-flags.html">Release Status Flags</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#policies">Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processes">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#related-documentation">Related documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Bug Handling</a> &raquo;</li>
+        
+      <li>Defect Severity</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/bug-mgmt/guides/severity.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="defect-severity">
+<h1>Defect Severity<a class="headerlink" href="#defect-severity" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="definition">
+<h2>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h2>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">severity</span></code> field in Bugzilla to indicate the scope of a
+bug’s effect on Firefox.</p>
+<p>The field is display alongside the bug’s priority.</p>
+<img alt="Screenshot of severity field" src="bug-mgmt/guides/screenshot-severity.png" />
+</div>
+<div class="section" id="values">
+<h2>Values<a class="headerlink" href="#values" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://wiki.mozilla.org/BMO/UserGuide/BugFields#severity">Severities are
+enumerated</a>
+as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--</span></code>: Default for new bugs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N/A</span></code>: (not applicable): Only applies to bugs of type Task or Enhancement.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">S1</span></code>: (Catastrophic) Blocks development/testing, may impact more than 25%</dt><dd><p>of users, causes data loss, potential chemspill, and no workaround available</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">S2</span></code>: (Serious) Major Functionality/product severely impaired and a</dt><dd><p>satisfactory workaround doesn’t exist</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S3</span></code>: (Normal) Blocks non-critical functionality and a work around exists</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">S4</span></code>: (Small/Trivial) minor significance, cosmetic issues, low or no impact to users</p></li>
+</ul>
+<p>By default, new bugs have a severity of <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p>
+<div class="section" id="examples-of-s1-bugs">
+<h3>Examples of S1 bugs<a class="headerlink" href="#examples-of-s1-bugs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>WebExtensions disabled for all users</p></li>
+<li><p>Web search not working from URL bar</p></li>
+<li><p>Crashes with data loss</p></li>
+</ul>
+</div>
+<div class="section" id="examples-of-s2-bugs">
+<h3>Examples of S2 bugs<a class="headerlink" href="#examples-of-s2-bugs" title="Permalink to this headline">¶</a></h3>
+<p>Bugs that could reasonably be expected to cause a Firefox user to switch browsers,
+either because the severity is bad enough, or the frequency of occurrence is high enough.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1640441">Bug 1640441</a> - Slack hangs
+indefinitely in a onResize loop</p></li>
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1645651">Bug 1645651</a> - Changes in
+Reddit’s comment section JS code makes selecting text slow on Nightly</p></li>
+</ul>
+<p>Bugs involving contractual partners (if not an S1)</p>
+<p>Bugs reported from QA</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1640913">Bug 1640913</a> - because an
+important message is not visible with the dark theme. It’s not marked as S1 since the
+issue is reproducible only on one OS and the functionality is not affected.</p></li>
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1641521">Bug 1641521</a> - because videos
+are not working on several sites with ETP on (default). This is not an S1 since turning
+ETP off fixes the issue.</p></li>
+</ul>
+</div>
+<div class="section" id="examples-of-s3-bugs">
+<h3>Examples of S3 bugs<a class="headerlink" href="#examples-of-s3-bugs" title="Permalink to this headline">¶</a></h3>
+<p>Bugs filed by contributors as part of daily refactoring and maintenance of the code base.</p>
+<p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1634171">Bug 1634171</a> - Visual artifacts around circular images</p>
+<p>Bugs reported from QA</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1635105">Bug 1635105</a> because
+the associated steps to reproduce are uncommon,
+and the issue is no longer reproducible after refresh.</p></li>
+<li><p><a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1636063">Bug 1636063</a> since it’s
+reproducible only on a specific web app, and only with a particular set of configurations.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="rules-of-thumb">
+<h2>Rules of thumb<a class="headerlink" href="#rules-of-thumb" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><em>A crash may be be a ``S1`` or ``S2`` defect, but not all crashes are
+critical defects</em></p></li>
+<li><p>High severity defects (<code class="docutils literal notranslate"><span class="pre">S1</span></code> or <code class="docutils literal notranslate"><span class="pre">S2</span></code>) do not need to be assigned
+immediately as they will be reviewed by Engineering Leadership, QA, and
+Release Management</p></li>
+<li><p>The severity of most bugs of type <code class="docutils literal notranslate"><span class="pre">task</span></code> and <code class="docutils literal notranslate"><span class="pre">enhancement</span></code> will be
+<code class="docutils literal notranslate"><span class="pre">N/A</span></code></p></li>
+<li><p><strong>Do not</strong> assign bugs of type <code class="docutils literal notranslate"><span class="pre">defect</span></code> the severity <code class="docutils literal notranslate"><span class="pre">N/A</span></code></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="status-flags.html" class="btn btn-neutral float-right" title="Release Status Flags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="priority.html" class="btn btn-neutral float-left" title="Priority Definitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozhttpd — Serving up content to be consumed by the browser &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mozproxy — Provides an HTTP proxy" href="mozproxy.html" />
+    <link rel="prev" title="Handling content for the browser" href="servingcontent.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">mozbase</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manifestparser.html">Managing lists of tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gettinginfo.html">Getting information on the system under test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setuprunning.html">Set up and running</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="servingcontent.html">Handling content for the browser</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozhttpd</span></code> — Serving up content to be consumed by the browser</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-mozhttpd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozhttpd</span></code> — Simple webserver</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mozproxy.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozproxy</span></code> — Provides an HTTP proxy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="loggingreporting.html">Logging and reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="devicemanagement.html">Device management</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">mozbase</a> &raquo;</li>
+        
+          <li><a href="servingcontent.html">Handling content for the browser</a> &raquo;</li>
+        
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozhttpd</span></code> — Serving up content to be consumed by the browser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mozbase/mozhttpd.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozhttpd-serving-up-content-to-be-consumed-by-the-browser">
+<h1><a class="reference internal" href="#module-mozhttpd" title="mozhttpd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozhttpd</span></code></a> — Serving up content to be consumed by the browser<a class="headerlink" href="#mozhttpd-serving-up-content-to-be-consumed-by-the-browser" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The mozhttpd module is considered obsolete. For new code,
+please use <a class="reference external" href="https://pypi.python.org/pypi/wptserve">wptserve</a> which can do everything mozhttpd does
+and more.</p>
+</div>
+<div class="section" id="module-mozhttpd">
+<span id="mozhttpd-simple-webserver"></span><h2><a class="reference internal" href="#module-mozhttpd" title="mozhttpd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mozhttpd</span></code></a> — Simple webserver<a class="headerlink" href="#module-mozhttpd" title="Permalink to this headline">¶</a></h2>
+<p>Mozhttpd is a simple http webserver written in python, designed expressly
+for use in automated testing scenarios. It is designed to both serve static
+content and provide simple web services.</p>
+<p>The server is based on python standard library modules such as
+SimpleHttpServer, urlparse, etc. The ThreadingMixIn is used to
+serve each request on a discrete thread.</p>
+<p>Some existing uses of mozhttpd include <a class="reference external" href="https://github.com/mozilla/peptest/">Peptest</a>, <a class="reference external" href="https://github.com/mozilla/eideticker/">Eideticker</a>, and <a class="reference external" href="http://hg.mozilla.org/build/">Talos</a>.</p>
+<p>The following simple example creates a basic HTTP server which serves
+content from the current directory, defines a single API endpoint
+<cite>/api/resource/&lt;resourceid&gt;</cite> and then serves requests indefinitely:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mozhttpd</span>
+
+<span class="nd">@mozhttpd</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">json_response</span>
+<span class="k">def</span> <span class="nf">resource_get</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">objid</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">objid</span><span class="p">,</span>
+                   <span class="s1">&#39;query&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">query</span> <span class="p">})</span>
+
+
+<span class="n">httpd</span> <span class="o">=</span> <span class="n">mozhttpd</span><span class="o">.</span><span class="n">MozHttpd</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8080</span><span class="p">,</span> <span class="n">docroot</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span>
+                          <span class="n">urlhandlers</span> <span class="o">=</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="s1">&#39;/api/resources/([^/]+)/?&#39;</span><span class="p">,</span>
+                                            <span class="s1">&#39;function&#39;</span><span class="p">:</span> <span class="n">resource_get</span> <span class="p">}</span> <span class="p">])</span>
+<span class="nb">print</span> <span class="s2">&quot;Serving &#39;</span><span class="si">%s</span><span class="s2">&#39; at </span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">httpd</span><span class="o">.</span><span class="n">docroot</span><span class="p">,</span> <span class="n">httpd</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">httpd</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+<span class="n">httpd</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="mozhttpd.MozHttpd">
+<em class="property">class </em><code class="sig-prename descclassname">mozhttpd.</code><code class="sig-name descname">MozHttpd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host</span><span class="o">=</span><span class="default_value">'127.0.0.1'</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">docroot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">urlhandlers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_mappings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proxy_host_dirs</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">log_requests</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.MozHttpd" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Host from which to serve (default 127.0.0.1)</p></li>
+<li><p><strong>port</strong> – Port from which to serve (default 8888)</p></li>
+<li><p><strong>docroot</strong> – Server root (default os.getcwd())</p></li>
+<li><p><strong>urlhandlers</strong> – Handlers to specify behavior against method and path match (default None)</p></li>
+<li><p><strong>path_mappings</strong> – A dict mapping URL prefixes to additional on-disk paths.</p></li>
+<li><p><strong>proxy_host_dirs</strong> – Toggle proxy behavior (default False)</p></li>
+<li><p><strong>log_requests</strong> – Toggle logging behavior (default False)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Very basic HTTP server class. Takes a docroot (path on the filesystem)
+and a set of urlhandler dictionaries of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">HTTP</span> <span class="n">method</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">GET</span><span class="p">,</span> <span class="n">POST</span><span class="p">,</span> <span class="ow">or</span> <span class="n">DEL</span><span class="p">,</span>
+  <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">PATH_INFO</span> <span class="p">(</span><span class="n">regular</span> <span class="n">expression</span> <span class="n">string</span><span class="p">),</span>
+  <span class="s1">&#39;function&#39;</span><span class="p">:</span> <span class="n">function</span> <span class="n">of</span> <span class="n">form</span> <span class="n">fn</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and serves HTTP. For each request, MozHttpd will either return a file
+off the docroot, or dispatch to a handler function (if both path and
+method match).</p>
+<p>Note that one of docroot or urlhandlers may be None (in which case no
+local files or handlers, respectively, will be used). If both docroot or
+urlhandlers are None then MozHttpd will default to serving just the local
+directory.</p>
+<p>MozHttpd also handles proxy requests (i.e. with a full URI on the request
+line).  By default files are served from docroot according to the request
+URI’s path component, but if proxy_host_dirs is True, files are served
+from &lt;self.docroot&gt;/&lt;host&gt;/.</p>
+<p>For example, the request “GET <a class="reference external" href="http://foo.bar/dir/file.html">http://foo.bar/dir/file.html</a>” would
+(assuming no handlers match) serve &lt;docroot&gt;/dir/file.html if
+proxy_host_dirs is False, or &lt;docroot&gt;/foo.bar/dir/file.html if it is
+True.</p>
+<dl class="py method">
+<dt id="mozhttpd.MozHttpd.get_url">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.MozHttpd.get_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a URL that can be used for accessing the server (e.g. <a class="reference external" href="http://192.168.1.3:4321/">http://192.168.1.3:4321/</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – Path to append to URL (e.g. if path were /foobar.html you would get a URL like
+<a class="reference external" href="http://192.168.1.3:4321/foobar.html">http://192.168.1.3:4321/foobar.html</a>). Default is <cite>/</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.MozHttpd.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">block</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.MozHttpd.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the server.</p>
+<p>If <cite>block</cite> is True, the call will not return. If <cite>block</cite> is False, the
+server will be started on a separate thread that can be terminated by
+a call to stop().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.MozHttpd.stop">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.MozHttpd.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the server.</p>
+<p>If the server is not running, this method has no effect.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozhttpd.Request">
+<em class="property">class </em><code class="sig-prename descclassname">mozhttpd.</code><code class="sig-name descname">Request</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span></em>, <em class="sig-param"><span class="n">headers</span></em>, <em class="sig-param"><span class="n">rfile</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.Request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Details of a request.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mozhttpd.RequestHandler">
+<em class="property">class </em><code class="sig-prename descclassname">mozhttpd.</code><code class="sig-name descname">RequestHandler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="mozhttpd.RequestHandler.address_string">
+<code class="sig-name descname">address_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler.address_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the client address.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.RequestHandler.do_GET">
+<code class="sig-name descname">do_GET</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler.do_GET" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serve a GET request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.RequestHandler.log_message">
+<code class="sig-name descname">log_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">format</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler.log_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log an arbitrary message.</p>
+<p>This is used by all other logging functions.  Override
+it if you have specific logging wishes.</p>
+<p>The first argument, FORMAT, is a format string for the
+message to be logged.  If the format string contains
+any % escapes requiring parameters, they should be
+specified as subsequent arguments (it’s just like
+printf!).</p>
+<p>The client ip and current date/time are prefixed to
+every message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.RequestHandler.parse_request">
+<code class="sig-name descname">parse_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler.parse_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a request (internal).</p>
+<p>The request should be stored in self.raw_requestline; the results
+are in self.command, self.path, self.request_version and
+self.headers.</p>
+<p>Return True for success, False for failure; on failure, any relevant
+error response has already been sent back.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozhttpd.RequestHandler.translate_path">
+<code class="sig-name descname">translate_path</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.RequestHandler.translate_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate a /-separated PATH to the local filename syntax.</p>
+<p>Components that mean special things to the local file system
+(e.g. drive or directory names) are ignored.  (XXX They should
+probably be diagnosed.)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="mozhttpd.json_response">
+<code class="sig-prename descclassname">mozhttpd.</code><code class="sig-name descname">json_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozhttpd.json_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates results of ‘func’ into a JSON response.</p>
+</dd></dl>
+
+<div class="section" id="interface">
+<h3>Interface<a class="headerlink" href="#interface" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="id0">
+<em class="property">class </em><code class="sig-prename descclassname">mozhttpd.</code><code class="sig-name descname">MozHttpd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host</span><span class="o">=</span><span class="default_value">'127.0.0.1'</span></em>, <em class="sig-param"><span class="n">port</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">docroot</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">urlhandlers</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path_mappings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">proxy_host_dirs</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">log_requests</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host</strong> – Host from which to serve (default 127.0.0.1)</p></li>
+<li><p><strong>port</strong> – Port from which to serve (default 8888)</p></li>
+<li><p><strong>docroot</strong> – Server root (default os.getcwd())</p></li>
+<li><p><strong>urlhandlers</strong> – Handlers to specify behavior against method and path match (default None)</p></li>
+<li><p><strong>path_mappings</strong> – A dict mapping URL prefixes to additional on-disk paths.</p></li>
+<li><p><strong>proxy_host_dirs</strong> – Toggle proxy behavior (default False)</p></li>
+<li><p><strong>log_requests</strong> – Toggle logging behavior (default False)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Very basic HTTP server class. Takes a docroot (path on the filesystem)
+and a set of urlhandler dictionaries of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">HTTP</span> <span class="n">method</span> <span class="p">(</span><span class="n">string</span><span class="p">):</span> <span class="n">GET</span><span class="p">,</span> <span class="n">POST</span><span class="p">,</span> <span class="ow">or</span> <span class="n">DEL</span><span class="p">,</span>
+  <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">PATH_INFO</span> <span class="p">(</span><span class="n">regular</span> <span class="n">expression</span> <span class="n">string</span><span class="p">),</span>
+  <span class="s1">&#39;function&#39;</span><span class="p">:</span> <span class="n">function</span> <span class="n">of</span> <span class="n">form</span> <span class="n">fn</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>and serves HTTP. For each request, MozHttpd will either return a file
+off the docroot, or dispatch to a handler function (if both path and
+method match).</p>
+<p>Note that one of docroot or urlhandlers may be None (in which case no
+local files or handlers, respectively, will be used). If both docroot or
+urlhandlers are None then MozHttpd will default to serving just the local
+directory.</p>
+<p>MozHttpd also handles proxy requests (i.e. with a full URI on the request
+line).  By default files are served from docroot according to the request
+URI’s path component, but if proxy_host_dirs is True, files are served
+from &lt;self.docroot&gt;/&lt;host&gt;/.</p>
+<p>For example, the request “GET <a class="reference external" href="http://foo.bar/dir/file.html">http://foo.bar/dir/file.html</a>” would
+(assuming no handlers match) serve &lt;docroot&gt;/dir/file.html if
+proxy_host_dirs is False, or &lt;docroot&gt;/foo.bar/dir/file.html if it is
+True.</p>
+<dl class="py method">
+<dt id="id1">
+<code class="sig-name descname">get_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">'/'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a URL that can be used for accessing the server (e.g. <a class="reference external" href="http://192.168.1.3:4321/">http://192.168.1.3:4321/</a>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – Path to append to URL (e.g. if path were /foobar.html you would get a URL like
+<a class="reference external" href="http://192.168.1.3:4321/foobar.html">http://192.168.1.3:4321/foobar.html</a>). Default is <cite>/</cite>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id2">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">block</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the server.</p>
+<p>If <cite>block</cite> is True, the call will not return. If <cite>block</cite> is False, the
+server will be started on a separate thread that can be terminated by
+a call to stop().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id3">
+<code class="sig-name descname">stop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the server.</p>
+<p>If the server is not running, this method has no effect.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mozproxy.html" class="btn btn-neutral float-right" title="mozproxy — Provides an HTTP proxy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="servingcontent.html" class="btn btn-neutral float-left" title="Handling content for the browser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

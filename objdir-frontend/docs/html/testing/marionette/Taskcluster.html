@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Testing with one-click loaners &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Style guide" href="CodeStyle.html" />
+    <link rel="prev" title="Testing" href="Testing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing.html">Testing</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing with one-click loaners</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-marionette-environment">Setting up the Marionette environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-marionette-tests">Running Marionette tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#firefox">Firefox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefs.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internals/index.html">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Marionette</a> &raquo;</li>
+        
+      <li>Testing with one-click loaners</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/marionette/Taskcluster.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="testing-with-one-click-loaners">
+<h1>Testing with one-click loaners<a class="headerlink" href="#testing-with-one-click-loaners" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://docs.taskcluster.net/">Taskcluster</a> is the task execution framework that supports Mozilla’s
+continuous integration and release processes.</p>
+<p>Build and test jobs (like Marionette) are executed across all supported
+platforms, and job results are pushed to <a class="reference external" href="https://treeherder.mozilla.org">Treeherder</a> for observation.</p>
+<p>The best way to debug issues for intermittent test failures of
+Marionette tests for Firefox and Fennec (Android) is to use a
+one-click loaner as provided by Taskcluster. Such a loaner creates
+an interactive task you can interact with via a shell and VNC.</p>
+<p>To create an interactive task for a Marionette job which is shown
+as failed on Treeherder, follow the Taskcluster documentation for
+<a class="reference external" href="https://docs.taskcluster.net/tutorial/debug-task#content">Debugging a task</a>.</p>
+<p>Please note that you need special permissions to actually request
+such a loaner.</p>
+<p>When the task has been created the shell needs to be opened.
+Once that has been done a wizard will automatically launch and
+provide some options. Best here is to choose the second option,
+which will run all the setup steps, installs the Firefox or Fennec
+binary, and then exits.</p>
+<div class="section" id="setting-up-the-marionette-environment">
+<h2>Setting up the Marionette environment<a class="headerlink" href="#setting-up-the-marionette-environment" title="Permalink to this headline">¶</a></h2>
+<p>Best here is to use a virtual environment, which has all the
+necessary packages installed. If no modifications to any Python
+package will be done, the already created environment by the
+wizard can be used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">cd</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span>
+<span class="o">%</span> <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Otherwise a new virtual environment needs to be created and
+populated with the mozbase and marionette packages installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">cd</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span> <span class="o">&amp;&amp;</span> <span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="n">venv</span>
+<span class="o">%</span> <span class="n">virtualenv</span> <span class="n">venv</span> <span class="o">&amp;&amp;</span> <span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="o">%</span> <span class="n">cd</span> <span class="n">tests</span><span class="o">/</span><span class="n">mozbase</span> <span class="o">&amp;&amp;</span> <span class="o">./</span><span class="n">setup_development</span><span class="o">.</span><span class="n">py</span>
+<span class="o">%</span> <span class="n">cd</span> <span class="o">../</span><span class="n">marionette</span><span class="o">/</span><span class="n">client</span> <span class="o">&amp;&amp;</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+<span class="o">%</span> <span class="n">cd</span> <span class="o">../</span><span class="n">harness</span> <span class="o">&amp;&amp;</span> <span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+<span class="o">%</span> <span class="n">cd</span> <span class="o">../../../</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-marionette-tests">
+<h2>Running Marionette tests<a class="headerlink" href="#running-marionette-tests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="firefox">
+<h3>Firefox<a class="headerlink" href="#firefox" title="Permalink to this headline">¶</a></h3>
+<p>To run the Marionette tests execute the <code class="docutils literal notranslate"><span class="pre">runtests.py</span></code> script. For all
+the required options as best search in the log file of the failing job
+the interactive task has been created from.  Then copy the complete
+command and run it inside the already sourced virtual environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">-</span><span class="n">u</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">harness</span><span class="o">/</span><span class="n">marionette_harness</span><span class="o">/</span><span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">gecko</span><span class="o">-</span><span class="n">log</span><span class="o">=-</span> <span class="o">-</span><span class="n">vv</span> <span class="o">--</span><span class="n">binary</span><span class="o">=/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">application</span><span class="o">/</span><span class="n">firefox</span><span class="o">/</span><span class="n">firefox</span> <span class="o">--</span><span class="n">address</span><span class="o">=</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">2828</span> <span class="o">--</span><span class="n">symbols</span><span class="o">-</span><span class="n">path</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">queue</span><span class="o">.</span><span class="n">taskcluster</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">task</span><span class="o">/</span><span class="n">GSuwee61Qyibujtxq4UV3A</span><span class="o">/</span><span class="n">artifacts</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">target</span><span class="o">.</span><span class="n">crashreporter</span><span class="o">-</span><span class="n">symbols</span><span class="o">.</span><span class="n">zip</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">testing</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">harness</span><span class="o">/</span><span class="n">marionette_harness</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">unit</span><span class="o">-</span><span class="n">tests</span><span class="o">.</span><span class="n">ini</span>
+</pre></div>
+</div>
+<div class="section" id="fennec">
+<h4>Fennec<a class="headerlink" href="#fennec" title="Permalink to this headline">¶</a></h4>
+<p>The Marionette tests for Fennec are executed by using an Android
+emulator which runs on the host platform. As such some extra setup
+steps compared to Firefox on desktop are required.</p>
+<p>The following lines set necessary environment variables before
+starting the emulator in the background, and to let Marionette
+know of various Android SDK tools.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">export</span> <span class="n">ADB_PATH</span><span class="o">=/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="n">linux</span><span class="o">/</span><span class="n">platform</span><span class="o">-</span><span class="n">tools</span><span class="o">/</span><span class="n">adb</span>
+<span class="o">%</span> <span class="n">export</span> <span class="n">ANDROID_AVD_HOME</span><span class="o">=/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/.</span><span class="n">android</span><span class="o">/</span><span class="n">avd</span><span class="o">/</span>
+<span class="o">%</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">sdk</span><span class="o">-</span><span class="n">linux</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">emulator</span> <span class="o">-</span><span class="n">avd</span> <span class="n">test</span><span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="n">show</span><span class="o">-</span><span class="n">kernel</span> <span class="o">-</span><span class="n">debug</span> <span class="n">init</span><span class="p">,</span><span class="n">console</span><span class="p">,</span><span class="n">gles</span><span class="p">,</span><span class="n">memcheck</span><span class="p">,</span><span class="n">adbserver</span><span class="p">,</span><span class="n">adbclient</span><span class="p">,</span><span class="n">adb</span><span class="p">,</span><span class="n">avd_config</span><span class="p">,</span><span class="n">socket</span> <span class="o">&amp;</span>
+</pre></div>
+</div>
+<p>The actual call to <code class="docutils literal notranslate"><span class="pre">runtests.py</span></code> is different per test job because
+those are using chunks on Android. As best search for the command
+and its options in the log file of the failing job the interactive
+task has been created from. Then copy the complete command and run
+it inside the already sourced virtual environment.</p>
+<p>Here an example for chunk 1 which runs all the tests in the current
+chunk with some options for logs removed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">-</span><span class="n">u</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">harness</span><span class="o">/</span><span class="n">marionette_harness</span><span class="o">/</span><span class="n">runtests</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">emulator</span> <span class="o">--</span><span class="n">app</span><span class="o">=</span><span class="n">fennec</span> <span class="o">--</span><span class="n">package</span><span class="o">=</span><span class="n">org</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">fennec_aurora</span> <span class="o">--</span><span class="n">address</span><span class="o">=</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">2828</span> <span class="o">/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">testing</span><span class="o">/</span><span class="n">marionette</span><span class="o">/</span><span class="n">harness</span><span class="o">/</span><span class="n">marionette_harness</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">unit</span><span class="o">-</span><span class="n">tests</span><span class="o">.</span><span class="n">ini</span> <span class="o">--</span><span class="n">gecko</span><span class="o">-</span><span class="n">log</span><span class="o">=-</span> <span class="o">--</span><span class="n">symbols</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">builds</span><span class="o">/</span><span class="n">worker</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">build</span><span class="o">/</span><span class="n">symbols</span> <span class="o">--</span><span class="n">startup</span><span class="o">-</span><span class="n">timeout</span><span class="o">=</span><span class="mi">300</span> <span class="o">--</span><span class="n">this</span><span class="o">-</span><span class="n">chunk</span> <span class="mi">1</span> <span class="o">--</span><span class="n">total</span><span class="o">-</span><span class="n">chunks</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>To execute a specific test only simply replace <code class="docutils literal notranslate"><span class="pre">unit-tests.ini</span></code>
+with its name.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="CodeStyle.html" class="btn btn-neutral float-right" title="Style guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Testing.html" class="btn btn-neutral float-left" title="Testing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

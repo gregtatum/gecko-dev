@@ -1,0 +1,45 @@
+taskgraph.optimize package
+==========================
+
+Submodules
+----------
+
+taskgraph.optimize.backstop module
+----------------------------------
+
+.. automodule:: taskgraph.optimize.backstop
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.optimize.bugbug module
+--------------------------------
+
+.. automodule:: taskgraph.optimize.bugbug
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.optimize.schema module
+--------------------------------
+
+.. automodule:: taskgraph.optimize.schema
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+taskgraph.optimize.strategies module
+------------------------------------
+
+.. automodule:: taskgraph.optimize.strategies
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: taskgraph.optimize
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JavaScript coding standards &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>JavaScript coding standards</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/contributing/javascript.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="javascript-coding-standards">
+<h1>JavaScript coding standards<a class="headerlink" href="#javascript-coding-standards" title="Permalink to this headline">¶</a></h1>
+<p>Probably the best piece of advice is <strong>to be consistent with the rest of the code in the file</strong>.</p>
+<p>We use <a class="reference external" href="http://eslint.org/">ESLint</a> to analyse JavaScript files automatically, either from within a code editor or from the command line. Here’s <a class="reference internal" href="eslint.html"><span class="doc">our guide to install and configure it</span></a>.</p>
+<p>For quick reference, here are some of the main code style rules:</p>
+<ul class="simple">
+<li><p>file references to browser globals such as <code class="docutils literal notranslate"><span class="pre">window</span></code> and <code class="docutils literal notranslate"><span class="pre">document</span></code> need <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">eslint-env</span> <span class="pre">browser</span> <span class="pre">*/</span></code> at the top of the file,</p></li>
+<li><p>lines should be 90 characters maximum,</p></li>
+<li><p>indent with 2 spaces (no tabs!),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">camelCasePlease</span></code>,</p></li>
+<li><p>don’t open braces on the next line,</p></li>
+<li><p>don’t name function expressions: <code class="docutils literal notranslate"><span class="pre">let</span> <span class="pre">o</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">doSomething:</span> <span class="pre">function</span> <span class="pre">doSomething()</span> <span class="pre">{}</span> <span class="pre">};</span></code>,</p></li>
+<li><p>use a space before opening paren for anonymous functions, but don’t use one for named functions:</p>
+<ul>
+<li><p>anonymous functions: <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">()</span> <span class="pre">{}</span></code></p></li>
+<li><p>named functions: <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">foo()</span> <span class="pre">{}</span></code></p></li>
+<li><p>anonymous generators: <code class="docutils literal notranslate"><span class="pre">function*</span> <span class="pre">()</span> <span class="pre">{}</span></code></p></li>
+<li><p>named generators: <code class="docutils literal notranslate"><span class="pre">function*</span> <span class="pre">foo()</span> <span class="pre">{}</span></code></p></li>
+</ul>
+</li>
+<li><p>aim for short functions, 24 lines max (ESLint has a rule that checks for function complexity too),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">aArguments</span> <span class="pre">aAre</span> <span class="pre">the</span> <span class="pre">aDevil</span></code> (don’t use them please),</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;use</span> <span class="pre">strict&quot;;</span></code> globally per module,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">semicolons;</span> <span class="pre">//</span> <span class="pre">use</span> <span class="pre">them</span></code>,</p></li>
+<li><p>no comma-first,</p></li>
+<li><p>consider using Task.jsm (<code class="docutils literal notranslate"><span class="pre">Task.async</span></code>, <code class="docutils literal notranslate"><span class="pre">Task.spawn</span></code>) for nice-looking asynchronous code instead of formatting endless <code class="docutils literal notranslate"><span class="pre">.then</span></code> chains,<!--TODO: shouldn't we advise async/await now?--></p></li>
+<li><p>use ES6 syntax:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">setBreakpoint({url,</span> <span class="pre">line,</span> <span class="pre">column})</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(...args)</span> <span class="pre">=&gt;</span> <span class="pre">{</span> <span class="pre">}</span></code> rest args are awesome, no need for <code class="docutils literal notranslate"><span class="pre">arguments</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for..of</span></code> loops,</p></li>
+</ul>
+</li>
+<li><p>don’t use non-standard SpiderMonkey-only syntax:</p>
+<ul>
+<li><p>no <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">each</span></code> loops,</p></li>
+<li><p>no <code class="docutils literal notranslate"><span class="pre">function</span> <span class="pre">()</span> <span class="pre">implicitReturnVal</span></code>,</p></li>
+<li><p>getters / setters require { },</p></li>
+</ul>
+</li>
+<li><p>only import specific, explicitly-declared symbols into your namespace:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">{</span> <span class="pre">foo,</span> <span class="pre">bar</span> <span class="pre">}</span> <span class="pre">=</span> <span class="pre">require(&quot;foo/bar&quot;);</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">{</span> <span class="pre">foo,</span> <span class="pre">bar</span> <span class="pre">}</span> <span class="pre">=</span> <span class="pre">ChromeUtils.import(&quot;...&quot;);</span></code>,</p></li>
+</ul>
+</li>
+<li><p>use Maps, Sets, WeakMaps when possible,</p></li>
+<li><p>use <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">template strings</a> whenever possible to avoid concatenation, allow multi-line strings, and interpolation.</p></li>
+</ul>
+<div class="section" id="comments">
+<h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
+<p>Commenting code is important, but bad comments can hurt too, so it’s important to have a few rules in mind when commenting:</p>
+<ul class="simple">
+<li><p>If the code can be rewritten to be made more readable, then that should be preferred over writing an explanation as a comment.</p></li>
+<li><p>Instead of writing a comment to explain the meaning of a poorly chosen variable name, then rename that variable.</p></li>
+<li><p>Avoid long separator comments like <code class="docutils literal notranslate"><span class="pre">//</span> <span class="pre">******************</span> <span class="pre">another</span> <span class="pre">section</span> <span class="pre">below</span> <span class="pre">**********</span></code>. They are often a sign that you should split a file in multiple files.</p></li>
+<li><p>Line comments go above the code they are commenting, not at the end of the line.</p></li>
+<li><p>Sentences in comments start with a capital letter and end with a period.</p></li>
+<li><p>Watch out for typos.</p></li>
+<li><p>Obsolete copy/pasted code hurts, make sure you update comments inside copy/pasted code blocks.</p></li>
+<li><p>A global comment at the very top of a file explaining what the file is about and the major types/classes/functions it contains is a good idea for quickly browsing code.</p></li>
+<li><p>If you are forced to employ some kind of hack in your code, and there’s no way around it, then add a comment that explains the hack and why it is needed. The reviewer is going to ask for one anyway.</p></li>
+<li><p>Bullet points in comments should use stars aligned with the first comment to format each point</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// headline comment</span>
+<span class="c1">// * bullet point 1</span>
+<span class="c1">// * bullet point 2</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="asynchronous-code">
+<h2>Asynchronous code<a class="headerlink" href="#asynchronous-code" title="Permalink to this headline">¶</a></h2>
+<p>A lot of code in DevTools is asynchronous, because a lot of it relies on connecting to the DevTools server and getting information from there in an asynchronous fashion.</p>
+<p>It’s easy to make mistakes with asynchronous code, so here are a few guidelines that should help:</p>
+<ul class="simple">
+<li><p>Prefer <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a> over callbacks.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Promise(()</span> <span class="pre">=&gt;</span> <span class="pre">{})</span></code> syntax.</p></li>
+<li><p>Don’t forget to catch rejections by defining a rejection handler: <code class="docutils literal notranslate"><span class="pre">promise.then(()</span> <span class="pre">=&gt;</span> <span class="pre">console.log(&quot;resolved&quot;),</span> <span class="pre">()</span> <span class="pre">=&gt;</span> <span class="pre">console.log(&quot;rejected&quot;));</span></code> or <code class="docutils literal notranslate"><span class="pre">promise.catch(()</span> <span class="pre">=&gt;</span> <span class="pre">console.log(&quot;rejected&quot;));</span></code>.</p></li>
+<li><p>Make use of <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Task.jsm"><code class="docutils literal notranslate"><span class="pre">Tasks</span></code> and generator functions</a> to make asynchronous code look synchronous. <!--TODO async/await as in the TODO above?--></p></li>
+</ul>
+</div>
+<div class="section" id="react-redux">
+<h2>React &amp; Redux<a class="headerlink" href="#react-redux" title="Permalink to this headline">¶</a></h2>
+<p>There are React-specific code style rules in the .eslintrc file.</p>
+<div class="section" id="components">
+<h3>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Default to creating components as <a class="reference external" href="https://facebook.github.io/react/docs/reusable-components.html#stateless-functions">stateless function components</a>.</p></li>
+<li><p>If you need local state or lifecycle methods, use <code class="docutils literal notranslate"><span class="pre">React.createClass</span></code> instead of functions.</p></li>
+<li><p>Use React.DOM to create native elements. Assign it to a variable named <code class="docutils literal notranslate"><span class="pre">dom</span></code>, and use it like <code class="docutils literal notranslate"><span class="pre">dom.div({},</span> <span class="pre">dom.span({}))</span></code>. You may also destructure specific elements directly: <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">{</span> <span class="pre">div,</span> <span class="pre">ul</span> <span class="pre">}</span> <span class="pre">=</span> <span class="pre">React.DOM</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="proptypes">
+<h3>PropTypes<a class="headerlink" href="#proptypes" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="https://facebook.github.io/react/docs/reusable-components.html#prop-validation">PropTypes</a> to define the expected properties of your component. Each directly accessed property (or child of a property) should have a corresponding PropType.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">isRequired</span></code> for any required properties.</p></li>
+<li><p>Place the propTypes definition at the top of the component. If using a stateless function component, place it above the declaration of the function.</p></li>
+<li><p>Where the children property is used, consider <a class="reference external" href="http://www.mattzabriskie.com/blog/react-validating-children">validating the children</a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

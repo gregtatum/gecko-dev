@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Thread Sanitizer &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Performance Testing" href="../../testing/perfdocs/index.html" />
+    <link rel="prev" title="Memory Sanitizer" href="memory_sanitizer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Sanitizer</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="asan.html">Address Sanitizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="asan_nightly.html">ASan Nightly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory_sanitizer.html">Memory Sanitizer</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Thread Sanitizer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-thread-sanitizer">What is Thread Sanitizer?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#downloading-artifact-builds">Downloading artifact builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-try-builds">Creating Try builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-local-builds-on-linux">Creating local builds on Linux</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build-prerequisites">Build prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-firefox">Building Firefox</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-sanitizer-and-symbols">Thread Sanitizer and Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runtime-suppressions">Runtime Suppressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting-known-problems">Troubleshooting / Known Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#known-sources-of-false-positives">Known Sources of False Positives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intermittent-broken-stacks">Intermittent Broken Stacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intermittent-race-reports">Intermittent Race Reports</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frequently-asked-questions-about-tsan">Frequently Asked Questions about TSan</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-fix-data-races">Why fix data races?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-race-is-benign-can-we-ignore-it">My race is benign, can we ignore it?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-does-tsan-work-exactly">How does TSan work exactly?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Sanitizer</a> &raquo;</li>
+        
+      <li>Thread Sanitizer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tools/sanitizer/tsan.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="thread-sanitizer">
+<h1>Thread Sanitizer<a class="headerlink" href="#thread-sanitizer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-thread-sanitizer">
+<h2>What is Thread Sanitizer?<a class="headerlink" href="#what-is-thread-sanitizer" title="Permalink to this headline">¶</a></h2>
+<p>Thread Sanitizer (TSan) is a fast data race detector for C/C++ and Rust
+programs. It uses a compile-time instrumentation to check all non-race-free
+memory access at runtime. Unlike other tools, it understands compiler-builtin
+atomics and synchronization and therefore provides very accurate results
+with no false positives (except if unsupported synchronization primitives
+like inline assembly or memory fences are used). More information on how
+TSan works can be found on <a class="reference external" href="https://github.com/google/sanitizers/wiki/ThreadSanitizerAlgorithm">the Thread Sanitizer wiki</a>.</p>
+<p>A <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=tsan">meta bug called tsan</a>
+is maintained to keep track of all the bugs found with TSan.</p>
+<p>Note that unlike other sanitizers, TSan is currently <strong>only supported on Linux</strong>.</p>
+</div>
+<div class="section" id="downloading-artifact-builds">
+<h2>Downloading artifact builds<a class="headerlink" href="#downloading-artifact-builds" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to get Firefox builds with Thread Sanitizer is to download a
+continuous integration TSan build of mozilla-central (updated at least daily):</p>
+<ul class="simple">
+<li><p>mozilla-central optimized builds:
+<a class="reference external" href="https://firefox-ci-tc.services.mozilla.com/api/index/v1/task/gecko.v2.mozilla-central.latest.firefox.linux64-tsan-opt/artifacts/public/build/target.tar.bz2">linux</a></p></li>
+</ul>
+<p>The fuzzing team also offers a tool called <code class="docutils literal notranslate"><span class="pre">fuzzfetch</span></code> to download this and many
+other CI builds. It makes downloading and unpacking these builds much easier and
+can be used not just for fuzzing but for all purposes that require a CI build download.</p>
+<p>You can install <code class="docutils literal notranslate"><span class="pre">fuzzfetch</span></code> from
+<a class="reference external" href="https://github.com/MozillaSecurity/fuzzfetch">Github</a> or
+<a class="reference external" href="https://pypi.org/project/fuzzfetch/">via pip</a>.</p>
+<p>Afterwards, you can run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m fuzzfetch --tsan -n firefox-tsan
+</pre></div>
+</div>
+<p>to get the build mentioned above unpacked into a directory called <code class="docutils literal notranslate"><span class="pre">firefox-tsan</span></code>.</p>
+</div>
+<div class="section" id="creating-try-builds">
+<h2>Creating Try builds<a class="headerlink" href="#creating-try-builds" title="Permalink to this headline">¶</a></h2>
+<p>If for some reason you can’t use the pre-built binaries mentioned in the
+previous section (e.g. you need to test a patch), you can either build
+Firefox yourself (see the following section) or use the <a class="reference internal" href="../try/index.html#try-server"><span class="std std-ref">try server</span></a>
+to create the customized build for you. Pushing to try requires L1 commit
+access. If you don’t have this access yet you can request access (see
+<a class="reference external" href="https://www.mozilla.org/about/governance/policies/commit/">Becoming A Mozilla
+Committer</a>
+and <a class="reference external" href="https://www.mozilla.org/about/governance/policies/commit/access-policy/">Mozilla Commit Access
+Policy</a>
+for the requirements).</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">try</span> <span class="pre">fuzzy</span> <span class="pre">--full</span></code> you can select the <code class="docutils literal notranslate"><span class="pre">build-linux64-tsan/opt</span></code> job
+and related tests (if required).</p>
+</div>
+<div class="section" id="creating-local-builds-on-linux">
+<h2>Creating local builds on Linux<a class="headerlink" href="#creating-local-builds-on-linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="build-prerequisites">
+<h3>Build prerequisites<a class="headerlink" href="#build-prerequisites" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="llvm-clang">
+<h4>LLVM/Clang<a class="headerlink" href="#llvm-clang" title="Permalink to this headline">¶</a></h4>
+<p>The TSan instrumentation is implemented as an LLVM pass and integrated
+into Clang. We strongly recommend that you use the Clang version supplied
+as part of the <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">bootstrap</span></code> process, as we backported several required
+fixes for TSan on Firefox.</p>
+<p>You also currently require a Rust Nightly toolchain because the usage of
+sanitizers is restricted to Nightly toolchains in Rust. Unlike for ASan,
+we really need to instrument <em>all</em> code, including Rust code, in order to
+avoid false positives.</p>
+</div>
+</div>
+<div class="section" id="building-firefox">
+<h3>Building Firefox<a class="headerlink" href="#building-firefox" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="getting-the-source">
+<h4>Getting the source<a class="headerlink" href="#getting-the-source" title="Permalink to this headline">¶</a></h4>
+<p>Using that or any later revision, all you need to do is to <a class="reference internal" href="../../contributing/vcs/mercurial.html#mercurial-overview"><span class="std std-ref">get yourself
+a clone of mozilla-central</span></a>.</p>
+</div>
+<div class="section" id="adjusting-the-build-configuration">
+<h4>Adjusting the build configuration<a class="headerlink" href="#adjusting-the-build-configuration" title="Permalink to this headline">¶</a></h4>
+<p>Create the build configuration file <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code> with the following
+content in your mozilla-central directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combined .mozconfig file for TSan on Linux+Mac</span>
+
+<span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=</span><span class="nd">@TOPSRCDIR</span><span class="o">@/</span><span class="n">objdir</span><span class="o">-</span><span class="n">ff</span><span class="o">-</span><span class="n">tsan</span>
+
+<span class="c1"># Enable ASan specific code and build workarounds</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">thread</span><span class="o">-</span><span class="n">sanitizer</span>
+
+<span class="c1"># This ensures that we also instrument Rust code.</span>
+<span class="n">export</span> <span class="n">RUSTFLAGS</span><span class="o">=</span><span class="s2">&quot;-Zsanitizer=thread&quot;</span>
+
+<span class="c1"># rustfmt is currently missing in Rust nightly</span>
+<span class="n">unset</span> <span class="n">RUSTFMT</span>
+
+<span class="c1"># Current Rust Nightly has warnings</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">warnings</span><span class="o">-</span><span class="k">as</span><span class="o">-</span><span class="n">errors</span>
+
+<span class="c1"># These are required by TSan</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">jemalloc</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">crashreporter</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">elf</span><span class="o">-</span><span class="n">hack</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">profiling</span>
+
+<span class="c1"># The Thread Sanitizer is not compatible with sandboxing</span>
+<span class="c1"># (see bug 1182565)</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">sandbox</span>
+
+<span class="c1"># Keep symbols to symbolize TSan traces later</span>
+<span class="n">export</span> <span class="n">MOZ_DEBUG_SYMBOLS</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span><span class="o">-</span><span class="n">symbols</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">strip</span>
+
+<span class="c1"># Settings for an opt build (preferred)</span>
+<span class="c1"># The -gline-tables-only ensures that all the necessary debug information for ASan</span>
+<span class="c1"># is present, but the rest is stripped so the resulting binaries are smaller.</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">optimize</span><span class="o">=</span><span class="s2">&quot;-O2 -gline-tables-only&quot;</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">debug</span>
+
+<span class="c1"># Settings for a debug+opt build</span>
+<span class="c1">#ac_add_options --enable-optimize</span>
+<span class="c1">#ac_add_options --enable-debug</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-the-build-process">
+<h4>Starting the build process<a class="headerlink" href="#starting-the-build-process" title="Permalink to this headline">¶</a></h4>
+<p>Now you start the build process using the regular <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">build</span></code>
+command.</p>
+</div>
+<div class="section" id="starting-firefox">
+<h4>Starting Firefox<a class="headerlink" href="#starting-firefox" title="Permalink to this headline">¶</a></h4>
+<p>After the build has completed, <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">run</span></code> with the usual options for
+running in a debugger (<code class="docutils literal notranslate"><span class="pre">gdb</span></code>, <code class="docutils literal notranslate"><span class="pre">lldb</span></code>, <code class="docutils literal notranslate"><span class="pre">rr</span></code>, etc.) work fine, as do
+the <code class="docutils literal notranslate"><span class="pre">--disable-e10s</span></code> and other options.</p>
+</div>
+<div class="section" id="building-only-the-javascript-shell">
+<h4>Building only the JavaScript shell<a class="headerlink" href="#building-only-the-javascript-shell" title="Permalink to this headline">¶</a></h4>
+<p>If you want to build only the JavaScript shell instead of doing a full
+Firefox build, the build script below will probably help you to do so.
+Execute this script in the <code class="docutils literal notranslate"><span class="pre">js/src/</span></code> subdirectory and pass a directory
+name as the first parameter. The build will then be created in a new
+subdirectory with that name.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#! /bin/sh
+
+if [ -z $1 ] ; then
+     echo &quot;usage: $0 &lt;dirname&gt;&quot;
+elif [ -d $1 ] ; then
+     echo &quot;directory $1 already exists&quot;
+else
+     autoconf2.13
+     mkdir $1
+     cd $1
+     CC=&quot;/path/to/mozbuild/clang&quot; \
+     CXX=&quot;/path/to/mozbuild/clang++&quot; \
+     ../configure --disable-debug --enable-optimize=&quot;-O2 -gline-tables-only&quot; --enable-thread-sanitizer --disable-jemalloc
+fi
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="thread-sanitizer-and-symbols">
+<h2>Thread Sanitizer and Symbols<a class="headerlink" href="#thread-sanitizer-and-symbols" title="Permalink to this headline">¶</a></h2>
+<p>Unlike Address Sanitizer, TSan requires in-process symbolizing to work
+properly in the first place, as any kind of runtime suppressions will
+otherwise not work.</p>
+<p>Hence, it is required that you have a copy of <code class="docutils literal notranslate"><span class="pre">llvm-symbolizer</span></code> either
+in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> or pointed to by the <code class="docutils literal notranslate"><span class="pre">TSAN_SYMBOLIZER_PATH</span></code> environment
+variable. This binary is included in your local mozbuild directory, obtained
+by <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code>.</p>
+</div>
+<div class="section" id="runtime-suppressions">
+<h2>Runtime Suppressions<a class="headerlink" href="#runtime-suppressions" title="Permalink to this headline">¶</a></h2>
+<p>TSan has the ability to suppress race reports at runtime. This can be used to
+silence a race while a fix is developed as well as to permanently silence a
+(benign) race that cannot be fixed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Warning</strong>: Many races <em>look</em> benign but are indeed not. Please read
+the <span class="xref std std-ref">FAQ section</span> carefully
+and think twice before attempting to suppress a race.</p>
+</div>
+<p>The runtime Suppression list is directly baked into Firefox at compile-time and
+located at <a class="reference external" href="https://searchfox.org/mozilla-central/source/mozglue/build/TsanOptions.cpp">mozglue/build/TsanOptions.cpp</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Important</strong>: When adding a suppression, always make sure to include
+the bug number. If the suppression is supposed to be permanent, please
+add the string <code class="docutils literal notranslate"><span class="pre">permanent</span></code> in the same line as the bug number.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Important</strong>: When adding a suppression for a <em>data race</em>, always make
+sure to include a stack frame from <strong>each</strong> of the two race stacks.
+Adding only one suppression for one stack can cause intermittent failures
+that are later on hard to track. One exception to this rule is when suppressing
+races on global variables. In that case, a single race entry with the name of
+the variable is sufficient.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting-known-problems">
+<h2>Troubleshooting / Known Problems<a class="headerlink" href="#troubleshooting-known-problems" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="known-sources-of-false-positives">
+<h3>Known Sources of False Positives<a class="headerlink" href="#known-sources-of-false-positives" title="Permalink to this headline">¶</a></h3>
+<p>TSan has a number of things that can cause false positives, namely:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The use of memory fences (e.g. Rust Arc)</p></li>
+<li><p>The use of inline assembly for synchronization</p></li>
+<li><p>Uninstrumented code (e.g. external libraries) using compiler-builtins for synchronization</p></li>
+<li><p>A lock order inversion involving only a single thread can cause a false positive deadlock
+report (see also <a class="reference external" href="https://github.com/google/sanitizers/issues/488">https://github.com/google/sanitizers/issues/488</a>).</p></li>
+</ul>
+</div></blockquote>
+<p>If none of these four items are involved, you should <em>never</em> assume that TSan is reporting
+a false positive to you without consulting TSan peers. It is very easy to misjudge a race
+to be a false positive because races can be highly complex and totally non-obvious due to
+compiler optimizations and the nature of parallel code.</p>
+</div>
+<div class="section" id="intermittent-broken-stacks">
+<h3>Intermittent Broken Stacks<a class="headerlink" href="#intermittent-broken-stacks" title="Permalink to this headline">¶</a></h3>
+<p>If you intermittently see race reports where one stack is missing with a <code class="docutils literal notranslate"><span class="pre">failed</span> <span class="pre">to</span> <span class="pre">restore</span> <span class="pre">the</span> <span class="pre">stack</span></code>
+message, this can indicate that a suppression is partially covering the race you are seeing.</p>
+<p>Any race where only one of the two stacks is matched by a runtime suppression will show up
+if that particular stack fails to symbolize for some reason. The usual solution is to search
+the suppressions for potential candidates and disable them temporarily to check if your race
+report now becomes mostly consistent.</p>
+<p>However, there are other reasons for broken TSan stacks, in particular if they are not intermittent.
+See also the <code class="docutils literal notranslate"><span class="pre">history_size</span></code> parameter in the <a class="reference external" href="https://github.com/google/sanitizers/wiki/ThreadSanitizerFlags">TSan flags</a>.</p>
+</div>
+<div class="section" id="intermittent-race-reports">
+<h3>Intermittent Race Reports<a class="headerlink" href="#intermittent-race-reports" title="Permalink to this headline">¶</a></h3>
+<p>Unfortunately, the TSan algorithm does not guarantee, that a race is detected 100% of the
+time. Intermittent failures with TSan are (to a certain degree) to be expected and the races
+involved should be filed and fixed to solve the problem.</p>
+</div>
+</div>
+<div class="section" id="frequently-asked-questions-about-tsan">
+<h2>Frequently Asked Questions about TSan<a class="headerlink" href="#frequently-asked-questions-about-tsan" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="why-fix-data-races">
+<h3>Why fix data races?<a class="headerlink" href="#why-fix-data-races" title="Permalink to this headline">¶</a></h3>
+<p>Data races are undefined behavior and can cause crashes as well as correctness issues.
+Compiler optimizations can cause racy code to have unpredictable and hard-to-reproduce behavior.</p>
+<p>At Mozilla, we have already seen several dangerous races, causing random
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1580288">use-after-free crashes</a>,
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1602009">intermittent test failures</a>,
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1607008">hangs</a>,
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1615045">performance issues</a> and
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1601940">intermittent asserts</a>. Such problems do
+not only decrease the quality of our code and user experience, but they also waste countless hours
+of developer time.</p>
+<p>Since it is very hard to judge if a particular race could cause such a situation, we
+have decided to fix all data races wherever possible, since doing so is often cheaper
+than analyzing a race.</p>
+</div>
+<div class="section" id="my-race-is-benign-can-we-ignore-it">
+<h3>My race is benign, can we ignore it?<a class="headerlink" href="#my-race-is-benign-can-we-ignore-it" title="Permalink to this headline">¶</a></h3>
+<p>While it is possible to add a runtime suppression to ignore the race, we <em>strongly</em> encourage
+you to not do so, for two reasons:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Each suppressed race decreases the overall performance of the TSan build, as the race
+has to be symbolized each time when it occurs. Since TSan is already in itself a slow
+build, we need to keep the amount of suppressed races as low as possible.</p></li>
+<li><p>Deciding if a race is truly benign is surprisingly hard. We recommend to read
+<a class="reference external" href="http://software.intel.com/en-us/blogs/2013/01/06/benign-data-races-what-could-possibly-go-wrong">this blog post</a>
+and <cite>this paper &lt;https://www.usenix.org/legacy/events/hotpar11/tech/final_files/Boehm.pdf&gt;</cite>
+on the effects of seemingly benign races.</p></li>
+</ol>
+</div></blockquote>
+<p>Valid reasons to suppress a confirmed benign race include performance problems arising from
+fixing the race or cases where fixing the race would require an unreasonable amount of work.</p>
+<p>Note that the use of atomics usually does not have the bad performance impact that developers
+tend to associate with it. If you assume that e.g. using atomics for synchronization will
+cause performance regressions, we suggest to perform a benchmark to confirm this. In many
+cases, the difference is not measurable.</p>
+</div>
+<div class="section" id="how-does-tsan-work-exactly">
+<h3>How does TSan work exactly?<a class="headerlink" href="#how-does-tsan-work-exactly" title="Permalink to this headline">¶</a></h3>
+<p>More information on how TSan works can be found on <a class="reference external" href="https://github.com/google/sanitizers/wiki/ThreadSanitizerAlgorithm">the Thread Sanitizer wiki</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../testing/perfdocs/index.html" class="btn btn-neutral float-right" title="Performance Testing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="memory_sanitizer.html" class="btn btn-neutral float-left" title="Memory Sanitizer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

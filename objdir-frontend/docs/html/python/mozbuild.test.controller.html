@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozbuild.test.controller package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>mozbuild.test.controller package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/mozbuild.test.controller.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozbuild-test-controller-package">
+<h1>mozbuild.test.controller package<a class="headerlink" href="#mozbuild-test-controller-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-mozbuild.test.controller.test_ccachestats">
+<span id="mozbuild-test-controller-test-ccachestats-module"></span><h2>mozbuild.test.controller.test_ccachestats module<a class="headerlink" href="#module-mozbuild.test.controller.test_ccachestats" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.controller.test_ccachestats.</code><code class="sig-name descname">TestCcacheStats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT0">
+<code class="sig-name descname">STAT0</code><em class="property"> = '\n    cache directory                     /home/tlin/.ccache\n    cache hit (direct)                     0\n    cache hit (preprocessed)               0\n    cache miss                             0\n    files in cache                         0\n    cache size                             0 Kbytes\n    max cache size                      16.0 Gbytes'</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT1">
+<code class="sig-name descname">STAT1</code><em class="property"> = '\n    cache directory                     /home/tlin/.ccache\n    cache hit (direct)                   100\n    cache hit (preprocessed)             200\n    cache miss                          2500\n    called for link                      180\n    called for preprocessing               6\n    compile failed                        11\n    preprocessor error                     3\n    bad compiler arguments                 6\n    unsupported source language            9\n    autoconf compile/link                 60\n    unsupported compiler option            2\n    no input file                         21\n    files in cache                      7344\n    cache size                           1.9 Gbytes\n    max cache size                      16.0 Gbytes'</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT2">
+<code class="sig-name descname">STAT2</code><em class="property"> = '\n    cache directory                     /home/tlin/.ccache\n    cache hit (direct)                  1900\n    cache hit (preprocessed)             300\n    cache miss                          2600\n    called for link                      361\n    called for preprocessing              12\n    compile failed                        22\n    preprocessor error                     6\n    bad compiler arguments                12\n    unsupported source language           18\n    autoconf compile/link                120\n    unsupported compiler option            4\n    no input file                         48\n    files in cache                      7392\n    cache size                           2.0 Gbytes\n    max cache size                      16.0 Gbytes'</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT3">
+<code class="sig-name descname">STAT3</code><em class="property"> = '\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.2/etc/ccache.conf\n    cache hit (direct)                 12004\n    cache hit (preprocessed)            1786\n    cache miss                         26348\n    called for link                     2338\n    called for preprocessing            6313\n    compile failed                       399\n    preprocessor error                   390\n    bad compiler arguments                86\n    unsupported source language           66\n    autoconf compile/link               2439\n    unsupported compiler option          187\n    no input file                       1068\n    files in cache                     18044\n    cache size                           7.5 GB\n    max cache size                       8.6 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT4">
+<code class="sig-name descname">STAT4</code><em class="property"> = '\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.2.1/etc/ccache.conf\n    cache hit (direct)                 21039\n    cache hit (preprocessed)            2315\n    cache miss                         39370\n    called for link                     3651\n    called for preprocessing            6693\n    compile failed                       723\n    ccache internal error                  1\n    preprocessor error                   588\n    bad compiler arguments               128\n    unsupported source language           99\n    autoconf compile/link               3669\n    unsupported compiler option          187\n    no input file                       1711\n    files in cache                     18313\n    cache size                           6.3 GB\n    max cache size                       6.0 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT5">
+<code class="sig-name descname">STAT5</code><em class="property"> = '\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.2.1/etc/ccache.conf\n    cache hit (direct)                 21039\n    cache hit (preprocessed)            2315\n    cache miss                         39372\n    called for link                     3653\n    called for preprocessing            6693\n    compile failed                       723\n    ccache internal error                  1\n    preprocessor error                   588\n    bad compiler arguments               128\n    unsupported source language           99\n    autoconf compile/link               3669\n    unsupported compiler option          187\n    no input file                       1711\n    files in cache                     17411\n    cache size                           6.0 GB\n    max cache size                       6.0 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT6">
+<code class="sig-name descname">STAT6</code><em class="property"> = &quot;\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.3.2/etc/ccache.conf\n    cache hit (direct)                319287\n    cache hit (preprocessed)          125987\n    cache miss                        749959\n    cache hit rate                     37.25 %\n    called for link                    87978\n    called for preprocessing          418591\n    multiple source files               1861\n    compiler produced no output          122\n    compiler produced empty output       174\n    compile failed                     14330\n    ccache internal error                  1\n    preprocessor error                  9459\n    can't use precompiled header           4\n    bad compiler arguments              2077\n    unsupported source language        18195\n    autoconf compile/link              51485\n    unsupported compiler option          322\n    no input file                     309538\n    cleanups performed                     1\n    files in cache                     17358\n    cache size                          15.4 GB\n    max cache size                      17.2 GB\n    &quot;</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT7">
+<code class="sig-name descname">STAT7</code><em class="property"> = '\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.3.3/etc/ccache.conf\n    cache hit (direct)                 27035\n    cache hit (preprocessed)           13939\n    cache miss                         62630\n    cache hit rate                     39.55 %\n    called for link                     1280\n    called for preprocessing             736\n    compile failed                       550\n    preprocessor error                   638\n    bad compiler arguments                20\n    autoconf compile/link               1751\n    unsupported code directive             2\n    no input file                       2378\n    cleanups performed                  1792\n    files in cache                      3479\n    cache size                           4.4 GB\n    max cache size                       5.0 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT8">
+<code class="sig-name descname">STAT8</code><em class="property"> = '\n    cache directory                     /home/psimonyi/.ccache\n    primary config                      /home/psimonyi/.ccache/ccache.conf\n    secondary config      (readonly)    /etc/ccache.conf\n    stats zero time                     Tue Oct 13 08:50:26 2020\n    cache hit (direct)                   571\n    cache hit (preprocessed)            1203\n    cache miss                         11747\n    cache hit rate                     13.12 %\n    called for link                      623\n    called for preprocessing            7194\n    compile failed                        32\n    preprocessor error                   137\n    bad compiler arguments                 4\n    autoconf compile/link                348\n    no input file                        162\n    cleanups performed                    77\n    files in cache                     13464\n    cache size                           6.2 GB\n    max cache size                       7.0 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT9">
+<code class="sig-name descname">STAT9</code><em class="property"> = '\n    cache directory                     /Users/tlin/.ccache\n    primary config                      /Users/tlin/.ccache/ccache.conf\n    secondary config      (readonly)    /usr/local/Cellar/ccache/3.5/etc/ccache.conf\n    stats updated                       Tue Oct 13 08:50:26 2020\n    stats zeroed                        Tue Oct 13 08:50:26 2020\n    cache hit (direct)                 80147\n    cache hit (preprocessed)           21413\n    cache miss                        191128\n    cache hit rate                     34.70 %\n    called for link                     5194\n    called for preprocessing            1721\n    compile failed                       825\n    preprocessor error                  3838\n    cache file missing                  4863\n    bad compiler arguments                32\n    autoconf compile/link               3554\n    unsupported code directive             4\n    no input file                       5545\n    cleanups performed                  3154\n    files in cache                     18525\n    cache size                          13.4 GB\n    max cache size                      15.0 GB\n    '</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT_GARBAGE">
+<code class="sig-name descname">STAT_GARBAGE</code><em class="property"> = 'A garbage line which should be failed to parse'</em><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.STAT_GARBAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_cache_size_shrinking">
+<code class="sig-name descname">test_cache_size_shrinking</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_cache_size_shrinking" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_hit_rate_of_diff_stats">
+<code class="sig-name descname">test_hit_rate_of_diff_stats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_hit_rate_of_diff_stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_parse_garbage_stats_message">
+<code class="sig-name descname">test_parse_garbage_stats_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_parse_garbage_stats_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_parse_zero_stats_message">
+<code class="sig-name descname">test_parse_zero_stats_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_parse_zero_stats_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_contains_data">
+<code class="sig-name descname">test_stats_contains_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_contains_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version32">
+<code class="sig-name descname">test_stats_version32</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version32" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version33">
+<code class="sig-name descname">test_stats_version33</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version33" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version34">
+<code class="sig-name descname">test_stats_version34</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version34" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version35">
+<code class="sig-name descname">test_stats_version35</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_ccachestats.TestCcacheStats.test_stats_version35" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.controller.test_clobber">
+<span id="mozbuild-test-controller-test-clobber-module"></span><h2>mozbuild.test.controller.test_clobber module<a class="headerlink" href="#module-mozbuild.test.controller.test_clobber" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer">
+<em class="property">class </em><code class="sig-prename descclassname">mozbuild.test.controller.test_clobber.</code><code class="sig-name descname">TestClobberer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">methodName</span><span class="o">=</span><span class="default_value">'runTest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">unittest.case.TestCase</span></code></p>
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.get_tempdir">
+<code class="sig-name descname">get_tempdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.get_tempdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.get_topsrcdir">
+<code class="sig-name descname">get_topsrcdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.get_topsrcdir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.setUp">
+<code class="sig-name descname">setUp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.setUp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.tearDown">
+<code class="sig-name descname">tearDown</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.tearDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hook method for deconstructing the test fixture after testing it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_cwd_is_topobjdir">
+<code class="sig-name descname">test_cwd_is_topobjdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_cwd_is_topobjdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>If cwd is topobjdir, we can still clobber.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_cwd_under_topobjdir">
+<code class="sig-name descname">test_cwd_under_topobjdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_cwd_under_topobjdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>If cwd is under topobjdir, we can’t clobber.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_mozconfig_opt_in">
+<code class="sig-name descname">test_mozconfig_opt_in</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_mozconfig_opt_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto clobber iff AUTOCLOBBER is in the environment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_no_objdir">
+<code class="sig-name descname">test_no_objdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_no_objdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>If topobjdir does not exist, no clobber is needed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_clobber_newer">
+<code class="sig-name descname">test_objdir_clobber_newer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_clobber_newer" title="Permalink to this definition">¶</a></dt>
+<dd><p>If CLOBBER in topobjdir is newer, do nothing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_clobber_older">
+<code class="sig-name descname">test_objdir_clobber_older</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_clobber_older" title="Permalink to this definition">¶</a></dt>
+<dd><p>If CLOBBER in topobjdir is older, we clobber.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_is_srcdir">
+<code class="sig-name descname">test_objdir_is_srcdir</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_is_srcdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>If topobjdir is the topsrcdir, refuse to clobber.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_no_clobber_file">
+<code class="sig-name descname">test_objdir_no_clobber_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mozbuild.test.controller.test_clobber.TestClobberer.test_objdir_no_clobber_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>If CLOBBER does not exist in topobjdir, treat as empty.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mozbuild.test.controller">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mozbuild.test.controller" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

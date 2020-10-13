@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>“Introduction to WPT” video transcript &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Running Tests" href="running-tests/index.html" />
+    <link rel="prev" title="Test Suite Design" href="test-suite-design.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">web-platform-tests documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#github">GitHub</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests/index.html">Writing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reviewing-tests/index.html">Reviewing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">web-platform-tests documentation</a> &raquo;</li>
+        
+      <li>“Introduction to WPT” video transcript</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/web-platform/intro-video-transcript.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-wpt-video-transcript">
+<h1>“Introduction to WPT” video transcript<a class="headerlink" href="#introduction-to-wpt-video-transcript" title="Permalink to this headline">¶</a></h1>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/zuK1uyXPZS0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen></iframe><p><strong>Still image of the WPT logo. The song <a class="reference external" href="http://brokeforfree.bandcamp.com/track/my-luck">“My
+Luck”</a> by <a class="reference external" href="http://brokeforfree.com/">Broke for
+Free</a> (licensed under <a class="reference external" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
+3.0</a>)
+plays in the background.</strong></p>
+<blockquote>
+<div><p>Hello, and welcome to the Web Platform Tests!</p>
+<p>The goal of this project is to ensure that all web browsers present websites
+in exactly the way the authors intended.</p>
+<p>But what is the web platform, exactly? You can think of it as having three
+main parts.</p>
+</div></blockquote>
+<p><strong>A top-down shot of a blank sheet of graph paper</strong></p>
+<blockquote>
+<div><p>First, there are the web browsers.</p>
+</div></blockquote>
+<p>A hand places a paper cutout depicting a browser window in the lower-right
+corner of the sheet.</p>
+<blockquote>
+<div><p>Applications like Firefox, Chrome, and Safari allow people to interact with
+pages and with each other.</p>
+<p>Second, there are the web standards.</p>
+</div></blockquote>
+<p>A hand places a paper cutout depicting a scroll of parchment paper in the
+lower-left corner of the sheet.</p>
+<blockquote>
+<div><p>These documents define how the browsers are supposed to behave.</p>
+</div></blockquote>
+<p><strong>A screen recording of a web browser</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">https://platform.html5.org</span></code> is entered into the location bar, and the browser
+loads the page.</p>
+<blockquote>
+<div><p>That includes everything from how text is rendered to how augmented reality
+apps are built. Specifying it all takes a lot of work!</p>
+</div></blockquote>
+<p>The browser clicks through to the Fetch standard and begins scrolling.</p>
+<blockquote>
+<div><p>And as you might expect, the standards can get really complicated.</p>
+</div></blockquote>
+<p><strong>Return to the graph paper</strong></p>
+<p>A hand draws an arrow from the cutout of the scroll to the cutout of the
+browser window.</p>
+<blockquote>
+<div><p>The people who build the browsers use the specifications as a blue print for
+their work. A shared set of generic instructions like these make it possible
+for people to choose between different browsers, but only if the browsers get
+it right.</p>
+</div></blockquote>
+<p>A hand places a cutout representing a stack of papers on the top-center of the
+sheet and draws an arrow from that cutout to the cutout of the browser window.</p>
+<blockquote>
+<div><p>To verify their work, the browser maintainers rely on the third part of the
+web platform: conformance tests.</p>
+</div></blockquote>
+<p>A hand draws an arrow from the cutout of the scroll to the cutout of the tests.</p>
+<blockquote>
+<div><p>We author tests to describe the same behavior as the standards, just
+formatted in a way that a computer can understand.</p>
+</div></blockquote>
+<p>A hand draws an arrow from the cutout of the browser window to the cutout of
+the scroll.</p>
+<blockquote>
+<div><p>In the process, the maintainers sometimes uncover problems in the design of
+the specifications, and they recommend changes to fix them.</p>
+</div></blockquote>
+<p>A hand draws an arrow from the cutout of the tests to the cutout of the scroll.</p>
+<blockquote>
+<div><p>Test authors also find and fix these so-called “spec bugs.”</p>
+</div></blockquote>
+<p>A hand draws an arrow from the cutout of the browser window to the cutout of
+the tests.</p>
+<blockquote>
+<div><p>…and as they implement the standards, the maintainers of each browser
+frequently write new tests that can be shared with the others.</p>
+<p>This is how thousands of people coordinate to build the cohesive programming
+platform that we call the world wide web. The web-platform-tests project is
+one of the test suites that make this possible.</p>
+<p>That’s pretty abstract, though! Let’s take a quick look at the tests
+themselves.</p>
+</div></blockquote>
+<p><strong>A screen recording of a web browser</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">http://wpt.live</span></code> is entered into the location bar, and the browser loads the
+page.</p>
+<blockquote>
+<div><p>The latest version of the tests is publicly hosted in executable form on the
+web at wpt.live.</p>
+</div></blockquote>
+<p>The browser begins scrolling through the enormous list of directories.</p>
+<blockquote>
+<div><p>There, were can navigate among all the tests for all the different web
+technologies.</p>
+<p>Let’s take a look at a typical test.</p>
+</div></blockquote>
+<p>The browser stops scrolling, and a mouse cursor clicks on <code class="docutils literal notranslate"><span class="pre">fetch</span></code>, then <code class="docutils literal notranslate"><span class="pre">api</span></code>,
+then <code class="docutils literal notranslate"><span class="pre">headers</span></code>, and finally <code class="docutils literal notranslate"><span class="pre">headers-basic.html</span></code>.</p>
+<blockquote>
+<div><p>This test is written with the web-platform-tests’s testing framework,
+testharness.js. The test completes almost instantly, and testharness.js
+reports that this browser passes all but one subtest. To understand the
+failure, we can read the source code.</p>
+</div></blockquote>
+<p>The mouse opens a context menu, selects “View Source”, and scrolls to the
+source of the failing test.</p>
+<blockquote>
+<div><p>It looks like the failing subtest is for what happens when a <code class="docutils literal notranslate"><span class="pre">Headers</span></code>
+instance has a custom JavaScript iterator method. That’s a strange edge case,
+but it’s important for browsers to agree on every detail!</p>
+</div></blockquote>
+<p>The mouse clicks on the browser’s “Back” button and then navigates through the
+directory structure to the test at
+<code class="docutils literal notranslate"><span class="pre">css/css-transforms/transform-transformed-tr-contains-fixed-position.html</span></code>. It
+displays text rendered at an angle.</p>
+<blockquote>
+<div><p>Many tests don’t use testharness.js at all. Let’s take a look at a couple
+other test types.</p>
+<p>When it comes to the visual appearance of a page, it can be hard to verify
+the intended behavior using JavaScript alone. For these situations, the
+web-platform-tests uses what’s known as a reftest.</p>
+<p>Short for “reference test”, this type of test uses at least two different web
+pages.</p>
+<p>The first page demonstrates the feature under test.</p>
+</div></blockquote>
+<p>The mouse opens a context menu, selects “View Source”, and clicks on the <code class="docutils literal notranslate"><span class="pre">href</span></code>
+value for the matching reference. It looks identical to the previous page.</p>
+<blockquote>
+<div><p>Inside of it, we’ll find a link to a second page. This second page is the
+reference page. It’s designed to use a different approach to produce the same
+output.</p>
+</div></blockquote>
+<p>The mouse clicks back and forth between the browser tabs displaying the test
+page and the reference page.</p>
+<blockquote>
+<div><p>When tests like these are run automatically, a computer verifies that
+screenshots of the two pages are identical.</p>
+</div></blockquote>
+<p>The mouse clicks on the browser’s “Back” button and then navigates through the
+directory structure to the test at
+<code class="docutils literal notranslate"><span class="pre">css/css-animations/animation-fill-mode-002-manual.html</span></code>. The page includes the
+text, “Test passes if there is a filled color square with ‘Filler Text’, whose
+color gradually changes in the order: YELLOW to GREEN.” It also includes the
+described animated square.</p>
+<blockquote>
+<div><p>Even with testharness.js and reftests, there are many web platform features
+that a computer can’t automatically verify. In cases like these, we fall back
+to using manual tests.</p>
+<p>Manual tests can only be verified by a living, breathing human. They describe
+their expectations in plain English so that a human operator can easily
+determine whether the browser is behaving correctly.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">https://web-platform-tests.org</span></code> is entered into the location bar, and the
+browser loads the page.</p>
+<blockquote>
+<div><p>You can read more about all the test types in the project documentation at
+<a class="reference external" href="https://web-platform-tests.org">web-platform-tests.org</a>.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">https://wpt.fyi</span></code> is entered into the location bar, and the browser loads the
+page.</p>
+<blockquote>
+<div><p><a class="reference external" href="https://wpt.fyi">wpt.fyi</a> is a great way to see how today’s browsers are
+performing on the web-platform-tests.</p>
+</div></blockquote>
+<p>The browser scrolls to <code class="docutils literal notranslate"><span class="pre">fetch</span></code>, and a mouse cursor clicks on <code class="docutils literal notranslate"><span class="pre">fetch</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">api</span></code>, then <code class="docutils literal notranslate"><span class="pre">headers</span></code>, and finally <code class="docutils literal notranslate"><span class="pre">headers-basic.html</span></code>.</p>
+<blockquote>
+<div><p>Here, you’ll find all the same tests, just presented with the results from
+various browsers.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">https://web-platform-tests.live/LICENSE.md</span></code> is entered into the location bar,
+and the browser loads the page.</p>
+<blockquote>
+<div><p>The web-platform-tests project is free and open source software. From bug
+reports to documentation improvements and brand new tests, we welcome all
+sorts of contributions from everyone.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">https://github.com/web-platform-tests/wpt</span></code> is entered into the location bar,
+and the browser loads the page.</p>
+<blockquote>
+<div><p>To get involved, you can visit the project management website hosted on
+GitHub.com.</p>
+</div></blockquote>
+<p>The browser navigates to the project’s “issues” list and filters the list for
+just the ones labeled as “good first issue.”</p>
+<blockquote>
+<div><p>Some issues are more difficult than others, but many are perfect for people who
+are just getting started with the project. When we come across an issue like
+that, we label it as a “good first issue.”</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">https://lists.w3.org/Archives/Public/public-test-infra</span></code> is entered into the
+location bar, and the browser loads the page.</p>
+<blockquote>
+<div><p>You can also join the mailing list to receive e-mail with announcements and
+discussion about the project.</p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">http://irc.w3.org/</span></code> is entered into the location bar, and the browser loads
+the page. <code class="docutils literal notranslate"><span class="pre">web4all</span></code> is entered as the Nickname, and <code class="docutils literal notranslate"><span class="pre">#testing</span></code> is entered as
+the channel name. A mouse clicks on the “Connect” button.</p>
+<blockquote>
+<div><p>For more immediate communication, you can join the “testing” channel on the
+IRC server run by the W3C.</p>
+</div></blockquote>
+<p><strong>Return to the graph paper</strong></p>
+<p>A hand places a paper cutout depicting a human silhouette on the sheet. It then
+draws arrows from the new cutout to each of the three previously-introduced
+cutouts.</p>
+<p><img alt="../_images/web-platform.png" src="../_images/web-platform.png" /></p>
+<blockquote>
+<div><p>We’re looking forward to working with you!</p>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="running-tests/index.html" class="btn btn-neutral float-right" title="Running Tests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="test-suite-design.html" class="btn btn-neutral float-left" title="Test Suite Design" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>GitHub Metadata Recommendations &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to Mark Regressions" href="regressions.html" />
+    <link rel="prev" title="Fixing Security Bugs" href="fixing-security-bugs.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bug Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#guides">Guides</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#policies">Policies</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#processes">Processes</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="doc-requests.html">User documentation requests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fixing-security-bugs.html">Fixing Security Bugs</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GitHub Metadata Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#bug-types">Bug types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#statuses">Statuses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#severities-required">Severities (Required)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-status-flags">Release Status Flags</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#priorities">Priorities</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keywords">Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="regressions.html">How to Mark Regressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-approval.html">Security Bug Approval Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shared-bug-queues.html">Shared Bug Queues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#related-documentation">Related documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Bug Handling</a> &raquo;</li>
+        
+      <li>GitHub Metadata Recommendations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/bug-mgmt/processes/labels.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="github-metadata-recommendations">
+<h1>GitHub Metadata Recommendations<a class="headerlink" href="#github-metadata-recommendations" title="Permalink to this headline">¶</a></h1>
+<p>To have better consistency with code and task tracking among Mozilla
+Central, Bugzilla, and GitHub, we request that you use a common set of
+labels in your projects. Benefits of improved consistency in our
+conventions include:</p>
+<ul class="simple">
+<li><p>Consistency makes measurement of processes simpler across the
+organization</p></li>
+<li><p>Consistency makes it easier to write re-usable process tools</p></li>
+<li><p>Consistency increases clarity for those than need to work across
+different repositories and bug trackers</p></li>
+<li><p>Consistency reduces friction around engineering mobility between
+projects</p></li>
+</ul>
+<p>We recommend creating sets of labels in your project to do this.</p>
+<div class="section" id="bug-types">
+<h2>Bug types<a class="headerlink" href="#bug-types" title="Permalink to this headline">¶</a></h2>
+<p>In Bugzilla bugs are distinguished by type: <code class="docutils literal notranslate"><span class="pre">defect</span></code>, <code class="docutils literal notranslate"><span class="pre">enhancement</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">tasks</span></code>. Use a label to make this distinction in your project.</p>
+</div>
+<div class="section" id="statuses">
+<h2>Statuses<a class="headerlink" href="#statuses" title="Permalink to this headline">¶</a></h2>
+<p>Bugs in GitHub issues have two states: closed and open. Bugzilla has a
+richer set of states.</p>
+<p>When you close a bug, add a label indicating <a class="reference external" href="https://wiki.mozilla.org/BMO/UserGuide/BugStatuses#Resolutions">the
+resolution</a>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fixed</span></code></p>
+<ul>
+<li><p>A change set for the bug has been landed in Mozilla-Central</p></li>
+<li><p>A GitHub issue could be closed, but the change set has not
+landed so it would be still considered open from the
+Bugzilla point of view</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">invalid</span></code></p>
+<ul>
+<li><p>The problem described is not a bug.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">incomplete</span></code></p>
+<ul>
+<li><p>The problem is vaguely described with no steps to reproduce, or is
+a support request.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wontfix</span></code></p>
+<ul>
+<li><p>The problem described is a bug which will never be fixed.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicate</span></code></p>
+<ul>
+<li><p>The problem is a duplicate of an existing bug. Be sure to link the
+bug this is a duplicate of.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">worksforme</span></code></p>
+<ul>
+<li><p>All attempts at reproducing this bug were futile, and reading the
+code produces no clues as to why the described behavior would
+occur.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="severities-required">
+<h2>Severities (Required)<a class="headerlink" href="#severities-required" title="Permalink to this headline">¶</a></h2>
+<p>The triage process for Firefox bugs in Bugzilla requires a non default
+value of a bug’s <a class="reference internal" href="../guides/severity.html#defect-severity"><span class="std std-ref">Severity (definitions)</span></a>.</p>
+</div>
+<div class="section" id="release-status-flags">
+<h2>Release Status Flags<a class="headerlink" href="#release-status-flags" title="Permalink to this headline">¶</a></h2>
+<p>Open Firefox bugs may also have <a class="reference internal" href="../guides/status-flags.html#release-status-flags"><span class="std std-ref">status flags</span></a>
+(<code class="docutils literal notranslate"><span class="pre">status_firefoxNN</span></code>) set for Nightly, Beta, Release, or ESR.</p>
+</div>
+<div class="section" id="priorities">
+<h2>Priorities<a class="headerlink" href="#priorities" title="Permalink to this headline">¶</a></h2>
+<p>Firefox projects in Bugzilla can use the <a class="reference internal" href="../guides/priority.html#priority-definitions"><span class="std std-ref">priority field</span></a>
+to indicate when a bug will be worked on.</p>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>In GitHub issues metadata is either a label or the bug’s open/closed
+state.</p>
+<p>Some Bugzilla metadata behaves like labels, but you need to be careful
+with how you use it in order not to confuse QA.</p>
+<div class="section" id="regressions">
+<h3>Regressions<a class="headerlink" href="#regressions" title="Permalink to this headline">¶</a></h3>
+<p>In Bugzilla, the <code class="docutils literal notranslate"><span class="pre">regression</span></code> keyword indicates a regression in
+existing behavior introduced by a code change.</p>
+<p>When a bug is labeled as a regression in GitHub does it imply the
+regression is in the code module in GitHub, or the module that’s landed
+in Mozilla Central? Using the label <code class="docutils literal notranslate"><span class="pre">regression-internal</span></code> will signal
+QA that the regression is internal to your development cycle, and not
+one introduced into the Mozilla Central tree.</p>
+<p>If it is not clear which pull request caused the regression, add the
+<code class="docutils literal notranslate"><span class="pre">regressionwindow-wanted</span></code> label.</p>
+</div>
+<div class="section" id="other-keywords">
+<h3>Other Keywords<a class="headerlink" href="#other-keywords" title="Permalink to this headline">¶</a></h3>
+<p>Other useful labels include <code class="docutils literal notranslate"><span class="pre">enhancement</span></code> to distinguish feature
+requests, and <code class="docutils literal notranslate"><span class="pre">good</span> <span class="pre">first</span> <span class="pre">issue</span></code> to signal to contributors (<a class="reference external" href="http://blog.humphd.org/why-good-first-bugs-often-arent/">along
+with adequate
+documentation</a>.)</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>To represent Bugzilla fields, use labels following this scheme.</p>
+<ul class="simple">
+<li><p>Bug types</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">defect</span></code>, <code class="docutils literal notranslate"><span class="pre">enhancement</span></code>, <code class="docutils literal notranslate"><span class="pre">task</span></code></p></li>
+</ul>
+</li>
+<li><p>Resolution statuses</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">invalid</span></code>, <code class="docutils literal notranslate"><span class="pre">duplicate</span></code>, <code class="docutils literal notranslate"><span class="pre">incomplete</span></code>, <code class="docutils literal notranslate"><span class="pre">worksforme</span></code>,
+<code class="docutils literal notranslate"><span class="pre">wontfix</span></code></p></li>
+</ul>
+</li>
+<li><p>Regressions</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">regression</span></code>, <code class="docutils literal notranslate"><span class="pre">regressionwindow-wanted</span></code>,
+<code class="docutils literal notranslate"><span class="pre">regression-internal</span></code></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../guides/severity.html#defect-severity"><span class="std std-ref">Severity</span></a> (required)</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">S1</span></code>, <code class="docutils literal notranslate"><span class="pre">S2</span></code>, <code class="docutils literal notranslate"><span class="pre">S3</span></code>, <code class="docutils literal notranslate"><span class="pre">S4</span></code>, <code class="docutils literal notranslate"><span class="pre">N/A</span></code> (reserved for bugs
+of type <code class="docutils literal notranslate"><span class="pre">task</span></code> or <code class="docutils literal notranslate"><span class="pre">enhancement</span></code>)</p></li>
+</ul>
+</li>
+<li><p><span class="xref std std-ref">Status flags</span></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">status_firefoxNN:&lt;status&gt;</span></code>
+(example <code class="docutils literal notranslate"><span class="pre">status_firefox77:affected</span></code>)</p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="../guides/priority.html#priority-definitions"><span class="std std-ref">Priority</span></a></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">P1</span></code>, <code class="docutils literal notranslate"><span class="pre">P2</span></code>, <code class="docutils literal notranslate"><span class="pre">P3</span></code>, <code class="docutils literal notranslate"><span class="pre">P5</span></code></p></li>
+</ul>
+</li>
+<li><p>Other keywords</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">good</span> <span class="pre">first</span> <span class="pre">bug</span></code>, <code class="docutils literal notranslate"><span class="pre">perf</span></code>, &amp;etc.</p></li>
+</ul>
+</li>
+</ul>
+<p>You may already have a set of tags, so do an edit to convert them
+or use <a class="reference external" href="https://github.com/probot/settings">the GitHub settings app</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="regressions.html" class="btn btn-neutral float-right" title="How to Mark Regressions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fixing-security-bugs.html" class="btn btn-neutral float-left" title="Fixing Security Bugs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

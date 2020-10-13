@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Performance Tests: DAMP &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Writing new performance test" href="writing-perf-tests.html" />
+    <link rel="prev" title="Debugging Intermittent Test Failures" href="debugging-intermittents.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="README.html">Automated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpcshell.html">xpcshell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-chrome.html">Chrome mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-devtools.html">DevTools mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-tests.html">Node tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests.html">Writing tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-intermittents.html">Debugging intermittent failures</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Performance tests (DAMP)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-it-locally">How to run it locally?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-it-on-try">How to run it on try?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-get-performance-profiles-on-try">How to get performance profiles on try?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-does-it-do">What does it do?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-see-the-results-from-try">How to see the results from try?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-contribute-to-damp">How to contribute to DAMP?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-see-the-performance-trends">How to see the performance trends?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-use-perfherder-charts">How to use PerfHerder charts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html">Writing new performance test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-name-your-test-and-register-it">How to name your test and register it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-run-your-new-test">How to run your new test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-example.html">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-tips.html">Advanced tips</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Performance Tests: DAMP</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/tests/performance-tests.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="performance-tests-damp">
+<h1>Performance Tests: DAMP<a class="headerlink" href="#performance-tests-damp" title="Permalink to this headline">¶</a></h1>
+<p>DAMP (DevTools At Maximum Performance) is our test suite to track performance.</p>
+<div class="section" id="how-to-run-it-locally">
+<h2>How to run it locally?<a class="headerlink" href="#how-to-run-it-locally" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp
+</pre></div>
+</div>
+<p>Note that the first run is slower as it pulls a large tarball with various website copies.
+This will run all DAMP tests, you can filter by test name with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --subtests console
+</pre></div>
+</div>
+<p>This command will run all tests which contains “console” in their name.</p>
+<div class="section" id="command-line-options">
+<h3>Command line options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="running-tests-only-once">
+<h4>Running tests only once<a class="headerlink" href="#running-tests-only-once" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --cycles <span class="m">1</span> --tppagecycles <span class="m">1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">--cycles</span></code> will limit the number of Firefox restart to only one, while
+<code class="docutils literal notranslate"><span class="pre">--tppagecycles</span></code> will limit the number of test re-run in each firefox start to one.
+This is often helpful when debugging one particular subtest.</p>
+</div>
+<div class="section" id="taking-screenshots">
+<h4>Taking screenshots<a class="headerlink" href="#taking-screenshots" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">DEBUG_DEVTOOLS_SCREENSHOTS</span><span class="o">=</span><span class="m">1</span> ./mach talos-test --activeTests damp
+</pre></div>
+</div>
+<p>When passing <code class="docutils literal notranslate"><span class="pre">DEBUG_DEVTOOLS_SCREENSHOTS</span></code> env variable, screenshots will be taken after each subtest
+was run. The screenshot will be opened in new tabs and their title
+includes the subtest label. Firefox won’t automatically close so that you can view the screenshots.</p>
+</div>
+<div class="section" id="recording-a-profile">
+<h4>Recording a profile<a class="headerlink" href="#recording-a-profile" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --gecko-profile --gecko-profile-entries <span class="m">100000000</span>
+</pre></div>
+</div>
+<p>This will automatically record the tests and open the profile. You may use the following command in order
+to focus on just one subtest run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach talos-test --activeTests damp --subtests custom.webconsole --cycles <span class="m">1</span> --tppagecycles <span class="m">1</span> --gecko-profile --gecko-profile-entries <span class="m">100000000</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="how-to-run-it-on-try">
+<h2>How to run it on try?<a class="headerlink" href="#how-to-run-it-on-try" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./mach try fuzzy --query <span class="s2">&quot;&#39;linux64-shippable/ &#39;damp&quot;</span> --rebuild <span class="m">6</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Linux appears to build and run quickly, and offers quite stable results over the other OSes.
+The vast majority of performance issues for DevTools are OS agnostic, so it doesn’t really matter which one you run them on.</p></li>
+<li><p>“damp” is the talos bucket in which we run DAMP.</p></li>
+<li><p>And 6 is the number of times we run DAMP tests. That’s to do averages between all the 6 runs and helps filtering out the noise.</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-get-performance-profiles-on-try">
+<h2>How to get performance profiles on try?<a class="headerlink" href="#how-to-get-performance-profiles-on-try" title="Permalink to this headline">¶</a></h2>
+<p>Once you have a successful try job for <code class="docutils literal notranslate"><span class="pre">damp</span></code>:</p>
+<ul class="simple">
+<li><p>select this job in treeherder</p></li>
+<li><p>click on the <code class="docutils literal notranslate"><span class="pre">...</span></code> menu in the bottom left</p></li>
+<li><p>select “Create Gecko Profile”</p></li>
+</ul>
+<p><img alt="PerfHerder Create Gecko Profile menu" src="../../_images/perfherder-create-gecko-profile.png" /></p>
+<p>This should start a new damp job called <code class="docutils literal notranslate"><span class="pre">damp-p</span></code>. Once <code class="docutils literal notranslate"><span class="pre">damp-p</span></code> is finished:</p>
+<ul class="simple">
+<li><p>select the <code class="docutils literal notranslate"><span class="pre">damp-p</span></code> job</p></li>
+<li><p>click on <code class="docutils literal notranslate"><span class="pre">Job</span> <span class="pre">Details</span></code> tab</p></li>
+<li><p>click on <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">in</span> <span class="pre">Firefox</span> <span class="pre">Profiler</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="what-does-it-do">
+<h2>What does it do?<a class="headerlink" href="#what-does-it-do" title="Permalink to this headline">¶</a></h2>
+<p>DAMP measures three important operations:</p>
+<ul class="simple">
+<li><p>Open a toolbox</p></li>
+<li><p>Reload the web page</p></li>
+<li><p>Close the toolbox
+It measures the time it takes to do each of these operations for the following panels:</p></li>
+</ul>
+<p>inspector, console, netmonitor debugger, memory, performance.</p>
+<p>It runs all these three tests two times. Each time against a different web page:</p>
+<ul class="simple">
+<li><p>“simple”: an empty webpage. This test highlights the performance of all tools against the simplest possible page.</p></li>
+<li><p>“complicated”: a copy of bild.de website. This is supposed to represent a typical website to debug via DevTools.</p></li>
+</ul>
+<p>Then, there are a couple of extra tests:</p>
+<ul class="simple">
+<li><p>“cold”: we run the three operations (open toolbox, page reload and close toolbox) first with the inspector.
+This is run first after Firefox’s startup, before any other test.
+This test allows to measure a “cold startup”. When a user first interacts with DevTools, many resources are loaded and cached,
+so that all next interactions will be significantly faster.</p></li>
+<li><p>and many other smaller tests, focused on one particular feature or possible slowness for each panel.</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-see-the-results-from-try">
+<h2>How to see the results from try?<a class="headerlink" href="#how-to-see-the-results-from-try" title="Permalink to this headline">¶</a></h2>
+<p>First, open TreeHerder. A link is displayed in your console when executing <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">try</span></code>.
+You should also receive a mail with a link to it.</p>
+<p>Look for “T-e10s(+6)”, click on “+6”, then click on “damp”:
+<img alt="TreeHerder jobs" src="../../_images/perfherder-damp.png" /></p>
+<p>On the bottom panel that just opened, click on “Compare result against another revision”.
+<img alt="TreeHerder panel" src="../../_images/perfherder-compare-link.png" /></p>
+<p>You are now on PerfHerder, click on “Compare”,
+<img alt="PerfHerder compare" src="../../_images/perfherder-compare.png" /></p>
+<p>Next to “Talos” select menu, in the filter textbox, type “damp”.
+Under “damp opt e10s” item, mouse over the “linux64” line, click on “subtests” link.
+<img alt="PerfHerder filter" src="../../_images/perfherder-filter-subtests.png" /></p>
+<p>And here you get the results for each DAMP test:
+<img alt="PerfHerder subtests" src="../../_images/perfherder-subtests.png" /></p>
+<p>On this page, you can filter by test name with the filter box on top of the result table.
+This table has the following columns:</p>
+<ul class="simple">
+<li><p>Base:
+Average time it took to run the test on the base build (by default, the last 2 days of DAMP runs on mozilla-central revisions)</p></li>
+<li><p>New:
+Average time it took to run the test on the new build, the one with your patches.
+Both “Base” and “New” have a  “± x.xx%” suffix which tells you the variance of the timings.
+i.e. the average difference in percent between the median timing and both the slowest and the fastest.</p></li>
+<li><p>Delta:
+Difference in percent between the base and new runs.
+The color of this can be red, orange or green:</p>
+<ul>
+<li><p>Red means “certainly regressing”</p></li>
+<li><p>Orange means “possibly regressing”</p></li>
+<li><p>Green means “certainly improving”</p></li>
+<li><p>No colored background means “nothing to conclude”
+The difference between certainly and possibly is explained by the next column.</p></li>
+</ul>
+</li>
+<li><p>Confidence:
+If there is a significant difference between the two runs, tells if the results is trustworthy.</p>
+<ul>
+<li><p>“low” either means there isn’t a significant difference between the two runs, or the difference is smaller than the typical variance of the given test.
+If the test is known to have an execution time varying by 2% between two runs of the same build, and you get a 1% difference between your base and new builds,
+the confidence will be low. You really can’t make any conclusion.</p></li>
+<li><p>“med” means medium confidence and the delta is around the size of the variance. It may highlight a regression, but it can still be justified by the test noise.</p></li>
+<li><p>“high” means that this is a high confidence difference. The delta is significantly higher than the typical test variance. A regression is most likely detected.</p></li>
+</ul>
+</li>
+</ul>
+<p>There is also “Show only important changes” checkbox, which helps seeing if there is any significant regression.
+It will only display regressions and improvements with a medium or high confidence.</p>
+</div>
+<div class="section" id="how-to-contribute-to-damp">
+<h2>How to contribute to DAMP?<a class="headerlink" href="#how-to-contribute-to-damp" title="Permalink to this headline">¶</a></h2>
+<p>DAMP is based on top of a more generic test suite called <a class="reference external" href="https://wiki.mozilla.org/Buildbot/Talos">Talos</a>.
+Talos is a Mozilla test suite to follow all Firefox components performance.
+It is written in Python and here are <a class="reference external" href="https://searchfox.org/mozilla-central/source/testing/talos/">the sources</a> in mozilla-central.
+Compared to the other test suites, it isn’t run on the cloud, but on dedicated hardware.
+This is to ensure performance numbers are stable over time and between two runs.
+Talos runs various types of tests. More specifically, DAMP is a <a class="reference external" href="https://wiki.mozilla.org/Buildbot/Talos/Tests#Page_Load_Tests">Page loader test</a>.
+The <a class="reference external" href="http://searchfox.org/mozilla-central/source/testing/talos/talos/tests/devtools/">source code</a> for DAMP is also in mozilla-central.
+See <a class="reference internal" href="writing-perf-tests.html"><span class="doc">Writing new performance test</span></a> for more information about the implementation of DAMP tests.</p>
+</div>
+<div class="section" id="how-to-see-the-performance-trends">
+<h2>How to see the performance trends?<a class="headerlink" href="#how-to-see-the-performance-trends" title="Permalink to this headline">¶</a></h2>
+<p>You can find the dedicated performance dashboard for DevTools at http://firefox-dev.tools/performance-dashboard. You will find links to trend charts for various tools:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference external" href="http://firefox-dev.tools/performance-dashboard/tools/inspector.html?days=60&amp;filterstddev=true">Inspector dashboard</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://firefox-dev.tools/performance-dashboard/tools/console.html?days=60&amp;filterstddev=true">Console dashboard</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://firefox-dev.tools/performance-dashboard/tools/netmonitor.html?days=60&amp;filterstddev=true">Netmonitor dashboard</a></li>
+<li class="toctree-l1"><a class="reference external" href="http://firefox-dev.tools/performance-dashboard/tools/debugger.html?days=60&amp;filterstddev=true">Debugger dashboard</a></li>
+</ul>
+</div>
+<p>Each tool page displays charts for all the subtests relevant for a given panel.</p>
+<p>Each circle on the chart is a push to mozilla-central. You can hover on a circle to see some additional information about the push, such as the date, the performance impact for the subtest, and the push id. Clicking on a circle will take you to the pushlog.</p>
+<p>Colored circles indicate that the push contains a change that was identified as having a performance impact. Those can be categorized as:</p>
+<ul class="simple">
+<li><p>hardware: hardware change for the machines used to run Talos</p></li>
+<li><p>platform: non-DevTools change that impacts DevTools performance</p></li>
+<li><p>damp: test change in DAMP that impacts test results</p></li>
+<li><p>devtools: identified DevTools change that introduced an improvement or regression</p></li>
+</ul>
+<p>This data is synchronized from a <a class="reference external" href="https://docs.google.com/spreadsheets/d/12Goo3vq-0X0_Ay-J6gfV56pUB8GC0Nl62I4p8G-UsEA/edit#gid=0">shared Google doc</a>.</p>
+<p>There is a PerfHerder link on each chart that will take you to the PerfHerder page corresponding to this subtest.</p>
+</div>
+<div class="section" id="how-to-use-perfherder-charts">
+<h2>How to use PerfHerder charts<a class="headerlink" href="#how-to-use-perfherder-charts" title="Permalink to this headline">¶</a></h2>
+<p>On PerfHerder charts, each circle is a push on mozilla-central.
+When you see a spike or a drop, you can try to identify the patch that relates to it by clicking the circles.
+It will show a black popup. Then click on the changeset hash like “cb717386aec8” and you will get a mercurial changelog.
+Then it is up to you to read the changelog and see which changeset may have hit the performance.</p>
+<p>For example, open <a class="reference external" href="https://treeherder.mozilla.org/perf.html#/graphs?timerange=31536000&amp;series=mozilla-central,1417969,1,1&amp;series=mozilla-central,1417971,1,1&amp;series=mozilla-central,1417966,1,1&amp;highlightedRevisions=a06f92099a5d&amp;zoom=1482734645161.3916,1483610598216.4773,594.756508587898,969.2883437938906">this page</a>.
+This is tracking inspector opening performance against the “Simple” page.
+<img alt="Perfherder graphs" src="../../_images/regression-graph.png" /></p>
+<p>See the regression on Dec 31th?
+Now, click on the first yellow circle of this spike.
+You will get a black popup like this one:
+<img alt="Perfherder changeset popup" src="../../_images/regression-popup.png" /></p>
+<p>Click on the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/pushloghtml?fromchange=9104708cc3ac0ccfe4cf5d518e13736773c565d7&amp;tochange=a06f92099a5d8edeb05e5971967fe8d6cd4c593c">changelog link</a> to see which changesets were added during this run. Here, you will see that the regression comes from these patches:</p>
+<ul class="simple">
+<li><p>Bug 1245921 - Turn toolbox toolbar into a React component</p></li>
+<li><p>Bug 1245921 - Monkey patch ReactDOM event system for XUL</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="writing-perf-tests.html" class="btn btn-neutral float-right" title="Writing new performance test" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="debugging-intermittents.html" class="btn btn-neutral float-left" title="Debugging Intermittent Test Failures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

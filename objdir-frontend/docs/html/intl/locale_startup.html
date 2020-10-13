@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Startup &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="UI Internationalization" href="dataintl.html" />
+    <link rel="prev" title="Environments" href="locale_env.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Internationalization</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="locale.html">Locale management</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="locale.html#locales-and-language-tags">Locales and Language Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#locale-fallback-chains">Locale Fallback Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#language-negotiation">Language Negotiation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#available-locales">Available Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#requested-locales">Requested Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#regional-preferences">Regional Preferences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#default-and-last-fallback-locales">Default and Last Fallback Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#packaged-locales">Packaged Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#web-exposed-locales">Web Exposed Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#multi-process">Multi-Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#mozilla-exceptions">Mozilla Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#testing">Testing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="locale.html#deep-dive">Deep Dive</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="locale_env.html">Environments</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Startup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="locale.html#feedback">Feedback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataintl.html">UI Internationalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icu.html">ICU</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Internationalization</a> &raquo;</li>
+        
+          <li><a href="locale.html">Locale management</a> &raquo;</li>
+        
+      <li>Startup</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intl/locale_startup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="startup">
+<h1>Startup<a class="headerlink" href="#startup" title="Permalink to this headline">¶</a></h1>
+<p>There are cases where it may be important to understand how Gecko locale management
+acts during the startup.</p>
+<p>Below is the description of the <cite>server</cite> mode, since the <cite>client</cite> mode is starting
+with no data and doesn’t perform any operations waiting for the parent to fill
+basic locale lists (<cite>requested</cite> and <cite>appLocales</cite>) and then maintain them in a
+unidirectional way.</p>
+<div class="section" id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<p>There are two primary data types involved in negotiating locales during startup:
+<cite>requested</cite> and <cite>available</cite>.
+Throughout the startup different sources for this lists become available, and
+in result the values for those lists change.</p>
+</div>
+<div class="section" id="data-sources">
+<h2>Data Sources<a class="headerlink" href="#data-sources" title="Permalink to this headline">¶</a></h2>
+<p>There are three primary sources that become available during the bootstrap.</p>
+<ol class="arabic simple">
+<li><p>Packaged locale lists stored in files <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">update</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">locale</span></span></code> and <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">multilocale</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">txt</span></span></code>.</p></li>
+<li><p>User preferences read from the profile.</p></li>
+<li><p>Language packs installed in user profile or system wide.</p></li>
+</ol>
+</div>
+<div class="section" id="bootstrap">
+<h2>Bootstrap<a class="headerlink" href="#bootstrap" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="packaged-data">
+<h3>1) Packaged Data<a class="headerlink" href="#packaged-data" title="Permalink to this headline">¶</a></h3>
+<p>In the <cite>server</cite> mode Gecko starts with no knowledge of <cite>available</cite> or <cite>requested</cite>
+locales.</p>
+<p>Initially, all fields are resolved lazily, so no data for available, requested,
+default or resolved locales is retrieved.</p>
+<p>If any code queries any of the APIs, it triggers the initial data fetching
+and language negotiation.</p>
+<p>The initial request comes from the XPCLocale which is initializing
+the first JS context and needs to know which locale the JS context should use as
+the default.</p>
+<p>At that moment <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span></code> fetches the list of available locales, using
+packaged locales which are retrieved via <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">multilocale</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">txt</span></span></code> file in the toolkit’s
+package.
+This gives LocaleService information about which locales are initially available.</p>
+<p>Notice that this happens before any of the language packs gets registered, so
+at that point Gecko only knows about packaged locales.</p>
+<p>For requested locales, the initial request comes before user profile preferences
+are being read, so the data is being fetched using packaged preferences.</p>
+<p>In case of Desktop Firefox the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">locale</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">requested</span></span></code> pref will be not set,
+which means Gecko will use the default locale which is retrieved from
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">update</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">locale</span></span></code> file (also packaged).</p>
+<p>This means that the initial result of language negotiation is between packaged
+locales as available and the default requested locale.</p>
+</div>
+<div class="section" id="profile-prefs-read">
+<h3>2) Profile Prefs Read<a class="headerlink" href="#profile-prefs-read" title="Permalink to this headline">¶</a></h3>
+<p>Next, the profile is being read and if the user set any requested locales,
+LocaleService updates its list of requested locales and broadcasts
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">requested</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code> event.</p>
+<p>This may lead to language renegotiation if the requested locale is one of the packaged
+ones. In that case, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">app</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code> will be broadcasted.</p>
+</div>
+<div class="section" id="language-packs-registered">
+<h3>3) Language Packs Registered<a class="headerlink" href="#language-packs-registered" title="Permalink to this headline">¶</a></h3>
+<p>Finally, the AddonManager registers all the language packs, they get added to
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">L10nRegistry</span></span></code> and in result LocaleService’s available locales get updated.</p>
+<p>That triggers language negotiation and, if the language from the language pack
+is used in the requested list, final list of locales is being set.</p>
+<p>All of that happens before any UI is being built, but there’s no guarantee of this
+order being preserved, so it is important to understand that, depending on where the
+code is used during the startup, it may receive different list of locales.</p>
+<p>In order to maintain the correct locale settings it is important to set an observer
+on <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">app</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code> and update the code when the locale list changes.</p>
+<p>That ensures the code always uses the best possible locale selection during startup,
+but also during runtime in case user changes their requested locale list, or
+language packs are updated/removed on the fly.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dataintl.html" class="btn btn-neutral float-right" title="UI Internationalization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="locale_env.html" class="btn btn-neutral float-left" title="Environments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Manual Tests &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="File Name Flags" href="file-names.html" />
+    <link rel="prev" title="wdspec tests" href="wdspec.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">web-platform-tests documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#github">GitHub</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Writing Tests</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#test-types">Test Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submitting-tests">Submitting Tests</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reviewing-tests/index.html">Reviewing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">web-platform-tests documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Writing Tests</a> &raquo;</li>
+        
+      <li>Manual Tests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/web-platform/writing-tests/manual.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="manual-tests">
+<h1>Manual Tests<a class="headerlink" href="#manual-tests" title="Permalink to this headline">¶</a></h1>
+<p>Some testing scenarios are intrinsically difficult to automate and
+require a human to run the test and check the pass condition.</p>
+<div class="section" id="when-to-write-manual-tests">
+<h2>When to Write Manual Tests<a class="headerlink" href="#when-to-write-manual-tests" title="Permalink to this headline">¶</a></h2>
+<p>Whenever possible it’s best to write a fully automated test. For a
+browser vendor it’s possible to run an automated test hundreds of
+times a day, but manual tests are likely to be run at most a handful
+of times a year (and quite possibly approximately never!). This makes
+them significantly less useful for catching regressions than automated
+tests.</p>
+<p>However, there are certain scenarios in which this is not yet
+possible. For example:</p>
+<ul class="simple">
+<li><p>Test which require observing animation (e.g., a test for CSS
+animation or for video playback),</p></li>
+<li><p>Tests that require interaction with browser security UI (e.g., a
+test in which a user refuses a geolocation permissions grant),</p></li>
+<li><p>Tests that require interaction with the underlying OS (e.g., tests
+for drag and drop from the desktop onto the browser),</p></li>
+<li><p>Tests that require non-default browser configuration (e.g., images
+disabled), and</p></li>
+<li><p>Tests that require interaction with the physical environment (e.g.,
+tests that the vibration API causes the device to vibrate or that
+various sensor APIs respond in the expected way).</p></li>
+</ul>
+</div>
+<div class="section" id="requirements-for-a-manual-test">
+<h2>Requirements for a Manual Test<a class="headerlink" href="#requirements-for-a-manual-test" title="Permalink to this headline">¶</a></h2>
+<p>Manual tests are distinguished by their filename; all manual tests
+have filenames of the form <code class="docutils literal notranslate"><span class="pre">name-manual.ext</span></code> (i.e., a <code class="docutils literal notranslate"><span class="pre">-manual</span></code> suffix
+after the main filename but before the extension).</p>
+<p>Manual tests must be
+fully
+<a class="reference internal" href="general-guidelines.html"><span class="doc">self-describing</span></a>.
+It is particularly important for these tests that it is easy to
+determine the result from the information provided in the page to the
+tester, because a tester may have hundreds of tests to get through and
+little understanding of the features that they are testing. As a
+result, minimalism is especially a virtue for manual tests.</p>
+<p>A test should have, at a minimum step-by-step instructions for
+performing the test, and a clear statement of either the test result
+if it can be automatically determined after some setup or how to
+otherwise determine the outcome.</p>
+<p>Any information other than this (e.g., quotes from the spec) should be
+avoided (though, as always, can be provided in
+HTML/CSS/JS/etc. comments).</p>
+</div>
+<div class="section" id="using-testharness-js-for-manual-tests">
+<h2>Using testharness.js for Manual Tests<a class="headerlink" href="#using-testharness-js-for-manual-tests" title="Permalink to this headline">¶</a></h2>
+<p>A convenient way to present the results of a test that can have the
+result determined by script after some manual setup steps is to use
+testharness.js to determine and present the result. In this case one
+must pass <code class="docutils literal notranslate"><span class="pre">{explicit_timeout:</span> <span class="pre">true}</span></code> in a call to <code class="docutils literal notranslate"><span class="pre">setup()</span></code> in order
+to disable the automatic timeout of the test. For example:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!doctype html&gt;</span>
+<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Manual click on button triggers onclick handler<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/resources/testharness.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;/resources/testharnessreport.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="nx">setup</span><span class="p">({</span><span class="nx">explicit_timeout</span><span class="o">:</span> <span class="kc">true</span><span class="p">})</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Click on the button below. If a &quot;PASS&quot; result appears the test
+passes, otherwise it fails<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;done()&quot;</span><span class="p">&gt;</span>Click Here<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="file-names.html" class="btn btn-neutral float-right" title="File Name Flags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wdspec.html" class="btn btn-neutral float-left" title="wdspec tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

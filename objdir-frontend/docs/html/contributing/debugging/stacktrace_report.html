@@ -1,0 +1,443 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How to get a stacktrace for a bug report &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to get a stacktrace with WinDbg" href="stacktrace_windbg.html" />
+    <link rel="prev" title="How to get a process dump with Windows Task Manager" href="process_dump_task_manager.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="capturing_minidump.html">Capturing a minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_gdb.html">Debugging Firefox with GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_rr.html">Debugging Firefox with rr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to get a stacktrace for a bug report</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-get-a-crash-id-with-the-mozilla-crash-reporter">How to get a crash ID with the Mozilla Crash Reporter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-get-the-crash-id-if-firefox-crashes-on-startup">How to get the crash ID if Firefox crashes on startup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#alternative-ways-to-get-a-stacktrace">Alternative ways to get a stacktrace</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#os-x">OS X</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#crash-reports-files-on-your-computer">Crash reports files on your computer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/artifact_builds.html">Understanding Artifact Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/building_mobile_firefox.html">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>How to get a stacktrace for a bug report</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/debugging/stacktrace_report.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-to-get-a-stacktrace-for-a-bug-report">
+<h1>How to get a stacktrace for a bug report<a class="headerlink" href="#how-to-get-a-stacktrace-for-a-bug-report" title="Permalink to this headline">¶</a></h1>
+<p>If you file a bug report in Bugzilla about a crash you should include a
+stacktrace (call stack) in your report. A stacktrace will tell Mozilla
+developers what crashed and provide a starting point for investigating
+its cause. This article describes how to use the Mozilla Crash Reporter
+(Breakpad) to get a crash ID, which our engineers can use to get a
+stacktrace, and alternative ways to get a stacktrace if you can’t get a
+crash ID.</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>You need a binary build of Firefox from
+<a class="reference external" href="https://www.mozilla.org/firefox/">Mozilla.org</a>. SeaMonkey and
+Thunderbird also support crash reporting.</p>
+<p>Mozilla’s crash report server currently only has debug information for
+Mozilla builds and thus the crash reporter cannot work if you use a
+build from a Linux distribution or if you compile from source code. In
+these cases you will need to use one of the <span class="xref std std-ref">alternative
+methods</span> listed below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note:</strong> When filing a crash report, it is important to know whether
+the crash occurs with <a class="reference external" href="http://support.mozilla.com/kb/Safe+Mode">Firefox safe
+mode</a>. This helps
+engineers determine whether a particular
+<a class="reference external" href="http://support.mozilla.com/kb/Troubleshooting+extensions+and+themes">extension</a>
+or
+<a class="reference external" href="http://support.mozilla.com/kb/Troubleshooting+plugins">plugin</a>
+is the cause of the crash.</p>
+</div>
+</div>
+<div class="section" id="how-to-get-a-crash-id-with-the-mozilla-crash-reporter">
+<h2>How to get a crash ID with the Mozilla Crash Reporter<a class="headerlink" href="#how-to-get-a-crash-id-with-the-mozilla-crash-reporter" title="Permalink to this headline">¶</a></h2>
+<p>1 - Crash and submit a report to the system.</p>
+<img alt="../../_images/reporter.jpg" src="../../_images/reporter.jpg" />
+<p>The Mozilla Crash Reporter window should automatically come up after Firefox crashes.
+If you have any additional information about the crash, such as additional detail on
+what you were doing at the time that may have triggered the crash, please enter it
+into the comments box. Be sure that you <strong>check the “Tell Mozilla about this crash”</strong>
+checkbox and click the restart button. The crash reporter should now submit the
+crash report and Firefox should open again.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The “Details” button gives additional data about the incident,
+however this is not useful in a bug report.</p>
+</div>
+<p>2 - Tell us the ID of the report you submitted.</p>
+<img alt="../../_images/crashlist.jpg" src="../../_images/crashlist.jpg" />
+<p>To access all of your submitted reports type “<a class="reference external" href="about:crashes">about:crashes</a>” into the Firefox address bar
+and press enter. Firefox should open a list of IDs for your submitted crash reports.
+Copy two or three of the IDs for the appropriate crashes and paste them into your
+Bugzilla report. Please check the listed times to avoid copying the ID of an unrelated
+crash report.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can prefix a “bp-” to the beginning of an ID to make Bugzilla turn it
+into a link: bp-a70759c6-1295-4160-aa30-bc4772090918</p>
+</div>
+<div class="section" id="how-to-get-the-crash-id-if-firefox-crashes-on-startup">
+<h3>How to get the crash ID if Firefox crashes on startup<a class="headerlink" href="#how-to-get-the-crash-id-if-firefox-crashes-on-startup" title="Permalink to this headline">¶</a></h3>
+<p>If Firefox crashes on startup you can still access your submitted crash
+reports. Crash reports are accessible from all Firefox profiles, so if a
+<a class="reference external" href="https://support.mozilla.org/kb/profile-manager-create-remove-switch-firefox-profiles">new
+profile</a>
+does not crash you can use it to access them through “<a class="reference external" href="about:crashes">about:crashes</a>” as above.</p>
+<div class="section" id="accessing-crash-report-ids-outside-of-firefox">
+<h4>Accessing crash report IDs outside of Firefox<a class="headerlink" href="#accessing-crash-report-ids-outside-of-firefox" title="Permalink to this headline">¶</a></h4>
+<p>If you cannot load Firefox at all you can find the crash report files at
+this location depending on your operating system:</p>
+<ul class="simple">
+<li><p>Windows : <code class="docutils literal notranslate"><span class="pre">%APPDATA%\Mozilla\Firefox\Crash</span> <span class="pre">Reports\submitted\</span></code></p></li>
+<li><p>OS X : <code class="docutils literal notranslate"><span class="pre">~/Library/Application</span> <span class="pre">Support/Firefox/Crash</span> <span class="pre">Reports/submitted/</span></code></p></li>
+<li><p>Linux : <code class="docutils literal notranslate"><span class="pre">~/.mozilla/firefox/Crash</span> <span class="pre">Reports/submitted/</span></code></p></li>
+</ul>
+<p>Each file in this folder contains one submitted crash report ID. You can
+check the modified or creation time for each file to discern which crash
+reports are relevant to your bug report.</p>
+</div>
+</div>
+</div>
+<div class="section" id="alternative-ways-to-get-a-stacktrace">
+<h2>Alternative ways to get a stacktrace<a class="headerlink" href="#alternative-ways-to-get-a-stacktrace" title="Permalink to this headline">¶</a></h2>
+<p>If the Mozilla crash reporter doesn’t come up or isn’t available you
+will need to obtain a stacktrace manually:</p>
+<div class="section" id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h3>
+<p>See the article <span class="xref std std-ref">Create a stacktrace with Windbg</span> for information
+on how to do this.</p>
+<p>For a full process dump, see <a class="reference internal" href="process_dump_task_manager.html#how-to-get-a-process-dump-with-windows-task-manager"><span class="std std-ref">How to get a process dump with Windows Task Manager</span></a>.</p>
+</div>
+<div class="section" id="os-x">
+<h3>OS X<a class="headerlink" href="#os-x" title="Permalink to this headline">¶</a></h3>
+<p>Run /Applications/Utilities/Console.app.  Expand “~/Library/Logs” and
+“CrashReporter”, then look for logs for “firefox-bin”.</p>
+</div>
+<div class="section" id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h3>
+<p>Note that for most distros, the package you need to get symbols for will
+be something like “xulrunner”, not “firefox”.</p>
+</div>
+</div>
+<div class="section" id="crash-reports-files-on-your-computer">
+<h2>Crash reports files on your computer<a class="headerlink" href="#crash-reports-files-on-your-computer" title="Permalink to this headline">¶</a></h2>
+<p>When Breakpad initially catches a crash it first writes crash report
+files (e.g. .dump and .extra files) into the ‘pending’ subdirectory of
+its ‘Crash Reports’ directory.</p>
+<p>If Breakpad successfully sends the crash report to the reporting server
+then, by default, the files added to the ‘pending’ subdirectory for the
+crash are removed, and a .txt file is placed in the ‘submitted’
+directory containing the crash ID created by the reporting server.</p>
+<p>If you want Breakpad to leave the .dump and .extra files on your
+computer so that you can examine them locally, then set the
+MOZ_CRASHREPORTER_NO_DELETE_DUMP environment variable to 1.</p>
+<ul class="simple">
+<li><p>Ubuntu:  <a class="reference external" href="https://wiki.ubuntu.com/MozillaTeam/Bugs#Obtain%20a%20backtrace%20from%20an%20apport%20crash%20report%20(using%20gdb)">Instructions from the Ubuntu
+Team</a></p></li>
+<li><p>openSUSE:  <a class="reference external" href="https://en.opensuse.org/openSUSE:Bugreport_application_crashed">General instructions from
+openSUSE</a></p></li>
+<li><p>Fedora: <a class="reference external" href="https://fedoraproject.org/wiki/StackTraces">Capturing Stack
+Traces</a></p></li>
+<li><p>Gentoo: <a class="reference external" href="https://wiki.gentoo.org/wiki/Debugging_with_GDB">Debugging using
+GDB</a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stacktrace_windbg.html" class="btn btn-neutral float-right" title="How to get a stacktrace with WinDbg" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="process_dump_task_manager.html" class="btn btn-neutral float-left" title="How to get a process dump with Windows Task Manager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

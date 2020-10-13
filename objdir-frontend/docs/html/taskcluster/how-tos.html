@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How Tos &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Task Graph" href="task-graph.html" />
+    <link rel="prev" title="Taskcluster Configuration" href="config.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How Tos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hacking-task-graphs">Hacking Task Graphs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hacking-actions">Hacking Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#common-changes">Common Changes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#changing-test-characteristics">Changing Test Characteristics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-test-suite">Adding a Test Suite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#greening-up-a-new-test">Greening Up a New Test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-new-task">Adding a New Task</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#something-else">Something Else?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+      <li>How Tos</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/how-tos.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-tos">
+<h1>How Tos<a class="headerlink" href="#how-tos" title="Permalink to this headline">¶</a></h1>
+<p>All of this equipment is here to help you get your work done more efficiently.
+However, learning how task-graphs are generated is probably not the work you
+are interested in doing.  This section should help you accomplish some of the
+more common changes to the task graph with minimal fuss.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you cannot accomplish what you need with the information provided here,
+please consider whether you can achieve your goal in a different way.
+Perhaps something simpler would cost a bit more in compute time, but save
+the much more expensive resource of developers’ mental bandwidth.
+Task-graph generation is already complex enough!</p>
+<p>If you want to proceed, you may need to delve into the implementation of
+task-graph generation.  The documentation and code are designed to help, as
+are the authors - <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">blame</span></code> may help track down helpful people.</p>
+<p>As you write your new transform or add a new kind, please consider the next
+developer.  Where possible, make your change data-driven and general, so
+that others can make a much smaller change.  Document the semantics of what
+you are changing clearly, especially if it involves modifying a transform
+schema.  And if you are adding complexity temporarily while making a
+gradual transition, please open a new bug to remind yourself to remove the
+complexity when the transition is complete.</p>
+</div>
+<div class="section" id="hacking-task-graphs">
+<h2>Hacking Task Graphs<a class="headerlink" href="#hacking-task-graphs" title="Permalink to this headline">¶</a></h2>
+<p>The recommended process for changing task graphs is this:</p>
+<ol class="arabic">
+<li><p>Run one of the <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">taskgraph</span></code> subcommands (see <a class="reference internal" href="mach.html"><span class="doc">Taskcluster Mach commands</span></a>) to
+generate a baseline against which to measure your changes.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./mach taskgraph tasks --json &gt; old-tasks.json
+</pre></div>
+</div>
+</li>
+<li><p>Make your modifications under <code class="docutils literal notranslate"><span class="pre">taskcluster/</span></code>.</p></li>
+<li><p>Run the same <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">taskgraph</span></code> command, sending the output to a new file,
+and use <code class="docutils literal notranslate"><span class="pre">diff</span></code> to compare the old and new files.  Make sure your changes
+have the desired effect and no undesirable side-effects.  A plain unified
+diff should be useful for most changes, but in some cases it may be helpful
+to post-process the JSON to strip distracting changes.</p></li>
+<li><p>When you are satisfied with the changes, push them to try to ensure that the
+modified tasks work as expected.</p></li>
+</ol>
+<div class="section" id="hacking-actions">
+<h3>Hacking Actions<a class="headerlink" href="#hacking-actions" title="Permalink to this headline">¶</a></h3>
+<p>If you are working on an action task and wish to test it out locally, use the
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">taskgraph</span> <span class="pre">test-action-callback</span></code> command:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./mach taskgraph test-action-callback \
+    --task-id I4gu9KDmSZWu3KHx6ba6tw --task-group-id sMO4ybV9Qb2tmcI1sDHClQ \
+    --input input.yml hello_world_action
+</pre></div>
+</div>
+</div></blockquote>
+<p>This invocation will run the hello world callback with the given inputs and
+print any created tasks to stdout, rather than actually creating them.</p>
+</div>
+</div>
+<div class="section" id="common-changes">
+<h2>Common Changes<a class="headerlink" href="#common-changes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="changing-test-characteristics">
+<h3>Changing Test Characteristics<a class="headerlink" href="#changing-test-characteristics" title="Permalink to this headline">¶</a></h3>
+<p>First, find the test description.  This will be in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/ci/*/tests.yml</span></code>, for the appropriate kind (consult
+<a class="reference internal" href="kinds.html"><span class="doc">Task Kinds</span></a>).  You will find a YAML stanza for each test suite, and each
+stanza defines the test’s characteristics.  For example, the <code class="docutils literal notranslate"><span class="pre">chunks</span></code>
+property gives the number of chunks to run.  This can be specified as a simple
+integer if all platforms have the same chunk count, or it can be keyed by test
+platform.  For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">chunks</span><span class="p">:</span>
+    <span class="nt">by-test-platform</span><span class="p">:</span>
+        <span class="nt">linux64/debug</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8</span>
+</pre></div>
+</div>
+<p>The full set of available properties is in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/tests.py</span></code>.  Some other
+commonly-modified properties are <code class="docutils literal notranslate"><span class="pre">max-run-time</span></code> (useful if tests are being
+killed for exceeding maxRunTime) and <code class="docutils literal notranslate"><span class="pre">treeherder-symbol</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Android tests are also chunked at the mozharness level, so you will need to
+modify the relevant mozharness config, as well.</p>
+</div>
+</div>
+<div class="section" id="adding-a-test-suite">
+<h3>Adding a Test Suite<a class="headerlink" href="#adding-a-test-suite" title="Permalink to this headline">¶</a></h3>
+<p>To add a new test suite, you will need to know the proper mozharness invocation
+for that suite, and which kind it fits into (consult <a class="reference internal" href="kinds.html"><span class="doc">Task Kinds</span></a>).</p>
+<p>Add a new stanza to <code class="docutils literal notranslate"><span class="pre">taskcluster/ci/&lt;kind&gt;/tests.yml</span></code>, copying from the other
+stanzas in that file.  The meanings should be clear, but authoritative
+documentation is in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/tests.py</span></code> should you need
+it.  The stanza name is the name by which the test will be referenced in try
+syntax.</p>
+<p>Add your new test to a test set in <code class="docutils literal notranslate"><span class="pre">test-sets.yml</span></code> in the same directory.  If
+the test should only run on a limited set of platforms, you may need to define
+a new test set and reference that from the appropriate platforms in
+<code class="docutils literal notranslate"><span class="pre">test-platforms.yml</span></code>.  If you do so, include some helpful comments in
+<code class="docutils literal notranslate"><span class="pre">test-sets.yml</span></code> for the next person.</p>
+</div>
+<div class="section" id="greening-up-a-new-test">
+<h3>Greening Up a New Test<a class="headerlink" href="#greening-up-a-new-test" title="Permalink to this headline">¶</a></h3>
+<p>When a test is not yet reliably green, configuration for that test should not
+be landed on integration branches.  Of course, you can control where the
+configuration is landed!  For many cases, it is easiest to green up a test in
+try: push the configuration to run the test to try along with your work to fix
+the remaining test failures.</p>
+<p>When working with a group, check out a “twig” repository to share among your
+group, and land the test configuration in that repository.  Once the test is
+green, merge to an integration branch and the test will begin running there as
+well.</p>
+</div>
+<div class="section" id="adding-a-new-task">
+<h3>Adding a New Task<a class="headerlink" href="#adding-a-new-task" title="Permalink to this headline">¶</a></h3>
+<p>If you are adding a new task that is not a test suite, there are a number of
+options.  A few questions to consider:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Is this a new build platform or variant that will produce an artifact to
+be run through the usual test suites?</p></li>
+<li><p>Does this task depend on other tasks?  Do other tasks depend on it?</p></li>
+<li><p>Is this one of a few related tasks, or will you need to generate a large
+set of tasks using some programmatic means (for example, chunking)?</p></li>
+<li><p>How is the task actually executed?  Mozharness?  Mach?</p></li>
+<li><p>What kind of environment does the task require?</p></li>
+</ul>
+</div></blockquote>
+<p>Armed with that information, you can choose among a few options for
+implementing this new task.  Try to choose the simplest solution that will
+satisfy your near-term needs.  Since this is all implemented in-tree, it
+is not difficult to refactor later when you need more generality.</p>
+<div class="section" id="existing-kind">
+<h4>Existing Kind<a class="headerlink" href="#existing-kind" title="Permalink to this headline">¶</a></h4>
+<p>The simplest option is to add your task to an existing kind.  This is most
+practical when the task “makes sense” as part of that kind – for example, if
+your task is building an installer for a new platform using mozharness scripts
+similar to the existing build tasks, it makes most sense to add your task to
+the <code class="docutils literal notranslate"><span class="pre">build</span></code> kind.  If you need some additional functionality in the kind,
+it’s OK to modify the implementation as necessary, as long as the modification
+is complete and useful to the next developer to come along.</p>
+<p>Tasks in the <code class="docutils literal notranslate"><span class="pre">build</span></code> kind generate Firefox installers, and the <code class="docutils literal notranslate"><span class="pre">test</span></code> kind
+will add a full set of Firefox tests for each <code class="docutils literal notranslate"><span class="pre">build</span></code> task.</p>
+</div>
+<div class="section" id="new-kind">
+<h4>New Kind<a class="headerlink" href="#new-kind" title="Permalink to this headline">¶</a></h4>
+<p>The next option to consider is adding a new kind.  A distinct kind gives you
+some isolation from other task types, which can be nice if you are adding an
+experimental kind of task.</p>
+<p>Kinds can range in complexity.  The simplest sort of kind uses the transform
+loader to read a list of jobs from the <code class="docutils literal notranslate"><span class="pre">jobs</span></code> key, and applies the standard
+<code class="docutils literal notranslate"><span class="pre">job</span></code> and <code class="docutils literal notranslate"><span class="pre">task</span></code> transforms:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">implementation</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.task.transform:TransformTask</span>
+<span class="nt">transforms</span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.transforms.job:transforms</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.transforms.task:transforms</span>
+<span class="nt">jobs</span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">..your job description here..</span>
+</pre></div>
+</div>
+<p>Job descriptions are defined and documented in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/job/__init__.py</span></code>.</p>
+</div>
+<div class="section" id="custom-kind-loader">
+<h4>Custom Kind Loader<a class="headerlink" href="#custom-kind-loader" title="Permalink to this headline">¶</a></h4>
+<p>If your task depends on other tasks, then the decision of which tasks to create
+may require some code.  For example, the <code class="docutils literal notranslate"><span class="pre">test</span></code> kind iterates over
+the builds in the graph, generating a full set of test tasks for each one.  This specific
+post-build behavior is implemented as a loader defined in <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/loader/test.py</span></code>.</p>
+<p>A custom loader is useful when the set of tasks you want to create is not
+static but based on something else (such as the available builds) or when the
+dependency relationships for your tasks are complex.</p>
+</div>
+<div class="section" id="custom-transforms">
+<h4>Custom Transforms<a class="headerlink" href="#custom-transforms" title="Permalink to this headline">¶</a></h4>
+<p>Most loaders apply a series of “<a class="reference internal" href="transforms.html"><span class="doc">transforms</span></a>” that start with
+an initial human-friendly description of a task and end with a task definition
+suitable for insertion into a Taskcluster queue.</p>
+<p>Custom transforms can be useful to apply defaults, simplifying the YAML files
+in your kind. They can also apply business logic that is more easily expressed
+in code than in YAML.</p>
+<p>Transforms need not be one-to-one: a transform can produce zero or more outputs
+for each input. For example, the test transforms perform chunking by producing
+an output for each chunk of a given input.</p>
+<p>Ideally those transforms will produce job descriptions, so you can use the
+existing <code class="docutils literal notranslate"><span class="pre">job</span></code> and <code class="docutils literal notranslate"><span class="pre">task</span></code> transforms:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">transforms</span><span class="p">:</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.transforms.my_stuff:transforms</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.transforms.job:transforms</span>
+   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">taskgraph.transforms.task:transforms</span>
+</pre></div>
+</div>
+<p>Try to keep transforms simple, single-purpose and well-documented!</p>
+</div>
+<div class="section" id="custom-run-using">
+<h4>Custom Run-Using<a class="headerlink" href="#custom-run-using" title="Permalink to this headline">¶</a></h4>
+<p>If the way your task is executed is unique (so, not a mach command or
+mozharness invocation), you can add a new implementation of the job
+description’s “run” section.  Before you do this, consider that it might be a
+better investment to modify your task to support invocation via mozharness or
+mach, instead.  If this is not possible, then adding a new file in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/jobs</span></code> with a structure similar to its peers
+will make the new run-using option available for job descriptions.</p>
+</div>
+</div>
+<div class="section" id="something-else">
+<h3>Something Else?<a class="headerlink" href="#something-else" title="Permalink to this headline">¶</a></h3>
+<p>If you make another change not described here that turns out to be simple or
+common, please include an update to this file in your patch.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="task-graph.html" class="btn btn-neutral float-right" title="Task Graph" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="config.html" class="btn btn-neutral float-left" title="Taskcluster Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

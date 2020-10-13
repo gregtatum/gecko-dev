@@ -1,0 +1,503 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Text Preprocessor &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="JAR Manifests" href="jar-manifests.html" />
+    <link rel="prev" title="mozinfo" href="mozinfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Text Preprocessor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#directives">Directives</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Text Preprocessor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/preprocessor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="text-preprocessor">
+<span id="preprocessor"></span><h1>Text Preprocessor<a class="headerlink" href="#text-preprocessor" title="Permalink to this headline">¶</a></h1>
+<p>The build system contains a text preprocessor similar to the C preprocessor,
+meant for processing files which have no built-in preprocessor such as XUL
+and JavaScript documents. It is implemented at <code class="docutils literal notranslate"><span class="pre">python/mozbuild/mozbuild/preprocessor.py</span></code> and
+is typically invoked via <a class="reference internal" href="jar-manifests.html#jar-manifests"><span class="std std-ref">JAR Manifests</span></a>.</p>
+<p>While used to preprocess CSS files, the directives are changed to begin with
+<code class="docutils literal notranslate"><span class="pre">%</span></code> instead of <code class="docutils literal notranslate"><span class="pre">#</span></code> to avoid conflict of the id selectors.</p>
+<div class="section" id="directives">
+<h2>Directives<a class="headerlink" href="#directives" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="variable-definition">
+<h3>Variable Definition<a class="headerlink" href="#variable-definition" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="define">
+<h4>define<a class="headerlink" href="#define" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#define variable</span>
+<span class="c1">#define variable value</span>
+</pre></div>
+</div>
+<p>Defines a preprocessor variable.</p>
+<p>Note that, unlike the C preprocessor, instances of this variable later in the
+source are not automatically replaced (see #filter). If value is not supplied,
+it defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>Note that whitespace is significant, so <code class="docutils literal notranslate"><span class="pre">&quot;#define</span> <span class="pre">foo</span> <span class="pre">one&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&quot;#define</span> <span class="pre">foo</span> <span class="pre">one</span> <span class="pre">&quot;</span></code> is different (in the second case, <code class="docutils literal notranslate"><span class="pre">foo</span></code> is defined to
+be a four-character string).</p>
+</div>
+<div class="section" id="undef">
+<h4>undef<a class="headerlink" href="#undef" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#undef variable</span>
+</pre></div>
+</div>
+<p>Undefines a preprocessor variable.</p>
+</div>
+</div>
+<div class="section" id="conditionals">
+<h3>Conditionals<a class="headerlink" href="#conditionals" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="if">
+<h4>if<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#if variable</span>
+<span class="c1">#if !variable</span>
+<span class="c1">#if variable == string</span>
+<span class="c1">#if variable != string</span>
+</pre></div>
+</div>
+<p>Disables output if the conditional is false. This can be nested to arbitrary
+depths. Note that in the equality checks, the variable must come first.</p>
+</div>
+<div class="section" id="else">
+<h4>else<a class="headerlink" href="#else" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#else</span>
+</pre></div>
+</div>
+<p>Reverses the state of the previous conditional block; for example, if the
+last <code class="docutils literal notranslate"><span class="pre">#if</span></code> was true (output was enabled), an <code class="docutils literal notranslate"><span class="pre">#else</span></code> makes it off
+(output gets disabled).</p>
+</div>
+<div class="section" id="endif">
+<h4>endif<a class="headerlink" href="#endif" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#endif</span>
+</pre></div>
+</div>
+<p>Ends the conditional block.</p>
+</div>
+<div class="section" id="ifdef-ifndef">
+<h4>ifdef / ifndef<a class="headerlink" href="#ifdef-ifndef" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#ifdef variable</span>
+<span class="c1">#ifndef variable</span>
+</pre></div>
+</div>
+<p>An <code class="docutils literal notranslate"><span class="pre">#if</span></code> conditional that is true only if the preprocessor variable
+variable is defined (in the case of <code class="docutils literal notranslate"><span class="pre">ifdef</span></code>) or not defined (<code class="docutils literal notranslate"><span class="pre">ifndef</span></code>).</p>
+</div>
+<div class="section" id="elif-elifdef-elifndef">
+<h4>elif / elifdef / elifndef<a class="headerlink" href="#elif-elifdef-elifndef" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#elif variable</span>
+<span class="c1">#elif !variable</span>
+<span class="c1">#elif variable == string</span>
+<span class="c1">#elif variable != string</span>
+<span class="c1">#elifdef variable</span>
+<span class="c1">#elifndef variable</span>
+</pre></div>
+</div>
+<p>A shorthand to mean an <code class="docutils literal notranslate"><span class="pre">#else</span></code> combined with the relevant conditional.
+The following two blocks are equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#ifdef foo</span>
+  <span class="n">block</span> <span class="mi">1</span>
+<span class="c1">#elifdef bar</span>
+  <span class="n">block</span> <span class="mi">2</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#ifdef foo</span>
+  <span class="n">block</span> <span class="mi">1</span>
+<span class="c1">#else</span>
+<span class="c1">#ifdef bar</span>
+  <span class="n">block</span> <span class="mi">2</span>
+<span class="c1">#endif</span>
+<span class="c1">#endif</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="file-inclusion">
+<h3>File Inclusion<a class="headerlink" href="#file-inclusion" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="include">
+<h4>include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#include filename</span>
+</pre></div>
+</div>
+<p>The file specified by filename is processed as if the contents was placed
+at this position. This also means that preprocessor conditionals can even
+be started in one file and ended in another (but is highly discouraged).
+There is no limit on depth of inclusion, or repeated inclusion of the same
+file, or self inclusion; thus, care should be taken to avoid infinite loops.</p>
+</div>
+<div class="section" id="includesubst">
+<h4>includesubst<a class="headerlink" href="#includesubst" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#includesubst @variable@filename</span>
+</pre></div>
+</div>
+<p>Same as a <code class="docutils literal notranslate"><span class="pre">#include</span></code> except that all instances of variable in the included
+file is also expanded as in <code class="docutils literal notranslate"><span class="pre">#filter</span></code> substitution</p>
+</div>
+<div class="section" id="expand">
+<h4>expand<a class="headerlink" href="#expand" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#expand string</span>
+</pre></div>
+</div>
+<p>All variables wrapped in <code class="docutils literal notranslate"><span class="pre">__</span></code> are replaced with their value, for this line
+only. If the variable is not defined, it expands to an empty string. For
+example, if <code class="docutils literal notranslate"><span class="pre">foo</span></code> has the value <code class="docutils literal notranslate"><span class="pre">bar</span></code>, and <code class="docutils literal notranslate"><span class="pre">baz</span></code> is not defined, then:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#expand This &lt;__foo__&gt; &lt;__baz__&gt; gets expanded</span>
+</pre></div>
+</div>
+<p>Is expanded to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="o">&lt;</span><span class="n">bar</span><span class="o">&gt;</span> <span class="o">&lt;&gt;</span> <span class="n">gets</span> <span class="n">expanded</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filter-unfilter">
+<h4>filter / unfilter<a class="headerlink" href="#filter-unfilter" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#filter filter1 filter2 ... filterN</span>
+<span class="c1">#unfilter filter1 filter2 ... filterN</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">#filter</span></code> turns on the given filter.</p>
+<p>Filters are run in alphabetical order on a per-line basis.</p>
+<p><code class="docutils literal notranslate"><span class="pre">#unfilter</span></code> turns off the given filter. Available filters are:</p>
+<dl class="simple">
+<dt>emptyLines</dt><dd><p>strips blank lines from the output</p>
+</dd>
+<dt>dumbComments</dt><dd><p>dumbComments: empties out any line that consists of optional whitespace
+followed by a <code class="docutils literal notranslate"><span class="pre">//</span></code>. Good for getting rid of comments that are on their
+own lines, and being smarter with a simple regexp filter is impossible</p>
+</dd>
+<dt>substitution</dt><dd><p>all variables wrapped in &#64; are replaced with their value. If the
+variable is not defined, it is a fatal error. Similar to <code class="docutils literal notranslate"><span class="pre">#expand</span></code>
+and <code class="docutils literal notranslate"><span class="pre">#filter</span></code></p>
+</dd>
+<dt>attemptSubstitution</dt><dd><p>all variables wrapped in <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> are replaced with their value, or an
+empty string if the variable is not defined. Similar to <code class="docutils literal notranslate"><span class="pre">#expand</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="literal">
+<h4>literal<a class="headerlink" href="#literal" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#literal string</span>
+</pre></div>
+</div>
+<p>Output the string (i.e. the rest of the line) literally, with no other fixups.
+This is useful to output lines starting with <code class="docutils literal notranslate"><span class="pre">#</span></code>, or to temporarily
+disable filters.</p>
+</div>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="error">
+<h4>#error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#error string</span>
+</pre></div>
+</div>
+<p>Cause a fatal error at this point, with the error message being the
+given string.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jar-manifests.html" class="btn btn-neutral float-right" title="JAR Manifests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mozinfo.html" class="btn btn-neutral float-left" title="mozinfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

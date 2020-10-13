@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Panel SVGs &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Quick Intro" href="react.html" />
+    <link rel="prev" title="Console Tool Architecture" href="../tools/console-panel.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#frontend">Frontend</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Panel SVGs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#explanation-of-pixel-grid">Explanation of Pixel Grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#panel-icon-requirements">Panel Icon Requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#illustrator">Illustrator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sketch">Sketch</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="react.html">React</a></li>
+<li class="toctree-l3"><a class="reference internal" href="react-guidelines.html">React Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux.html">Redux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="redux-guidelines.html">Redux Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html">Current DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#scope-of-the-devtools-csp">Scope of the DevTools CSP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#recognizing-csp-issues">Recognizing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#fixing-csp-issues">Fixing CSP issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="csp.html#fixing-csp-issues-in-tests">Fixing CSP issues in tests</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Panel SVGs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/frontend/svgs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="panel-svgs">
+<h1>Panel SVGs<a class="headerlink" href="#panel-svgs" title="Permalink to this headline">¶</a></h1>
+<p>These are the guidelines for creating devtools SVGs to make sure they’re as small and neatly formatted as possible. The Mozilla Developer SVG guidelines can be found <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/SVG_Guidelines">here</a>.</p>
+<div class="section" id="explanation-of-pixel-grid">
+<h2>Explanation of Pixel Grid<a class="headerlink" href="#explanation-of-pixel-grid" title="Permalink to this headline">¶</a></h2>
+<p>Since so many of our SVGs appear so small, designing them on the pixel grid will help them not appear fuzzy when they’re sized down to 16x16 pixels. There is program-specific documentation in both the <a class="reference external" href="#illustrator">Illustrator</a> and <a class="reference external" href="#sketch">Sketch</a> sections.</p>
+</div>
+<div class="section" id="panel-icon-requirements">
+<h2>Panel Icon Requirements<a class="headerlink" href="#panel-icon-requirements" title="Permalink to this headline">¶</a></h2>
+<p>The devtools panel icons do a couple of things in a specific way; following these guidelines will help stick your patch:</p>
+<ol class="simple">
+<li><p><strong>Inline fill colors.</strong> Devtools panel icons all use <code class="docutils literal notranslate"><span class="pre">fill=&quot;#0b0b0b&quot;</span></code> in the <code class="docutils literal notranslate"><span class="pre">&lt;svg&gt;</span></code> tag.</p></li>
+<li><p><strong>Inline opacities.</strong> Devtools panel icons also inline opacities on their relevant path.</p></li>
+</ol>
+</div>
+<div class="section" id="illustrator">
+<h2>Illustrator<a class="headerlink" href="#illustrator" title="Permalink to this headline">¶</a></h2>
+<p>For Illustrator you’ll want the following document settings:</p>
+<ul class="simple">
+<li><p><strong>Document settings</strong>: <code class="docutils literal notranslate"><span class="pre">Units:</span> <span class="pre">pixels</span></code>, <code class="docutils literal notranslate"><span class="pre">Advanced</span></code> &gt; check <code class="docutils literal notranslate"><span class="pre">Align</span> <span class="pre">New</span> <span class="pre">Objects</span> <span class="pre">to</span> <span class="pre">Pixel</span> <span class="pre">Grid</span></code></p></li>
+<li><p><strong>Transform Panel</strong>: for existing artwork not on pixel grid, select shape and then within <code class="docutils literal notranslate"><span class="pre">Transform</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Advanced</span></code> &gt; check <code class="docutils literal notranslate"><span class="pre">Align</span> <span class="pre">to</span> <span class="pre">Pixel</span> <span class="pre">Grid</span></code></p></li>
+</ul>
+<p>You can get a more detailed breakdown with images <a class="reference external" href="http://medialoot.com/blog/3-valuable-pixel-perfect-illustrator-techniques/">here</a>.</p>
+<p>You can download a sample Illustrator file <a class="reference external" href="https://www.dropbox.com/home/Mozilla_MobileUX_Share/Internal%20Assets/Templates/Firefox?preview=pixel-grid-illustrator.ai">here</a>.</p>
+<div class="section" id="tips-for-object-creation">
+<h3>Tips for Object Creation<a class="headerlink" href="#tips-for-object-creation" title="Permalink to this headline">¶</a></h3>
+<p>When you’re designing your icons in a graphics editor like Adobe Illustrator, there are a lot of things you can do that will bring down the size of the file and make your SVGs easier for the developers to work with. Here are some of them:</p>
+<ul class="simple">
+<li><p><strong>Expand paths</strong>: Instead of having multiple shapes overlapping each other, expand shapes using the pathfinder.
+<img alt="Use pathfinder to expand shapes" src="../../_images/pathfinder.gif" /></p></li>
+<li><p>Simplify paths (<code class="docutils literal notranslate"><span class="pre">Object</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Path</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Simplify</span></code>)</p></li>
+<li><p>Expand objects so that strokes become objects. This has the added benefit of keeping the stroke size intact as the SVG is resized.
+<img alt="Expand strokes to make them objects" src="../../_images/expand-strokes.gif" /></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="sketch">
+<h2>Sketch<a class="headerlink" href="#sketch" title="Permalink to this headline">¶</a></h2>
+<p>Sketch vector work is a little different but the fundamentals (keeping your SVG small, expanding all paths) is the same. Here’s what we’ve found helps to build clean icons:</p>
+<ul class="simple">
+<li><p><strong>Build your icon at 16x16 with the Pixel Grid turned on.</strong> You can turn the pixel grid on at <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">&gt;</span> <span class="pre">Canvas</span> <span class="pre">&gt;</span> <span class="pre">Show</span> <span class="pre">Pixels</span></code></p></li>
+<li><p><strong>Make sure that all x/y coordinates are full pixels for lines/rectangles.</strong> Sub-pixels = not on pixel grid.
+<img alt="Position in the upper right hand corner of Sketch" src="../../_images/sketch-position.png" /></p></li>
+<li><p><strong>Expand all your paths so strokes expand properly as the SVG gets resized.</strong> You can do this at <code class="docutils literal notranslate"><span class="pre">Layer</span> <span class="pre">&gt;</span> <span class="pre">Paths</span> <span class="pre">&gt;</span> <span class="pre">Vectorize</span> <span class="pre">Stroke</span></code>.</p></li>
+<li><p><strong>Align anything that isn’t boxy to the pixel grid with item selected then <code class="docutils literal notranslate"><span class="pre">Layer</span> <span class="pre">&gt;</span> <span class="pre">Round</span> <span class="pre">to</span> <span class="pre">Nearest</span> <span class="pre">Pixel</span> <span class="pre">Edge</span></code>.</strong></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="react.html" class="btn btn-neutral float-right" title="Quick Intro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tools/console-panel.html" class="btn btn-neutral float-left" title="Console Tool Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

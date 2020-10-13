@@ -1,0 +1,825 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Locale management &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Environments" href="locale_env.html" />
+    <link rel="prev" title="Internationalization" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Internationalization</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Locale management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#locales-and-language-tags">Locales and Language Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#locale-fallback-chains">Locale Fallback Chains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#language-negotiation">Language Negotiation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-locale-matching">Single Locale Matching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filtering-matching-lookup">Filtering / Matching / Lookup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-locale">Default Locale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#chained-language-negotiation">Chained Language Negotiation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#available-locales">Available Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#requested-locales">Requested Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#regional-preferences">Regional Preferences</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ui-direction">UI Direction</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#default-and-last-fallback-locales">Default and Last Fallback Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#packaged-locales">Packaged Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#web-exposed-locales">Web Exposed Locales</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-process">Multi-Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mozilla-exceptions">Mozilla Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#testing-localization">Testing Localization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-locale-switching">Testing Locale Switching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-the-outcome">Testing the outcome</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#deep-dive">Deep Dive</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="locale_env.html">Environments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locale_startup.html">Startup</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#feedback">Feedback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dataintl.html">UI Internationalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="icu.html">ICU</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Internationalization</a> &raquo;</li>
+        
+      <li>Locale management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intl/locale.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="locale-management">
+<h1>Locale management<a class="headerlink" href="#locale-management" title="Permalink to this headline">¶</a></h1>
+<p>A locale is a combination of language, region, script, and regional preferences the
+user wants to format their data into.</p>
+<p>There are multiple models of locale data structures in the industry that have varying degrees
+of compatibility between each other. Historically, each major platform has used their own,
+and many standard bodies provided conflicting proposals.</p>
+<p>Mozilla, alongside with most modern platforms, follows Unicode and W3C recommendation
+and conforms to a standard known as <a class="reference external" href="https://tools.ietf.org/html/bcp47#section-2.1">BCP 47</a> which describes a low level textual
+representation of a locale known as <cite>language tag</cite>.</p>
+<p>A few examples of language tags: <em>en-US</em>, <em>de</em>, <em>ar</em>, <em>zh-Hans</em>, <em>es-CL</em>.</p>
+<div class="section" id="locales-and-language-tags">
+<h2>Locales and Language Tags<a class="headerlink" href="#locales-and-language-tags" title="Permalink to this headline">¶</a></h2>
+<p>Locale data structure consists of four primary fields.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Language (Example: English - <em>en</em>, French - <em>fr</em>, Serbian - <em>sr</em>)</p></li>
+<li><p>Script (Example: Latin - <em>Latn</em>, Cyrylic - <em>Cyrl</em>)</p></li>
+<li><p>Region (Example: United States - <em>US</em>, Canada - <em>CA</em>, Russia - <em>RU</em>)</p></li>
+<li><p>Variants (Example: Mac OS - <em>macos</em>, Windows - <em>windows</em>, Linux - <em>linux</em>)</p></li>
+</ul>
+</div></blockquote>
+<p><a class="reference external" href="https://tools.ietf.org/html/bcp47#section-2.1">BCP 47</a> specifies the syntax for each of those fields (called subtags) when
+represented as a string. The syntax defines the allowed selection of characters,
+their capitalization, and the order in which the fields should be defined.</p>
+<p>Most of the base subtags are valid ISO codes, such as <a class="reference external" href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639</a> for
+language subtag, or <a class="reference external" href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166-1</a> for region.</p>
+<p>The examples above present language tags with several fields omitted, which is allowed
+by the standard.</p>
+<p>On top of that, a locale may contain:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>extensions and private fields</dt><dd><p>These fields can be used to carry additional information about a locale.
+Mozilla currently has partial support for them in the JS implementation and plans to
+extend support to all APIs.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>extkeys and “grandfathered” tags (unfortunate language, but part of the spec)</dt><dd><p>Mozilla does not support these yet.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>An example locale can be visualized as:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;language&quot;</span><span class="o">:</span> <span class="s2">&quot;sr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;script&quot;</span><span class="o">:</span> <span class="s2">&quot;Cyrl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;RU&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;variants&quot;</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="s2">&quot;extensions&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;privateuse&quot;</span><span class="o">:</span> <span class="p">[],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>which can be then serialized into a string: <strong>“sr-Cyrl-RU”</strong>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Since locales are often stored and passed around the codebase as
+language tag strings, it is important to always use an appropriate
+API to parse, manipulate and serialize them.
+Avoid <cite>Do-It-Yourself</cite> solutions which leave your code fragile and may
+break on unexpected language tag structures.</p>
+</div>
+</div>
+<div class="section" id="locale-fallback-chains">
+<h2>Locale Fallback Chains<a class="headerlink" href="#locale-fallback-chains" title="Permalink to this headline">¶</a></h2>
+<p>Locale sensitive operations are always considered “best-effort”. That means that it
+cannot be assumed that a perfect match will exist between what the user requested and what
+the API can provide.</p>
+<p>As a result, the best practice is to <em>always</em> operate on locale fallback chains -
+ordered lists of locales according to the user preference.</p>
+<p>An example of a locale fallback chain may be: <code class="code js javascript docutils literal notranslate"><span class="punctuation"><span class="pre">[</span></span><span class="literal string double"><span class="pre">“es-CL”</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal string double"><span class="pre">“es-ES”</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal string double"><span class="pre">“es”</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal string double"><span class="pre">“fr”</span></span><span class="punctuation"><span class="pre">,</span></span> <span class="literal string double"><span class="pre">“en”</span></span><span class="punctuation"><span class="pre">]</span></span></code>.</p>
+<p>The above means a request to format the data according to the Chilean Spanish if possible,
+fall back to Spanish Spanish, then any (generic) Spanish, French and eventually to
+English.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>It is <em>always</em> better to use a locale fallback chain over a single locale.
+In case there’s only one locale available, a list with one element will work
+while allowing for future extensions without a costly refactor.</p>
+</div>
+</div>
+<div class="section" id="language-negotiation">
+<h2>Language Negotiation<a class="headerlink" href="#language-negotiation" title="Permalink to this headline">¶</a></h2>
+<p>Due to the imperfections in data matching, all operations on locales should always
+use a language negotiation algorithm to resolve the best available set of locales,
+based on the list of all available locales and an ordered list of requested locales.</p>
+<p>Such algorithms may vary in sophistication and number of strategies. Mozilla’s
+solution is based on modified logic from <a class="reference external" href="https://tools.ietf.org/html/rfc5656">RFC 5656</a>.</p>
+<p>The three lists of locales used in negotiation:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Available</strong> - locales that are locally installed</p></li>
+<li><p><strong>Requested</strong> - locales that the user selected in decreasing order of preference</p></li>
+<li><p><strong>Resolved</strong> - result of the negotiation</p></li>
+</ul>
+</div></blockquote>
+<p>The result of a negotiation is an ordered list of locales that are available to
+the system, and the consumer is expected to attempt using the locales in the
+resolved order.</p>
+<p>Negotiation should be used in all scenarios like selecting language resources,
+calendar, number formatting, etc.</p>
+<div class="section" id="single-locale-matching">
+<h3>Single Locale Matching<a class="headerlink" href="#single-locale-matching" title="Permalink to this headline">¶</a></h3>
+<p>Every negotiation strategy goes through a list of steps in an attempt to find the
+best possible match between locales.</p>
+<p>The exact algorithm is custom, and consists of a 6 level strategy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">find</span> <span class="n">an</span> <span class="n">exact</span> <span class="n">match</span> <span class="k">for</span> <span class="n">each</span> <span class="n">requested</span> <span class="n">locale</span> <span class="ow">in</span> <span class="n">available</span>
+   <span class="n">locales</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">]</span>
+
+<span class="mi">2</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">match</span> <span class="n">a</span> <span class="n">requested</span> <span class="n">locale</span> <span class="n">to</span> <span class="n">an</span> <span class="n">available</span> <span class="n">locale</span> <span class="n">treated</span>
+   <span class="k">as</span> <span class="n">a</span> <span class="n">locale</span> <span class="nb">range</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">]</span>
+                          <span class="o">^^</span>
+                          <span class="o">|--</span> <span class="n">becomes</span> <span class="s1">&#39;en-*-*-*&#39;</span>
+
+<span class="mi">3</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">use</span> <span class="n">the</span> <span class="n">maximized</span> <span class="n">version</span> <span class="n">of</span> <span class="n">the</span> <span class="n">requested</span> <span class="n">locale</span><span class="p">,</span> <span class="n">to</span>
+   <span class="n">find</span> <span class="n">the</span> <span class="n">best</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">available</span> <span class="n">locales</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;en-GB&#39;</span><span class="p">,</span> <span class="s1">&#39;en-US&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">]</span>
+              <span class="o">^^</span>
+              <span class="o">|--</span> <span class="n">ICU</span> <span class="n">likelySubtags</span> <span class="n">expands</span> <span class="n">it</span> <span class="n">to</span> <span class="s1">&#39;en-Latn-US&#39;</span>
+
+<span class="mi">4</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">look</span> <span class="k">for</span> <span class="n">a</span> <span class="n">different</span> <span class="n">variant</span> <span class="n">of</span> <span class="n">the</span> <span class="n">same</span> <span class="n">locale</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ja-JP-win&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;ja-JP-mac&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ja-JP-mac&#39;</span><span class="p">]</span>
+              <span class="o">^^^^^^^^^</span>
+              <span class="o">|-----------</span> <span class="n">replace</span> <span class="n">variant</span> <span class="k">with</span> <span class="nb">range</span><span class="p">:</span> <span class="s1">&#39;ja-JP-*&#39;</span>
+
+<span class="mi">5</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">look</span> <span class="k">for</span> <span class="n">a</span> <span class="n">maximized</span> <span class="n">version</span> <span class="n">of</span> <span class="n">the</span> <span class="n">requested</span> <span class="n">locale</span><span class="p">,</span>
+   <span class="n">stripped</span> <span class="n">of</span> <span class="n">the</span> <span class="n">region</span> <span class="n">code</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en-CA&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;en-ZA&#39;</span><span class="p">,</span> <span class="s1">&#39;en-US&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en-US&#39;</span><span class="p">,</span> <span class="s1">&#39;en-ZA&#39;</span><span class="p">]</span>
+              <span class="o">^^^^^</span>
+              <span class="o">|-----------</span> <span class="n">look</span> <span class="k">for</span> <span class="n">likelySubtag</span> <span class="n">of</span> <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="s1">&#39;en-Latn-US&#39;</span>
+
+<span class="mi">6</span><span class="p">)</span> <span class="n">Attempt</span> <span class="n">to</span> <span class="n">look</span> <span class="k">for</span> <span class="n">a</span> <span class="n">different</span> <span class="n">region</span> <span class="n">of</span> <span class="n">the</span> <span class="n">same</span> <span class="n">locale</span><span class="o">.</span>
+   <span class="n">Example</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;en-GB&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">[</span><span class="s1">&#39;en-AU&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;en-AU&#39;</span><span class="p">]</span>
+              <span class="o">^^^^^</span>
+              <span class="o">|-----</span> <span class="n">replace</span> <span class="n">region</span> <span class="k">with</span> <span class="nb">range</span><span class="p">:</span> <span class="s1">&#39;en-*&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtering-matching-lookup">
+<h3>Filtering / Matching / Lookup<a class="headerlink" href="#filtering-matching-lookup" title="Permalink to this headline">¶</a></h3>
+<p>When negotiating between lists of locales, Mozilla’s <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span></code> API
+offers three language negotiation strategies:</p>
+<div class="section" id="filtering">
+<h4>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h4>
+<p>This is the most common scenario, where there is an advantage in creating a
+maximal possible list of locales that the user may benefit from.</p>
+<p>An example of a scenario:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">requested</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;en-US&quot;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">available</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en-GB&quot;</span><span class="p">,</span> <span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="s2">&quot;en-ZA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">,</span> <span class="s2">&quot;de-DE&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CH&quot;</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">negotiateLanguages</span><span class="p">(</span><span class="nx">requested</span><span class="p">,</span> <span class="nx">available</span><span class="p">);</span>
+
+<span class="nx">result</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CH&quot;</span><span class="p">,</span> <span class="s2">&quot;en-GB&quot;</span><span class="p">,</span> <span class="s2">&quot;en-ZA&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>In the example above the algorithm was able to match <em>“fr-CA”</em> as a perfect match,
+but then was able to find other matches as well - a generic French is a very
+good match, and Swiss French is also very close to the top requested language.</p>
+<p>In case of the second of the requested locales, unfortunately American English
+is not available, but British English and South African English are.</p>
+<p>The algorithm is greedy and attempts to match as many locales
+as possible. This is usually what the developer wants.</p>
+</div>
+<div class="section" id="matching">
+<h4>Matching<a class="headerlink" href="#matching" title="Permalink to this headline">¶</a></h4>
+<p>In less common scenarios the code needs to match a single, best available locale for
+each of the requested locales.</p>
+<p>An example of this scenario:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">requested</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;en-US&quot;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">available</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en-GB&quot;</span><span class="p">,</span> <span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="s2">&quot;en-ZA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">,</span> <span class="s2">&quot;de-DE&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-ZH&quot;</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">negotiateLanguages</span><span class="p">(</span>
+  <span class="nx">requested</span><span class="p">,</span>
+  <span class="nx">available</span><span class="p">,</span>
+  <span class="kc">undefined</span><span class="p">,</span>
+  <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">langNegStrategyMatching</span><span class="p">);</span>
+
+<span class="nx">result</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;en-GB&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>The best available locales for <em>“fr-CA”</em> is a perfect match, and for <em>“en-US”</em>, the
+algorithm selected British English.</p>
+</div>
+<div class="section" id="lookup">
+<h4>Lookup<a class="headerlink" href="#lookup" title="Permalink to this headline">¶</a></h4>
+<p>The third strategy should be used in cases where no matter what, only one locale
+can be ever used. Some third-party APIs don’t support fallback and it doesn’t make
+sense to continue resolving after finding the first locale.</p>
+<p>It is still advised to continue using this API as a fallback chain list, just in
+this case with a single element.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">requested</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;en-US&quot;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">available</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en-GB&quot;</span><span class="p">,</span> <span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="s2">&quot;en-ZA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr&quot;</span><span class="p">,</span> <span class="s2">&quot;de-DE&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-ZH&quot;</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">negotiateLanguages</span><span class="p">(</span>
+  <span class="nx">requested</span><span class="p">,</span>
+  <span class="nx">available</span><span class="p">,</span>
+  <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">defaultLocale</span><span class="p">,</span>
+  <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">langNegStrategyLookup</span><span class="p">);</span>
+
+<span class="nx">result</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="default-locale">
+<h3>Default Locale<a class="headerlink" href="#default-locale" title="Permalink to this headline">¶</a></h3>
+<p>Besides <em>Available</em>, <em>Requested</em> and <em>Resolved</em> locale lists, there’s also a concept
+of <em>DefaultLocale</em>, which is a single locale out of the list of available ones that
+should be used in case there is no match to be found between available and
+requested locales.</p>
+<p>Every Firefox is built with a single default locale - for example
+<strong>Firefox zh-CN</strong> has <em>DefaultLocale</em> set to <em>zh-CN</em> since this locale is guaranteed
+to be packaged in, have all the resources, and should be used if the negotiation fails
+to return any matches.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">requested</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;fr-CA&quot;</span><span class="p">,</span> <span class="s2">&quot;en-US&quot;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">available</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;zh-CN&quot;</span><span class="p">,</span> <span class="s2">&quot;pl&quot;</span><span class="p">,</span> <span class="s2">&quot;sr-RU&quot;</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">defaultLocale</span> <span class="o">=</span> <span class="s2">&quot;zh-CN&quot;</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">negotiateLanguages</span><span class="p">(</span><span class="nx">requested</span><span class="p">,</span> <span class="nx">available</span><span class="p">,</span> <span class="nx">defaultLocale</span><span class="p">);</span>
+
+<span class="nx">result</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;zh-CN&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="chained-language-negotiation">
+<h3>Chained Language Negotiation<a class="headerlink" href="#chained-language-negotiation" title="Permalink to this headline">¶</a></h3>
+<p>In some cases the user may want to link a language selection to another component.</p>
+<p>For example, a Firefox extension may come with its own list of available locales, which
+may have locales that Firefox doesn’t.</p>
+<p>In that case, negotiation between user requested locales and the add-on’s list may result
+in a selection of locales superseding that of Firefox itself.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>     Fx Available
+    +-------------+
+    |  it, fr, ar |
+    +-------------+                 Fx Locales
+                  |                +--------+
+                  +--------------&gt; | fr, ar |
+                  |                +--------+
+        Requested |
+ +----------------+
+ | es, fr, pl, ar |
+ +----------------+                 Add-on Locales
+                  |                +------------+
+                  +--------------&gt; | es, fr, ar |
+  Add-on Available |               +------------+
++-----------------+
+|  de, es, fr, ar |
++-----------------+
+</pre></div>
+</div>
+<p>In that case, an add-on may end up being displayed in Spanish, while Firefox UI will
+use French. In most cases this results in a bad UX.</p>
+<p>In order to avoid that, one can chain the add-on negotiation and take Firefox’s resolved
+locales as a <cite>requested</cite>, and negotiate that against the add-ons’ <cite>available</cite> list.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    Fx Available
+   +-------------+
+   |  it, ar, fr |
+   +-------------+                Fx Locales (as Add-on Requested)
+                 |                +--------+
+                 +--------------&gt; | fr, ar |
+                 |                +--------+
+       Requested |                         |                Add-on Locales
++----------------+                         |                +--------+
+| es, fr, pl, ar |                         +-------------&gt;  | fr, ar |
++----------------+                         |                +--------+
+                                           |
+                          Add-on Available |
+                         +-----------------+
+                         |  de, es, ar, fr |
+                         +-----------------+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="available-locales">
+<h2>Available Locales<a class="headerlink" href="#available-locales" title="Permalink to this headline">¶</a></h2>
+<p>In Gecko, available locales come from the <cite>Packaged Locales</cite> and the installed
+<cite>language packs</cite>. Language packs are a variant of web extensions providing just
+localized resources for one or more languages.</p>
+<p>The primary notion of which locales are available is based on which locales Gecko has
+UI localization resources for, and other datasets such as internationalization may
+carry different lists of available locales.</p>
+</div>
+<div class="section" id="requested-locales">
+<h2>Requested Locales<a class="headerlink" href="#requested-locales" title="Permalink to this headline">¶</a></h2>
+<p>The list of requested locales can be read and set using <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span><span class="operator"><span class="pre">::</span></span><span class="name other"><span class="pre">requestedLocales</span></span></code> API.</p>
+<p>Using the API will perform necessary sanity checks and canonicalize the values.</p>
+<p>After the sanitization, the value will be stored in a pref <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">locale</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">requested</span></span></code>.
+The pref usually will store a comma separated list of valid BCP47 locale
+codes, but it can also have two special meanings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If the pref is not set at all, Gecko will use the default locale as the requested one.</p></li>
+<li><p>If the pref is set to an empty string, Gecko will look into OS app locales as the requested.</p></li>
+</ul>
+</div></blockquote>
+<p>The former is the current default setting for Firefox Desktop, and the latter is the
+default setting for Firefox for Android.</p>
+<p>If the developer wants to programmatically request the app to follow OS locales,
+they can assign <code class="code js javascript docutils literal notranslate"><span class="keyword constant"><span class="pre">null</span></span></code> to <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">requestedLocales</span></span></code>.</p>
+</div>
+<div class="section" id="regional-preferences">
+<h2>Regional Preferences<a class="headerlink" href="#regional-preferences" title="Permalink to this headline">¶</a></h2>
+<p>Every locale comes with a set of default preferences that are specific to a culture
+and region. This contains preferences such as calendar system, way to display
+time (24h vs 12h clock), which day the week starts on, which days constitute a weekend,
+what numbering system and date time formatting a given locale uses
+(for example “MM/DD” in en-US vs “DD/MM” in en-AU).</p>
+<p>For all such preferences Gecko has a list of default settings for every region,
+but there’s also a degree of customization every user may want to make.</p>
+<p>All major operating systems have a Settings UI for selecting those preferences,
+and since Firefox does not provide its own, Gecko looks into the OS for them.</p>
+<p>A special API <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">mozilla</span></span><span class="operator"><span class="pre">::</span></span><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">::</span></span><span class="name other"><span class="pre">OSPreferences</span></span></code> handles communication with the
+host operating system, retrieving regional preferences and altering
+internationalization formatting with user preferences.</p>
+<p>One thing to notice is that the boundary between regional preferences and language
+selection is not strong. In many cases the internationalization formats
+will contain language specific terms and literals. For example a date formatting
+pattern into Japanese may look like this - <em>“2018年3月24日”</em>, or the date format
+may contains names of months or weekdays to be translated
+(“April”, “Tuesday” etc.).</p>
+<p>For that reason it is tricky to follow regional preferences in a scenario where Operating
+System locale selection does not match the Firefox UI locales.</p>
+<p>Such behavior might lead to a UI case like “Today is 24 października” in an English Firefox
+with Polish date formats.</p>
+<p>For that reason, by default, Gecko will <em>only</em> look into OS Preferences if the <em>language</em>
+portion of the locale of the OS and Firefox match.
+That means that if Windows is in “<strong>en</strong>-AU” and Firefox is in “<strong>en</strong>-US” Gecko will look
+into Windows Regional Preferences, but if Windows is in “<strong>de</strong>-CH” and Firefox
+is in “<strong>fr</strong>-FR” it won’t.
+In order to force Gecko to look into OS preferences irrelevant of the language match,
+set the flag <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">regional_prefs</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">use_os_locales</span></span></code> to <code class="code js javascript docutils literal notranslate"><span class="keyword constant"><span class="pre">true</span></span></code>.</p>
+<div class="section" id="ui-direction">
+<h3>UI Direction<a class="headerlink" href="#ui-direction" title="Permalink to this headline">¶</a></h3>
+<p>Since the UI direction is so tightly coupled with the locale selection, the
+main method of testing the directionality of the Gecko app lives in LocaleService.</p>
+<p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span><span class="operator"><span class="pre">::</span></span><span class="name other"><span class="pre">IsAppLocaleRTL</span></span></code> returns a boolean indicating if the current
+direction of the app UI is right-to-left.</p>
+</div>
+</div>
+<div class="section" id="default-and-last-fallback-locales">
+<h2>Default and Last Fallback Locales<a class="headerlink" href="#default-and-last-fallback-locales" title="Permalink to this headline">¶</a></h2>
+<p>Every Gecko application is built with a single locale as the default one. Such locale
+is guaranteed to have all linguistic resources available, should be used
+as the default locale in case language negotiation cannot find any match, and also
+as the last locale to look for in a fallback chain.</p>
+<p>If all else fails, Gecko also support a notion of last fallback locale, which is
+currently hardcoded to <em>“en-US”</em>, and is the very final locale to try in case
+nothing else (including the default locale) works.
+Notice that Unicode and ICU use <em>“en-GB”</em> in that role because more English speaking
+people around the World recognize British regional preferences than American (metric vs.
+imperial, Fahrenheit vs Celsius etc.).
+Mozilla may switch to <em>“en-GB”</em> in the future.</p>
+</div>
+<div class="section" id="packaged-locales">
+<h2>Packaged Locales<a class="headerlink" href="#packaged-locales" title="Permalink to this headline">¶</a></h2>
+<p>When the Gecko application is being packaged it bundles a selection of locale resources
+to be available within it. At the moment, for example, most Firefox for Android
+builds come with almost 100 locales packaged into it, while Desktop Firefox comes
+with usually just one packaged locale.</p>
+<p>There is currently work being done on enabling more flexibility in how
+the locales are packaged to allow for bundling applications with different
+sets of locales in different areas - dictionaries, hyphenations, product language resources,
+installer language resources, etc.</p>
+</div>
+<div class="section" id="web-exposed-locales">
+<h2>Web Exposed Locales<a class="headerlink" href="#web-exposed-locales" title="Permalink to this headline">¶</a></h2>
+<p>For anti-tracking or some other reasons, we tend to expose spoofed locale to web content instead
+of default locales. This can be done by setting the pref <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">locale</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">privacy</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">web_exposed</span></span></code>.
+The pref is a comma separated list of locale, and empty string implies default locales.</p>
+<p>The pref has no function while <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">privacy</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">spoof_english</span></span></code> is set to 2, where <em>“en-US”</em> will always
+be returned.</p>
+</div>
+<div class="section" id="multi-process">
+<h2>Multi-Process<a class="headerlink" href="#multi-process" title="Permalink to this headline">¶</a></h2>
+<p>Locale management can operate in a client/server model. This allows a Gecko process
+to manage locales (server mode) or just receive the locale selection from a parent
+process (client mode).</p>
+<p>The client mode is currently used by all child processes of Desktop Firefox, and
+may be used by, for example, GeckoView to follow locale selection from a parent
+process.</p>
+<p>To check the mode the process is operating in, the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span><span class="operator"><span class="pre">::</span></span><span class="name other"><span class="pre">IsServer</span></span></code> method is available.</p>
+<p>Note that <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">L10nRegistry</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">registerSources</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">L10nRegistry</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">updateSources</span></span></code>, and
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">L10nRegistry</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">removeSources</span></span></code> each trigger an IPC synchronization between the parent
+process and any extant content processes, which is expensive. If you need to change the
+registration of multiple sources, the best way to do so is to coalesce multiple requests
+into a single array and then call the method once.</p>
+</div>
+<div class="section" id="mozilla-exceptions">
+<h2>Mozilla Exceptions<a class="headerlink" href="#mozilla-exceptions" title="Permalink to this headline">¶</a></h2>
+<p>There’s currently only a single exception of the BCP47 used, and that’s
+a legacy “ja-JP-mac” locale. The “mac” is a variant and BCP47 requires all variants
+to be 5-8 character long.</p>
+<p>Gecko supports the limitation by accepting the 3-letter variants in our APIs and also
+provides a special <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">appLocalesAsLangTags</span></span></code> method which returns this locale in that form.
+(<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">appLocalesAsBCP47</span></span></code> will canonicalize it and turn into <cite>“ja-JP-macos”</cite>).</p>
+<p>Usage of language negotiation etc. shouldn’t rely on this behavior.</p>
+</div>
+<div class="section" id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">LocaleService</span></span></code> emits two events: <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">app</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code> and
+<code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">requested</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code> which all code can listen to.</p>
+<p>Those events may be broadcasted in response to new language packs being installed, or
+uninstalled, or user selection of languages changing.</p>
+<p>In most cases, the code should observe the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">intl</span></span><span class="operator"><span class="pre">:</span></span><span class="name other"><span class="pre">app</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">locales</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">changed</span></span></code>
+and react to only that event since this is the one indicating a change
+in the currently used language settings that the components should follow.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>Many components may have logic encoded to react to changes in requested, available
+or resolved locales.</p>
+<p>In order to test the component’s behavior, it is important to replicate
+the environment in which such change may happen.</p>
+<p>Since in most cases it is advised for a component to tie its
+language negotiation to the main application (see <cite>Chained Language Negotiation</cite>),
+it is not enough to add a new locale to trigger the language change.</p>
+<p>First, it is necessary to add a new locale to the available ones, then change
+the requested, and only that will result in a new negotiation and language
+change happening.</p>
+<p>There are two primary ways to add a locale to available ones.</p>
+<div class="section" id="testing-localization">
+<h3>Testing Localization<a class="headerlink" href="#testing-localization" title="Permalink to this headline">¶</a></h3>
+<p>If the goal is to test that the correct localization ends up in the correct place,
+the developer needs to register a new <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">FileSource</span></span></code> in <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">L10nRegistry</span></span></code> and
+provide a mock cached data to be returned by the API.</p>
+<p>It may look like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">fs</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileSource</span><span class="p">([</span><span class="s2">&quot;ko-KR&quot;</span><span class="p">,</span> <span class="s2">&quot;ar&quot;</span><span class="p">],</span> <span class="s2">&quot;resource://mock-addon/localization/{locale}&quot;</span><span class="p">);</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">cache</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;resource://mock-addon/localization/ko-KR/test.ftl&quot;</span><span class="o">:</span> <span class="s2">&quot;key = Value in Korean&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;resource://mock-addon/localization/ar/test.ftl&quot;</span><span class="o">:</span> <span class="s2">&quot;key = Value in Arabic&quot;</span>
+<span class="p">};</span>
+
+<span class="nx">L10nRegistry</span><span class="p">.</span><span class="nx">registerSources</span><span class="p">([</span><span class="nx">fs</span><span class="p">]);</span>
+
+<span class="kd">let</span> <span class="nx">availableLocales</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">availableLocales</span><span class="p">;</span>
+
+<span class="nx">assert</span><span class="p">(</span><span class="nx">availableLocales</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;ko-KR&quot;</span><span class="p">));</span>
+<span class="nx">assert</span><span class="p">(</span><span class="nx">availableLocales</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;ar&quot;</span><span class="p">));</span>
+
+<span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">requestedLocales</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ko-KR&quot;</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="nx">appLocales</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">appLocalesAsBCP47</span><span class="p">;</span>
+<span class="nx">assert</span><span class="p">(</span><span class="nx">appLocales</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span> <span class="s2">&quot;ko-KR&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>From here, a resource <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">test</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">ftl</span></span></code> can be added to a <cite>Localization</cite> and for ID <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">key</span></span></code>
+the correct value from the mocked cache will be returned.</p>
+</div>
+<div class="section" id="testing-locale-switching">
+<h3>Testing Locale Switching<a class="headerlink" href="#testing-locale-switching" title="Permalink to this headline">¶</a></h3>
+<p>The second method is much more limited, as it only mocks the locale availability,
+but it is also simpler:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">availableLocales</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ko-KR&quot;</span><span class="p">,</span> <span class="s2">&quot;ar&quot;</span><span class="p">];</span>
+<span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">requestedLocales</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ko-KR&quot;</span><span class="p">];</span>
+
+<span class="kd">let</span> <span class="nx">appLocales</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">locale</span><span class="p">.</span><span class="nx">appLocalesAsBCP47</span><span class="p">;</span>
+<span class="nx">assert</span><span class="p">(</span><span class="nx">appLocales</span><span class="p">[</span><span class="mf">0</span><span class="p">],</span> <span class="s2">&quot;ko-KR&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In the future, Mozilla plans to add a third way for add-ons (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1440969">bug 1440969</a>)
+to allow for either manual or automated testing purposes disconnecting its locales
+from the main application ones.</p>
+</div>
+<div class="section" id="testing-the-outcome">
+<h3>Testing the outcome<a class="headerlink" href="#testing-the-outcome" title="Permalink to this headline">¶</a></h3>
+<p>Except of testing for reaction to locale changes, it is advised to avoid writing
+tests that expect a certain locale to be selected, or certain internationalization
+or localization data to be used.</p>
+<p>Doing so locks down the test infrastructure to be only usable when launched in
+a single locale environment and requires those tests to be updated whenever the underlying
+data changes.</p>
+<p>In the case of testing locale selection it is best to use a fake locale like <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">x</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">test</span></span></code>, that
+will not be present at the beginning of the test.</p>
+<p>In the case of testing for internationalization data it is best to use <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">resolvedOptions</span></span><span class="punctuation"><span class="pre">()</span></span></code>,
+to verify the right data is being used, rather than comparing the output string.</p>
+<p>In the case of localization, it is best to test against the correct <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">data</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">l10n</span></span><span class="operator"><span class="pre">-</span></span><span class="name other"><span class="pre">id</span></span></code>
+being set or, in edge cases, verify that a given variable is present in the string using
+<code class="code js javascript docutils literal notranslate"><span class="name builtin"><span class="pre">String</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">prototype</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">includes</span></span></code>.</p>
+</div>
+</div>
+<div class="section" id="deep-dive">
+<h2>Deep Dive<a class="headerlink" href="#deep-dive" title="Permalink to this headline">¶</a></h2>
+<p>Below is a list of articles with additional
+details on selected subjects:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="locale_env.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="locale_startup.html">Startup</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="feedback">
+<h2>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">¶</a></h2>
+<p>In case of questions, please consult Intl module peers.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="locale_env.html" class="btn btn-neutral float-right" title="Environments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Internationalization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

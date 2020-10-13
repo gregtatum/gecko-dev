@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building Firefox On Windows &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Building Firefox On MacOS" href="macos_build.html" />
+    <link rel="prev" title="Welcome to the Firefox codebase!" href="getting_set_up.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Set Up To Work On The Firefox Codebase</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_set_up.html">Welcome to the Firefox codebase!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_set_up.html#what-skills-do-i-need">What skills do I need?</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building Firefox On Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#getting-ready">Getting ready</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visual-studio-2019">Visual Studio 2019</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-required-tools">Other Required Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-the-source">Getting the source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-firefox">Build Firefox!</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#you-re-ready">You’re ready</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#details-and-troubleshooting">Details and troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-and-software-requirements">Hardware and software requirements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-the-build-prerequisites">Installing the build prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozillabuild-package">MozillaBuild package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#opening-a-mozillabuild-command-prompt">Opening a MozillaBuild command prompt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#create-a-directory-for-the-source">Create a directory for the source</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-prompt-tips-and-caveats">Command prompt tips and caveats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-problems-hints-and-restrictions">Common problems, hints, and restrictions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="macos_build.html">Building Firefox On MacOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux_build.html">Building Firefox On Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing_code.html">How To Contribute Code To Firefox</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Getting Set Up To Work On The Firefox Codebase</a> &raquo;</li>
+        
+      <li>Building Firefox On Windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/setup/windows_build.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-firefox-on-windows">
+<h1>Building Firefox On Windows<a class="headerlink" href="#building-firefox-on-windows" title="Permalink to this headline">¶</a></h1>
+<p>Thank you for helping us build the world’s best browser on the world’s
+most popular OS. This document will help you get set up to build and
+hack on your own version of Firefox on your local machine.</p>
+<p>Getting set up won’t be difficult, but it can take a while - we need to
+download a lot of bytes! Even on a fast connection, this can take ten to
+fifteen minutes of work, spread out over an hour or two.</p>
+<p>The details are further down this page, but this quick start guide
+should get you up and running:</p>
+<div class="section" id="getting-ready">
+<h2>Getting ready<a class="headerlink" href="#getting-ready" title="Permalink to this headline">¶</a></h2>
+<p>To build Firefox on Windows, you need a 64-bit version of Windows 7 or
+later and about 40 GB of free space on your hard drive. You can make
+sure your version of Windows is 64-bit on Windows 7 by right-clicking on
+“Computer” in your “Start” menu, clicking “Properties” and then
+“System”. On Windows 8.1 and Windows 10, right-clicking the “Windows”
+menu button and choosing “System” will show you the same information.
+You can alternatively press the “Windows” and “Pause Break” buttons
+simultaneously on your keyboard on any version of Windows.</p>
+<p>Next, we want to start on a solid foundation: make sure you’re up to
+date with Windows Update and then we’ll get moving.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Microsoft is providing some Windows images with Visual Studio and code
+<a class="reference external" href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/</a></p>
+</div>
+<div class="section" id="visual-studio-2019">
+<h3>Visual Studio 2019<a class="headerlink" href="#visual-studio-2019" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As of <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1483835">bug
+1483835</a>, local
+Windows builds <a class="reference external" href="https://groups.google.com/d/topic/mozilla.dev.platform/MdbLAcvHC0Y/discussion">use clang-cl by
+default</a>
+as compiler. Visual Studio is still necessary for build tools, headers,
+and SDK.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Automation builds still use Visual Studio 2017, so there may be some
+divergence until we upgrade. <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1581930">Bug
+1581930</a> tracks
+various issues building with 2019. Please file your issue there and
+downgrade in the interim if you encounter build failures.</p>
+</div>
+<p><a class="reference external" href="https://visualstudio.microsoft.com/downloads/">Download and install the Community
+edition</a> of Visual
+Studio 2019. Professional and Enterprise are also supported if you have
+either of those editions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When installing, the following workloads must be checked:</p>
+<ul class="simple">
+<li><p>“Desktop development with C++” (under the Windows group)</p></li>
+<li><p>“Game development with C++” (under the Mobile &amp; Gaming group)</p></li>
+</ul>
+<p>In addition, go to the Individual Components tab and make sure the
+following components are selected under the “SDKs, libraries, and
+frameworks” group:</p>
+<ul class="simple">
+<li><p>“Windows 10 SDK” (at least version <strong>10.0.17134.0</strong>)</p></li>
+<li><p>“C++ ATL for v142 build tools (x86 and x64)” (also select ARM64
+if you’ll be building for ARM64)</p></li>
+</ul>
+</div>
+<p>Make sure you run Visual Studio once after installing, so it finishes
+any first-run tasks and associates the installation with your account.</p>
+<p>If you already have Visual Studio 2019 installed, you can get to the
+installer via its menu “Tools” → “Get Tools and Features”.</p>
+</div>
+<div class="section" id="other-required-tools">
+<h3>Other Required Tools<a class="headerlink" href="#other-required-tools" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="mozillabuild">
+<h4>MozillaBuild<a class="headerlink" href="#mozillabuild" title="Permalink to this headline">¶</a></h4>
+<p>Finally, download the <a class="reference external" href="https://ftp.mozilla.org/pub/mozilla.org/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe">MozillaBuild
+Package</a>
+from Mozilla. Accept the default settings, in particular the default
+installation directory: <code class="docutils literal notranslate"><span class="pre">c:\mozilla-build\</span></code>. On some versions of
+Windows an error dialog will give you the option to ‘reinstall with the
+correct settings’ - you should agree and proceed.</p>
+<p>Once this is done, creating a shortcut to
+<code class="docutils literal notranslate"><span class="pre">c:\mozilla-build\start-shell.bat</span></code> on your desktop will make your life
+easier.</p>
+</div>
+</div>
+<div class="section" id="getting-the-source">
+<h3>Getting the source<a class="headerlink" href="#getting-the-source" title="Permalink to this headline">¶</a></h3>
+<p>This is the last big step. Double-clicking <strong>start-shell.bat</strong> in
+<code class="docutils literal notranslate"><span class="pre">c:\mozilla-build</span></code> (or the shortcut you’ve created above) will open a
+terminal window.</p>
+<p>Start by creating a “mozilla-source” directory off of <code class="docutils literal notranslate"><span class="pre">C:\</span></code> and cd
+into it like so</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> c:/
+
+mkdir mozilla-source
+
+<span class="nb">cd</span> mozilla-source
+</pre></div>
+</div>
+<p>Next, you can get the Firefox source code with Mercurial. There is a
+wiki page on how to <a class="reference internal" href="../contributing/vcs/mercurial.html#mercurial-overview"><span class="std std-ref">get the source using
+Mercurial</span></a>
+but, in summary, if your network connection is good enough to download
+1+ GB without interuption and you want the main development repository,
+then you can just use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>curl https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py -o bootstrap.py
+
+python3 bootstrap.py
+</pre></div>
+</div>
+<p>… and follow the prompts. This will use mercurial to checkout the
+source code. If you prefer to work with git, use this command instead (you’ll
+have to have <a class="reference external" href="https://git-scm.com/download/win">Git for Windows</a> installed):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3 bootstrap.py --vcs<span class="o">=</span>git
+</pre></div>
+</div>
+<p>While you’re waiting for that process to finish, take a look at <a class="reference external" href="http://mozilla-version-control-tools.readthedocs.org/en/latest/hgmozilla/index.html">our
+Mercurial
+documentation</a>.
+It explains how we use version control at Mozilla to manage our code and
+land changes to our source tree.</p>
+</div>
+<div class="section" id="build-firefox">
+<h3>Build Firefox!<a class="headerlink" href="#build-firefox" title="Permalink to this headline">¶</a></h3>
+<p>Now we tie it all together. In your terminal window, <code class="docutils literal notranslate"><span class="pre">cd</span></code> to your
+source directory as before and type</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> mozilla-unified  <span class="c1"># ... or the name of the repo you chose earlier</span>
+
+./mach bootstrap
+
+./mach build
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> step is a catch-all for any dependencies not
+covered in this documentation. Note that, bootstrap works <strong>only with
+the Mercurial repo of the source</strong>, not with source tar balls, nor the
+github mirror. If you are working on Firefox or Firefox for Android
+frontends or building Firefox without any changes, select <a class="reference internal" href="../contributing/build/artifact_builds.html#understanding-artifact-builds"><span class="std std-ref">Artifact Builds</span></a> in
+the first question in <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code>.  Artifact builds will
+complete more quickly!  Artifact builds are unsuitable for those working
+on C++ or Rust code.</p>
+<p>You’re on your way. Don’t be discouraged if this takes a while; it takes
+some time even on the fastest modern machines and as much as two hours
+or more on older hardware. Firefox is pretty big, because the Web is
+big.</p>
+</div>
+<div class="section" id="you-re-ready">
+<h3>You’re ready<a class="headerlink" href="#you-re-ready" title="Permalink to this headline">¶</a></h3>
+<p>When mach build completes, you’ll have your own version of Firefox built
+from the source code on your hard drive, ready to run. You can run it
+with</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach run
+</pre></div>
+</div>
+<p>Now you have your own home-built version of Firefox.</p>
+<p>If you saw an error here, look further down in this document for the
+“Troubleshooting” section - some antivirus software quarantine some of
+our tests, so you need to create exceptions for the “mozilla-source” and
+“mozilla-build” directories. Don’t turn your antivirus off! Just add the
+exceptions.</p>
+</div>
+</div>
+<div class="section" id="details-and-troubleshooting">
+<h2>Details and troubleshooting<a class="headerlink" href="#details-and-troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hardware-and-software-requirements">
+<h3>Hardware and software requirements<a class="headerlink" href="#hardware-and-software-requirements" title="Permalink to this headline">¶</a></h3>
+<p>The Firefox build process is both I/O and CPU-intensive, and can take a
+long time to build even on modern hardware. The minimum and recommended
+hardware requirements for Mozilla development are:</p>
+<ul class="simple">
+<li><p>At least 4 GB of RAM. 8 GB or more is recommended, and more is always
+better.</p></li>
+<li><p>35 GB free disk space. This amount of disk space accommodates Visual
+Studio 2019 Community Edition, the required SDKs, the MozillaBuild
+package, the Mercurial source repository and enough free disk space
+to compile. A solid-state hard disk is recommended as the Firefox
+build process is I/O-intensive.</p></li>
+<li><p>A 64-bit version of Windows 7 (Service Pack 1) or later. You can
+still build 32-bit Firefox on a 64-bit Windows installation.</p></li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>The Mozilla build process requires many tools that are not pre-installed
+on most Windows systems. In addition to Visual Studio, install
+MozillaBuild - a software bundle that includes the required versions of
+bash, GNU make, Mercurial, and much more.</p>
+<p>Firefox 61+ require Visual Studio 2017 Update 6 or newer to build.</p>
+<p>Firefox 48 to 60 build with Visual Studio 2015. Visual Studio 2017 also
+works for building Firefox 58 or newer.</p>
+<p>Firefox 37 through to 47 build with Visual Studio 2013 (VC12) and
+possibly Visual Studio 2015 (although Visual Studio 2015 may not build
+every revision).</p>
+<p>Earlier versions of Firefox build with older versions of Visual Studio.</p>
+</div>
+<div class="section" id="installing-the-build-prerequisites">
+<h3>Installing the build prerequisites<a class="headerlink" href="#installing-the-build-prerequisites" title="Permalink to this headline">¶</a></h3>
+<p>Complete each of these steps otherwise, you may not be able to build
+successfully. There are notes on these software requirements below.</p>
+<ol class="arabic simple">
+<li><p>Make sure your system is up-to-date through Windows Update.</p></li>
+<li><p>Install <a class="reference external" href="https://www.visualstudio.com/downloads/">Visual Studio Community
+2019</a> (free).
+Alternatively, you can also use a paid version of Visual Studio. Some
+additional components may be required to build Firefox, as noted in
+the “Visual Studio 2019” section above. Earlier versions of Visual
+Studio are not supported; the Firefox codebase relies on C++ features
+that are not supported in earlier releases.</p></li>
+<li><p>Optionally, in addition to VS2019, you may want to install <a class="reference external" href="http://go.microsoft.com/?linkid=7729279">Visual
+C++ 2008 Express</a> (free)
+to compile some Python extensions used in the build system as Python
+2.7.x for Windows is built with that compiler by default. Note, if
+you want to use “mach resource-usage”, “mach doctor”, “mach
+android-emulator”, or run talos tests locally, you should install it
+for building psutil.</p></li>
+<li><p>Download and install the
+<a class="reference external" href="https://ftp.mozilla.org/pub/mozilla.org/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe">MozillaBuild</a>
+package, containing additional build tools. If you have Cygwin
+installed, read the note in the tips section. If you see a Windows
+error dialog giving you the option to re-install with the ‘correct
+settings’, after the MozillaBuild’s installer exits, choose the
+option and after that all should be well. More information about
+MozillaBuild and links to newer versions are available at
+<a class="reference external" href="https://wiki.mozilla.org/MozillaBuild">https://wiki.mozilla.org/MozillaBuild</a>.</p></li>
+</ol>
+</div>
+<div class="section" id="troubleshooting">
+<h3>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h3>
+<p>In some circumstances, the following problems can arise:</p>
+<div class="section" id="antivirus-performance">
+<h4>Antivirus performance<a class="headerlink" href="#antivirus-performance" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Windows Defender and some scanning antivirus products are known to
+have a major impact on build times. For example, if you have cloned
+<code class="docutils literal notranslate"><span class="pre">mozilla-unified</span></code> successfully but <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">build</span></code> fails, reporting
+a missing file, you are likely experiencing this problem. Our
+regression tests, for well-known security bugs, can include code
+samples that some antivirus software will identify as a threat, and
+will either quarantine or otherwise corrupt the files involved. To
+resolve this you will need to add your source and object directories
+(the <code class="docutils literal notranslate"><span class="pre">mozilla-source</span></code> and <code class="docutils literal notranslate"><span class="pre">mozilla-build</span></code>
+directories) to the
+<a class="reference external" href="https://support.microsoft.com/en-ca/help/4028485/windows-10-add-an-exclusion-to-windows-security">exclusion list in Windows Defender</a>
+or your antivirus software. If you are missing files, revert your source
+tree with the <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">update</span> <span class="pre">-C</span></code> command. Once this is done your next
+<code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">build</span></code> should complete successfully.</p></li>
+</ul>
+</div>
+<div class="section" id="installing-visual-studio-in-a-different-language-than-the-system-can-cause-issues">
+<h4>Installing Visual Studio in a different language than the system can cause issues<a class="headerlink" href="#installing-visual-studio-in-a-different-language-than-the-system-can-cause-issues" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>For example, having Visual Studio in French when the system is in
+English causes the build to spew a lot of include errors and finishes
+with a link error.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note:</strong> <strong>Mozilla will not build</strong> if the path to the installation
+tool folders contains <strong>spaces</strong> or other breaking characters such as
+pluses, quotation marks, or metacharacters.  The Visual Studio tools and
+SDKs are an exception - they may be installed in a directory which
+contains spaces. It is strongly recommended that you accept the default
+settings for all installation locations.</p>
+</div>
+</div>
+</div>
+<div class="section" id="mozillabuild-package">
+<h3>MozillaBuild package<a class="headerlink" href="#mozillabuild-package" title="Permalink to this headline">¶</a></h3>
+<p>The MozillaBuild package contains other software prerequisites necessary
+for building Mozilla, including the MSYS build environment,
+<a class="reference external" href="https://www.mercurial-scm.org/">Mercurial</a>, CVS, Python, YASM, NSIS, and UPX,
+as well as optional but useful tools such as wget and emacs.</p>
+<p><a class="reference external" href="https://ftp.mozilla.org/pub/mozilla.org/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe">Download the current MozillaBuild
+package.</a></p>
+<p>By default, the package installs to <code class="docutils literal notranslate"><span class="pre">c:\mozilla-build</span></code> and it is
+recommended to use the default path. Don’t use a path that contains
+spaces. The installer does not modify the Windows registry. Note that
+some binaries may require <a class="reference external" href="https://www.microsoft.com/downloads/en/details.aspx?FamilyID=a5c84275-3b97-4ab7-a40d-3802b2af5fc2&amp;displaylang=en">Visual C++ Redistributable
+package</a> to
+run.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>MozillaBuild command prompt expectation setting:</strong> Note that the
+“UNIX-like” environment provided by MozillaBuild is only really useful
+for building and committing to the Mozilla source. Most command line
+tools you would expect in a modern Linux distribution are not present,
+and those tools that are provided can be as much as a decade or so old
+(especially those provided by MSYS). It’s the old tools in particular
+that can cause problems since they often don’t behave as expected, are
+buggy, or don’t support command line arguments that have been taken for
+granted for years. For example, copying a source tree using
+<code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-rf</span> <span class="pre">src1</span> <span class="pre">src2</span></code> does not work correctly because of an old version
+of cp (it gives “cp: will not create hard link” errors for some files).
+In short, MozillaBuild supports essential developer interactions with
+the Mozilla code, but beyond that don’t be surprised if it trips you up
+in all sorts of exciting and unexpected ways.</p>
+</div>
+</div>
+<div class="section" id="opening-a-mozillabuild-command-prompt">
+<h3>Opening a MozillaBuild command prompt<a class="headerlink" href="#opening-a-mozillabuild-command-prompt" title="Permalink to this headline">¶</a></h3>
+<p>After the prerequisites are installed, launch
+the <code class="docutils literal notranslate"><span class="pre">start-shell.bat</span></code> batch file using the Windows command
+prompt in the directory to which you installed MozillaBuild
+(<code class="docutils literal notranslate"><span class="pre">c:\mozilla-build</span></code> by default). This will launch an MSYS/BASH command
+prompt properly configured to build Firefox. All further commands should
+be executed in this command prompt window. (Note that this is not the
+same as what you get with the Windows CMD.EXE shell.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: This is not the same as what you get with the Windows CMD.EXE
+shell.</p>
+</div>
+</div>
+<div class="section" id="create-a-directory-for-the-source">
+<h3>Create a directory for the source<a class="headerlink" href="#create-a-directory-for-the-source" title="Permalink to this headline">¶</a></h3>
+<p><strong>Note:</strong> You won’t be able to build the Firefox source code if it’s
+under a directory with spaces in the path such as “Documents and
+Settings”. You can pick any other location, such as a new directory
+c:/mozilla-source or c:/thunderbird-src. The build command prompt also
+tolerates “c:\” and “/c/”, but the former gives confusion in the
+Windows command prompt, and the latter is misinterpreted by some tools
+(at least MOZ_OBJDIR). The “C:/” syntax helps draw attention that the
+<strong>MozillaBuild</strong> command prompt is assumed from here on out since it
+provides configured environment and tools.</p>
+<p>It’s a sensible idea to create a new shallow directory, like
+“c:/mozilla-source” dedicated solely to the
+code:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> c:/<span class="p">;</span> mkdir mozilla-source<span class="p">;</span> <span class="nb">cd</span> mozilla-source
+</pre></div>
+</div>
+<p>Keeping in mind the diagnostic hints below should you have issues. You
+are now ready to get the Firefox source and build.</p>
+</div>
+</div>
+<div class="section" id="command-prompt-tips-and-caveats">
+<h2>Command prompt tips and caveats<a class="headerlink" href="#command-prompt-tips-and-caveats" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>To paste into this window, you must right-click on the window’s title
+bar, move your cursor to the “Edit” menu, and click “Paste”. You can
+also set “Quick Edit Mode” in the “Properties” menu and right-click
+the window to paste your selection.</p></li>
+<li><p>If you have Cygwin installed, make sure that the MozillaBuild
+directories come before any Cygwin directories in the search path
+enhanced by <code class="docutils literal notranslate"><span class="pre">start-shell-msvc2015.bat</span></code> (use <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$PATH</span></code> to see
+your search path).</p></li>
+<li><p>In the MSYS / BASH shell started by <code class="docutils literal notranslate"><span class="pre">start-shell-msvc2015.bat</span></code>,
+UNIX-style forward slashes (/) are used as path separators instead of
+the Windows-style backward slashes (\).  So if you want to change to
+the directory <code class="docutils literal notranslate"><span class="pre">c:\mydir</span></code>, in the MSYS shell to improve clarity, you
+would use <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/c/mydir</span> <span class="pre">``though</span> <span class="pre">both</span> <span class="pre">``c:\mydir</span></code> and <code class="docutils literal notranslate"><span class="pre">c:/mydir</span></code>
+are supported.</p></li>
+<li><p>The MSYS root directory is located in <code class="docutils literal notranslate"><span class="pre">/c/mozilla-build/msys</span></code> if
+you used the default installation directory. It’s a good idea not to
+build anything under this directory. Instead use something like
+<code class="docutils literal notranslate"><span class="pre">/c/mydir</span></code>.</p></li>
+</ul>
+</div>
+<div class="section" id="common-problems-hints-and-restrictions">
+<h2>Common problems, hints, and restrictions<a class="headerlink" href="#common-problems-hints-and-restrictions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../contributing/debugging/debugging_on_windows.html#debugging-on-windows"><span class="std std-ref">Debugging Firefox on Windows FAQ</span></a>:
+Tips on how to debug Mozilla on Windows.</p></li>
+<li><p>Your installed MozillaBuild may be too old. The build system may
+assume you have new features and bugfixes that are only present in
+newer versions of MozillaBuild. Instructions for how to update
+MozillaBuild <a class="reference external" href="https://wiki.mozilla.org/MozillaBuild">can be found
+here</a>.</p></li>
+<li><p>If the bootstrapping script <code class="docutils literal notranslate"><span class="pre">bootstrap.py</span></code> fails, you can also try running
+<code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">clone</span> <span class="pre">https://hg.mozilla.org/mozilla-unified</span></code> followed by
+<code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">mozilla-unified;</span> <span class="pre">./mach</span> <span class="pre">bootstrap</span></code> yourself.</p></li>
+<li><p>The build may fail if your machine is configured with the wrong
+architecture. If you want to build 64-bit Firefox, add the two lines
+below to your mozconfig file:</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ac_add_options --target<span class="o">=</span>x86_64-pc-mingw32
+ac_add_options --host<span class="o">=</span>x86_64-pc-mingw32
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The build may fail if your <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment variable contains
+quotation marks(“). Quotes are not properly translated when passed
+down to MozillaBuild sub-shells and they are usually not needed so
+they can be removed.</p></li>
+<li><p>The build may fail if you have a <code class="docutils literal notranslate"><span class="pre">PYTHON</span></code> environment variable set.
+It displays an error almost immediately that says
+“<code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">system</span> <span class="pre">cannot</span> <span class="pre">find</span> <span class="pre">the</span> <span class="pre">file</span> <span class="pre">specified</span></code>.” Typing
+“<code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">PYTHON</span></code>” before running the Mozilla build tools in the same
+command shell should fix this. Make sure that <code class="docutils literal notranslate"><span class="pre">PYTHON</span></code> is unset,
+rather than set to an empty value.</p></li>
+<li><p>The build may fail if you have Cygwin installed. Make sure that the
+MozillaBuild directories (<code class="docutils literal notranslate"><span class="pre">/c/mozilla-build</span></code> and subdirectories)
+come before any Cygwin directories in your PATH environment variable.
+If this does not help, remove the Cygwin directories from PATH, or
+try building on a clean PC with no Cygwin.</p></li>
+<li><p>Building with versions of NSIS other than the version that comes with
+the latest supported version of MozillaBuild is not supported and
+will likely fail.</p></li>
+<li><p>If you intend to distribute your build to others, set
+<code class="docutils literal notranslate"><span class="pre">WIN32_REDIST_DIR=$VCINSTALLDIR\redist\x86\Microsoft.VC141.CRT</span></code> in
+your mozconfig to get the Microsoft CRT DLLs packaged along with the
+application. Note the exact .CRT file may depend on your Visual
+Studio version.</p></li>
+<li><p>The Microsoft Antimalware service can interfere with compilation,
+often manifesting as an error related to <code class="docutils literal notranslate"><span class="pre">conftest.exe</span></code> during
+build. To remedy this, add at your object directory at least to the
+exclusion settings.</p></li>
+<li><p>Errors like “second C linkage of overloaded function
+‘_interlockedbittestandset’ not allowed”, are encountered when
+intrin.h and windows.h are included together. Use a <em>#define</em> to
+redefine one instance of the function’s name.</p></li>
+<li><p>Parallel builds (<code class="docutils literal notranslate"><span class="pre">-jN</span></code>) do not work with GNU makes on Windows. You
+should use the <code class="docutils literal notranslate"><span class="pre">mozmake</span></code> command included with current versions of
+MozillaBuild. Building with the <code class="docutils literal notranslate"><span class="pre">mach</span></code> command will always use the
+best available make command.</p></li>
+<li><p>If you encounter a build failure like “ERROR: Cannot find
+makecab.exe”, try applying the patch from <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1383578">bug
+1383578</a>,
+i.e. change: <code class="docutils literal notranslate"><span class="pre">SET</span> <span class="pre">PATH=&quot;%PATH%;!LLVMDIR!\bin&quot;</span></code>  to
+<code class="docutils literal notranslate"><span class="pre">SET</span> <span class="pre">&quot;PATH=%PATH%;!LLVMDIR!\bin&quot;</span></code>.</p></li>
+<li><p>If you encounter a build failure with
+<code class="docutils literal notranslate"><span class="pre">LINK:</span> <span class="pre">fatal</span> <span class="pre">error</span> <span class="pre">LNK1181:</span> <span class="pre">cannot</span> <span class="pre">open</span> <span class="pre">input</span> <span class="pre">file</span> <span class="pre">..\..\..\..\..\security\nss3.lib</span></code>,
+it may be related to your clone of <code class="docutils literal notranslate"><span class="pre">mozilla-unified</span></code> being located
+in the Users folder (possibly encrypted). Try moving it outside of
+the Users folder. The docs recommend
+<code class="docutils literal notranslate"><span class="pre">C:\mozilla-source\mozilla-unified</span></code> which should work.</p></li>
+<li><p>If you encounter a build failure with
+<code class="docutils literal notranslate"><span class="pre">ERROR:</span> <span class="pre">GetShortPathName</span> <span class="pre">returned</span> <span class="pre">a</span> <span class="pre">long</span> <span class="pre">path</span> <span class="pre">name.</span></code>.You need
+create a 8dot3name short name for the path which has space.For
+example : fsutil file setshortname “C:\Program Files (x86)”
+PROGRA~2.  If you got “access denied”, try to restart your computer
+to safe mode and try again.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="macos_build.html" class="btn btn-neutral float-right" title="Building Firefox On MacOS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_set_up.html" class="btn btn-neutral float-left" title="Welcome to the Firefox codebase!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

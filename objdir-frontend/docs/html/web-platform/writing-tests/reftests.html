@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reftests &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Writing a reftest" href="reftest-tutorial.html" />
+    <link rel="prev" title="Rendering Test Guidelines" href="rendering.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">web-platform-tests documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#github">GitHub</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#table-of-contents">Table of Contents</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Writing Tests</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#test-types">Test Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#submitting-tests">Submitting Tests</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reviewing-tests/index.html">Reviewing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">web-platform-tests documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Writing Tests</a> &raquo;</li>
+        
+      <li>Reftests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/web-platform/writing-tests/reftests.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reftests">
+<h1>Reftests<a class="headerlink" href="#reftests" title="Permalink to this headline">¶</a></h1>
+<p>Reftests are one of the primary tools for testing things relating to
+rendering; they are made up of the test and one or more other pages
+(“references”) with assertions as to whether they render identically
+or not. This page describes their aspects exhaustively; <a class="reference internal" href="reftest-tutorial.html"><span class="doc">the tutorial
+on writing a reftest</span></a> offers a more limited but
+grounded guide to the process.</p>
+<div class="section" id="how-to-run-reftests">
+<h2>How to Run Reftests<a class="headerlink" href="#how-to-run-reftests" title="Permalink to this headline">¶</a></h2>
+<p>Reftests can be run manually simply by opening the test and the
+reference file in multiple windows or tabs and flipping between the
+two. In automation the comparison is done in an automated fashion,
+which can lead to differences hard for the human eye to notice to
+cause the test to fail.</p>
+</div>
+<div class="section" id="components-of-a-reftest">
+<h2>Components of a Reftest<a class="headerlink" href="#components-of-a-reftest" title="Permalink to this headline">¶</a></h2>
+<p>In the simplest case, a reftest consists of a pair of files called the
+<em>test</em> and the <em>reference</em>.</p>
+<p>The <em>test</em> file is the one that makes use of the technology being
+tested. It also contains a <code class="docutils literal notranslate"><span class="pre">link</span></code> element with <code class="docutils literal notranslate"><span class="pre">rel=&quot;match&quot;</span></code> or
+<code class="docutils literal notranslate"><span class="pre">rel=&quot;mismatch&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute pointing to the <em>reference</em>
+file, e.g. <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=match</span> <span class="pre">href=references/green-box-ref.html&gt;</span></code>. A
+<code class="docutils literal notranslate"><span class="pre">match</span></code> test only passes if the two files render pixel-for-pixel
+identically within a 800x600 window <em>including</em> scroll-bars if
+present; a <code class="docutils literal notranslate"><span class="pre">mismatch</span></code> test only passes if they <em>don’t</em> render
+identically.</p>
+<p>The <em>reference</em> file is typically written to be as simple as possible,
+and does not use the technology under test. It is desirable that the
+reference be rendered correctly even in UAs with relatively poor
+support for CSS and no support for the technology under test.</p>
+</div>
+<div class="section" id="writing-a-good-reftest">
+<h2>Writing a Good Reftest<a class="headerlink" href="#writing-a-good-reftest" title="Permalink to this headline">¶</a></h2>
+<p>In general the files used in a reftest should follow
+the <a class="reference internal" href="general-guidelines.html"><span class="doc">general guidelines</span></a> and
+the <a class="reference internal" href="rendering.html"><span class="doc">rendering test guidelines</span></a>. They should also be
+self-describing, to allow a human to determine whether the the
+rendering is as expected.</p>
+<p>References can be shared between tests; this is strongly encouraged as
+it makes it easier to tell at a glance whether a test passes (through
+familiarity) and enables some optimizations in automated test
+runners. Shared references are typically placed in <code class="docutils literal notranslate"><span class="pre">references</span></code>
+directories, either alongside the tests they are expected to be useful
+for or at the top level if expected to be generally applicable (e.g.,
+many layout tests can be written such that the correct rendering is a
+100x100 green square!). For references that are applicable only to a
+single test, it is recommended to use the test name with a suffix of
+<code class="docutils literal notranslate"><span class="pre">-ref</span></code> as their filename; e.g., <code class="docutils literal notranslate"><span class="pre">test.html</span></code> would have <code class="docutils literal notranslate"><span class="pre">test-ref.html</span></code>
+as a reference.</p>
+</div>
+<div class="section" id="multiple-references">
+<h2>Multiple References<a class="headerlink" href="#multiple-references" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, a test’s pass condition cannot be captured in a single
+reference.</p>
+<p>If a test has multiple links, then the test passes if:</p>
+<ul class="simple">
+<li><p>If there are any match references, at least one must match, and</p></li>
+<li><p>If there are any mismatch references, all must mismatch.</p></li>
+</ul>
+<p>If you need multiple matches to succeed, these can be turned into
+multiple tests (for example, by just having a reference be a test
+itself!). If this seems like an unreasonable restriction, please file
+a bug and let us know!</p>
+</div>
+<div class="section" id="controlling-when-comparison-occurs">
+<h2>Controlling When Comparison Occurs<a class="headerlink" href="#controlling-when-comparison-occurs" title="Permalink to this headline">¶</a></h2>
+<p>By default, reftest screenshots are taken after the following
+conditions are met:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">load</span></code> event has fired</p></li>
+<li><p>Web fonts (if any) are loaded</p></li>
+<li><p>Pending paints have completed</p></li>
+</ul>
+<p>In some cases it is necessary to delay the screenshot later than this,
+for example because some DOM manipulation is required to set up the
+desired test conditions. To enable this, the test may have a
+<code class="docutils literal notranslate"><span class="pre">class=&quot;reftest-wait&quot;</span></code> attribute specified on the root element. In
+this case the harness will run the following sequence of steps:</p>
+<ul class="simple">
+<li><p>Wait for the <code class="docutils literal notranslate"><span class="pre">load</span></code> event to fire and fonts to load.</p></li>
+<li><p>Wait for pending paints to complete.</p></li>
+<li><p>Fire an event named <code class="docutils literal notranslate"><span class="pre">TestRendered</span></code> at the root element, with the
+<code class="docutils literal notranslate"><span class="pre">bubbles</span></code> attribute set to true.</p></li>
+<li><p>Wait for the <code class="docutils literal notranslate"><span class="pre">reftest-wait</span></code> class to be removed from the root
+element.</p></li>
+<li><p>Wait for pending paints to complete.</p></li>
+<li><p>Screenshot the viewport.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">TestRendered</span></code> event provides a hook for tests to make
+modifications to the test document that are not batched into the
+initial layout/paint.</p>
+</div>
+<div class="section" id="fuzzy-matching">
+<h2>Fuzzy Matching<a class="headerlink" href="#fuzzy-matching" title="Permalink to this headline">¶</a></h2>
+<p>In some situations a test may have subtle differences in rendering
+compared to the reference due to, e.g., anti-aliasing. To allow for
+these small differences, we allow tests to specify a fuzziness
+characterised by two parameters, both of which must be specified:</p>
+<ul class="simple">
+<li><p>A maximum difference in the per-channel color value for any pixel.</p></li>
+<li><p>A number of total pixels that may be different.</p></li>
+</ul>
+<p>The maximum difference in the per pixel color value is formally
+defined as follows: let <code>T<sub>x,y,c</sub></code> be the value of
+colour channel <code class="docutils literal notranslate"><span class="pre">c</span></code> at pixel coordinates <code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> in the test image and
+<code>R<sub>x,y,c</sub></code> be the corresponding value in the
+reference image, and let <code>width</code> and <code>height</code> be
+the dimensions of the image in pixels. Then <code>maxDifference =
+max<sub>x=[0,width) y=[0,height), c={r,g,b}</sub>(|T<sub>x,y,c</sub> -
+R<sub>x,y,c</sub>|)</code>.</p>
+<p>To specify the fuzziness in the test file one may add a <code class="docutils literal notranslate"><span class="pre">&lt;meta</span> <span class="pre">name=fuzzy&gt;</span></code> element (or, in the case of more complex tests, to any
+page containing the <code class="docutils literal notranslate"><span class="pre">&lt;link</span> <span class="pre">rel=[mis]match&gt;</span></code> elements). In the simplest
+case this has a <code class="docutils literal notranslate"><span class="pre">content</span></code> attribute containing the parameters above,
+separated by a colon e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="n">fuzzy</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;maxDifference=15;totalPixels=300&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>would allow for a  difference of exactly 15 / 255 on any color channel
+and 300 exactly pixels total difference. The argument names are optional
+and may be elided; the above is the same as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="n">fuzzy</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;15;300&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The values may also be given as ranges e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="n">fuzzy</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;maxDifference=10-15;totalPixels=200-300&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="n">fuzzy</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;10-15;200-300&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In this case the maximum pixel difference must be in the range
+<code class="docutils literal notranslate"><span class="pre">10-15</span></code> and the total number of different pixels must be in the range
+<code class="docutils literal notranslate"><span class="pre">200-300</span></code>.</p>
+<p>In cases where a single test has multiple possible refs and the
+fuzziness is not the same for all refs, a ref may be specified by
+prefixing the <code class="docutils literal notranslate"><span class="pre">content</span></code> value with the relative url for the ref e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">meta</span> <span class="n">name</span><span class="o">=</span><span class="n">fuzzy</span> <span class="n">content</span><span class="o">=</span><span class="s2">&quot;option1-ref.html:10-15;200-300&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>One meta element is required per reference requiring a unique
+fuzziness value, but any unprefixed value will automatically be
+applied to any ref that doesn’t have a more specific value.</p>
+</div>
+<div class="section" id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h2>
+<p>In some cases, a test cannot be a reftest. For example, there is no
+way to create a reference for underlining, since the position and
+thickness of the underline depends on the UA, the font, and/or the
+platform. However, once it’s established that underlining an inline
+element works, it’s possible to construct a reftest for underlining
+a block element, by constructing a reference using underlines on a
+<code class="docutils literal notranslate"><span class="pre">&lt;span&gt;</span></code> that wraps all the content inside the block.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="reftest-tutorial.html" class="btn btn-neutral float-right" title="Writing a reftest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rendering.html" class="btn btn-neutral float-left" title="Rendering Test Guidelines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

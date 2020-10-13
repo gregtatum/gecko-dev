@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugger.Frame &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugger.Memory" href="Debugger.Memory.html" />
+    <link rel="prev" title="Debugger.Environment" href="Debugger.Environment.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugger.Frame</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#visible-frames">Visible Frames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invocation-functions-and-debugger-frames">Invocation Functions and “debugger” Frames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suspended-frames">Suspended Frames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stepping-into-generators-the-initial-yield">Stepping Into Generators: The “Initial Yield”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessor-properties-of-the-debugger-frame-prototype-object">Accessor Properties of the Debugger.Frame Prototype Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handler-methods-of-debugger-frame-instances">Handler Methods of Debugger.Frame Instances</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-properties-of-the-debugger-frame-prototype-object">Function Properties of the Debugger.Frame Prototype Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>Debugger.Frame</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Debugger.Frame.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugger-frame">
+<h1>Debugger.Frame<a class="headerlink" href="#debugger-frame" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance represents a <a class="reference external" href="#visible-frames">visible stack frame</a>. Given a
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance, you can find the script the frame is executing,
+walk the stack to older frames, find the lexical environment in which the
+execution is taking place, and so on.</p>
+<p>For a given <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance, SpiderMonkey creates
+only one <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance for a given visible frame. Every handler
+method called while the debuggee is running in a given frame is given the
+same frame object. Similarly, walking the stack back to a previously
+accessed frame yields the same frame object as before. Debugger code can
+add its own properties to a frame object and expect to find them later, use
+<code class="docutils literal notranslate"><span class="pre">==</span></code> to decide whether two expressions refer to the same frame, and so on.</p>
+<p>(If more than one <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance is debugging the
+same code, each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> gets a separate
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance for a given frame. This allows the code using
+each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance to place whatever properties it
+likes on its <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instances, without worrying about interfering
+with other debuggers.)</p>
+<p>When the debuggee pops a stack frame (say, because a function call has
+returned or an exception has been thrown from it), the <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code>
+instance referring to that frame becomes inactive: its <code class="docutils literal notranslate"><span class="pre">onStack</span></code> property
+becomes <code class="docutils literal notranslate"><span class="pre">false</span></code>, and accessing its many properties or calling its methods
+throws an exception. Note that frames only become inactive at times that
+are predictable for the debugger: when the debuggee runs, or when the
+debugger removes frames from the stack itself.</p>
+<div class="section" id="visible-frames">
+<h2>Visible Frames<a class="headerlink" href="#visible-frames" title="Permalink to this headline">¶</a></h2>
+<p>When inspecting the call stack, <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> does not
+reveal all the frames that are actually present on the stack: while it does
+reveal all frames running debuggee code, it omits frames running the
+debugger’s own code, and omits most frames running non-debuggee code. We
+call those stack frames a <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> does reveal
+<i>visible frames</i>.</p>
+<p>A frame is a visible frame if any of the following are true:</p>
+<ul class="simple">
+<li><p>it is running <a class="reference external" href="Conventions.html#debuggee-code">debuggee code</a>;</p></li>
+<li><p>its immediate caller is a frame running debuggee code; or</p></li>
+<li><p>it is a <a class="reference external" href="#invocation-functions-and-debugger-frames"><code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frame</a>,
+representing the continuation of debuggee code invoked by the debugger.</p></li>
+</ul>
+<p>The “immediate caller” rule means that, when debuggee code calls a
+non-debuggee function, it looks like a call to a primitive: you see a frame
+for the non-debuggee function that was accessible to the debuggee, but any
+further calls that function makes are treated as internal details, and
+omitted from the stack trace. If the non-debuggee function eventually calls
+back into debuggee code, then those frames are visible.</p>
+<p>(Note that the debuggee is not considered an “immediate caller” of handler
+methods it triggers. Even though the debuggee and debugger share the same
+JavaScript stack, frames pushed for SpiderMonkey’s calls to handler methods
+to report events in the debuggee are never considered visible frames.)</p>
+</div>
+<div class="section" id="invocation-functions-and-debugger-frames">
+<h2>Invocation Functions and “debugger” Frames<a class="headerlink" href="#invocation-functions-and-debugger-frames" title="Permalink to this headline">¶</a></h2>
+<p>An <i>invocation function</i> is any function in this interface that allows
+the debugger to invoke code in the debuggee:
+<code class="docutils literal notranslate"><span class="pre">Debugger.Object.prototype.call</span></code>, <code class="docutils literal notranslate"><span class="pre">Debugger.Frame.prototype.eval</span></code>, and so
+on.</p>
+<p>While invocation functions differ in the code to be run and how to pass
+values to it, they all follow this general procedure:</p>
+<ol class="simple">
+<li><p>Let <i>older</i> be the youngest visible frame on the stack, or <code class="docutils literal notranslate"><span class="pre">null</span></code>
+if there is no such frame. (This is never one of the the debugger’s own
+frames; those never appear as <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instances.)</p></li>
+<li><p>Push a <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frame on the stack, with <i>older</i> as its
+<code class="docutils literal notranslate"><span class="pre">older</span></code> property.</p></li>
+<li><p>Invoke the debuggee code as appropriate for the given invocation
+function, with the <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frame as its continuation. For example,
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame.prototype.eval</span></code> pushes an <code class="docutils literal notranslate"><span class="pre">&quot;eval&quot;</span></code> frame for code it
+runs, whereas <code class="docutils literal notranslate"><span class="pre">Debugger.Object.prototype.call</span></code> pushes a <code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code> frame.</p></li>
+<li><p>When the debuggee code completes, whether by returning, throwing an
+exception or being terminated, pop the <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frame, and return an
+appropriate <a class="reference external" href="Conventions.html#completion-values">completion value</a> from the invocation function to the
+debugger.</p></li>
+</ol>
+<p>When a debugger calls an invocation function to run debuggee code, that
+code’s continuation is the debugger, not the next debuggee code frame.
+Pushing a <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frame makes this continuation explicit, and makes it
+easier to find the extent of the stack created for the invocation.</p>
+</div>
+<div class="section" id="suspended-frames">
+<h2>Suspended Frames<a class="headerlink" href="#suspended-frames" title="Permalink to this headline">¶</a></h2>
+<p>Some frames can be <em>suspended</em>.</p>
+<p>When a generator <code class="docutils literal notranslate"><span class="pre">yield</span></code>s a value, or when an async function <code class="docutils literal notranslate"><span class="pre">await</span></code>s a
+value, the current frame is suspended and removed from the stack, and
+other JS code has a chance to run. Later (if the <code class="docutils literal notranslate"><span class="pre">await</span></code>ed promise
+becomes resolved, for example), SpiderMonkey will <em>resume</em> the frame. It
+will be put back onto the stack, and execution will continue where it
+left off. Only generator and async function call frames can be suspended
+and resumed.</p>
+<p>Currently, a frame’s <code class="docutils literal notranslate"><span class="pre">onStack</span></code> property is <code class="docutils literal notranslate"><span class="pre">false</span></code> while it’s suspended
+(<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1448880">bug 1448880</a>).</p>
+<p>SpiderMonkey uses the same <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> object each time a generator
+or async function call is put back onto the stack. This means that the
+<code class="docutils literal notranslate"><span class="pre">onStep</span></code> handler can be used to step over <code class="docutils literal notranslate"><span class="pre">yield</span></code> and <code class="docutils literal notranslate"><span class="pre">await</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">frame.onPop</span></code> handler is called each time a frame is suspended, and
+the <code class="docutils literal notranslate"><span class="pre">Debugger.onEnterFrame</span></code> handler is called each time a frame is
+resumed. (This means these events can fire multiple times for the same
+<code class="docutils literal notranslate"><span class="pre">Frame</span></code> object, which is odd, but accurately conveys what’s happening.)</p>
+<p>The <a class="reference external" href="Conventions.html#completion-values">completion value</a> passed to the <code class="docutils literal notranslate"><span class="pre">frame.onPop</span></code> handler for a suspension
+contains additional properties to clarify what’s going on. See the documentation
+for completion values for details.</p>
+</div>
+<div class="section" id="stepping-into-generators-the-initial-yield">
+<h2>Stepping Into Generators: The “Initial Yield”<a class="headerlink" href="#stepping-into-generators-the-initial-yield" title="Permalink to this headline">¶</a></h2>
+<p>When a debuggee generator is called, something weird happens. The
+<code class="docutils literal notranslate"><span class="pre">.onEnterFrame</span></code> hook fires, as though we’re stepping into the generator.
+But the code inside the generator doesn’t run. Instead it immediately
+returns. Then we sometimes get <em>another</em> <code class="docutils literal notranslate"><span class="pre">.onEnterFrame</span></code> event for the
+same generator. What’s going on?</p>
+<p>To explain this, we first have to describe how generator calls work,
+according to the ECMAScript language specification. Note that except for
+step 3, it’s exactly like a regular function call.</p>
+<ol class="simple">
+<li><p>An “execution context” (what we call a <code class="docutils literal notranslate"><span class="pre">Frame</span></code>) is pushed to the stack.</p></li>
+<li><p>An environment is created (for arguments and local variables).
+Argument-default-value-expressions, if any, are evaluated.</p></li>
+<li><p>A generator object is created, initially suspended at the start of the generator body.</p></li>
+<li><p>The stack frame is popped, and the generator object is returned to the caller.</p></li>
+</ol>
+<p>The JavaScript engine actually carries out these steps, in this order.
+So when a debuggee generator is called, here’s what you’ll observe:</p>
+<ol class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">debugger.onEnterFrame</span></code> hook fires.</p></li>
+<li><p>The debugger can step through the argument-default-value code, if any.</p></li>
+<li><p>The body of the generator does not run yet. Instead, a generator object
+is created and suspended (which does not fire any debugger events).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">frame.onPop</span></code> hook fires, with a completion value of
+<code class="docutils literal notranslate"><span class="pre">{return:</span></code> <em>(the new generator object)</em> <code class="docutils literal notranslate"><span class="pre">}</span></code>.</p></li>
+</ol>
+<p>In SpiderMonkey, this process of suspending and returning a new
+generator object is called the “initial yield”.</p>
+<p>If the caller then uses the generator’s <code class="docutils literal notranslate"><span class="pre">.next()</span></code> method, which may or
+may not happen right away depending on the debuggee code, the suspended
+generator will be resumed, firing <code class="docutils literal notranslate"><span class="pre">.onEnterFrame</span></code> again.</p>
+</div>
+<div class="section" id="accessor-properties-of-the-debugger-frame-prototype-object">
+<h2>Accessor Properties of the Debugger.Frame Prototype Object<a class="headerlink" href="#accessor-properties-of-the-debugger-frame-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance inherits the following accessor properties from
+its prototype:</p>
+<div class="section" id="type">
+<h3><code class="docutils literal notranslate"><span class="pre">type</span></code><a class="headerlink" href="#type" title="Permalink to this headline">¶</a></h3>
+<p>A string describing what sort of frame this is:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code>: a frame running a function call. (We may not be able to obtain
+frames for calls to host functions.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;eval&quot;</span></code>: a frame running code passed to <code class="docutils literal notranslate"><span class="pre">eval</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;global&quot;</span></code>: a frame running global code (JavaScript that is neither of
+the above).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;module&quot;</span></code>: a frame running code at the top level of a module.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;wasmcall&quot;</span></code>: a frame running a WebAssembly function call.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code>: a frame for a call to user code invoked by the debugger
+(see the <code class="docutils literal notranslate"><span class="pre">eval</span></code> method below).</p></li>
+</ul>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="implementation">
+<h3><code class="docutils literal notranslate"><span class="pre">implementation</span></code><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>A string describing which tier of the JavaScript engine this frame is
+executing in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;interpreter&quot;</span></code>: a frame running in the interpreter.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;baseline&quot;</span></code>: a frame running in the unoptimizing, baseline JIT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;ion&quot;</span></code>: a frame running in the optimizing JIT.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>: a frame running in WebAssembly baseline JIT.</p></li>
+</ul>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.onStack</span> <span class="pre">==</span> <span class="pre">false</span></code>.</p>
+</div>
+<div class="section" id="this">
+<h3><code class="docutils literal notranslate"><span class="pre">this</span></code><a class="headerlink" href="#this" title="Permalink to this headline">¶</a></h3>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">this</span></code> for this frame (a debuggee value). For a <code class="docutils literal notranslate"><span class="pre">wasmcall</span></code>
+frame, this property throws a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="older">
+<h3><code class="docutils literal notranslate"><span class="pre">older</span></code><a class="headerlink" href="#older" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> for the next-older visible frame, in which control will
+resume when this frame completes. If there is no older frame, this is <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+If there an explicitly inserted asynchronous stack trace above this frame,
+this is <code class="docutils literal notranslate"><span class="pre">null</span></code>, since the explicit saved frame takes priority.
+If this frame is a suspended generator or async call, this will also be <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="oldersavedframe">
+<h3><code class="docutils literal notranslate"><span class="pre">olderSavedFrame</span></code><a class="headerlink" href="#oldersavedframe" title="Permalink to this headline">¶</a></h3>
+<p>If this frame has no <code class="docutils literal notranslate"><span class="pre">older</span></code> frame, this field may hold a <a class="reference internal" href="../SavedFrame/index.html"><span class="doc">SavedFrame</span></a>
+object representing the saved asynchronous stack that triggered execution of
+this <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="onstack">
+<h3><code class="docutils literal notranslate"><span class="pre">onStack</span></code><a class="headerlink" href="#onstack" title="Permalink to this headline">¶</a></h3>
+<p>True if the frame this <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance refers to is still on
+the stack; false if it has completed execution or been popped in some other way.
+Note that this property may be accessed regardless of what state the frame is
+in, so it can be used to verify whether it is safe to access other properties
+that require an on-stack frame.</p>
+</div>
+<div class="section" id="terminated">
+<h3><code class="docutils literal notranslate"><span class="pre">terminated</span></code><a class="headerlink" href="#terminated" title="Permalink to this headline">¶</a></h3>
+<p>True if the frame this <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance refers to will never run
+again; false if it is on-stack or is a suspended generator/async call that
+may be resumed later. Note that this property may be accessed regardless of
+what state the frame is in, so it can be used to verify whether it is safe to
+access other properties that require a non-terminated frame.</p>
+</div>
+<div class="section" id="script">
+<h3><code class="docutils literal notranslate"><span class="pre">script</span></code><a class="headerlink" href="#script" title="Permalink to this headline">¶</a></h3>
+<p>The script being executed in this frame (a <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a>
+instance), or <code class="docutils literal notranslate"><span class="pre">null</span></code> on frames that do not represent calls to debuggee
+code. On frames whose <code class="docutils literal notranslate"><span class="pre">callee</span></code> property is not null, this is equal to
+<code class="docutils literal notranslate"><span class="pre">callee.script</span></code>.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="offset">
+<h3><code class="docutils literal notranslate"><span class="pre">offset</span></code><a class="headerlink" href="#offset" title="Permalink to this headline">¶</a></h3>
+<p>The offset of the bytecode instruction currently being executed in
+<code class="docutils literal notranslate"><span class="pre">script</span></code>, or <code class="docutils literal notranslate"><span class="pre">undefined</span></code> if the frame’s <code class="docutils literal notranslate"><span class="pre">script</span></code> property is <code class="docutils literal notranslate"><span class="pre">null</span></code>.
+For a <code class="docutils literal notranslate"><span class="pre">wasmcall</span></code> frame, this property throws a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>If this is used on a suspended function frame, the offset will reference
+the offset where the frame will be resumed.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="environment">
+<h3><code class="docutils literal notranslate"><span class="pre">environment</span></code><a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h3>
+<p>The lexical environment within which evaluation is taking place (a
+<a class="reference internal" href="Debugger.Environment.html"><span class="doc">Debugger.Environment</span></a> instance), or <code class="docutils literal notranslate"><span class="pre">null</span></code> on frames
+that do not represent the evaluation of debuggee code, like calls
+non-debuggee functions, host functions or <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frames.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="callee">
+<h3><code class="docutils literal notranslate"><span class="pre">callee</span></code><a class="headerlink" href="#callee" title="Permalink to this headline">¶</a></h3>
+<p>The function whose application created this frame, as a debuggee value,
+or <code class="docutils literal notranslate"><span class="pre">null</span></code> if this is not a <code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code> frame.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="constructing">
+<h3><code class="docutils literal notranslate"><span class="pre">constructing</span></code><a class="headerlink" href="#constructing" title="Permalink to this headline">¶</a></h3>
+<p>True if this frame is for a function called as a constructor, false
+otherwise.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+<div class="section" id="arguments">
+<h3><code class="docutils literal notranslate"><span class="pre">arguments</span></code><a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h3>
+<p>The arguments passed to the current frame, or <code class="docutils literal notranslate"><span class="pre">null</span></code> if this is not a
+<code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code> frame. When non-<code class="docutils literal notranslate"><span class="pre">null</span></code>, this is an object, allocated in the
+same global as the debugger, with <code class="docutils literal notranslate"><span class="pre">Array.prototype</span></code> on its prototype
+chain, a non-writable <code class="docutils literal notranslate"><span class="pre">length</span></code> property, and properties whose names are
+array indices. Each property is a read-only accessor property whose
+getter returns the current value of the corresponding parameter. When
+the referent frame is popped, the argument value’s properties’ getters
+throw an error.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.onStack</span> <span class="pre">==</span> <span class="pre">false</span></code>.</p>
+</div>
+<div class="section" id="asyncpromise">
+<h3><code class="docutils literal notranslate"><span class="pre">asyncPromise</span></code><a class="headerlink" href="#asyncpromise" title="Permalink to this headline">¶</a></h3>
+<p>If the frame is not an async (generator) function, this will be <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>For async functions, this will be a <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> whose referent
+is the promise for async function call’s return value. Note that this
+property will be <code class="docutils literal notranslate"><span class="pre">null</span></code> if the value is accessed during <code class="docutils literal notranslate"><span class="pre">onEnterFrame</span></code>,
+since the promise doesn’t exist yet at that point.</p>
+<p>For async generator functions, this will be a <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a>
+whose referent is the promise for the current iteration’s “value”+”done” object,
+which will be resolved when the generator next throws/yields/returns.
+Note that this will be <code class="docutils literal notranslate"><span class="pre">null</span></code> if the value is accessed during the initial
+generator <code class="docutils literal notranslate"><span class="pre">onEnterFrame</span></code>/<code class="docutils literal notranslate"><span class="pre">onPop</span></code> (before the first <code class="docutils literal notranslate"><span class="pre">.next</span></code> call),
+since there is no promise yet at that point.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.terminated</span> <span class="pre">==</span> <span class="pre">true</span></code>.</p>
+</div>
+</div>
+<div class="section" id="handler-methods-of-debugger-frame-instances">
+<h2>Handler Methods of Debugger.Frame Instances<a class="headerlink" href="#handler-methods-of-debugger-frame-instances" title="Permalink to this headline">¶</a></h2>
+<p>Each <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance inherits accessor properties holding handler
+functions for SpiderMonkey to call when given events occur in the frame.</p>
+<p>Calls to frames’ handler methods are cross-compartment, intra-thread calls:
+the call takes place in the thread to which the frame belongs, and runs in
+the compartment to which the handler method belongs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instances inherit the following handler method properties:</p>
+<div class="section" id="onstep">
+<h3><code class="docutils literal notranslate"><span class="pre">onStep</span></code><a class="headerlink" href="#onstep" title="Permalink to this headline">¶</a></h3>
+<p>This property must be either <code class="docutils literal notranslate"><span class="pre">undefined</span></code> or a function. If it is a
+function, SpiderMonkey calls it when execution in this frame makes a
+small amount of progress, passing no arguments and providing this
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance as the <code class="docutils literal notranslate"><span class="pre">this</span></code>value. The function should
+return a <a class="reference external" href="Conventions.html#resumption-values">resumption value</a> specifying how the debuggee’s execution
+should proceed.</p>
+<p>What constitutes “a small amount of progress” varies depending on the
+implementation, but it is fine-grained enough to implement useful
+“step” and “next” behavior.</p>
+<p>If multiple <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instances each have
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instances for a given stack frame with <code class="docutils literal notranslate"><span class="pre">onStep</span></code>
+handlers set, their handlers are run in an unspecified order. If any
+<code class="docutils literal notranslate"><span class="pre">onStep</span></code> handler forces the frame to return early (by returning a
+resumption value other than <code class="docutils literal notranslate"><span class="pre">undefined</span></code>), any remaining debuggers’
+<code class="docutils literal notranslate"><span class="pre">onStep</span></code> handlers do not run.</p>
+<p>This property is ignored on frames that are not executing debuggee
+code, like <code class="docutils literal notranslate"><span class="pre">&quot;call&quot;</span></code> frames for calls to host functions and <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code>
+frames.</p>
+<p>Accessing and reassigning this property is allowed independent of whether
+or not the frame is currently on-stack/suspended/terminated.</p>
+</div>
+<div class="section" id="onpop">
+<h3><code class="docutils literal notranslate"><span class="pre">onPop</span></code><a class="headerlink" href="#onpop" title="Permalink to this headline">¶</a></h3>
+<p>This property must be either <code class="docutils literal notranslate"><span class="pre">undefined</span></code> or a function. If it is a function,
+SpiderMonkey calls it just before this frame is popped or suspended, passing
+a <a class="reference external" href="Conventions.html#completion-values">completion value</a> indicating the reason, and providing this
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance as the <code class="docutils literal notranslate"><span class="pre">this</span></code> value. The function should return a
+<a class="reference external" href="Conventions.html#resumption-values">resumption value</a> indicating how execution should proceed. On newly
+created frames, this property’s value is <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>When this handler is called, this frame’s current execution location, as
+reflected in its <code class="docutils literal notranslate"><span class="pre">offset</span></code> and <code class="docutils literal notranslate"><span class="pre">environment</span></code> properties, is the operation
+which caused it to be unwound. In frames returning or throwing an exception,
+the location is often a return or a throw statement. In frames propagating
+exceptions, the location is a call. In generator or async function frames,
+the location may be a <code class="docutils literal notranslate"><span class="pre">yield</span></code> or <code class="docutils literal notranslate"><span class="pre">await</span></code> expression.</p>
+<p>When an <code class="docutils literal notranslate"><span class="pre">onPop</span></code> call reports the completion of a construction call
+(that is, a function called via the <code class="docutils literal notranslate"><span class="pre">new</span></code> operator), the completion
+value passed to the handler describes the value returned by the
+function body. If this value is not an object, it may be different from
+the value produced by the <code class="docutils literal notranslate"><span class="pre">new</span></code> expression, which will be the value of
+the frame’s <code class="docutils literal notranslate"><span class="pre">this</span></code> property. (In ECMAScript terms, the <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler
+receives the value returned by the <code class="docutils literal notranslate"><span class="pre">[[Call]]</span></code> method, not the value
+returned by the <code class="docutils literal notranslate"><span class="pre">[[Construct]]</span></code> method.)</p>
+<p>When a debugger handler function forces a frame to complete early, by
+returning a <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">return:...</span> <span class="pre">}</span></code>, <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">throw:...</span> <span class="pre">}</span></code>, or <code class="docutils literal notranslate"><span class="pre">null</span></code> resumption
+value, SpiderMonkey calls the frame’s <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler, if any. The
+completion value passed in this case reflects the resumption value that
+caused the frame to complete.</p>
+<p>When SpiderMonkey calls an <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler for a frame that is throwing
+an exception or being terminated, and the handler returns <code class="docutils literal notranslate"><span class="pre">undefined</span></code>,
+then SpiderMonkey proceeds with the exception or termination. That is,
+an <code class="docutils literal notranslate"><span class="pre">undefined</span></code> resumption value leaves the frame’s throwing and
+termination process undisturbed.</p>
+<p>If multiple <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instances each have
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instances for a given stack frame with <code class="docutils literal notranslate"><span class="pre">onPop</span></code>
+handlers set, their handlers are run in an unspecified order. The
+resumption value each handler returns establishes the completion value
+reported to the next handler.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">onPop</span></code> handler is typically called only once for a given
+<code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code>, after which the frame becomes inactive. However, in the
+case of <a class="reference external" href="#suspended-frames">generators and async functions</a>, <code class="docutils literal notranslate"><span class="pre">onPop</span></code> fires
+each time the frame is suspended.</p>
+<p>This handler is not called on <code class="docutils literal notranslate"><span class="pre">&quot;debugger&quot;</span></code> frames. It is also not called
+when unwinding a frame due to an over-recursion or out-of-memory
+exception.</p>
+<p>Accessing and reassigning this property is allowed independent of whether
+or not the frame is currently on-stack/suspended/terminated.</p>
+</div>
+</div>
+<div class="section" id="function-properties-of-the-debugger-frame-prototype-object">
+<h2>Function Properties of the Debugger.Frame Prototype Object<a class="headerlink" href="#function-properties-of-the-debugger-frame-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>The functions described below may only be called with a <code class="docutils literal notranslate"><span class="pre">this</span></code> value
+referring to a <code class="docutils literal notranslate"><span class="pre">Debugger.Frame</span></code> instance; they may not be used as
+methods of other kinds of objects.</p>
+<div class="section" id="eval-code-options">
+<h3><code class="docutils literal notranslate"><span class="pre">eval(code,</span> <span class="pre">[options])</span></code><a class="headerlink" href="#eval-code-options" title="Permalink to this headline">¶</a></h3>
+<p>Evaluate <i>code</i> in the execution context of this frame, and return
+a <a class="reference external" href="Conventions.html#completion-values">completion value</a> describing how it completed. <i>Code</i> is a
+string. If this frame’s <code class="docutils literal notranslate"><span class="pre">environment</span></code> property is <code class="docutils literal notranslate"><span class="pre">null</span></code> or <code class="docutils literal notranslate"><span class="pre">type</span></code> property
+is <code class="docutils literal notranslate"><span class="pre">wasmcall</span></code>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>. All extant handler methods, breakpoints,
+and so on remain active during the call. This function follows the
+<a class="reference external" href="#invocation-functions-and-debugger-frames">invocation function conventions</a>.</p>
+<p><i>Code</i> is interpreted as strict mode code when it contains a Use
+Strict Directive, or the code executing in this frame is strict mode
+code.</p>
+<p>If <i>code</i> is not strict mode code, then variable declarations in
+<i>code</i> affect the environment of this frame. (In the terms used by
+the ECMAScript specification, the <code class="docutils literal notranslate"><span class="pre">VariableEnvironment</span></code> of the
+execution context for the eval code is the <code class="docutils literal notranslate"><span class="pre">VariableEnvironment</span></code> of the
+execution context that this frame represents.) If implementation
+restrictions prevent SpiderMonkey from extending this frame’s
+environment as requested, this call throws an Error exception.</p>
+<p>If given, <i>options</i> should be an object whose properties specify
+details of how the evaluation should occur. The <code class="docutils literal notranslate"><span class="pre">eval</span></code> method
+recognizes the following properties:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">url</span></code></p>
+<p>The filename or URL to which we should attribute <i>code</i>. If this
+property is omitted, the URL defaults to <code class="docutils literal notranslate"><span class="pre">&quot;debugger</span> <span class="pre">eval</span> <span class="pre">code&quot;</span></code>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lineNumber</span></code></p>
+<p>The line number at which the evaluated code should be claimed to begin
+within <i>url</i>.</p>
+</li>
+</ul>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.onStack</span> <span class="pre">==</span> <span class="pre">false</span></code>.</p>
+</div>
+<div class="section" id="evalwithbindings-code-bindings-options">
+<h3><code class="docutils literal notranslate"><span class="pre">evalWithBindings(code,</span> <span class="pre">bindings,</span> <span class="pre">[options])</span></code><a class="headerlink" href="#evalwithbindings-code-bindings-options" title="Permalink to this headline">¶</a></h3>
+<p>Like <code class="docutils literal notranslate"><span class="pre">eval</span></code>, but evaluate <i>code</i> in the environment of this frame,
+extended with bindings from the object <i>bindings</i>. For each own
+enumerable property of <i>bindings</i> named <i>name</i> whose value is
+<i>value</i>, include a variable in the environment in which
+<i>code</i> is evaluated named <i>name</i>, whose value is
+<i>value</i>. Each <i>value</i> must be a debuggee value. (This is not
+like a <code class="docutils literal notranslate"><span class="pre">with</span></code> statement: <i>code</i> may access, assign to, and delete
+the introduced bindings without having any effect on the
+<i>bindings</i> object.)</p>
+<p>This method allows debugger code to introduce temporary bindings that
+are visible to the given debuggee code and which refer to debugger-held
+debuggee values, and do so without mutating any existing debuggee
+environment.</p>
+<p>Note that, like <code class="docutils literal notranslate"><span class="pre">eval</span></code>, declarations in the <i>code</i> passed to
+<code class="docutils literal notranslate"><span class="pre">evalWithBindings</span></code> affect the environment of this frame, even as that
+environment is extended by bindings visible within <i>code</i>. (In the
+terms used by the ECMAScript specification, the <code class="docutils literal notranslate"><span class="pre">VariableEnvironment</span></code>
+of the execution context for the eval code is the <code class="docutils literal notranslate"><span class="pre">VariableEnvironment</span></code>
+of the execution context that this frame represents, and the
+<i>bindings</i> appear in a new declarative environment, which is the
+eval code’s <code class="docutils literal notranslate"><span class="pre">LexicalEnvironment</span></code>.) If implementation restrictions
+prevent SpiderMonkey from extending this frame’s environment as
+requested, this call throws an <code class="docutils literal notranslate"><span class="pre">Error</span></code> exception.</p>
+<p>The <i>options</i> argument is as for
+<a class="reference external" href="#eval-code-options"><code class="docutils literal notranslate"><span class="pre">Debugger.Frame.prototype.eval</span></code></a>, described above.
+Also like <code class="docutils literal notranslate"><span class="pre">eval</span></code>, if this frame’s <code class="docutils literal notranslate"><span class="pre">environment</span></code> property is <code class="docutils literal notranslate"><span class="pre">null</span></code> or
+<code class="docutils literal notranslate"><span class="pre">type</span></code> property is <code class="docutils literal notranslate"><span class="pre">wasmcall</span></code>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<p>Note: If this method is called on an object whose owner
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger object</span></a> has an onNativeCall handler, only hooks
+on objects associated with that debugger will be called during the evaluation.</p>
+<p>Accessing this property will throw if <code class="docutils literal notranslate"><span class="pre">.onStack</span> <span class="pre">==</span> <span class="pre">false</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger.Memory.html" class="btn btn-neutral float-right" title="Debugger.Memory" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Debugger.Environment.html" class="btn btn-neutral float-left" title="Debugger.Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

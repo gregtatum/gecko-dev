@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interacting with Web content &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Working with Site Permissions" href="permissions.html" />
+    <link rel="prev" title="Getting Started with GeckoView" href="geckoview-quick-start.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Using GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#usage-documentation">Usage Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="geckoview-quick-start.html">Getting Started with GeckoView</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Interacting with Web content</a></li>
+<li class="toctree-l4"><a class="reference internal" href="permissions.html">Working with Site Permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automation.html">Configuring GeckoView for Automation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../contributor/index.html">Contributing to GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Using GeckoView</a> &raquo;</li>
+        
+      <li>Interacting with Web content</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/consumer/web-extensions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="interacting-with-web-content">
+<h1>Interacting with Web content<a class="headerlink" href="#interacting-with-web-content" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="interacting-with-web-content-and-webextensions">
+<h2>Interacting with Web content and WebExtensions<a class="headerlink" href="#interacting-with-web-content-and-webextensions" title="Permalink to this headline">¶</a></h2>
+<p>GeckoView allows embedder applications to register and run
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions">WebExtensions</a>
+in a GeckoView instance. Extensions are the preferred way to interact
+with Web content.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#running-extensions-in-geckoview" id="id8">Running extensions in GeckoView</a></p></li>
+<li><p><a class="reference internal" href="#communicating-with-web-content" id="id9">Communicating with Web Content</a></p>
+<ul>
+<li><p><a class="reference internal" href="#one-off-messages" id="id10">One-off messages</a></p></li>
+<li><p><a class="reference internal" href="#messaging-example" id="id11">Messaging Example</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id12">Example</a></p>
+<ul>
+<li><p><a class="reference internal" href="#activity-java" id="id13">Activity.java</a></p></li>
+<li><p><a class="reference internal" href="#assets-messaging-manifest-json" id="id14">/assets/messaging/manifest.json</a></p></li>
+<li><p><a class="reference internal" href="#assets-messaging-messaging-js" id="id15">/assets/messaging/messaging.js</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#connection-based-messaging" id="id16">Connection-based messaging</a></p>
+<ul>
+<li><p><a class="reference internal" href="#assets-messaging-background-js" id="id17">/assets/messaging/background.js</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="running-extensions-in-geckoview">
+<h3><a class="toc-backref" href="#id8">Running extensions in GeckoView</a><a class="headerlink" href="#running-extensions-in-geckoview" title="Permalink to this headline">¶</a></h3>
+<p>Extensions bundled with applications can be provided in a folder in the
+<code class="docutils literal notranslate"><span class="pre">/assets</span></code> section of the APK. Like ordinary extensions, every
+extension bundled with GeckoView requires a
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json">manifest.json</a>
+file.</p>
+<p>To locate files bundled with the APK, GeckoView provides a shorthand
+<code class="docutils literal notranslate"><span class="pre">resource://android/</span></code> that points to the root of the APK.</p>
+<p>E.g. <code class="docutils literal notranslate"><span class="pre">resource://android/assets/messaging/</span></code> will point to the
+<code class="docutils literal notranslate"><span class="pre">/assets/messaging/</span></code> folder present in the APK.</p>
+<p>Note: Every installed extension will need an
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/browser_specific_settings">id</a>
+and
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/version">version</a>
+specified in the <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code> file.</p>
+<p>To install a bundled extension in GeckoView, simply call
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.html">WebExtensionController.installBuiltIn</a>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">runtime</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+  <span class="p">.</span><span class="na">installBuiltIn</span><span class="p">(</span><span class="s">&quot;resource://android/assets/messaging/&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the lifetime of the extension is not tied with the lifetime of
+the
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/GeckoRuntime.html">GeckoRuntime</a>
+instance. The extension persists even when your app is restarted.
+Installing at every start up is fine, but it could be slow. To avoid
+installing multiple times you can use <code class="docutils literal notranslate"><span class="pre">WebExtensionRuntime.ensureBuiltIn</span></code>,
+which will only install if the extension is not installed yet.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">runtime</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+  <span class="p">.</span><span class="na">ensureBuiltIn</span><span class="p">(</span><span class="s">&quot;resource://android/assets/messaging/&quot;</span><span class="p">,</span> <span class="s">&quot;messaging@example.com&quot;</span><span class="p">)</span>
+  <span class="p">.</span><span class="na">accept</span><span class="p">(</span>
+        <span class="n">extension</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">.</span><span class="na">i</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Extension installed: &quot;</span> <span class="o">+</span> <span class="n">extension</span><span class="p">),</span>
+        <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Error registering WebExtension&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="communicating-with-web-content">
+<h3><a class="toc-backref" href="#id9">Communicating with Web Content</a><a class="headerlink" href="#communicating-with-web-content" title="Permalink to this headline">¶</a></h3>
+<p>GeckoView allows bidirectional communication with Web pages through
+extensions.</p>
+<p>When using GeckoView, <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging#Exchanging_messages">native
+messaging</a>
+can be used for communicating to and from the browser.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/sendNativeMessage">runtime.sendNativeMessage</a>
+for one-off messages.</p></li>
+<li><p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/connectNative">runtime.connectNative</a>
+for connection-based messaging.</p></li>
+</ul>
+<p>Note: these APIs are only available when the <code class="docutils literal notranslate"><span class="pre">geckoViewAddons</span></code>
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions">permission</a>
+is present in the <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code> file of the extension.</p>
+<div class="section" id="one-off-messages">
+<h4><a class="toc-backref" href="#id10">One-off messages</a><a class="headerlink" href="#one-off-messages" title="Permalink to this headline">¶</a></h4>
+<p>The easiest way to send messages from a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts">content
+script</a>
+or a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Anatomy_of_a_WebExtension#Background_scripts">background
+script</a>
+is using
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/sendNativeMessage">runtime.sendNativeMessage</a>.</p>
+<p>Note: Ordinarily, native extensions would use a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging#App_manifest">native
+manifest</a>
+to define what native app identifier to use. For GeckoView this is <em>not</em>
+needed, the <code class="docutils literal notranslate"><span class="pre">nativeApp</span></code> parameter in <code class="docutils literal notranslate"><span class="pre">setMessageDelegate</span></code> will be
+use to determine what native app string is used.</p>
+</div>
+<div class="section" id="messaging-example">
+<h4><a class="toc-backref" href="#id11">Messaging Example</a><a class="headerlink" href="#messaging-example" title="Permalink to this headline">¶</a></h4>
+<p>To receive messages from the background script, call
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.html#setMessageDelegate-org.mozilla.geckoview.WebExtension.MessageDelegate-java.lang.String-">setMessageDelegate</a>
+on the
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.html">WebExtension</a>
+object.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">extension</span><span class="p">.</span><span class="na">setMessageDelegate</span><span class="p">(</span><span class="n">messageDelegate</span><span class="p">,</span> <span class="s">&quot;browser&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/GeckoSession.html#setMessageDelegate-org.mozilla.geckoview.WebExtension.MessageDelegate-java.lang.String-">SessionController.setMessageDelegate</a>
+allows the app to receive messages from content scripts.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">session</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+    <span class="p">.</span><span class="na">setMessageDelegate</span><span class="p">(</span><span class="n">extension</span><span class="p">,</span> <span class="n">messageDelegate</span><span class="p">,</span> <span class="s">&quot;browser&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note: the <code class="docutils literal notranslate"><span class="pre">&quot;browser&quot;</span></code> parameter in the code above determines what
+native app id the extension can use to send native messages.</p>
+<p>Note: extension can only send messages from content scripts if
+explicitly authorized by the app by adding
+<code class="docutils literal notranslate"><span class="pre">nativeMessagingFromContent</span></code> in the manifest.json file, e.g.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>&quot;permissions&quot;: [
+  &quot;nativeMessaging&quot;,
+  &quot;nativeMessagingFromContent&quot;,
+  &quot;geckoViewAddons&quot;
+]
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h4><a class="toc-backref" href="#id12">Example</a><a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<p>Let’s set up an activity that registers an extension located in the
+<code class="docutils literal notranslate"><span class="pre">/assets/messaging/</span></code> folder of the APK. This activity will set up a
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.MessageDelegate.html">MessageDelegate</a>
+that will be used to communicate with Web Content.</p>
+<p>You can find the full example here:
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/mobile/android/examples/messaging_example">MessagingExample</a>.</p>
+<div class="section" id="activity-java">
+<h5><a class="toc-backref" href="#id13">Activity.java</a><a class="headerlink" href="#activity-java" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageDelegate</span> <span class="n">messageDelegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageDelegate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nd">@Nullable</span>
+    <span class="kd">public</span> <span class="n">GeckoResult</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">onMessage</span><span class="p">(</span><span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">String</span> <span class="n">nativeApp</span><span class="p">,</span>
+                                         <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">Object</span> <span class="n">message</span><span class="p">,</span>
+                                         <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageSender</span> <span class="n">sender</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// The sender object contains information about the session that</span>
+        <span class="c1">// originated this message and can be used to validate that the message</span>
+        <span class="c1">// has been sent from the expected location.</span>
+
+        <span class="c1">// Be careful when handling the type of message as it depends on what</span>
+        <span class="c1">// type of object was sent from the WebExtension script.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="k">instanceof</span> <span class="n">JSONObject</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Do something with message</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// Let&#39;s make sure the extension is installed</span>
+<span class="n">runtime</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">ensureBuiltIn</span><span class="p">(</span><span class="n">EXTENSION_LOCATION</span><span class="p">,</span> <span class="s">&quot;messaging@example.com&quot;</span><span class="p">).</span><span class="na">accept</span><span class="p">(</span>
+            <span class="c1">// Set delegate that will receive messages coming from this extension.</span>
+            <span class="n">extension</span> <span class="o">-&gt;</span> <span class="n">session</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+                    <span class="p">.</span><span class="na">setMessageDelegate</span><span class="p">(</span><span class="n">extension</span><span class="p">,</span> <span class="n">messageDelegate</span><span class="p">,</span> <span class="s">&quot;browser&quot;</span><span class="p">),</span>
+            <span class="c1">// Something bad happened, let&#39;s log an error</span>
+            <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Error registering extension&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">);</span>
+</pre></div>
+</div>
+<p>Now add the <code class="docutils literal notranslate"><span class="pre">geckoViewAddons</span></code>, <code class="docutils literal notranslate"><span class="pre">nativeMessaging</span></code> and
+<code class="docutils literal notranslate"><span class="pre">nativeMessagingFromContent</span></code> permissions to your <code class="docutils literal notranslate"><span class="pre">manifest.json</span></code>
+file.</p>
+</div>
+<div class="section" id="assets-messaging-manifest-json">
+<h5><a class="toc-backref" href="#id14">/assets/messaging/manifest.json</a><a class="headerlink" href="#assets-messaging-manifest-json" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;manifest_version&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;messaging&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Example messaging web extension.&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;browser_specific_settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;gecko&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;messaging@example.com&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;content_scripts&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;matches&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;*://*.twitter.com/*&quot;</span><span class="p">],</span>
+      <span class="nt">&quot;js&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;messaging.js&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;permissions&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;nativeMessaging&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nativeMessagingFromContent&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;geckoViewAddons&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>And finally, write a content script that will send a message to the app
+when a certain event occurs. For example, you could send a message
+whenever a <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Manifest">WPA
+manifest</a> is
+found on the page. Note that our <code class="docutils literal notranslate"><span class="pre">nativeApp</span></code> identifier used for
+<code class="docutils literal notranslate"><span class="pre">sendNativeMessage</span></code> is the same as the one used in the
+<code class="docutils literal notranslate"><span class="pre">setMessageDelegate</span></code> call in <a class="reference external" href="#activityjava">Activity.java</a>.</p>
+</div>
+<div class="section" id="assets-messaging-messaging-js">
+<h5><a class="toc-backref" href="#id15">/assets/messaging/messaging.js</a><a class="headerlink" href="#assets-messaging-messaging-js" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">manifest</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&quot;head &gt; link[rel=manifest]&quot;</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">manifest</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">fetch</span><span class="p">(</span><span class="nx">manifest</span><span class="p">.</span><span class="nx">href</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">json</span> <span class="p">=&gt;</span> <span class="p">{</span>
+             <span class="kd">let</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">{</span><span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;WPAManifest&quot;</span><span class="p">,</span> <span class="nx">manifest</span><span class="o">:</span> <span class="nx">json</span><span class="p">};</span>
+             <span class="nx">browser</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">sendNativeMessage</span><span class="p">(</span><span class="s2">&quot;browser&quot;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+        <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can handle this message in the <code class="docutils literal notranslate"><span class="pre">onMessage</span></code> method in the
+<code class="docutils literal notranslate"><span class="pre">messageDelegate</span></code> <a class="reference external" href="#activityjava">above</a>.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Nullable</span>
+<span class="kd">public</span> <span class="n">GeckoResult</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="nf">onMessage</span><span class="p">(</span><span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">String</span> <span class="n">nativeApp</span><span class="p">,</span>
+                                     <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">Object</span> <span class="n">message</span><span class="p">,</span>
+                                     <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageSender</span> <span class="n">sender</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">message</span> <span class="k">instanceof</span> <span class="n">JSONObject</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">JSONObject</span> <span class="n">json</span> <span class="o">=</span> <span class="p">(</span><span class="n">JSONObject</span><span class="p">)</span> <span class="n">message</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="na">has</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="s">&quot;WPAManifest&quot;</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="na">getString</span><span class="p">(</span><span class="s">&quot;type&quot;</span><span class="p">)))</span> <span class="p">{</span>
+                <span class="n">JSONObject</span> <span class="n">manifest</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="na">getJSONObject</span><span class="p">(</span><span class="s">&quot;manifest&quot;</span><span class="p">);</span>
+                <span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Found WPA manifest: &quot;</span> <span class="o">+</span> <span class="n">manifest</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Invalid manifest&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note that, in the case of content scripts, <code class="docutils literal notranslate"><span class="pre">sender.session</span></code> will be a
+reference to the <code class="docutils literal notranslate"><span class="pre">GeckoSession</span></code> instance from which the message
+originated. For background scripts, <code class="docutils literal notranslate"><span class="pre">sender.session</span></code> will always be
+<code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>Also note that the type of <code class="docutils literal notranslate"><span class="pre">message</span></code> will depend on what was sent from
+the extension.</p>
+<p>The type of <code class="docutils literal notranslate"><span class="pre">message</span></code> will be <code class="docutils literal notranslate"><span class="pre">JSONObject</span></code> when the extension sends
+a javascript object, but could also be a primitive type if the extension
+sends one, e.g. for</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">runtime</span><span class="p">.</span><span class="nx">browser</span><span class="p">.</span><span class="nx">sendNativeMessage</span><span class="p">(</span><span class="s2">&quot;browser&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>the type of <code class="docutils literal notranslate"><span class="pre">message</span></code> will be <code class="docutils literal notranslate"><span class="pre">java.util.String</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="connection-based-messaging">
+<h3><a class="toc-backref" href="#id16">Connection-based messaging</a><a class="headerlink" href="#connection-based-messaging" title="Permalink to this headline">¶</a></h3>
+<p>For more complex scenarios or for when you want to send messages <em>from</em>
+the app to the extension,
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/connectNative">runtime.connectNative</a>
+is the appropriate API to use.</p>
+<p><code class="docutils literal notranslate"><span class="pre">connectNative</span></code> returns a
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/Port">runtime.Port</a>
+that can be used to send messages to the app. On the app side,
+implementing
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.MessageDelegate.html#onConnect-org.mozilla.geckoview.WebExtension.Port-">MessageDelegate#onConnect</a>
+will allow you to receive a
+<a class="reference external" href="https://mozilla.github.io/geckoview/javadoc/mozilla-central/org/mozilla/geckoview/WebExtension.Port.html">Port</a>
+object that can be used to receive and send messages to the extension.</p>
+<p>The following example can be found
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/mobile/android/examples/port_messaging_example">here</a>.</p>
+<p>For this example, the extension side will do the following:</p>
+<ul class="simple">
+<li><p>open a port on the background script using <code class="docutils literal notranslate"><span class="pre">connectNative</span></code></p></li>
+<li><p>listen on the port and log to console every message received</p></li>
+<li><p>send a message immediately after opening the port.</p></li>
+</ul>
+<div class="section" id="assets-messaging-background-js">
+<h4><a class="toc-backref" href="#id17">/assets/messaging/background.js</a><a class="headerlink" href="#assets-messaging-background-js" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Establish connection with app</span>
+<span class="kd">let</span> <span class="nx">port</span> <span class="o">=</span> <span class="nx">browser</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">connectNative</span><span class="p">(</span><span class="s2">&quot;browser&quot;</span><span class="p">);</span>
+<span class="nx">port</span><span class="p">.</span><span class="nx">onMessage</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Let&#39;s just echo the message back</span>
+    <span class="nx">port</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="sb">`Received: </span><span class="si">${</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">port</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="s2">&quot;Hello from WebExtension!&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>On the app side, following the <a class="reference external" href="#activityjava">above</a> example,
+<code class="docutils literal notranslate"><span class="pre">onConnect</span></code> will be storing the <code class="docutils literal notranslate"><span class="pre">Port</span></code> object in a member variable
+and then using it when needed.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">Port</span> <span class="n">mPort</span><span class="p">;</span>
+
+<span class="nd">@Override</span>
+<span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">Bundle</span> <span class="n">savedInstanceState</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ... initialize GeckoView</span>
+
+    <span class="c1">// This delegate will handle all communications from and to a specific Port</span>
+    <span class="c1">// object</span>
+    <span class="n">WebExtension</span><span class="p">.</span><span class="na">PortDelegate</span> <span class="n">portDelegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">PortDelegate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">public</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">Port</span> <span class="n">port</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onPortMessage</span><span class="p">(</span><span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">Object</span> <span class="n">message</span><span class="p">,</span>
+                                  <span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">Port</span> <span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// This method will be called every time a message is sent from the</span>
+            <span class="c1">// extension through this port. For now, let&#39;s just log a</span>
+            <span class="c1">// message.</span>
+            <span class="n">Log</span><span class="p">.</span><span class="na">d</span><span class="p">(</span><span class="s">&quot;PortDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Received message from WebExtension: &quot;</span>
+                    <span class="o">+</span> <span class="n">message</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onDisconnect</span><span class="p">(</span><span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">Port</span> <span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// After this method is called, this port is not usable anymore.</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">port</span> <span class="o">==</span> <span class="n">mPort</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">mPort</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="c1">// This delegate will handle requests to open a port coming from the</span>
+    <span class="c1">// extension</span>
+    <span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageDelegate</span> <span class="n">messageDelegate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">MessageDelegate</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nd">@Nullable</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onConnect</span><span class="p">(</span><span class="kd">final</span> <span class="nd">@NonNull</span> <span class="n">WebExtension</span><span class="p">.</span><span class="na">Port</span> <span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Let&#39;s store the Port object in a member variable so it can be</span>
+            <span class="c1">// used later to exchange messages with the WebExtension.</span>
+            <span class="n">mPort</span> <span class="o">=</span> <span class="n">port</span><span class="p">;</span>
+
+            <span class="c1">// Registering the delegate will allow us to receive messages sent</span>
+            <span class="c1">// through this port.</span>
+            <span class="n">mPort</span><span class="p">.</span><span class="na">setDelegate</span><span class="p">(</span><span class="n">portDelegate</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="n">runtime</span><span class="p">.</span><span class="na">getWebExtensionController</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">ensureBuiltIn</span><span class="p">(</span><span class="s">&quot;resource://android/assets/messaging/&quot;</span><span class="p">,</span> <span class="s">&quot;messaging@example.com&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">accept</span><span class="p">(</span>
+            <span class="c1">// Register message delegate for background script</span>
+            <span class="n">extension</span> <span class="o">-&gt;</span> <span class="n">extension</span><span class="p">.</span><span class="na">setMessageDelegate</span><span class="p">(</span><span class="n">messageDelegate</span><span class="p">,</span> <span class="s">&quot;browser&quot;</span><span class="p">),</span>
+            <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">Log</span><span class="p">.</span><span class="na">e</span><span class="p">(</span><span class="s">&quot;MessageDelegate&quot;</span><span class="p">,</span> <span class="s">&quot;Error registering WebExtension&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="p">);</span>
+
+    <span class="c1">// ... other</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For example, let’s send a message to the extension every time the user
+long presses on a key on the virtual keyboard, e.g. on the back button.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">onKeyLongPress</span><span class="p">(</span><span class="kt">int</span> <span class="n">keyCode</span><span class="p">,</span> <span class="n">KeyEvent</span> <span class="n">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">mPort</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// No extension registered yet, let&#39;s ignore this message</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">JSONObject</span> <span class="n">message</span> <span class="o">=</span> <span class="k">new</span> <span class="n">JSONObject</span><span class="p">();</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">message</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;keyCode&quot;</span><span class="p">,</span> <span class="n">keyCode</span><span class="p">);</span>
+        <span class="n">message</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;event&quot;</span><span class="p">,</span> <span class="n">KeyEvent</span><span class="p">.</span><span class="na">keyCodeToString</span><span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="na">getKeyCode</span><span class="p">()));</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">JSONException</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">mPort</span><span class="p">.</span><span class="na">postMessage</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This allows bidirectional communication between the app and the
+extension.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="permissions.html" class="btn btn-neutral float-right" title="Working with Site Permissions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="geckoview-quick-start.html" class="btn btn-neutral float-left" title="Getting Started with GeckoView" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

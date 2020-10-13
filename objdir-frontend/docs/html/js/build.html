@@ -1,0 +1,582 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Building SpiderMonkey &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Debugger API" href="Debugger/index.html" />
+    <link rel="prev" title="SpiderMonkey" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Building SpiderMonkey</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#developer-debug-build">Developer (debug) build</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#setting-up-a-mozconfig">Setting up a MOZCONFIG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#optimized-builds">Optimized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spidermonkey-on-android-aarch64">SpiderMonkey on Android aarch64</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#building-spidermonkey-on-android">Building SpiderMonkey on Android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-jit-tests-on-android">Running jit-tests on Android</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-jit-tests-on-android">Debugging jit-tests on Android</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cross-compiling">Cross-Compiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cross-architecture-testing-using-qemu">Cross-Architecture Testing using Qemu</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger/index.html">Debugger API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">SpiderMonkey</a> &raquo;</li>
+        
+      <li>Building SpiderMonkey</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/js/build.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="building-spidermonkey">
+<h1>Building SpiderMonkey<a class="headerlink" href="#building-spidermonkey" title="Permalink to this headline">¶</a></h1>
+<p><strong>Before you begin, make sure you have the right build tools for your
+computer:</strong></p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../setup/linux_build.html#building-firefox-on-linux"><span class="std std-ref">Building Firefox On Linux</span></a></p></li>
+<li><p><a class="reference internal" href="../setup/windows_build.html#building-firefox-on-windows"><span class="std std-ref">Building Firefox On Windows</span></a></p></li>
+<li><p><a class="reference internal" href="../setup/macos_build.html#building-firefox-on-macos"><span class="std std-ref">Building Firefox On MacOS</span></a></p></li>
+<li><p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Build_Instructions">Others</a></p></li>
+</ul>
+<p>This guide shows you how to build SpiderMonkey using <code class="docutils literal notranslate"><span class="pre">mach</span></code>, which is Mozilla’s multipurpose build tool.
+For builds using <code class="docutils literal notranslate"><span class="pre">configure</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span></code>, and translations into other languages see
+<a class="reference internal" href="#building-spidermonkey"><span class="std std-ref">these instructions on MDN</span></a>.</p>
+<p>These instructions assume you have a clone of <cite>mozilla-central</cite> and are interested
+in building the JS shell.</p>
+<div class="section" id="developer-debug-build">
+<h2>Developer (debug) build<a class="headerlink" href="#developer-debug-build" title="Permalink to this headline">¶</a></h2>
+<p>For developing and debugging SpiderMonkey itself, it is best to have
+both a debug build (for everyday debugging) and an optimized build (for
+performance testing), in separate build directories. We’ll start by
+covering how to create a debug build.</p>
+<div class="section" id="setting-up-a-mozconfig">
+<h3>Setting up a MOZCONFIG<a class="headerlink" href="#setting-up-a-mozconfig" title="Permalink to this headline">¶</a></h3>
+<p>First, we will create a <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> file. This file describes the characteristics
+of the build you’d like <cite>mach</cite> to create. Since it is likely you will have a
+couple of <code class="docutils literal notranslate"><span class="pre">MOZCONFIGs</span></code>, a directory like <code class="docutils literal notranslate"><span class="pre">$HOME/mozconfigs</span></code> is a useful thing to
+have.</p>
+<p>A basic <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> file for doing a debug build, put into <code class="docutils literal notranslate"><span class="pre">$HOME/mozconfigs/debug</span></code> looks like this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build only the JS shell</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">js</span>
+
+<span class="c1"># Disable Optimization, for the most accurate debugging experience</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">optimize</span>
+<span class="c1"># Enable the debugging tools: Assertions, debug only code etc.</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span>
+</pre></div>
+</div>
+<p>To activate a particular <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code>, set the environment variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>export MOZCONFIG=$HOME/mozconfigs/debug
+</pre></div>
+</div>
+</div>
+<div class="section" id="building">
+<h3>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h3>
+<p>Once you have activated a <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code> by setting the environment variable
+you can then ask <code class="docutils literal notranslate"><span class="pre">mach</span></code>, located in the top directory of your checkout,
+to do your build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd &lt;path to mozilla-central&gt;
+$ ./mach build
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Note</strong>: If you are on Mac and baldrdash fails to compile with something similar to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Cellar</span><span class="o">/</span><span class="n">llvm</span><span class="o">/</span><span class="mf">7.0</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">clang</span><span class="o">/</span><span class="mf">7.0</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">inttypes</span><span class="o">.</span><span class="n">h</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">15</span><span class="p">:</span> <span class="n">fatal</span> <span class="n">error</span><span class="p">:</span> <span class="s1">&#39;inttypes.h&#39;</span> <span class="n">file</span> <span class="ow">not</span> <span class="n">found</span>
+</pre></div>
+</div>
+<p>This is because, starting from Mojave, headers are no longer
+installed in <code class="docutils literal notranslate"><span class="pre">/usr/include</span></code>. Refer the <a class="reference external" href="https://developer.apple.com/documentation/xcode_release_notes/xcode_10_release_notes">release
+notes</a>  under
+Command Line Tools -&gt; New Features</p>
+<p>The release notes also states that this compatibility package will no longer be provided in the near
+future, so the build system on macOS will have to be adapted to look for headers in the SDK</p>
+<p>Until then, the following should help,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">Packages</span><span class="o">/</span><span class="n">macOS_SDK_headers_for_macOS_10</span><span class="o">.</span><span class="mf">14.</span><span class="n">pk</span>
+</pre></div>
+</div>
+</div>
+<p>Once you have successfully built the shell, you can run it using <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">run</span></code>.</p>
+</div>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+<p>Once built, you can then use <code class="docutils literal notranslate"><span class="pre">mach</span></code> to run the <code class="docutils literal notranslate"><span class="pre">jit-tests</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./mach jit-test
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="optimized-builds">
+<h2>Optimized Builds<a class="headerlink" href="#optimized-builds" title="Permalink to this headline">¶</a></h2>
+<p>To switch to an optimized build, one need only have an optimized build <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code>,
+and then activate it. An example <code class="docutils literal notranslate"><span class="pre">$HOME/mozconfigs/optimized</span></code> <code class="docutils literal notranslate"><span class="pre">MOZCONFIG</span></code>
+looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build only the JS shell</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">application</span><span class="o">=</span><span class="n">js</span>
+
+<span class="c1"># Enable optimization for speed</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">optimize</span>
+<span class="c1"># Enable the debugging tools: Assertions, debug only code etc.</span>
+<span class="c1"># For performance testing you would probably want to change this</span>
+<span class="c1"># to --disable-debug.</span>
+<span class="n">ac_add_options</span> <span class="o">--</span><span class="n">enable</span><span class="o">-</span><span class="n">debug</span>
+
+<span class="c1"># Use a separate objdir for optimized builds to allow easy</span>
+<span class="c1"># switching between optimized and debug builds while developing.</span>
+<span class="n">mk_add_options</span> <span class="n">MOZ_OBJDIR</span><span class="o">=</span><span class="nd">@TOPSRCDIR</span><span class="o">@/</span><span class="n">obj</span><span class="o">-</span><span class="n">opt</span><span class="o">-</span><span class="nd">@CONFIG_GUESS</span><span class="o">@</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spidermonkey-on-android-aarch64">
+<h2>SpiderMonkey on Android aarch64<a class="headerlink" href="#spidermonkey-on-android-aarch64" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="building-spidermonkey-on-android">
+<h3>Building SpiderMonkey on Android<a class="headerlink" href="#building-spidermonkey-on-android" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First, run <cite>mach bootstrap</cite> and answer <cite>GeckoView/Firefox for Android</cite> when
+asked which project you want to build. This will download a recent Android
+NDK, make sure all the build dependencies required to compile on Android are
+present, etc.</p></li>
+<li><p>Make sure that <cite>$MOZBUILD_DIR/android-sdk-linux/platform-tools</cite> is present in
+your <cite>PATH</cite> environment. You can do this by running the following line in a
+shell, or adding it to a shell profile init file:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export PATH=&quot;$PATH:~/.mozbuild/android-sdk-linux/platform-tools&quot;
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a typical <cite>mozconfig</cite> file for compiling SpiderMonkey, as outlined in
+the <span class="xref std std-ref">Setting up a MOZCONFIG</span> documentation, and include the following
+line:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ac_add_options</span> <span class="o">--</span><span class="n">target</span><span class="o">=</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">android</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Then compile as usual with <cite>mach compile</cite> with this <cite>MOZCONFIG</cite> file.</p></li>
+</ul>
+</div>
+<div class="section" id="running-jit-tests-on-android">
+<h3>Running jit-tests on Android<a class="headerlink" href="#running-jit-tests-on-android" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Plug your Android device to the machine which compiled the shell for aarch64
+as described above, or make sure it is on the same subnetwork as the host. It
+should appear in the list of devices seen by <cite>adb</cite>:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">devices</span>
+</pre></div>
+</div>
+<p>This command should show you a device ID with the name of the device. If it
+doesn’t, make sure that you have enabled Developer options on your device, as
+well as <a class="reference external" href="https://developer.android.com/studio/debug/dev-options">enabled USB debugging on the device</a>.</p>
+<ul class="simple">
+<li><p>Run <cite>mach jit-test –remote {JIT_TEST_ARGS}</cite> with the android-aarch64
+<cite>MOZCONFIG</cite> file. This will upload the JS shell and its dependencies to the
+Android device, in a temporary directory (<cite>/data/local/tmp/test_root/bin</cite> as
+of 2020-09-02). Then it will start running the jit-test suite.</p></li>
+</ul>
+</div>
+<div class="section" id="debugging-jit-tests-on-android">
+<h3>Debugging jit-tests on Android<a class="headerlink" href="#debugging-jit-tests-on-android" title="Permalink to this headline">¶</a></h3>
+<p>Debugging on Android uses the GDB remote debugging protocol, so we’ll set up a
+GDB server on the Android device, that is going to be controlled remotely by
+the host machine.</p>
+<ul class="simple">
+<li><p>Upload the <cite>gdbserver</cite> precompiled binary from the NDK from the host machine
+to the Android device, using this command on the host:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">push</span> \
+    <span class="o">~/.</span><span class="n">mozbuild</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">-</span><span class="n">r20</span><span class="o">/</span><span class="n">prebuilt</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">arm64</span><span class="o">/</span><span class="n">gdbserver</span><span class="o">/</span><span class="n">gdbserver</span> \
+    <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test_root</span><span class="o">/</span><span class="nb">bin</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Make sure that the <cite>ncurses5</cite> library is installed on the host. On
+Debian-like distros, this can be done with <cite>sudo apt install -y libncurses5</cite>.</p></li>
+<li><p>Set up port forwarding for the GDB port, from the Android device to the host,
+so we can connect to a local port from the host, without needing to find what
+the IP address of the Android device is:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">forward</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">5039</span> <span class="n">tcp</span><span class="p">:</span><span class="mi">5039</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Start <cite>gdbserver</cite> on the phone, passing the JS shell command line arguments
+to gdbserver:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">adb</span> <span class="n">shell</span> <span class="n">export</span> <span class="n">LD_LIBRARY_PATH</span><span class="o">=/</span><span class="n">data</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test_root</span><span class="o">/</span><span class="nb">bin</span> <span class="s1">&#39;&amp;&amp;&#39;</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test_root</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gdbserver</span> <span class="p">:</span><span class="mi">5039</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">test_root</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">js</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note this will make the gdbserver listen on the 5039 port on all the
+network interfaces. In particular, the gdbserver will be reachable from
+every other devices on the same networks as your phone. Since the gdbserver
+protocol is unsafe, it is strongly recommended to double-check that the
+gdbserver process has properly terminated when exiting the shell, and to
+not run it more than needed.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find the full command line that the <cite>jit_test.py</cite> script is
+using by giving it the <cite>-s</cite> parameter, and copy/paste it as the final
+argument to the gdbserver invocation above.</p>
+</div>
+<ul class="simple">
+<li><p>On the host, start the precompiled NDK version of GDB that matches your host
+architecture, passing it the path to the shell compiled with <cite>mach</cite> above:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">~/.</span><span class="n">mozbuild</span><span class="o">/</span><span class="n">android</span><span class="o">-</span><span class="n">ndk</span><span class="o">-</span><span class="n">r20</span><span class="o">/</span><span class="n">prebuilt</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">gdb</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">objdir</span><span class="o">-</span><span class="n">aarch64</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">android</span><span class="o">/</span><span class="n">dist</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">js</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Then connect remotely to the GDB server that’s listening on the Android
+device:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">target</span> <span class="n">remote</span> <span class="p">:</span><span class="mi">5039</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">continue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cross-compiling">
+<h2>Cross-Compiling<a class="headerlink" href="#cross-compiling" title="Permalink to this headline">¶</a></h2>
+<p>It is possible to cross-compile a SpiderMonkey shell binary for another
+architecture. For example, one can develop and compile on an x86 host while
+building a <code class="docutils literal notranslate"><span class="pre">js</span></code> binary for AArch64 (ARM64).</p>
+<p>Unlike the rest of this document, this section will use the old-style
+<code class="docutils literal notranslate"><span class="pre">configure</span></code> script.</p>
+<p>To do this, first you must install the appropriate cross-compiler and system
+libraries for the desired target. This is system- and distribution-specific.
+Look for a package such as (using AArch64 as an example)
+<code class="docutils literal notranslate"><span class="pre">aarch64-linux-gnu-gcc</span></code>. This document will assume that you have the
+appropriate compiler and libraries; you can test this by compiling a C or C++
+hello-world program.</p>
+<p>You will also need the appropriate Rust compiler target support installed. For
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rustup target add aarch64-unknown-linux-gnu
+</pre></div>
+</div>
+<p>Once you have these prerequisites installed, you simply need to set a few
+environment variables and configure the build appropriately:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd js/src/
+$ export CC=aarch64-linux-gnu-gcc  # adjust for target as appropriate.
+$ export CXX=aarch64-linux-gnu-g++
+$ export AR=aarch64-linux-gnu-ar
+$ export BINDGEN_CFLAGS=&quot;--sysroot /usr/aarch64-linux-gnu/sys-root&quot;
+$ mkdir BUILD_AARCH64.OBJ
+$ cd BUILD_AARCH64.OBJ/
+$ ../configure --target=aarch64-unknown-linux-gnu
+$ make
+</pre></div>
+</div>
+<p>This will produce a binary that is appropriate for the target architecture.
+Note that you will not be able to run this binary natively on your host system;
+to do so, keep reading to set up Qemu-based user-space emulation.</p>
+</div>
+<div class="section" id="cross-architecture-testing-using-qemu">
+<h2>Cross-Architecture Testing using Qemu<a class="headerlink" href="#cross-architecture-testing-using-qemu" title="Permalink to this headline">¶</a></h2>
+<p>It is sometimes desirable to test a cross-compiled binary directly. Unlike the
+target-ISA emulators that SpiderMonkey also supports, testing a cross-compiled
+binary ensures that the actual binary, running as it would on the target
+system, works appropriately. As far as the JS shell is concerned, it is running
+on the target ISA.</p>
+<p>This is possible using the Qemu emulator. Qemu supports a mode called
+“user-space emulation”, where an individual process executes a binary that
+targets a non-native ISA, and system calls are translated as appropriate to the
+host system. This allows transparent execution of cross-compiled binaries.</p>
+<p>To set this up, you will need Qemu (check your system package manager) and
+shared libraries for the target system. You will likely have the necessary
+shared libraries already if you cross-compiled as described above.</p>
+<p>Then, write a small wrapper script that invokes the JS shell under Qemu. For
+example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+
+# This is the binary compiled in the previous section.
+CROSS_BIN=`dirname $0`/BUILD_AARCH64.OBJ/dist/bin/js
+
+# Adjust the library path as needed; this is prefixed to paths such as
+# `/lib64/libc.so.64`, and so should contain `lib` (and perhaps `lib64`)
+# subdirectories.
+exec qemu-aarch64 -L /usr/aarch64-linux-gnu/sys-root/ $CROSS_BIN &quot;$@&quot;
+</pre></div>
+</div>
+<p>You can then invoke this wrapper as if it were a normal JS shell, and use it
+with <code class="docutils literal notranslate"><span class="pre">jit_test.py</span></code> to run tests:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ jit-test/jit_test.py ./js-cross-wrapper
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger/index.html" class="btn btn-neutral float-right" title="Debugger API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="SpiderMonkey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

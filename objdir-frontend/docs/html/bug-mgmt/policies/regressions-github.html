@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Regressions from GitHub &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Triage for Bugzilla" href="triage-bugzilla.html" />
+    <link rel="prev" title="New Feature Triage" href="new-feature-triage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bug Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#guides">Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#policies">Policies</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="new-feature-triage.html">New Feature Triage</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Regressions from GitHub</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#policy">Policy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#best-practices">Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="triage-bugzilla.html">Triage for Bugzilla</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processes">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#related-documentation">Related documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Bug Handling</a> &raquo;</li>
+        
+      <li>Regressions from GitHub</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/bug-mgmt/policies/regressions-github.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="regressions-from-github">
+<h1>Regressions from GitHub<a class="headerlink" href="#regressions-from-github" title="Permalink to this headline">¶</a></h1>
+<p>Release Management and the weekly regression triage must be aware of the
+status of all reported regressions in order to assure we are not
+shipping known regressions in Firefox releases.</p>
+<p>If a team is using GitHub to manage their part of the Firefox project,
+there’s a risk that those groups might not see a regression.</p>
+<p>We need an agreed to standard for how we keep track of these.</p>
+<div class="section" id="policy">
+<h2>Policy<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h2>
+<p><em>All Firefox components, even if their bugs are tracked off of Bugzilla,
+must have a component in Bugzilla.</em></p>
+<p><em>If a regression bug is found in any of the release trains (Nightly,
+Beta, Release, or ESR) and the bug is in a Firefox component which uses
+an external repository, the regression must be tracked by a bug in
+Bugzilla (whether or not the component in question uses an external
+issue tracker).</em></p>
+<p><em>Unless approved by Release Management, any GitHub managed code with
+open regressions will not be merged to mozilla-central. Even if the
+regression is not code that has been previously merged into
+mozilla-central.</em></p>
+<p><em>All Firefox code managed in GitHub which uses GitHub to manage
+issues</em>  <a class="reference external" href="https://mozilla.github.io/bmo-harmony/labels">must use the shared
+tags</a>.</p>
+<div class="section" id="comments">
+<h3>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h3>
+<p>The bug <strong>must</strong> have the regression keyword.</p>
+<p>The bug <strong>must</strong> have release flags set.</p>
+<p>If the team works in an external bug tracker, then the Bugzilla bug
+<strong>must</strong> reference, using the see-also field, the URL of the bug in the
+external tracker.</p>
+<p>The bug <strong>must not</strong> be RESOLVED until the code from the external
+repository containing the change set for the bug has landed in
+mozilla-central. When the change set lands in mozilla-central, the
+Bugzilla tracking bug should be set to RESOLVED FIXED and release status
+flags should be updated to reflect the release trains the fix has been
+landed or uplifted into.</p>
+<p>If the change set containing the patch for the regression is reverted
+from mozilla-central, for any reason, then the tracking bug for the
+regression <strong>must</strong> be set to REOPENED and the release status flags
+updated accordingly.</p>
+<p>If the change set containing the patch for the bug is backed out, for
+any reason, the bug must be reopened and the status flags on the
+Bugzilla tracking bug updated.</p>
+<p>The team responsible for the component with the regression <strong>should</strong>
+strive to create a patch for mozilla-central which contains the fix for
+the bug alone, not a monolithic patch containing changes for several
+other bugs or features.</p>
+<p>Landings of third-party libraries <a class="reference external" href="https://docs.google.com/document/d/12ihxPXBo9zBBaU_pBsPrc_wNHds4Upr-PwFfiSHrbu8">must contain a manifest
+file</a>.</p>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="you-must-file-a-regression-bug-in-bugzilla">
+<h3>You must file a regression bug in Bugzilla<a class="headerlink" href="#you-must-file-a-regression-bug-in-bugzilla" title="Permalink to this headline">¶</a></h3>
+<p><em>If the code with the regression has landed in mozilla-central, you must
+file a regression bug.</em></p>
+<div class="section" id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h4>
+<p>While using a release of Firefox (Nightly, Beta, Release, ESR) you run
+across a bug. Upon research using MozRegression or other tools you find
+that the bug was introduced in a change set imported from a component
+whose code and issues are managed in GitHub.</p>
+<div class="section" id="actions-to-take">
+<h5>Actions to take<a class="headerlink" href="#actions-to-take" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Open a new bug in Bugzilla in appropriate component and add the
+REGRESSION keyword</p></li>
+<li><p>Set affected status for the releases where the bug appears</p></li>
+<li><p>Open an issue in the corresponding GitHub project, put the Bugzilla
+bug number in the title with the prefix ‘Bug’ (i.e. “Bug 99999:
+Regression in foo”)</p></li>
+<li><p>Add the REGRESSION label to the new issue</p></li>
+<li><p>Add the link to the GitHub issue into the ‘See Also” field in the
+Bugzilla bug</p></li>
+</ul>
+</div>
+<div class="section" id="consequences">
+<h5>Consequences<a class="headerlink" href="#consequences" title="Permalink to this headline">¶</a></h5>
+<p><em>Until the regression is fixed or backed out of the GitHub repo, the
+project cannot merge code into mozilla-central</em></p>
+</div>
+</div>
+<div class="section" id="id1">
+<h4>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>You import a development branch of a component managed in GitHub into
+your copy of master. You find a bug and isolate it to the imported
+branch. The code is managed in their own GitHub project, but bugs are
+managed in Bugzilla.</p>
+<div class="section" id="id2">
+<h5>Actions to take<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Open a new bug in Bugzilla in appropriate component and add the
+REGRESSION keyword</p></li>
+<li><p>Set affected status for the releases where the bug appears</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h5>Consequences<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h5>
+<p><em>Until the regression is fixed or backed out of the GitHub repo, the
+project cannot merge code into mozilla-central</em></p>
+</div>
+</div>
+</div>
+<div class="section" id="do-not-file-a-regression-bug-in-bugzilla">
+<h3>Do not file a regression bug in Bugzilla<a class="headerlink" href="#do-not-file-a-regression-bug-in-bugzilla" title="Permalink to this headline">¶</a></h3>
+<p><em>If the code with the regression has not landed in mozilla-central, you
+do not need to file a bug.</em></p>
+<div class="section" id="id4">
+<h4>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>You import a development branch of a component managed in GitHub into
+your copy of master. You find a bug and isolate it to the imported
+branch. The code and issues are managed in their own GitHub project.</p>
+<div class="section" id="id5">
+<h5>Actions to take<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>File new issue in the GitHub repository of the imported code.</p></li>
+<li><p>Label issue as REGRESSION</p></li>
+</ul>
+</div>
+<div class="section" id="consequence">
+<h5>Consequence<a class="headerlink" href="#consequence" title="Permalink to this headline">¶</a></h5>
+<p><em>Issue blocks merge of GitHub project with mozilla-central until
+resolved or backed out.</em></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="triage-bugzilla.html" class="btn btn-neutral float-right" title="Triage for Bugzilla" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="new-feature-triage.html" class="btn btn-neutral float-left" title="New Feature Triage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

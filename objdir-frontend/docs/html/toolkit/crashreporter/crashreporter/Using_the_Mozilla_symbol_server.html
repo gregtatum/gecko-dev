@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using the Mozilla symbol server &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Feature Gates" href="../../components/featuregates/featuregates/index.html" />
+    <link rel="prev" title="Crash Reporter" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Crash Reporter</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="index.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#how-main-process-crash-handling-works">How Main-Process Crash Handling Works</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#plugin-and-child-process-crashes">Plugin and Child Process Crashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#memory-reports">Memory Reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#flash-process-crashes">Flash Process Crashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#plugin-hangs">Plugin Hangs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#about-crashes">about:crashes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#environment-variables-affecting-crash-reporting">Environment variables affecting crash reporting</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#other-topics">Other topics</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Using the Mozilla symbol server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../components/extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">Crash Reporter</a> &raquo;</li>
+        
+      <li>Using the Mozilla symbol server</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/toolkit/crashreporter/crashreporter/Using_the_Mozilla_symbol_server.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-the-mozilla-symbol-server">
+<h1>Using the Mozilla symbol server<a class="headerlink" href="#using-the-mozilla-symbol-server" title="Permalink to this headline">¶</a></h1>
+<p>The Mozilla project runs a symbol server for trunk Firefox nightly and
+release builds on Windows. Symbols are available for at least 30
+previous days worth of nightly builds, and Firefox releases from
+2.0.0.4. This allows debugging of those builds without forcing all users
+to download large debugging files. The server functions like
+<a class="reference external" href="https://docs.microsoft.com/windows/win32/dxtecharts/debugging-with-symbols">Microsoft’s symbol server</a>
+so the documentation there can be useful.</p>
+<p>Note that because Mozilla release builds are heavily optimized,
+debugging is not always easy. The debugger will not be able to show you
+the content of all variables and the execution path can seem strange
+because of inlining, tail calls, and other compiler optimizations. The
+only workaround is to build an unoptimized local build.</p>
+<p>The official symbol server URL for Firefox is <code class="docutils literal notranslate"><span class="pre">https://symbols.mozilla.org/</span></code>.
+You cannot visit this URL directly: you must add it to the symbol path of your
+debugging tool. In the examples below, a local cache directory is used to avoid
+repeatedly fetching the PDB from the server. Replace
+<code class="docutils literal notranslate"><span class="pre">C:\Users\myname\symbols</span></code> with an appropriate cache directory on your
+machine.</p>
+<div class="section" id="using-the-symbol-server-in-microsoft-visual-c">
+<h2>Using the symbol server in Microsoft Visual C++<a class="headerlink" href="#using-the-symbol-server-in-microsoft-visual-c" title="Permalink to this headline">¶</a></h2>
+<p><img alt="The Tools menu of Visual C++ with the Options item selected" class="internal" src="../../../_images/vs_tools_options.png" /> <img alt="The Visual C++ 2017 Symbols pane of the Options dialog with the Mozilla symbol server configured" class="internal" src="../../../_images/snip_20170901070042.png" /></p>
+</div>
+<div class="section" id="using-the-symbol-server-in-windbg">
+<h2>Using the symbol server in Windbg<a class="headerlink" href="#using-the-symbol-server-in-windbg" title="Permalink to this headline">¶</a></h2>
+<p>The Windbg symbol path is configured with a string value delimited with
+asterisk characters. To use only the Mozilla symbol server, add the
+following entry to your symbol path (<strong>note:</strong> you can replace <code class="docutils literal notranslate"><span class="pre">C:\symcache\</span></code>
+with any writable directory on your computer, if you’d prefer a different
+location for downloaded symbols):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SRV</span><span class="o">*</span><span class="n">c</span><span class="p">:</span>\<span class="n">symcache</span>\<span class="o">*</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">symbols</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Set this string as <code class="docutils literal notranslate"><span class="pre">_NT_SYMBOL_PATH</span></code> in the environment, using
+the Windbg menus, or by typing the <code class="docutils literal notranslate"><span class="pre">.sympath</span></code> command. If you
+would like to get symbols from Microsoft’s symbol server as well, you
+should list that first (<strong>note:</strong> you can replace <code class="docutils literal notranslate"><span class="pre">C:\symcache\</span></code>
+with any writable directory on your computer, if you’d prefer a different
+location for downloaded symbols):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SRV</span><span class="o">*</span><span class="n">c</span><span class="p">:</span>\<span class="n">symcache</span>\<span class="o">*</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">msdl</span><span class="o">.</span><span class="n">microsoft</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">symbols</span><span class="p">;</span><span class="n">SRV</span><span class="o">*</span><span class="n">c</span><span class="p">:</span>\<span class="n">symcache</span>\<span class="o">*</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">symbols</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+</pre></div>
+</div>
+<p><img alt="Image:symbol-server-windbg-menu.jpg" class="internal" src="toolkit/crashreporter/crashreporter/img/=Symbol-server-windbg-menu.jpg" /> <img alt="The WinDbg Symbol Search Path dialog with the Mozilla symbol server configured" class="internal" src="../../../_images/snip_20170901081816.png" /></p>
+</div>
+<div class="section" id="downloading-symbols-using-symchk-exe">
+<h2>Downloading symbols using symchk.exe<a class="headerlink" href="#downloading-symbols-using-symchk-exe" title="Permalink to this headline">¶</a></h2>
+<p>You can also download the symbols using symchk.exe, part of Microsoft’s
+Debugging Tools for Windows. The command should look like this (again,
+you can replace <code class="docutils literal notranslate"><span class="pre">C:\symcache\</span></code> with any writable directory on
+your computer, if you’d prefer a different location for downloaded
+symbols):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;C:\Program Files (x86)\Windows Kits</span><span class="se">\10</span><span class="s2">\Debuggers</span><span class="se">\x64</span><span class="s2">\symchk.exe&quot;</span> <span class="o">/</span><span class="n">r</span> <span class="s2">&quot;C:\Program Files\Mozilla Firefox/*&quot;</span> <span class="o">/</span><span class="n">s</span> <span class="n">SRV</span><span class="o">*</span><span class="n">C</span><span class="p">:</span>\<span class="n">symcache</span>\<span class="o">*</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">symbols</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">\*</span></code> after the Mozilla directory. The output of this command should
+be similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">l2</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">file</span><span class="o">-</span><span class="n">l2</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">localization</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">localization</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">processthreads</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">processthreads</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">1.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">synch</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">synch</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">timezone</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">timezone</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">conio</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">conio</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">convert</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">convert</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">environment</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">environment</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">filesystem</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">filesystem</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">heap</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">heap</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">locale</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">locale</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">math</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">math</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">multibyte</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">multibyte</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">private</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">private</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">process</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">process</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">stdio</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">stdio</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">string</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">string</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">time</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">time</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">utility</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">dll</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">api</span><span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="n">win</span><span class="o">-</span><span class="n">crt</span><span class="o">-</span><span class="n">utility</span><span class="o">-</span><span class="n">l1</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">d3dcompiler_47</span><span class="o">.</span><span class="n">dll</span>   <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">D3DCompiler_47</span><span class="o">.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">maintenanceservice_installer</span><span class="o">.</span><span class="n">exe</span> <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">Built</span> <span class="n">without</span> <span class="n">debugging</span> <span class="n">information</span><span class="o">.</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">msvcp140</span><span class="o">.</span><span class="n">dll</span>         <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">msvcp140</span><span class="o">.</span><span class="n">amd64</span><span class="o">.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">ucrtbase</span><span class="o">.</span><span class="n">dll</span>         <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">ucrtbase</span><span class="o">.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">vcruntime140</span><span class="o">.</span><span class="n">dll</span>     <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">vcruntime140</span><span class="o">.</span><span class="n">amd64</span><span class="o">.</span><span class="n">pdb</span> <span class="n">mismatched</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">helper</span><span class="o">.</span><span class="n">exe</span>           <span class="n">FAILED</span>  <span class="o">-</span> <span class="n">Built</span> <span class="n">without</span> <span class="n">debugging</span> <span class="n">information</span><span class="o">.</span>
+
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">FAILED</span> <span class="n">files</span> <span class="o">=</span> <span class="mi">27</span>
+<span class="n">SYMCHK</span><span class="p">:</span> <span class="n">PASSED</span> <span class="o">+</span> <span class="n">IGNORED</span> <span class="n">files</span> <span class="o">=</span> <span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="downloading-symbols-on-linux-mac-os-x">
+<h2>Downloading symbols on Linux / Mac OS X<a class="headerlink" href="#downloading-symbols-on-linux-mac-os-x" title="Permalink to this headline">¶</a></h2>
+<p>If you are on Linux and running GDB 7.9 or newer, you can use <a class="reference external" href="https://gist.github.com/luser/193572147c401c8a965c">this GDB
+Python script</a> to
+automatically fetch symbols. You will need to source this script before
+loading symbols (the part where it spends a few seconds loading each .so
+when you attach gdb). If you want to reload symbols, you can try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nosharedlibrary</span>
+<span class="n">sharedlibrary</span> <span class="n">lib</span>
+</pre></div>
+</div>
+<p>On older GDB and Mac OS X there is a <a class="reference external" href="http://hg.mozilla.org/users/jwatt_jwatt.org/fetch-symbols">Python script to download symbols
+from the Mozilla symbol
+server</a>
+for <a class="reference internal" href="../../../contributing/debugging/debugging_firefox_with_gdb.html#debugging-firefox-with-gdb"><span class="std std-ref">gdb</span></a>, Shark and other software
+that uses symbols. Note that the symbol file for the XUL library is very
+large and takes some time to download. This may make it appear as if the
+script has gotten stuck, but it will continue.</p>
+<p>Symbol indices are named like so:
+symbols.mozilla.org/{lowercased:Name}/{lowercased:Name}-{Version}-{Platform}-{BuildID}-symbols.txt.
+The Platform is either ‘Darwin’ (for Mac) or ‘Linux’. The rest of values
+are based on the contents of the application.ini file under the [App]
+heading: For example, the Thunderbird 3.1b2 release with
+Name=Thunderbird, Version=3.1b2, BuildID=20100430125415 would have a
+filename of “thunderbird-3.1b2-Linux-20100430125415-symbols.txt” under
+the thunderbird directory at symbols.mozilla.org. Its contents are a
+list of paths to files, all relative to the directory the
+BLAH-symbols.txt file is found in.</p>
+</div>
+<div class="section" id="the-source-server">
+<h2>The source server<a class="headerlink" href="#the-source-server" title="Permalink to this headline">¶</a></h2>
+<p>In addition to symbols, Mozilla also has a
+<a class="reference internal" href="../../../taskcluster/using-the-mozilla-source-server.html#using-the-mozilla-source-server"><span class="std std-ref">source server</span></a>, letting you do
+source-level debugging and inspection on demand.</p>
+</div>
+<div class="section" id="troubleshooting-symbols-will-not-download">
+<h2>Troubleshooting: Symbols will not download<a class="headerlink" href="#troubleshooting-symbols-will-not-download" title="Permalink to this headline">¶</a></h2>
+<p>If symbols will not download no matter what you do, the problem may be
+that Internet Explorer has been set to the <strong>Work Offline</strong> mode. You
+will not receive any warnings of this in Windbg, Visual C++ or Visual
+Studio. Even using the command line with symchk.exe to download symbols
+will fail. This is because Microsoft uses Internet Explorer’s internet &amp;
+proxy settings to download the symbol files. Check the File menu of
+Internet Explorer to ensure “Work Offline” is unchecked.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../components/featuregates/featuregates/index.html" class="btn btn-neutral float-right" title="Feature Gates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Crash Reporter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

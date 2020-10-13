@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>web-platform-tests documentation &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test Suite Design" href="test-suite-design.html" />
+    <link rel="prev" title="Self-serving an ARM build" href="../testing/geckodriver/ARM.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">web-platform-tests documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#video-introduction-transcript">Video Introduction (transcript)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github">GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test-suite-design.html">Test Suite Design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l3"><a class="reference internal" href="running-tests/index.html">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests/index.html">Writing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reviewing-tests/index.html">Reviewing Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin/index.html">Project Administration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>web-platform-tests documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/web-platform/index.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web-platform-tests-documentation">
+<h1>web-platform-tests documentation<a class="headerlink" href="#web-platform-tests-documentation" title="Permalink to this headline">¶</a></h1>
+<p>The web-platform-tests project is a cross-browser test suite for <a class="reference external" href="https://platform.html5.org">the
+Web-platform stack</a>. Writing tests in a way that
+allows them to be run in all browsers gives browser projects confidence that
+they are shipping software which is compatible with other implementations, and
+that later implementations will be compatible with their implementations. This
+in turn gives Web authors/developers confidence that they can actually rely on
+the Web platform to deliver on the promise of working across browsers and
+devices without needing extra layers of abstraction to paper over the gaps left
+by specification editors and implementors.</p>
+<p>The most important sources of information and activity are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/web-platform-tests/wpt">github.com/web-platform-tests/wpt</a>:
+the canonical location of the project’s source code revision history and the
+discussion forum for changes to the code</p></li>
+<li><p><a class="reference external" href="https://web-platform-tests.org">web-platform-tests.org</a>: the documentation
+website; details how to set up the project, how to write tests, how to give
+and receive peer review, how to serve as an administrator, and more</p></li>
+<li><p><a class="reference external" href="http://wpt.live">wpt.live</a>: a public deployment of the test suite,
+allowing anyone to run the tests by visiting from an
+Internet-enabled browser of their choice</p></li>
+<li><p><a class="reference external" href="https://wpt.fyi">wpt.fyi</a>: an archive of test results collected from an
+array of web browsers on a regular basis</p></li>
+<li><p><a class="reference external" href="http://irc.w3.org/?channels=testing">Real-time chat room</a>: the
+<a class="reference external" href="http://www.irchelp.org/">IRC</a> chat room named <code class="docutils literal notranslate"><span class="pre">#testing</span></code> on
+<a class="reference external" href="https://www.w3.org/wiki/IRC">irc.w3.org</a>; includes participants located
+around the world, but busiest during the European working day; <a class="reference external" href="https://w3.logbot.info/testing">all
+discussion is archived here</a></p></li>
+<li><p><a class="reference external" href="https://lists.w3.org/Archives/Public/public-test-infra/">Mailing list</a>: a
+public and low-traffic discussion list</p></li>
+</ul>
+<p><strong>If you’d like clarification about anything</strong>, don’t hesitate to ask in the
+chat room or on the mailing list.</p>
+<div class="section" id="video-introduction-transcript">
+<h2>Video Introduction (<a class="reference internal" href="intro-video-transcript.html"><span class="doc">transcript</span></a>)<a class="headerlink" href="#video-introduction-transcript" title="Permalink to this headline">¶</a></h2>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/zuK1uyXPZS0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen></iframe><p>See also <a class="reference external" href="https://www.youtube.com/watch?v=XnfE3MfH5hQ">this lecture from Web Engines Hackfest 2018 (30
+minutes)</a></p>
+</div>
+<div class="section" id="github">
+<h2>GitHub<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/web-platform-tests/wpt/">GitHub</a> is used both for <a class="reference external" href="https://github.com/web-platform-tests/wpt/issues">issue tracking</a> and <a class="reference external" href="https://github.com/web-platform-tests/wpt/pulls">test submissions</a>; we
+provide <a class="reference internal" href="writing-tests/github-intro.html"><span class="doc">a limited introduction</span></a> to both git and
+GitHub.</p>
+<p>Pull Requests are automatically labeled based on the directory the
+files they change are in; there are also comments added automatically
+to notify a number of people: this list of people comes from META.yml
+files in those same directories and their parents (i.e., they work
+recursively: <code class="docutils literal notranslate"><span class="pre">a/META.yml</span></code> will get notified for <code class="docutils literal notranslate"><span class="pre">a/foo.html</span></code> and
+<code class="docutils literal notranslate"><span class="pre">a/b/bar.html</span></code>).</p>
+<p>If you want to be notified about changes to tests in a directory, feel
+free to add yourself to the META.yml file!</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test-suite-design.html">Test Suite Design</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test-suite-design.html#test-layout">Test Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test-suite-design.html#test-types">Test Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro-video-transcript.html">“Introduction to WPT” video transcript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running-tests/index.html">Running Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running-tests/from-web.html">Running Tests from the Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-tests/from-local-system.html">Running Tests from the Local System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-tests/from-ci.html">Running Tests on CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-tests/custom-runner.html">Writing Your Own Runner</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="writing-tests/index.html">Writing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests/index.html#test-types">Test Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests/index.html#submitting-tests">Submitting Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="writing-tests/index.html#table-of-contents">Table of Contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reviewing-tests/index.html">Reviewing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/checklist.html">Review Checklist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/email.html">Email Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/git.html">Working with Pull Requests as a reviewer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/reverting.html">Reverting Changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/index.html#test-review-policy">Test Review Policy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/index.html#notifications">Notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reviewing-tests/index.html#finding-contributions-to-review">Finding contributions to review</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="admin/index.html">Project Administration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#tooling">Tooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#secrets">Secrets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#third-party-account-owners">Third-party account owners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="admin/index.html#emergency-playbook">Emergency playbook</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="test-suite-design.html" class="btn btn-neutral float-right" title="Test Suite Design" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../testing/geckodriver/ARM.html" class="btn btn-neutral float-left" title="Self-serving an ARM build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

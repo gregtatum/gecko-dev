@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Caches &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managing Documentation" href="../tools/moztreedocs/index.html" />
+    <link rel="prev" title="Task Attributes" href="attributes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kinds.html">Task Kinds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attributes.html">Task Attributes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Caches</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#caches-and-run-task">Caches and <code class="docutils literal notranslate"><span class="pre">run-task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#common-caches">Common Caches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Caches</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/caches.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="caches">
+<h1>Caches<a class="headerlink" href="#caches" title="Permalink to this headline">¶</a></h1>
+<p>There are various caches used by the in-tree tasks. This page attempts to
+document them and their appropriate use.</p>
+<p>Caches are essentially isolated filesystems that are persisted between
+tasks. For example, if 2 tasks run on a worker - one after the other -
+and both tasks request the same cache, the subsequent task will be
+able to see files in the cache that were created by the first task.
+It’s also worth noting that TaskCluster workers ensure a cache can only
+be used by 1 task at a time. If a worker is simultaneously running
+multiple tasks requesting the same named cache, the worker will
+have multiple caches of the same name on the worker.</p>
+<div class="section" id="caches-and-run-task">
+<h2>Caches and <code class="docutils literal notranslate"><span class="pre">run-task</span></code><a class="headerlink" href="#caches-and-run-task" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">run-task</span></code> is our generic task wrapper script. It does common activities
+like ensure a version control checkout is present.</p>
+<p>One of the roles of <code class="docutils literal notranslate"><span class="pre">run-task</span></code> is to verify and sanitize caches.
+It does this by storing state in a cache on its first use. If the recorded
+<em>capabilities</em> of an existing cache don’t match expectations for the
+current task, <code class="docutils literal notranslate"><span class="pre">run-task</span></code> bails. This ensures that caches are only
+reused by tasks with similar execution <em>profiles</em>. This prevents
+accidental cache use across incompatible tasks. It also allows run-task
+to make assumptions about the state of caches, which can help avoid
+costly operations.</p>
+<p>In addition, the hash of <code class="docutils literal notranslate"><span class="pre">run-task</span></code> is used to derive the cache name.
+So any time <code class="docutils literal notranslate"><span class="pre">run-task</span></code> changes, a new set of caches are used. This
+ensures that any backwards incompatible changes or bug fixes to
+<code class="docutils literal notranslate"><span class="pre">run-task</span></code> result in fresh caches.</p>
+<p>Some caches are reserved for use with run-task. That property will be denoted
+below.</p>
+</div>
+<div class="section" id="common-caches">
+<h2>Common Caches<a class="headerlink" href="#common-caches" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="version-control-caches">
+<h3>Version Control Caches<a class="headerlink" href="#version-control-caches" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">level-{{level}}-checkouts-{{hash}}</span></code></dt><dd><p>This cache holds version control checkouts, each in a subdirectory named
+after the repo (e.g., <code class="docutils literal notranslate"><span class="pre">gecko</span></code>).</p>
+<p>Checkouts should be read-only. If a task needs to create new files from
+content of a checkout, this content should be written in a separate
+directory/cache (like a workspace).</p>
+<p>This cache name pattern is managed by <code class="docutils literal notranslate"><span class="pre">run-task</span></code> and must only be
+used with <code class="docutils literal notranslate"><span class="pre">run-task</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">level-{{level}}-checkouts-sparse-{{hash}}</span></code></dt><dd><p>This is like the above but is used when the checkout is sparse (contains
+a subset of files).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">level-{{level}}-checkouts-{{version}}</span></code> (deprecated)</dt><dd><p>This cache holds version control checkouts, each in a subdirectory named
+after the repo (e.g., <code class="docutils literal notranslate"><span class="pre">gecko</span></code>).</p>
+<p>Checkouts should be read-only. If a task needs to create new files from
+content of a checkout, this content should be written in a separate
+directory/cache (like a workspace).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">version</span></code> parameter appears in the cache name to allow
+backwards-incompatible changes to the cache’s behavior.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">hg-store</span></code> contains a <cite>shared store &lt;https://www.mercurial-scm.org/wiki/ShareExtension&gt;</cite>
+that is is used by <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">robustcheckout</span></code>. If you are using <code class="docutils literal notranslate"><span class="pre">run-task</span></code> you
+should set the <code class="docutils literal notranslate"><span class="pre">HG_STORE_PATH</span></code> environment variable to point to this
+directory. If you are using <code class="docutils literal notranslate"><span class="pre">hg</span> <span class="pre">robustcheckout</span></code>, pass this directory to the
+<code class="docutils literal notranslate"><span class="pre">--sharebase</span></code> option.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="workspace-caches">
+<h3>Workspace Caches<a class="headerlink" href="#workspace-caches" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">level-{{level}}-*-workspace</span></code></dt><dd><p>These caches (of various names typically ending with <code class="docutils literal notranslate"><span class="pre">workspace</span></code>)
+contain state to be shared between task invocations. Use cases are
+dependent on the task.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">level-{{level}}-tooltool-cache-{{hash}}</span></code></dt><dd><p>Tooltool invocations should use this cache. Tooltool will store files here
+indexed by their hash.</p>
+<p>This cache name pattern is reserved for use with <code class="docutils literal notranslate"><span class="pre">run-task</span></code> and must only
+be used by <code class="docutils literal notranslate"><span class="pre">run-task</span></code></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tooltool-cache</span></code> (deprecated)</dt><dd><p>Legacy location for tooltool files. Use the per-level one instead.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tools/moztreedocs/index.html" class="btn btn-neutral float-right" title="Managing Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="attributes.html" class="btn btn-neutral float-left" title="Task Attributes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

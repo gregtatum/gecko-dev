@@ -1,0 +1,359 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mn Python tests &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Protocol" href="Protocol.html" />
+    <link rel="prev" title="Building" href="Building.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Building.html">Building</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Mn Python tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-assertions">Test assertions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-api">The API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Prefs.html">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="internals/index.html">Internals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Marionette</a> &raquo;</li>
+        
+      <li>Mn Python tests</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/marionette/PythonTests.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mn-python-tests">
+<h1>Mn Python tests<a class="headerlink" href="#mn-python-tests" title="Permalink to this headline">¶</a></h1>
+<p><em>Marionette</em> is the codename of a <a class="reference external" href="Protocol.html">remote protocol</a> built in to
+Firefox as well as the name of a functional test framework for
+automating user interface tests.</p>
+<p>The in-tree test framework supports tests written in Python, using
+Python’s <a class="reference external" href="https://docs.python.org/2.7/library/unittest.html">unittest</a> library.  Test cases are written as a subclass
+of <code class="docutils literal notranslate"><span class="pre">MarionetteTestCase</span></code>, with child tests belonging to instance
+methods that have a name starting with <code class="docutils literal notranslate"><span class="pre">test_</span></code>.</p>
+<p>You can additionally define <a class="reference external" href="https://docs.python.org/2.7/library/unittest.html#unittest.TestCase.setUp"><code class="docutils literal notranslate"><span class="pre">setUp</span></code></a> and <a class="reference external" href="https://docs.python.org/2.7/library/unittest.html#unittest.TestCase.tearDown"><code class="docutils literal notranslate"><span class="pre">tearDown</span></code></a> instance
+methods to execute code before and after child tests, and
+<a class="reference external" href="https://docs.python.org/2.7/library/unittest.html#unittest.TestCase.setUpClass"><code class="docutils literal notranslate"><span class="pre">setUpClass</span></code></a>/<a class="reference external" href="https://docs.python.org/2.7/library/unittest.html#unittest.TestCase.tearDownClass"><code class="docutils literal notranslate"><span class="pre">tearDownClass</span></code></a> for the parent test.  When you use
+these, it is important to remember calling the [<code class="docutils literal notranslate"><span class="pre">MarionetteTestCase</span></code>]
+superclass’ own <code class="docutils literal notranslate"><span class="pre">setUp</span></code>/<code class="docutils literal notranslate"><span class="pre">tearDown</span></code> methods since they handle
+setup/cleanup of the session.</p>
+<p>The test structure is illustrated here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marionette_test</span> <span class="kn">import</span> <span class="n">MarionetteTestCase</span>
+
+<span class="k">class</span> <span class="nc">TestSomething</span><span class="p">(</span><span class="n">MarionetteTestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># code to execute before any tests are run</span>
+        <span class="n">MarionetteTestCase</span><span class="o">.</span><span class="n">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># run test for &#39;foo&#39;</span>
+
+    <span class="k">def</span> <span class="nf">test_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># run test for &#39;bar&#39;</span>
+
+    <span class="k">def</span> <span class="nf">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># code to execute after all tests are run</span>
+        <span class="n">MarionetteTestCase</span><span class="o">.</span><span class="n">tearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="test-assertions">
+<h2>Test assertions<a class="headerlink" href="#test-assertions" title="Permalink to this headline">¶</a></h2>
+<p>Assertions are provided courtesy of <a class="reference external" href="https://docs.python.org/2.7/library/unittest.html">unittest</a>.  For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">marionette_test</span> <span class="kn">import</span> <span class="n">MarionetteTestCase</span>
+
+<span class="k">class</span> <span class="nc">TestSomething</span><span class="p">(</span><span class="n">MarionetteTestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_foo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;3 x 3 should be 9&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;2 should be an integer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-api">
+<h2>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h2>
+<p>The full API documentation is found <a class="reference external" href="../../../python/marionette_driver.html">here</a>, but the key objects are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MarionetteTestCase</span></code>: a subclass for <code class="docutils literal notranslate"><span class="pre">unittest.TestCase</span></code>
+used as a base class for all tests to run.</p></li>
+<li><p><a class="reference external" href="../../../python/marionette_driver.html#marionette_driver.marionette.Marionette"><code class="docutils literal notranslate"><span class="pre">Marionette</span></code></a>: client that speaks to Firefox.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Protocol.html" class="btn btn-neutral float-right" title="Protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Building.html" class="btn btn-neutral float-left" title="Building" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

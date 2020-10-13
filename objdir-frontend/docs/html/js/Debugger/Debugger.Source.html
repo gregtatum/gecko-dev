@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugger.Source &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugger.Environment" href="Debugger.Environment.html" />
+    <link rel="prev" title="Debugger.Script" href="Debugger.Script.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugger.Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-source-for-javascript">Debugger.Source for JavaScript</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-source-for-webassembly">Debugger.Source for WebAssembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convention">Convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessor-properties-of-the-debugger-source-prototype-object">Accessor Properties of the Debugger.Source Prototype Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-properties-of-the-debugger-source-prototype-object">Function Properties of the Debugger.Source Prototype Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>Debugger.Source</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Debugger.Source.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugger-source">
+<h1>Debugger.Source<a class="headerlink" href="#debugger-source" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance represents either a piece of JavaScript source
+code or the serialized text of a block of WebAssembly code. The two cases are
+distinguished by the latter having its <code class="docutils literal notranslate"><span class="pre">introductionType</span></code> property always
+being <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code> and the former having its <code class="docutils literal notranslate"><span class="pre">introductionType</span></code> property never
+being <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>.</p>
+<p>Each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance has a separate collection of
+<code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instances representing the source code that has been
+presented to the system.</p>
+<p>A debugger may place its own properties on <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instances,
+to store metadata about particular pieces of source code.</p>
+<div class="section" id="debugger-source-for-javascript">
+<h2>Debugger.Source for JavaScript<a class="headerlink" href="#debugger-source-for-javascript" title="Permalink to this headline">¶</a></h2>
+<p>For a <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance representing a piece of JavaScript source
+code, its properties provide the source code itself as a string, and describe
+where it came from. Each <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> instance refers to the
+<code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance holding the source code from which it was produced.</p>
+<p>If a single piece of source code contains both top-level code and
+function definitions, perhaps with nested functions, then the
+<a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> instances for those all refer to the same
+<code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance. Each script indicates the substring of the
+overall source to which it corresponds.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance may represent only a portion of a larger
+source document. For example, an HTML document can contain JavaScript in
+multiple <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> elements and event handler content attributes.
+In this case, there may be either a single <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance
+for the entire HTML document, with each <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> referring to
+its substring of the document; or there may be a separate
+<code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance for each <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element and
+attribute. The choice is left up to the implementation.</p>
+<p>If a given piece of source code is presented to the JavaScript
+implementation more than once, with the same origin metadata, the
+JavaScript implementation may generate a fresh <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code>
+instance to represent each presentation, or it may use a single
+<code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance to represent them all.</p>
+</div>
+<div class="section" id="debugger-source-for-webassembly">
+<h2>Debugger.Source for WebAssembly<a class="headerlink" href="#debugger-source-for-webassembly" title="Permalink to this headline">¶</a></h2>
+<p>For a <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance representing the serialized text of a block
+of WebAssembly code, its properties provide the serialized text as a string.</p>
+<p>Currently only entire modules evaluated via <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">WebAssembly.Module</span></code> are
+represented. SpiderMonkey constructs exactly one <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> for each
+underlying WebAssembly module per <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance.</p>
+<p>Please note at the time of this writing, support for WebAssembly is very
+preliminary. Many properties below return placeholder values.</p>
+</div>
+<div class="section" id="convention">
+<h2>Convention<a class="headerlink" href="#convention" title="Permalink to this headline">¶</a></h2>
+<p>For descriptions of properties and methods below, if the behavior of the
+property or method differs between the instance referring to JavaScript source
+or to a block of WebAssembly code, the text will be split into two sections,
+headed by “<strong>if the instance refers to JavaScript source</strong>” and “<strong>if the
+instance refers to WebAssembly code</strong>”, respectively. If the behavior does not
+differ, no such emphasized headings will appear.</p>
+</div>
+<div class="section" id="accessor-properties-of-the-debugger-source-prototype-object">
+<h2>Accessor Properties of the Debugger.Source Prototype Object<a class="headerlink" href="#accessor-properties-of-the-debugger-source-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance inherits the following accessor properties
+from its prototype:</p>
+<div class="section" id="text">
+<h3><code class="docutils literal notranslate"><span class="pre">text</span></code><a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, the JavaScript source
+code, as a string. The value satisfies the <code class="docutils literal notranslate"><span class="pre">Program</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FunctionDeclaration</span></code>, or <code class="docutils literal notranslate"><span class="pre">FunctionExpression</span></code> productions in the
+ECMAScript standard.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, the <code class="docutils literal notranslate"><span class="pre">&quot;[wasm]&quot;</span></code> value will
+be returned.</p>
+</div>
+<div class="section" id="binary">
+<h3><code class="docutils literal notranslate"><span class="pre">binary</span></code><a class="headerlink" href="#binary" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to WebAssembly code</strong>, a Uint8Array that contains
+the WebAssembly bytecode.</p>
+</div>
+<div class="section" id="url">
+<h3><code class="docutils literal notranslate"><span class="pre">url</span></code><a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, the filename or URL from
+which this script’s code was loaded. For scripts created by <code class="docutils literal notranslate"><span class="pre">eval</span></code> or the
+<code class="docutils literal notranslate"><span class="pre">Function</span></code> constructor, this may be a synthesized filename, starting with a
+valid URL and followed by information tracking how the code was introduced
+into the system; the entire string is not a valid URL. For
+<code class="docutils literal notranslate"><span class="pre">Function.prototype</span></code>’s script, this is <code class="docutils literal notranslate"><span class="pre">null</span></code>. Source may be loaded from a
+URL in the following ways:</p>
+<ul class="simple">
+<li><p>The URL may appear as the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute of a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element
+in markup text.</p></li>
+<li><p>The URL may be passed to the <code class="docutils literal notranslate"><span class="pre">Worker</span></code> web worker constructor, or the web
+worker <code class="docutils literal notranslate"><span class="pre">importScripts</span></code> function.</p></li>
+<li><p>The URL may be the name of a XPCOM JavaScript module or subscript.</p></li>
+</ul>
+<p>(Note that code passed to <code class="docutils literal notranslate"><span class="pre">eval</span></code>, the <code class="docutils literal notranslate"><span class="pre">Function</span></code> constructor, or a
+similar function is <i>not</i> considered to be loaded from a URL; the
+<code class="docutils literal notranslate"><span class="pre">url</span></code> accessor on <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instances for such sources should
+return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.)</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, the URL of the script that
+called <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">WebAssembly.Module</span></code> with the string <code class="docutils literal notranslate"><span class="pre">&quot;&gt;</span> <span class="pre">wasm&quot;</span></code> appended.</p>
+</div>
+<div class="section" id="startline">
+<h3><code class="docutils literal notranslate"><span class="pre">startLine</span></code><a class="headerlink" href="#startline" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, the start line of the
+source within the file or URL it was loaded from. This is normally <code class="docutils literal notranslate"><span class="pre">1</span></code>, but
+may have another value if the source is part of an HTML document.</p>
+</div>
+<div class="section" id="id">
+<h3><code class="docutils literal notranslate"><span class="pre">id</span></code><a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, an int32 counter that identifies
+the source within the current process.  This ID is used in other places in Gecko
+that weakly refer to sources, such as nsIScriptError.</p>
+</div>
+<div class="section" id="sourcemapurl">
+<h3><code class="docutils literal notranslate"><span class="pre">sourceMapURL</span></code><a class="headerlink" href="#sourcemapurl" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, if this source was
+produced by a minimizer or translated from some other language, and we
+know the URL of a <b>source map</b> document relating the source positions
+in this source to the corresponding source positions in the original
+source, then this property’s value is that URL. Otherwise, this is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+<p>(On the web, the translator may provide the source map URL in a
+specially formatted comment in the JavaScript source code, or via a
+header in the HTTP reply that carried the generated JavaScript.)</p>
+<p>This property is writable, so you can change the source map URL by
+setting it. All Debugger.Source objects referencing the same
+source will see the change. Setting an empty string has no effect
+and will not change existing value.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, <code class="docutils literal notranslate"><span class="pre">null</span></code>. Attempts to write
+to this property throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="displayurl">
+<h3><code class="docutils literal notranslate"><span class="pre">displayURL</span></code><a class="headerlink" href="#displayurl" title="Permalink to this headline">¶</a></h3>
+<p>If the script had a special <code class="docutils literal notranslate"><span class="pre">//#</span> <span class="pre">sourceURL</span></code> comment, as described in
+the source maps specification, then this property’s value holds
+the string that was given.  Otherwise, this is <code class="docutils literal notranslate"><span class="pre">null</span></code>.</p>
+</div>
+<div class="section" id="element">
+<h3><code class="docutils literal notranslate"><span class="pre">element</span></code><a class="headerlink" href="#element" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instance referring to the DOM element to which
+this source code belongs, if any, or <code class="docutils literal notranslate"><span class="pre">undefined</span></code> if it belongs to no DOM
+element. Source belongs to a DOM element in the following cases:</p>
+<ul class="simple">
+<li><p>Source belongs to a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element if it is the element’s text
+content (that is, it is written out as the body of the <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code>
+element in the markup text), or is the source document referenced by its
+<code class="docutils literal notranslate"><span class="pre">src</span></code> attribute.</p></li>
+<li><p>Source belongs to a DOM element if it is an event handler content
+attribute (that is, if it is written out in the markup text as an
+attribute value).</p></li>
+<li><p>Source belongs to a DOM element if it was assigned to one of the
+element’s event handler IDL attributes as a string. (Note that one may
+assign both strings and functions to DOM elements’ event handler IDL
+attributes. If one assigns a function, that function’s script’s source
+does <i>not</i> belong to the DOM element; the function’s definition
+must appear elsewhere.)</p></li>
+</ul>
+<p>(If the sources attached to a DOM element change, the <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code>
+instances representing superseded code still refer to the DOM element;
+this accessor only reflects origins, not current relationships.)</p>
+</div>
+<div class="section" id="elementattributename">
+<h3><code class="docutils literal notranslate"><span class="pre">elementAttributeName</span></code><a class="headerlink" href="#elementattributename" title="Permalink to this headline">¶</a></h3>
+<p>If this source belongs to a DOM element because it is an event handler
+content attribute or an event handler IDL attribute, this is the name of
+that attribute, a string. Otherwise, this is <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+</div>
+<div class="section" id="introductiontype">
+<h3><code class="docutils literal notranslate"><span class="pre">introductionType</span></code><a class="headerlink" href="#introductiontype" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, a string indicating how
+this source code was introduced into the system.  This accessor returns
+one of the following values:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;eval&quot;</span></code>, for code passed to <code class="docutils literal notranslate"><span class="pre">eval</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Function&quot;</span></code>, for code passed to the <code class="docutils literal notranslate"><span class="pre">Function</span></code> constructor.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Function.prototype&quot;</span></code>, for <code class="docutils literal notranslate"><span class="pre">Function.prototype</span></code> internally generated code.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Worker&quot;</span></code>, for code loaded by calling the Web worker constructor—the
+worker’s main script.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;importScripts&quot;</span></code>, for code by calling <code class="docutils literal notranslate"><span class="pre">importScripts</span></code> in a web worker.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;eventHandler&quot;</span></code>, for code assigned to DOM elements’ event handler IDL
+attributes as a string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;srcScript&quot;</span></code>, for code belonging to <code class="docutils literal notranslate"><span class="pre">&lt;script</span> <span class="pre">src=&quot;file.js&quot;&gt;</span></code> elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;inlineScript&quot;</span></code>, for code belonging to <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;code;&lt;/script&gt;</span></code> elements.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;injectedScript&quot;</span></code>, for code belonging to scripts that <em>would</em> be
+<code class="docutils literal notranslate"><span class="pre">&quot;inlineScript&quot;</span></code> except that they were not part of the initial file itself.</p>
+<p>For example, scripts created via:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">document.write(&quot;&lt;script&gt;code;&lt;/script&gt;&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">s</span> <span class="pre">=</span> <span class="pre">document.createElement(&quot;script&quot;);</span> <span class="pre">s.text</span> <span class="pre">=</span> <span class="pre">&quot;code&quot;;</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;importedModule&quot;</span></code>, for code that was loaded indirectly by being imported
+by another script using ESM static or dynamic imports.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;javascriptURL&quot;</span></code>, for code presented in <code class="docutils literal notranslate"><span class="pre">javascript:</span></code> URLs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;domTimer&quot;</span></code>, for code passed to <code class="docutils literal notranslate"><span class="pre">setTimeout</span></code>/<code class="docutils literal notranslate"><span class="pre">setInterval</span></code> as a string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">undefined</span></code>, if the implementation doesn’t know how the code was
+introduced.</p></li>
+</ul>
+<p><strong>If the instance refers to WebAssembly code</strong>, <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>.</p>
+</div>
+<div class="section" id="introductionscript-introductionoffset">
+<h3><code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code><a class="headerlink" href="#introductionscript-introductionoffset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, and if this source was
+introduced by calling a function from debuggee code, then
+<code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> is the <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> instance referring
+to the script containing that call, and <code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code> is the call’s
+bytecode offset within that script. Otherwise, these are both <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.
+Taken together, these properties indicate the location of the introducing
+call.</p>
+<p>For the purposes of these accessors, assignments to accessor properties are
+treated as function calls. Thus, setting a DOM element’s event handler IDL
+attribute by assigning to the corresponding JavaScript property creates a
+source whose <code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> and <code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code> refer to the
+property assignment.</p>
+<p>Since a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element parsed from a web page’s original HTML was not
+introduced by any scripted call, its source’s <code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> and
+<code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code> accessors both return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>If a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element was dynamically inserted into a document, then these
+accessors refer to the call that actually caused the script to run—usually
+the call that made the element part of the document. Thus, they do
+<i>not</i> refer to the call that created the element; stored the source as
+the element’s text child; made the element a child of some uninserted parent
+node that was later inserted; or the like.</p>
+<p>Although the main script of a worker thread is introduced by a call to
+<code class="docutils literal notranslate"><span class="pre">Worker</span></code> or <code class="docutils literal notranslate"><span class="pre">SharedWorker</span></code>, these accessors always return <code class="docutils literal notranslate"><span class="pre">undefined</span></code> on
+such script’s sources. A worker’s main script source and the call that
+created the worker are always in separate threads, but
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> is an inherently single-threaded facility: its
+debuggees must all run in the same thread. Since the global that created the
+worker is in a different thread, it is guaranteed not to be a debuggee of
+the <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance that owns this source; and thus
+the creating call is never “in debuggee code”. Relating a worker to its
+creator, and other multi-threaded debugging concerns, are out of scope for
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, <code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> is
+the <a class="reference internal" href="Debugger.Script.html"><span class="doc">Debugger.Script</span></a> instance referring to the same underlying
+WebAssembly module. <code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code> is <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+</div>
+</div>
+<div class="section" id="function-properties-of-the-debugger-source-prototype-object">
+<h2>Function Properties of the Debugger.Source Prototype Object<a class="headerlink" href="#function-properties-of-the-debugger-source-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>The functions described below may only be called with a <code class="docutils literal notranslate"><span class="pre">this</span></code> value
+referring to a <code class="docutils literal notranslate"><span class="pre">Debugger.Source</span></code> instance; they may not be used as
+methods of other kinds of objects.</p>
+<div class="section" id="reparse">
+<h3><code class="docutils literal notranslate"><span class="pre">reparse()</span></code><a class="headerlink" href="#reparse" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to JavaScript source</strong>, and if the source has text
+available, return a <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance referring to a new script
+created by reparsing this source’s text. Debugger <code class="docutils literal notranslate"><span class="pre">onNewScript</span></code> hooks will
+not be invoked for the new script. Otherwise, throw an <code class="docutils literal notranslate"><span class="pre">Error</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger.Environment.html" class="btn btn-neutral float-right" title="Debugger.Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Debugger.Script.html" class="btn btn-neutral float-left" title="Debugger.Script" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,647 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Touch Bar &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="UITour" href="../components/uitour/docs/index.html" />
+    <link rel="prev" title="Async tab switcher" href="../base/tabbrowser/async-tab-switcher.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/newtab/docs/index.html">Firefox Home (New Tab)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/newtab/content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Touch Bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-api">JavaScript API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-types">Input types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adding-a-new-input">Adding a new input</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cocoa-api">Cocoa API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#nstouchbaritemidentifiers">NSTouchBarItemIdentifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#touchbarinput-creation-flow">TouchBarInput creation flow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../components/uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../components/payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox</a> &raquo;</li>
+        
+      <li>Touch Bar</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/browser/touchbar/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="touch-bar">
+<h1><a class="toc-backref" href="#id1">Touch Bar</a><a class="headerlink" href="#touch-bar" title="Permalink to this headline">¶</a></h1>
+<p>The Touch Bar is a hardware component on some MacBook Pros released from 2016.
+It is a display above the keyboard that allows more flexible types of
+input than is otherwise possible with a normal keyboard. Apple offers Touch Bar
+APIs so developers can extend the Touch Bar to display inputs specific to their
+application. Firefox consumes these APIs to offer a customizable row of inputs
+in the Touch Bar.</p>
+<p>In Apple’s documentation, the term “the Touch Bar” refers to the hardware.
+The term “a Touch Bar” refers not to the hardware but to a collection of inputs
+shown on the Touch Bar. This means that there can be multiple “Touch Bars” that
+switch out as the user switches contexts. The same naming convention is used in
+this document.</p>
+<p>In this document and in the code, the word “input” is used to refer to
+an interactive element in the Touch Bar. It is often interchangeable with
+“button”, but “input” can also refer to any element displayed in the Touch Bar.</p>
+<p>The Touch Bar should never offer functionality unavailable to Firefox users
+without the Touch Bar. Most macOS Firefox users do not have the Touch Bar and
+some choose to disable it. Apple’s own <a class="reference external" href="https://developer.apple.com/design/human-interface-guidelines/macos/touch-bar/touch-bar-overview/">Human Interface Guidelines</a> (HIG)
+forbids this kind of Touch Bar functionality. Please read the HIG for more
+design considerations before you plan on implementing a new Touch Bar feature.</p>
+<p>If you have questions about the Touch Bar that are not answered in this
+document, feel free to reach out to <a class="reference external" href="mailto:harry&#37;&#52;&#48;mozilla&#46;com">Harry Twyford</a> (:harry on Slack).
+He wrote this document and Firefox’s initial Touch Bar implementation.</p>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#touch-bar" id="id1">Touch Bar</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#javascript-api" id="id3">JavaScript API</a></p>
+<ul>
+<li><p><a class="reference internal" href="#input-types" id="id4">Input types</a></p></li>
+<li><p><a class="reference internal" href="#examples" id="id5">Examples</a></p></li>
+<li><p><a class="reference internal" href="#adding-a-new-input" id="id6">Adding a new input</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cocoa-api" id="id7">Cocoa API</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nstouchbaritemidentifiers" id="id8">NSTouchBarItemIdentifiers</a></p></li>
+<li><p><a class="reference internal" href="#touchbarinput-creation-flow" id="id9">TouchBarInput creation flow</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Firefox’s Touch Bar implementation is equal parts JavaScript and Cocoa
+(Objective-C++). The JavaScript code lives in <code class="docutils literal notranslate"><span class="pre">browser/components/touchbar</span></code>
+and the Cocoa code lives in <code class="docutils literal notranslate"><span class="pre">widget/cocoa</span></code>, mostly in <code class="docutils literal notranslate"><span class="pre">nsTouchBar.mm</span></code>. The
+Cocoa code is a consumer of Apple’s Touch Bar APIs and defines what types of
+Touch Bar inputs are available to its own consumers. The JS code in
+<code class="docutils literal notranslate"><span class="pre">browser/components/touchbar</span></code> provides services to <code class="docutils literal notranslate"><span class="pre">nsTouchBar.mm</span></code> and
+defines what inputs the user actually sees in the Touch Bar. There is two-way
+communication between the JS and the Cocoa: the Cocoa code asks the JS what
+inputs it should display, and the JS asks the Cocoa code to update those inputs
+when needed.</p>
+</div>
+<div class="section" id="javascript-api">
+<h2><a class="toc-backref" href="#id3">JavaScript API</a><a class="headerlink" href="#javascript-api" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">browser/components/touchbar/MacTouchBar.js</span></code> defines what specific inputs are
+available to the user, what icon they will have, what action they will perform,
+and so on. Inputs are defined in the <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code> object <a class="reference external" href="https://searchfox.org/mozilla-central/rev/ebe492edacc75bb122a2b380e4cafcca3470864c/browser/components/touchbar/MacTouchBar.js#82">in that file</a>.
+When creating a new object in <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code>, the available properties are
+documented in the JSDoc for <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code>:</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * A representation of a Touch Bar input.</span>
+<span class="cm"> *     @param {string} input.title</span>
+<span class="cm"> *            The lookup key for the button&#39;s localized text title.</span>
+<span class="cm"> *     @param {string} input.image</span>
+<span class="cm"> *            A URL pointing to an SVG internal to Firefox.</span>
+<span class="cm"> *     @param {string} input.type</span>
+<span class="cm"> *            The type of Touch Bar input represented by the object.</span>
+<span class="cm"> *            Must be a value from kInputTypes.</span>
+<span class="cm"> *     @param {Function} input.callback</span>
+<span class="cm"> *            A callback invoked when a touchbar item is touched.</span>
+<span class="cm"> *     @param {string} [input.color]</span>
+<span class="cm"> *            A string in hex format specifying the button&#39;s background color.</span>
+<span class="cm"> *            If omitted, the default background color is used.</span>
+<span class="cm"> *     @param {bool} [input.disabled]</span>
+<span class="cm"> *            If `true`, the Touch Bar input is greyed out and inoperable.</span>
+<span class="cm"> *     @param {Array} [input.children]</span>
+<span class="cm"> *            An array of input objects that will be displayed as children of</span>
+<span class="cm"> *            this input. Available only for types KInputTypes.POPOVER and</span>
+<span class="cm"> *            kInputTypes.SCROLLVIEW.</span>
+<span class="cm"> */</span>
+</pre></div>
+</div>
+<p>Clarification on some of these properties is warranted.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code> is the key to a Fluent translation defined in <code class="docutils literal notranslate"><span class="pre">browser/locales/&lt;LOCALE&gt;/browser/touchbar/touchbar.ftl</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> must be a value from the <code class="docutils literal notranslate"><span class="pre">kInputTypes</span></code> enum in <code class="docutils literal notranslate"><span class="pre">MacTouchBar.js</span></code>.
+For example, <code class="docutils literal notranslate"><span class="pre">kInputTypes.BUTTON</span></code>. More information on input types follows
+below.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">callback</span></code> points to a JavaScript function. Any chrome-level JavaScript can
+be executed. <code class="docutils literal notranslate"><span class="pre">execCommand</span></code> is a convenience method in <code class="docutils literal notranslate"><span class="pre">MacTouchBar.js</span></code>
+that takes a XUL command as a string and executes that command. For instance,
+one input sets <code class="docutils literal notranslate"><span class="pre">callback</span></code> to <code class="docutils literal notranslate"><span class="pre">execCommand(&quot;Browser:Back&quot;)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">children</span></code> is an array of objects with the same properties as members of
+<code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code>. When used with an input of type
+<code class="docutils literal notranslate"><span class="pre">kInputTypes.SCROLLVIEW</span></code>, <code class="docutils literal notranslate"><span class="pre">children</span></code> can only contain inputs of type
+<code class="docutils literal notranslate"><span class="pre">kInputTypes.BUTTON</span></code>. When used with an input of type
+<code class="docutils literal notranslate"><span class="pre">kInputTypes.POPOVER</span></code>, any input type except another <code class="docutils literal notranslate"><span class="pre">kInputTypes.POPOVER</span></code>
+can be used.</p></li>
+</ul>
+<div class="section" id="input-types">
+<h3><a class="toc-backref" href="#id4">Input types</a><a class="headerlink" href="#input-types" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>Button</dt><dd><p>A simple button. If <code class="docutils literal notranslate"><span class="pre">image</span></code> is not specified, the buttons displays the text
+label from <code class="docutils literal notranslate"><span class="pre">title</span></code>. If both <code class="docutils literal notranslate"><span class="pre">image</span></code> and <code class="docutils literal notranslate"><span class="pre">title</span></code> are specified, only the
+<code class="docutils literal notranslate"><span class="pre">image</span></code> is shown. The action specified in <code class="docutils literal notranslate"><span class="pre">callback</span></code> is executed when the
+button is pressed.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Even if the <code class="docutils literal notranslate"><span class="pre">title</span></code> will not be shown in the Touch Bar, you must still
+define a <code class="docutils literal notranslate"><span class="pre">title</span></code> property.</p>
+</div>
+</dd>
+<dt>Main Button</dt><dd><p>Similar to a button, but displayed at double the width. A main button
+displays both the string in <code class="docutils literal notranslate"><span class="pre">title</span></code> and the icon in <code class="docutils literal notranslate"><span class="pre">image</span></code>. Only one
+main button should be shown in the Touch Bar at any time, although this is
+not enforced.</p>
+</dd>
+<dt>Label</dt><dd><p>A non-interactive text label. This input takes only the attributes <code class="docutils literal notranslate"><span class="pre">title</span></code>
+and <code class="docutils literal notranslate"><span class="pre">type</span></code>.</p>
+</dd>
+<dt>Popover</dt><dd><p>Initially represented in the Touch Bar as a button, a popover will display an
+entirely different set of inputs when pressed. These different inputs should
+be defined in the <code class="docutils literal notranslate"><span class="pre">children</span></code> property of the parent. Popovers can also be
+shown and hidden programmatically, by calling</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">gTouchBarUpdater</span><span class="p">.</span><span class="nx">showPopover</span><span class="p">(</span>
+  <span class="nx">TouchBarHelper</span><span class="p">.</span><span class="nx">baseWindow</span><span class="p">,</span>
+  <span class="p">[</span><span class="nx">POPOVER</span><span class="p">],</span>
+  <span class="p">{</span><span class="kc">true</span> <span class="o">|</span> <span class="kc">false</span><span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>where the second argument is a reference to a popover TouchBarInput and
+the third argument is whether the popover should be shown or hidden.</p>
+</dd>
+<dt>Scroll View</dt><dd><p>A Scroll View is a scrolling list of buttons. The buttons should be defined
+in the Scroll View’s <code class="docutils literal notranslate"><span class="pre">children</span></code> array.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In Firefox, a list of search shortcuts appears in the Touch Bar when the
+address bar is focused. This is an example of a ScrollView contained within
+a popover. The popover is opened programmatically with
+<code class="docutils literal notranslate"><span class="pre">gTouchBarUpdater.showPopover</span></code> when the address bar is focused and it is
+hidden when the address bar is blurred.</p>
+</div>
+</dd>
+</dl>
+</div>
+<div class="section" id="examples">
+<h3><a class="toc-backref" href="#id5">Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Some examples of <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code> objects follow.</p>
+<dl>
+<dt>A simple button</dt><dd><div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">Back</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;back&quot;</span><span class="p">,</span>
+  <span class="nx">image</span><span class="o">:</span> <span class="s2">&quot;chrome://browser/skin/back.svg&quot;</span><span class="p">,</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+  <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">execCommand</span><span class="p">(</span><span class="s2">&quot;Browser:Back&quot;</span><span class="p">,</span> <span class="s2">&quot;Back&quot;</span><span class="p">),</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>A button is defined with a title, icon, type, and a callback. The callback
+simply calls the XUL command to go back.</p>
+</dd>
+<dt>The search popover</dt><dd><p>This is the input that occupies the Touch Bar when the address bar is focused.</p>
+<div class="highlight-JavaScript notranslate"><div class="highlight"><pre><span></span><span class="nx">SearchPopover</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-popover&quot;</span><span class="p">,</span>
+  <span class="nx">image</span><span class="o">:</span> <span class="s2">&quot;chrome://browser/skin/search-glass.svg&quot;</span><span class="p">,</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">POPOVER</span><span class="p">,</span>
+  <span class="nx">children</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">SearchScrollViewLabel</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-search-in&quot;</span><span class="p">,</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">LABEL</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">SearchScrollView</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">key</span><span class="o">:</span> <span class="s2">&quot;search-scrollview&quot;</span><span class="p">,</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">SCROLLVIEW</span><span class="p">,</span>
+      <span class="nx">children</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">Bookmarks</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-bookmarks&quot;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span>
+            <span class="nx">gTouchBarHelper</span><span class="p">.</span><span class="nx">insertRestrictionInUrlbar</span><span class="p">(</span>
+              <span class="nx">UrlbarTokenizer</span><span class="p">.</span><span class="nx">RESTRICT</span><span class="p">.</span><span class="nx">BOOKMARK</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+        <span class="nx">History</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-history&quot;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span>
+            <span class="nx">gTouchBarHelper</span><span class="p">.</span><span class="nx">insertRestrictionInUrlbar</span><span class="p">(</span>
+              <span class="nx">UrlbarTokenizer</span><span class="p">.</span><span class="nx">RESTRICT</span><span class="p">.</span><span class="nx">HISTORY</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+        <span class="nx">OpenTabs</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-opentabs&quot;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span>
+            <span class="nx">gTouchBarHelper</span><span class="p">.</span><span class="nx">insertRestrictionInUrlbar</span><span class="p">(</span>
+              <span class="nx">UrlbarTokenizer</span><span class="p">.</span><span class="nx">RESTRICT</span><span class="p">.</span><span class="nx">OPENPAGE</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+        <span class="nx">Tags</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-tags&quot;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span>
+            <span class="nx">gTouchBarHelper</span><span class="p">.</span><span class="nx">insertRestrictionInUrlbar</span><span class="p">(</span>
+              <span class="nx">UrlbarTokenizer</span><span class="p">.</span><span class="nx">RESTRICT</span><span class="p">.</span><span class="nx">TAG</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+        <span class="nx">Titles</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;search-titles&quot;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="nx">kInputTypes</span><span class="p">.</span><span class="nx">BUTTON</span><span class="p">,</span>
+          <span class="nx">callback</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span>
+            <span class="nx">gTouchBarHelper</span><span class="p">.</span><span class="nx">insertRestrictionInUrlbar</span><span class="p">(</span>
+              <span class="nx">UrlbarTokenizer</span><span class="p">.</span><span class="nx">RESTRICT</span><span class="p">.</span><span class="nx">TITLE</span>
+            <span class="p">),</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>At the top level, a Popover is defined. This allows a collection of children
+to be shown in a separate Touch Bar. The Popover has two children: a Label,
+and a Scroll View. The Scroll View displays five similar buttons that call a
+helper method to insert search shortcut symbols into the address bar.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="adding-a-new-input">
+<h3><a class="toc-backref" href="#id6">Adding a new input</a><a class="headerlink" href="#adding-a-new-input" title="Permalink to this headline">¶</a></h3>
+<p>Adding a new input is easy: just add a new object to <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code>. This
+will make the input available in the Touch Bar customization window (accessible
+from the Firefox menu bar item).</p>
+<p>If you want to to add your new input to the default set, add its identifier
+<a class="reference external" href="https://searchfox.org/mozilla-central/rev/ebe492edacc75bb122a2b380e4cafcca3470864c/widget/cocoa/nsTouchBar.mm#100">here</a>, where <code class="docutils literal notranslate"><span class="pre">type</span></code> is a value from <code class="docutils literal notranslate"><span class="pre">kAllowedInputTypes</span></code> in that
+file and <code class="docutils literal notranslate"><span class="pre">key</span></code> is the value you set for <code class="docutils literal notranslate"><span class="pre">title</span></code> in <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code>.
+You should request approval from UX before changing the default set of inputs.</p>
+<p>If you are interested in adding new features to Firefox’s implementation of the
+Touch Bar API, read on!</p>
+</div>
+</div>
+<div class="section" id="cocoa-api">
+<h2><a class="toc-backref" href="#id7">Cocoa API</a><a class="headerlink" href="#cocoa-api" title="Permalink to this headline">¶</a></h2>
+<p>Firefox implements Apple’s Touch Bar API in its Widget: Cocoa code with an
+<code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> class. <code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> interfaces between Apple’s Touch Bar API
+and the <code class="docutils literal notranslate"><span class="pre">TouchBarHelper</span></code> JavaScript API.</p>
+<p>The best resource to understand the Touch Bar API is Apple’s
+<a class="reference external" href="https://developer.apple.com/documentation/appkit/nstouchbar?language=objc">official documentation</a>. This documentation will cover how Firefox implements
+these APIs and how one might extend <code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> to enable new Touch Bar
+features.</p>
+<p>Every new Firefox window initializes <code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> (<a class="reference external" href="https://searchfox.org/mozilla-central/rev/ebe492edacc75bb122a2b380e4cafcca3470864c/widget/cocoa/nsCocoaWindow.mm#2877">link</a>). The function
+<code class="docutils literal notranslate"><span class="pre">makeTouchBar</span></code> is looked for automatically on every new instance of an
+<code class="docutils literal notranslate"><span class="pre">NSWindow*</span></code>. If <code class="docutils literal notranslate"><span class="pre">makeTouchBar</span></code> is defined, that window will own a new
+instance of <code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code>.</p>
+<p>At the time of this writing, every window initializes <code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> with a
+default set of inputs. In the future, Firefox windows other than the main
+browser window (such as the Library window or DevTools) may initialize
+<code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> with a different set of inputs.</p>
+<p><code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> has two different initialization methods: <code class="docutils literal notranslate"><span class="pre">init</span></code> and
+<code class="docutils literal notranslate"><span class="pre">initWithInputs</span></code>. The former is a convenience method for the latter, calling
+<code class="docutils literal notranslate"><span class="pre">initWithInputs</span></code> with a nil argument. When that happens, a Touch Bar is
+created containing a default set of inputs. <code class="docutils literal notranslate"><span class="pre">initWithInputs</span></code> can also take an
+<code class="docutils literal notranslate"><span class="pre">NSArray&lt;TouchBarInput*&gt;*</span></code>. In that case, a non-customizable Touch Bar will be
+initialized with only those inputs available.</p>
+<div class="section" id="nstouchbaritemidentifiers">
+<h3><a class="toc-backref" href="#id8">NSTouchBarItemIdentifiers</a><a class="headerlink" href="#nstouchbaritemidentifiers" title="Permalink to this headline">¶</a></h3>
+<p>The architecture of the Touch Bar is based largely around an <code class="docutils literal notranslate"><span class="pre">NSString*</span></code>
+wrapper class called <code class="docutils literal notranslate"><span class="pre">NSTouchBarItemIdentifier</span></code>. Every input in the Touch Bar
+has a unique <code class="docutils literal notranslate"><span class="pre">NSTouchBarItemIdentifier</span></code>. They are structured in reverse-URI
+format like so:</p>
+<p><code class="docutils literal notranslate"><span class="pre">com.mozilla.firefox.touchbar.[TYPE].[KEY]</span></code></p>
+<p>[TYPE] is a string indicating the type of the input, e.g. “button”. If an
+input is a child of another input, the parent’s type is prepended to the child’s
+type, e.g. “scrubber.button” indicates a button contained in a scrubber.</p>
+<p>[KEY] is the <code class="docutils literal notranslate"><span class="pre">title</span></code> attribute defined for that input on the JS side.</p>
+<p>If you need to generate an identifier, use the convenience method
+<code class="docutils literal notranslate"><span class="pre">[TouchBarInput</span> <span class="pre">nativeIdentifierWithType:withKey:]</span></code>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Do not create a new input that would have the same identifier as any other
+input. All identifiers must be unique.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">NSTouchBarItemIdentifier</span></code> <a class="reference external" href="https://searchfox.org/mozilla-central/rev/ebe492edacc75bb122a2b380e4cafcca3470864c/widget/cocoa/nsTouchBar.mm#71">is used in one other place</a>: setting
+<code class="docutils literal notranslate"><span class="pre">customizationIdentifier</span></code>. Do not ever change this string. If it is changed,
+any customizations users have made to the layout of their Touch Bar in Firefox
+will be erased.</p>
+</div>
+<p>Each identifier is tied to a <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code>. <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code> is a class
+that holds the properties specified for each input in <code class="docutils literal notranslate"><span class="pre">gBuiltInInputs</span></code>.
+<code class="docutils literal notranslate"><span class="pre">nsTouchBar</span></code> uses them to create instances of <code class="docutils literal notranslate"><span class="pre">NSTouchBarItem</span></code>
+which are the actual objects used by Apple’s Touch Bar API and displayed in the
+Touch Bar. It is important to understand the difference between
+<code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code> and <code class="docutils literal notranslate"><span class="pre">NSTouchBarItem</span></code>!</p>
+</div>
+<div class="section" id="touchbarinput-creation-flow">
+<h3><a class="toc-backref" href="#id9">TouchBarInput creation flow</a><a class="headerlink" href="#touchbarinput-creation-flow" title="Permalink to this headline">¶</a></h3>
+<p>Creating a Touch Bar and its <code class="docutils literal notranslate"><span class="pre">TouchBarInputs</span></code> flows as follows:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[nsTouchBar</span> <span class="pre">init]</span></code> is called from <code class="docutils literal notranslate"><span class="pre">[NSWindow</span> <span class="pre">makeTouchBar]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init</span></code> populates two NSArrays: <code class="docutils literal notranslate"><span class="pre">customizationAllowedItemIdentifiers</span></code> and
+<code class="docutils literal notranslate"><span class="pre">defaultItemIdentifiers</span></code>. It also initializes a <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code> object
+for every element in the union of the two arrays and stores them in
+<code class="docutils literal notranslate"><span class="pre">NSMutableDictionary&lt;NSTouchBarItemIdentifier,</span> <span class="pre">TouchBarInput*&gt;*</span> <span class="pre">mappedLayoutItems</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touchBar:makeItemForIdentifier:</span></code> is called for every element in the union
+of the two arrays of identifiers. This method retrieves the <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code>
+for the given identifier and uses it to initialize a <code class="docutils literal notranslate"><span class="pre">NSTouchBarItem</span></code>.
+<code class="docutils literal notranslate"><span class="pre">touchBar:makeItemForIdentifier:</span></code> reads the <code class="docutils literal notranslate"><span class="pre">type</span></code> attribute from the
+<code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code> to determine what <code class="docutils literal notranslate"><span class="pre">NSTouchBarItem</span></code> subclass should be
+initialized. Our Touch Bar code currently supports <code class="docutils literal notranslate"><span class="pre">NSCustomTouchBarItem</span></code>
+(buttons, main buttons); <code class="docutils literal notranslate"><span class="pre">NSPopoverTouchBarItem</span></code> (popovers);
+<code class="docutils literal notranslate"><span class="pre">NSTextField</span></code> (labels); and <code class="docutils literal notranslate"><span class="pre">NSScrollView</span></code> (ScrollViews).</p></li>
+<li><p>Once the <code class="docutils literal notranslate"><span class="pre">NSTouchBarItem</span></code> is initialized, its properties are populated with
+an assortment of “update” methods. These include <code class="docutils literal notranslate"><span class="pre">updateButton</span></code>,
+<code class="docutils literal notranslate"><span class="pre">updateMainButton</span></code>, <code class="docutils literal notranslate"><span class="pre">updateLabel</span></code>, <code class="docutils literal notranslate"><span class="pre">updatePopover</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">updateScrollView</span></code>.</p></li>
+<li><p>Since the localization of <code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code> titles happens asynchronously in
+JavaScript code, the l10n callback executes
+<code class="docutils literal notranslate"><span class="pre">[nsTouchBarUpdater</span> <span class="pre">updateTouchBarInputs:]</span></code>. This method reads the
+identifier of the input(s) that need to be updated and calls their respective
+“update” methods. This method is most often used to update <code class="docutils literal notranslate"><span class="pre">title</span></code> after
+l10n is complete. It can also be used to update any property of a
+<code class="docutils literal notranslate"><span class="pre">TouchBarInput</span></code>;  for instance, one might wish to change <code class="docutils literal notranslate"><span class="pre">color</span></code>
+when a specific event occurs in the browser.</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../components/uitour/docs/index.html" class="btn btn-neutral float-right" title="UITour" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../base/tabbrowser/async-tab-switcher.html" class="btn btn-neutral float-left" title="Async tab switcher" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+mozpack.test package
+====================
+
+Submodules
+----------
+
+mozpack.test.test\_archive module
+---------------------------------
+
+.. automodule:: mozpack.test.test_archive
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_chrome\_flags module
+---------------------------------------
+
+.. automodule:: mozpack.test.test_chrome_flags
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_chrome\_manifest module
+------------------------------------------
+
+.. automodule:: mozpack.test.test_chrome_manifest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_copier module
+--------------------------------
+
+.. automodule:: mozpack.test.test_copier
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_errors module
+--------------------------------
+
+.. automodule:: mozpack.test.test_errors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_files module
+-------------------------------
+
+.. automodule:: mozpack.test.test_files
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_manifests module
+-----------------------------------
+
+.. automodule:: mozpack.test.test_manifests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_mozjar module
+--------------------------------
+
+.. automodule:: mozpack.test.test_mozjar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_packager module
+----------------------------------
+
+.. automodule:: mozpack.test.test_packager
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_packager\_formats module
+-------------------------------------------
+
+.. automodule:: mozpack.test.test_packager_formats
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_packager\_l10n module
+----------------------------------------
+
+.. automodule:: mozpack.test.test_packager_l10n
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_packager\_unpack module
+------------------------------------------
+
+.. automodule:: mozpack.test.test_packager_unpack
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.test.test\_path module
+------------------------------
+
+.. automodule:: mozpack.test.test_path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozpack.test
+   :members:
+   :undoc-members:
+   :show-inheritance:

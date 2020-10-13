@@ -1,0 +1,29 @@
+mozpack.chrome package
+======================
+
+Submodules
+----------
+
+mozpack.chrome.flags module
+---------------------------
+
+.. automodule:: mozpack.chrome.flags
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.chrome.manifest module
+------------------------------
+
+.. automodule:: mozpack.chrome.manifest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozpack.chrome
+   :members:
+   :undoc-members:
+   :show-inheritance:

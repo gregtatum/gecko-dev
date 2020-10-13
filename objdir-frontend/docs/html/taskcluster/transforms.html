@@ -1,0 +1,495 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transforms &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optimization" href="optimization.html" />
+    <link rel="prev" title="Loading Tasks" href="loading.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Transforms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transform-functions">Transform Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#schemas">Schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keyed-by">Keyed By</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#organization">Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-descriptions">Test Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#job-descriptions">Job Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#task-descriptions">Task Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signing-descriptions">Signing Descriptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-detail">More Detail</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+      <li>Transforms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/transforms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="transforms">
+<h1>Transforms<a class="headerlink" href="#transforms" title="Permalink to this headline">¶</a></h1>
+<p>Many task kinds generate tasks by a process of transforming job descriptions
+into task definitions.  The basic operation is simple, although the sequence of
+transforms applied for a particular kind may not be!</p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>To begin, a kind implementation generates a collection of items; see
+<a class="reference internal" href="loading.html"><span class="doc">Loading Tasks</span></a>.  The items are simply Python dictionaries, and describe
+“semantically” what the resulting task or tasks should do.</p>
+<p>The kind also defines a sequence of transformations.  These are applied, in
+order, to each item.  Early transforms might apply default values or break
+items up into smaller items (for example, chunking a test suite).  Later
+transforms rewrite the items entirely, with the final result being a task
+definition.</p>
+<div class="section" id="transform-functions">
+<h3>Transform Functions<a class="headerlink" href="#transform-functions" title="Permalink to this headline">¶</a></h3>
+<p>Each transformation looks like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@transforms</span><span class="o">.</span><span class="n">add</span>
+<span class="k">def</span> <span class="nf">transform_an_item</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This transform ...&quot;&quot;&quot;</span>  <span class="c1"># always a docstring!</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="c1"># ..</span>
+        <span class="k">yield</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">config</span></code> argument is a Python object containing useful configuration for
+the kind, and is a subclass of
+<a class="reference internal" href="../python/taskgraph.transforms.html#taskgraph.transforms.base.TransformConfig" title="taskgraph.transforms.base.TransformConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">taskgraph.transforms.base.TransformConfig</span></code></a>, which specifies a few of
+its attributes.  Kinds may subclass and add additional attributes if necessary.</p>
+<p>While most transforms yield one item for each item consumed, this is not always
+true: items that are not yielded are effectively filtered out.  Yielding
+multiple items for each consumed item implements item duplication; this is how
+test chunking is accomplished, for example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">transforms</span></code> object is an instance of
+<a class="reference internal" href="../python/taskgraph.transforms.html#taskgraph.transforms.base.TransformSequence" title="taskgraph.transforms.base.TransformSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">taskgraph.transforms.base.TransformSequence</span></code></a>, which serves as a simple
+mechanism to combine a sequence of transforms into one.</p>
+</div>
+<div class="section" id="schemas">
+<h3>Schemas<a class="headerlink" href="#schemas" title="Permalink to this headline">¶</a></h3>
+<p>The items used in transforms are validated against some simple schemas at
+various points in the transformation process.  These schemas accomplish two
+things: they provide a place to add comments about the meaning of each field,
+and they enforce that the fields are actually used in the documented fashion.</p>
+</div>
+<div class="section" id="keyed-by">
+<h3>Keyed By<a class="headerlink" href="#keyed-by" title="Permalink to this headline">¶</a></h3>
+<p>Several fields in the input items can be “keyed by” another value in the item.
+For example, a test description’s chunks may be keyed by <code class="docutils literal notranslate"><span class="pre">test-platform</span></code>.
+In the item, this looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">chunks</span><span class="p">:</span>
+    <span class="nt">by-test-platform</span><span class="p">:</span>
+        <span class="nt">linux64/debug</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">12</span>
+        <span class="nt">linux64/opt</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">8</span>
+        <span class="nt">android.*</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">14</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+</pre></div>
+</div>
+<p>This is a simple but powerful way to encode business rules in the items
+provided as input to the transforms, rather than expressing those rules in the
+transforms themselves.  If you are implementing a new business rule, prefer
+this mode where possible.  The structure is easily resolved to a single value
+using <code class="xref py py-func docutils literal notranslate"><span class="pre">taskgraph.transform.base.resolve_keyed_by()</span></code>.</p>
+<p>Exact matches are used immediately.  If no exact matches are found, each
+alternative is treated as a regular expression, matched against the whole
+value.  Thus <code class="docutils literal notranslate"><span class="pre">android.*</span></code> would match <code class="docutils literal notranslate"><span class="pre">android-api-16/debug</span></code>.  If nothing
+matches as a regular expression, but there is a <code class="docutils literal notranslate"><span class="pre">default</span></code> alternative, it is
+used.  Otherwise, an exception is raised and graph generation stops.</p>
+</div>
+</div>
+<div class="section" id="organization">
+<h2>Organization<a class="headerlink" href="#organization" title="Permalink to this headline">¶</a></h2>
+<p>Task creation operates broadly in a few phases, with the interfaces of those
+stages defined by schemas.  The process begins with the raw data structures
+parsed from the YAML files in the kind configuration.  This data can processed
+by kind-specific transforms resulting, for test jobs, in a “test description”.
+For non-test jobs, the next step is a “job description”.  These transformations
+may also “duplicate” tasks, for example to implement chunking or several
+variations of the same task.</p>
+<p>In any case, shared transforms then convert this into a “task description”,
+which the task-generation transforms then convert into a task definition
+suitable for <code class="docutils literal notranslate"><span class="pre">queue.createTask</span></code>.</p>
+</div>
+<div class="section" id="test-descriptions">
+<h2>Test Descriptions<a class="headerlink" href="#test-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>Test descriptions specify how to run a unittest or talos run.  They aim to
+describe this abstractly, although in many cases the unique nature of
+invocation on different platforms leaves a lot of specific behavior in the test
+description, divided by <code class="docutils literal notranslate"><span class="pre">by-test-platform</span></code>.</p>
+<p>Test descriptions are validated to conform to the schema in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/tests.py</span></code>.  This schema is extensively
+documented and is a the primary reference for anyone modifying tests.</p>
+<p>The output of <code class="docutils literal notranslate"><span class="pre">tests.py</span></code> is a task description.  Test dependencies are
+produced in the form of a dictionary mapping dependency name to task label.</p>
+</div>
+<div class="section" id="job-descriptions">
+<h2>Job Descriptions<a class="headerlink" href="#job-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>A job description says what to run in the task.  It is a combination of a
+<code class="docutils literal notranslate"><span class="pre">run</span></code> section and all of the fields from a task description.  The run section
+has a <code class="docutils literal notranslate"><span class="pre">using</span></code> property that defines how this task should be run; for example,
+<code class="docutils literal notranslate"><span class="pre">mozharness</span></code> to run a mozharness script, or <code class="docutils literal notranslate"><span class="pre">mach</span></code> to run a mach command.
+The remainder of the run section is specific to the run-using implementation.</p>
+<p>The effect of a job description is to say “run this thing on this worker”.  The
+job description must contain enough information about the worker to identify
+the workerType and the implementation (docker-worker, generic-worker, etc.).
+Alternatively, job descriptions can specify the <code class="docutils literal notranslate"><span class="pre">platforms</span></code> field in
+conjunction with the  <code class="docutils literal notranslate"><span class="pre">by-platform</span></code> key to specify multiple workerTypes and
+implementations. Any other task-description information is passed along
+verbatim, although it is augmented by the run-using implementation.</p>
+<p>The run-using implementations are all located in
+<code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/job</span></code>, along with the schemas for their
+implementations.  Those well-commented source files are the canonical
+documentation for what constitutes a job description, and should be considered
+part of the documentation.</p>
+<p>following <code class="docutils literal notranslate"><span class="pre">run-using</span></code> are available</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hazard</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mach</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mozharness</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mozharness-test</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run-task</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spidermonkey</span></code> or <code class="docutils literal notranslate"><span class="pre">spidermonkey-package</span></code> or <code class="docutils literal notranslate"><span class="pre">spidermonkey-mozjs-crate</span></code> or <code class="docutils literal notranslate"><span class="pre">spidermonkey-rust-bindings</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">debian-package</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">toolchain-script</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">always-optimized</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fetch-url</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">python-test</span></code></p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="task-descriptions">
+<h2>Task Descriptions<a class="headerlink" href="#task-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>Every kind needs to create tasks, and all of those tasks have some things in
+common.  They all run on one of a small set of worker implementations, each
+with their own idiosyncrasies.  And they all report to TreeHerder in a similar
+way.</p>
+<p>The transforms in <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/task.py</span></code> implement
+this common functionality.  They expect a “task description”, and produce a
+task definition.  The schema for a task description is defined at the top of
+<code class="docutils literal notranslate"><span class="pre">task.py</span></code>, with copious comments.  Go forth and read it now!</p>
+<p>In general, the task-description transforms handle functionality that is common
+to all Gecko tasks.  While the schema is the definitive reference, the
+functionality includes:</p>
+<ul class="simple">
+<li><p>TreeHerder metadata</p></li>
+<li><p>Build index routes</p></li>
+<li><p>Information about the projects on which this task should run</p></li>
+<li><p>Optimizations</p></li>
+<li><p>Defaults for <code class="docutils literal notranslate"><span class="pre">expires-after</span></code> and and <code class="docutils literal notranslate"><span class="pre">deadline-after</span></code>, based on project</p></li>
+<li><p>Worker configuration</p></li>
+</ul>
+<p>The parts of the task description that are specific to a worker implementation
+are isolated in a <code class="docutils literal notranslate"><span class="pre">task_description['worker']</span></code> object which has an
+<code class="docutils literal notranslate"><span class="pre">implementation</span></code> property naming the worker implementation.  Each worker
+implementation has its own section of the schema describing the fields it
+expects.  Thus the transforms that produce a task description must be aware of
+the worker implementation to be used, but need not be aware of the details of
+its payload format.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">task.py</span></code> file also contains a dictionary mapping treeherder groups to
+group names using an internal list of group names.  Feel free to add additional
+groups to this list as necessary.</p>
+</div>
+<div class="section" id="signing-descriptions">
+<h2>Signing Descriptions<a class="headerlink" href="#signing-descriptions" title="Permalink to this headline">¶</a></h2>
+<p>Signing kinds are passed a single dependent job (from its kind dependency) to act
+on.</p>
+<p>The transforms in <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms/signing.py</span></code> implement
+this common functionality.  They expect a “signing description”, and produce a
+task definition.  The schema for a signing description is defined at the top of
+<code class="docutils literal notranslate"><span class="pre">signing.py</span></code>, with copious comments.</p>
+<p>In particular you define a set of upstream artifact urls (that point at the
+dependent task) and can optionally provide a dependent name (defaults to build)
+for use in <code class="docutils literal notranslate"><span class="pre">task-reference</span></code>/<code class="docutils literal notranslate"><span class="pre">artifact-reference</span></code>. You also need to provide
+the signing formats to use.</p>
+</div>
+<div class="section" id="more-detail">
+<h2>More Detail<a class="headerlink" href="#more-detail" title="Permalink to this headline">¶</a></h2>
+<p>The source files provide lots of additional detail, both in the code itself and
+in the comments and docstrings.  For the next level of detail beyond this file,
+consult the transform source under <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/transforms</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="optimization.html" class="btn btn-neutral float-right" title="Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="loading.html" class="btn btn-neutral float-left" title="Loading Tasks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

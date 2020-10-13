@@ -1,0 +1,469 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Including Rust Code in Firefox &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sparse Checkouts" href="sparse.html" />
+    <link rel="prev" title="Localized Builds" href="locales.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Including Rust Code in Firefox</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linking-rust-crates-into-libxul">Linking Rust crates into libxul</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linking-rust-crates-into-something-else">Linking Rust crates into something else</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-compilation">Conditional compilation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standalone-rust-programs">Standalone Rust programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#where-should-i-put-my-crate">Where should I put my crate?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#third-party-crate-dependencies">Third-party crate dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#patching-third-party-crates">Patching third-party crates</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Including Rust Code in Firefox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/rust.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="including-rust-code-in-firefox">
+<span id="rust"></span><h1>Including Rust Code in Firefox<a class="headerlink" href="#including-rust-code-in-firefox" title="Permalink to this headline">¶</a></h1>
+<p>This page explains how to add, build, link, and vendor Rust crates.</p>
+<p>The <a class="reference external" href="../../writing-rust-code">code documentation</a> explains how to write and
+work with Rust code in Firefox. The
+<a class="reference external" href="../../testing-rust-code">test documentation</a> explains how to test and debug
+Rust code in Firefox.</p>
+<div class="section" id="linking-rust-crates-into-libxul">
+<h2>Linking Rust crates into libxul<a class="headerlink" href="#linking-rust-crates-into-libxul" title="Permalink to this headline">¶</a></h2>
+<p>Rust crates that you want to link into libxul should be listed in the
+<code class="docutils literal notranslate"><span class="pre">dependencies</span></code> section of
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/library/rust/shared/Cargo.toml">toolkit/library/rust/shared/Cargo.toml</a>.
+You must also add an <code class="docutils literal notranslate"><span class="pre">extern</span> <span class="pre">crate</span></code> reference to
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/library/rust/shared/lib.rs">toolkit/library/rust/shared/lib.rs</a>.
+This ensures that the Rust code will be linked properly into libxul as well
+as the copy of libxul used for gtests. (Even though Rust 2018 mostly doesn’t
+require <code class="docutils literal notranslate"><span class="pre">extern</span> <span class="pre">crate</span></code> declarations, these ones are necessary because the
+gkrust setup is non-typical.)</p>
+<p>After adding your crate, execute <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">update</span> <span class="pre">-p</span> <span class="pre">gkrust-shared</span></code> to update
+the <code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> file. You will also need to do this any time you change the
+dependencies in a <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file. If you don’t, you will get a build error
+saying <strong>“error: the lock file /home/njn/moz/mc3/Cargo.lock needs to be updated
+but –frozen was passed to prevent this”</strong>.</p>
+<p>By default, all Cargo packages in the mozilla-central repository are part of
+the same
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/library/rust/shared/lib.rs">workspace</a>
+and will share the <code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> file and <code class="docutils literal notranslate"><span class="pre">target</span></code> directory in the root of
+the repository.  You can change this behavior by adding a path to the
+<code class="docutils literal notranslate"><span class="pre">exclude</span></code> list in the top-level <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file.  You may want to do
+this if your package’s development workflow includes dev-dependencies that
+aren’t needed by general Firefox developers or test infrastructure.</p>
+<p>The actual build mechanism is as follows. The build system generates a special
+‘Rust unified library’ crate, compiles that to a static library
+(<code class="docutils literal notranslate"><span class="pre">libgkrust.a</span></code>), and links that into libxul, so all public symbols will be
+available to C++ code. Building a static library that is linked into a dynamic
+library is easier than building dynamic libraries directly, and it also avoids
+some subtle issues around how mozalloc works that make the Rust dynamic library
+path a little wonky.</p>
+</div>
+<div class="section" id="linking-rust-crates-into-something-else">
+<h2>Linking Rust crates into something else<a class="headerlink" href="#linking-rust-crates-into-something-else" title="Permalink to this headline">¶</a></h2>
+<p>To link Rust code into libraries other than libxul, create a directory with a
+<code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file for your crate, and a <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> file that contains:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RustLibrary</span><span class="p">(</span><span class="s1">&#39;crate_name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">crate_name</span></code> matches the name from the <code class="docutils literal notranslate"><span class="pre">[package]</span></code> section of your
+<code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code>. You can refer to <a class="reference external" href="https://searchfox.org/mozilla-central/rev/3f4c3a3cabaf94958834d3a8935adfb4a887942d/toolkit/library/rust/moz.build#7">the moz.build file</a> and <a class="reference external" href="https://searchfox.org/mozilla-central/rev/3f4c3a3cabaf94958834d3a8935adfb4a887942d/toolkit/library/rust/Cargo.toml">the Cargo.toml file</a> that are used for libxul.</p>
+<p>You can then add <code class="docutils literal notranslate"><span class="pre">USE_LIBS</span> <span class="pre">+=</span> <span class="pre">['crate_name']</span></code> to the <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> file
+that defines the binary as you would with any other library in the tree.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You cannot link a Rust crate into an intermediate library that will be
+eventually linked into libxul. The build system enforces that only a single
+<code class="docutils literal notranslate"><span class="pre">RustLibrary</span></code> may be linked into a binary. If you need to do this, you
+will have to add a <code class="docutils literal notranslate"><span class="pre">RustLibrary</span></code> to link to any standalone binaries that
+link the intermediate library, and also add the Rust crate to the libxul
+dependencies as in <a class="reference internal" href="#linking-rust-crates-into-libxul">linking Rust Crates into libxul</a>.</p>
+</div>
+</div>
+<div class="section" id="conditional-compilation">
+<h2>Conditional compilation<a class="headerlink" href="#conditional-compilation" title="Permalink to this headline">¶</a></h2>
+<p>Edit <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/library/rust/gkrust-features.mozbuild">tool/library/rust/gkrust-features.mozbuild</a>
+to expose build flags as Cargo features.</p>
+</div>
+<div class="section" id="standalone-rust-programs">
+<h2>Standalone Rust programs<a class="headerlink" href="#standalone-rust-programs" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to build standalone Rust programs. First, put the Rust
+program (including the <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> file and the <code class="docutils literal notranslate"><span class="pre">src</span></code> directory) in its
+own directory, and add an empty <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> file to the same directory.</p>
+<p>Then, if the standalone Rust program must run on the compile target (e.g.
+because it’s shipped with Firefox) then add this rule to the <code class="docutils literal notranslate"><span class="pre">moz.build</span></code>
+file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">RUST_PROGRAMS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;prog_name&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where <em>prog_name</em> is the name of the executable as specified in the
+<code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> (and probably also matches the name of the directory).</p>
+<p>Otherwise, if the standalone Rust program must run on the compile host (e.g.
+because it’s used to build Firefox but not shipped with Firefox) then do the
+same thing, but use <code class="docutils literal notranslate"><span class="pre">HOST_RUST_PROGRAMS</span></code> instead of <code class="docutils literal notranslate"><span class="pre">RUST_PROGRAMS</span></code>.</p>
+</div>
+<div class="section" id="where-should-i-put-my-crate">
+<h2>Where should I put my crate?<a class="headerlink" href="#where-should-i-put-my-crate" title="Permalink to this headline">¶</a></h2>
+<p>If your crate’s canonical home is mozilla-central, you can put it next to the
+related code in the appropriate directory.</p>
+<p>If your crate is mirrored into mozilla-central from another repository, and
+will not be actively developed in mozilla-central, you can simply list it
+as a <code class="docutils literal notranslate"><span class="pre">crates.io</span></code>-style dependency with a version number, and let it be
+vendored into the <code class="docutils literal notranslate"><span class="pre">third_party/rust</span></code> directory.</p>
+<p>If your crate is mirrored into mozilla-central from another repository, but
+will be actively developed in both locations, you should send mail to the
+dev-builds mailing list to start a discussion on how to meet your needs.</p>
+</div>
+<div class="section" id="third-party-crate-dependencies">
+<h2>Third-party crate dependencies<a class="headerlink" href="#third-party-crate-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>Third-party dependencies for in-tree Rust crates are <em>vendored</em> into the
+<code class="docutils literal notranslate"><span class="pre">third_party/rust</span></code> directory of mozilla-central. This means that a copy of
+each third-party crate’s code is committed into mozilla-central. As a result,
+building Firefox does not involve downloading any third-party crates.</p>
+<p>If you add a dependency on a new crate you must run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">vendor</span> <span class="pre">rust</span></code> to
+vendor the dependencies into that directory. (Note that <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">vendor</span> <span class="pre">rust</span></code>
+<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1647582">may not work as well on Windows</a>
+as on other platforms.)</p>
+<p>When it comes to checking the suitability of third-party code for inclusion
+into mozilla-central, keep the following in mind.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">vendor</span> <span class="pre">rust</span></code> will check that the licenses of all crates are suitable.</p></li>
+<li><p>You should review the crate code to some degree to check that it looks
+reasonable (especially for unsafe code) and that it has reasonable tests.</p></li>
+<li><p>Third-party crate tests aren’t run, which means that large test fixtures will
+bloat mozilla-central. Consider working with upstream to mark those test
+fixtures with <code class="docutils literal notranslate"><span class="pre">[package]</span> <span class="pre">exclude</span> <span class="pre">=</span> <span class="pre">...</span></code> as described
+<a class="reference external" href="https://doc.rust-lang.org/cargo/reference/manifest.html#the-exclude-and-include-fields">here</a>.</p></li>
+<li><p>If you specify a dependency on a branch, pin it to a specific revision,
+otherwise other people will get unexpected changes when they run <code class="docutils literal notranslate"><span class="pre">./mach</span>
+<span class="pre">vendor</span> <span class="pre">rust</span></code> any time the branch gets updated. See <a class="reference external" href="https://bugzil.la/1612619">bug 1612619</a> for a case where such a problem was fixed.</p></li>
+<li><p>Other than that, there is no formal sign-off procedure, but one may be added
+in the future.</p></li>
+</ul>
+<p>Note that all dependencies will be vendored, even ones that aren’t used due to
+disabled features. It’s possible that multiple versions of a crate will end up
+vendored into mozilla-central.</p>
+</div>
+<div class="section" id="patching-third-party-crates">
+<h2>Patching third-party crates<a class="headerlink" href="#patching-third-party-crates" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you might want to temporarily patch a third-party crate, for local
+builds or for a try push.</p>
+<p>To do this, first add an entry to the <code class="docutils literal notranslate"><span class="pre">[patch.crates-io]</span></code> section of the
+top-level <code class="docutils literal notranslate"><span class="pre">Cargo.toml</span></code> that points to the crate within <code class="docutils literal notranslate"><span class="pre">third_party</span></code>. For
+example</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">bitflags</span> <span class="o">=</span> <span class="p">{</span> <span class="n">path</span> <span class="o">=</span> <span class="s">&quot;third_party/rust/bitflags&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Next, run <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">update</span> <span class="pre">-p</span> <span class="pre">$CRATE_NAME</span> <span class="pre">--precise</span> <span class="pre">$VERSION</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">$CRATE_NAME</span></code> is the name of the patched crate, and <code class="docutils literal notranslate"><span class="pre">$VERSION</span></code> is its
+version number. This will update the <code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> file.</p>
+<p>Then, make the local changes to the crate.</p>
+<p>Finally, make sure you don’t accidentally land the changes to the crate or the
+<code class="docutils literal notranslate"><span class="pre">Cargo.lock</span></code> file.</p>
+<p>For an example of a more complex workflow involving a third-party crate, see
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/media/mp4parse-rust/README.md">mp4parse-rust/README.md</a>.
+It describes the workflow for a crate that is hosted on GitHub, and for which
+changes are made via GitHub pull requests, but all pull requests must also be
+tested within mozilla-central before being merged.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sparse.html" class="btn btn-neutral float-right" title="Sparse Checkouts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="locales.html" class="btn btn-neutral float-left" title="Localized Builds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

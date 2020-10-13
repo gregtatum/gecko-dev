@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Fluent &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Fluent for Firefox Developers" href="tutorial.html" />
+    <link rel="prev" title="Localization" href="../overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Localization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../overview.html">Localization</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fluent</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tutorial.html">Fluent for Firefox Developers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="review.html">Guidelines for Fluent Reviewers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../migrations/index.html">Migrating Strings From Legacy or Fluent Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crosschannel/index.html">Cross-channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html">L10N Glossary</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Localization</a> &raquo;</li>
+        
+      <li>Fluent</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/l10n/fluent/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fluent">
+<h1>Fluent<a class="headerlink" href="#fluent" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://projectfluent.org/">Fluent</a> is a localization system developed by Mozilla, which aims to replace
+all existing localization models currently used at Mozilla.</p>
+<p>In case of Firefox it directly supersedes DTD and StringBundle systems, providing
+a large number of features and improvements over both of them, for developers
+and localizers.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Fluent for Firefox Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#using-fluent-in-gecko">Using Fluent in Gecko</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#major-benefits">Major Benefits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#fluent-translation-list-ftl">Fluent Translation List - FTL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#social-contract">Social Contract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#markup-localization">Markup Localization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#runtime-localization">Runtime Localization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#internationalization">Internationalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#registering-new-l10n-files">Registering New L10n Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#custom-localizations">Custom Localizations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#designing-localizable-apis">Designing Localizable APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#pseudolocalization">Pseudolocalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#inner-structure-of-fluent">Inner Structure of Fluent</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="review.html">Guidelines for Fluent Reviewers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="review.html#message-identifiers">Message Identifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#comments">Comments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#changes-to-existing-messages">Changes to Existing Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#non-text-elements-in-messages">Non-text Elements in Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#message-references">Message References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#terms">Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#variants-and-plurals">Variants and plurals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#linter">Linter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="review.html#migrating-strings-from-legacy-or-fluent-files">Migrating Strings From Legacy or Fluent Files</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Other resources:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="http://projectfluent.org/fluent/guide/">Fluent Syntax Guide</a></p></li>
+<li><p><a class="reference external" href="https://github.com/projectfluent/fluent/wiki">Fluent Wiki</a></p></li>
+<li><p><a class="reference external" href="https://github.com/projectfluent/fluent.js/wiki">Fluent.js Wiki</a></p></li>
+</ul>
+</div></blockquote>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="Fluent for Firefox Developers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../overview.html" class="btn btn-neutral float-left" title="Localization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

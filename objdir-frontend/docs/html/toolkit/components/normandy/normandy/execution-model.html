@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Execution Model &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Suitabilities" href="suitabilities.html" />
+    <link rel="prev" title="Data Collection" href="data-collection.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Shield Recipe Client</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="data-collection.html">Data Collection</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Execution Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fetching">1. Fetching</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#suitability">2. Suitability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#execution">3. Execution</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="suitabilities.html">Suitabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="services.html">Normandy Services</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">Shield Recipe Client</a> &raquo;</li>
+        
+      <li>Execution Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/normandy/normandy/execution-model.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="execution-model">
+<h1>Execution Model<a class="headerlink" href="#execution-model" title="Permalink to this headline">¶</a></h1>
+<p>This document describes the execution model of the Normandy Client.</p>
+<p>The basic unit of instruction from the server is a <em>recipe</em>, which contains
+instructions for filtering, and arguments for a given action. See below for
+details.</p>
+<p>One iteration through all of these steps is called a <em>Normandy session</em>. This
+happens at least once every 6 hours, and possibly more often if Remote
+Settings syncs new changes.</p>
+<div class="section" id="fetching">
+<h2>1. Fetching<a class="headerlink" href="#fetching" title="Permalink to this headline">¶</a></h2>
+<p>A list of all active recipes is retrieved from Remote Settings, which has
+likely been syncing them in the background.</p>
+</div>
+<div class="section" id="suitability">
+<h2>2. Suitability<a class="headerlink" href="#suitability" title="Permalink to this headline">¶</a></h2>
+<p>Once recipes have been retrieved, they go through several checks to determine
+their suitability for this client. Recipes contain information about which
+clients should execute the recipe. All recipes are processed by all clients,
+and all filtering happens in the client.</p>
+<p>For more information, see <a class="reference external" href="./suitabilities.html">the suitabilities docs</a>.</p>
+<div class="section" id="signature">
+<h3>Signature<a class="headerlink" href="#signature" title="Permalink to this headline">¶</a></h3>
+<p>First, recipes are validated using a signature generated by <a class="reference external" href="https://github.com/mozilla-services/autograph">Autograph</a> that
+is included with the recipe. This signature validates both the contents of
+the recipe as well as its source.</p>
+<p>This signature is separate and distinct from the signing that happens on the
+Remote Settings collection. This provides additional assurance that this
+recipe is legitimate and intended to run on this client.</p>
+</div>
+<div class="section" id="capabilities">
+<h3>Capabilities<a class="headerlink" href="#capabilities" title="Permalink to this headline">¶</a></h3>
+<p>Next a recipe is checked for compatibility using <em>capabilities</em>.
+Capabilities are simple strings, such as <code class="docutils literal notranslate"><span class="pre">&quot;action:show-heartbeat&quot;</span></code>. A
+recipe contains a list of required capabilities, and the Normandy Client has
+a list of capabilities that it supports. If any of the capabilities required
+by the recipe are not compatible with the client, then the recipe does not
+execute.</p>
+<p>Capabilities are used to avoid running recipes on a client that are so
+incompatible as to be harmful. For example, some changes to filter expression
+handling cannot be detected by filter expressions, and so older clients that
+receive filters using these new features would break.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Capabilities were first introduced in Firefox 70. Clients prior to this
+do not check capabilities, and run all recipes provided. To accommodate
+this, the server splits recipes into two Remote Settings collections,
+<code class="docutils literal notranslate"><span class="pre">normandy-recipes</span></code>, and <code class="docutils literal notranslate"><span class="pre">normandy-recipes-capabilities</span></code>. Clients
+prior to Firefox 70 use the former, whereas Firefox 70 and above use the
+latter. Recipes that only require “baseline” capabilities are published
+to both, and those that require advanced capabilities are only published
+to the capabilities aware collection.</p>
+</div>
+</div>
+<div class="section" id="filter-expressions">
+<h3>Filter Expressions<a class="headerlink" href="#filter-expressions" title="Permalink to this headline">¶</a></h3>
+<p>Finally the recipe’s filter expression is checked. Filter expressions are
+written in an expression language named <a class="reference external" href="https://github.com/mozilla/mozjexl">JEXL</a> that is similar to JavaScript,
+but far simpler. It is intended to be as safe to evaluate as possible.</p>
+<p>Filters are evaluated in a context that contains details about the client
+including browser versions, installed add-ons, and Telemetry data. Filters
+have access to “transforms” which are simple functions that can do things like
+check preference values or parse strings into <code class="docutils literal notranslate"><span class="pre">Date</span></code> objects. Filters don’t
+have access to change any state in the browser, and are generally
+idempotent. However, filters are <em>not</em> considered to be “pure functions”,
+because they have access to state that may change, such as time and location.</p>
+</div>
+</div>
+<div class="section" id="execution">
+<h2>3. Execution<a class="headerlink" href="#execution" title="Permalink to this headline">¶</a></h2>
+<p>After a recipe’s suitability is determined, that recipe is executed. The
+recipe specifies an <em>action</em> by name, as well as arguments to pass to that
+action. The arguments are validated against an expected schema.</p>
+<p>All action have a pre- and post-step that runs once each Normandy session.
+The pre-step is run before any recipes are executed, and once the post-step
+is executed, no more recipes will be executed on that action in this session.</p>
+<p>Each recipe is passed to the action, along with its suitability. Individual
+actions have their own semantics about what to do with recipes. Many actions
+maintain their own life cycle of events for new recipes, existing recipes,
+and recipes that stop applying to this client.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="suitabilities.html" class="btn btn-neutral float-right" title="Suitabilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="data-collection.html" class="btn btn-neutral float-left" title="Data Collection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

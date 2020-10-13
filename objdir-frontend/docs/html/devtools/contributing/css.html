@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CSS &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>CSS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/contributing/css.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="css">
+<h1>CSS<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<p>This page is for information about CSS used by DevTools. Wondering about the Dev Edition theme? See this page for more information about the <a class="reference external" href="https://wiki.mozilla.org/DevTools/Developer_Edition_Theme">Developer Edition theme</a>.</p>
+<div class="section" id="basics">
+<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
+<p>The CSS code is in <code class="docutils literal notranslate"><span class="pre">devtools/client/themes</span></code>.</p>
+<p>Here are some basic tips that can optimize reviews if you are changing CSS:</p>
+<ul class="simple">
+<li><p>Avoid <code class="docutils literal notranslate"><span class="pre">!important</span></code> but if you have to use it, make sure it’s obvious why you’re using it (maybe with a comment).</p></li>
+<li><p>Avoid magic numbers, prefer automatic sizing.</p></li>
+<li><p>Avoid platforms specific styles, put everything in the <code class="docutils literal notranslate"><span class="pre">shared</span></code> directory.</p></li>
+<li><p>Avoid preprocessor variables, use CSS variables instead.</p></li>
+<li><p>Avoid setting styles in JavaScript. It’s generally better to set a class and then specify the styles in CSS</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">classList</span></code> is generally better than <code class="docutils literal notranslate"><span class="pre">className</span></code>. There’s less chance of over-writing an existing class.</p></li>
+</ul>
+<div class="section" id="boilerplate">
+<h3>Boilerplate<a class="headerlink" href="#boilerplate" title="Permalink to this headline">¶</a></h3>
+<p>Make sure each file starts with the standard copyright header (see <a class="reference external" href="https://www.mozilla.org/MPL/headers/">License Boilerplate</a>).</p>
+</div>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+<p>CSS changes should generally be similar across platforms since they used a shared implementation, but there can still be differences worth checking out. Check major changes on Windows, OS X and Ubuntu.</p>
+</div>
+</div>
+<div class="section" id="formatting">
+<h2>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h2>
+<p>We use 2-spaces indentation for the CSS.</p>
+<p>In general the formatting looks like this:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="nt">selector</span><span class="o">,</span>
+<span class="nt">alternate-selector</span> <span class="p">{</span>
+  <span class="n">property</span><span class="p">:</span> <span class="n">value</span><span class="p">;</span>
+  <span class="n">other-property</span><span class="p">:</span> <span class="n">other-value</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<!--TODO: add examples for long shorthand properties, and multi-valued properties (background, font-family, ...)--><p>Also:</p>
+<ul class="simple">
+<li><p>Omit units on 0 values.</p></li>
+<li><p>Example: Use <code class="docutils literal notranslate"><span class="pre">margin:</span> <span class="pre">0;</span></code>, not <code class="docutils literal notranslate"><span class="pre">margin:</span> <span class="pre">0px;</span></code>.</p></li>
+<li><p>Add a space after each comma, <strong>except</strong> within color functions.</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">linear-gradient(to</span> <span class="pre">bottom,</span> <span class="pre">black</span> <span class="pre">1px,</span> <span class="pre">rgba(255,255,255,0.2)</span> <span class="pre">1px)</span></code>.</p></li>
+<li><p>Always add a space before <code class="docutils literal notranslate"> <span class="pre">!important</span></code>.</p></li>
+<li><p>Assume <code class="docutils literal notranslate"><span class="pre">=&quot;true&quot;</span></code> in attribute selectors.</p></li>
+<li><p>Example: Use <code class="docutils literal notranslate"><span class="pre">option[checked]</span></code>, not <code class="docutils literal notranslate"><span class="pre">option[checked=&quot;true&quot;]</span></code>.</p></li>
+<li><p>Use longhand versions of properties so it’s clear what you’re changing.</p></li>
+<li><p>Example: Use <code class="docutils literal notranslate"><span class="pre">border-color:</span> <span class="pre">red</span></code>, not <code class="docutils literal notranslate"><span class="pre">border:</span> <span class="pre">red;</span></code>.</p></li>
+</ul>
+<p>Naming standards for class names:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lower-case-with-dashes</span></code> is the most common.</p></li>
+<li><p>But <code class="docutils literal notranslate"><span class="pre">camelCase</span></code> is also used sometimes. Try to follow the style of existing or related code.</p></li>
+</ul>
+</div>
+<div class="section" id="light-and-dark-theme-support">
+<h2>Light and Dark theme support<a class="headerlink" href="#light-and-dark-theme-support" title="Permalink to this headline">¶</a></h2>
+<p>DevTools supports 2 different themes: the dark theme and the light theme. In order to support them, there are 2 class names available (<code class="docutils literal notranslate"><span class="pre">theme-dark</span></code> and <code class="docutils literal notranslate"><span class="pre">theme-light</span></code>).</p>
+<ul class="simple">
+<li><p>Use <a class="reference external" href="https://searchfox.org/mozilla-central/source/devtools/client/themes/variables.css">pre-defined CSS variables</a> instead of hardcoding colors when possible.</p></li>
+<li><p>If you need to support themes and the pre-defined variables don’t fit, define a variable with your custom colors at the beginning of the CSS file. This avoids selector duplication in the code.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span>.theme-light {
+  --some-variable-name: &lt;color-for-light-theme&gt;;
+}
+.theme-dark {
+  --some-variable-name: &lt;color-for-dark-theme&gt;;
+}
+#myElement {
+  background-color: var(--some-variable-name);
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="hdpi-support">
+<h2>HDPI support<a class="headerlink" href="#hdpi-support" title="Permalink to this headline">¶</a></h2>
+<p>It’s recommended to use SVG since it keeps the CSS clean when supporting multiple resolutions. However, if only 1x and 2x PNG assets are available, you can use this <code class="docutils literal notranslate"><span class="pre">&#64;media</span></code> query to target higher density displays (HDPI): <code class="docutils literal notranslate"><span class="pre">&#64;media</span> <span class="pre">(min-resolution:</span> <span class="pre">1.1dppx)</span></code>. <!--TODO an example would be good here--></p>
+</div>
+<div class="section" id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Read <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS">Writing Efficient CSS</a>.</p></li>
+<li><p>Use an iframe where possible so your rules are scoped to the smallest possible set of nodes.<!--TODO: is this still true? and also refine exactly when it is appropriate to use an iframe. Examples might help--></p></li>
+<li><p>If your CSS is used in <code class="docutils literal notranslate"><span class="pre">browser.xhtml</span></code>, you need to take special care with performance:</p></li>
+<li><p>Descendent selectors should be avoided.</p></li>
+<li><p>If possible, find ways to use <strong>only</strong> id selectors, class selectors and selector groups.</p></li>
+</ul>
+</div>
+<div class="section" id="localization">
+<h2>Localization<a class="headerlink" href="#localization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="text-direction">
+<h3>Text Direction<a class="headerlink" href="#text-direction" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>For margins, padding and borders, use <code class="docutils literal notranslate"><span class="pre">inline-start</span></code>/<code class="docutils literal notranslate"><span class="pre">inline-end</span></code> rather than <code class="docutils literal notranslate"><span class="pre">left</span></code>/<code class="docutils literal notranslate"><span class="pre">right</span></code>.</p></li>
+<li><p>Example: Use <code class="docutils literal notranslate"><span class="pre">margin-inline-start:</span> <span class="pre">3px;</span></code> not <code class="docutils literal notranslate"><span class="pre">margin-left:</span> <span class="pre">3px</span></code>.</p></li>
+<li><p>For RTL-aware positioning (left/right), use <code class="docutils literal notranslate"><span class="pre">inset-inline-start/end</span></code>.</p></li>
+<li><p>When there is no special RTL-aware property (eg. <code class="docutils literal notranslate"><span class="pre">float:</span> <span class="pre">left|right</span></code>) available, use the pseudo <code class="docutils literal notranslate"><span class="pre">:-moz-locale-dir(ltr|rtl)</span></code> (for XUL files) or <code class="docutils literal notranslate"><span class="pre">:dir(ltr|rtl)</span></code> (for HTML files).</p></li>
+<li><p>Remember that while a tab content’s scrollbar still shows on the right in RTL, an overflow scrollbar will show on the left.</p></li>
+<li><p>Write <code class="docutils literal notranslate"><span class="pre">padding:</span> <span class="pre">0</span> <span class="pre">3px</span> <span class="pre">4px;</span></code> instead of <code class="docutils literal notranslate"><span class="pre">padding:</span> <span class="pre">0</span> <span class="pre">3px</span> <span class="pre">4px</span> <span class="pre">3px;</span></code>. This makes it more obvious that the padding is symmetrical (so RTL won’t be an issue).</p></li>
+</ul>
+</div>
+<div class="section" id="rtl-support-for-html-modules">
+<h3>RTL support for html modules<a class="headerlink" href="#rtl-support-for-html-modules" title="Permalink to this headline">¶</a></h3>
+<p>By default, new HTML modules support only left-to-right (LTR) and do not reuse the current direction of the browser.</p>
+<p>To enable right-to-left (RTL) support in a module, set the <code class="docutils literal notranslate"><span class="pre">[dir]</span></code> attribute on the document element of the module:</p>
+<ul class="simple">
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">&lt;html</span> <span class="pre">xmlns=&quot;http://www.w3.org/1999/xhtml&quot;</span> <span class="pre">dir=&quot;&quot;&gt;</span></code>.</p></li>
+</ul>
+<p>The appropriate value for the <code class="docutils literal notranslate"><span class="pre">dir</span></code> attribute will then be set when the toolbox loads this module.</p>
+</div>
+<div class="section" id="id1">
+<h3>Testing<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The recommended workflow to test RTL on DevTools is to use the <a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/force-rtl/">Force RTL extension</a>. After changing the direction using Force RTL, you should restart DevTools to make sure all modules apply the new direction. A future version of Force RTL will be able to update dynamically all DevTools documents.<!--TODO: update when the fate of this addon/webextension is known--></p>
+<p>Going to <code class="docutils literal notranslate"><span class="pre">about:config</span></code> and setting <code class="docutils literal notranslate"><span class="pre">intl.uidirection.en</span></code> to rtl is not recommended, and will always require to re-open DevTools to have any impact.</p>
+</div>
+</div>
+<div class="section" id="toggles">
+<h2>Toggles<a class="headerlink" href="#toggles" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you have a style that you want to turn on and off. For example a tree twisty (a expand-collapse arrow), a tab background, etc.</p>
+<p>The Mozilla way is to perform the toggle using an attribute rather than a class:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">tree-node</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">right-arrow.svg</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">.</span><span class="nc">tree-node</span><span class="o">[</span><span class="nt">open</span><span class="o">]</span> <span class="p">{</span>
+  <span class="k">background-image</span><span class="p">:</span> <span class="nb">url</span><span class="p">(</span><span class="sx">down-arrow.svg</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tips">
+<h2>Tips<a class="headerlink" href="#tips" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">:empty</span></code> to match a node that doesn’t have children.</p></li>
+<li><p>Usually, if <code class="docutils literal notranslate"><span class="pre">margin</span></code> or <code class="docutils literal notranslate"><span class="pre">padding</span></code> has 4 values, something is wrong. If the left and right values are asymmetrical, you’re supposed to use <code class="docutils literal notranslate"><span class="pre">-start</span></code> and <code class="docutils literal notranslate"><span class="pre">-end</span></code>. If the values are symmetrical, use only 3 values (see localization section).</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Background &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="API Implementation Basics" href="basics.html" />
+    <link rel="prev" title="WebExtensions API Development" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../telemetry/index.html">Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">WebExtensions API Development</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Background</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#javascript-apis">Javascript APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manifest-keys">Manifest Keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-considerations">Other Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="basics.html">API Implementation Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema.html">API Schemas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="functions.html">Implementing a function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="events.html">Implementing an event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="manifest.html">Implementing a manifest property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lifecycle.html">Managing the Extension Lifecycle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="incognito.html">Incognito Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="other.html">Utilities for implementing APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reference.html">WebExtensions Javascript Component Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="index.html">WebExtensions API Development</a> &raquo;</li>
+        
+      <li>Background</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/extensions/webextensions/background.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<p>WebExtensions run in a sandboxed environment much like regular web content.
+The purpose of extensions is to enhance the browser in a way that
+regular content cannot – WebExtensions APIs bridge this gap by exposing
+browser features to extensions in a way preserves safety, reliability,
+and performance.
+The implementation of a WebExtension API runs with
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Security/Firefox_Security_Basics_For_Developers">chrome privileges</a>.
+Browser internals are accessed using
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM">XPCOM</a>
+or <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/WebIDL_bindings#ChromeOnly">ChromeOnly WebIDL features</a>.</p>
+<p>The rest of this documentation covers how API implementations interact
+with the implementation of WebExtensions.
+To expose some browser feature to WebExtensions, the first step is
+to design the API.  Some high-level principles for API design
+are documented on the Mozilla wiki:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://wiki.mozilla.org/WebExtensions/Vision">Vision for WebExtensions</a></p></li>
+<li><p><a class="reference external" href="https://wiki.mozilla.org/WebExtensions/policy">API Policies</a></p></li>
+<li><p><a class="reference external" href="https://wiki.mozilla.org/WebExtensions/NewAPIs">Process for creating new APIs</a></p></li>
+</ul>
+<div class="section" id="javascript-apis">
+<h2>Javascript APIs<a class="headerlink" href="#javascript-apis" title="Permalink to this headline">¶</a></h2>
+<p>Many WebExtension APIs are accessed directly from extensions through
+Javascript.  Functions are the most common type of object to expose,
+though some extensions expose properties of primitive Javascript types
+(e.g., constants).
+Regardless of the exact method by which something is exposed,
+there are a few important considerations when designing part of an API
+that is accessible from Javascript:</p>
+<ul class="simple">
+<li><p><strong>Namespace</strong>:
+Everything provided to extensions is exposed as part of a global object
+called <code class="docutils literal notranslate"><span class="pre">browser</span></code>.  For compatibility with Google Chrome, many of these
+features are also exposed on a global object called <code class="docutils literal notranslate"><span class="pre">chrome</span></code>.
+Functions and other objects are not exposed directly as properties on
+<code class="docutils literal notranslate"><span class="pre">browser</span></code>, they are organized into <em>namespaces</em>, which appear as
+properties on <code class="docutils literal notranslate"><span class="pre">browser</span></code>.  For example, the
+<a class="reference external" href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/tabs">tabs API</a>
+uses a namespace called <code class="docutils literal notranslate"><span class="pre">tabs</span></code>, so all its functions and other
+properties appear on the object <code class="docutils literal notranslate"><span class="pre">browser.tabs</span></code>.
+For a new API that provides features via Javascript, the usual practice
+is to create a new namespace with a concise but descriptive name.</p></li>
+<li><p><strong>Environments</strong>:
+There are several different types of Javascript environments in which
+extension code can execute: extension pages, content scripts, proxy
+scripts, and devtools pages.
+Extension pages include the background page, popups, and content pages
+accessed via <a class="reference external" href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/runtime/getURL"><code class="docutils literal notranslate"><span class="pre">browser.runtime.getURL()</span></code></a>.
+When creating a new Javascript feature the designer must choose
+in which of these environments the feature will be available.
+Most Javascript features are available in extension pages,
+other environments have limited sets of API features available.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Permissions</strong>:
+Many Javascript features are only present for extensions that
+include an appropriate permission in the manifest.
+The guidelines for when an API feature requires a permission are
+described in (<em>citation needed</em>).</p></li>
+</ul>
+<p>The specific types of features that can be exposed via Javascript are:</p>
+<ul class="simple">
+<li><p><strong>Functions</strong>:
+A function callable from Javascript is perhaps the most commonly
+used feature in WebExtension APIs.
+New API functions are asynchronous, returning a
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>.  Even functions that do not return a result
+use Promises so that errors can be indicated asynchronously
+via a rejected Promise as opposed to a synchronously thrown Error.
+This is due to the fact that extensions run in a child process and
+many API functions require communication with the main process.
+If an API function that needs to communicate in this way returned a
+synchronous result, then all Javascript execution in the child
+process would need to be paused until a response from the main process
+was received.  Even if a function could be implemented synchronously
+within a child process, the standard practice is to make it
+asynchronous so as not to constrain the implementation of the underlying
+browser feature and make it impossible to move functionality out of the
+child process.
+Another consequence of functions using inter-process communication is
+that the parameters to a function and its return value must all be
+simple data types that can be sent between processes using the
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm">structured clone algorithm</a>.</p></li>
+<li><p><strong>Events</strong>:
+Events complement functions (which allow an extension to call into
+an API) by allowing an event within the browser to invoke a callback
+in the extension.
+Any time an API requires an extension to pass a callback function that
+gets invoked some arbitrary number of times, that API method should be
+defined as an event.</p></li>
+</ul>
+</div>
+<div class="section" id="manifest-keys">
+<h2>Manifest Keys<a class="headerlink" href="#manifest-keys" title="Permalink to this headline">¶</a></h2>
+<p>In addition to providing functionality via Javascript, WebExtension APIs
+can also take actions based on the contents of particular properties
+in an extension’s manifest (or even just the presence of a particular
+property).
+Manifest entries are used for features in which an extension specifies
+some static information that is used when an extension is installed or
+when it starts up (i.e., before it has the chance to run any code to use
+a Javascript API).
+An API may handle a manifest key and implement Javscript functionality,
+see the
+<a class="reference external" href="https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/browserAction">browser action</a>
+API for an example.</p>
+</div>
+<div class="section" id="other-considerations">
+<h2>Other Considerations<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the guidelines outlined above,
+there are some other considerations when designing and implementing
+a WebExtension API:</p>
+<ul class="simple">
+<li><p><strong>Cleanup</strong>: A badly written WebExtension should not be able to permanently
+leak any resources.  In particular, any action from an extension that
+causes a resource to be allocated within the browser should be
+automatically cleaned up when the extension is disabled or uninstalled.
+This is described in more detail in the section on <a class="reference internal" href="lifecycle.html#lifecycle"><span class="std std-ref">Managing the Extension Lifecycle</span></a>.</p></li>
+<li><p><strong>Performance</strong>: A new WebExtension API should not add any new overhead
+to the browser when the API is not used.  That is, the implementation
+of the API should not be loaded at all unless it is actively used by
+an extension.  In addition, initialization should be delayed when
+possible – extensions ared started relatively early in the browser
+startup process so any unnecessary work done during extension startup
+contributes directly to sluggish browser startup.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="basics.html" class="btn btn-neutral float-right" title="API Implementation Basics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="WebExtensions API Development" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

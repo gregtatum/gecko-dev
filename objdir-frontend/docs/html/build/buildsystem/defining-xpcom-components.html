@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Defining XPCOM C++-implemented Components &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Creating Toolchain Archives" href="toolchains.html" />
+    <link rel="prev" title="Defining Binaries for the Build System" href="defining-binaries.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-symbols.html">mozbuild Sandbox Symbols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Defining XPCOM C++-implemented Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-compilation">Conditional Compilation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component-constructors">Component Constructors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#registering-categories">Registering Categories</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Defining XPCOM C++-implemented Components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/defining-xpcom-components.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="defining-xpcom-c-implemented-components">
+<span id="defining-xpcom-components"></span><h1>Defining XPCOM C++-implemented Components<a class="headerlink" href="#defining-xpcom-c-implemented-components" title="Permalink to this headline">¶</a></h1>
+<p>Native XPCOM components are registered at build time, and compiled into static
+data structures which allow them to be accessed with little runtime overhead.
+Each module which wishes to register components must provide a manifest
+describing each component it implements, its type, and how it should be
+constructed.</p>
+<p>Manifest files are Python data files registered in <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> files in a
+<code class="docutils literal notranslate"><span class="pre">XPCOM_MANIFESTS</span></code> file list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">XPCOM_MANIFESTS</span> <span class="o">+=</span> <span class="p">[</span>
+  <span class="s1">&#39;components.conf&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The files may define any of the following special variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional: A function to be called once, the first time any component</span>
+<span class="c1"># listed in this manifest is instantiated.</span>
+<span class="n">InitFunc</span> <span class="o">=</span> <span class="s1">&#39;nsInitFooModule&#39;</span>
+<span class="c1"># Optional: A function to be called at shutdown if any component listed in</span>
+<span class="c1"># this manifest has been instantiated.</span>
+<span class="n">UnloadFunc</span> <span class="o">=</span> <span class="s1">&#39;nsUnloadFooModule&#39;</span>
+
+<span class="c1"># Optional: A processing priority, to determine how early or late the</span>
+<span class="c1"># manifest is processed. Defaults to 50. In practice, this mainly affects</span>
+<span class="c1"># the order in which unload functions are called at shutdown, with higher</span>
+<span class="c1"># priority numbers being called later.</span>
+<span class="n">Priority</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Optional: A list of header files to include before calling init or</span>
+<span class="c1"># unload functions, or any legacy constructor functions.</span>
+<span class="c1">#</span>
+<span class="c1"># Any header path beginning with a `/` is loaded relative to the root of</span>
+<span class="c1"># the source tree, and must not rely on any local includes.</span>
+<span class="c1">#</span>
+<span class="c1"># Any relative header path must be exported.</span>
+<span class="n">Headers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;/foo/nsFooModule.h&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;nsFoo.h&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># A list of component classes provided by this module.</span>
+<span class="n">Classes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="c1"># ...</span>
+    <span class="p">},</span>
+    <span class="c1"># ...</span>
+<span class="p">]</span>
+
+<span class="c1"># A list of category registrations</span>
+<span class="n">Categories</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;other-name&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">ProcessSelector</span><span class="o">.</span><span class="n">MAIN_PROCESS_ONLY</span><span class="p">),</span>
+        <span class="c1"># ...</span>
+    <span class="p">},</span>
+    <span class="c1"># ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Class definitions may have the following properties:</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">name</span></code> (optional)</dt><dd><p>If present, this component will generate an entry with the given name in the
+<code class="docutils literal notranslate"><span class="pre">mozilla::components</span></code> namespace in <code class="docutils literal notranslate"><span class="pre">mozilla/Components.h</span></code>, which gives
+easy access to its CID, service, and instance constructors as (e.g.,)
+<code class="docutils literal notranslate"><span class="pre">components::Foo::CID()</span></code>, <code class="docutils literal notranslate"><span class="pre">components::Foo::Service()</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">components::Foo::Create()</span></code>, respectively.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">cid</span></code></dt><dd><p>A UUID string containing this component’s CID, in the form
+<code class="docutils literal notranslate"><span class="pre">'{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}'</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">contract_ids</span></code> (optional)</dt><dd><p>A list of contract IDs to register for this class.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">categories</span></code> (optional)</dt><dd><p>A dict of category entries to register for this component’s contract ID.
+Each key in the dict is the name of the category. Each value is either a
+string containing a single entry name, or a list of entry name strings.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">type</span></code> (optional, default=``nsISupports``)</dt><dd><p>The fully-qualified type of the class implementing this component. Defaults
+to <code class="docutils literal notranslate"><span class="pre">nsISupports</span></code>, but <strong>must</strong> be provided if the <code class="docutils literal notranslate"><span class="pre">init_method</span></code> property
+is specified, or if neither the <code class="docutils literal notranslate"><span class="pre">constructor</span></code> nor <code class="docutils literal notranslate"><span class="pre">legacy_constructor</span></code>
+properties are provided.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">headers</span></code> (optional)</dt><dd><p>A list of headers to include in order to call this component’s constructor,
+in the same format as the global <code class="docutils literal notranslate"><span class="pre">Headers</span></code> property.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">init_method</span></code> (optional)</dt><dd><p>The name of a method to call on newly-created instances of this class before
+returning them. The method must take no arguments, and must return a
+<code class="docutils literal notranslate"><span class="pre">nsresult</span></code>. If it returns failure, that failure is propagated to the
+<code class="docutils literal notranslate"><span class="pre">getService</span></code> or <code class="docutils literal notranslate"><span class="pre">createInstance</span></code> caller.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">constructor</span></code> (optional)</dt><dd><p>The fully-qualified name of a constructor function to call in order to
+create instances of this class. This function must be declared in one of the
+headers listed in the <code class="docutils literal notranslate"><span class="pre">headers</span></code> property, must take no arguments, and must
+return <code class="docutils literal notranslate"><span class="pre">already_AddRefed&lt;iface&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">iface</span></code> is the interface provided
+in the <code class="docutils literal notranslate"><span class="pre">type</span></code> property.</p>
+<p>This property is incompatible with <code class="docutils literal notranslate"><span class="pre">legacy_constructor</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">jsm</span></code> (optional)</dt><dd><p>If provided, must be the URL of a JavaScript module which contains a
+JavaScript implementation of the component. The <code class="docutils literal notranslate"><span class="pre">constructor</span></code> property
+must contain the name of an exported function which can be constructed to
+create a new instance of the component.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">legacy_constructor</span></code> (optional)</dt><dd><p>This property is deprecated, and should not be used in new code.</p>
+<p>The fully-qualified name of a constructor function to call in order to
+create instances of this class. This function must be declared in one of the
+headers listed in the <code class="docutils literal notranslate"><span class="pre">headers</span></code> property, and must have the signature
+<code class="docutils literal notranslate"><span class="pre">nsresult(nsISupports*</span> <span class="pre">aOuter,</span> <span class="pre">const</span> <span class="pre">nsID&amp;</span> <span class="pre">aIID,</span> <span class="pre">void**</span> <span class="pre">aResult)</span></code>, and
+behave equivalently to <code class="docutils literal notranslate"><span class="pre">nsIFactory::CreateInstance</span></code>.</p>
+<p>This property is incompatible with <code class="docutils literal notranslate"><span class="pre">constructor</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">singleton</span></code> (optional, default=``False``)</dt><dd><p>If true, this component’s constructor is expected to return the same
+singleton for every call, and no <code class="docutils literal notranslate"><span class="pre">mozilla::components::&lt;name&gt;::Create()</span></code>
+method will be generated for it.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">overridable</span></code> (optional, default=``False``)</dt><dd><p>If true, this component’s contract ID is expected to be overridden by some
+tests, and its <code class="docutils literal notranslate"><span class="pre">mozilla::components::&lt;name&gt;::Service()</span></code> getter will
+therefore look it up by contract ID for every call. This component must,
+therefore, provide at least one contract ID in its <code class="docutils literal notranslate"><span class="pre">contract_ids</span></code> array.</p>
+<p>If false, the <code class="docutils literal notranslate"><span class="pre">Service()</span></code> getter will always retrieve the service based on
+its static data, and it cannot be overridden.</p>
+<p>Note: Enabling this option is expensive, and should not be done when it can
+be avoided, or when the getter is used by any hot code.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">external</span></code> (optional, default=``False`` if any <code class="docutils literal notranslate"><span class="pre">headers</span></code> are provided, <code class="docutils literal notranslate"><span class="pre">True</span></code> otherwise)</dt><dd><p>If true, a constructor for this component’s <code class="docutils literal notranslate"><span class="pre">type</span></code> must be defined in
+another translation unit, using <code class="docutils literal notranslate"><span class="pre">NS_IMPL_COMPONENT_FACTORY(type)</span></code>. The
+constructor must return an <code class="docutils literal notranslate"><span class="pre">already_AddRefed&lt;nsISupports&gt;</span></code>, and will be
+used to construct instances of this type.</p>
+<p>This option should only be used in cases where the headers which define the
+component’s concrete type cannot be easily included without local includes.</p>
+<p>Note: External constructors may not specify an <code class="docutils literal notranslate"><span class="pre">init_method</span></code>, since the
+generated code will not have the necessary type information required to call
+it. This option is also incompatible with <code class="docutils literal notranslate"><span class="pre">constructor</span></code> and
+<code class="docutils literal notranslate"><span class="pre">legacy_constructor</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">processes</span></code> (optional, default=``ProcessSelector.ANY_PROCESS``)</dt><dd><p>An optional specifier restricting which types of process this component may
+be loaded in. This must be a property of <code class="docutils literal notranslate"><span class="pre">ProcessSelector</span></code> with the same
+name as one of the values in the <code class="docutils literal notranslate"><span class="pre">Module::ProcessSelector</span></code> enum.</p>
+</dd>
+</dl>
+<div class="section" id="conditional-compilation">
+<h2>Conditional Compilation<a class="headerlink" href="#conditional-compilation" title="Permalink to this headline">¶</a></h2>
+<p>This manifest may run any appropriate Python code to customize the values of
+the <code class="docutils literal notranslate"><span class="pre">Classes</span></code> array based on build configuration. To simplify this process,
+the following globals are available:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">defined</span></code></dt><dd><p>A function which returns true if the given build config setting is defined
+and true.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">buildconfig</span></code></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">buildconfig</span></code> python module, with a <code class="docutils literal notranslate"><span class="pre">substs</span></code> property containing a
+dict of all available build substitutions.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="component-constructors">
+<h2>Component Constructors<a class="headerlink" href="#component-constructors" title="Permalink to this headline">¶</a></h2>
+<p>There are several ways to define component constructors, which vary mostly
+depending on how old the code that uses them is:</p>
+<div class="section" id="class-constructors">
+<h3>Class Constructors<a class="headerlink" href="#class-constructors" title="Permalink to this headline">¶</a></h3>
+<p>This simplest way to define a component is to include a header defining a
+concrete type, and let the component manager call that class’s constructor:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mozilla::foo::Foo&#39;</span><span class="p">,</span>
+<span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mozilla/Foo.h&#39;</span><span class="p">],</span>
+</pre></div>
+</div>
+<p>This is generally the preferred method of defining non-singleton constructors,
+but may not be practicable for classes which rely on local includes for their
+definitions.</p>
+</div>
+<div class="section" id="singleton-constructors">
+<h3>Singleton Constructors<a class="headerlink" href="#singleton-constructors" title="Permalink to this headline">¶</a></h3>
+<p>Singleton classes are generally expected to provide their own constructor
+function which caches a singleton instance the first time it is called, and
+returns the same instance on subsequent calls. This requires declaring the
+constructor in an included header, and implementing it in a separate source
+file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mozilla::foo::Foo&#39;</span><span class="p">,</span>
+<span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mozilla/Foo.h&#39;</span><span class="p">],</span>
+<span class="s1">&#39;constructor&#39;</span><span class="p">:</span> <span class="s1">&#39;mozilla::Foo::GetSingleton&#39;</span><span class="p">,</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Foo.h</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Foo</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">nsISupports</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="k">static</span> <span class="n">already_AddRefed</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">GetSingleton</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Foo.cpp</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">already_AddRefed</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="n">Foo</span><span class="o">::</span><span class="n">GetSingleton</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="external-constructors">
+<h3>External Constructors<a class="headerlink" href="#external-constructors" title="Permalink to this headline">¶</a></h3>
+<p>For types whose headers can’t easily be included, constructors can be defined
+using a template specialization on an incomplete type:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;mozilla::foo::Foo&#39;</span><span class="p">,</span>
+<span class="s1">&#39;external: True,&#39;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Foo.cpp</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">NS_IMPL_COMPONENT_FACTORY</span><span class="p">(</span><span class="n">Foo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nf">do_AddRef</span><span class="p">(</span><span class="k">new</span> <span class="n">Foo</span><span class="p">()).</span><span class="n">downcast</span><span class="o">&lt;</span><span class="n">nsISupports</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="legacy-constructors">
+<h3>Legacy Constructors<a class="headerlink" href="#legacy-constructors" title="Permalink to this headline">¶</a></h3>
+<p>These should not be used in new code, and are left as an exercise for the
+reader.</p>
+</div>
+</div>
+<div class="section" id="registering-categories">
+<h2>Registering Categories<a class="headerlink" href="#registering-categories" title="Permalink to this headline">¶</a></h2>
+<p>Classes which need define category entries with the same value as their
+contract ID may do so using the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;contract_ids&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;@mozilla.org/foo;1&#39;</span><span class="p">],</span>
+<span class="s1">&#39;categories&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;content-policy&#39;</span><span class="p">:</span> <span class="s1">&#39;m-foo&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Gecko-Content-Viewers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;image/jpeg&#39;</span><span class="p">,</span> <span class="s1">&#39;image/png&#39;</span><span class="p">],</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>This will define each of the following category entries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;content-policy&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;m-foo&quot;,</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;&#64;mozilla.org/foo;1&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Gecko-Content-Viewers&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;image/jpeg&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;&#64;mozilla.org/foo;1&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Gecko-Content-Viewers&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;image/png&quot;</span></code> <code class="docutils literal notranslate"><span class="pre">&quot;&#64;mozilla.org/foo;1&quot;</span></code></p></li>
+</ul>
+<p>Some category entries do not have a contract ID as a value. These entries can
+be specified by adding to a global <code class="docutils literal notranslate"><span class="pre">Categories</span></code> dictionary:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Categories</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;app-startup&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Mapi Support&#39;</span><span class="p">:</span> <span class="s1">&#39;service,@mozilla.org/mapisupport;1&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is possible to limit these on a per-process basis by using a tuple as the
+value:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Categories</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;app-startup&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;MainProcessSingleton&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;service,@mozilla.org/main-process-singleton;1&#39;</span><span class="p">,</span> <span class="n">ProcessSelector</span><span class="o">.</span><span class="n">MAIN_PROCESS_ONLY</span><span class="p">),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="toolchains.html" class="btn btn-neutral float-right" title="Creating Toolchain Archives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="defining-binaries.html" class="btn btn-neutral float-left" title="Defining Binaries for the Build System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

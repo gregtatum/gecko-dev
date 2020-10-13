@@ -1,0 +1,348 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Security aspects of the remote agent &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Security aspects of the remote agent</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/remote/doc/remote/curity.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="security-aspects-of-the-remote-agent">
+<h1>Security aspects of the remote agent<a class="headerlink" href="#security-aspects-of-the-remote-agent" title="Permalink to this headline">¶</a></h1>
+<p>The remote agent is not a web-facing feature and as such has different
+security characteristics than traditional web platform APIs.  The
+primary consumers are out-of-process programs that connect to the
+agent via a remote protocol, but can theoretically be extended to
+facilitate browser-local clients communicating over IPDL.</p>
+<div class="section" id="design-considerations">
+<h2>Design considerations<a class="headerlink" href="#design-considerations" title="Permalink to this headline">¶</a></h2>
+<p>The remote agent allows consumers to interface with Firefox through
+an assorted set of domains for inspecting the state and controlling
+execution of documents running in web content, injecting arbitrary
+scripts to documents, do browser service instrumentation, simulation
+of user interaction for automation purposes, and for subscribing
+to updates in the browser such as network- and console logs.</p>
+<p>The remote interfaces are served over an HTTP wire protocol, by a
+server listener hosted in the Firefox binary.  This can only be
+started by passing the <code class="docutils literal notranslate"><span class="pre">--remote-debugging-port</span></code>
+flag.  Connections are by default restricted to loopback devices
+(such as localhost and 127.0.0.1), but this can be overridden with
+the <code class="docutils literal notranslate"><span class="pre">remote.force-local</span></code> preference.</p>
+<p>The feature as a whole is guarded behind the <code class="docutils literal notranslate"><span class="pre">remote.enabled</span></code>
+preference.  This preference serves as a way to gate the remote
+agent component through release channels, and potentially for
+remotely disabling the remote agent through Normandy if the need
+should arise.</p>
+<p>Since the remote agent is not an in-document web feature, the
+security concerns we have for this feature are essentially different
+to other web platform features.  The primary concern is that the
+HTTPD is not spun up without passing one of the command-line flags.
+It is out perception that if a malicious user has the capability
+to execute arbitrary shell commands, there is little we can do to
+prevent the browser being turned into an evil listening device.</p>
+</div>
+<div class="section" id="user-privacy-concerns">
+<h2>User privacy concerns<a class="headerlink" href="#user-privacy-concerns" title="Permalink to this headline">¶</a></h2>
+<p>There are no user privacy concerns beyond the fact that the offered
+interfaces will give the client access to all browser internals,
+and thereby follows all browser-internal secrets.</p>
+</div>
+<div class="section" id="how-the-remote-agent-works">
+<h2>How the remote agent works<a class="headerlink" href="#how-the-remote-agent-works" title="Permalink to this headline">¶</a></h2>
+<p>When the <code class="docutils literal notranslate"><span class="pre">--remote-debugging-port</span></code> flag is used,
+it spins up an HTTPD on the desired port, or defaults to
+localhost:9222.  The HTTPD serves WebSocket connections via
+<code class="docutils literal notranslate"><span class="pre">nsIWebSocket.createServerWebSocket</span></code> that clients connect to in
+order to give the agent remote instructions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remote.force-local</span></code> preference controls whether the HTTPD
+accepts connections from non-loopback clients.  System-local loopback
+connections are the default:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    if (Preferences.get(FORCE_LOCAL) &amp;&amp; !LOOPBACKS.includes(host)) {
+      throw new Error(&quot;Restricted to loopback devices&quot;);
+    }
+</pre></div>
+</div>
+<p>The remote agent implements a large subset of the Chrome DevTools
+Protocol (CDP).  This protocol allows a client to:</p>
+<ul class="simple">
+<li><p>take control over the user session for automation purposes, for
+example to simulate user interaction such as clicking and typing;</p></li>
+<li><p>instrument the browser for analytical reasons, such as intercepting
+network traffic;</p></li>
+<li><p>and extract information from the user session, including cookies
+and local strage.</p></li>
+</ul>
+<p>There are no web-exposed features in the remote agent whatsoever.</p>
+</div>
+<div class="section" id="security-model">
+<h2>Security model<a class="headerlink" href="#security-model" title="Permalink to this headline">¶</a></h2>
+<p>It shares the same security model as DevTools and Marionette, in
+that there is no other mechanism for enabling the remote agent than
+by passing a command-line flag.</p>
+<p>It is our assumption that if an attacker has shell access to the
+user account, there is little we can do to prevent secrets from
+being accessed or leaked.</p>
+<p>The preference <code class="docutils literal notranslate"><span class="pre">remote.enabled</span></code> is true on the Firefox Nightly
+release channel.  The <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1542229">security review</a> was completed in November
+2019.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

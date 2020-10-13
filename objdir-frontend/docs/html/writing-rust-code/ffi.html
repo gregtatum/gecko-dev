@@ -1,0 +1,511 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Rust/C++ interop &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="XPCOM components in Rust" href="xpcom.html" />
+    <link rel="prev" title="Basics" href="basics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Writing Rust Code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basics</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Rust/C++ interop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#transferable-types">Transferable types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-c-code-and-data-from-rust">Accessing C++ code and data from Rust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-rust-code-and-data-from-c">Accessing Rust code and data from C++</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basics">Basics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#complex-types">Complex types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instances">Instances</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#other-examples">Other examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="xpcom.html">XPCOM components in Rust</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Writing Rust Code</a> &raquo;</li>
+        
+      <li>Rust/C++ interop</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/writing-rust-code/ffi.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="rust-c-interop">
+<h1>Rust/C++ interop<a class="headerlink" href="#rust-c-interop" title="Permalink to this headline">¶</a></h1>
+<p>This document describes how to use FFI in Firefox to get Rust code and C++ code to interoperate.</p>
+<div class="section" id="transferable-types">
+<h2>Transferable types<a class="headerlink" href="#transferable-types" title="Permalink to this headline">¶</a></h2>
+<p>Generally speaking, the more complicated is the data you want to transfer, the
+harder it’ll be to transfer across the FFI boundary.</p>
+<p>Booleans, integers, and pointers cause little trouble.</p>
+<ul class="simple">
+<li><p>C++ <code class="docutils literal notranslate"><span class="pre">bool</span></code> matches Rust <code class="docutils literal notranslate"><span class="pre">bool</span></code></p></li>
+<li><p>C++ <code class="docutils literal notranslate"><span class="pre">uint8_t</span></code> matches Rust <code class="docutils literal notranslate"><span class="pre">u8</span></code>, <code class="docutils literal notranslate"><span class="pre">int32_t</span></code> matches Rust <code class="docutils literal notranslate"><span class="pre">i32</span></code>, etc.</p></li>
+<li><p>C++ <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">T*</span></code> matches Rust <code class="docutils literal notranslate"><span class="pre">*const</span> <span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">T*</span></code> matches Rust <code class="docutils literal notranslate"><span class="pre">*mut</span> <span class="pre">T</span></code>.</p></li>
+</ul>
+<p>Lists are handled by C++ <code class="docutils literal notranslate"><span class="pre">nsTArray</span></code> and Rust <code class="docutils literal notranslate"><span class="pre">ThinVec</span></code>.</p>
+<p>For strings, it is best to use the <code class="docutils literal notranslate"><span class="pre">nsstring</span></code> helper crate. Using a raw pointer
+plus length is also possible for strings, but more error-prone.</p>
+<p>If you need a hashmap, you’ll likely want to decompose it into two lists (keys
+and values) and transfer them separately.</p>
+<p>Other types can be handled with tools that generate bindings, as the following
+sections describe.</p>
+</div>
+<div class="section" id="accessing-c-code-and-data-from-rust">
+<h2>Accessing C++ code and data from Rust<a class="headerlink" href="#accessing-c-code-and-data-from-rust" title="Permalink to this headline">¶</a></h2>
+<p>To call a C++ function from Rust requires adding a function declaration to Rust.
+For example, for this C++ function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">extern</span> <span class="s2">&quot;C&quot;</span> <span class="p">{</span>
+<span class="nb">bool</span> <span class="n">UniquelyNamedFunction</span><span class="p">(</span><span class="n">const</span> <span class="n">nsCString</span><span class="o">*</span> <span class="n">aInput</span><span class="p">,</span> <span class="n">nsCString</span><span class="o">*</span> <span class="n">aRetVal</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">true</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>add this declaration to the Rust code:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">UniquelyNamedFunction</span><span class="p">(</span><span class="n">input</span>: <span class="kp">&amp;</span><span class="nc">nsCString</span><span class="p">,</span><span class="w"> </span><span class="n">ret_val</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">nsCString</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Rust code can now call <code class="docutils literal notranslate"><span class="pre">UniquelyNamedFunction()</span></code> within an <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> block. Note
+that if the declarations do not match (e.g. because the C++ function signature
+changes without the Rust declaration being updated) crashes are likely. (Hence
+the <code class="docutils literal notranslate"><span class="pre">unsafe</span></code> block.)</p>
+<p>Because of this unsafety, for non-trivial interfaces (in particular when C++
+structs and classes must be accessed from Rust code) it’s common to use
+<a class="reference external" href="https://github.com/rust-lang/rust-bindgen">rust-bindgen</a>, which generates Rust
+bindings. The documentation is
+<a class="reference external" href="https://rust-lang.github.io/rust-bindgen/">here</a>.</p>
+</div>
+<div class="section" id="accessing-rust-code-and-data-from-c">
+<h2>Accessing Rust code and data from C++<a class="headerlink" href="#accessing-rust-code-and-data-from-c" title="Permalink to this headline">¶</a></h2>
+<p>A common option for accessing Rust code and data from C++ is to use
+<a class="reference external" href="https://github.com/eqrion/cbindgen">cbindgen</a>, which generates C++ header
+files. for Rust crates that expose a public C API. cbindgen is a very powerful
+tool, and this section only covers some basic uses of it.</p>
+<div class="section" id="basics">
+<h3>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h3>
+<p>First, add suitable definitions to your Rust. <code class="docutils literal notranslate"><span class="pre">#[no_mangle]</span></code> and <code class="docutils literal notranslate"><span class="pre">extern</span> <span class="pre">&quot;C&quot;</span></code>
+are required.</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[no_mangle]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">unic_langid_canonicalize</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">langid</span>: <span class="kp">&amp;</span><span class="nc">nsCString</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ret_val</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">nsCString</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ret_val</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="s">&quot;new value&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kc">true</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then, add a <code class="docutils literal notranslate"><span class="pre">cbindgen.toml</span></code> file in the root of your crate. It may look like this:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span>header = &quot;&quot;&quot;/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */&quot;&quot;&quot;
+autogen_warning = &quot;&quot;&quot;/* DO NOT MODIFY THIS MANUALLY! This file was generated using cbindgen. See RunCbindgen.py */
+#ifndef mozilla_intl_locale_MozLocaleBindings_h
+#error &quot;Don&#39;t include this file directly, instead include MozLocaleBindings.h&quot;
+#endif
+&quot;&quot;&quot;
+include_version = true
+braces = &quot;SameLine&quot;
+line_length = 100
+tab_width = 2
+language = &quot;C++&quot;
+# Put FFI calls in the `mozilla::intl::ffi` namespace.
+namespaces = [&quot;mozilla&quot;, &quot;intl&quot;, &quot;ffi&quot;]
+
+# Export `ThinVec` references as `nsTArray`.
+[export.rename]
+&quot;ThinVec&quot; = &quot;nsTArray&quot;
+</pre></div>
+</div>
+<p>Next, extend the relevant <code class="docutils literal notranslate"><span class="pre">moz.build</span></code> file to invoke cbindgen.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">CONFIG</span><span class="p">[</span><span class="s1">&#39;COMPILE_ENVIRONMENT&#39;</span><span class="p">]:</span>
+    <span class="n">CbindgenHeader</span><span class="p">(</span><span class="s1">&#39;unic_langid_ffi_generated.h&#39;</span><span class="p">,</span>
+                   <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/intl/locale/rust/unic-langid-ffi&#39;</span><span class="p">])</span>
+
+    <span class="n">EXPORTS</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">intl</span> <span class="o">+=</span> <span class="p">[</span>
+        <span class="s1">&#39;!unic_langid_ffi_generated.h&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p>This tells the build system to run cbindgen on
+<code class="docutils literal notranslate"><span class="pre">intl/locale/rust/unic-langid-ffi</span></code> to generate <code class="docutils literal notranslate"><span class="pre">unic_langid_ffi_generated.h</span></code>,
+which will be placed in <code class="docutils literal notranslate"><span class="pre">$OBJDIR/dist/include/mozilla/intl/</span></code>.</p>
+<p>Finally, include the generated header into a C++ file and call the function.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;mozilla/intl/unic_langid_ffi_generated.h&quot;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">mozilla</span><span class="o">::</span><span class="n">intl</span><span class="o">::</span><span class="n">ffi</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="n">Locale</span><span class="o">::</span><span class="n">MyFunction</span><span class="p">(</span><span class="n">nsCString</span><span class="o">&amp;</span> <span class="n">aInput</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+  <span class="n">nsCString</span> <span class="n">result</span><span class="p">;</span>
+  <span class="n">unic_langid_canonicalize</span><span class="p">(</span><span class="n">aInput</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">result</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="complex-types">
+<h3>Complex types<a class="headerlink" href="#complex-types" title="Permalink to this headline">¶</a></h3>
+<p>Many complex Rust types can be exposed to C++, and cbindgen will generate
+appropriate bindings for all <code class="docutils literal notranslate"><span class="pre">pub</span></code> types. For example:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[repr(C)]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">FluentPlatform</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Linux</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Windows</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Macos</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Android</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">Other</span><span class="p">,</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">FluentBuiltInGetPlatform</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">FluentPlatform</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ffi</span><span class="o">::</span><span class="n">FluentPlatform</span> <span class="n">FluentBuiltInGetPlatform</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">ffi</span><span class="o">::</span><span class="n">FluentPlatform</span><span class="o">::</span><span class="n">Linux</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For an example using cbindgen to expose much more complex Rust types to C++,
+see <a class="reference external" href="https://crisal.io/words/2020/02/28/C++-rust-ffi-patterns-1-complex-data-structures.html">this blog post</a>.</p>
+</div>
+<div class="section" id="instances">
+<h3>Instances<a class="headerlink" href="#instances" title="Permalink to this headline">¶</a></h3>
+<p>If you need to create and destroy a Rust struct from C++ code, the following
+example may be helpful.</p>
+<p>First, define constructor, destructor and getter functions in Rust. (C++
+declarations for these will be generated by cbindgen.)</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[no_mangle]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">unic_langid_new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">LanguageIdentifier</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">langid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LanguageIdentifier</span>::<span class="n">default</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="nb">Box</span>::<span class="n">into_raw</span><span class="p">(</span><span class="nb">Box</span>::<span class="n">new</span><span class="p">(</span><span class="n">langid</span><span class="p">))</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[no_mangle]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">unic_langid_destroy</span><span class="p">(</span><span class="n">langid</span>: <span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="n">LanguageIdentifier</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nb">drop</span><span class="p">(</span><span class="nb">Box</span>::<span class="n">from_raw</span><span class="p">(</span><span class="n">langid</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="cp">#[no_mangle]</span><span class="w"></span>
+<span class="k">pub</span><span class="w"> </span><span class="k">unsafe</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="s">&quot;C&quot;</span><span class="w"> </span><span class="k">fn</span> <span class="nf">unic_langid_as_string</span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="n">langid</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">LanguageIdentifier</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">ret_val</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">nsACString</span><span class="p">,</span><span class="w"></span>
+<span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ret_val</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">langid</span><span class="p">.</span><span class="n">to_string</span><span class="p">());</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Next, in a C++ header define a destructor via <code class="docutils literal notranslate"><span class="pre">DefaultDelete</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;mozilla/intl/unic_langid_ffi_generated.h&quot;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&quot;mozilla/UniquePtr.h&quot;</span><span class="cp"></span>
+
+<span class="k">namespace</span> <span class="n">mozilla</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;&gt;</span>
+<span class="k">class</span> <span class="nc">DefaultDelete</span><span class="o">&lt;</span><span class="n">intl</span><span class="o">::</span><span class="n">ffi</span><span class="o">::</span><span class="n">LanguageIdentifier</span><span class="o">&gt;</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="n">intl</span><span class="o">::</span><span class="n">ffi</span><span class="o">::</span><span class="n">LanguageIdentifier</span><span class="o">*</span> <span class="n">aPtr</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">unic_langid_destroy</span><span class="p">(</span><span class="n">aPtr</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span>  <span class="c1">// namespace mozilla</span>
+</pre></div>
+</div>
+<p>(This definition must be visible any place where
+<code class="docutils literal notranslate"><span class="pre">UniquePtr&lt;intl::ffi::LanguageIdentifier&gt;</span></code> is used, otherwise C++ will try to
+free the code, which might lead to strange behaviour!)</p>
+<p>Finally, implement the class.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Locale</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+  <span class="k">explicit</span> <span class="n">Locale</span><span class="p">(</span><span class="k">const</span> <span class="n">nsACString</span><span class="o">&amp;</span> <span class="n">aLocale</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">mRaw</span><span class="p">(</span><span class="n">unic_langid_new</span><span class="p">())</span> <span class="p">{}</span>
+
+  <span class="k">const</span> <span class="n">nsCString</span> <span class="n">Locale</span><span class="o">::</span><span class="n">AsString</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+    <span class="n">nsCString</span> <span class="n">tag</span><span class="p">;</span>
+    <span class="n">unic_langid_as_string</span><span class="p">(</span><span class="n">mRaw</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="o">&amp;</span><span class="n">tag</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">tag</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="k">private</span><span class="o">:</span>
+  <span class="n">UniquePtr</span><span class="o">&lt;</span><span class="n">ffi</span><span class="o">::</span><span class="n">LanguageIdentifier</span><span class="o">&gt;</span> <span class="n">mRaw</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This makes it possible to instantiate a <code class="docutils literal notranslate"><span class="pre">Locale</span></code> object and call <code class="docutils literal notranslate"><span class="pre">AsString()</span></code>,
+all from C++ code.</p>
+</div>
+</div>
+<div class="section" id="other-examples">
+<h2>Other examples<a class="headerlink" href="#other-examples" title="Permalink to this headline">¶</a></h2>
+<p>For a detailed explanation of an interface in Firefox that doesn’t use cbindgen
+or rust-bindgen, see <a class="reference external" href="https://hsivonen.fi/modern-cpp-in-rust/">this blog post</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="xpcom.html" class="btn btn-neutral float-right" title="XPCOM components in Rust" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basics.html" class="btn btn-neutral float-left" title="Basics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

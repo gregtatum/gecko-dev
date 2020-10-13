@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugging Intermittent Test Failures &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Performance Tests: DAMP" href="performance-tests.html" />
+    <link rel="prev" title="Automated tests: writing tests" href="writing-tests.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="README.html">Automated tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xpcshell.html">xpcshell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-chrome.html">Chrome mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mochitest-devtools.html">DevTools mochitests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-tests.html">Node tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-tests.html">Writing tests</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugging intermittent failures</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-are-intermittents-aka-oranges">What are Intermittents (aka Oranges)?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finding-intermittents">Finding Intermittents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reproducing-test-failures-locally">Reproducing Test Failures locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#that-didn-t-work">That Didn’t Work</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#solving">Solving</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verifying">Verifying</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="performance-tests.html">Performance tests (DAMP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html">Writing new performance test</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-name-your-test-and-register-it">How to name your test and register it?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests.html#how-to-run-your-new-test">How to run your new test?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-example.html">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="writing-perf-tests-tips.html">Advanced tips</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Debugging Intermittent Test Failures</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/tests/debugging-intermittents.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugging-intermittent-test-failures">
+<h1>Debugging Intermittent Test Failures<a class="headerlink" href="#debugging-intermittent-test-failures" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-are-intermittents-aka-oranges">
+<h2>What are Intermittents (aka Oranges)?<a class="headerlink" href="#what-are-intermittents-aka-oranges" title="Permalink to this headline">¶</a></h2>
+<p>Intermittents are test failures which happen intermittently, in a seemingly random way. Often you’ll write a test that passes fine locally on your computer, but when ran thousands of times on various CI environments (some of them under heavy load) it may start to fail randomly.</p>
+<p>Intermittents are also known as Oranges, because the corresponding test jobs are rendered orange on <a class="reference external" href="http://treeherder.mozilla.org/">treeherder</a>.</p>
+<p>These intermittent failures are tracked in Bugzilla. When a test starts being intermittent a bug is filed in Bugzilla (usually by a Mozilla code sheriff).</p>
+<p>Once the bug exists for a given test failure, all further similar failures of that test will be reported as comments within that bug.
+These reports are usually posted weekly and look like this:</p>
+<blockquote>
+<div><p>5 failures in 2740 pushes (0.002 failures/push) were associated with this bug in the last 7 days.</p>
+</div></blockquote>
+<p>See <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1250523#c4">an example here</a>.</p>
+<p>Sometimes, tests start failing more frequently and these reports are then posted daily.</p>
+<p>To help with the (unfortunately) ever-growing list of intermittents, the Stockwell project was initiated a while ago (read more about the goals of that project on <a class="reference external" href="https://wiki.mozilla.org/Auto-tools/Projects/Stockwell">their wiki</a>).</p>
+<p>This project defines a scenario where very frequently failing tests get disabled.
+Ideally, we should try to avoid this, because this means reducing our test coverage, but sometimes we do not have time to investigate the failure, and disabling it is the only remaining option.</p>
+</div>
+<div class="section" id="finding-intermittents">
+<h2>Finding Intermittents<a class="headerlink" href="#finding-intermittents" title="Permalink to this headline">¶</a></h2>
+<p>You will have no trouble finding out that a particular test is intermittent, because a bug for it will be filed and you will see it in Bugzilla (<a class="reference external" href="https://bugzilla.mozilla.org/userprefs.cgi?tab=component_watch">watching the Bugzilla component of your choice</a> is a good way to avoid missing the failure reports).</p>
+<p>However, it can still be useful to see intermittents in context. The <a class="reference external" href="https://treeherder.mozilla.org/intermittent-failures.html">Intermittent Failures View on Treeherder</a> shows intermittents ranked by frequency.</p>
+<p>You can also see intermittents in Bugzilla.  Go to <a class="reference external" href="https://bugzilla.mozilla.org/userprefs.cgi?tab=settings">the settings page</a> and enable “When viewing a bug, show its corresponding Orange Factor page”.</p>
+</div>
+<div class="section" id="reproducing-test-failures-locally">
+<h2>Reproducing Test Failures locally<a class="headerlink" href="#reproducing-test-failures-locally" title="Permalink to this headline">¶</a></h2>
+<p>The first step to fix an intermittent is to reproduce it.</p>
+<p>Sometimes reproducing the failure can only be done in automation, but it’s worth trying locally, because this makes it much simpler to debug.</p>
+<p>First, try running the test in isolation.  You can use the <code class="docutils literal notranslate"><span class="pre">--repeat</span></code> and <code class="docutils literal notranslate"><span class="pre">--run-until-failure</span></code> flags to <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">mochitest</span></code> to automate this a bit.  It’s nice to do this sort of thing in headless mode (<code class="docutils literal notranslate"><span class="pre">--headless</span></code>) or in a VM (or using Xnest on Linux) to avoid locking up your machine.  Mozilla provides an <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Developer_guide/Using_the_VM">easy-to-use VM</a>.</p>
+<p>Sometimes, though, a test will only fail if it is run in conjunction with one or more other tests.  You can use the <code class="docutils literal notranslate"><span class="pre">--start-at</span></code> and <code class="docutils literal notranslate"><span class="pre">--end-at</span></code> flags with <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">mochitest</span></code> to run a group of tests together.</p>
+<p>For some jobs, but not all, you can get an <a class="reference external" href="https://jonasfj.dk/2016/03/one-click-loaners-with-taskcluster/">interactive shell from TaskCluster</a>.</p>
+<p>There’s also a <a class="reference external" href="https://wiki.mozilla.org/Electrolysis/e10s_test_tips">handy page of e10s test debugging tips</a> that is worth a read.</p>
+<p>Because intermittents are often caused by race conditions, it’s sometimes useful to enable Chaos Mode.  This changes timings and event orderings a bit. The simplest way to do this is to enable it in a specific test, by
+calling <code class="docutils literal notranslate"><span class="pre">SimpleTest.testInChaosMode</span></code>.  You can also set the <code class="docutils literal notranslate"><span class="pre">MOZ_CHAOSMODE</span></code> environment variable, or even edit <code class="docutils literal notranslate"><span class="pre">mfbt/ChaosMode.cpp</span></code> directly.</p>
+<p>Some tests leak intermittently. Use <code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-logrefcnt</span></code> in your mozconfig to potentially find them.<!--TODO: how? add more detail about this --></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rr</span></code> tool has <a class="reference external" href="http://robert.ocallahan.org/2016/02/introducing-rr-chaos-mode.html">its own chaos mode</a>.  This can also sometimes reproduce a failure that isn’t ordinarily reproducible.  While it’s difficult to debug JS bugs using <code class="docutils literal notranslate"><span class="pre">rr</span></code>, often if you can reliably reproduce the failure you can at least experiment (see below) to attempt a fix.</p>
+</div>
+<div class="section" id="that-didn-t-work">
+<h2>That Didn’t Work<a class="headerlink" href="#that-didn-t-work" title="Permalink to this headline">¶</a></h2>
+<p>If you couldn’t reproduce locally, there are other options.</p>
+<p>One useful approach is to add additional logging to the test, then push again.  Sometimes log buffering makes the output weird; you can add a call to <code class="docutils literal notranslate"><span class="pre">SimpleTest.requestCompleteLog()</span></code> to fix this.</p>
+<p>You can run a single directory of tests on try using <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">try</span> <span class="pre">DIR</span></code>.  You can also use the <code class="docutils literal notranslate"><span class="pre">--rebuild</span></code> flag to retrigger test jobs multiple times; or you can also do this easily from treeherder.<!--TODO: how? and why is it easy?--></p>
+</div>
+<div class="section" id="solving">
+<h2>Solving<a class="headerlink" href="#solving" title="Permalink to this headline">¶</a></h2>
+<p>If a test fails at different places for each failure it might be a timeout.  The current mochitest timeout is 45 seconds, so if successful runs of an intermittent are ~40 seconds, it might just be a
+real timeout.  This is particularly true if the failure is most often seen on the slower builds, for example Linux 32 debug.  In this case you can either split the test or call <code class="docutils literal notranslate"><span class="pre">requestLongerTimeout</span></code> somewhere at the beginning of the test (here’s <a class="reference external" href="https://searchfox.org/mozilla-central/rev/c56977420df7a1b692ce0f7e499ddb364d9fd7b2/devtools/client/framework/test/browser_toolbox_tool_remote_reopen.js#12">an example</a>).</p>
+<p>Sometimes the problem is a race at a specific spot in the test.  You can test this theory by adding a short wait to see if the failure goes away, like:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">yield</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">r</span> <span class="p">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="mf">100</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">waitForTick</span></code> and <code class="docutils literal notranslate"><span class="pre">waitForTime</span></code> functions in <code class="docutils literal notranslate"><span class="pre">DevToolsUtils</span></code> for similar functionality.</p>
+<p>You can use a similar trick to “pause” the test at a certain point. This is useful when debugging locally because it will leave Firefox open and responsive, at the specific spot you’ve chosen.  Do this
+using <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">new</span> <span class="pre">Promise(r</span> <span class="pre">=&gt;</span> <span class="pre">r);</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">shared-head.js</span></code> also has some helpers, like <code class="docutils literal notranslate"><span class="pre">once</span></code>, to bind to events with additional logging.</p>
+<p>You can also binary search the test by either commenting out chunks of it, or hacking in early <code class="docutils literal notranslate"><span class="pre">return</span></code>s.  You can do a bunch of these experiments in parallel without waiting for the first to complete.</p>
+</div>
+<div class="section" id="verifying">
+<h2>Verifying<a class="headerlink" href="#verifying" title="Permalink to this headline">¶</a></h2>
+<p>It’s difficult to verify that an intermittent has truly been fixed.
+One thing you can do is push to try, and then retrigger the job many times in treeherder.  Exactly how many times you should retrigger depends on the frequency of the failure.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="performance-tests.html" class="btn btn-neutral float-right" title="Performance Tests: DAMP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="writing-tests.html" class="btn btn-neutral float-left" title="Automated tests: writing tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

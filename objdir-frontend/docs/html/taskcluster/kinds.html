@@ -1,0 +1,1122 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Task Kinds &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parameters" href="parameters.html" />
+    <link rel="prev" title="Reference" href="reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Task Kinds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#build">build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-fat-aar">build-fat-aar</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-signing">build-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-notarization-part-1">build-notarization-part-1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-notarization-poller">build-notarization-poller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#artifact-build">artifact-build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hazard">hazard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l10n">l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shippable-l10n">shippable-l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shippable-l10n-signing">shippable-l10n-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shippable-l10n-notarization-part-1">shippable-l10n-notarization-part-1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shippable-l10n-notarization-poller">shippable-l10n-notarization-poller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#source-test">source-test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code-review">code-review</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upload-symbols">upload-symbols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#upload-generated-sources">upload-generated-sources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#valgrind">valgrind</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#searchfox">searchfox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#static-analysis-autotest">static-analysis-autotest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#toolchain">toolchain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spidermonkey">spidermonkey</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test">test</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#docker-image">docker-image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#balrog">balrog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover">beetmover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-l10n">beetmover-l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-repackage">beetmover-repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-beetmover-push-to-release">release-beetmover-push-to-release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-snap">beetmover-snap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-source">beetmover-source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-geckoview">beetmover-geckoview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#condprof">condprof</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-source-checksums-signing">release-source-checksums-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#beetmover-checksums">beetmover-checksums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-beetmover-source-checksums">release-beetmover-source-checksums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#perftest">perftest</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-balrog-submit-toplevel">release-balrog-submit-toplevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-balrog-submit-toplevel">release-secondary-balrog-submit-toplevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-balrog-scheduling">release-balrog-scheduling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-balrog-scheduling">release-secondary-balrog-scheduling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-binary-transparency">release-binary-transparency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-snap-repackage">release-snap-repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-flatpak-repackage">release-flatpak-repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-snap-push">release-snap-push</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-flatpak-push">release-flatpak-push</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-snap-push">release-secondary-snap-push</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-flatpak-push">release-secondary-flatpak-push</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-notify-av-announce">release-notify-av-announce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-notify-push">release-notify-push</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-notify-ship">release-notify-ship</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-notify-ship">release-secondary-notify-ship</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-notify-promote">release-notify-promote</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-notify-started">release-notify-started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-bouncer-sub">release-bouncer-sub</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-mark-as-shipped">release-mark-as-shipped</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-bouncer-aliases">release-bouncer-aliases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cron-bouncer-check">cron-bouncer-check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bouncer-locations">bouncer-locations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-bouncer-check">release-bouncer-check</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-generate-checksums">release-generate-checksums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-generate-checksums-signing">release-generate-checksums-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-generate-checksums-beetmover">release-generate-checksums-beetmover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-final-verify">release-final-verify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-final-verify">release-secondary-final-verify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-push-langpacks">release-push-langpacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-beetmover-signed-langpacks">release-beetmover-signed-langpacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-beetmover-signed-langpacks-checksums">release-beetmover-signed-langpacks-checksums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-update-verify">release-update-verify</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-update-verify-next">release-update-verify-next</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-update-verify-config">release-update-verify-config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-secondary-update-verify-config">release-secondary-update-verify-config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-update-verify-config-next">release-update-verify-config-next</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-updates-builder">release-updates-builder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-version-bump">release-version-bump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-source">release-source</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-source-signing">release-source-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack">release-partner-repack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-attribution">release-partner-attribution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-chunking-dummy">release-partner-repack-chunking-dummy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-signing">release-partner-repack-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-notarization-part-1">release-partner-repack-notarization-part-1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-notarization-poller">release-partner-repack-notarization-poller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-repackage">release-partner-repack-repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-repackage-signing">release-partner-repack-repackage-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-beetmover">release-partner-repack-beetmover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-attribution-beetmover">release-partner-attribution-beetmover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-partner-repack-bouncer-sub">release-partner-repack-bouncer-sub</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-early-tagging">release-early-tagging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack">release-eme-free-repack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-signing">release-eme-free-repack-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-notarization-part-1">release-eme-free-repack-notarization-part-1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-notarization-poller">release-eme-free-repack-notarization-poller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-repackage">release-eme-free-repack-repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-repackage-signing">release-eme-free-repack-repackage-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-beetmover">release-eme-free-repack-beetmover</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-eme-free-repack-beetmover-checksums">release-eme-free-repack-beetmover-checksums</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage">repackage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage-l10n">repackage-l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage-signing">repackage-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage-signing-l10n">repackage-signing-l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mar-signing">mar-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mar-signing-l10n">mar-signing-l10n</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mar-signing-autograph-stage">mar-signing-autograph-stage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage-msi">repackage-msi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repackage-signing-msi">repackage-signing-msi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repo-update">repo-update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-dependency-update">python-dependency-update</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partials">partials</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partials-signing">partials-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-balrog-dummy">post-balrog-dummy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-beetmover-dummy">post-beetmover-dummy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-beetmover-checksums-dummy">post-beetmover-checksums-dummy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-langpack-dummy">post-langpack-dummy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fetch">fetch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packages">packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diffoscope">diffoscope</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#addon">addon</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openh264-plugin">openh264-plugin</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#openh264-signing">openh264-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#webrender">webrender</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wgpu">wgpu</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#github-sync">github-sync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instrumented-build">instrumented-build</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#generate-profile">generate-profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#geckodriver-signing">geckodriver-signing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-metrics">visual-metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#visual-metrics-dep">visual-metrics-dep</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iris">iris</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maybe-release">maybe-release</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l10n-bump">l10n-bump</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#merge-automation">merge-automation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-symbols">system-symbols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-symbols-upload">system-symbols-upload</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scriptworker-canary">scriptworker-canary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updatebot">updatebot</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="parameters.html">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="attributes.html">Task Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="caches.html">Caches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Task Kinds</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/kinds.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="task-kinds">
+<h1>Task Kinds<a class="headerlink" href="#task-kinds" title="Permalink to this headline">¶</a></h1>
+<p>This section lists and documents the available task kinds.</p>
+<div class="section" id="build">
+<h2>build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<p>Builds are tasks that produce an installer or other output that can be run by
+users or automated tests.  This is more restrictive than most definitions of
+“build” in a Mozilla context: it does not include tasks that run build-like
+actions for static analysis or to produce instrumented artifacts.</p>
+</div>
+<div class="section" id="build-fat-aar">
+<h2>build-fat-aar<a class="headerlink" href="#build-fat-aar" title="Permalink to this headline">¶</a></h2>
+<p>Build architecture-independent GeckoView AAR (Android ARchive) files. This build-like tasks is an
+artifact build (ARMv7, but this is arbitrary) that itself depends on arch-specific Android build
+jobs. It fetches arch-specific AAR files, extracts arch-specific libraries and preference files,
+and then assembles a multi-architecture “fat AAR”. Downstream consumers are expected to use
+per-ABI feature splits to produce arch-specific APKs.</p>
+<dl class="simple">
+<dt>If you want to run this task locally, you need to specify these environment variable:</dt><dd><ul class="simple">
+<li><p>MOZ_ANDROID_FAT_AAR_ARCHITECTURES: must be a comma-separated list of architecture.
+Eg: “armeabi-v7a,arm64-v8a,x86,x86_64”.</p></li>
+<li><p>each of MOZ_ANDROID_FAT_AAR_ARM64_V8A, MOZ_ANDROID_FAT_AAR_ARMEABI_V7A,
+MOZ_ANDROID_FAT_AAR_X86, MOZ_ANDROID_FAT_AAR_X86_64 must be a path relative to
+MOZ_FETCHES_DIR.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="build-signing">
+<h2>build-signing<a class="headerlink" href="#build-signing" title="Permalink to this headline">¶</a></h2>
+<p>Many builds must be signed. The build-signing task takes the unsigned <cite>build</cite>
+kind artifacts and passes them through signingscriptworker to a signing server
+and returns signed results.</p>
+<p>For mac notarization, we download the signed bits that have been notarized by Apple, and we staple the notarization to the app and pkg.</p>
+</div>
+<div class="section" id="build-notarization-part-1">
+<h2>build-notarization-part-1<a class="headerlink" href="#build-notarization-part-1" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the first task, which signs the files and submits them for notarization.</p>
+</div>
+<div class="section" id="build-notarization-poller">
+<h2>build-notarization-poller<a class="headerlink" href="#build-notarization-poller" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the second task, which polls Apple for notarization status. Because this is run in a separate, special notarization poller pool, we free up the mac notarization pool for actual signing work.</p>
+</div>
+<div class="section" id="artifact-build">
+<h2>artifact-build<a class="headerlink" href="#artifact-build" title="Permalink to this headline">¶</a></h2>
+<p>This kind performs an artifact build: one based on precompiled binaries
+discovered via the TaskCluster index.  This task verifies that such builds
+continue to work correctly.</p>
+</div>
+<div class="section" id="hazard">
+<h2>hazard<a class="headerlink" href="#hazard" title="Permalink to this headline">¶</a></h2>
+<p>Hazard builds are similar to “regular’ builds, but use a compiler extension to
+extract a bunch of data from the build and then analyze that data looking for
+hazardous behaviors.</p>
+</div>
+<div class="section" id="l10n">
+<h2>l10n<a class="headerlink" href="#l10n" title="Permalink to this headline">¶</a></h2>
+<p>The l10n kind takes the last published nightly build, and generates localized builds
+from it. You can read more about how to trigger these on the <a class="reference external" href="https://wiki.mozilla.org/ReleaseEngineering/TryServer#Desktop_l10n_jobs_.28on_Taskcluster.29">wiki</a>.</p>
+</div>
+<div class="section" id="shippable-l10n">
+<h2>shippable-l10n<a class="headerlink" href="#shippable-l10n" title="Permalink to this headline">¶</a></h2>
+<p>The nightly l10n kind repacks a specific nightly build (from the same source code)
+in order to provide localized versions of the same source.</p>
+</div>
+<div class="section" id="shippable-l10n-signing">
+<h2>shippable-l10n-signing<a class="headerlink" href="#shippable-l10n-signing" title="Permalink to this headline">¶</a></h2>
+<p>The shippable l10n signing kind takes artifacts from the shippable-l10n kind and
+passes them to signing servers to have their contents signed appropriately, based
+on an appropriate signing format. One signing job is created for each shippable-l10n
+job (usually chunked).</p>
+<p>For mac notarization, we download the signed bits that have been notarized by Apple, and we staple the notarization to the app and pkg.</p>
+</div>
+<div class="section" id="shippable-l10n-notarization-part-1">
+<h2>shippable-l10n-notarization-part-1<a class="headerlink" href="#shippable-l10n-notarization-part-1" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the first task, which signs the files and submits them for notarization.</p>
+</div>
+<div class="section" id="shippable-l10n-notarization-poller">
+<h2>shippable-l10n-notarization-poller<a class="headerlink" href="#shippable-l10n-notarization-poller" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the second task, which polls Apple for notarization status. Because this is run in a separate, special notarization poller pool, we free up the mac notarization pool for actual signing work.</p>
+</div>
+<div class="section" id="source-test">
+<h2>source-test<a class="headerlink" href="#source-test" title="Permalink to this headline">¶</a></h2>
+<p>Source-tests are tasks that run directly from the Gecko source. This can include linting,
+unit tests, source-code analysis, or measurement work. While source-test tasks run from
+a source checkout, it is still possible for them to depend on a build artifact, though
+often they do not.</p>
+</div>
+<div class="section" id="code-review">
+<h2>code-review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h2>
+<p>Publish issues found by source-test tasks on Phabricator.
+This is a part of Release Management code review Bot.</p>
+</div>
+<div class="section" id="upload-symbols">
+<h2>upload-symbols<a class="headerlink" href="#upload-symbols" title="Permalink to this headline">¶</a></h2>
+<p>Upload-symbols tasks run after builds and upload the symbols files generated by
+build tasks to Socorro for later use in crash analysis.</p>
+</div>
+<div class="section" id="upload-generated-sources">
+<h2>upload-generated-sources<a class="headerlink" href="#upload-generated-sources" title="Permalink to this headline">¶</a></h2>
+<p>Upload-generated-sources tasks run after builds and upload source files that were generated as part of the build process to an s3 bucket for later use in links from crash reports or when debugging shipped builds.</p>
+</div>
+<div class="section" id="valgrind">
+<h2>valgrind<a class="headerlink" href="#valgrind" title="Permalink to this headline">¶</a></h2>
+<p>Valgrind tasks produce builds instrumented by valgrind.</p>
+</div>
+<div class="section" id="searchfox">
+<h2>searchfox<a class="headerlink" href="#searchfox" title="Permalink to this headline">¶</a></h2>
+<p>Searchfox builds generate C++ index data for Searchfox.</p>
+</div>
+<div class="section" id="static-analysis-autotest">
+<h2>static-analysis-autotest<a class="headerlink" href="#static-analysis-autotest" title="Permalink to this headline">¶</a></h2>
+<p>Static analysis autotest utility in order to be sure that there is no regression
+when upgrading utilities that impact static-analysis.</p>
+</div>
+<div class="section" id="toolchain">
+<h2>toolchain<a class="headerlink" href="#toolchain" title="Permalink to this headline">¶</a></h2>
+<p>Toolchain builds create the compiler toolchains used to build Firefox.  These
+will eventually be dependencies of the builds themselves, but for the moment
+are run manually via try pushes and the results uploaded to tooltool.</p>
+</div>
+<div class="section" id="spidermonkey">
+<h2>spidermonkey<a class="headerlink" href="#spidermonkey" title="Permalink to this headline">¶</a></h2>
+<p>Spidermonkey tasks check out the full gecko source tree, then compile only the
+spidermonkey portion.  Each task runs specific tests after the build.</p>
+</div>
+<div class="section" id="test">
+<h2>test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">desktop-test</span></code> kind defines tests for builds.  Its <code class="docutils literal notranslate"><span class="pre">tests.yml</span></code> defines
+the full suite of desktop tests and their particulars, leaving it to the
+transforms to determine how those particulars apply to the various platforms.</p>
+<p>The process of generating tests goes like this, based on a set of YAML files
+named in <code class="docutils literal notranslate"><span class="pre">kind.yml</span></code>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For each build task, determine the related test platforms based on the build
+platform.  For example, a Windows 2010 build might be tested on Windows 7
+and Windows 10.  Each test platform specifies “test sets” indicating which
+tests to run.  This is configured in the file named
+<code class="docutils literal notranslate"><span class="pre">test-platforms.yml</span></code>.</p></li>
+<li><p>Each test set is expanded to a list of tests to run.  This is configured in
+the file named by <code class="docutils literal notranslate"><span class="pre">test-sets.yml</span></code>. A platform may specify several test
+sets, in which case the union of those sets is used.</p></li>
+<li><p>Each named test is looked up in the file named by <code class="docutils literal notranslate"><span class="pre">tests.yml</span></code> to find a
+test description.  This test description indicates what the test does, how
+it is reported to treeherder, and how to perform the test, all in a
+platform-independent fashion.</p></li>
+<li><p>Each test description is converted into one or more tasks.  This is
+performed by a sequence of transforms defined in the <code class="docutils literal notranslate"><span class="pre">transforms</span></code> key in
+<code class="docutils literal notranslate"><span class="pre">kind.yml</span></code>.  See <a class="reference internal" href="transforms.html"><span class="doc">Transforms</span></a>: for more information on these
+transforms.</p></li>
+<li><p>The resulting tasks become a part of the task graph.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This process generates <em>all</em> test jobs, regardless of tree or try syntax.
+It is up to a later stages of the task-graph generation (the target set and
+optimization) to select the tests that will actually be performed.</p>
+</div>
+</div>
+<div class="section" id="docker-image">
+<h2>docker-image<a class="headerlink" href="#docker-image" title="Permalink to this headline">¶</a></h2>
+<p>Tasks of the <code class="docutils literal notranslate"><span class="pre">docker-image</span></code> kind build the Docker images in which other
+Docker tasks run.</p>
+<p>The tasks to generate each docker image have predictable labels:
+<code class="docutils literal notranslate"><span class="pre">docker-image-&lt;name&gt;</span></code>.</p>
+<p>Docker images are built from subdirectories of <code class="docutils literal notranslate"><span class="pre">taskcluster/docker</span></code>, using
+<code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">build</span></code>.  There is currently no capability for one Docker image to
+depend on another in-tree docker image, without uploading the latter to a
+Docker repository.</p>
+</div>
+<div class="section" id="balrog">
+<h2>balrog<a class="headerlink" href="#balrog" title="Permalink to this headline">¶</a></h2>
+<p>Balrog tasks are responsible for submitting metadata to our update server (Balrog).
+They are typically downstream of a beetmover job that moves signed MARs somewhere
+(eg: beetmover and beetmover-l10n for releases, beetmover-repackage for nightlies).</p>
+</div>
+<div class="section" id="beetmover">
+<h2>beetmover<a class="headerlink" href="#beetmover" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover, takes specific artifacts, “Beets”, and pushes them to a location outside
+of Taskcluster’s task artifacts, (archive.mozilla.org as one place) and in the
+process determines the final location and a “pretty” name (versioned product name)</p>
+</div>
+<div class="section" id="beetmover-l10n">
+<h2>beetmover-l10n<a class="headerlink" href="#beetmover-l10n" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover L10n, takes specific artifacts, “Beets”, and pushes them to a location outside
+of Taskcluster’s task artifacts, (archive.mozilla.org as one place) and in the
+process determines the final location and a “pretty” name (versioned product name)
+This separate kind uses logic specific to localized artifacts, such as including
+the language in the final artifact names.</p>
+</div>
+<div class="section" id="beetmover-repackage">
+<h2>beetmover-repackage<a class="headerlink" href="#beetmover-repackage" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover-repackage is beetmover but for tasks that need an intermediate step
+between signing and packaging, such as OSX. For more details see the definitions
+of the Beetmover kind above and the repackage kind below.</p>
+</div>
+<div class="section" id="release-beetmover-push-to-release">
+<h2>release-beetmover-push-to-release<a class="headerlink" href="#release-beetmover-push-to-release" title="Permalink to this headline">¶</a></h2>
+<p>release-beetmover-push-to-release publishes promoted releases from the
+candidates directory to the release directory. This is part of release
+promotion.</p>
+</div>
+<div class="section" id="beetmover-snap">
+<h2>beetmover-snap<a class="headerlink" href="#beetmover-snap" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover-source publishes Ubuntu’s snap. This is part of release promotion.</p>
+</div>
+<div class="section" id="beetmover-source">
+<h2>beetmover-source<a class="headerlink" href="#beetmover-source" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover-source publishes release source. This is part of release promotion.</p>
+</div>
+<div class="section" id="beetmover-geckoview">
+<h2>beetmover-geckoview<a class="headerlink" href="#beetmover-geckoview" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover-geckoview publishes the Android library called “geckoview”.</p>
+</div>
+<div class="section" id="condprof">
+<h2>condprof<a class="headerlink" href="#condprof" title="Permalink to this headline">¶</a></h2>
+<p>condprof creates and updates realistic profiles.</p>
+</div>
+<div class="section" id="release-source-checksums-signing">
+<h2>release-source-checksums-signing<a class="headerlink" href="#release-source-checksums-signing" title="Permalink to this headline">¶</a></h2>
+<p>release-source-checksums-signing take as input the checksums file generated by
+source-related beetmover task and sign it via the signing scriptworkers.
+Returns the same file signed and additional detached signature.</p>
+</div>
+<div class="section" id="beetmover-checksums">
+<h2>beetmover-checksums<a class="headerlink" href="#beetmover-checksums" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover, takes specific artifact checksums and pushes it to a location outside
+of Taskcluster’s task artifacts (archive.mozilla.org as one place) and in the
+process determines the final location and “pretty” names it (version product name)</p>
+</div>
+<div class="section" id="release-beetmover-source-checksums">
+<h2>release-beetmover-source-checksums<a class="headerlink" href="#release-beetmover-source-checksums" title="Permalink to this headline">¶</a></h2>
+<p>Beetmover, takes source specific artifact checksums and pushes it to a location outside
+of Taskcluster’s task artifacts (archive.mozilla.org as one place) and in the
+process determines the final location and “pretty” names it (version product name)</p>
+</div>
+<div class="section" id="perftest">
+<h2>perftest<a class="headerlink" href="#perftest" title="Permalink to this headline">¶</a></h2>
+<p>Runs performance tests using mozperftest.</p>
+</div>
+<div class="section" id="release-balrog-submit-toplevel">
+<h2>release-balrog-submit-toplevel<a class="headerlink" href="#release-balrog-submit-toplevel" title="Permalink to this headline">¶</a></h2>
+<p>Toplevel tasks are responsible for submitting metadata to Balrog that is not specific to any
+particular platform+locale. For example: fileUrl templates, versions, and platform aliases.</p>
+<p>Toplevel tasks are also responsible for updating test channel rules to point at the Release
+being generated.</p>
+</div>
+<div class="section" id="release-secondary-balrog-submit-toplevel">
+<h2>release-secondary-balrog-submit-toplevel<a class="headerlink" href="#release-secondary-balrog-submit-toplevel" title="Permalink to this headline">¶</a></h2>
+<p>Performs the same function as <cite>release-balrog-submit-toplevel</cite>, but against the beta channel
+during RC builds.</p>
+</div>
+<div class="section" id="release-balrog-scheduling">
+<h2>release-balrog-scheduling<a class="headerlink" href="#release-balrog-scheduling" title="Permalink to this headline">¶</a></h2>
+<p>Schedules a Release for shipping in Balrog. If a <cite>release_eta</cite> was provided when starting the Release,
+it will be scheduled to go live at that day and time.</p>
+</div>
+<div class="section" id="release-secondary-balrog-scheduling">
+<h2>release-secondary-balrog-scheduling<a class="headerlink" href="#release-secondary-balrog-scheduling" title="Permalink to this headline">¶</a></h2>
+<p>Performs the same function as <cite>release-balrog-scheduling</cite>, except for the beta channel as part of RC
+Releases.</p>
+</div>
+<div class="section" id="release-binary-transparency">
+<h2>release-binary-transparency<a class="headerlink" href="#release-binary-transparency" title="Permalink to this headline">¶</a></h2>
+<p>Binary transparency creates a publicly verifiable log of binary shas for downstream
+release auditing. <a class="reference external" href="https://wiki.mozilla.org/Security/Binary_Transparency">https://wiki.mozilla.org/Security/Binary_Transparency</a></p>
+</div>
+<div class="section" id="release-snap-repackage">
+<h2>release-snap-repackage<a class="headerlink" href="#release-snap-repackage" title="Permalink to this headline">¶</a></h2>
+<p>Generate an installer using Ubuntu’s Snap format.</p>
+</div>
+<div class="section" id="release-flatpak-repackage">
+<h2>release-flatpak-repackage<a class="headerlink" href="#release-flatpak-repackage" title="Permalink to this headline">¶</a></h2>
+<p>Generate an installer using Flathub’s Flatpak format.</p>
+</div>
+<div class="section" id="release-snap-push">
+<h2>release-snap-push<a class="headerlink" href="#release-snap-push" title="Permalink to this headline">¶</a></h2>
+<p>Pushes Snap repackage on Snap store.</p>
+</div>
+<div class="section" id="release-flatpak-push">
+<h2>release-flatpak-push<a class="headerlink" href="#release-flatpak-push" title="Permalink to this headline">¶</a></h2>
+<p>Pushes Flatpak repackage on Flathub</p>
+</div>
+<div class="section" id="release-secondary-snap-push">
+<h2>release-secondary-snap-push<a class="headerlink" href="#release-secondary-snap-push" title="Permalink to this headline">¶</a></h2>
+<p>Performs the same function as <cite>release-snap-push</cite>, except for the beta channel as part of RC
+Releases.</p>
+</div>
+<div class="section" id="release-secondary-flatpak-push">
+<h2>release-secondary-flatpak-push<a class="headerlink" href="#release-secondary-flatpak-push" title="Permalink to this headline">¶</a></h2>
+<p>Performs the same function as <cite>release-flatpak-push</cite>, except for the beta channel as part of RC
+Releases.</p>
+</div>
+<div class="section" id="release-notify-av-announce">
+<h2>release-notify-av-announce<a class="headerlink" href="#release-notify-av-announce" title="Permalink to this headline">¶</a></h2>
+<p>Notify anti-virus vendors when a release is likely shipping.</p>
+</div>
+<div class="section" id="release-notify-push">
+<h2>release-notify-push<a class="headerlink" href="#release-notify-push" title="Permalink to this headline">¶</a></h2>
+<p>Notify when a release has been pushed to CDNs.</p>
+</div>
+<div class="section" id="release-notify-ship">
+<h2>release-notify-ship<a class="headerlink" href="#release-notify-ship" title="Permalink to this headline">¶</a></h2>
+<p>Notify when a release has been shipped.</p>
+</div>
+<div class="section" id="release-secondary-notify-ship">
+<h2>release-secondary-notify-ship<a class="headerlink" href="#release-secondary-notify-ship" title="Permalink to this headline">¶</a></h2>
+<p>Notify when an RC release has been shipped to the beta channel.</p>
+</div>
+<div class="section" id="release-notify-promote">
+<h2>release-notify-promote<a class="headerlink" href="#release-notify-promote" title="Permalink to this headline">¶</a></h2>
+<p>Notify when a release has been promoted.</p>
+</div>
+<div class="section" id="release-notify-started">
+<h2>release-notify-started<a class="headerlink" href="#release-notify-started" title="Permalink to this headline">¶</a></h2>
+<p>Notify when a release has been started.</p>
+</div>
+<div class="section" id="release-bouncer-sub">
+<h2>release-bouncer-sub<a class="headerlink" href="#release-bouncer-sub" title="Permalink to this headline">¶</a></h2>
+<p>Submits bouncer information for releases.</p>
+</div>
+<div class="section" id="release-mark-as-shipped">
+<h2>release-mark-as-shipped<a class="headerlink" href="#release-mark-as-shipped" title="Permalink to this headline">¶</a></h2>
+<p>Marks releases as shipped in Ship-It v1</p>
+</div>
+<div class="section" id="release-bouncer-aliases">
+<h2>release-bouncer-aliases<a class="headerlink" href="#release-bouncer-aliases" title="Permalink to this headline">¶</a></h2>
+<p>Update Bouncer’s (download.mozilla.org) “latest” aliases.</p>
+</div>
+<div class="section" id="cron-bouncer-check">
+<h2>cron-bouncer-check<a class="headerlink" href="#cron-bouncer-check" title="Permalink to this headline">¶</a></h2>
+<p>Checks Bouncer (download.mozilla.org) uptake.</p>
+</div>
+<div class="section" id="bouncer-locations">
+<h2>bouncer-locations<a class="headerlink" href="#bouncer-locations" title="Permalink to this headline">¶</a></h2>
+<p>Updates nightly bouncer locations for version bump.</p>
+</div>
+<div class="section" id="release-bouncer-check">
+<h2>release-bouncer-check<a class="headerlink" href="#release-bouncer-check" title="Permalink to this headline">¶</a></h2>
+<p>Checks Bouncer (download.mozilla.org) uptake as part of the release tasks.</p>
+</div>
+<div class="section" id="release-generate-checksums">
+<h2>release-generate-checksums<a class="headerlink" href="#release-generate-checksums" title="Permalink to this headline">¶</a></h2>
+<p>Generate the per-release checksums along with the summaries</p>
+</div>
+<div class="section" id="release-generate-checksums-signing">
+<h2>release-generate-checksums-signing<a class="headerlink" href="#release-generate-checksums-signing" title="Permalink to this headline">¶</a></h2>
+<p>Sign the pre-release checksums produced by the above task</p>
+</div>
+<div class="section" id="release-generate-checksums-beetmover">
+<h2>release-generate-checksums-beetmover<a class="headerlink" href="#release-generate-checksums-beetmover" title="Permalink to this headline">¶</a></h2>
+<p>Submit to S3 the artifacts produced by the release-checksums task and its signing counterpart.</p>
+</div>
+<div class="section" id="release-final-verify">
+<h2>release-final-verify<a class="headerlink" href="#release-final-verify" title="Permalink to this headline">¶</a></h2>
+<p>Verifies the contents and package of release update MARs.</p>
+</div>
+<div class="section" id="release-secondary-final-verify">
+<h2>release-secondary-final-verify<a class="headerlink" href="#release-secondary-final-verify" title="Permalink to this headline">¶</a></h2>
+<p>Verifies the contents and package of release update MARs for RC releases.</p>
+</div>
+<div class="section" id="release-push-langpacks">
+<h2>release-push-langpacks<a class="headerlink" href="#release-push-langpacks" title="Permalink to this headline">¶</a></h2>
+<p>Publishes language packs onto addons.mozilla.org.</p>
+</div>
+<div class="section" id="release-beetmover-signed-langpacks">
+<h2>release-beetmover-signed-langpacks<a class="headerlink" href="#release-beetmover-signed-langpacks" title="Permalink to this headline">¶</a></h2>
+<p>Publishes signed langpacks to archive.mozilla.org</p>
+</div>
+<div class="section" id="release-beetmover-signed-langpacks-checksums">
+<h2>release-beetmover-signed-langpacks-checksums<a class="headerlink" href="#release-beetmover-signed-langpacks-checksums" title="Permalink to this headline">¶</a></h2>
+<p>Publishes signed langpacks to archive.mozilla.org</p>
+</div>
+<div class="section" id="release-update-verify">
+<h2>release-update-verify<a class="headerlink" href="#release-update-verify" title="Permalink to this headline">¶</a></h2>
+<p>Verifies the contents and package of release update MARs.
+release-secondary-update-verify
+——————————-
+Verifies the contents and package of release update MARs.</p>
+</div>
+<div class="section" id="release-update-verify-next">
+<h2>release-update-verify-next<a class="headerlink" href="#release-update-verify-next" title="Permalink to this headline">¶</a></h2>
+<p>Verifies the contents and package of release and updare MARs from the previous ESR release.</p>
+</div>
+<div class="section" id="release-update-verify-config">
+<h2>release-update-verify-config<a class="headerlink" href="#release-update-verify-config" title="Permalink to this headline">¶</a></h2>
+<p>Creates configs for release-update-verify tasks</p>
+</div>
+<div class="section" id="release-secondary-update-verify-config">
+<h2>release-secondary-update-verify-config<a class="headerlink" href="#release-secondary-update-verify-config" title="Permalink to this headline">¶</a></h2>
+<p>Creates configs for release-secondary-update-verify tasks</p>
+</div>
+<div class="section" id="release-update-verify-config-next">
+<h2>release-update-verify-config-next<a class="headerlink" href="#release-update-verify-config-next" title="Permalink to this headline">¶</a></h2>
+<p>Creates configs for release-update-verify-next tasks</p>
+</div>
+<div class="section" id="release-updates-builder">
+<h2>release-updates-builder<a class="headerlink" href="#release-updates-builder" title="Permalink to this headline">¶</a></h2>
+<p>Top level Balrog blob submission &amp; patcher/update verify config updates.</p>
+</div>
+<div class="section" id="release-version-bump">
+<h2>release-version-bump<a class="headerlink" href="#release-version-bump" title="Permalink to this headline">¶</a></h2>
+<p>Bumps to the next version.</p>
+</div>
+<div class="section" id="release-source">
+<h2>release-source<a class="headerlink" href="#release-source" title="Permalink to this headline">¶</a></h2>
+<p>Generates source for the release</p>
+</div>
+<div class="section" id="release-source-signing">
+<h2>release-source-signing<a class="headerlink" href="#release-source-signing" title="Permalink to this headline">¶</a></h2>
+<p>Signs source for the release</p>
+</div>
+<div class="section" id="release-partner-repack">
+<h2>release-partner-repack<a class="headerlink" href="#release-partner-repack" title="Permalink to this headline">¶</a></h2>
+<p>Generates customized versions of releases for partners.</p>
+</div>
+<div class="section" id="release-partner-attribution">
+<h2>release-partner-attribution<a class="headerlink" href="#release-partner-attribution" title="Permalink to this headline">¶</a></h2>
+<p>Generates attributed versions of releases for partners.</p>
+</div>
+<div class="section" id="release-partner-repack-chunking-dummy">
+<h2>release-partner-repack-chunking-dummy<a class="headerlink" href="#release-partner-repack-chunking-dummy" title="Permalink to this headline">¶</a></h2>
+<p>Chunks the partner repacks by locale.</p>
+</div>
+<div class="section" id="release-partner-repack-signing">
+<h2>release-partner-repack-signing<a class="headerlink" href="#release-partner-repack-signing" title="Permalink to this headline">¶</a></h2>
+<p>Internal signing of partner repacks.</p>
+<p>For mac notarization, we download the signed bits that have been notarized by Apple, and we staple the notarization to the app and pkg.</p>
+</div>
+<div class="section" id="release-partner-repack-notarization-part-1">
+<h2>release-partner-repack-notarization-part-1<a class="headerlink" href="#release-partner-repack-notarization-part-1" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the first task, which signs the files and submits them for notarization.</p>
+</div>
+<div class="section" id="release-partner-repack-notarization-poller">
+<h2>release-partner-repack-notarization-poller<a class="headerlink" href="#release-partner-repack-notarization-poller" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the second task, which polls Apple for notarization status. Because this is run in a separate, special notarization poller pool, we free up the mac notarization pool for actual signing work.</p>
+</div>
+<div class="section" id="release-partner-repack-repackage">
+<h2>release-partner-repack-repackage<a class="headerlink" href="#release-partner-repack-repackage" title="Permalink to this headline">¶</a></h2>
+<p>Repackaging of partner repacks.</p>
+</div>
+<div class="section" id="release-partner-repack-repackage-signing">
+<h2>release-partner-repack-repackage-signing<a class="headerlink" href="#release-partner-repack-repackage-signing" title="Permalink to this headline">¶</a></h2>
+<p>External signing of partner repacks.</p>
+</div>
+<div class="section" id="release-partner-repack-beetmover">
+<h2>release-partner-repack-beetmover<a class="headerlink" href="#release-partner-repack-beetmover" title="Permalink to this headline">¶</a></h2>
+<p>Moves the partner repacks to S3 buckets.</p>
+</div>
+<div class="section" id="release-partner-attribution-beetmover">
+<h2>release-partner-attribution-beetmover<a class="headerlink" href="#release-partner-attribution-beetmover" title="Permalink to this headline">¶</a></h2>
+<p>Moves the partner attributions to S3 buckets.</p>
+</div>
+<div class="section" id="release-partner-repack-bouncer-sub">
+<h2>release-partner-repack-bouncer-sub<a class="headerlink" href="#release-partner-repack-bouncer-sub" title="Permalink to this headline">¶</a></h2>
+<p>Sets up bouncer products for partners.</p>
+</div>
+<div class="section" id="release-early-tagging">
+<h2>release-early-tagging<a class="headerlink" href="#release-early-tagging" title="Permalink to this headline">¶</a></h2>
+<p>Utilises treescript to perform tagging that should happen near the start of a release.</p>
+</div>
+<div class="section" id="release-eme-free-repack">
+<h2>release-eme-free-repack<a class="headerlink" href="#release-eme-free-repack" title="Permalink to this headline">¶</a></h2>
+<p>Generates customized versions of releases for eme-free repacks.</p>
+</div>
+<div class="section" id="release-eme-free-repack-signing">
+<h2>release-eme-free-repack-signing<a class="headerlink" href="#release-eme-free-repack-signing" title="Permalink to this headline">¶</a></h2>
+<p>Internal signing of eme-free repacks</p>
+<p>For mac notarization, we download the signed bits that have been notarized by Apple, and we staple the notarization to the app and pkg.</p>
+</div>
+<div class="section" id="release-eme-free-repack-notarization-part-1">
+<h2>release-eme-free-repack-notarization-part-1<a class="headerlink" href="#release-eme-free-repack-notarization-part-1" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the first task, which signs the files and submits them for notarization.</p>
+</div>
+<div class="section" id="release-eme-free-repack-notarization-poller">
+<h2>release-eme-free-repack-notarization-poller<a class="headerlink" href="#release-eme-free-repack-notarization-poller" title="Permalink to this headline">¶</a></h2>
+<p>We switched to a 3-part mac notarization workflow in bug 1562412. This is the second task, which polls Apple for notarization status. Because this is run in a separate, special notarization poller pool, we free up the mac notarization pool for actual signing work.</p>
+</div>
+<div class="section" id="release-eme-free-repack-repackage">
+<h2>release-eme-free-repack-repackage<a class="headerlink" href="#release-eme-free-repack-repackage" title="Permalink to this headline">¶</a></h2>
+<p>Repackaging of eme-free repacks.</p>
+</div>
+<div class="section" id="release-eme-free-repack-repackage-signing">
+<h2>release-eme-free-repack-repackage-signing<a class="headerlink" href="#release-eme-free-repack-repackage-signing" title="Permalink to this headline">¶</a></h2>
+<p>External signing of eme-free repacks.</p>
+</div>
+<div class="section" id="release-eme-free-repack-beetmover">
+<h2>release-eme-free-repack-beetmover<a class="headerlink" href="#release-eme-free-repack-beetmover" title="Permalink to this headline">¶</a></h2>
+<p>Moves the eme-free repacks to S3 buckets.</p>
+</div>
+<div class="section" id="release-eme-free-repack-beetmover-checksums">
+<h2>release-eme-free-repack-beetmover-checksums<a class="headerlink" href="#release-eme-free-repack-beetmover-checksums" title="Permalink to this headline">¶</a></h2>
+<p>Moves the beetmover checksum for eme-free repacks to S3 buckets.</p>
+</div>
+<div class="section" id="repackage">
+<h2>repackage<a class="headerlink" href="#repackage" title="Permalink to this headline">¶</a></h2>
+<p>Repackage tasks take a signed output and package them up into something suitable
+for shipping to our users. For example, on OSX we return a tarball as the signed output
+and this task would package that up as an Apple Disk Image (.dmg)</p>
+</div>
+<div class="section" id="repackage-l10n">
+<h2>repackage-l10n<a class="headerlink" href="#repackage-l10n" title="Permalink to this headline">¶</a></h2>
+<p>Repackage-L10n is a <code class="docutils literal notranslate"><span class="pre">`Repackage`</span></code> task split up to be suitable for use after l10n repacks.</p>
+</div>
+<div class="section" id="repackage-signing">
+<h2>repackage-signing<a class="headerlink" href="#repackage-signing" title="Permalink to this headline">¶</a></h2>
+<p>Repackage-signing take the repackaged installers (windows) and signs them.</p>
+</div>
+<div class="section" id="repackage-signing-l10n">
+<h2>repackage-signing-l10n<a class="headerlink" href="#repackage-signing-l10n" title="Permalink to this headline">¶</a></h2>
+<p>Repackage-signing-l10n take the repackaged installers (windows) and signs them for localized versions.</p>
+</div>
+<div class="section" id="mar-signing">
+<h2>mar-signing<a class="headerlink" href="#mar-signing" title="Permalink to this headline">¶</a></h2>
+<p>Mar-signing takes the complete update MARs and signs them.</p>
+</div>
+<div class="section" id="mar-signing-l10n">
+<h2>mar-signing-l10n<a class="headerlink" href="#mar-signing-l10n" title="Permalink to this headline">¶</a></h2>
+<p>Mar-signing-l10n takes the complete update MARs and signs them for localized versions.</p>
+</div>
+<div class="section" id="mar-signing-autograph-stage">
+<h2>mar-signing-autograph-stage<a class="headerlink" href="#mar-signing-autograph-stage" title="Permalink to this headline">¶</a></h2>
+<p>These tasks are only to test autograph-stage, when the autograph team asks for their staging environment to be tested.</p>
+</div>
+<div class="section" id="repackage-msi">
+<h2>repackage-msi<a class="headerlink" href="#repackage-msi" title="Permalink to this headline">¶</a></h2>
+<p>Repackage-msi takes the signed full installer and produces an msi installer (that wraps the full installer)
+Using the <code class="docutils literal notranslate"><span class="pre">`./mach</span> <span class="pre">repackage`</span></code> command</p>
+</div>
+<div class="section" id="repackage-signing-msi">
+<h2>repackage-signing-msi<a class="headerlink" href="#repackage-signing-msi" title="Permalink to this headline">¶</a></h2>
+<p>Repackage-signing-msi takes the repackaged msi installers and signs them.</p>
+</div>
+<div class="section" id="repo-update">
+<h2>repo-update<a class="headerlink" href="#repo-update" title="Permalink to this headline">¶</a></h2>
+<p>Repo-Update tasks are tasks that perform some action on the project repo itself,
+in order to update its state in some way.</p>
+</div>
+<div class="section" id="python-dependency-update">
+<h2>python-dependency-update<a class="headerlink" href="#python-dependency-update" title="Permalink to this headline">¶</a></h2>
+<p>Python-dependency-update runs <cite>pip-compile –generate-hashes</cite> against the specified <cite>requirements.in</cite> and
+submits patches to Phabricator.</p>
+</div>
+<div class="section" id="partials">
+<h2>partials<a class="headerlink" href="#partials" title="Permalink to this headline">¶</a></h2>
+<p>Partials takes the complete.mar files produced in previous tasks and generates partial
+updates between previous nightly releases and the new one. Requires a release_history
+in the parameters. See <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">release-history</span></code> if doing this manually.</p>
+</div>
+<div class="section" id="partials-signing">
+<h2>partials-signing<a class="headerlink" href="#partials-signing" title="Permalink to this headline">¶</a></h2>
+<p>Partials-signing takes the partial updates produced in Partials and signs them.</p>
+</div>
+<div class="section" id="post-balrog-dummy">
+<h2>post-balrog-dummy<a class="headerlink" href="#post-balrog-dummy" title="Permalink to this headline">¶</a></h2>
+<p>Dummy tasks to consolidate balrog dependencies to avoid taskcluster limits on number of dependencies per task.</p>
+</div>
+<div class="section" id="post-beetmover-dummy">
+<h2>post-beetmover-dummy<a class="headerlink" href="#post-beetmover-dummy" title="Permalink to this headline">¶</a></h2>
+<p>Dummy tasks to consolidate beetmover dependencies to avoid taskcluster limits on number of dependencies per task.</p>
+</div>
+<div class="section" id="post-beetmover-checksums-dummy">
+<h2>post-beetmover-checksums-dummy<a class="headerlink" href="#post-beetmover-checksums-dummy" title="Permalink to this headline">¶</a></h2>
+<p>Dummy tasks to consolidate beetmover-checksums dependencies to avoid taskcluster limits on number of dependencies per task.</p>
+</div>
+<div class="section" id="post-langpack-dummy">
+<h2>post-langpack-dummy<a class="headerlink" href="#post-langpack-dummy" title="Permalink to this headline">¶</a></h2>
+<p>Dummy tasks to consolidate language pack beetmover dependencies to avoid taskcluster limits on number of dependencies per task.</p>
+</div>
+<div class="section" id="fetch">
+<h2>fetch<a class="headerlink" href="#fetch" title="Permalink to this headline">¶</a></h2>
+<p>Tasks that obtain something from a remote service and re-expose it as a
+task artifact. These tasks are used to effectively cache and re-host
+remote content so it is reliably and deterministically available.</p>
+</div>
+<div class="section" id="packages">
+<h2>packages<a class="headerlink" href="#packages" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to build packages for use in docker images.</p>
+</div>
+<div class="section" id="diffoscope">
+<h2>diffoscope<a class="headerlink" href="#diffoscope" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to compare pairs of Firefox builds using <a class="reference external" href="https://diffoscope.org/">https://diffoscope.org/</a>.
+As of writing, this is mainly meant to be used in try builds, by editing
+taskcluster/ci/diffoscope/kind.yml for your needs.</p>
+</div>
+<div class="section" id="addon">
+<h2>addon<a class="headerlink" href="#addon" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to build/package add-ons.</p>
+</div>
+<div class="section" id="openh264-plugin">
+<h2>openh264-plugin<a class="headerlink" href="#openh264-plugin" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to build the openh264 plugin.</p>
+</div>
+<div class="section" id="openh264-signing">
+<h2>openh264-signing<a class="headerlink" href="#openh264-signing" title="Permalink to this headline">¶</a></h2>
+<p>Signing for the openh264 plugin.</p>
+</div>
+<div class="section" id="webrender">
+<h2>webrender<a class="headerlink" href="#webrender" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to do testing of WebRender standalone (without gecko). The
+WebRender code lives in gfx/wr and has its own testing infrastructure.</p>
+</div>
+<div class="section" id="wgpu">
+<h2>wgpu<a class="headerlink" href="#wgpu" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to do testing of WebGPU standalone (without gecko). The
+WebGPU code lives in gfx/wgpu and has its own testing infrastructure.</p>
+</div>
+<div class="section" id="github-sync">
+<h2>github-sync<a class="headerlink" href="#github-sync" title="Permalink to this headline">¶</a></h2>
+<p>Tasks used to do synchronize parts of Gecko that have downstream GitHub
+repositories.</p>
+</div>
+<div class="section" id="instrumented-build">
+<h2>instrumented-build<a class="headerlink" href="#instrumented-build" title="Permalink to this headline">¶</a></h2>
+<p>Tasks that generate builds with PGO instrumentation enabled. This is an
+intermediate build that can be used to generate profiling information for a
+final PGO build. This is the 1st stage of the full 3-step PGO process.</p>
+</div>
+<div class="section" id="generate-profile">
+<h2>generate-profile<a class="headerlink" href="#generate-profile" title="Permalink to this headline">¶</a></h2>
+<p>Tasks that take a build configured for PGO and run the binary against a sample
+set to generate profile data. This is the 2nd stage of the full 3-step PGO
+process.</p>
+</div>
+<div class="section" id="geckodriver-signing">
+<h2>geckodriver-signing<a class="headerlink" href="#geckodriver-signing" title="Permalink to this headline">¶</a></h2>
+<p>Signing for geckodriver binary.</p>
+</div>
+<div class="section" id="visual-metrics">
+<h2>visual-metrics<a class="headerlink" href="#visual-metrics" title="Permalink to this headline">¶</a></h2>
+<p>Tasks that compute visual performance metrics from videos and images captured
+by other tasks.</p>
+</div>
+<div class="section" id="visual-metrics-dep">
+<h2>visual-metrics-dep<a class="headerlink" href="#visual-metrics-dep" title="Permalink to this headline">¶</a></h2>
+<p>Tasks that compute visual performance metrics from videos and images captured
+by another task that produces a jobs.json artifact</p>
+</div>
+<div class="section" id="iris">
+<h2>iris<a class="headerlink" href="#iris" title="Permalink to this headline">¶</a></h2>
+<p>Iris testing suite</p>
+</div>
+<div class="section" id="maybe-release">
+<h2>maybe-release<a class="headerlink" href="#maybe-release" title="Permalink to this headline">¶</a></h2>
+<p>A shipitscript task that does the following:</p>
+<ol class="arabic simple">
+<li><p>Checks if automated releases are disabled</p></li>
+<li><p>Checks if the changes between the current revision and the previous releases
+revision are considered “worthwhile” for a new release.</p></li>
+<li><p>Triggers the release via ship-it, which will then create an action task.</p></li>
+</ol>
+</div>
+<div class="section" id="l10n-bump">
+<h2>l10n-bump<a class="headerlink" href="#l10n-bump" title="Permalink to this headline">¶</a></h2>
+<p>Cron-driven tasks that bump l10n-changesets files in-tree, using data from the l10n dashboard.</p>
+</div>
+<div class="section" id="merge-automation">
+<h2>merge-automation<a class="headerlink" href="#merge-automation" title="Permalink to this headline">¶</a></h2>
+<p>Hook-driven tasks that automate “Merge Day” tasks during the release cycle.</p>
+</div>
+<div class="section" id="system-symbols">
+<h2>system-symbols<a class="headerlink" href="#system-symbols" title="Permalink to this headline">¶</a></h2>
+<p>Generate missing macOS and windows system symbols from crash reports.</p>
+</div>
+<div class="section" id="system-symbols-upload">
+<h2>system-symbols-upload<a class="headerlink" href="#system-symbols-upload" title="Permalink to this headline">¶</a></h2>
+<p>Upload macOS and windows system symbols to tecken.</p>
+</div>
+<div class="section" id="scriptworker-canary">
+<h2>scriptworker-canary<a class="headerlink" href="#scriptworker-canary" title="Permalink to this headline">¶</a></h2>
+<p>Push tasks to try to test new scriptworker deployments.</p>
+</div>
+<div class="section" id="updatebot">
+<h2>updatebot<a class="headerlink" href="#updatebot" title="Permalink to this headline">¶</a></h2>
+<p>Check for updates to (supported) third party libraries, and manage their lifecycle.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="parameters.html" class="btn btn-neutral float-right" title="Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="reference.html" class="btn btn-neutral float-left" title="Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

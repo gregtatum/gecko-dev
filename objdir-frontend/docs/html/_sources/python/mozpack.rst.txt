@@ -1,0 +1,95 @@
+mozpack package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mozpack.chrome
+   mozpack.packager
+   mozpack.test
+
+Submodules
+----------
+
+mozpack.archive module
+----------------------
+
+.. automodule:: mozpack.archive
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.copier module
+---------------------
+
+.. automodule:: mozpack.copier
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.dmg module
+------------------
+
+.. automodule:: mozpack.dmg
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.errors module
+---------------------
+
+.. automodule:: mozpack.errors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.executables module
+--------------------------
+
+.. automodule:: mozpack.executables
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.files module
+--------------------
+
+.. automodule:: mozpack.files
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.manifests module
+------------------------
+
+.. automodule:: mozpack.manifests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.mozjar module
+---------------------
+
+.. automodule:: mozpack.mozjar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozpack.path module
+-------------------
+
+.. automodule:: mozpack.path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozpack
+   :members:
+   :undoc-members:
+   :show-inheritance:

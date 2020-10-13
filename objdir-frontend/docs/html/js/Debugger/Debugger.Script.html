@@ -1,0 +1,783 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugger.Script &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugger.Source" href="Debugger.Source.html" />
+    <link rel="prev" title="Debugger.Object" href="Debugger.Object.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Debugger API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Debugger.Script</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-script-for-jsscripts">Debugger.Script for JSScripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-script-for-webassembly">Debugger.Script for WebAssembly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#convention">Convention</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#accessor-properties-of-the-debugger-script-prototype-object">Accessor Properties of the Debugger.Script Prototype Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-properties-of-the-debugger-script-prototype-object">Function Properties of the Debugger.Script Prototype Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+          <li><a href="index.html">Debugger API</a> &raquo;</li>
+        
+      <li>Debugger.Script</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/Debugger.Script.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugger-script">
+<h1>Debugger.Script<a class="headerlink" href="#debugger-script" title="Permalink to this headline">¶</a></h1>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance may refer to a sequence of bytecode in the
+debuggee or to a block of WebAssembly code. For the former, it is the
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> API’s presentation of a JSAPI <code class="docutils literal notranslate"><span class="pre">JSScript</span></code>
+object. The two cases are distinguished by their <code class="docutils literal notranslate"><span class="pre">format</span></code> property being
+<code class="docutils literal notranslate"><span class="pre">&quot;js&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>.</p>
+<div class="section" id="debugger-script-for-jsscripts">
+<h2>Debugger.Script for JSScripts<a class="headerlink" href="#debugger-script-for-jsscripts" title="Permalink to this headline">¶</a></h2>
+<p>For <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instances referring to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code>, they are
+distinguished by their <code class="docutils literal notranslate"><span class="pre">format</span></code> property being <code class="docutils literal notranslate"><span class="pre">&quot;js&quot;</span></code>.</p>
+<p>Each of the following is represented by a single <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> object:</p>
+<ul class="simple">
+<li><p>The body of a function—that is, all the code in the function that is not
+contained within some nested function.</p></li>
+<li><p>The code passed to a single call to <code class="docutils literal notranslate"><span class="pre">eval</span></code>, excluding the bodies of any
+functions that code defines.</p></li>
+<li><p>The contents of a <code class="docutils literal notranslate"><span class="pre">&lt;script&gt;</span></code> element.</p></li>
+<li><p>A DOM event handler, whether embedded in HTML or attached to the element
+by other JavaScript code.</p></li>
+<li><p>Code appearing in a <code class="docutils literal notranslate"><span class="pre">javascript:</span></code> URL.</p></li>
+</ul>
+<p>The <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> interface constructs <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> objects as scripts
+of debuggee code are uncovered by the debugger: via the <code class="docutils literal notranslate"><span class="pre">onNewScript</span></code>
+handler method; via <a class="reference internal" href="Debugger.Frame.html"><span class="doc">Debugger.Frame</span></a>’s <code class="docutils literal notranslate"><span class="pre">script</span></code> properties; via the
+<code class="docutils literal notranslate"><span class="pre">functionScript</span></code> method of <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a> instances; and so on. For a
+given <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance, SpiderMonkey constructs exactly one
+<code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance for each underlying script object; debugger
+code can add its own properties to a script object and expect to find
+them later, use <code class="docutils literal notranslate"><span class="pre">==</span></code> to decide whether two expressions refer to the same
+script, and so on.</p>
+<p>(If more than one <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance is debugging the same code, each
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> gets a separate <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance for a given
+script. This allows the code using each <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance to place
+whatever properties it likes on its <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instances, without
+worrying about interfering with other debuggers.)</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance is a strong reference to a JSScript object;
+it protects the script it refers to from being garbage collected.</p>
+<p>Note that SpiderMonkey may use the same <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instances for
+equivalent functions or evaluated code—that is, scripts representing the
+same source code, at the same position in the same source file,
+evaluated in the same lexical environment.</p>
+</div>
+<div class="section" id="debugger-script-for-webassembly">
+<h2>Debugger.Script for WebAssembly<a class="headerlink" href="#debugger-script-for-webassembly" title="Permalink to this headline">¶</a></h2>
+<p>For <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instances referring to a block of WebAssembly code, they
+are distinguished by their <code class="docutils literal notranslate"><span class="pre">format</span></code> property being <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>.</p>
+<p>Currently only entire modules evaluated via <code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">WebAssembly.Module</span></code> are
+represented.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> objects for WebAssembly are uncovered via <code class="docutils literal notranslate"><span class="pre">onNewScript</span></code> when
+a new WebAssembly module is instantiated and via the <code class="docutils literal notranslate"><span class="pre">findScripts</span></code> method on
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instances. SpiderMonkey constructs exactly one
+<code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> for each underlying WebAssembly module per
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance is a strong reference to the underlying
+WebAssembly module; it protects the module it refers to from being garbage
+collected.</p>
+<p>Please note at the time of this writing, support for WebAssembly is
+very preliminary. Many properties and methods below throw.</p>
+</div>
+<div class="section" id="convention">
+<h2>Convention<a class="headerlink" href="#convention" title="Permalink to this headline">¶</a></h2>
+<p>For descriptions of properties and methods below, if the behavior of the
+property or method differs between the instance referring to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> or
+to a block of WebAssembly code, the text will be split into two sections,
+headed by “<strong>if the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>” and “<strong>if the instance
+refers to WebAssembly code</strong>”, respectively. If the behavior does not differ,
+no such emphasized headings will appear.</p>
+</div>
+<div class="section" id="accessor-properties-of-the-debugger-script-prototype-object">
+<h2>Accessor Properties of the Debugger.Script Prototype Object<a class="headerlink" href="#accessor-properties-of-the-debugger-script-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance inherits the following accessor properties
+from its prototype:</p>
+<div class="section" id="isgeneratorfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">isGeneratorFunction</span></code><a class="headerlink" href="#isgeneratorfunction" title="Permalink to this headline">¶</a></h3>
+<p>True if this instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> for a function defined with a
+<code class="docutils literal notranslate"><span class="pre">function*</span></code> expression or statement. False otherwise.</p>
+</div>
+<div class="section" id="isasyncfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">isAsyncFunction</span></code><a class="headerlink" href="#isasyncfunction" title="Permalink to this headline">¶</a></h3>
+<p>True if this instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> for an async function, defined
+with an <code class="docutils literal notranslate"><span class="pre">async</span> <span class="pre">function</span></code> expression or statement. False otherwise.</p>
+</div>
+<div class="section" id="isfunction">
+<h3><code class="docutils literal notranslate"><span class="pre">isFunction</span></code><a class="headerlink" href="#isfunction" title="Permalink to this headline">¶</a></h3>
+<p>True if this instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> for a function. False
+otherwise.</p>
+</div>
+<div class="section" id="ismodule">
+<h3><code class="docutils literal notranslate"><span class="pre">isModule</span></code><a class="headerlink" href="#ismodule" title="Permalink to this headline">¶</a></h3>
+<p>True if this instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code> that was parsed and loaded
+as an ECMAScript module. False otherwise.</p>
+</div>
+<div class="section" id="displayname">
+<h3><code class="docutils literal notranslate"><span class="pre">displayName</span></code><a class="headerlink" href="#displayname" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, this is the script’s display
+name, if it has one. If the script has no display name — for example,
+if it is a top-level <code class="docutils literal notranslate"><span class="pre">eval</span></code> script — this is <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>If the script’s function has a given name, its display name is the same as
+its function’s given name.</p>
+<p>If the script’s function has no name, SpiderMonkey attempts to infer an
+appropriate name for it given its context. For example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{}</span>          <span class="c1">// display name: f (the given name)</span>
+<span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>  <span class="c1">// display name: g</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">p</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{};</span>    <span class="c1">// display name: o.p</span>
+<span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">r</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>      <span class="c1">// display name: q.r</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Note that the display name may not be a proper JavaScript identifier,
+or even a proper expression: we attempt to find helpful names even when
+the function is not immediately assigned as the value of some variable
+or property. Thus, we use <code><i>a</i>/<i>b</i></code> to refer to
+the <i>b</i> defined within <i>a</i>, and <code><i>a</i>&lt;</code> to
+refer to a function that occurs somewhere within an expression that is
+assigned to <i>a</i>. For example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">h</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>    <span class="c1">// display name: h/i</span>
+  <span class="nx">f</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>        <span class="c1">// display name: h/&lt;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">f</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{});</span>  <span class="c1">// display name: s&lt;</span>
+</pre></div>
+</div>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="parameternames">
+<h3><code class="docutils literal notranslate"><span class="pre">parameterNames</span></code><a class="headerlink" href="#parameternames" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the names of its parameters,
+as an array of strings. If the script is not a function script this is
+<code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>If the function uses destructuring parameters, the corresponding array elements
+are <code class="docutils literal notranslate"><span class="pre">undefined</span></code>. For example, if the referent is a function script declared in this
+way:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="p">[</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">],</span> <span class="p">{</span><span class="nx">d</span><span class="p">,</span> <span class="nx">e</span><span class="o">:</span><span class="nx">f</span><span class="p">})</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>then this <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance’s <code class="docutils literal notranslate"><span class="pre">parameterNames</span></code> property would
+have the value:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="url">
+<h3><code class="docutils literal notranslate"><span class="pre">url</span></code><a class="headerlink" href="#url" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the filename or URL from which
+this script’s code was loaded. For scripts created by <code class="docutils literal notranslate"><span class="pre">eval</span></code> or the
+<code class="docutils literal notranslate"><span class="pre">Function</span></code> constructor, this may be a synthesized filename, starting with a
+valid URL and followed by information tracking how the code was introduced
+into the system; the entire string is not a valid URL. For
+<code class="docutils literal notranslate"><span class="pre">Function.prototype</span></code>’s script, this is <code class="docutils literal notranslate"><span class="pre">null</span></code>. If this <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">source</span></code> property is non-<code class="docutils literal notranslate"><span class="pre">null</span></code>, then this is equal to <code class="docutils literal notranslate"><span class="pre">source.url</span></code>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="startline">
+<h3><code class="docutils literal notranslate"><span class="pre">startLine</span></code><a class="headerlink" href="#startline" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the number of the line at
+which this script’s code starts, within the file or document named by
+<code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+</div>
+<div class="section" id="startcolumn">
+<h3><code class="docutils literal notranslate"><span class="pre">startColumn</span></code><a class="headerlink" href="#startcolumn" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the zero-indexed number of the
+column at which this script’s code starts, within the file or document
+named by <code class="docutils literal notranslate"><span class="pre">url</span></code>.  For functions, this is the start of the function’s
+arguments:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+<span class="c1">//        ^ start (column 10)</span>
+<span class="kd">let</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">x</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">*</span><span class="nx">x</span><span class="p">;</span>
+<span class="c1">//      ^ start (column 8)</span>
+<span class="kd">let</span> <span class="nx">h</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">x</span><span class="o">*</span><span class="nx">x</span><span class="p">;</span>
+<span class="c1">//      ^ start (column 8)</span>
+</pre></div>
+</div>
+<p>For default class constructors, it is the start of the <code class="docutils literal notranslate"><span class="pre">class</span></code> keyword:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">MyClass</span> <span class="o">=</span> <span class="kr">class</span> <span class="p">{</span> <span class="p">};</span>
+<span class="c1">//            ^ start (column 14)</span>
+</pre></div>
+</div>
+<p>For scripts from other sources, such as <code class="docutils literal notranslate"><span class="pre">eval</span></code> or the <code class="docutils literal notranslate"><span class="pre">Function</span></code>
+constructor, it is typically 0:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">&quot;  console.log(&#39;hello world&#39;);&quot;</span><span class="p">);</span>
+<span class="c1">//                    ^ start (column 0, from the string&#39;s perspective)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="linecount">
+<h3><code class="docutils literal notranslate"><span class="pre">lineCount</span></code><a class="headerlink" href="#linecount" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the number of lines this
+script’s code occupies, within the file or document named by <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+</div>
+<div class="section" id="source">
+<h3><code class="docutils literal notranslate"><span class="pre">source</span></code><a class="headerlink" href="#source" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the
+<a class="reference internal" href="Debugger.Source.html"><span class="doc">Debugger.Source</span></a> instance representing the source code from
+which this script was produced. This is <code class="docutils literal notranslate"><span class="pre">null</span></code> if the source code was not
+retained.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, the
+<a class="reference internal" href="Debugger.Source.html"><span class="doc">Debugger.Source</span></a> instance representing the serialized text
+format of the WebAssembly code.</p>
+</div>
+<div class="section" id="sourcestart">
+<h3><code class="docutils literal notranslate"><span class="pre">sourceStart</span></code><a class="headerlink" href="#sourcestart" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the character within the
+<a class="reference internal" href="Debugger.Source.html"><span class="doc">Debugger.Source</span></a> instance given by <code class="docutils literal notranslate"><span class="pre">source</span></code> at which this
+script’s code starts; zero-based. If this is a function’s script, this is
+the index of the start of the <code class="docutils literal notranslate"><span class="pre">function</span></code> token in the source code.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="sourcelength">
+<h3><code class="docutils literal notranslate"><span class="pre">sourceLength</span></code><a class="headerlink" href="#sourcelength" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the length, in characters, of
+this script’s code within the <a class="reference internal" href="Debugger.Source.html"><span class="doc">Debugger.Source</span></a> instance given
+by <code class="docutils literal notranslate"><span class="pre">source</span></code>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="mainoffset">
+<h3><code class="docutils literal notranslate"><span class="pre">mainOffset</span></code><a class="headerlink" href="#mainoffset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, the offset of the main
+entry point of the script, excluding any prologue.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="global">
+<h3><code class="docutils literal notranslate"><span class="pre">global</span></code><a class="headerlink" href="#global" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, a <a class="reference internal" href="Debugger.Object.html"><span class="doc">Debugger.Object</span></a>
+instance referring to the global object in whose scope this script
+runs. The result refers to the global directly, not via a wrapper or a
+<code class="docutils literal notranslate"><span class="pre">WindowProxy</span></code> (“outer window”, in Firefox).</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="format">
+<h3><code class="docutils literal notranslate"><span class="pre">format</span></code><a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, <code class="docutils literal notranslate"><span class="pre">&quot;js&quot;</span></code>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, <code class="docutils literal notranslate"><span class="pre">&quot;wasm&quot;</span></code>.</p>
+</div>
+</div>
+<div class="section" id="function-properties-of-the-debugger-script-prototype-object">
+<h2>Function Properties of the Debugger.Script Prototype Object<a class="headerlink" href="#function-properties-of-the-debugger-script-prototype-object" title="Permalink to this headline">¶</a></h2>
+<p>The functions described below may only be called with a <code class="docutils literal notranslate"><span class="pre">this</span></code> value
+referring to a <code class="docutils literal notranslate"><span class="pre">Debugger.Script</span></code> instance; they may not be used as
+methods of other kinds of objects.</p>
+<div class="section" id="getchildscripts">
+<h3><code class="docutils literal notranslate"><span class="pre">getChildScripts()</span></code><a class="headerlink" href="#getchildscripts" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return a new array whose
+elements are Debugger.Script objects for each function
+in this script. Only direct children are included; nested
+children can be reached by walking the tree.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="getpossiblebreakpoints-query">
+<h3><code class="docutils literal notranslate"><span class="pre">getPossibleBreakpoints(query)</span></code><a class="headerlink" href="#getpossiblebreakpoints-query" title="Permalink to this headline">¶</a></h3>
+<p>Query for the recommended breakpoint locations available in SpiderMonkey.
+Returns a result array of objects with the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">offset:</span> <span class="pre">number</span></code> - The offset the breakpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lineNumber:</span> <span class="pre">number</span></code> - The line number of the breakpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columnNumber:</span> <span class="pre">number</span></code> - The column number of the breakpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isStepStart:</span> <span class="pre">boolean</span></code> - True if SpiderMonkey recommends that the
+breakpoint be treated as a step location when users of debuggers
+step to the next item. This <em>roughly</em> translates to the start of
+each statement, though not entirely.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">query</span></code> argument can be used to filter the set of breakpoints.
+The <code class="docutils literal notranslate"><span class="pre">query</span></code> object can contain the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">minOffset:</span> <span class="pre">number</span></code> - The inclusive lower bound of <code class="docutils literal notranslate"><span class="pre">offset</span></code> values to include.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maxOffset:</span> <span class="pre">number</span></code> - The exclusive upper bound of <code class="docutils literal notranslate"><span class="pre">offset</span></code> values to include.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line:</span> <span class="pre">number</span></code> - Limit to breakpoints on the given line.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minLine:</span> <span class="pre">number</span></code> - The inclusive lower bound of lines to include.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minColumn:</span> <span class="pre">number</span></code> - The inclusive lower bound of the line/minLine column to include.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maxLine:</span> <span class="pre">number</span></code> - The exclusive upper bound of lines to include.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maxColumn:</span> <span class="pre">number</span></code> - The exclusive upper bound of the line/maxLine column to include.</p></li>
+</ul>
+</div>
+<div class="section" id="getpossiblebreakpointoffsets-query">
+<h3><code class="docutils literal notranslate"><span class="pre">getPossibleBreakpointOffsets(query)</span></code><a class="headerlink" href="#getpossiblebreakpointoffsets-query" title="Permalink to this headline">¶</a></h3>
+<p>Query for the recommended breakpoint locations available in SpiderMonkey.
+Identical to getPossibleBreakpoints except this returns an array of <code class="docutils literal notranslate"><span class="pre">offset</span></code>
+values instead of offset metadata objects.</p>
+</div>
+<div class="section" id="getoffsetmetadata-offset">
+<h3><code class="docutils literal notranslate"><span class="pre">getOffsetMetadata(offset)</span></code><a class="headerlink" href="#getoffsetmetadata-offset" title="Permalink to this headline">¶</a></h3>
+<p>Get metadata about a given bytecode offset.
+Returns an object with the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lineNumber:</span> <span class="pre">number</span></code> - The line number of the breakpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columnNumber:</span> <span class="pre">number</span></code> - The column number of the breakpoint.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isBreakpoint:</span> <span class="pre">boolean</span></code> - True if this offset qualifies as a breakpoint,
+defined using the same semantics used for <code class="docutils literal notranslate"><span class="pre">getPossibleBreakpoints()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isStepStart:</span> <span class="pre">boolean</span></code> - True if SpiderMonkey recommends that the
+breakpoint be treated as a step location when users of debuggers
+step to the next item. This <em>roughly</em> translates to the start of
+each statement, though not entirely.</p></li>
+</ul>
+</div>
+<div class="section" id="setbreakpoint-offset-handler">
+<h3><code class="docutils literal notranslate"><span class="pre">setBreakpoint(offset,</span> <span class="pre">handler)</span></code><a class="headerlink" href="#setbreakpoint-offset-handler" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, set a breakpoint at the
+bytecode instruction at <i>offset</i> in this script, reporting hits to
+the <code class="docutils literal notranslate"><span class="pre">hit</span></code> method of <i>handler</i>. If <i>offset</i> is not a valid offset
+in this script, throw an error.</p>
+<p>When execution reaches the given instruction, SpiderMonkey calls the
+<code class="docutils literal notranslate"><span class="pre">hit</span></code> method of <i>handler</i>, passing a <a class="reference internal" href="Debugger.Frame.html"><span class="doc">Debugger.Frame</span></a>
+instance representing the currently executing stack frame. The <code class="docutils literal notranslate"><span class="pre">hit</span></code>
+method’s return value should be a <a class="reference external" href="./Conventions.html#resumption-values">resumption value</a>, determining
+how execution should continue.</p>
+<p>Any number of breakpoints may be set at a single location; when control
+reaches that point, SpiderMonkey calls their handlers in an unspecified
+order.</p>
+<p>Any number of breakpoints may use the same <i>handler</i> object.</p>
+<p>Breakpoint handler method calls are cross-compartment, intra-thread
+calls: the call takes place in the same thread that hit the breakpoint,
+and in the compartment containing the handler function (typically the
+debugger’s compartment).</p>
+<p>The new breakpoint belongs to the <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance to
+which this script belongs. Removing a global from the
+<a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance’s set of debuggees clears all the
+breakpoints belonging to that <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance in that
+global’s scripts.</p>
+</div>
+<div class="section" id="getbreakpoints-offset">
+<h3><code class="docutils literal notranslate"><span class="pre">getBreakpoints([offset])</span></code><a class="headerlink" href="#getbreakpoints-offset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an array containing the
+handler objects for all the breakpoints set at <i>offset</i> in this
+script. If <i>offset</i> is omitted, return the handlers of all
+breakpoints set anywhere in this script. If <i>offset</i> is present, but
+not a valid offset in this script, throw an error.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="clearbreakpoint-handler-offset">
+<h3><code class="docutils literal notranslate"><span class="pre">clearBreakpoint(handler,</span> <span class="pre">[offset])</span></code><a class="headerlink" href="#clearbreakpoint-handler-offset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, remove all breakpoints set in
+this <a class="reference internal" href="Debugger.html"><span class="doc">Debugger</span></a> instance that use <i>handler</i> as
+their handler. If <i>offset</i> is given, remove only those breakpoints
+set at <i>offset</i> that use <i>handler</i>; if <i>offset</i> is not a
+valid offset in this script, throw an error.</p>
+<p>Note that, if breakpoints using other handler objects are set at the
+same location(s) as <i>handler</i>, they remain in place.</p>
+</div>
+<div class="section" id="clearallbreakpoints-offset">
+<h3><code class="docutils literal notranslate"><span class="pre">clearAllBreakpoints([offset])</span></code><a class="headerlink" href="#clearallbreakpoints-offset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, remove all breakpoints set in
+this script. If <i>offset</i> is present, remove all breakpoints set at
+that offset in this script; if <i>offset</i> is not a valid bytecode
+offset in this script, throw an error.</p>
+</div>
+<div class="section" id="geteffectfuloffsets">
+<h3><code class="docutils literal notranslate"><span class="pre">getEffectfulOffsets()</span></code><a class="headerlink" href="#geteffectfuloffsets" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an array
+containing the offsets of all bytecodes in the script which can have direct
+side effects that are visible outside the currently executing frame.  This
+includes, for example, operations that set properties or elements on
+objects, or that may set names in environments created outside the frame.</p>
+</div>
+<div class="section" id="getoffsetscoverage">
+<h3><code class="docutils literal notranslate"><span class="pre">getOffsetsCoverage()</span></code>:<a class="headerlink" href="#getoffsetscoverage" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return <code class="docutils literal notranslate"><span class="pre">null</span></code> or an array which
+contains information about the coverage of all opcodes. The elements of
+the array are objects, each of which describes a single opcode, and
+contains the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lineNumber</span></code>: the line number of the current opcode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columnNumber</span></code>: the column number of the current opcode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">offset</span></code>: the bytecode instruction offset of the current opcode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: the number of times the current opcode got executed.</p></li>
+</ul>
+<p>If this script has no coverage, or if it is not instrumented, then this
+function will return <code class="docutils literal notranslate"><span class="pre">null</span></code>. To ensure that the debuggee is instrumented,
+the flag <code class="docutils literal notranslate"><span class="pre">Debugger.collectCoverageInfo</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="isincatchscope-offset">
+<h3><code class="docutils literal notranslate"><span class="pre">isInCatchScope([offset])</span></code><a class="headerlink" href="#isincatchscope-offset" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, this is <code class="docutils literal notranslate"><span class="pre">true</span></code> if this offset
+falls within the scope of a try block, and <code class="docutils literal notranslate"><span class="pre">false</span></code> otherwise.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="setinstrumentationid-id">
+<h3><code class="docutils literal notranslate"><span class="pre">setInstrumentationId(id)</span></code>:<a class="headerlink" href="#setinstrumentationid-id" title="Permalink to this headline">¶</a></h3>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, set the value which will be
+supplied as the script’s ID to instrumentation callbacks in the script’s
+realm. See <code class="docutils literal notranslate"><span class="pre">Debugger.Object.setInstrumentation()</span></code>.</p>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="deprecated-debugger-script-prototype-functions">
+<h3>Deprecated Debugger.Script Prototype Functions<a class="headerlink" href="#deprecated-debugger-script-prototype-functions" title="Permalink to this headline">¶</a></h3>
+<p>The following functions have all been deprecated in favor of <code class="docutils literal notranslate"><span class="pre">getOffsetMetadata</span></code>,
+<code class="docutils literal notranslate"><span class="pre">getPossibleBreakpoints</span></code>, and <code class="docutils literal notranslate"><span class="pre">getPossibleBreakpointOffsets</span></code>. These functions
+all have an under-defined concept of what offsets are and are not included
+in their results.</p>
+<div class="section" id="getalloffsets">
+<h4><code class="docutils literal notranslate"><span class="pre">getAllOffsets()</span></code><a class="headerlink" href="#getalloffsets" title="Permalink to this headline">¶</a></h4>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an array <i>L</i>
+describing the relationship between bytecode instruction offsets and
+source code positions in this script. <i>L</i> is sparse, and indexed by
+source line number. If a source line number <i>line</i> has no code, then
+<i>L</i> has no <i>line</i> property. If there is code for <i>line</i>,
+then <code><i>L</i>[<i>line</i>]</code> is an array of offsets of byte
+code instructions that are entry points to that line.</p>
+<p>For example, suppose we have a script for the following source code:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">a</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mf">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mf">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="c1">// It&#39;s hip to be square.</span>
+    <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">i</span><span class="o">*</span><span class="nx">i</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">getAllOffsets()</span></code> on that code might yield an array like this:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mf">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5</span><span class="p">,</span> <span class="mf">20</span><span class="p">],</span> <span class="p">,</span> <span class="p">[</span><span class="mf">10</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>This array indicates that:</p>
+<ul class="simple">
+<li><p>the first line’s code starts at offset 0 in the script;</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement head has two entry points at offsets 5 and 20 (for
+the initialization, which is performed only once, and the loop test,
+which is performed at the start of each iteration);</p></li>
+<li><p>the third line has no code;</p></li>
+<li><p>and the fourth line begins at offset 10.</p></li>
+</ul>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="getallcolumnoffsets">
+<h4><code class="docutils literal notranslate"><span class="pre">getAllColumnOffsets()</span></code><a class="headerlink" href="#getallcolumnoffsets" title="Permalink to this headline">¶</a></h4>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an array describing the
+relationship between bytecode instruction offsets and source code
+positions in this script. Unlike getAllOffsets(), which returns all
+offsets that are entry points for each line, getAllColumnOffsets() returns
+all offsets that are entry points for each (line, column) pair.</p>
+<p>The elements of the array are objects, each of which describes a single
+entry point, and contains the following properties:</p>
+<ul class="simple">
+<li><p>lineNumber: the line number for which offset is an entry point</p></li>
+<li><p>columnNumber: the column number for which offset is an entry point</p></li>
+<li><p>offset: the bytecode instruction offset of the entry point</p></li>
+</ul>
+<p>For example, suppose we have a script for the following source code:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">a</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mf">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mf">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="c1">// It&#39;s hip to be square.</span>
+    <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">i</span><span class="o">*</span><span class="nx">i</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">getAllColumnOffsets()</span></code> on that code might yield an array like this:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span> <span class="nx">lineNumber</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">columnNumber</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span> <span class="nx">offset</span><span class="o">:</span> <span class="mf">0</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">lineNumber</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">columnNumber</span><span class="o">:</span> <span class="mf">5</span><span class="p">,</span> <span class="nx">offset</span><span class="o">:</span> <span class="mf">5</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">lineNumber</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span> <span class="nx">columnNumber</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span> <span class="nx">offset</span><span class="o">:</span> <span class="mf">20</span> <span class="p">},</span>
+  <span class="p">{</span> <span class="nx">lineNumber</span><span class="o">:</span> <span class="mf">3</span><span class="p">,</span> <span class="nx">columnNumber</span><span class="o">:</span> <span class="mf">4</span><span class="p">,</span> <span class="nx">offset</span><span class="o">:</span> <span class="mf">10</span> <span class="p">}]</span>
+</pre></div>
+</div>
+<p><strong>If the instance refers to WebAssembly code</strong>, throw a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+</div>
+<div class="section" id="getlineoffsets-line">
+<h4><code class="docutils literal notranslate"><span class="pre">getLineOffsets(line)</span></code><a class="headerlink" href="#getlineoffsets-line" title="Permalink to this headline">¶</a></h4>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an array of bytecode
+instruction offsets representing the entry points to source line
+<i>line</i>. If the script contains no executable code at that line, the
+array returned is empty.</p>
+</div>
+<div class="section" id="getoffsetlocation-offset">
+<h4><code class="docutils literal notranslate"><span class="pre">getOffsetLocation(offset)</span></code><a class="headerlink" href="#getoffsetlocation-offset" title="Permalink to this headline">¶</a></h4>
+<p><strong>If the instance refers to a <code class="docutils literal notranslate"><span class="pre">JSScript</span></code></strong>, return an object describing the
+source code location responsible for the bytecode at <i>offset</i> in this
+script.  The object has the following properties:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lineNumber</span></code>: the line number for which offset is an entry point</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">columnNumber</span></code>: the column number for which offset is an entry point</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">isEntryPoint</span></code>: true if the offset is a column entry point, as
+would be reported by getAllColumnOffsets(); otherwise false.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger.Source.html" class="btn btn-neutral float-right" title="Debugger.Source" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Debugger.Object.html" class="btn btn-neutral float-left" title="Debugger.Object" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

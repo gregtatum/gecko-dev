@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Capturing a minidump &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugging A Hang On OS X" href="debugging_a_hang_on_os_x.html" />
+    <link rel="prev" title="Mercurial Bundles" href="../vcs/mercurial_bundles.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Capturing a minidump</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#privacy-and-minidumps">Privacy and minidumps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#capturing-a-minidump-application-crash">Capturing a minidump: application crash</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-debugging-tools-for-windows">Install debugging tools for Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#capture-a-minidump">Capture a minidump</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#capturing-a-minidump-application-hang">Capturing a minidump: application hang</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_gdb.html">Debugging Firefox with GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_rr.html">Debugging Firefox with rr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_report.html">How to get a stacktrace for a bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/artifact_builds.html">Understanding Artifact Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build/building_mobile_firefox.html">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>Capturing a minidump</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/debugging/capturing_minidump.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="capturing-a-minidump">
+<h1>Capturing a minidump<a class="headerlink" href="#capturing-a-minidump" title="Permalink to this headline">¶</a></h1>
+<p><em>Minidumps</em> are files created by various Windows tools which record the
+complete state of a program as it’s running, or as it was at the moment
+of a crash. Small minidumps are created by the Breakpad <a class="reference internal" href="../../toolkit/crashreporter/crashreporter/index.html#crash-reporter"><span class="std std-ref">crash
+reporting</span></a> tool, but sometimes that’s not
+sufficient to diagnose a problem. For example, if the application is
+hanging (not responding to input, but hasn’t crashed) then Breakpad is
+not triggered, and it can be difficult to determine where the problem
+lies. Sometimes a more complete form of minidump is needed to see
+additional details about a crash, in which case manual capture of a
+minidump is desired.</p>
+<p>This page describes how to capture these minidumps on Windows, to permit
+better debugging.</p>
+<div class="section" id="privacy-and-minidumps">
+<h2>Privacy and minidumps<a class="headerlink" href="#privacy-and-minidumps" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Warning!</strong> Unlike the minidumps submitted by Breakpad, these
+minidumps contain the <strong>complete</strong> contents of program memory. They
+are therefore much more likely to contain private information, if
+there is any in the browser. For this reason, you may prefer to
+generate minidumps against a <a class="reference external" href="http://support.mozilla.com/en-US/kb/Managing%20profiles">clean
+profile</a>
+where possible.</p>
+</div>
+</div>
+<div class="section" id="capturing-a-minidump-application-crash">
+<h2>Capturing a minidump: application crash<a class="headerlink" href="#capturing-a-minidump-application-crash" title="Permalink to this headline">¶</a></h2>
+<p>To capture a full minidump for an application crash, you can use a tool
+called windbg.</p>
+<div class="section" id="install-debugging-tools-for-windows">
+<h3>Install debugging tools for Windows<a class="headerlink" href="#install-debugging-tools-for-windows" title="Permalink to this headline">¶</a></h3>
+<p>Microsoft distributes the Debugging Tools for Windows for free, those
+include WinDbg which you will need here. Download it from <a class="reference external" href="http://msdn.microsoft.com/en-us/windows/hardware/gg463009.aspx">Install
+Debugging Tools for
+Windows</a>.
+(<em>You’ll want the 32-bit version of WinDbg only if you are using a
+32</em>-bit version of Firefox) Then install it, the standard settings in
+the installation process are fine.</p>
+</div>
+<div class="section" id="capture-a-minidump">
+<h3>Capture a minidump<a class="headerlink" href="#capture-a-minidump" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Connect Firefox to the debugger.</p>
+<ol class="loweralpha simple">
+<li><p>If Firefox is not already running, then open WinDbg from the Start
+menu (Start-&gt;All Programs-&gt;Debugging Tools for Windows-&gt;WinDbg).
+Next, open the <strong>“File”</strong> menu and choose <strong>“Open
+Executable…”</strong>. In the file chooser window that appears, open
+the firefox.exe executable in your Firefox program folder
+(C:Program FilesMozilla Firefox).</p></li>
+<li><p>If Firefox is already running, open WinDbg from the Start menu
+(Start-&gt;All Programs-&gt;Debugging Tools for Windows-&gt;WinDbg).  Next,
+open the <strong>“File”</strong> menu and choose <strong>“Attach to a Process…”</strong>.
+In the file chooser window that appears, find the firefox.exe
+executable process with the lowest PID.</p></li>
+</ol>
+</li>
+<li><p>You should now see a “Command” text window with debug output at the
+top and an input box at the bottom. From the menu, select
+<code class="docutils literal notranslate"><span class="pre">Debug</span> <span class="pre">→</span> <span class="pre">Go</span></code>, and Firefox should start. If the debugger spits out
+some text right away and Firefox doesn’t come up, select
+<code class="docutils literal notranslate"><span class="pre">Debug</span> <span class="pre">→</span> <span class="pre">Go</span></code> again.</p></li>
+<li><p>When the program is about to crash, WinDbg will spit out more data,
+and the prompt at the bottom will change from saying “<code class="docutils literal notranslate"><span class="pre">*BUSY*</span></code>” to
+having a number in it. At this point, you should type
+“<code class="docutils literal notranslate"><span class="pre">.dump</span> <span class="pre">/ma</span> <span class="pre">c:\temp\firefoxcrash.dmp</span></code>” – without the quotes, but
+don’t forget the dot at the beginning. Once it completes, which can
+take a fair while, you will have a very large file at
+<code class="docutils literal notranslate"><span class="pre">c:\temp\firefoxcrash.dmp</span></code> that can be used to help debug your
+problem.  File size will depend on this size of Firefox running in
+your environment, which could several GB.</p></li>
+<li><p>Ask in the relevant bug or thread how best to share this very large
+file!</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="capturing-a-minidump-application-hang">
+<h2>Capturing a minidump: application hang<a class="headerlink" href="#capturing-a-minidump-application-hang" title="Permalink to this headline">¶</a></h2>
+<p>On Windows Vista and Windows 7, you can follow <a class="reference external" href="http://support.microsoft.com/kb/931673">these
+instructions</a> to capture a
+dump file and locate it after it’s been saved.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugging_a_hang_on_os_x.html" class="btn btn-neutral float-right" title="Debugging A Hang On OS X" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../vcs/mercurial_bundles.html" class="btn btn-neutral float-left" title="Mercurial Bundles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

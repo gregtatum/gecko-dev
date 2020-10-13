@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>taskgraph.transforms.job package &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>taskgraph.transforms.job package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/taskgraph.transforms.job.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="taskgraph-transforms-job-package">
+<h1>taskgraph.transforms.job package<a class="headerlink" href="#taskgraph-transforms-job-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-taskgraph.transforms.job.common">
+<span id="taskgraph-transforms-job-common-module"></span><h2>taskgraph.transforms.job.common module<a class="headerlink" href="#module-taskgraph.transforms.job.common" title="Permalink to this headline">¶</a></h2>
+<p>Common support for various job types.  These functions are all named after the
+worker implementation they operate on, and take the same three parameters, for
+consistency.</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.add_artifacts">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">add_artifacts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.add_artifacts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.add_cache">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">add_cache</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mount_point</span></em>, <em class="sig-param"><span class="n">skip_untrusted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.add_cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a cache based on the worker’s implementation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job</strong> (<em>dict</em>) – Task’s job description.</p></li>
+<li><p><strong>taskdesc</strong> (<em>dict</em>) – Target task description to modify.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the cache.</p></li>
+<li><p><strong>mount_point</strong> (<em>path</em>) – Path on the host to mount the cache.</p></li>
+<li><p><strong>skip_untrusted</strong> (<em>bool</em>) – Whether cache is used in untrusted environments
+(default: False). Only applies to docker-worker.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.add_tooltool">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">add_tooltool</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">internal</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.add_tooltool" title="Permalink to this definition">¶</a></dt>
+<dd><p>Give the task access to tooltool.</p>
+<p>Enables the tooltool cache. Adds releng proxy. Configures scopes.</p>
+<p>By default, only public tooltool access will be granted. Access to internal
+tooltool can be enabled via <code class="docutils literal notranslate"><span class="pre">internal=True</span></code>.</p>
+<p>This can only be used with <code class="docutils literal notranslate"><span class="pre">run-task</span></code> tasks, as the cache name is
+reserved for use with <code class="docutils literal notranslate"><span class="pre">run-task</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.docker_worker_add_artifacts">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">docker_worker_add_artifacts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.docker_worker_add_artifacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an artifact directory to the task</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.generic_worker_add_artifacts">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">generic_worker_add_artifacts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.generic_worker_add_artifacts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an artifact directory to the task</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.generic_worker_hg_commands">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">generic_worker_hg_commands</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_repo</span></em>, <em class="sig-param"><span class="n">head_repo</span></em>, <em class="sig-param"><span class="n">head_rev</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">sparse_profile</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.generic_worker_hg_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Obtain commands needed to obtain a Mercurial checkout on generic-worker.</p>
+<p>Returns two command strings. One performs the checkout. Another logs.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.setup_secrets">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">setup_secrets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.setup_secrets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up access to secrets via taskcluster-proxy.  The value of
+run[‘secrets’] should be a boolean or a list of secret names that
+can be accessed.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.common.support_vcs_checkout">
+<code class="sig-prename descclassname">taskgraph.transforms.job.common.</code><code class="sig-name descname">support_vcs_checkout</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">sparse</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.common.support_vcs_checkout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update a job/task with parameters to enable a VCS checkout.</p>
+<p>This can only be used with <code class="docutils literal notranslate"><span class="pre">run-task</span></code> tasks, as the cache name is
+reserved for <code class="docutils literal notranslate"><span class="pre">run-task</span></code> tasks.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.debian_package">
+<span id="taskgraph-transforms-job-debian-package-module"></span><h2>taskgraph.transforms.job.debian_package module<a class="headerlink" href="#module-taskgraph.transforms.job.debian_package" title="Permalink to this headline">¶</a></h2>
+<p>Support for running spidermonkey jobs via dedicated scripts</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.debian_package.docker_worker_debian_package">
+<code class="sig-prename descclassname">taskgraph.transforms.job.debian_package.</code><code class="sig-name descname">docker_worker_debian_package</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.debian_package.docker_worker_debian_package" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.hazard">
+<span id="taskgraph-transforms-job-hazard-module"></span><h2>taskgraph.transforms.job.hazard module<a class="headerlink" href="#module-taskgraph.transforms.job.hazard" title="Permalink to this headline">¶</a></h2>
+<p>Support for running hazard jobs via dedicated scripts</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.hazard.docker_worker_hazard">
+<code class="sig-prename descclassname">taskgraph.transforms.job.hazard.</code><code class="sig-name descname">docker_worker_hazard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.hazard.docker_worker_hazard" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.mach">
+<span id="taskgraph-transforms-job-mach-module"></span><h2>taskgraph.transforms.job.mach module<a class="headerlink" href="#module-taskgraph.transforms.job.mach" title="Permalink to this headline">¶</a></h2>
+<p>Support for running mach tasks (via run-task)</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mach.configure_mach">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mach.</code><code class="sig-name descname">configure_mach</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mach.configure_mach" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.mozharness">
+<span id="taskgraph-transforms-job-mozharness-module"></span><h2>taskgraph.transforms.job.mozharness module<a class="headerlink" href="#module-taskgraph.transforms.job.mozharness" title="Permalink to this headline">¶</a></h2>
+<p>Support for running jobs via mozharness.  Ideally, most stuff gets run this
+way, and certainly anything using mozharness should use this approach.</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness.mozharness_on_docker_worker_setup">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness.</code><code class="sig-name descname">mozharness_on_docker_worker_setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness.mozharness_on_docker_worker_setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness.mozharness_on_generic_worker">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness.</code><code class="sig-name descname">mozharness_on_generic_worker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness.mozharness_on_generic_worker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.mozharness_test">
+<span id="taskgraph-transforms-job-mozharness-test-module"></span><h2>taskgraph.transforms.job.mozharness_test module<a class="headerlink" href="#module-taskgraph.transforms.job.mozharness_test" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness_test.get_variant">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness_test.</code><code class="sig-name descname">get_variant</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_platform</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness_test.get_variant" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness_test.installer_url">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness_test.</code><code class="sig-name descname">installer_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness_test.installer_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness_test.mozharness_test_on_docker">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness_test.</code><code class="sig-name descname">mozharness_test_on_docker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness_test.mozharness_test_on_docker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness_test.mozharness_test_on_generic_worker">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness_test.</code><code class="sig-name descname">mozharness_test_on_generic_worker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness_test.mozharness_test_on_generic_worker" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.mozharness_test.test_packages_url">
+<code class="sig-prename descclassname">taskgraph.transforms.job.mozharness_test.</code><code class="sig-name descname">test_packages_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.mozharness_test.test_packages_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Account for different platforms that name their test packages differently</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.python_test">
+<span id="taskgraph-transforms-job-python-test-module"></span><h2>taskgraph.transforms.job.python_test module<a class="headerlink" href="#module-taskgraph.transforms.job.python_test" title="Permalink to this headline">¶</a></h2>
+<p>Support for running mach python-test tasks (via run-task)</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.python_test.configure_python_test">
+<code class="sig-prename descclassname">taskgraph.transforms.job.python_test.</code><code class="sig-name descname">configure_python_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.python_test.configure_python_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.run_task">
+<span id="taskgraph-transforms-job-run-task-module"></span><h2>taskgraph.transforms.job.run_task module<a class="headerlink" href="#module-taskgraph.transforms.job.run_task" title="Permalink to this headline">¶</a></h2>
+<p>Support for running jobs that are invoked via the <cite>run-task</cite> script.</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.run_task.common_setup">
+<code class="sig-prename descclassname">taskgraph.transforms.job.run_task.</code><code class="sig-name descname">common_setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">command</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.run_task.common_setup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.run_task.docker_worker_run_task">
+<code class="sig-prename descclassname">taskgraph.transforms.job.run_task.</code><code class="sig-name descname">docker_worker_run_task</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.run_task.docker_worker_run_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.run_task.generic_worker_run_task">
+<code class="sig-prename descclassname">taskgraph.transforms.job.run_task.</code><code class="sig-name descname">generic_worker_run_task</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.run_task.generic_worker_run_task" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.run_task.script_url">
+<code class="sig-prename descclassname">taskgraph.transforms.job.run_task.</code><code class="sig-name descname">script_url</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">script</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.run_task.script_url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.spidermonkey">
+<span id="taskgraph-transforms-job-spidermonkey-module"></span><h2>taskgraph.transforms.job.spidermonkey module<a class="headerlink" href="#module-taskgraph.transforms.job.spidermonkey" title="Permalink to this headline">¶</a></h2>
+<p>Support for running spidermonkey jobs via dedicated scripts</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.spidermonkey.docker_worker_spidermonkey">
+<code class="sig-prename descclassname">taskgraph.transforms.job.spidermonkey.</code><code class="sig-name descname">docker_worker_spidermonkey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.spidermonkey.docker_worker_spidermonkey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.spidermonkey.generic_worker_spidermonkey">
+<code class="sig-prename descclassname">taskgraph.transforms.job.spidermonkey.</code><code class="sig-name descname">generic_worker_spidermonkey</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.spidermonkey.generic_worker_spidermonkey" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job.toolchain">
+<span id="taskgraph-transforms-job-toolchain-module"></span><h2>taskgraph.transforms.job.toolchain module<a class="headerlink" href="#module-taskgraph.transforms.job.toolchain" title="Permalink to this headline">¶</a></h2>
+<p>Support for running toolchain-building jobs via dedicated scripts</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.toolchain.docker_worker_toolchain">
+<code class="sig-prename descclassname">taskgraph.transforms.job.toolchain.</code><code class="sig-name descname">docker_worker_toolchain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.toolchain.docker_worker_toolchain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.toolchain.get_digest_data">
+<code class="sig-prename descclassname">taskgraph.transforms.job.toolchain.</code><code class="sig-name descname">get_digest_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">run</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.toolchain.get_digest_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.toolchain.windows_toolchain">
+<code class="sig-prename descclassname">taskgraph.transforms.job.toolchain.</code><code class="sig-name descname">windows_toolchain</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.toolchain.windows_toolchain" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-taskgraph.transforms.job">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-taskgraph.transforms.job" title="Permalink to this headline">¶</a></h2>
+<p>Convert a job description into a task description.</p>
+<p>Jobs descriptions are similar to task descriptions, but they specify how to run
+the job at a higher level, using a “run” field that can be interpreted by
+run-using handlers in <cite>taskcluster/taskgraph/transforms/job</cite>.</p>
+<dl class="py function">
+<dt id="taskgraph.transforms.job.add_resource_monitor">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">add_resource_monitor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.add_resource_monitor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.always_optimized">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">always_optimized</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.always_optimized" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.configure_taskdesc_for_run">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">configure_taskdesc_for_run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">job</span></em>, <em class="sig-param"><span class="n">taskdesc</span></em>, <em class="sig-param"><span class="n">worker_implementation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.configure_taskdesc_for_run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the appropriate function for this job against the given task
+description.</p>
+<p>This will raise an appropriate error if no function exists, or if the job’s
+run is not valid according to the schema.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.get_attribute">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">get_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dict</span></em>, <em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">attributes</span></em>, <em class="sig-param"><span class="n">attribute_name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.get_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get <cite>attribute_name</cite> from the given <cite>attributes</cite> dict, and if there
+is a corresponding value, set <cite>key</cite> in <cite>dict</cite> to that value.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.make_task_description">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">make_task_description</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.make_task_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a build description, create a task description</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.rewrite_when_to_optimization">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">rewrite_when_to_optimization</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.rewrite_when_to_optimization" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.run_job_using">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">run_job_using</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">worker_implementation</span></em>, <em class="sig-param"><span class="n">run_using</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">defaults</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.run_job_using" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register the decorated function as able to set up a task description for
+jobs with the given worker implementation and <cite>run.using</cite> property.  If
+<cite>schema</cite> is given, the job’s run field will be verified to match it.</p>
+<p>The decorated function should have the signature <cite>using_foo(config, job, taskdesc)</cite>
+and should modify the task description in-place.  The skeleton of
+the task description is already set up, but without a payload.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.set_implementation">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">set_implementation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.set_implementation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.set_label">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">set_label</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.set_label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="taskgraph.transforms.job.use_fetches">
+<code class="sig-prename descclassname">taskgraph.transforms.job.</code><code class="sig-name descname">use_fetches</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">jobs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#taskgraph.transforms.job.use_fetches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

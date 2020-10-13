@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Settings &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mach Telemetry" href="telemetry.html" />
+    <link rel="prev" title="Logging" href="logging.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Mach</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="usage.html">User Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commands.html">Implementing Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="driver.html">Drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#core-settings">Core Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-settings">Defining Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wildcards">Wildcards</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-settings">Finding Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#accessing-settings">Accessing Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="telemetry.html">Mach Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Mach</a> &raquo;</li>
+        
+      <li>Settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mach/settings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="settings">
+<span id="mach-settings"></span><h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<p>Mach can read settings in from a set of configuration files. These
+configuration files are either named <code class="docutils literal notranslate"><span class="pre">machrc</span></code> or <code class="docutils literal notranslate"><span class="pre">.machrc</span></code> and
+are specified by the bootstrap script. In mozilla-central, these files
+can live in <code class="docutils literal notranslate"><span class="pre">~/.mozbuild</span></code> and/or <code class="docutils literal notranslate"><span class="pre">topsrcdir</span></code>.</p>
+<p>Settings can be specified anywhere, and used both by mach core or
+individual commands.</p>
+<div class="section" id="core-settings">
+<h2>Core Settings<a class="headerlink" href="#core-settings" title="Permalink to this headline">¶</a></h2>
+<p>These settings are implemented by mach core.</p>
+<ul class="simple">
+<li><p>alias - Create a command alias. This is useful if you want to alias a command to something else, optionally including some defaults. It can either be used to create an entire new command, or provide defaults for an existing one. For example:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">alias</span><span class="p">]</span>
+<span class="n">mochitest</span> <span class="o">=</span> <span class="n">mochitest</span> <span class="o">-</span><span class="n">f</span> <span class="n">browser</span>
+<span class="n">browser</span><span class="o">-</span><span class="n">test</span> <span class="o">=</span> <span class="n">mochitest</span> <span class="o">-</span><span class="n">f</span> <span class="n">browser</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-settings">
+<h2>Defining Settings<a class="headerlink" href="#defining-settings" title="Permalink to this headline">¶</a></h2>
+<p>Settings need to be explicitly defined, along with their type,
+otherwise mach will throw when trying to access them.</p>
+<p>To define settings, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">SettingsProvider()</span></code>
+decorator in an existing mach command module. E.g:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mach.decorators</span> <span class="kn">import</span> <span class="n">SettingsProvider</span>
+<span class="kn">from</span> <span class="nn">mozbuild.base</span> <span class="kn">import</span> <span class="n">MachCommandBase</span>
+
+<span class="nd">@SettingsProvider</span>
+<span class="k">class</span> <span class="nc">ArbitraryClassName</span><span class="p">(</span><span class="n">MachCommandBase</span><span class="p">):</span>
+    <span class="n">config_settings</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s2">&quot;A helpful description&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;foo.baz&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s2">&quot;Another description&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;choices&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])}),</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;SettingsProvider</span></code>’s must specify a variable called <code class="docutils literal notranslate"><span class="pre">config_settings</span></code>
+that returns a list of tuples. Alternatively, it can specify a function
+called <code class="docutils literal notranslate"><span class="pre">config_settings</span></code> that returns a list of tuples.</p>
+<p>Each tuple is of the form:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;&lt;section&gt;.&lt;option&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;type&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;description&gt;&#39;</span><span class="p">,</span> <span class="n">default</span><span class="p">,</span> <span class="n">extra</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">type</span></code> is a string and can be one of:
+string, boolean, int, pos_int, path</p>
+<p><code class="docutils literal notranslate"><span class="pre">description</span></code> is a string explaining how to define the settings and
+where they get used. Descriptions should ideally be multi-line paragraphs
+where the first line acts as a short description.</p>
+<p><code class="docutils literal notranslate"><span class="pre">default</span></code> is optional, and provides a default value in case none was
+specified by any of the configuration files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">extra</span></code> is also optional and is a dict containing additional key/value
+pairs to add to the setting’s metadata. The following keys may be specified
+in the <code class="docutils literal notranslate"><span class="pre">extra</span></code> dict:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">choices</span></code> - A set of allowed values for the setting.</p></li>
+</ul>
+</div></blockquote>
+<div class="section" id="wildcards">
+<h3>Wildcards<a class="headerlink" href="#wildcards" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes a section should allow arbitrarily defined options from the user, such
+as the <code class="docutils literal notranslate"><span class="pre">alias</span></code> section mentioned above. To define a section like this, use <code class="docutils literal notranslate"><span class="pre">*</span></code>
+as the option name. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;foo.*&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This allows configuration files like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">foo</span><span class="p">]</span>
+<span class="n">arbitrary1</span> <span class="o">=</span> <span class="n">some</span> <span class="n">string</span>
+<span class="n">arbitrary2</span> <span class="o">=</span> <span class="n">some</span> <span class="n">other</span> <span class="n">string</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-settings">
+<h2>Finding Settings<a class="headerlink" href="#finding-settings" title="Permalink to this headline">¶</a></h2>
+<p>You can see which settings are available as well as their description and
+expected values by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">mach</span> <span class="n">settings</span>  <span class="c1"># or</span>
+<span class="o">./</span><span class="n">mach</span> <span class="n">settings</span> <span class="o">--</span><span class="nb">list</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="accessing-settings">
+<h2>Accessing Settings<a class="headerlink" href="#accessing-settings" title="Permalink to this headline">¶</a></h2>
+<p>Now that the settings are defined and documented, they’re accessible from
+individual mach commands from the mach command context.
+For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mach.decorators</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Command</span><span class="p">,</span>
+    <span class="n">CommandProvider</span><span class="p">,</span>
+    <span class="n">SettingsProvider</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">mozbuild.base</span> <span class="kn">import</span> <span class="n">MachCommandBase</span>
+
+<span class="nd">@SettingsProvider</span>
+<span class="k">class</span> <span class="nc">ExampleSettings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">config_settings</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;a.b&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">,),</span>
+        <span class="p">(</span><span class="s1">&#39;foo.baz&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;choices&#39;</span><span class="p">:</span> <span class="nb">set</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])}),</span>
+    <span class="p">]</span>
+
+<span class="nd">@CommandProvider</span>
+<span class="k">class</span> <span class="nc">Commands</span><span class="p">(</span><span class="n">MachCommandBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Commands</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mach_context</span><span class="o">.</span><span class="n">settings</span>
+
+    <span class="nd">@Command</span><span class="p">(</span><span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s1">&#39;misc&#39;</span><span class="p">,</span>
+             <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Prints a setting&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">foo</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">foo</span><span class="p">[</span><span class="n">option</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Mach Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="logging.html" class="btn btn-neutral float-left" title="Logging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

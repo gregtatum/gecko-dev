@@ -1,0 +1,29 @@
+mozbuild.test.controller package
+================================
+
+Submodules
+----------
+
+mozbuild.test.controller.test\_ccachestats module
+-------------------------------------------------
+
+.. automodule:: mozbuild.test.controller.test_ccachestats
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mozbuild.test.controller.test\_clobber module
+---------------------------------------------
+
+.. automodule:: mozbuild.test.controller.test_clobber
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mozbuild.test.controller
+   :members:
+   :undoc-members:
+   :show-inheritance:

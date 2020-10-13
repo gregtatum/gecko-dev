@@ -1,0 +1,379 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Visual Studio Projects &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="mozbuild" href="mozbuild/index.html" />
+    <link rel="prev" title="Cpp Eclipse Projects" href="cppeclipse.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/vscode.html">Visual Studio Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cppeclipse.html">Cpp Eclipse Projects</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Visual Studio Projects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#structure-of-solution">Structure of Solution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#updating-project-files">Updating Project Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moving-project-files-around">Moving Project Files Around</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#invoking-mach-through-visual-studio">Invoking mach through Visual Studio</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>Visual Studio Projects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/visualstudio.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="visual-studio-projects">
+<span id="build-visualstudio"></span><h1>Visual Studio Projects<a class="headerlink" href="#visual-studio-projects" title="Permalink to this headline">¶</a></h1>
+<p>The build system contains alpha support for generating Visual Studio
+project files to aid with development.</p>
+<p>To generate Visual Studio project files, you’ll need to have a configured tree:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mach</span> <span class="n">configure</span>
+</pre></div>
+</div>
+<p>(If you have built recently, your tree is already configured.)</p>
+<p>Then, simply generate the Visual Studio build backend:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mach</span> <span class="n">build</span><span class="o">-</span><span class="n">backend</span> <span class="o">-</span><span class="n">b</span> <span class="n">VisualStudio</span>
+</pre></div>
+</div>
+<p>If all goes well, the path to the generated Solution (<code class="docutils literal notranslate"><span class="pre">.sln</span></code>) file should be
+printed. You should be able to open that solution with Visual Studio 2010 or
+newer.</p>
+<p>Currently, output is hard-coded to the Visual Studio 2010 format. If you open
+the solution in a newer Visual Studio release, you will be prompted to upgrade
+projects. Simply click through the wizard to do that.</p>
+<div class="section" id="structure-of-solution">
+<h2>Structure of Solution<a class="headerlink" href="#structure-of-solution" title="Permalink to this headline">¶</a></h2>
+<p>The Visual Studio solution consists of hundreds of projects spanning thousands
+of files. To help with organization, the solution is divided into the following
+trees/folders:</p>
+<dl>
+<dt>Build Targets</dt><dd><p>This folder contains common build targets. The <em>full</em> project is used to
+perform a full build. The <em>binaries</em> project is used to build just binaries.
+The <em>visual-studio</em> project can be built to regenerate the Visual Studio
+project files.</p>
+<p>Performing the <em>clean</em> action on any of these targets will clean the
+<em>entire</em> build output.</p>
+</dd>
+<dt>Binaries</dt><dd><p>This folder contains common binaries that can be executed from within
+Visual Studio. If you are building the Firefox desktop application,
+the <em>firefox</em> project will launch firefox.exe. You probably want one of
+these set to your startup project.</p>
+</dd>
+<dt>Libraries</dt><dd><p>This folder contains entries for each static library that is produced as
+part of the build. These roughly correspond to each directory in the tree
+containing C/C++. e.g. code from <code class="docutils literal notranslate"><span class="pre">dom/base</span></code> will be contained in the
+<code class="docutils literal notranslate"><span class="pre">dom_base</span></code> project.</p>
+<p>These projects don’t do anything when built. If you build a project here,
+the <em>binaries</em> build target project is built.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="updating-project-files">
+<h2>Updating Project Files<a class="headerlink" href="#updating-project-files" title="Permalink to this headline">¶</a></h2>
+<p>As you pull and update the source tree, your Visual Studio files may fall out
+of sync with the build configuration. The tree should still build fine from
+within Visual Studio. But source files may be missing and IntelliSense may not
+have the proper build configuration.</p>
+<p>To account for this, you’ll want to periodically regenerate the Visual Studio
+project files. You can do this within Visual Studio by building the
+<code class="docutils literal notranslate"><span class="pre">Build</span> <span class="pre">Targets</span> <span class="pre">::</span> <span class="pre">visual-studio</span></code> project or by running
+<code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build-backend</span> <span class="pre">-b</span> <span class="pre">VisualStudio</span></code> from the command line.</p>
+<p>Currently, regeneration rewrites the original project files. <strong>If you’ve made
+any customizations to the solution or projects, they will likely get
+overwritten.</strong> We would like to improve this user experience in the
+future.</p>
+</div>
+<div class="section" id="moving-project-files-around">
+<h2>Moving Project Files Around<a class="headerlink" href="#moving-project-files-around" title="Permalink to this headline">¶</a></h2>
+<p>The produced Visual Studio solution and project files should be portable.
+If you want to move them to a non-default directory, they should continue
+to work from wherever they are. If they don’t, please file a bug.</p>
+</div>
+<div class="section" id="invoking-mach-through-visual-studio">
+<h2>Invoking mach through Visual Studio<a class="headerlink" href="#invoking-mach-through-visual-studio" title="Permalink to this headline">¶</a></h2>
+<p>It’s possible to build the tree via Visual Studio. There is some light magic
+involved here.</p>
+<p>Alongside the Visual Studio project files is a batch script named <code class="docutils literal notranslate"><span class="pre">mach.bat</span></code>.
+This batch script sets the environment variables present in your <em>MozillaBuild</em>
+development environment at the time of Visual Studio project generation
+and invokes <em>mach</em> inside an msys shell with the arguments specified to the
+batch script. This script essentially allows you to invoke mach commands
+inside the MozillaBuild environment without having to load MozillaBuild.</p>
+<p>While projects currently only utilize the <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> command, the batch
+script does not limit it’s use: any mach command can be invoked. Developers
+may abuse this fact to add custom projects and commands that invoke other
+mach commands.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mozbuild/index.html" class="btn btn-neutral float-right" title="mozbuild" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cppeclipse.html" class="btn btn-neutral float-left" title="Cpp Eclipse Projects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

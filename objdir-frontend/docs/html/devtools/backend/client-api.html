@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Client API &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Debugger API" href="debugger-api.html" />
+    <link rel="prev" title="Remote Debugging Protocol" href="protocol.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#backend">Backend</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="protocol.html">Remote Debugging Protocol</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Client API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#starting-communication">Starting communication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shutting-down">Shutting down</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#attaching-to-a-browser-tab">Attaching to a browser tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#handling-location-changes">Handling location changes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-javascript-running-in-a-browser-tab">Debugging JavaScript running in a browser tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#debugger-application-example">Debugger application example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="debugger-api.html">Debugger API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backward-compatibility.html">Backward Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-hierarchy.html">Actors Organization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-e10s-handling.html">Handling Multi-Processes in Actors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protocol.js.html">Writing Actors With protocol.js</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-registration.html">Registering A New Actor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="actor-best-practices.html">Actor Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>Client API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/backend/client-api.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="client-api">
+<h1>Client API<a class="headerlink" href="#client-api" title="Permalink to this headline">¶</a></h1>
+<p>DevTools has a client module that allows applications to be written that debug or inspect web pages using the <a class="reference internal" href="protocol.html"><span class="doc">Remote Debugging Protocol</span></a>.</p>
+<div class="section" id="starting-communication">
+<h2>Starting communication<a class="headerlink" href="#starting-communication" title="Permalink to this headline">¶</a></h2>
+<p>In order to communicate, a client and a server instance must be created and a protocol connection must be established. The connection can be either over a TCP socket or an nsIPipe. The <code class="docutils literal notranslate"><span class="pre">start</span></code> function displayed below establishes an nsIPipe-backed connection:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsServer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/server/devtools-server&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsClient</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/client/devtools-client&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">start</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Start the server.</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">registerAllActors</span><span class="p">();</span>
+
+  <span class="c1">// Listen to an nsIPipe</span>
+  <span class="kd">let</span> <span class="nx">transport</span> <span class="o">=</span> <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">connectPipe</span><span class="p">();</span>
+
+  <span class="c1">// Start the client.</span>
+  <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DevToolsClient</span><span class="p">(</span><span class="nx">transport</span><span class="p">);</span>
+
+  <span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">type</span><span class="p">,</span> <span class="nx">traits</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Now the client is connected to the server.</span>
+    <span class="nx">debugTab</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If a TCP socket is required, the function should be split in two parts, a server-side and a client-side, like this:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsServer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/server/devtools-server&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsClient</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/client/devtools-client&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">startServer</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Start the server.</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">registerAllActors</span><span class="p">();</span>
+
+  <span class="c1">// For an nsIServerSocket we do this:</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">openListener</span><span class="p">(</span><span class="mf">2929</span><span class="p">);</span> <span class="c1">// A connection on port 2929.</span>
+<span class="p">}</span>
+
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">startClient</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">transport</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">DevToolsClient</span><span class="p">.</span><span class="nx">socketConnect</span><span class="p">({</span> <span class="nx">host</span><span class="o">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="mf">2929</span> <span class="p">});</span>
+
+  <span class="c1">// Start the client.</span>
+  <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DevToolsClient</span><span class="p">(</span><span class="nx">transport</span><span class="p">);</span>
+
+  <span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">type</span><span class="p">,</span> <span class="nx">traits</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Now the client is connected to the server.</span>
+    <span class="nx">debugTab</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="shutting-down">
+<h2>Shutting down<a class="headerlink" href="#shutting-down" title="Permalink to this headline">¶</a></h2>
+<p>When the application is finished, it has to notify the client to shut down the protocol connection. This makes sure that memory leaks are avoided and the server is terminated in an orderly fashion. Shutting down is as simple as it gets:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">shutdown</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="attaching-to-a-browser-tab">
+<h2>Attaching to a browser tab<a class="headerlink" href="#attaching-to-a-browser-tab" title="Permalink to this headline">¶</a></h2>
+<p>Attaching to a browser tab requires enumerating the available tabs and attaching to one:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">attachToTab</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Get the list of tabs to find the one to attach to.</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">mainRoot</span><span class="p">.</span><span class="nx">listTabs</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">tabs</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Find the active tab.</span>
+    <span class="kd">let</span> <span class="nx">targetFront</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">tab</span> <span class="p">=&gt;</span> <span class="nx">tab</span><span class="p">.</span><span class="nx">selected</span><span class="p">);</span>
+
+    <span class="c1">// Attach to the tab.</span>
+    <span class="nx">targetFront</span><span class="p">.</span><span class="nx">attach</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Now the targetFront is ready and can be used.</span>
+
+      <span class="c1">// Attach listeners for client events.</span>
+      <span class="nx">targetFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;tabNavigated&quot;</span><span class="p">,</span> <span class="nx">onTab</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The devtools client will send event notifications for a number of events the application may be interested in. These events include state changes in the debugger, like pausing and resuming, stack frames or source scripts being ready for retrieval, etc.</p>
+</div>
+<div class="section" id="handling-location-changes">
+<h2>Handling location changes<a class="headerlink" href="#handling-location-changes" title="Permalink to this headline">¶</a></h2>
+<p>When the user navigates away from a page, a <code class="docutils literal notranslate"><span class="pre">tabNavigated</span></code> event will be fired. The proper way to handle this event is to detach from the previous thread and tab and attach to the new ones:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">async</span> <span class="kd">function</span> <span class="nx">onTab</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Detach from the previous thread.</span>
+  <span class="nx">await</span> <span class="nx">client</span><span class="p">.</span><span class="nx">activeThread</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+  <span class="c1">// Detach from the previous tab.</span>
+  <span class="nx">await</span> <span class="nx">targetFront</span><span class="p">.</span><span class="nx">detach</span><span class="p">();</span>
+  <span class="c1">// Start debugging the new tab.</span>
+  <span class="nx">start</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugging-javascript-running-in-a-browser-tab">
+<h2>Debugging JavaScript running in a browser tab<a class="headerlink" href="#debugging-javascript-running-in-a-browser-tab" title="Permalink to this headline">¶</a></h2>
+<p>Once the application is attached to a tab, it can attach to its thread in order to interact with the JavaScript debugger:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Assuming the application is already attached to the tab, and response is the first</span>
+<span class="c1">// argument of the attachTarget callback.</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">attachThread</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">threadActor</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">threadFront</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">threadFront</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Attach listeners for thread events.</span>
+  <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;paused&quot;</span><span class="p">,</span> <span class="nx">onPause</span><span class="p">);</span>
+  <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resumed&quot;</span><span class="p">,</span> <span class="nx">fooListener</span><span class="p">);</span>
+  <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;detached&quot;</span><span class="p">,</span> <span class="nx">fooListener</span><span class="p">);</span>
+
+  <span class="c1">// Resume the thread.</span>
+  <span class="nx">threadFront</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+
+  <span class="c1">// Debugger is now ready and debuggee is running.</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debugger-application-example">
+<h2>Debugger application example<a class="headerlink" href="#debugger-application-example" title="Permalink to this headline">¶</a></h2>
+<p>Here is the source code for a complete debugger application:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm"> * Debugger API demo.</span>
+<span class="cm"> */</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsServer</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/server/devtools-server&quot;</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">DevToolsClient</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;devtools/client/devtools-client&quot;</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">client</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">threadFront</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">startDebugger</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Start the server.</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+  <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">registerAllActors</span><span class="p">();</span>
+  <span class="c1">// Listen to an nsIPipe</span>
+  <span class="kd">let</span> <span class="nx">transport</span> <span class="o">=</span> <span class="nx">DevToolsServer</span><span class="p">.</span><span class="nx">connectPipe</span><span class="p">();</span>
+  <span class="c1">// For an nsIServerSocket we do this:</span>
+  <span class="c1">// DevToolsServer.openListener(port);</span>
+  <span class="c1">// ...and this at the client:</span>
+  <span class="c1">// let transport = debuggerSocketConnect(host, port);</span>
+
+  <span class="c1">// Start the client.</span>
+  <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DevToolsClient</span><span class="p">(</span><span class="nx">transport</span><span class="p">);</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">((</span><span class="nx">type</span><span class="p">,</span> <span class="nx">traits</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Now the client is connected to the server.</span>
+    <span class="nx">debugTab</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">shutdownDebugger</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Start debugging the current tab.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">debugTab</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Get the list of tabs to find the one to attach to.</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">mainRoot</span><span class="p">.</span><span class="nx">listTabs</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">tabs</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Find the active tab.</span>
+    <span class="kd">let</span> <span class="nx">targetFront</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">tab</span> <span class="p">=&gt;</span> <span class="nx">tab</span><span class="p">.</span><span class="nx">selected</span><span class="p">);</span>
+    <span class="c1">// Attach to the tab.</span>
+    <span class="nx">targetFront</span><span class="p">.</span><span class="nx">attach</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Attach to the thread (context).</span>
+      <span class="nx">targetFront</span><span class="p">.</span><span class="nx">attachThread</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">threadFront</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// Attach listeners for thread events.</span>
+        <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;paused&quot;</span><span class="p">,</span> <span class="nx">onPause</span><span class="p">);</span>
+        <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;resumed&quot;</span><span class="p">,</span> <span class="nx">fooListener</span><span class="p">);</span>
+        <span class="nx">threadFront</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;detached&quot;</span><span class="p">,</span> <span class="nx">fooListener</span><span class="p">);</span>
+
+        <span class="c1">// Resume the thread.</span>
+        <span class="nx">threadFront</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+        <span class="c1">// Debugger is now ready and debuggee is running.</span>
+      <span class="p">});</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Handler for location changes.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">onTab</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Detach from the previous thread.</span>
+  <span class="nx">client</span><span class="p">.</span><span class="nx">activeThread</span><span class="p">.</span><span class="nx">detach</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Detach from the previous tab.</span>
+    <span class="nx">client</span><span class="p">.</span><span class="nx">detach</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Start debugging the new tab.</span>
+      <span class="nx">debugTab</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Helper function to inspect the provided frame.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">inspectFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Get the &quot;this&quot; object.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">frame</span><span class="p">[</span><span class="s2">&quot;this&quot;</span><span class="p">])</span> <span class="p">{</span>
+    <span class="nx">getObjectProperties</span><span class="p">(</span><span class="nx">frame</span><span class="p">[</span><span class="s2">&quot;this&quot;</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Add &quot;arguments&quot;.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">arguments</span> <span class="o">&amp;&amp;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// frame.arguments is a regular Array.</span>
+    <span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;frame.arguments: &quot;</span> <span class="o">+</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">toSource</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+
+    <span class="c1">// Add variables for every argument.</span>
+    <span class="kd">let</span> <span class="nx">objClient</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">activeThread</span><span class="p">.</span><span class="nx">pauseGrip</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">callee</span><span class="p">);</span>
+    <span class="nx">objClient</span><span class="p">.</span><span class="nx">getSignature</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">parameters</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">parameters</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">value</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">getObjectProperties</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Helper function that retrieves the specified object&#39;s properties.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">getObjectProperties</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">thisClient</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">activeThread</span><span class="p">.</span><span class="nx">pauseGrip</span><span class="p">(</span><span class="nx">object</span><span class="p">);</span>
+  <span class="nx">thisClient</span><span class="p">.</span><span class="nx">getPrototypeAndProperties</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Get prototype as a protocol-specified grip.</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">type</span> <span class="o">!=</span> <span class="s2">&quot;null&quot;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">dump</span><span class="p">(</span><span class="s2">&quot;__proto__: &quot;</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toSource</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Get the rest of the object&#39;s own properties as protocol-specified grips.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">prop</span> <span class="k">of</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">ownProperties</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">dump</span><span class="p">(</span><span class="nx">prop</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nx">response</span><span class="p">.</span><span class="nx">ownProperties</span><span class="p">[</span><span class="nx">prop</span><span class="p">].</span><span class="nx">toSource</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Generic event listener.</span>
+<span class="cm"> */</span>
+<span class="kd">function</span> <span class="nx">fooListener</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">dump</span><span class="p">(</span><span class="nx">event</span> <span class="o">+</span> <span class="s2">&quot;\n&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Run the program.</span>
+<span class="nx">startDebugger</span><span class="p">();</span>
+
+<span class="c1">// Execute the following line to stop the program.</span>
+<span class="c1">//shutdownDebugger();</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="debugger-api.html" class="btn btn-neutral float-right" title="Debugger API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="protocol.html" class="btn btn-neutral float-left" title="Remote Debugging Protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

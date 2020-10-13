@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>High-Level Inspector Architecture &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Highlighters" href="highlighters.html" />
+    <link rel="prev" title="Adding New Files - Various DevTools Resource Types" href="../files/adding-files.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Firefox DevTools Contributor Docs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#contributing">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#automated-tests">Automated tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#files-and-directories">Files and directories</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#tool-architectures">Tool Architectures</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Inspector Panel Architecture</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ui-structure">UI structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-dependencies">Server dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#panel-loading-overview">Panel loading overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-side-structure">Server-side structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#highlighters">Highlighters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="highlighters.html">Inspector Highlighters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="memory-panel.html">Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="responsive-design-mode.html">Responsive Design Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console-panel.html">Console</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#frontend">Frontend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#backend">Backend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#about-this-documentation">About this documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox DevTools Contributor Docs</a> &raquo;</li>
+        
+      <li>High-Level Inspector Architecture</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/devtools/tools/inspector-panel.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="high-level-inspector-architecture">
+<h1>High-Level Inspector Architecture<a class="headerlink" href="#high-level-inspector-architecture" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ui-structure">
+<h2>UI structure<a class="headerlink" href="#ui-structure" title="Permalink to this headline">¶</a></h2>
+<p>The Inspector panel is a tab in the toolbox. Like all tabs, it’s in its own iframe.</p>
+<p>The high-level hierarchy looks something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="n">Toolbox</span>
+    <span class="o">|</span>
+<span class="n">InspectorPanel</span>
+    <span class="o">|</span>
+<span class="o">+-------------+------------------+---------------+</span>
+<span class="o">|</span>             <span class="o">|</span>                  <span class="o">|</span>               <span class="o">|</span>
+<span class="n">MarkupView</span>  <span class="n">SelectorSearch</span>  <span class="n">HTMLBreadcrumbs</span>  <span class="n">ToolSidebar</span> <span class="n">widget</span> <span class="p">(</span><span class="n">iframes</span><span class="p">)</span>
+                                                 <span class="o">|</span>
+                                                 <span class="o">+-</span> <span class="n">RuleView</span>
+                                                 <span class="o">|</span>
+                                                 <span class="o">+-</span> <span class="n">ComputedView</span>
+                                                 <span class="o">|</span>
+                                                 <span class="o">+-</span> <span class="n">LayoutView</span>
+                                                 <span class="o">|</span>
+                                                 <span class="o">+-</span> <span class="n">FontInspector</span>
+                                                 <span class="o">|</span>
+                                                 <span class="o">+-</span> <span class="n">AnimationInspector</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="server-dependencies">
+<h2>Server dependencies<a class="headerlink" href="#server-dependencies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The inspector panel relies on a series of actors that live on the server.</p></li>
+<li><p>Some of the most important actors are actually instantiated by the toolbox, because these actors are needed for other panels to preview and link to DOM nodes. For example, the webconsole needs to output DOM nodes, highlight them in the page on mouseover, and open them in the inspector on click. This is achieved using some of the same actors that the inspector panel uses.</p></li>
+<li><p>See Toolbox.prototype.initInspector: This method instantiates the InspectorActor, WalkerActor and HighlighterActor lazily, whenever they’re needed by a panel.</p></li>
+</ul>
+</div>
+<div class="section" id="panel-loading-overview">
+<h2>Panel loading overview<a class="headerlink" href="#panel-loading-overview" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>As with other panels, this starts with Toolbox.prototype.loadTool(id)</p></li>
+<li><p>For the inspector though, this calls Toolbox.prototype.initInspector</p></li>
+<li><p>When the panel’s open method is called:</p>
+<ul>
+<li><p>It uses the WalkerActor for the first time to know the default selected node (which could be a node that was selected before on the same page).</p></li>
+<li><p>It starts listening to the WalkerActor’s “new-root” events to know when to display a new DOM tree (when there’s a page navigation).</p></li>
+<li><p>It creates the breadcrumbs widget, the sidebar widget, the search widget, the markup-view</p></li>
+</ul>
+</li>
+<li><p>Sidebar:</p>
+<ul>
+<li><p>When this widget initializes, it loads its sub-iframes (rule-view, …)</p></li>
+<li><p>Each of these iframes contain panel that, in turn, listen to inspector events like “new-node-front” to know when to retrieve information about a node (i.e the rule-view will fetch the css rules for a node).</p></li>
+</ul>
+</li>
+<li><p>Markup-view:</p>
+<ul>
+<li><p>This panel initializes in its iframe, and gets a reference to the WalkerActor. It uses it to know the DOM tree to display. It knows when nodes change (markup-mutations), and knows what root node to start from.</p></li>
+<li><p>It only displays the nodes that are supposed to be visible at first (usually html, head, body and direct children of body).</p></li>
+<li><p>Then, as you expand nodes, it uses the WalkerActor to get more nodes lazily. It only ever knows data about nodes that have already been expanded once in the UI.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="server-side-structure">
+<h2>Server-side structure<a class="headerlink" href="#server-side-structure" title="Permalink to this headline">¶</a></h2>
+<p>Simplified actor hierarchy</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">InspectorActor</span>
+     <span class="o">|</span>
+<span class="o">+---------------+</span>
+<span class="o">|</span>               <span class="o">|</span>
+<span class="n">WalkerActor</span>    <span class="n">PageStyleActor</span> <span class="p">(</span><span class="k">for</span> <span class="n">rule</span><span class="o">-</span><span class="n">view</span><span class="o">/</span><span class="n">computed</span><span class="o">-</span><span class="n">view</span><span class="p">)</span>
+<span class="o">|</span>               <span class="o">|</span>
+<span class="n">NodeActor</span>      <span class="n">StyleRuleActor</span>
+</pre></div>
+</div>
+<p><strong>InspectorActor</strong></p>
+<p>This tab-level actor is the one the inspector-panel connects to. It doesn’t do much apart from creating and returning the WalkerActor and PageStyleActor.</p>
+<p><strong>WalkerActor</strong></p>
+<ul class="simple">
+<li><p>Single most important part of the inspector panel.</p></li>
+<li><p>Responsible for walking the DOM on the current page but:</p>
+<ul>
+<li><p>also walks iframes</p></li>
+<li><p>also finds pseudo-elements ::before and ::after</p></li>
+<li><p>also finds anonymous content (e.g. in the BrowserToolbox)</p></li>
+</ul>
+</li>
+<li><p>The actor uses an instance of inIDeepTreeWalker to walk the DOM</p></li>
+<li><p>Provides a tree of NodeActor objects that reflects the DOM.</p></li>
+<li><p>But only has a partial knowledge of the DOM (what is currently displayed/expanded in the MarkupView). It doesn’t need to walk the whole tree when you first instantiate it.</p></li>
+<li><p>Reflects some of the usual DOM APIs like querySelector.</p></li>
+<li><p>Note that methods like querySelector return arbitrarily nested NodeActors, in which case the WalkerActor also sends the list of parents to link the returned nodes to the closest known nodes, so the UI can display the tree correctly.</p></li>
+<li><p>Emits events when there are DOM mutations. These events are sent to the front-end and used to, for example refresh the markup-view. This uses an instance of MutationObserver (https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) configured with, in particular, nativeAnonymousChildList set to true, so that mutation events are also sent when pseudo elements are added/removed via css.</p></li>
+</ul>
+<p><strong>NodeActor</strong></p>
+<ul class="simple">
+<li><p>Representation of a single DOM node (tagname, namespace, attributes, parent, sibblings, …), which panels use to display previews of nodes.</p></li>
+<li><p>Also provide useful methods to:</p>
+<ul>
+<li><p>change attributes</p></li>
+<li><p>scroll into view</p></li>
+<li><p>get event listeners data</p></li>
+<li><p>get image data</p></li>
+<li><p>get unique css selector</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="highlighters">
+<h2>Highlighters<a class="headerlink" href="#highlighters" title="Permalink to this headline">¶</a></h2>
+<p>One of the important aspects of the inspector is the highlighters.
+You can find a lot more <a class="reference internal" href="highlighters.html"><span class="doc">documentation about highlighters here</span></a>.</p>
+<p>We don’t just have 1 highlighter, we have a framework for highlighters:</p>
+<ul class="simple">
+<li><p>a (chrome-only) platform API to inject markup in a native-anonymous node in content (that works on all targets)</p></li>
+<li><p>a number of specific highlighter implementations (css transform, rect, selector, geometry, rulers, …)</p></li>
+<li><p>a CustomHighlighterActor to get instances of specific highlighters</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="highlighters.html" class="btn btn-neutral float-right" title="Highlighters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../files/adding-files.html" class="btn btn-neutral float-left" title="Adding New Files - Various DevTools Resource Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

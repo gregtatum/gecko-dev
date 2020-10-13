@@ -1,0 +1,111 @@
+mach package
+============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mach.commands
+   mach.mixin
+   mach.test
+
+Submodules
+----------
+
+mach.base module
+----------------
+
+.. automodule:: mach.base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.config module
+------------------
+
+.. automodule:: mach.config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.decorators module
+----------------------
+
+.. automodule:: mach.decorators
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.dispatcher module
+----------------------
+
+.. automodule:: mach.dispatcher
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.logging module
+-------------------
+
+.. automodule:: mach.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.main module
+----------------
+
+.. automodule:: mach.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.registrar module
+---------------------
+
+.. automodule:: mach.registrar
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.sentry module
+------------------
+
+.. automodule:: mach.sentry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.telemetry module
+---------------------
+
+.. automodule:: mach.telemetry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.terminal module
+--------------------
+
+.. automodule:: mach.terminal
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mach.util module
+----------------
+
+.. automodule:: mach.util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: mach
+   :members:
+   :undoc-members:
+   :show-inheritance:

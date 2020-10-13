@@ -1,0 +1,914 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Platforms in the CI &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Platforms in the CI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/platforms.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="platforms-in-the-ci">
+<h1>Platforms in the CI<a class="headerlink" href="#platforms-in-the-ci" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="build-platforms">
+<h2>Build Platforms<a class="headerlink" href="#build-platforms" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>Why?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linux</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Linux DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Linux shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Linux x64 addon</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Linux x64 WebRender Shippable</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64 WebRender</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender</p></td>
+</tr>
+<tr class="row-even"><td><p>Linux x64 shippable</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">What we ship to our users.</div>
+<div class="line">Builds with PGO</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64 NoOpt</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">Developer build - Disable optimizations, enable debug options</div>
+<div class="line">Only runs on m-c</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Linux AArch64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>OS X 10.14</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>OS X Cross Compiled</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>OS X 10.14 shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>OS X Cross Compiled shippable</p></td>
+<td></td>
+<td><p>What we ship to our users</p></td>
+</tr>
+<tr class="row-odd"><td><p>OS X Cross Compiled NoOpt</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">Developer build - Disable optimizations, enable debug options</div>
+<div class="line">Only runs on m-c</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>OS X Cross Compiled addon</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>OS X Cross Compiled DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>OS X 10.14</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>OS X 10.14 WebRender</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender</p></td>
+</tr>
+<tr class="row-even"><td><p>OS X 10.14 Shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>OS X 10.14 WebRender Shippable</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender</p></td>
+</tr>
+<tr class="row-even"><td><p>OS X 10.14 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 shippable</p></td>
+<td></td>
+<td><p>What we ship to our users</p></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 addon</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 NoOpt</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">Developer build - Disable optimizations, enable debug options</div>
+<div class="line">Only runs on m-c</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 x64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 x64 shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 AArch64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 AArch64 Shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 AArch64 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 x64 addon</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 x64 NoOpt</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">Developer build - Disable optimizations, enable debug options</div>
+<div class="line">Only runs on m-c</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Windows 2012 x64 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows MinGW</p></td>
+<td><p>Tom Ritter</p></td>
+<td><div class="line-block">
+<div class="line">the Tor project uses MinGW; make sure we test that for them</div>
+<div class="line">Only runs on autoland, m-c and m-esr</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.0 API16+</p></td>
+<td></td>
+<td><div class="line-block">
+<div class="line">All Android jobs are for GeckoView. Fenix nightly uses m-c, Fenix beta =&gt; m-b, Fenix release =&gt; m-r and Focus uses m-r.</div>
+<div class="line">We run these tests in the CI to make sure that GeckoView tests do not regress.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Android 4.0 API16+ Beta</p></td>
+<td><p>James Willcox (Snorp)</p></td>
+<td><p>To ship/test Android 4.1 on arm v7 CPU</p></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.0 API16+ Release</p></td>
+<td></td>
+<td><p>To ship/test Android 4.1 on arm v7 CPU</p></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.0 API16+ GeckoView multi-arch fat AAR</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.2 x86</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.2 x86 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.2 x86 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.2 x86</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.2 x86 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.2 x86 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.3 API16+</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.3 API16+ Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.3 API16+ Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 5.0 AArch64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 5.0 AArch64 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 5.0 AArch64 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 5.0 x86-64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 5.0 x86-64 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 5.0 x86-64 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 7.0 x86</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 7.0 x86 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 7.0 x86 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 7.0 x86-64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 7.0 x86-64 WebRender</p></td>
+<td><p>Kris Taeleman</p></td>
+<td><p>Build and test GeckoView with WebRender</p></td>
+</tr>
+<tr class="row-odd"><td><p>Android 7.0 x86-64 Beta</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 7.0 x86-64 Release</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 7.0 MotoG5</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Android 8.0 Pixel2</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 8.0 Pixel2 WebRender</p></td>
+<td><p>Kris Taeleman</p></td>
+<td><p>Build and test GeckoView with WebRender</p></td>
+</tr>
+<tr class="row-even"><td><p>Android 8.0 Pixel2 AArch64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Android 8.0 Pixel2 AArch64 WebRender</p></td>
+<td><p>Kris Taeleman</p></td>
+<td><p>Build and test GeckoView with WebRender</p></td>
+</tr>
+<tr class="row-even"><td><p>Android</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-configurations">
+<h2>Testing configurations<a class="headerlink" href="#testing-configurations" title="Permalink to this headline">¶</a></h2>
+<p>We have some platforms used to run the tests to make sure they run correctly on different versions of the operating systems.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>Why?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linux 18.04 shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Linux 18.04 x64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Linux 18.04 x64 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Linux 18.04 x64 WebRender Shippable</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender for testing</p></td>
+</tr>
+<tr class="row-even"><td><p>Linux 18.04 x64 WebRender</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender for testing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux 18.04 x64 shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Linux 18.04 x64 Stylo-Seq</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 7</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 7 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 7 Shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 7 MinGW</p></td>
+<td><p>Tom Ritter</p></td>
+<td><div class="line-block">
+<div class="line">the Tor project uses MinGW; make sure we test that for them</div>
+<div class="line">Only runs on autoland, m-c and m-esr</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Windows 10 x64</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 10 x64 DevEdition</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 10 x64 Shippable</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Windows 10 x64 WebRender Shippable</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender for testing</p></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 10 x64 WebRender</p></td>
+<td><p>Jeff Muizelaar</p></td>
+<td><p>Build with WebRender for testing</p></td>
+</tr>
+<tr class="row-even"><td><p>Windows 10 x64 2017 Ref HW</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 10 x64 MinGW</p></td>
+<td><p>Tom Ritter</p></td>
+<td><div class="line-block">
+<div class="line">the Tor project uses MinGW; make sure we test that for them</div>
+<div class="line">Only runs on autoland, m-c and m-esr</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Windows 10 AArch64</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="quality-platforms">
+<h2>Quality platforms<a class="headerlink" href="#quality-platforms" title="Permalink to this headline">¶</a></h2>
+<p>We have many platforms used to run various quality tools. They aren’t directly focussing on user quality but on code quality,
+or prevening some classes of errors (memory, threading, etc).</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>Why?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linux 18.04 x64 tsan</p></td>
+<td><p>Christian Holler</p></td>
+<td><p>Identify threading issues with ThreadSanitizer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64 asan</p></td>
+<td><div class="line-block">
+<div class="line">Christian Holler</div>
+<div class="line">Tyson Smith (ubsan)</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">Identify memory issues with <a class="reference internal" href="../tools/sanitizer/asan.html#address-sanitizer"><span class="std std-ref">Address Sanitizer</span></a>.</div>
+<div class="line">Also includes the UndefinedBehaviorSanitizer</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Linux x64 WebRender asan</p></td>
+<td><div class="line-block">
+<div class="line">Christian Holler</div>
+<div class="line">Tyson Smith (ubsan)</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">Identify memory issues with <a class="reference internal" href="../tools/sanitizer/asan.html#address-sanitizer"><span class="std std-ref">Address Sanitizer</span></a>.</div>
+<div class="line">Also includes the UndefinedBehaviorSanitizer</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Linux x64 asan reporter</p></td>
+<td><p>Christian Holler</p></td>
+<td><p>Generate <a class="reference internal" href="../tools/sanitizer/asan_nightly.html#asan-nightly"><span class="std std-ref">ASan Nightly Project</span></a> builds</p></td>
+</tr>
+<tr class="row-even"><td><p>Linux x64 CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linux 18.04 x64 asan</p></td>
+<td><div class="line-block">
+<div class="line">Christian Holler</div>
+<div class="line">Tyson Smith (ubsan)</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">Identify memory issues with <a class="reference internal" href="../tools/sanitizer/asan.html#address-sanitizer"><span class="std std-ref">Address Sanitizer</span></a>.</div>
+<div class="line">Also includes the UndefinedBehaviorSanitizer</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Linux 18.04 x64 WebRender asan</p></td>
+<td><div class="line-block">
+<div class="line">Christian Holler</div>
+<div class="line">Tyson Smith (ubsan)</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">Identify memory issues with <a class="reference internal" href="../tools/sanitizer/asan.html#address-sanitizer"><span class="std std-ref">Address Sanitizer</span></a>.</div>
+<div class="line">Also includes the UndefinedBehaviorSanitizer</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Linux 18.04 x64 CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-even"><td><p>OS X Cross Compiled CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-odd"><td><p>OS X 10.14 Cross Compiled CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-even"><td><p>Windows 2012 x64 asan reporter</p></td>
+<td><p>Christian Holler</p></td>
+<td><p>Generate <a class="reference internal" href="../tools/sanitizer/asan_nightly.html#asan-nightly"><span class="std std-ref">ASan Nightly Project</span></a> builds</p></td>
+</tr>
+<tr class="row-odd"><td><p>Windows 10 x64 CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-even"><td><p>Android 4.0 API16+ CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Android 4.3 API16+ CCov</p></td>
+<td><p>Marco Castelluccio</p></td>
+<td><p>Collect <a class="reference internal" href="../tools/code-coverage/index.html#code-coverage"><span class="std std-ref">Code coverage</span></a> information to identify what is tested (or not)</p></td>
+</tr>
+<tr class="row-even"><td><p>Diffoscope</p></td>
+<td><p>Mike Hommey</p></td>
+<td><p>Make sure the build remains reproducible</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linting</p></td>
+<td><div class="line-block">
+<div class="line">Sylvestre Ledru</div>
+<div class="line">Andrew Halberstadt</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line">Identify <a class="reference internal" href="../code-quality/index.html#code-quality"><span class="std std-ref">Code quality</span></a> earlier</div>
+<div class="line">Also contains some Bugzilla</div>
+<div class="line">Run on all branches (except the Bugzilla task)</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>Documentation</p></td>
+<td><div class="line-block">
+<div class="line">Sylvestre Ledru</div>
+<div class="line">Andrew Halberstadt</div>
+</div>
+</td>
+<td><div class="line-block">
+<div class="line"><a class="reference internal" href="../tools/moztreedocs/index.html#managing-documentation"><span class="std std-ref">Documentation jobs</span></a></div>
+<div class="line">integration repository plus mozilla-central</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="infrastructure-tasks">
+<h2>Infrastructure tasks<a class="headerlink" href="#infrastructure-tasks" title="Permalink to this headline">¶</a></h2>
+<p>The decision tasks responsible for creating the task graph.</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Task</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>Why?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Gecko Decision Task</p></td>
+<td></td>
+<td><p>Define the tasks to run and their order</p></td>
+</tr>
+<tr class="row-odd"><td><p>Firefox Release Tasks</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Devedition Release Tasks</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Fennec Beta Tasks</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Fennec Release Tasks</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Thunderbird Release Tasks</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="others">
+<h2>Others<a class="headerlink" href="#others" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Platform</p></th>
+<th class="head"><p>Owner</p></th>
+<th class="head"><p>Why?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Docker Images</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Fetch</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Packages</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Toolchains</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Other</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

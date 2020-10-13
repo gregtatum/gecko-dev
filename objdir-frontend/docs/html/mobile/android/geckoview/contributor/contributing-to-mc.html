@@ -1,0 +1,516 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mozilla Central Contributor Guide &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Debugging Native Code" href="native-debugging.html" />
+    <link rel="prev" title="Mozilla Central Quick Start" href="mc-quick-start.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../consumer/index.html">Using GeckoView</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Contributing to GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#contributor-site">Contributor Site</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="geckoview-quick-start.html">GeckoView Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="for-gecko-engineers.html">GeckoView For Gecko Engineers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mc-quick-start.html">Mozilla Central Quick Start</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Mozilla Central Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="native-debugging.html">Debugging Native Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to GeckoView</a> &raquo;</li>
+        
+      <li>Mozilla Central Contributor Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/contributor/contributing-to-mc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozilla-central-contributor-guide">
+<h1>Mozilla Central Contributor Guide<a class="headerlink" href="#mozilla-central-contributor-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="submitting-a-patch-to-firefox-using-git">
+<h2>Submitting a patch to Firefox using Git.<a class="headerlink" href="#submitting-a-patch-to-firefox-using-git" title="Permalink to this headline">¶</a></h2>
+<p>This guide will take you through submitting and updating a patch to
+<code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> as a git user. You need to already be <a class="reference external" href="mc-quick-start.html">set up to use
+git to contribute to mozilla-central</a>.</p>
+<div class="section" id="performing-a-bug-fix">
+<h3>Performing a bug fix<a class="headerlink" href="#performing-a-bug-fix" title="Permalink to this headline">¶</a></h3>
+<p>All of the open bugs for issues in Firefox can be found in
+<a class="reference external" href="https://bugzilla.mozilla.org">Bugzilla</a>. If you know the component
+that you wish to contribute to you can use Bugzilla to search for issues
+in that project. If you are unsure which component you are interested
+in, you can search the <a class="reference external" href="https://bugzilla.mozilla.org/buglist.cgi?quicksearch=good-first-bug">Good First
+Bugs</a>
+list to find something you want to work on.</p>
+<ul class="simple">
+<li><p>Once you have your bug, assign it to yourself in Bugzilla.</p></li>
+<li><p>Update your local copy of the firefox codebase to match the current
+version on the servers to ensure you are working with the most up to
+date code.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote update
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a new feature branch tracking either Central or Inbound.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b bugxxxxxxx <span class="o">[</span>inbound<span class="p">|</span>central<span class="o">]</span>/default
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Work on your bug, checking into git according to your preferred
+workflow. <em>Try to ensure that each individual commit compiles and
+passes all of the tests for your component. This will make it easier
+to land if you use ``moz-phab`` to submit (details later in this
+post).</em></p></li>
+</ul>
+<p>It may be helpful to have Mozilla commit access, at least level 1. There
+are three levels of commit access that give increasing levels of access
+to the repositories.</p>
+<p>Level 1: Try/User access. You will need this level of access commit to
+the try server.</p>
+<p>Level 2: General access. This will give you full commit
+access to any mercurial or SVN repository not requiring level 3 access.</p>
+<p>Level 3: Core access. You will need this level to commit directly to any
+of the core repositories (Firefox/Thunderbird/Fennec).</p>
+<p>If you wish to apply for commit access, please follow the guide found in
+the <a class="reference external" href="https://www.mozilla.org/en-US/about/governance/policies/commit/access-policy/">Mozilla Commit Access
+Policy</a>.</p>
+<div class="section" id="submitting-a-patch-that-touches-c-c">
+<h4>Submitting a patch that touches C/C++<a class="headerlink" href="#submitting-a-patch-that-touches-c-c" title="Permalink to this headline">¶</a></h4>
+<p>If your patch makes changes to any C or C++ code and your editor does
+not have <code class="docutils literal notranslate"><span class="pre">clang-format</span></code> support, you should run the clang-format
+linter before submitting your patch to ensure that your code is properly
+formatted.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mach clang-format -p path/to/file.cpp
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">bootstrap</span></code> will offer to set up a commit hook that
+will automatically do this for you.</p>
+</div>
+<div class="section" id="submitting-to-try-with-level-1-commit-access">
+<h4>Submitting to <code class="docutils literal notranslate"><span class="pre">try</span></code> with Level 1 commit access.<a class="headerlink" href="#submitting-to-try-with-level-1-commit-access" title="Permalink to this headline">¶</a></h4>
+<p>If you only have Level 1 access, you will still need to submit your
+patch through phabricator, but you can test it on the try server first.</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">./mach</span> <span class="pre">try</span> <span class="pre">fuzzy</span></code> to select jobs to run and push to try.</p></li>
+</ul>
+</div>
+<div class="section" id="submitting-a-patch-via-phabricator">
+<h4>Submitting a patch via Phabricator.<a class="headerlink" href="#submitting-a-patch-via-phabricator" title="Permalink to this headline">¶</a></h4>
+<p>To commit anything to the repository, you will need to set up Arcanist
+and Phabricator. If you are using <code class="docutils literal notranslate"><span class="pre">git-cinnabar</span></code> then you will need to
+use git enabled versions of these tools.</p>
+<div class="section" id="install-arcanist-github-version">
+<h5>Install Arcanist (Github version)<a class="headerlink" href="#install-arcanist-github-version" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Ensure PHP is installed</p></li>
+<li><p><a class="reference external" href="https://secure.phabricator.com/book/phabricator/article/arcanist_quick_start/">Install
+Arcanist</a></p></li>
+</ul>
+</div>
+<div class="section" id="set-up-phabricator">
+<h5>Set up Phabricator<a class="headerlink" href="#set-up-phabricator" title="Permalink to this headline">¶</a></h5>
+<ul>
+<li><p>In a browser, visit Mozilla’s Phabricator instance at
+<a class="reference external" href="https://phabricator.services.mozilla.com/">https://phabricator.services.mozilla.com/</a>.</p></li>
+<li><p>Click “Log In” at the top of the page</p>
+<div class="figure align-default" id="id1">
+<img alt="Log in to Phabricator" src="../../../../_images/LogInPhab.png" />
+<p class="caption"><span class="caption-text">alt text</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Click the “Log In or Register” button on the next page. This will
+take you to Bugzilla to log in or register a new account.</p>
+<div class="figure align-default" id="id2">
+<img alt="Log in or register a Phabiricator account" src="../../../../_images/LogInOrRegister.png" />
+<p class="caption"><span class="caption-text">alt text</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>Sign in with your Bugzilla credentials, or create a new account.</p>
+<div class="figure align-default" id="id3">
+<img alt="Log in with Bugzilla" src="../../../../_images/LogInBugzilla.png" />
+<p class="caption"><span class="caption-text">alt text</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</li>
+<li><p>You will be redirected back to Phabricator, where you will have to
+create a new Phabricator account.</p>
+<Screenshot Needed></li>
+<li><p>Fill in/amend any fields on the form and click “Register Account”.</p>
+<Screenshot Needed></li>
+<li><p>You now have a Phabricator account and can submit and review patches.</p></li>
+</ul>
+</div>
+<div class="section" id="using-arcanist-to-submit-a-patch">
+<h5>Using Arcanist to submit a patch<a class="headerlink" href="#using-arcanist-to-submit-a-patch" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Ensure you are on the branch where you have commits that you want to
+submit.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout <span class="s2">&quot;your-branch-with-commits&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Create a differential patch containing your commits</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>arc diff
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>If you have any uncommitted files, Arcanist will ask if you want to
+commit them.</p></li>
+<li><p>If you have any files in the path not added to git Arcanist will ask
+if you want to ignore them.</p></li>
+<li><p>After formatting your patch, Arcanist will open a nano/emacs file for
+you to enter the commit details. If you have many individual git
+commits in your arcanist diff then the first line of the first commit
+message will become the patch title, and the rest of the commit, plus
+the messages for the other commits in the patch will form the
+summary.</p></li>
+<li><p>Ensure you have entered the bug number against the <code class="docutils literal notranslate"><span class="pre">Bug</span> <span class="pre">#</span></code> field.</p></li>
+<li><p>If you know who you want to review your patch, put their Phabricator
+handle against the <code class="docutils literal notranslate"><span class="pre">reviewers</span></code> field. If in doubt, look to see who
+filed, or is listed as a mentor on, the bug you are addressing and
+choose them.</p></li>
+<li><p>Close the editor (Ctrl X) to save the patch.</p></li>
+<li><p>Arcanist now formats your patch and submits it to Phabricator. It
+will display the Phabricator link in the output.</p></li>
+<li><p>Copy that link and paste it into a browser window to view your patch.</p></li>
+</ul>
+<p>You may have noticed when using Arcanist that it wraps all of your
+carefully curated Github commits into a single patch. If you have made
+many commits that are self contained and pass all the tests then you may
+wish to submit a patch for each commit. This will make it easier to
+review. The way to do this is via <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code>. <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code> required
+Arcanist so you do have to have that installed first.</p>
+</div>
+<div class="section" id="installing-moz-phab">
+<h5>Installing <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code><a class="headerlink" href="#installing-moz-phab" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install MozPhab <span class="o">[</span>--user<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="submitting-a-patch-using-moz-phab">
+<h5>Submitting a patch using <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code>.<a class="headerlink" href="#submitting-a-patch-using-moz-phab" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Ensure you are on the branch where you have commits that you want to
+submit.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout your-branch
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check the revision numbers for the commits you want to submit</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git log
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code>. Specifying a start commit will submit all commits
+from that commit. Specifying an end commit will submit all commits up
+to that commit. If no positional arguments are provided, the range is
+determined to be starting with the first non-public, non-obsolete
+changeset (for Mercurial) and ending with the currently checked-out
+changeset.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>moz-phab submit <span class="o">[</span>start_rev<span class="o">]</span> <span class="o">[</span>end_rev<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You will receive a Phabricator link for each commit in the set.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="updating-a-patch">
+<h4>Updating a patch<a class="headerlink" href="#updating-a-patch" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Often you will need to make amendments to a patch after it has been
+submitted to address review comments. To do this, add your commits to
+the base branch of your fix as normal.</p></li>
+</ul>
+<p>To submit the update using Arcanist, run
+<code class="docutils literal notranslate"><span class="pre">arc</span> <span class="pre">diff</span> <span class="pre">--update</span> <span class="pre">&lt;PhabricatorDifferentialNumber&gt;</span></code>.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">moz-phab</span></code> run in the same way as the initial submission with the
+same arguments, that is, specifying the full original range of commits.
+Note that, while inserting and amending commits should work fine,
+reordering commits is not yet supported, and deleting commits will leave
+the associated revisions open, which should be abandoned manually</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="native-debugging.html" class="btn btn-neutral float-right" title="Debugging Native Code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mc-quick-start.html" class="btn btn-neutral float-left" title="Mozilla Central Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UI Internationalization &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ICU" href="icu.html" />
+    <link rel="prev" title="Startup" href="locale_startup.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Internationalization</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="locale.html">Locale management</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">UI Internationalization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#javascript-internationalization-api">JavaScript Internationalization API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#services-intl">Services.intl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-apis">Additional APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-datetimeformat">mozIntl.DateTimeFormat</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getcalendarinfo-locale">mozIntl.getCalendarInfo(locale)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getdisplaynames-locales-options">mozIntl.getDisplayNames(locales, options)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getlocaleinfo-locales-options">mozIntl.getLocaleInfo(locales, options)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-relativetimeformat-locales-options">mozIntl.RelativeTimeFormat(locales, options)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getlanguagedisplaynames-locales-langcodes">mozIntl.getLanguageDisplayNames(locales, langCodes)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getregiondisplaynames-locales-regioncodes">mozIntl.getRegionDisplayNames(locales, regionCodes)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getlocaledisplaynames-locales-localecodes">mozIntl.getLocaleDisplayNames(locales, localeCodes)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mozintl-getavailablelocaledisplaynames-type">mozIntl.getAvailableLocaleDisplayNames(type)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practices">Best Practices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#future-extensions">Future extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="icu.html">ICU</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Internationalization</a> &raquo;</li>
+        
+      <li>UI Internationalization</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/intl/dataintl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ui-internationalization">
+<h1>UI Internationalization<a class="headerlink" href="#ui-internationalization" title="Permalink to this headline">¶</a></h1>
+<p>There are many types of data that need to be formatted into a locale specific format,
+or require locale specific API operations.</p>
+<p>Gecko provides a rich set of locale aware APIs for operations such as:</p>
+<ul class="simple">
+<li><p>date and time formatting</p></li>
+<li><p>number formatting</p></li>
+<li><p>searching</p></li>
+<li><p>sorting</p></li>
+<li><p>plural rules</p></li>
+<li><p>calendar and locale information</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of the APIs are backed by the Unicode projects <a class="reference external" href="http://cldr.unicode.org/">CLDR</a> and <a class="reference external" href="http://site.icu-project.org/">ICU</a> and are
+focused on enabling front-end code internationalization, which means the majority of
+the APIs are primarily available in JavaScript, with C++ and Rust having only a small
+subset of them exposed.</p>
+</div>
+<div class="section" id="javascript-internationalization-api">
+<h2>JavaScript Internationalization API<a class="headerlink" href="#javascript-internationalization-api" title="Permalink to this headline">¶</a></h2>
+<p>Data internationalization APIs are formalized in the JavaScript standard <a class="reference external" href="https://tc39.github.io/ecma402/">ECMA 402</a>.
+These APIs are supported by all major JS environments.</p>
+<p>It is best to consult the MDN article on the current state of the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl">Intl API</a>.
+Mozilla has an excellent support of the API and relies on it for majority
+of its needs. Yet, when working on Firefox UI the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Services</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">intl</span></span></code> wrapper
+should be used.</p>
+</div>
+<div class="section" id="services-intl">
+<h2>Services.intl<a class="headerlink" href="#services-intl" title="Permalink to this headline">¶</a></h2>
+<p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Services</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">intl</span></span></code> is an extension of the JS Intl API which should be used whenever
+working with Gecko app user interface with chrome privileges.</p>
+<p>The API provides the same objects and methods as <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="operator"><span class="pre">*</span></span></code>, but fine tunes them
+to the Gecko app user preferences, including matching OS Preferences and
+other locale choices that web content exposed JS Intl API cannot.</p>
+<p>For example, here’s an example of a locale aware date formatting
+using the regular <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">DateTimeFormat</span></span></code>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">rtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Intl</span><span class="p">.</span><span class="nx">DateTimeFormat</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">languages</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">year</span><span class="o">:</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span>
+  <span class="nx">month</span><span class="o">:</span> <span class="s2">&quot;long&quot;</span><span class="p">,</span>
+  <span class="nx">day</span><span class="o">:</span> <span class="s2">&quot;numeric&quot;</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rtf</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>It will do a good job at formatting the date to the user locale, but it will
+only be able to use the customization bits that are exposed to the Web, based on
+the locale the user broadcasts to the Web and any additional settings.</p>
+<p>But that ignores bits of information that could inform the formatting.</p>
+<p>Public API such as <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Intl</span></span><span class="punctuation"><span class="pre">.</span></span><span class="operator"><span class="pre">*</span></span></code> will not be able to look into the Operating System for
+regional preferences. It will also respect settings such as <cite>Resist Fingerprinting</cite>
+by masking its timezone and locale settings.</p>
+<p>This is a fair tradeoff when dealing with the Web Content, but in most cases, the
+privileged UI of the Gecko application should be able to access all of those
+additional bits and not be affected by the anti-fingerprinting masking.</p>
+<p><cite>mozIntl</cite> is a simple wrapper which in its simplest form works exactly the same. It’s
+exposed on <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Services</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">intl</span></span></code> object and can be used just like a regular <cite>Intl</cite> API:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">rtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">DateTimeFormat</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">year</span><span class="o">:</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span>
+  <span class="nx">month</span><span class="o">:</span> <span class="s2">&quot;long&quot;</span><span class="p">,</span>
+  <span class="nx">day</span><span class="o">:</span> <span class="s2">&quot;numeric&quot;</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">rtf</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>The difference is that this API will now use the set of locales as defined for
+Gecko, and will also respect additional regional preferences that Gecko
+will fetch from the Operating System.</p>
+<p>For those reasons, when dealing with Gecko application UI, it is always recommended
+to use the <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">Services</span></span><span class="punctuation"><span class="pre">.</span></span><span class="name other"><span class="pre">intl</span></span></code> wrapper.</p>
+</div>
+<div class="section" id="additional-apis">
+<h2>Additional APIs<a class="headerlink" href="#additional-apis" title="Permalink to this headline">¶</a></h2>
+<p>On top of wrapping up <cite>Intl</cite> API, <cite>mozIntl</cite> provides a number of features
+in form of additional options to existing APIs as well as completely new APIs.</p>
+<p>Many of those extensions are in the process of being standardized, but are
+already available to Gecko developers for internal use.</p>
+<p>Below is the list of current extensions:</p>
+<div class="section" id="mozintl-datetimeformat">
+<h3>mozIntl.DateTimeFormat<a class="headerlink" href="#mozintl-datetimeformat" title="Permalink to this headline">¶</a></h3>
+<p><cite>DateTimeFormat</cite> in <cite>mozIntl</cite> gets additional options that provide greater
+simplicity and consistency to the API.</p>
+<ul class="simple">
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">timeStyle</span></span></code> and <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dateStyle</span></span></code> can take values <code class="code js javascript docutils literal notranslate"><span class="keyword reserved"><span class="pre">short</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">medium</span></span></code>,
+<code class="code js javascript docutils literal notranslate"><span class="keyword reserved"><span class="pre">long</span></span></code> and <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">full</span></span></code>.
+These options can replace the manual listing of tokens like <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">year</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">day</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">hour</span></span></code> etc.
+and will compose the most natural date or time format of a given style for the selected
+locale.</p></li>
+</ul>
+<p>Using <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">timeStyle</span></span></code> and <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dateStyle</span></span></code> is highly recommended over listing the tokens,
+because different locales may use different default styles for displaying the same tokens.</p>
+<p>Additional value is that using those styles allows <cite>mozIntl</cite> to look into
+Operating System patterns, which gives users the ability to customize those
+patterns to their liking.</p>
+<p>Example use:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">dtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">DateTimeFormat</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">timeStyle</span><span class="o">:</span> <span class="s2">&quot;short&quot;</span><span class="p">,</span>
+  <span class="nx">dateStyle</span><span class="o">:</span> <span class="s2">&quot;short&quot;</span>
+<span class="p">});</span>
+<span class="kd">let</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">dtf</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>This will select the best locale to match the current Gecko application locale,
+then potentially check for Operating System regional preferences customizations,
+produce the correct pattern for short date+time style and format the date into it.</p>
+</div>
+<div class="section" id="mozintl-getcalendarinfo-locale">
+<h3>mozIntl.getCalendarInfo(locale)<a class="headerlink" href="#mozintl-getcalendarinfo-locale" title="Permalink to this headline">¶</a></h3>
+<p>The API will return the following calendar information for a given locale code:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>firstDayOfWeek</dt><dd><p>an integer in the range 1=Sunday to 7=Saturday indicating the day
+considered the first day of the week in calendars, e.g. 1 for en-US,
+2 for en-GB, 1 for bn-IN</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>minDays</dt><dd><p>an integer in the range of 1 to 7 indicating the minimum number
+of days required in the first week of the year, e.g. 1 for en-US, 4 for de</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>weekendStart</dt><dd><p>an integer in the range 1=Sunday to 7=Saturday indicating the day
+considered the beginning of a weekend, e.g. 7 for en-US, 7 for en-GB,
+1 for bn-IN</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>weekendEnd</dt><dd><p>an integer in the range 1=Sunday to 7=Saturday indicating the day
+considered the end of a weekend, e.g. 1 for en-US, 1 for en-GB,
+1 for bn-IN (note that “weekend” is <em>not</em> necessarily two days)</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Those bits of information should be especially useful for any UI that works
+with calendar data.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// omitting the `locale` argument will make the API return data for the</span>
+<span class="c1">// current Gecko application UI locale.</span>
+<span class="kd">let</span> <span class="p">{</span>
+  <span class="nx">firstDayOfWeek</span><span class="p">,</span>  <span class="c1">// 2</span>
+  <span class="nx">minDays</span><span class="p">,</span>         <span class="c1">// 4</span>
+  <span class="nx">weekendStart</span><span class="p">,</span>    <span class="c1">// 7</span>
+  <span class="nx">weekendEnd</span><span class="p">,</span>      <span class="c1">// 1</span>
+  <span class="nx">calendar</span><span class="p">,</span>        <span class="c1">// &quot;gregory&quot;</span>
+  <span class="nx">locale</span><span class="p">,</span>          <span class="c1">// &quot;pl&quot;</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">getCalendarInfo</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-getdisplaynames-locales-options">
+<h3>mozIntl.getDisplayNames(locales, options)<a class="headerlink" href="#mozintl-getdisplaynames-locales-options" title="Permalink to this headline">¶</a></h3>
+<p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">getDisplayNames</span></span></code> API is useful to retrieve various terms available in the
+internationalization API.</p>
+<p>The API takes a locale fallback chain list, and an options object which can contain
+two keys:</p>
+<ul class="simple">
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">style</span></span></code> which can takes values <code class="code js javascript docutils literal notranslate"><span class="keyword reserved"><span class="pre">short</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">medium</span></span></code>, <code class="code js javascript docutils literal notranslate"><span class="keyword reserved"><span class="pre">long</span></span></code></p></li>
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">keys</span></span></code> which is a list of keys in the following pattern:</p>
+<ul>
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dates</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">fields</span></span><span class="operator"><span class="pre">/</span></span><span class="punctuation"><span class="pre">{</span></span><span class="name other"><span class="pre">year</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">month</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">week</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">day</span></span><span class="punctuation"><span class="pre">}</span></span></code></p></li>
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dates</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">gregorian</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">months</span></span><span class="operator"><span class="pre">/</span></span><span class="punctuation"><span class="pre">{</span></span><span class="name other"><span class="pre">january</span></span><span class="operator"><span class="pre">|</span></span><span class="punctuation"><span class="pre">…</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">december</span></span><span class="punctuation"><span class="pre">}</span></span></code></p></li>
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dates</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">gregorian</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">weekdays</span></span><span class="operator"><span class="pre">/</span></span><span class="punctuation"><span class="pre">{</span></span><span class="name other"><span class="pre">sunday</span></span><span class="operator"><span class="pre">|</span></span><span class="punctuation"><span class="pre">…</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">saturday</span></span><span class="punctuation"><span class="pre">}</span></span></code></p></li>
+<li><p><code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">dates</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">gregorian</span></span><span class="operator"><span class="pre">/</span></span><span class="name other"><span class="pre">dayperiods</span></span><span class="operator"><span class="pre">/</span></span><span class="punctuation"><span class="pre">{</span></span><span class="name other"><span class="pre">am</span></span><span class="operator"><span class="pre">|</span></span><span class="name other"><span class="pre">pm</span></span><span class="punctuation"><span class="pre">}</span></span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>The return object provides values for the requested keys for the given locale and
+style.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="p">{</span>
+  <span class="nx">locale</span><span class="p">,</span>    <span class="c1">// &quot;pl&quot;</span>
+  <span class="nx">style</span><span class="p">,</span>     <span class="c1">// &quot;long&quot;</span>
+  <span class="nx">values</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">getDisplayNames</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;long&quot;</span><span class="p">,</span>
+  <span class="nx">keys</span><span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;dates/fields/year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dates/gregorian/months/january&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dates/gregorian/weekdays/monday&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dates/gregorian/dayperiods/am&quot;</span>
+  <span class="p">]</span>
+<span class="p">});</span>
+
+<span class="nx">values</span><span class="p">[</span><span class="s2">&quot;dates/fields/year&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;rok&quot;</span><span class="p">;</span>
+<span class="nx">values</span><span class="p">[</span><span class="s2">&quot;dates/gregorian/months/january&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;styczeń&quot;</span><span class="p">;</span>
+<span class="nx">values</span><span class="p">[</span><span class="s2">&quot;dates/gregorian/weekdays/monday&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;poniedziałek&quot;</span><span class="p">;</span>
+<span class="nx">values</span><span class="p">[</span><span class="s2">&quot;dates/gregorian/dayperiods/am&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;AM&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-getlocaleinfo-locales-options">
+<h3>mozIntl.getLocaleInfo(locales, options)<a class="headerlink" href="#mozintl-getlocaleinfo-locales-options" title="Permalink to this headline">¶</a></h3>
+<p>The API returns a simple object with information about the requested locale.</p>
+<p>At the moment the only bit handled by the API is directionality defined as <cite>direction</cite>
+key on the returned object.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="p">{</span>
+  <span class="nx">locale</span><span class="p">,</span>    <span class="c1">// &quot;pl&quot;</span>
+  <span class="nx">direction</span><span class="o">:</span> <span class="c1">// &quot;ltr&quot;</span>
+<span class="p">}</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">getLocaleInfo</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-relativetimeformat-locales-options">
+<h3>mozIntl.RelativeTimeFormat(locales, options)<a class="headerlink" href="#mozintl-relativetimeformat-locales-options" title="Permalink to this headline">¶</a></h3>
+<p>API which can be used to format an interval or a date into a textual
+representation of a relative time, such as <strong>5 minutes ago</strong> or <strong>in 2 days</strong>.</p>
+<p>This API is in the process of standardization and in its raw form will not handle
+any calculations to select the best unit. It is intended to just offer a way
+to format a value.</p>
+<p><cite>mozIntl</cite> wrapper extends the functionality providing the calculations and
+allowing the user to get the current best textual representation of the delta.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">rtf</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">intl</span><span class="p">.</span><span class="nx">RelativeTimeFormat</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">style</span><span class="o">:</span> <span class="s2">&quot;long&quot;</span><span class="p">,</span> <span class="c1">// &quot;narrow&quot; | &quot;short&quot; | &quot;long&quot; (default)</span>
+  <span class="nx">numeric</span><span class="o">:</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="c1">// &quot;always&quot; | &quot;auto&quot; (default)</span>
+<span class="p">});</span>
+
+<span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+<span class="nx">rtf</span><span class="p">.</span><span class="nx">formatBestUnit</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="mf">3</span> <span class="o">*</span> <span class="mf">1000</span> <span class="o">*</span> <span class="mf">60</span><span class="p">));</span> <span class="c1">// &quot;3 minutes ago&quot;</span>
+</pre></div>
+</div>
+<p>The option <cite>numeric</cite> has value set to <cite>auto</cite> by default, which means that when possible
+the formatter will use special textual terms like <em>yesterday</em>, <em>last year</em>, and so on.</p>
+<p>Those values require specific calculations that the raw <cite>Intl.*</cite> API cannot provide.
+For example, <em>yesterday</em> requires the algorithm to know not only the time delta,
+but also what time of the day <cite>now</cite> is. 15 hours ago may be <em>yesterday</em> if it
+is 10am, but will still be <em>today</em> if it is 11pm.</p>
+<p>For that reason the future <cite>Intl.RelativeTimeFormat</cite> will use <em>always</em> as default,
+since terms such as <em>15 hours ago</em> are independent of the current time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the current form, the API should be only used to format standalone values.
+Without additional capitalization rules, it cannot be freely used in sentences.</p>
+</div>
+</div>
+<div class="section" id="mozintl-getlanguagedisplaynames-locales-langcodes">
+<h3>mozIntl.getLanguageDisplayNames(locales, langCodes)<a class="headerlink" href="#mozintl-getlanguagedisplaynames-locales-langcodes" title="Permalink to this headline">¶</a></h3>
+<p>API which returns a list of language names formatted for display.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">langs</span> <span class="o">=</span> <span class="nx">getLanguageDisplayNames</span><span class="p">([</span><span class="s2">&quot;pl&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;fr&quot;</span><span class="p">,</span> <span class="s2">&quot;de&quot;</span><span class="p">,</span> <span class="s2">&quot;en&quot;</span><span class="p">]);</span>
+<span class="nx">langs</span> <span class="o">===</span> <span class="p">[</span><span class="s2">&quot;Francuski&quot;</span><span class="p">,</span> <span class="s2">&quot;Niemiecki&quot;</span><span class="p">,</span> <span class="s2">&quot;Angielski&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-getregiondisplaynames-locales-regioncodes">
+<h3>mozIntl.getRegionDisplayNames(locales, regionCodes)<a class="headerlink" href="#mozintl-getregiondisplaynames-locales-regioncodes" title="Permalink to this headline">¶</a></h3>
+<p>API which returns a list of region names formatted for display.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">regs</span> <span class="o">=</span> <span class="nx">getLanguageDisplayNames</span><span class="p">([</span><span class="s2">&quot;pl&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;US&quot;</span><span class="p">,</span> <span class="s2">&quot;CA&quot;</span><span class="p">,</span> <span class="s2">&quot;MX&quot;</span><span class="p">]);</span>
+<span class="nx">regs</span> <span class="o">===</span> <span class="p">[</span><span class="s2">&quot;Stany Zjednoczone&quot;</span><span class="p">,</span> <span class="s2">&quot;Kanada&quot;</span><span class="p">,</span> <span class="s2">&quot;Meksyk&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-getlocaledisplaynames-locales-localecodes">
+<h3>mozIntl.getLocaleDisplayNames(locales, localeCodes)<a class="headerlink" href="#mozintl-getlocaledisplaynames-locales-localecodes" title="Permalink to this headline">¶</a></h3>
+<p>API which returns a list of region names formatted for display.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">locs</span> <span class="o">=</span> <span class="nx">getLanguageDisplayNames</span><span class="p">([</span><span class="s2">&quot;pl&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;sr-RU&quot;</span><span class="p">,</span> <span class="s2">&quot;es-MX&quot;</span><span class="p">,</span> <span class="s2">&quot;fr-CA&quot;</span><span class="p">]);</span>
+<span class="nx">locs</span> <span class="o">===</span> <span class="p">[</span><span class="s2">&quot;Serbski (Rosja)&quot;</span><span class="p">,</span> <span class="s2">&quot;Hiszpański (Meksyk)&quot;</span><span class="p">,</span> <span class="s2">&quot;Francuski (Kanada)&quot;</span><span class="p">];</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozintl-getavailablelocaledisplaynames-type">
+<h3>mozIntl.getAvailableLocaleDisplayNames(type)<a class="headerlink" href="#mozintl-getavailablelocaledisplaynames-type" title="Permalink to this headline">¶</a></h3>
+<p>API which returns a list of locale display name codes available for a
+given type.
+Available types are: “language”, “region”.</p>
+<p>Example:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">codes</span> <span class="o">=</span> <span class="nx">getAvailableLocaleDisplayNames</span><span class="p">(</span><span class="s2">&quot;region&quot;</span><span class="p">);</span>
+<span class="nx">codes</span> <span class="o">===</span> <span class="p">[</span><span class="s2">&quot;au&quot;</span><span class="p">,</span> <span class="s2">&quot;ae&quot;</span><span class="p">,</span> <span class="s2">&quot;af&quot;</span><span class="p">,</span> <span class="p">...];</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Permalink to this headline">¶</a></h2>
+<p>The most important best practice when dealing with data internationalization is to
+perform it as close to the actual UI as possible; right before the UI is displayed.</p>
+<p>The reason for this practice is that internationalized data is considered <em>“opaque”</em>,
+which means that no code should ever attempt to operate on it. Late resolution also
+increases the chance that the data will be formatted in the current locale
+selection and not formatted and cached prematurely.</p>
+<p>It’s very important to not attempt to search, concatenate or in any other way
+alter the output of the API. Once it gets formatted, the only thing to do with
+the output should be to present it to the user.</p>
+<div class="section" id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h3>
+<p>The above is also important in the context of testing. It is a common mistake to
+attempt to write tests that verify the output of the UI with internationalized data.</p>
+<p>The underlying data set used to create the formatted version of the data may and will
+change over time, both due to dataset improvements and also changes to the language
+and regional preferences over time.
+That means that tests that attempt to verify the exact output will require
+significantly higher level of maintenance and will remain brittle.</p>
+<p>Most of the APIs provide special method, like <code class="code js javascript docutils literal notranslate"><span class="name other"><span class="pre">resolvedOptions</span></span></code> which should be used
+instead to verify that the output is matching the expectations.</p>
+</div>
+</div>
+<div class="section" id="future-extensions">
+<h2>Future extensions<a class="headerlink" href="#future-extensions" title="Permalink to this headline">¶</a></h2>
+<p>If you find yourself in the need of additional internationalization APIs not currently
+supported, you can verify if the API proposal is already in the works here,
+and file a bug in the component <a class="reference external" href="https://bugzilla.mozilla.org/enter_bug.cgi?product=Core&amp;component=Internationalization">Core::Internationalization</a> to request it.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="icu.html" class="btn btn-neutral float-right" title="ICU" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="locale_startup.html" class="btn btn-neutral float-left" title="Startup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

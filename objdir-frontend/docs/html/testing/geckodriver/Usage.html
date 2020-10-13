@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Usage &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Flags" href="Flags.html" />
+    <link rel="prev" title="Firefox capabilities" href="Capabilities.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../marionette/index.html">Marionette</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">geckodriver</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Support.html">Supported platforms</a></li>
+<li class="toctree-l2"><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities">WebDriver capabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Capabilities.html">Firefox capabilities</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#selenium">Selenium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#standalone">Standalone</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Flags.html">Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Profiles.html">Profiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bugs.html">Reporting bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="TraceLogs.html">Enabling trace logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CrashReports.html">Analyzing crash data of Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Notarization.html">macOS notarization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#for-developers">For developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">geckodriver</a> &raquo;</li>
+        
+      <li>Usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/testing/geckodriver/Usage.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>geckodriver is an implementation of WebDriver, and WebDriver can
+be used for widely different purposes.  How you invoke geckodriver
+largely depends on your use case.</p>
+<div class="section" id="selenium">
+<h2>Selenium<a class="headerlink" href="#selenium" title="Permalink to this headline">¶</a></h2>
+<p>If you are using geckodriver through <a class="reference external" href="http://seleniumhq.org/">Selenium</a>, you must ensure that
+you have version 3.11 or greater.  Because geckodriver implements the
+<a class="reference external" href="https://w3c.github.io/webdriver/">W3C WebDriver standard</a> and not the same Selenium wire
+protocol older drivers are using, you may experience incompatibilities
+and migration problems when making the switch from FirefoxDriver to
+geckodriver.</p>
+<p>Generally speaking, Selenium 3 enabled geckodriver as the default
+WebDriver implementation for Firefox.  With the release of Firefox 47,
+FirefoxDriver had to be discontinued for its lack of support for the
+<a class="reference external" href="https://developer.mozilla.org/en-US/Firefox/Multiprocess_Firefox">new multi-processing architecture in Gecko</a>.</p>
+<p>Selenium client bindings will pick up the <em>geckodriver</em> binary executable
+from your <a class="reference external" href="https://en.wikipedia.org/wiki/PATH_(variable)">system’s <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environmental variable</a> unless you
+override it by setting the <code class="docutils literal notranslate"><span class="pre">webdriver.gecko.driver</span></code> <a class="reference external" href="http://docs.oracle.com/javase/tutorial/essential/environment/sysprop.html">Java VM system
+property</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">System</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;webdriver.gecko.driver&quot;</span><span class="p">,</span> <span class="s2">&quot;/home/user/bin&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or by passing it as a flag to the <a class="reference external" href="http://www.manpagez.com/man/1/java/">java(1)</a> launcher:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">java</span> <span class="o">-</span><span class="n">Dwebdriver</span><span class="o">.</span><span class="n">gecko</span><span class="o">.</span><span class="n">driver</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="nb">bin</span> <span class="n">YourApplication</span>
+</pre></div>
+</div>
+<p>Your mileage with this approach may vary based on which programming
+language bindings you are using.  It is in any case generally the case
+that geckodriver will be picked up if it is available on the system path.
+In a bash compatible shell, you can make other programs aware of its
+location by exporting or setting the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% export PATH=$PATH:/home/user/bin
+% whereis geckodriver
+geckodriver: /home/user/bin/geckodriver
+</pre></div>
+</div>
+<p>On Window systems you can change the system path by right-clicking <strong>My
+Computer</strong> and choosing <strong>Properties</strong>.  In the dialogue that appears,
+navigate <strong>Advanced</strong> → <strong>Environmental Variables</strong> → <strong>Path</strong>.</p>
+<p>Or in the Windows console window:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ set PATH=%PATH%;C:\bin\geckodriver
+</pre></div>
+</div>
+</div>
+<div class="section" id="standalone">
+<h2>Standalone<a class="headerlink" href="#standalone" title="Permalink to this headline">¶</a></h2>
+<p>Since geckodriver is a separate HTTP server that is a complete remote end
+implementation of <a class="reference external" href="https://w3c.github.io/webdriver/">WebDriver</a>, it is possible to avoid using the Selenium
+remote server if you have no requirements to distribute processes across
+a matrix of systems.</p>
+<p>Given a W3C WebDriver conforming client library (or <em>local end</em>) you
+may interact with the geckodriver HTTP server as if you were speaking
+to any Selenium server.</p>
+<p>Using <a class="reference external" href="http://www.manpagez.com/man/1/curl/">curl(1)</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">geckodriver</span> <span class="o">&amp;</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">16010</span>
+<span class="o">%</span> <span class="mi">1491834109194</span>   <span class="n">geckodriver</span>     <span class="n">INFO</span>    <span class="n">Listening</span> <span class="n">on</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">4444</span>
+<span class="o">%</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;capabilities&quot;: {&quot;alwaysMatch&quot;: {&quot;acceptInsecureCerts&quot;: true}}}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4444</span><span class="o">/</span><span class="n">session</span>
+<span class="p">{</span><span class="s2">&quot;sessionId&quot;</span><span class="p">:</span><span class="s2">&quot;d4605710-5a4e-4d64-a52a-778bb0c31e00&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:{</span><span class="s2">&quot;XULappId&quot;</span><span class="p">:</span><span class="s2">&quot;{ec8030f7-c20a-464f-9b0e-13a3a9e97384}&quot;</span><span class="p">,</span><span class="s2">&quot;acceptSslCerts&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span><span class="s2">&quot;appBuildId&quot;</span><span class="p">:</span><span class="s2">&quot;20160913030425&quot;</span><span class="p">,</span><span class="s2">&quot;browserName&quot;</span><span class="p">:</span><span class="s2">&quot;firefox&quot;</span><span class="p">,</span><span class="s2">&quot;browserVersion&quot;</span><span class="p">:</span><span class="s2">&quot;51.0a1&quot;</span><span class="p">,</span><span class="s2">&quot;command_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;platform&quot;</span><span class="p">:</span><span class="s2">&quot;LINUX&quot;</span><span class="p">,</span><span class="s2">&quot;platformName&quot;</span><span class="p">:</span><span class="s2">&quot;linux&quot;</span><span class="p">,</span><span class="s2">&quot;platformVersion&quot;</span><span class="p">:</span><span class="s2">&quot;4.9.0-1-amd64&quot;</span><span class="p">,</span><span class="s2">&quot;processId&quot;</span><span class="p">:</span><span class="mi">17474</span><span class="p">,</span><span class="s2">&quot;proxy&quot;</span><span class="p">:{},</span><span class="s2">&quot;raisesAccessibilityExceptions&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span><span class="s2">&quot;rotatable&quot;</span><span class="p">:</span><span class="n">false</span><span class="p">,</span><span class="s2">&quot;specificationLevel&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;takesElementScreenshot&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;takesScreenshot&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span><span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;51.0a1&quot;</span><span class="p">}}</span>
+<span class="o">%</span> <span class="n">curl</span> <span class="o">-</span><span class="n">d</span> <span class="s1">&#39;{&quot;url&quot;: &quot;https://mozilla.org&quot;}&#39;</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4444</span><span class="o">/</span><span class="n">session</span><span class="o">/</span><span class="n">d4605710</span><span class="o">-</span><span class="mi">5</span><span class="n">a4e</span><span class="o">-</span><span class="mi">4</span><span class="n">d64</span><span class="o">-</span><span class="n">a52a</span><span class="o">-</span><span class="mi">778</span><span class="n">bb0c31e00</span><span class="o">/</span><span class="n">url</span>
+<span class="p">{}</span>
+<span class="o">%</span> <span class="n">curl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4444</span><span class="o">/</span><span class="n">session</span><span class="o">/</span><span class="n">d4605710</span><span class="o">-</span><span class="mi">5</span><span class="n">a4e</span><span class="o">-</span><span class="mi">4</span><span class="n">d64</span><span class="o">-</span><span class="n">a52a</span><span class="o">-</span><span class="mi">778</span><span class="n">bb0c31e00</span><span class="o">/</span><span class="n">url</span>
+<span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="s2">&quot;https://www.mozilla.org/en-US/&quot;</span>
+<span class="o">%</span> <span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">DELETE</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">4444</span><span class="o">/</span><span class="n">session</span><span class="o">/</span><span class="n">d4605710</span><span class="o">-</span><span class="mi">5</span><span class="n">a4e</span><span class="o">-</span><span class="mi">4</span><span class="n">d64</span><span class="o">-</span><span class="n">a52a</span><span class="o">-</span><span class="mi">778</span><span class="n">bb0c31e00</span>
+<span class="p">{}</span>
+<span class="o">%</span> <span class="n">fg</span>
+<span class="n">geckodriver</span>
+<span class="o">^</span><span class="n">C</span>
+<span class="o">%</span>
+</pre></div>
+</div>
+<p>Using the Python <a class="reference external" href="https://github.com/web-platform-tests/wpt/tree/master/tools/webdriver">wdclient</a> library:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">webdriver</span>
+
+<span class="k">with</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="mi">4444</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://mozilla.org&quot;</span>
+    <span class="nb">print</span> <span class="s2">&quot;The current URL is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">session</span><span class="o">.</span><span class="n">url</span>
+</pre></div>
+</div>
+<p>And to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">geckodriver</span> <span class="o">&amp;</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="mi">16054</span>
+<span class="o">%</span> <span class="n">python</span> <span class="n">example</span><span class="o">.</span><span class="n">py</span>
+<span class="mi">1491835308354</span>   <span class="n">geckodriver</span>     <span class="n">INFO</span>    <span class="n">Listening</span> <span class="n">on</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">4444</span>
+<span class="n">The</span> <span class="n">current</span> <span class="n">URL</span> <span class="ow">is</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="o">/</span>
+<span class="o">%</span> <span class="n">fg</span>
+<span class="n">geckodriver</span>
+<span class="o">^</span><span class="n">C</span>
+<span class="o">%</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Flags.html" class="btn btn-neutral float-right" title="Flags" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Capabilities.html" class="btn btn-neutral float-left" title="Firefox capabilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

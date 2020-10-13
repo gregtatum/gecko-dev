@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mozilla Central Quick Start &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Mozilla Central Contributor Guide" href="contributing-to-mc.html" />
+    <link rel="prev" title="GeckoView For Gecko Engineers" href="for-gecko-engineers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Welcome to GeckoView’s documentation!</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../consumer/index.html">Using GeckoView</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Contributing to GeckoView</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#contributor-site">Contributor Site</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="geckoview-quick-start.html">GeckoView Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="for-gecko-engineers.html">GeckoView For Gecko Engineers</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Mozilla Central Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="contributing-to-mc.html">Mozilla Central Contributor Guide</a></li>
+<li class="toctree-l4"><a class="reference internal" href="native-debugging.html">Debugging Native Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#using-geckoview">Using GeckoView</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#api-documentation">API Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#more-information">More information</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Welcome to GeckoView’s documentation!</a> &raquo;</li>
+        
+          <li><a href="index.html">Contributing to GeckoView</a> &raquo;</li>
+        
+      <li>Mozilla Central Quick Start</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/mobile/android/geckoview/contributor/mc-quick-start.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozilla-central-quick-start">
+<h1>Mozilla Central Quick Start<a class="headerlink" href="#mozilla-central-quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="firefox-developer-git-quick-start-guide">
+<h2>Firefox Developer Git Quick Start Guide<a class="headerlink" href="#firefox-developer-git-quick-start-guide" title="Permalink to this headline">¶</a></h2>
+<p>Getting setup to as a first time Mozilla contributor is hard. There are
+plenty of guides out there to help you get started as a contributor, but
+many of the new contributor guides out of date often more current ones
+are aimed at more experienced contributors. If you want to review these
+guides, you can find several linked to from <a class="reference external" href="https://developer.mozilla.org/docs/Mozilla/Developer_guide/Introduction">Contributing to the Mozilla code base</a>
+on <a class="reference external" href="https://developer.mozilla.org/">MDN</a>.</p>
+<p>This guide will take you through setting up as a contributor to
+<code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code>, the Firefox main repository, as a git user.</p>
+<div class="section" id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<p>The first thing you will need is to install Mercurial as this is the VCS
+that <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> uses.</p>
+<div class="section" id="mac">
+<span id="mac-0"></span><h4>Mac<a class="headerlink" href="#mac" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="homebrew">
+<span id="homebrew-0"></span><h5>Homebrew<a class="headerlink" href="#homebrew" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install mercurial
+</pre></div>
+</div>
+</div>
+<div class="section" id="macports">
+<h5>macports<a class="headerlink" href="#macports" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo port install mercurial
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="apt">
+<h5>apt<a class="headerlink" href="#apt" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install mercurial
+</pre></div>
+</div>
+<p>Alternatively you can install <a class="reference external" href="https://www.mercurial-scm.org/wiki/Download">Mercurial directly</a>.</p>
+<p>Check that you have successfully installed Mercurial by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>hg --version
+</pre></div>
+</div>
+<p>If you are an experienced git user and are unfamiliar with Mercurial,
+you may want to install <code class="docutils literal notranslate"><span class="pre">git-cinnabar</span></code>. Cinnabar is a git remote
+helper that allows you to interact with Mercurial repos using git
+semantics.</p>
+</div>
+</div>
+</div>
+<div class="section" id="git-cinnabar">
+<h3>git-cinnabar<a class="headerlink" href="#git-cinnabar" title="Permalink to this headline">¶</a></h3>
+<p>There is a Homebrew install option for <code class="docutils literal notranslate"><span class="pre">git-cinnabar</span></code>, but this did
+not work for me, nor did the installer option. Using these tools, when I
+tried to clone the Mercurial repo it hung and did not complete. I had to
+do a manual install before I could use <code class="docutils literal notranslate"><span class="pre">git-cinnabar</span></code> successfully to
+download a Mercurial repo. If you would like to try either of these
+option, however, here they are:</p>
+<div class="section" id="mac-1">
+<span id="id1"></span><h4>Mac<a class="headerlink" href="#mac-1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="homebrew-1">
+<span id="id2"></span><h5>Homebrew<a class="headerlink" href="#homebrew-1" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>brew install git-cinnabar
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="all-platforms">
+<h4>All Platforms<a class="headerlink" href="#all-platforms" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="installer">
+<h5>Installer<a class="headerlink" href="#installer" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git cinnabar download
+</pre></div>
+</div>
+</div>
+<div class="section" id="manual-installation">
+<h5>Manual installation<a class="headerlink" href="#manual-installation" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/glandium/git-cinnabar.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> git-cinnabar
+make
+<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:/somewhere/git-cinnabar&quot;</span>
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=&quot;$PATH:/somewhere/git-cinnabar&quot;&#39;</span> &gt;&gt; ~/.bash_profile
+git cinnabar download
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">git-cinnabar</span></code>’s creator, <a class="reference external" href="https://glandium.org/">glandium</a>, has
+written a number of posts about setting up for Firefox Development with
+git. This <a class="reference external" href="https://glandium.org/blog/?page_id=3438">post</a> is the one
+that has formed the basis for this walkthrough.</p>
+<p>In synopsis:</p>
+<ul class="simple">
+<li><p>initialize an empty git repository</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git init gecko <span class="o">&amp;&amp;</span> <span class="nb">cd</span> gecko
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Configure git:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config fetch.prune <span class="nb">true</span>
+git config push.default upstream
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add remotes for your repositories. There are several to choose from,
+<code class="docutils literal notranslate"><span class="pre">central</span></code>, <code class="docutils literal notranslate"><span class="pre">inbound</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">release</span></code> etc. but in reality,
+if you plan on using Phabricator, which is Firefox’s preferred patch
+submission system, you only need to set up <code class="docutils literal notranslate"><span class="pre">central</span></code>. It might be
+advisable to have access to <code class="docutils literal notranslate"><span class="pre">inbound</span></code> however, if you want to work
+on a version of Firefox that is queued for release. This guide will
+be focused on Phabricator.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add central hg::https://hg.mozilla.org/mozilla-central -t branches/default/tip
+git remote add inbound hg::https://hg.mozilla.org/integration/mozilla-inbound -t branches/default/tip
+git remote set-url --push central hg::ssh://hg.mozilla.org/mozilla-central
+git remote set-url --push inbound hg::ssh://hg.mozilla.org/integration/mozilla-inbound
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Expose the branch tip to get quick access with some easy names.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config remote.central.fetch +refs/heads/branches/default/tip:refs/remotes/central/default
+git config remote.inbound.fetch +refs/heads/branches/default/tip:refs/remotes/inbound/default
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Setup a remote for the try server. The try server is an easy way to
+test a patch without actually checking the patch into the core
+repository. Your code will go through the same tests as a
+<code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> push, and you’ll be able to download builds if
+you wish.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote add try hg::https://hg.mozilla.org/try
+git config remote.try.skipDefaultUpdate <span class="nb">true</span>
+git remote set-url --push try hg::ssh://hg.mozilla.org/try
+git config remote.try.push +HEAD:refs/heads/branches/default/tip
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Now update all the remotes. This performs a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> on all the
+remotes. Mozilla Central is a <em>large</em> repository. Be prepared for
+this to take a very long time.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git remote update
+</pre></div>
+</div>
+<p>All that’s left to do now is pick a bug to fix and <a class="reference external" href="contributing-to-mc">submit a
+patch</a>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing-to-mc.html" class="btn btn-neutral float-right" title="Mozilla Central Contributor Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="for-gecko-engineers.html" class="btn btn-neutral float-left" title="GeckoView For Gecko Engineers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

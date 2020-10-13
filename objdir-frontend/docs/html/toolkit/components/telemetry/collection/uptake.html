@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Uptake Telemetry &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Origin Telemetry" href="origin.html" />
+    <link rel="prev" title="Experiment Annotation" href="experiments.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Data collection</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="scalars.html">Scalars</a></li>
+<li class="toctree-l4"><a class="reference internal" href="histograms.html">Histograms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="events.html">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="measuring-time.html">Measuring elapsed time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="custom-pings.html">Submitting custom pings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experiments.html">Experiment Annotation</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Uptake Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="origin.html">Origin Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="use-counters.html">Use Counters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="webextension-api.html">WebExtension API for Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#browser-usage-telemetry">Browser Usage Telemetry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#version-history">Version History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Data collection</a> &raquo;</li>
+        
+      <li>Uptake Telemetry</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/collection/uptake.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uptake-telemetry">
+<span id="telemetry-collection-uptake"></span><h1>Uptake Telemetry<a class="headerlink" href="#uptake-telemetry" title="Permalink to this headline">¶</a></h1>
+<p>Firefox continuously pulls data from different remote sources (eg. settings, system add-ons, …). In order to have consistent insights about the <em>uptake rate</em> of these <em>update sources</em>, our clients can use a unified Telemetry helper to report their <em>update status</em>.</p>
+<p>The helper — described below — reports predefined update status, which eventually gives a unified way to obtain:</p>
+<ul class="simple">
+<li><p>the proportion of success among clients;</p></li>
+<li><p>its evolution over time;</p></li>
+<li><p>the distribution of error causes.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Examples of update sources: <em>remote settings, add-ons update, add-ons, gfx, and plugins blocklists, certificate revocation, certificate pinning, system add-ons delivery…</em></p>
+<p>Examples of update status: <em>up-to-date, success, network error, server error, signature error, server backoff, unknown error…</em></p>
+</div>
+<p>Every call to the UptakeTelemetry helper registers a point in a single <a class="reference internal" href="histograms.html#histogram-type-keyed"><span class="std std-ref">keyed histogram</span></a> whose id is <code class="docutils literal notranslate"><span class="pre">UPTAKE_REMOTE_CONTENT_RESULT_1</span></code> with the specified update <code class="docutils literal notranslate"><span class="pre">source</span></code> as the key.</p>
+<p>Additionally, to provide real-time insight into uptake, a <a class="reference internal" href="events.html#eventtelemetry"><span class="std std-ref">Telemetry Event</span></a> may be sent. Because telemetry events are more expensive to process than histograms, we take some measures to avoid overwhelming Mozilla systems with the flood of data that this produces. We always send events when not on release channel. On release channel, we only send events from 1% of clients.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">UptakeTelemetry</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">ChromeUtils</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s2">&quot;resource://services-common/uptake-telemetry.js&quot;</span><span class="p">,</span> <span class="p">{});</span>
+
+<span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">report</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="p">{</span> <span class="nx">source</span> <span class="p">});</span>
+</pre></div>
+</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">component</span></code>, a <code class="docutils literal notranslate"><span class="pre">string</span></code> that identifies the calling component (eg. <code class="docutils literal notranslate"><span class="pre">&quot;remotesettings&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;normandy&quot;</span></code>). Arbitrary components have to be previously declared in the <a class="reference internal" href="events.html#eventdefinition"><span class="std std-ref">Telemetry Events definition file</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>, a <code class="docutils literal notranslate"><span class="pre">string</span></code> to distinguish what is being pulled or updated in the component (eg. <code class="docutils literal notranslate"><span class="pre">&quot;blocklists/addons&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;recipes/33&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>, one of the following status constants:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.UP_TO_DATE</span></code>: Local content was already up-to-date with remote content.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SUCCESS</span></code>: Local content was updated successfully.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.BACKOFF</span></code>: Remote server asked clients to backoff.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.PREF_DISABLED</span></code>: Update is disabled in user preferences.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.PARSE_ERROR</span></code>: Parsing server response has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CONTENT_ERROR</span></code>: Server response has unexpected content.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SIGNATURE_ERROR</span></code>: Signature verification after diff-based sync has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SIGNATURE_RETRY_ERROR</span></code>: Signature verification after full fetch has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CONFLICT_ERROR</span></code>: Some remote changes are in conflict with local changes.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SYNC_ERROR</span></code>: Synchronization of remote changes has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.APPLY_ERROR</span></code>: Application of changes locally has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SERVER_ERROR</span></code>: Server failed to respond.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CERTIFICATE_ERROR</span></code>: Server certificate verification has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.DOWNLOAD_ERROR</span></code>: Data could not be fully retrieved.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.TIMEOUT_ERROR</span></code>: Server response has timed out.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.NETWORK_ERROR</span></code>: Communication with server has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.NETWORK_OFFLINE_ERROR</span></code>: Network not available.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CLEANUP_ERROR</span></code>: Clean-up of temporary files has failed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.UNKNOWN_ERROR</span></code>: Uncategorized error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CUSTOM_1_ERROR</span></code>: Error #1 specific to this update source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CUSTOM_2_ERROR</span></code>: Error #2 specific to this update source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CUSTOM_3_ERROR</span></code>: Error #3 specific to this update source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CUSTOM_4_ERROR</span></code>: Error #4 specific to this update source.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.CUSTOM_5_ERROR</span></code>: Error #5 specific to this update source.</p></li>
+</ul>
+<p>Events Telemetry only:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UptakeTelemetry.STATUS.SHUTDOWN_ERROR</span></code>: Error occurring during shutdown.</p></li>
+</ul>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">COMPONENT</span> <span class="o">=</span> <span class="s2">&quot;normandy&quot;</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">UPDATE_SOURCE</span> <span class="o">=</span> <span class="s2">&quot;update-monitoring&quot;</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">status</span><span class="p">;</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span>
+  <span class="nx">status</span> <span class="o">=</span> <span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">STATUS</span><span class="p">.</span><span class="nx">SUCCESS</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">status</span> <span class="o">=</span> <span class="sr">/NetworkError/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">?</span>
+              <span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">STATUS</span><span class="p">.</span><span class="nx">NETWORK_ERROR</span> <span class="o">:</span>
+              <span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">STATUS</span><span class="p">.</span><span class="nx">SERVER_ERROR</span> <span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">report</span><span class="p">(</span><span class="nx">COMPONENT</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="p">{</span> <span class="nx">source</span><span class="o">:</span> <span class="nx">UPDATE_SOURCE</span> <span class="p">});</span>
+</pre></div>
+</div>
+<div class="section" id="additional-event-info">
+<h3>Additional Event Info<a class="headerlink" href="#additional-event-info" title="Permalink to this headline">¶</a></h3>
+<p>Events sent using the telemetry events API can contain additional information. Uptake Telemetry allows you to add the following extra fields to events by adding them to the <code class="docutils literal notranslate"><span class="pre">options</span></code> argument:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trigger</span></code>: A label to distinguish what triggered the polling/fetching of remote content (eg. <code class="docutils literal notranslate"><span class="pre">&quot;broadcast&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;timer&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;forced&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;manual&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">age</span></code>: The age of pulled data in seconds (ie. difference between publication time and fetch time).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">duration</span></code>: The duration of the synchronization process in milliseconds.</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">UptakeTelemetry</span><span class="p">.</span><span class="nx">report</span><span class="p">(</span><span class="nx">component</span><span class="p">,</span> <span class="nx">status</span><span class="p">,</span> <span class="p">{</span> <span class="nx">source</span><span class="p">,</span> <span class="nx">trigger</span><span class="o">:</span> <span class="s2">&quot;timer&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mf">138</span> <span class="p">});</span>
+</pre></div>
+</div>
+<p>Remember that events are sampled on release channel. Those calls to uptake telemetry that do not produce events will ignore these extra fields.</p>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h2>Use-cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<p>The following remote data sources are already using this unified histogram.</p>
+<ul class="simple">
+<li><p>remote settings changes monitoring</p></li>
+<li><p>add-ons blocklist</p></li>
+<li><p>gfx blocklist</p></li>
+<li><p>plugins blocklist</p></li>
+<li><p>certificate revocation</p></li>
+<li><p>certificate pinning</p></li>
+<li><p><a class="reference internal" href="../../normandy/normandy/index.html#components-normandy"><span class="std std-ref">Normandy Recipe client</span></a></p></li>
+</ul>
+<p>Obviously, the goal is to eventually converge and avoid ad-hoc Telemetry probes for measuring uptake of remote content. Some notable potential use-cases are:</p>
+<ul class="simple">
+<li><p>nsUpdateService</p></li>
+<li><p>mozapps extensions update</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="origin.html" class="btn btn-neutral float-right" title="Origin Telemetry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experiments.html" class="btn btn-neutral float-left" title="Experiment Annotation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

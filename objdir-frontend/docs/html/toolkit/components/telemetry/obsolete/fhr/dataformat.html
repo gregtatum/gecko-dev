@@ -1,0 +1,2149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Payload Format &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Identifiers" href="identifiers.html" />
+    <link rel="prev" title="Architecture" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../internals/index.html">Internals</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html">Obsolete Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../uitelemetry/index.html">UITelemetry data format (obsolete)</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html">Firefox Health Report (Obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../hybrid-content.html">Hybrid Content Telemetry (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../optout-ping.html">“optout” ping (obsolete)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="../index.html">Obsolete Documentation</a> &raquo;</li>
+        
+          <li><a href="index.html">Firefox Health Report (Obsolete)</a> &raquo;</li>
+        
+      <li>Payload Format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/toolkit/components/telemetry/obsolete/fhr/dataformat.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="payload-format">
+<span id="healthreport-dataformat"></span><h1>Payload Format<a class="headerlink" href="#payload-format" title="Permalink to this headline">¶</a></h1>
+<p>Currently, the Firefox Health Report is submitted as a compressed JSON
+document. The root JSON element is an object. A <em>version</em> field defines
+the version of the payload which in turn defines the expected contents
+the object.</p>
+<p>As of 2013-07-03, desktop submits Version 2, and Firefox for Android submits
+Version 3 payloads.</p>
+<div class="section" id="version-3">
+<h2>Version 3<a class="headerlink" href="#version-3" title="Permalink to this headline">¶</a></h2>
+<p>Version 3 is a complete rebuild of the document format. Events are tracked in
+an “environment”. Environments are computed from a large swath of local data
+(e.g., add-ons, CPU count, versions), and a new environment comes into being
+when one of its attributes changes.</p>
+<p>Client documents, then, will include descriptions of many environments, and
+measurements will be attributed to one particular environment.</p>
+<p>A map of environments is present at the top level of the document, with the
+current named “current” in the map. Each environment has a hash identifier and
+a set of attributes. The current environment is completely described, and has
+its hash present in a “hash” attribute. All other environments are represented
+as a tree diff from the current environment, with their hash as the key in the
+“environments” object.</p>
+<p>A removed add-on has the value ‘null’.</p>
+<p>There is no “last” data at present.</p>
+<p>Daily data is hierarchical: by day, then by environment, and then by
+measurement, and is present in “data”, just as in v2.</p>
+<p>Leading by example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;lastPingDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-06-29&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;thisPingDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-07-03&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;environments&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;org.mozilla.sysinfo.sysinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;memoryMB&quot;</span><span class="p">:</span> <span class="mi">1567</span><span class="p">,</span>
+        <span class="s2">&quot;cpuCount&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;armeabi-v7a&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.1.2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Android&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.profile.age&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;profileCreation&quot;</span><span class="p">:</span> <span class="mi">15827</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.addons.active&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;QuitNow@TWiGSoftware.com&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15885</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;blocklistState&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15885</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.18.02&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;{dbbf9331-b713-6eda-1006-205efead09dc}&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="s2">&quot;askToActivate&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15779</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;blocklistState&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;plugin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15779</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;11.1 r115&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;desktopbydefault@bnicholson.mozilla.org&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15870</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;blocklistState&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15870</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;{6e092a7f-ba58-4abb-88c1-1a4e50b217e4}&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15828</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;blocklistState&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15828</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;{46551EC9-40F0-4e47-8E18-8E5CF550CFB8}&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15879</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;blocklistState&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15879</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.2&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;appLocale&quot;</span><span class="p">:</span> <span class="s2">&quot;en_us&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;osLocale&quot;</span><span class="p">:</span> <span class="s2">&quot;en_us&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;acceptLangIsUserSet&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;isTelemetryEnabled&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;isBlocklistEnabled&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;geckoAppInfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;updateChannel&quot;</span><span class="p">:</span> <span class="s2">&quot;nightly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;{aa3c5121-dab2-40e2-81ca-7ea25febc110}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="s2">&quot;Android&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130703031323&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platformVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;25.0a1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;fennec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xpcomabi&quot;</span><span class="p">:</span> <span class="s2">&quot;arm-eabi-gcc3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130703031323&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;25.0a1&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;tB4Pnnep9yTxnMDymc3dAB2RRB0=&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;org.mozilla.addons.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;plugin&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;k2O3hlreMeS7L1qtxeMsYWxgWWQ=&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;geckoAppInfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130630031138&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130630031138&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;1+KN9TutMpzdl4TJEl+aCxK+xcw=&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;geckoAppInfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130626031100&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130626031100&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.addons.active&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;QuitNow@TWiGSoftware.com&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;{dbbf9331-b713-6eda-1006-205efead09dc}&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;desktopbydefault@bnicholson.mozilla.org&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;{6e092a7f-ba58-4abb-88c1-1a4e50b217e4}&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;{46551EC9-40F0-4e47-8E18-8E5CF550CFB8}&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.addons.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;plugin&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;last&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;days&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;2013-07-03&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tB4Pnnep9yTxnMDymc3dAB2RRB0=&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;org.mozilla.appSessions&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;sj&quot;</span><span class="p">:</span> <span class="mi">653</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">22</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">5</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">0</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sg&quot;</span><span class="p">:</span> <span class="mi">3560</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">171</span><span class="p">,</span>
+                <span class="s2">&quot;sj&quot;</span><span class="p">:</span> <span class="mi">518</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">16</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">1079</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;k2O3hlreMeS7L1qtxeMsYWxgWWQ=&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;org.mozilla.appSessions&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="p">[</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">27</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">19</span>
+              <span class="p">},</span>
+              <span class="p">{</span>
+                <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">55</span>
+              <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;org.mozilla.searches.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;bartext&quot;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">&quot;google&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;org.mozilla.experiment&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;lastActive&quot;</span><span class="p">:</span> <span class="s2">&quot;some.experiment.id&quot;</span>
+            <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="app-sessions-in-version-3">
+<h3>App sessions in Version 3<a class="headerlink" href="#app-sessions-in-version-3" title="Permalink to this headline">¶</a></h3>
+<p>Sessions are divided into “normal” and “abnormal”. Session objects are stored as discrete JSON:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.appSessions&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="n">_v</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">123</span><span class="p">},</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;abnormal&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;oom&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span> <span class="s2">&quot;stopped&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Keys are:</p>
+<dl class="simple">
+<dt>“r”</dt><dd><p>reason. Values are “P” (activity paused), “A” (abnormal termination).</p>
+</dd>
+<dt>“d”</dt><dd><p>duration. Value in seconds.</p>
+</dd>
+<dt>“sg”</dt><dd><p>Gecko startup time (msec). Present if this is a clean launch. This
+corresponds to the telemetry timer <em>FENNEC_STARTUP_TIME_GECKOREADY</em>.</p>
+</dd>
+<dt>“sj”</dt><dd><p>Java activity init time (msec). Present if this is a clean launch. This
+corresponds to the telemetry timer <em>FENNEC_STARTUP_TIME_JAVAUI</em>,
+and includes initialization tasks beyond initial
+<em>onWindowFocusChanged</em>.</p>
+</dd>
+</dl>
+<p>Abnormal terminations will be missing a duration and will feature these keys:</p>
+<dl class="simple">
+<dt>“oom”</dt><dd><p>was the session killed by an OOM exception?</p>
+</dd>
+<dt>“stopped”</dt><dd><p>was the session stopped gently?</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="version-3-2">
+<h3>Version 3.2<a class="headerlink" href="#version-3-2" title="Permalink to this headline">¶</a></h3>
+<p>As of Firefox 35, the search counts measurement is now bumped to v6, including the <em>activity</em> location for the search activity.</p>
+</div>
+<div class="section" id="version-3-1">
+<h3>Version 3.1<a class="headerlink" href="#version-3-1" title="Permalink to this headline">¶</a></h3>
+<p>As of Firefox 27, <em>appinfo</em> is now bumped to v3, including <em>osLocale</em>,
+<em>appLocale</em> (currently always the same as <em>osLocale</em>), <em>distribution</em> (a string
+containing the distribution ID and version, separated by a colon), and
+<em>acceptLangIsUserSet</em>, an integer-boolean that describes whether the user set
+an <em>intl.accept_languages</em> preference.</p>
+<p>The search counts measurement is now at version 5, which indicates that
+non-partner searches are recorded. You’ll see identifiers like “other-Foo Bar”
+rather than “other”.</p>
+</div>
+<div class="section" id="id1">
+<h3>Version 3.2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>In Firefox 32, Firefox for Android includes a device configuration section
+in the environment description:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.device.config&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;hasHardwareKeyboard&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">&quot;screenXInMM&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">,</span>
+  <span class="s2">&quot;screenLayout&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;uiType&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;screenYInMM&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;uiMode&quot;</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Of these, the only keys that need explanation are:</p>
+<dl class="simple">
+<dt>uiType</dt><dd><p>One of “default”, “smalltablet”, “largetablet”.</p>
+</dd>
+<dt>uiMode</dt><dd><p>A mask of the Android <em>Configuration.uiMode</em> value, e.g.,
+<em>UI_MODE_TYPE_CAR</em>.</p>
+</dd>
+<dt>screenLayout</dt><dd><p>A mask of the Android <em>Configuration.screenLayout</em> value. One of the
+<em>SCREENLAYOUT_SIZE_</em> constants.</p>
+</dd>
+</dl>
+<p>Note that screen dimensions can be incorrect due to device inaccuracies and platform limitations.</p>
+</div>
+<div class="section" id="other-notable-differences-from-version-2">
+<h3>Other notable differences from Version 2<a class="headerlink" href="#other-notable-differences-from-version-2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>There is no default browser indicator on Android.</p></li>
+<li><p>Add-ons include a <em>blocklistState</em> attribute, as returned by AddonManager.</p></li>
+<li><p>Searches are now version 4, and are hierarchical: how the search was started
+(bartext, barkeyword, barsuggest), and then counts per provider.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="version-2">
+<h2>Version 2<a class="headerlink" href="#version-2" title="Permalink to this headline">¶</a></h2>
+<p>Version 2 is the same as version 1 with the exception that it has an additional
+top-level field, <em>geckoAppInfo</em>, which contains basic application info.</p>
+<div class="section" id="geckoappinfo">
+<h3>geckoAppInfo<a class="headerlink" href="#geckoappinfo" title="Permalink to this headline">¶</a></h3>
+<p>This field is an object that is a simple map of string keys and values
+describing basic application metadata. It is very similar to the <em>appinfo</em>
+measurement in the <em>last</em> section. The difference is this field is almost
+certainly guaranteed to exist whereas the one in the data part of the
+payload may be omitted in certain scenarios (such as catastrophic client
+error).</p>
+<p>Its keys are as follows:</p>
+<dl class="simple">
+<dt>appBuildID</dt><dd><p>The build ID/date of the application. e.g. “20130314113542”.</p>
+</dd>
+<dt>version</dt><dd><p>The value of nsXREAppData.version. This is the application’s version. e.g.
+“21.0.0”.</p>
+</dd>
+<dt>vendor</dt><dd><p>The value of nsXREAppData.vendor. Can be empty an empty string. For
+official Mozilla builds, this will be “Mozilla”.</p>
+</dd>
+<dt>name</dt><dd><p>The value of nsXREAppData.name. For official Firefox builds, this
+will be “Firefox”.</p>
+</dd>
+<dt>id</dt><dd><p>The value of nsXREAppData.ID.</p>
+</dd>
+<dt>platformVersion</dt><dd><p>The version of the Gecko platform (as opposed to the app version). For
+Firefox, this is almost certainly equivalent to the <em>version</em> field.</p>
+</dd>
+<dt>platformBuildID</dt><dd><p>The build ID/date of the Gecko platfor (as opposed to the app version).
+This is commonly equivalent to <em>appBuildID</em>.</p>
+</dd>
+<dt>os</dt><dd><p>The name of the operating system the application is running on.</p>
+</dd>
+<dt>xpcomabi</dt><dd><p>The binary architecture of the build.</p>
+</dd>
+<dt>updateChannel</dt><dd><p>The name of the channel used for application updates. Official Mozilla
+builds have one of the values {release, beta, aurora, nightly}. Local and
+test builds have <em>default</em> as the channel.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="version-1">
+<h2>Version 1<a class="headerlink" href="#version-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="top-level-properties">
+<h3>Top-level Properties<a class="headerlink" href="#top-level-properties" title="Permalink to this headline">¶</a></h3>
+<p>The main JSON object contains the following properties:</p>
+<dl>
+<dt>lastPingDate</dt><dd><p>UTC date of the last upload. If this is the first upload from this client,
+this will not be present.</p>
+</dd>
+<dt>thisPingDate</dt><dd><p>UTC date when this payload was constructed.</p>
+</dd>
+<dt>version</dt><dd><p>Integer version of this payload format. Currently only 1 is defined.</p>
+</dd>
+<dt>clientID</dt><dd><p>An identifier that identifies the client that is submitting data.</p>
+<p>This property may not be present in older clients.</p>
+<p>See <a class="reference internal" href="identifiers.html#healthreport-identifiers"><span class="std std-ref">Identifiers</span></a> for more info on identifiers.</p>
+</dd>
+<dt>clientIDVersion</dt><dd><p>Integer version associated with the generation semantics for the
+<code class="docutils literal notranslate"><span class="pre">clientID</span></code>.</p>
+<p>If the value is <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">clientID</span></code> is a randomly-generated UUID.</p>
+<p>This property may not be present in older clients.</p>
+</dd>
+<dt>data</dt><dd><p>Object holding data constituting health report.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="data-properties">
+<h3>Data Properties<a class="headerlink" href="#data-properties" title="Permalink to this headline">¶</a></h3>
+<p>The bulk of the health report is contained within the <em>data</em> object. This
+object has the following keys:</p>
+<dl class="simple">
+<dt>days</dt><dd><p>Object mapping UTC days to measurements from that day. Keys are in the
+<em>YYYY-MM-DD</em> format. e.g. “2013-03-14”</p>
+</dd>
+<dt>last</dt><dd><p>Object mapping measurement names to their values.</p>
+</dd>
+</dl>
+<p>The value of <em>days</em> and <em>last</em> are objects mapping measurement names to that
+measurement’s values. The values are always objects. Each object contains
+a <em>_v</em> property. This property defines the version of this measurement.
+Additional non-underscore-prefixed properties are defined by the measurement
+itself (see sections below).</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Here is an example JSON document for version 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;thisPingDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-03-11&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;lastPingDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2013-03-10&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;last&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;org.mozilla.addons.active&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;masspasswordreset@johnathan.nightingale&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.05&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">14973</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15317</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;places-maintenance@bonardo.net&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">15268</span><span class="p">,</span>
+          <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">15379</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130309030841&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;distributionID&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;distributionVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hotfixVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;{ec8030f7-c20a-464f-9b0e-13a3a9e97384}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;locale&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Firefox&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130309030841&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platformVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;22.0a1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;updateChannel&quot;</span><span class="p">:</span> <span class="s2">&quot;nightly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;22.0a1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xpcomabi&quot;</span><span class="p">:</span> <span class="s2">&quot;x86_64-gcc3&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.profile.age&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;profileCreation&quot;</span><span class="p">:</span> <span class="mi">12444</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.appSessions.current&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;startDay&quot;</span><span class="p">:</span> <span class="mi">15773</span><span class="p">,</span>
+        <span class="s2">&quot;activeTicks&quot;</span><span class="p">:</span> <span class="mi">522</span><span class="p">,</span>
+        <span class="s2">&quot;totalTime&quot;</span><span class="p">:</span> <span class="mi">70858</span><span class="p">,</span>
+        <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="mi">1245</span><span class="p">,</span>
+        <span class="s2">&quot;firstPaint&quot;</span><span class="p">:</span> <span class="mi">2695</span><span class="p">,</span>
+        <span class="s2">&quot;sessionRestored&quot;</span><span class="p">:</span> <span class="mi">3436</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;org.mozilla.sysinfo.sysinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;cpuCount&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;memoryMB&quot;</span><span class="p">:</span> <span class="mi">16384</span><span class="p">,</span>
+        <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;x86-64&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;12.2.1&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;days&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;2013-03-11&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;org.mozilla.addons.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+          <span class="s2">&quot;plugin&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+          <span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;org.mozilla.places.places&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;bookmarks&quot;</span><span class="p">:</span> <span class="mi">757</span><span class="p">,</span>
+          <span class="s2">&quot;pages&quot;</span><span class="p">:</span> <span class="mi">104858</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;isDefaultBrowser&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;2013-03-10&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;org.mozilla.addons.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+          <span class="s2">&quot;plugin&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+          <span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;org.mozilla.places.places&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;bookmarks&quot;</span><span class="p">:</span> <span class="mi">757</span><span class="p">,</span>
+          <span class="s2">&quot;pages&quot;</span><span class="p">:</span> <span class="mi">104857</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;org.mozilla.searches.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;google.urlbar&quot;</span><span class="p">:</span> <span class="mi">4</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">&quot;isDefaultBrowser&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="measurements">
+<h2>Measurements<a class="headerlink" href="#measurements" title="Permalink to this headline">¶</a></h2>
+<p>The bulk of payloads consists of measurement data. An individual measurement
+is merely a collection of related values e.g. <em>statistics about the Places
+database</em> or <em>system information</em>.</p>
+<p>Each measurement has an integer version number attached. When the fields in
+a measurement or the semantics of data within that measurement change, the
+version number is incremented.</p>
+<p>All measurements are defined alphabetically in the sections below.</p>
+<div class="section" id="org-mozilla-addons-addons">
+<h3>org.mozilla.addons.addons<a class="headerlink" href="#org-mozilla-addons-addons" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the currently-installed add-ons.</p>
+<div class="section" id="id2">
+<h4>Version 2<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>This version adds the human-readable fields <em>name</em> and <em>description</em>, both
+coming directly from the Addon instance as most properties in version 1.
+Also, all plugin details are now in org.mozilla.addons.plugins.</p>
+</div>
+<div class="section" id="id3">
+<h4>Version 1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>The measurement object is a mapping of add-on IDs to objects containing
+add-on metadata.</p>
+<p>Each add-on contains the following properties:</p>
+<ul class="simple">
+<li><p>userDisabled</p></li>
+<li><p>appDisabled</p></li>
+<li><p>version</p></li>
+<li><p>type</p></li>
+<li><p>scope</p></li>
+<li><p>foreignInstall</p></li>
+<li><p>hasBinaryComponents</p></li>
+<li><p>installDay</p></li>
+<li><p>updateDay</p></li>
+</ul>
+<p>With the exception of <em>installDay</em> and <em>updateDay</em>, all these properties
+come direct from the Addon instance. See <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Addons/Add-on_Manager/Addon">https://developer.mozilla.org/en-US/docs/Addons/Add-on_Manager/Addon</a>.
+<em>installDay</em> and <em>updateDay</em> are the number of days since UNIX epoch of
+the add-ons <em>installDate</em> and <em>updateDate</em> properties, respectively.</p>
+</div>
+<div class="section" id="notes">
+<h4>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h4>
+<p>Add-ons that have opted out of AMO updates via the
+<em>extensions._id_.getAddons.cache.enabled</em> preference are, since Bug 868306
+(Firefox 24), included in the list of submitted add-ons.</p>
+</div>
+<div class="section" id="id4">
+<h4>Example<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.addons.addons&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;{d10d0bf8-f5b5-c8b4-a8b2-2b9879e08c5d}&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Adblock Plus&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.4.1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Ads were yesterday!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">16093</span><span class="p">,</span>
+    <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">16093</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;{e4a8a97b-f2ed-450b-b12d-ee082ba24781}&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;userDisabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;appDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Greasemonkey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.14&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A User Script Manager for Firefox&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;foreignInstall&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;hasBinaryComponents&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;installDay&quot;</span><span class="p">:</span> <span class="mi">16093</span><span class="p">,</span>
+    <span class="s2">&quot;updateDay&quot;</span><span class="p">:</span> <span class="mi">16093</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-addons-plugins">
+<h3>org.mozilla.addons.plugins<a class="headerlink" href="#org-mozilla-addons-plugins" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the currently-installed plugins.</p>
+<div class="section" id="id5">
+<h4>Version 1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>The measurement object is a mapping of plugin IDs to objects containing
+plugin metadata.</p>
+<p>The plugin ID is constructed of the plugins filename, name, version and
+description. Every plugin has at least a filename and a name.</p>
+<p>Each plugin contains the following properties:</p>
+<ul class="simple">
+<li><p>name</p></li>
+<li><p>version</p></li>
+<li><p>description</p></li>
+<li><p>blocklisted</p></li>
+<li><p>disabled</p></li>
+<li><p>clicktoplay</p></li>
+<li><p>mimeTypes</p></li>
+<li><p>updateDay</p></li>
+</ul>
+<p>With the exception of <em>updateDay</em> and <em>mimeTypes</em>, all these properties come
+directly from <code class="docutils literal notranslate"><span class="pre">nsIPluginTag</span></code> via <code class="docutils literal notranslate"><span class="pre">nsIPluginHost</span></code>.
+<em>updateDay</em> is the number of days since UNIX epoch of the plugins last modified
+time.
+<em>mimeTypes</em> is the list of mimetypes the plugin supports, see
+<code class="docutils literal notranslate"><span class="pre">nsIPluginTag.getMimeTypes()</span></code>.</p>
+</div>
+<div class="section" id="id6">
+<h4>Example<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.addons.plugins&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;Flash Player.plugin:Shockwave Flash:12.0.0.38:Shockwave Flash 12.0 r0&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;mimeTypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;application/x-shockwave-flash&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;application/futuresplash&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Shockwave Flash&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;12.0.0.38&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Shockwave Flash 12.0 r0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;blocklisted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;disabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;clicktoplay&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;Default Browser.plugin:Default Browser Helper:537:Provides information about the default web browser&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;mimeTypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;application/apple-default-browser&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Default Browser Helper&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;537&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Provides information about the default web browser&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;blocklisted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">&quot;disabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">&quot;clicktoplay&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-addons-counts">
+<h3>org.mozilla.addons.counts<a class="headerlink" href="#org-mozilla-addons-counts" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about historical add-on counts.</p>
+<div class="section" id="id7">
+<h4>Version 1<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>The measurement object consists of counts of different add-on types. The
+properties are:</p>
+<dl class="simple">
+<dt>extension</dt><dd><p>Integer count of installed extensions.</p>
+</dd>
+<dt>plugin</dt><dd><p>Integer count of installed plugins.</p>
+</dd>
+<dt>theme</dt><dd><p>Integer count of installed themes.</p>
+</dd>
+<dt>lwtheme</dt><dd><p>Integer count of installed lightweight themes.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id8">
+<h4>Notes<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>Add-ons opted out of AMO updates are included in the counts. This differs from
+the behavior of the active add-ons measurement.</p>
+<p>If no add-ons of a particular type are installed, the property for that type
+will not be present (as opposed to an explicit property with value of 0).</p>
+</div>
+<div class="section" id="id9">
+<h4>Example<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;2013-03-14&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;org.mozilla.addons.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;extension&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="s2">&quot;plugin&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-appinfo-appinfo">
+<h3>org.mozilla.appInfo.appinfo<a class="headerlink" href="#org-mozilla-appinfo-appinfo" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains basic XUL application and Gecko platform
+information. It is reported in the <em>last</em> section.</p>
+<div class="section" id="id10">
+<h4>Version 2<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p>In addition to fields present in version 1, this version has the following
+fields appearing in the <em>days</em> section:</p>
+<dl class="simple">
+<dt>isBlocklistEnabled</dt><dd><p>Whether the blocklist ping is enabled. This is an integer, 0 or 1.
+This does not indicate whether the blocklist ping was sent but merely
+whether the application will try to send the blocklist ping.</p>
+</dd>
+<dt>isTelemetryEnabled</dt><dd><p>Whether Telemetry is enabled. This is an integer, 0 or 1.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id11">
+<h4>Version 1<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<p>The measurement object contains mostly string values describing the
+current application and build. The properties are:</p>
+<ul class="simple">
+<li><p>vendor</p></li>
+<li><p>name</p></li>
+<li><p>id</p></li>
+<li><p>version</p></li>
+<li><p>appBuildID</p></li>
+<li><p>platformVersion</p></li>
+<li><p>platformBuildID</p></li>
+<li><p>os</p></li>
+<li><p>xpcomabi</p></li>
+<li><p>updateChannel</p></li>
+<li><p>distributionID</p></li>
+<li><p>distributionVersion</p></li>
+<li><p>hotfixVersion</p></li>
+<li><p>locale</p></li>
+<li><p>isDefaultBrowser</p></li>
+</ul>
+</div>
+<div class="section" id="id12">
+<h4>Notes<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<p>All of the properties appear in the <em>last</em> section except for
+<em>isDefaultBrowser</em>, which appears under <em>days</em>.</p>
+</div>
+<div class="section" id="id13">
+<h4>Example<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<p>This example comes from an official macOS Nightly build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.appInfo.appinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130311030946&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;distributionID&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;distributionVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;hotfixVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;{ec8030f7-c20a-464f-9b0e-13a3a9e97384}&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;locale&quot;</span><span class="p">:</span> <span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Firefox&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="s2">&quot;20130311030946&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;platformVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;22.0a1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;updateChannel&quot;</span><span class="p">:</span> <span class="s2">&quot;nightly&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;22.0a1&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;xpcomabi&quot;</span><span class="p">:</span> <span class="s2">&quot;x86_64-gcc3&quot;</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-appinfo-update">
+<h3>org.mozilla.appInfo.update<a class="headerlink" href="#org-mozilla-appinfo-update" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the application update mechanism
+in the application.</p>
+<div class="section" id="id14">
+<h4>Version 1<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
+<p>The following daily values are reported:</p>
+<dl class="simple">
+<dt>enabled</dt><dd><p>Whether automatic application update checking is enabled. 1 for yes,
+0 for no.</p>
+</dd>
+<dt>autoDownload</dt><dd><p>Whether automatic download of available updates is enabled.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id15">
+<h4>Notes<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<p>This measurement was merged to mozilla-central for JS FHR on 2013-07-15.</p>
+</div>
+<div class="section" id="id16">
+<h4>Example<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;2013-07-15&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;org.mozilla.appInfo.update&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;autoDownload&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-appinfo-versions">
+<h3>org.mozilla.appInfo.versions<a class="headerlink" href="#org-mozilla-appinfo-versions" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains a history of application version numbers.</p>
+<div class="section" id="id17">
+<h4>Version 2<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<p>Version 2 reports more fields than version 1 and is not backwards compatible.
+The following fields are present in version 2:</p>
+<dl class="simple">
+<dt>appVersion</dt><dd><p>An array of application version strings.</p>
+</dd>
+<dt>appBuildID</dt><dd><p>An array of application build ID strings.</p>
+</dd>
+<dt>platformVersion</dt><dd><p>An array of platform version strings.</p>
+</dd>
+<dt>platformBuildID</dt><dd><p>An array of platform build ID strings.</p>
+</dd>
+</dl>
+<p>When the application is upgraded, the new version and/or build IDs are
+appended to their appropriate fields.</p>
+</div>
+<div class="section" id="id18">
+<h4>Version 1<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<p>When the application version (<em>version</em> from <em>org.mozilla.appinfo.appinfo</em>)
+changes, we record the new version on the day the change was seen. The new
+versions for a day are recorded in an array under the <em>version</em> property.</p>
+</div>
+<div class="section" id="id19">
+<h4>Notes<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<p>If the application isn’t upgraded, this measurement will not be present.
+This means this measurement will not be present for most days if a user is
+on the release channel (since updates are typically released every 6 weeks).
+However, users on the Nightly and Aurora channels will likely have a lot
+of these entries since those builds are updated every day.</p>
+<p>Values for this measurement are collected when performing the daily
+collection (typically occurs at upload time). As a result, it’s possible
+the actual upgrade day may not be attributed to the proper day - the
+reported day may lag behind.</p>
+<p>The app and platform versions and build IDs should be identical for most
+clients. If they are different, we are possibly looking at a <em>Frankenfox</em>.</p>
+</div>
+<div class="section" id="id20">
+<h4>Example<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;2013-03-27&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;org.mozilla.appInfo.versions&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;appVersion&quot;</span><span class="p">:</span> <span class="p">[</span>
+       <span class="s2">&quot;22.0.0&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;appBuildID&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;20130325031100&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;platformVersion&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;22.0.0&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;platformBuildID&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">&quot;20130325031100&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-appsessions-current">
+<h3>org.mozilla.appSessions.current<a class="headerlink" href="#org-mozilla-appsessions-current" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the currently running XUL
+application’s session.</p>
+<div class="section" id="id21">
+<h4>Version 3<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h4>
+<p>This measurement has the following properties:</p>
+<dl class="simple">
+<dt>startDay</dt><dd><p>Integer days since UNIX epoch when this session began.</p>
+</dd>
+<dt>activeTicks</dt><dd><p>Integer count of <em>ticks</em> the session was active for. Gecko periodically
+sends out a signal when the session is active. Session activity
+involves keyboard or mouse interaction with the application. Each tick
+represents a window of 5 seconds where there was interaction.</p>
+</dd>
+<dt>totalTime</dt><dd><p>Integer seconds the session has been alive.</p>
+</dd>
+<dt>main</dt><dd><p>Integer milliseconds it took for the Gecko process to start up.</p>
+</dd>
+<dt>firstPaint</dt><dd><p>Integer milliseconds from process start to first paint.</p>
+</dd>
+<dt>sessionRestored</dt><dd><p>Integer milliseconds from process start to session restore.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id22">
+<h4>Example<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.appSessions.current&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;startDay&quot;</span><span class="p">:</span> <span class="mi">15775</span><span class="p">,</span>
+  <span class="s2">&quot;activeTicks&quot;</span><span class="p">:</span> <span class="mi">4282</span><span class="p">,</span>
+  <span class="s2">&quot;totalTime&quot;</span><span class="p">:</span> <span class="mi">249422</span><span class="p">,</span>
+  <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="mi">851</span><span class="p">,</span>
+  <span class="s2">&quot;firstPaint&quot;</span><span class="p">:</span> <span class="mi">3271</span><span class="p">,</span>
+  <span class="s2">&quot;sessionRestored&quot;</span><span class="p">:</span> <span class="mi">5998</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-appsessions-previous">
+<h3>org.mozilla.appSessions.previous<a class="headerlink" href="#org-mozilla-appsessions-previous" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about previous XUL application sessions.</p>
+<div class="section" id="id23">
+<h4>Version 3<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h4>
+<p>This measurement contains per-day lists of all the sessions started on that
+day. The following properties may be present:</p>
+<dl class="simple">
+<dt>cleanActiveTicks</dt><dd><p>Active ticks of sessions that were properly shut down.</p>
+</dd>
+<dt>cleanTotalTime</dt><dd><p>Total number of seconds for sessions that were properly shut down.</p>
+</dd>
+<dt>abortedActiveTicks</dt><dd><p>Active ticks of sessions that were not properly shut down.</p>
+</dd>
+<dt>abortedTotalTime</dt><dd><p>Total number of seconds for sessions that were not properly shut down.</p>
+</dd>
+<dt>main</dt><dd><p>Time in milliseconds from process start to main process initialization.</p>
+</dd>
+<dt>firstPaint</dt><dd><p>Time in milliseconds from process start to first paint.</p>
+</dd>
+<dt>sessionRestored</dt><dd><p>Time in milliseconds from process start to session restore.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id24">
+<h4>Notes<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h4>
+<p>Sessions are recorded on the date on which they began.</p>
+<p>If a session was aborted/crashed, the total time may be less than the actual
+total time. This is because we don’t always update total time during periods
+of inactivity and the abort/crash could occur after a long period of idle,
+before we’ve updated the total time.</p>
+<p>The lengths of the arrays for {cleanActiveTicks, cleanTotalTime},
+{abortedActiveTicks, abortedTotalTime}, and {main, firstPaint, sessionRestored}
+should all be identical.</p>
+<p>The length of the clean sessions plus the length of the aborted sessions should
+be equal to the length of the {main, firstPaint, sessionRestored} properties.</p>
+<p>It is not possible to distinguish the main, firstPaint, and sessionRestored
+values from a clean vs aborted session: they are all lumped together.</p>
+<p>For sessions spanning multiple UTC days, it’s not possible to know which
+days the session was active for. It’s possible a week long session only
+had activity for 2 days and there’s no way for us to tell which days.</p>
+</div>
+<div class="section" id="id25">
+<h4>Example<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.appSessions.previous&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;cleanActiveTicks&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">78</span><span class="p">,</span>
+    <span class="mi">1785</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;cleanTotalTime&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">4472</span><span class="p">,</span>
+    <span class="mi">88908</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">32</span><span class="p">,</span>
+    <span class="mi">952</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;firstPaint&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">2755</span><span class="p">,</span>
+    <span class="mi">3497</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;sessionRestored&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="mi">5149</span><span class="p">,</span>
+    <span class="mi">5520</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-crashes-crashes">
+<h3>org.mozilla.crashes.crashes<a class="headerlink" href="#org-mozilla-crashes-crashes" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains a historical record of application crashes.</p>
+<div class="section" id="version-6">
+<h4>Version 6<a class="headerlink" href="#version-6" title="Permalink to this headline">¶</a></h4>
+<p>This version adds tracking for out-of-memory (OOM) crashes in the main process.
+An OOM crash will be counted as both main-crash and main-crash-oom.</p>
+<p>This measurement will be reported on each day there was a crash or crash
+submission. Records may contain the following fields, whose values indicate
+the number of crashes, hangs, or submissions that occurred on the given day:</p>
+<ul class="simple">
+<li><p>content-crash</p></li>
+<li><p>content-crash-submission-succeeded</p></li>
+<li><p>content-crash-submission-failed</p></li>
+<li><p>content-hang</p></li>
+<li><p>content-hang-submission-succeeded</p></li>
+<li><p>content-hang-submission-failed</p></li>
+<li><p>gmplugin-crash</p></li>
+<li><p>gmplugin-crash-submission-succeeded</p></li>
+<li><p>gmplugin-crash-submission-failed</p></li>
+<li><p>main-crash</p></li>
+<li><p>main-crash-oom</p></li>
+<li><p>main-crash-submission-succeeded</p></li>
+<li><p>main-crash-submission-failed</p></li>
+<li><p>main-hang</p></li>
+<li><p>main-hang-submission-succeeded</p></li>
+<li><p>main-hang-submission-failed</p></li>
+<li><p>plugin-crash</p></li>
+<li><p>plugin-crash-submission-succeeded</p></li>
+<li><p>plugin-crash-submission-failed</p></li>
+<li><p>plugin-hang</p></li>
+<li><p>plugin-hang-submission-succeeded</p></li>
+<li><p>plugin-hang-submission-failed</p></li>
+</ul>
+</div>
+<div class="section" id="version-5">
+<h4>Version 5<a class="headerlink" href="#version-5" title="Permalink to this headline">¶</a></h4>
+<p>This version adds support for Gecko media plugin (GMP) crashes.</p>
+<p>This measurement will be reported on each day there was a crash or crash
+submission. Records may contain the following fields, whose values indicate
+the number of crashes, hangs, or submissions that occurred on the given day:</p>
+<ul class="simple">
+<li><p>content-crash</p></li>
+<li><p>content-crash-submission-succeeded</p></li>
+<li><p>content-crash-submission-failed</p></li>
+<li><p>content-hang</p></li>
+<li><p>content-hang-submission-succeeded</p></li>
+<li><p>content-hang-submission-failed</p></li>
+<li><p>gmplugin-crash</p></li>
+<li><p>gmplugin-crash-submission-succeeded</p></li>
+<li><p>gmplugin-crash-submission-failed</p></li>
+<li><p>main-crash</p></li>
+<li><p>main-crash-submission-succeeded</p></li>
+<li><p>main-crash-submission-failed</p></li>
+<li><p>main-hang</p></li>
+<li><p>main-hang-submission-succeeded</p></li>
+<li><p>main-hang-submission-failed</p></li>
+<li><p>plugin-crash</p></li>
+<li><p>plugin-crash-submission-succeeded</p></li>
+<li><p>plugin-crash-submission-failed</p></li>
+<li><p>plugin-hang</p></li>
+<li><p>plugin-hang-submission-succeeded</p></li>
+<li><p>plugin-hang-submission-failed</p></li>
+</ul>
+</div>
+<div class="section" id="version-4">
+<h4>Version 4<a class="headerlink" href="#version-4" title="Permalink to this headline">¶</a></h4>
+<p>This version follows up from version 3, adding submissions which are now
+tracked by the <a class="reference internal" href="../../../crashes/crash-manager/index.html#crashes-crashmanager"><span class="std std-ref">Crash Manager</span></a>.</p>
+<p>This measurement will be reported on each day there was a crash or crash
+submission. Records may contain the following fields, whose values indicate
+the number of crashes, hangs, or submissions that occurred on the given day:</p>
+<ul class="simple">
+<li><p>main-crash</p></li>
+<li><p>main-crash-submission-succeeded</p></li>
+<li><p>main-crash-submission-failed</p></li>
+<li><p>main-hang</p></li>
+<li><p>main-hang-submission-succeeded</p></li>
+<li><p>main-hang-submission-failed</p></li>
+<li><p>content-crash</p></li>
+<li><p>content-crash-submission-succeeded</p></li>
+<li><p>content-crash-submission-failed</p></li>
+<li><p>content-hang</p></li>
+<li><p>content-hang-submission-succeeded</p></li>
+<li><p>content-hang-submission-failed</p></li>
+<li><p>plugin-crash</p></li>
+<li><p>plugin-crash-submission-succeeded</p></li>
+<li><p>plugin-crash-submission-failed</p></li>
+<li><p>plugin-hang</p></li>
+<li><p>plugin-hang-submission-succeeded</p></li>
+<li><p>plugin-hang-submission-failed</p></li>
+</ul>
+</div>
+<div class="section" id="id26">
+<h4>Version 3<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h4>
+<p>This version follows up from version 2, building on improvements to
+the <a class="reference internal" href="../../../crashes/crash-manager/index.html#crashes-crashmanager"><span class="std std-ref">Crash Manager</span></a>.</p>
+<p>This measurement will be reported on each day there was a
+crash. Records may contain the following fields, whose values indicate
+the number of crashes or hangs that occurred on the given day:</p>
+<ul class="simple">
+<li><p>main-crash</p></li>
+<li><p>main-hang</p></li>
+<li><p>content-crash</p></li>
+<li><p>content-hang</p></li>
+<li><p>plugin-crash</p></li>
+<li><p>plugin-hang</p></li>
+</ul>
+</div>
+<div class="section" id="id27">
+<h4>Version 2<a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h4>
+<p>The switch to version 2 coincides with the introduction of the
+<a class="reference internal" href="../../../crashes/crash-manager/index.html#crashes-crashmanager"><span class="std std-ref">Crash Manager</span></a>, which provides a more robust source of
+crash data.</p>
+<p>This measurement will be reported on each day there was a crash. The
+following fields may be present in each record:</p>
+<dl class="simple">
+<dt>mainCrash</dt><dd><p>The number of main process crashes that occurred on the given day.</p>
+</dd>
+</dl>
+<p>Yes, version 2 does not track submissions like version 1. It is very
+likely submissions will be re-added later.</p>
+<p>Also absent from version 2 are plugin crashes and hangs. These will be
+re-added, likely in version 3.</p>
+</div>
+<div class="section" id="id28">
+<h4>Version 1<a class="headerlink" href="#id28" title="Permalink to this headline">¶</a></h4>
+<p>This measurement will be reported on each day there was a crash. The
+following properties are reported:</p>
+<dl class="simple">
+<dt>pending</dt><dd><p>The number of crash reports that haven’t been submitted.</p>
+</dd>
+<dt>submitted</dt><dd><p>The number of crash reports that were submitted.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id29">
+<h4>Notes<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h4>
+<p>Main process crashes are typically submitted immediately after they
+occur (by checking a box in the crash reporter, which should appear
+automatically after a crash). If the crash reporter submits the crash
+successfully, we get a submitted crash. Else, we leave it as pending.</p>
+<p>A pending crash does not mean it will eventually be submitted.</p>
+<p>Pending crash reports can be submitted post-crash by going to
+<a class="reference external" href="about:crashes">about:crashes</a>.</p>
+<p>If a pending crash is submitted via <a class="reference external" href="about:crashes">about:crashes</a>, the submitted count
+increments but the pending count does not decrement. This is because FHR
+does not know which pending crash was just submitted and therefore it does
+not know which day’s pending crash to decrement.</p>
+</div>
+<div class="section" id="id30">
+<h4>Example<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.crashes.crashes&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;pending&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;submitted&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">},</span>
+<span class="s2">&quot;org.mozilla.crashes.crashes&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;mainCrash&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+<span class="s2">&quot;org.mozilla.crashes.crashes&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="s2">&quot;main-crash&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;main-crash-submission-succeeded&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;main-crash-submission-failed&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;main-hang&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;plugin-crash&quot;</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-healthreport-submissions">
+<h3>org.mozilla.healthreport.submissions<a class="headerlink" href="#org-mozilla-healthreport-submissions" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains a history of FHR’s own data submission activity.
+It was added in Firefox 23 in early May 2013.</p>
+<div class="section" id="id31">
+<h4>Version 2<a class="headerlink" href="#id31" title="Permalink to this headline">¶</a></h4>
+<p>This is the same as version 1 except an additional field has been added.</p>
+<dl class="simple">
+<dt>uploadAlreadyInProgress</dt><dd><p>A request for upload was initiated while another upload was in progress.
+This should not occur in well-behaving clients. It (along with a lock
+preventing simultaneous upload) was added to ensure this never occurs.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id32">
+<h4>Version 1<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h4>
+<p>Daily counts of upload events are recorded.</p>
+<dl class="simple">
+<dt>firstDocumentUploadAttempt</dt><dd><p>An attempt was made to upload the client’s first document to the server.
+These are uploads where the client is not aware of a previous document ID
+on the server. Unless the client had disabled upload, there should be at
+most one of these in the history of the client.</p>
+</dd>
+<dt>continuationUploadAttempt</dt><dd><p>An attempt was made to upload a document that replaces an existing document
+on the server. Most upload attempts should be attributed to this as opposed
+to <em>firstDocumentUploadAttempt</em>.</p>
+</dd>
+<dt>uploadSuccess</dt><dd><p>The upload attempt recorded by <em>firstDocumentUploadAttempt</em> or
+<em>continuationUploadAttempt</em> was successful.</p>
+</dd>
+<dt>uploadTransportFailure</dt><dd><p>An upload attempt failed due to transport failure (network unavailable,
+etc).</p>
+</dd>
+<dt>uploadServerFailure</dt><dd><p>An upload attempt failed due to a server-reported failure. Ideally these
+are failures reported by the FHR server itself. However, intermediate
+proxies, firewalls, etc may trigger this depending on how things are
+configured.</p>
+</dd>
+<dt>uploadClientFailure</dt><dd><p>An upload attempt failued due to an error/exception in the client.
+This almost certainly points to a bug in the client.</p>
+</dd>
+</dl>
+<p>The result for an upload attempt is always attributed to the same day as
+the attempt, even if the result occurred on a different day from the attempt.
+Therefore, the sum of the result counts should equal the result of the attempt
+counts.</p>
+</div>
+</div>
+<div class="section" id="org-mozilla-hotfix-update">
+<h3>org.mozilla.hotfix.update<a class="headerlink" href="#org-mozilla-hotfix-update" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains results from the Firefox update hotfix.</p>
+<p>The Firefox update hotfix bypasses the built-in application update mechanism
+and installs a modern Firefox.</p>
+<div class="section" id="id33">
+<h4>Version 1<a class="headerlink" href="#id33" title="Permalink to this headline">¶</a></h4>
+<p>The fields in this measurement are dynamically created based on which
+versions of the update hotfix state file are found on disk.</p>
+<p>The general format of the fields is <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;.&lt;thing&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">version</span></code>
+is a hotfix version like <code class="docutils literal notranslate"><span class="pre">v20140527</span></code> and <code class="docutils literal notranslate"><span class="pre">thing</span></code> is a key from the
+hotfix state file, e.g. <code class="docutils literal notranslate"><span class="pre">upgradedFrom</span></code>. Here are some of the <code class="docutils literal notranslate"><span class="pre">things</span></code>
+that can be defined.</p>
+<dl class="simple">
+<dt>upgradedFrom</dt><dd><p>String identifying the Firefox version that the hotfix upgraded from.
+e.g. <code class="docutils literal notranslate"><span class="pre">16.0</span></code> or <code class="docutils literal notranslate"><span class="pre">17.0.1</span></code>.</p>
+</dd>
+<dt>uninstallReason</dt><dd><p>String with enumerated values identifying why the hotfix was uninstalled.
+Value will be <code class="docutils literal notranslate"><span class="pre">STILL_INSTALLED</span></code> if the hotfix is still installed.</p>
+</dd>
+<dt>downloadAttempts</dt><dd><p>Integer number of times the hotfix started downloading an installer.
+Download resumes are part of this count.</p>
+</dd>
+<dt>downloadFailures</dt><dd><p>Integer count of times a download supposedly completed but couldn’t
+be validated. This likely represents something wrong with the network
+connection. The ratio of this to <code class="docutils literal notranslate"><span class="pre">downloadAttempts</span></code> should be low.</p>
+</dd>
+<dt>installAttempts</dt><dd><p>Integer count of times the hotfix attempted to run the installer.
+This should ideally be 1. It should only be greater than 1 if UAC
+elevation was canceled or not allowed.</p>
+</dd>
+<dt>installFailures</dt><dd><p>Integer count of total installation failures this client experienced.
+Can be 0. <code class="docutils literal notranslate"><span class="pre">installAttempts</span> <span class="pre">-</span> <span class="pre">installFailures</span></code> implies install successes.</p>
+</dd>
+<dt>notificationsShown</dt><dd><p>Integer count of times a notification was displayed to the user that
+they are running an older Firefox.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="org-mozilla-places-places">
+<h3>org.mozilla.places.places<a class="headerlink" href="#org-mozilla-places-places" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the Places database (where Firefox
+stores its history and bookmarks).</p>
+<div class="section" id="id34">
+<h4>Version 1<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h4>
+<p>Daily counts of items in the database are reported in the following properties:</p>
+<dl class="simple">
+<dt>bookmarks</dt><dd><p>Integer count of bookmarks present.</p>
+</dd>
+<dt>pages</dt><dd><p>Integer count of pages in the history database.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id35">
+<h4>Example<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.places.places&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;bookmarks&quot;</span><span class="p">:</span> <span class="mi">388</span><span class="p">,</span>
+  <span class="s2">&quot;pages&quot;</span><span class="p">:</span> <span class="mi">94870</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-profile-age">
+<h3>org.mozilla.profile.age<a class="headerlink" href="#org-mozilla-profile-age" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about the current profile’s age (and
+in version 2, the profile’s most recent reset date)</p>
+<div class="section" id="id36">
+<h4>Version 2<a class="headerlink" href="#id36" title="Permalink to this headline">¶</a></h4>
+<p><em>profileCreation</em> and <em>profileReset</em> properties are present.  Both define
+the integer days since UNIX epoch that the current profile was created or
+reset accordingly.</p>
+</div>
+<div class="section" id="id37">
+<h4>Version 1<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h4>
+<p>A single <em>profileCreation</em> property is present. It defines the integer
+days since UNIX epoch that the current profile was created.</p>
+</div>
+<div class="section" id="id38">
+<h4>Notes<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h4>
+<p>It is somewhat difficult to obtain a reliable <em>profile born date</em> due to a
+number of factors, but since Version 2, improvements have been made - on a
+“profile reset” we copy the profileCreation date from the old profile and
+record the time of the reset in profileReset.</p>
+</div>
+<div class="section" id="id39">
+<h4>Example<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.profile.age&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;profileCreation&quot;</span><span class="p">:</span> <span class="mi">15176</span>
+  <span class="s2">&quot;profileReset&quot;</span><span class="p">:</span> <span class="mi">15576</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-searches-counts">
+<h3>org.mozilla.searches.counts<a class="headerlink" href="#org-mozilla-searches-counts" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about searches performed in the
+application.</p>
+<div class="section" id="version-6-mobile">
+<h4>Version 6 (mobile)<a class="headerlink" href="#version-6-mobile" title="Permalink to this headline">¶</a></h4>
+<p>This adds two new search locations: <em>widget</em> and <em>activity</em>, corresponding to the search widget and search activity respectively.</p>
+</div>
+<div class="section" id="id40">
+<h4>Version 2<a class="headerlink" href="#id40" title="Permalink to this headline">¶</a></h4>
+<p>This behaves like version 1 except we added all search engines that
+Mozilla has a partner agreement with. Like version 1, we concatenate
+a search engine ID with a search origin.</p>
+<p>Another difference with version 2 is we should no longer misattribute
+a search to the <em>other</em> bucket if the search engine name is localized.</p>
+<p>The set of search engine providers is:</p>
+<ul class="simple">
+<li><p>amazon-co-uk</p></li>
+<li><p>amazon-de</p></li>
+<li><p>amazon-en-GB</p></li>
+<li><p>amazon-france</p></li>
+<li><p>amazon-it</p></li>
+<li><p>amazon-jp</p></li>
+<li><p>amazondotcn</p></li>
+<li><p>amazondotcom</p></li>
+<li><p>amazondotcom-de</p></li>
+<li><p>aol-en-GB</p></li>
+<li><p>aol-web-search</p></li>
+<li><p>bing</p></li>
+<li><p>eBay</p></li>
+<li><p>eBay-de</p></li>
+<li><p>eBay-en-GB</p></li>
+<li><p>eBay-es</p></li>
+<li><p>eBay-fi</p></li>
+<li><p>eBay-france</p></li>
+<li><p>eBay-hu</p></li>
+<li><p>eBay-in</p></li>
+<li><p>eBay-it</p></li>
+<li><p>google</p></li>
+<li><p>google-jp</p></li>
+<li><p>google-ku</p></li>
+<li><p>google-maps-zh-TW</p></li>
+<li><p>mailru</p></li>
+<li><p>mercadolibre-ar</p></li>
+<li><p>mercadolibre-cl</p></li>
+<li><p>mercadolibre-mx</p></li>
+<li><p>seznam-cz</p></li>
+<li><p>twitter</p></li>
+<li><p>twitter-de</p></li>
+<li><p>twitter-ja</p></li>
+<li><p>yahoo</p></li>
+<li><p>yahoo-NO</p></li>
+<li><p>yahoo-answer-zh-TW</p></li>
+<li><p>yahoo-ar</p></li>
+<li><p>yahoo-bid-zh-TW</p></li>
+<li><p>yahoo-br</p></li>
+<li><p>yahoo-ch</p></li>
+<li><p>yahoo-cl</p></li>
+<li><p>yahoo-de</p></li>
+<li><p>yahoo-en-GB</p></li>
+<li><p>yahoo-es</p></li>
+<li><p>yahoo-fi</p></li>
+<li><p>yahoo-france</p></li>
+<li><p>yahoo-fy-NL</p></li>
+<li><p>yahoo-id</p></li>
+<li><p>yahoo-in</p></li>
+<li><p>yahoo-it</p></li>
+<li><p>yahoo-jp</p></li>
+<li><p>yahoo-jp-auctions</p></li>
+<li><p>yahoo-mx</p></li>
+<li><p>yahoo-sv-SE</p></li>
+<li><p>yahoo-zh-TW</p></li>
+<li><p>yandex</p></li>
+<li><p>yandex-ru</p></li>
+<li><p>yandex-slovari</p></li>
+<li><p>yandex-tr</p></li>
+<li><p>yandex.by</p></li>
+<li><p>yandex.ru-be</p></li>
+</ul>
+<p>And of course, <em>other</em>.</p>
+<p>The sources for searches remain:</p>
+<ul class="simple">
+<li><p>abouthome</p></li>
+<li><p>contextmenu</p></li>
+<li><p>searchbar</p></li>
+<li><p>urlbar</p></li>
+</ul>
+<p>The measurement will only be populated with providers and sources that
+occurred that day.</p>
+<p>If a user switches locales, searches from default providers on the older
+locale will still be supported. However, if that same search engine is
+added by the user to the new build and is <em>not</em> a default search engine
+provider, its searches will be attributed to the <em>other</em> bucket.</p>
+</div>
+<div class="section" id="id41">
+<h4>Version 1<a class="headerlink" href="#id41" title="Permalink to this headline">¶</a></h4>
+<p>We record counts of performed searches grouped by search engine and search
+origin. Only search engines with which Mozilla has a business relationship
+are explicitly counted. All other search engines are grouped into an
+<em>other</em> bucket.</p>
+<p>The following search engines are explicitly counted:</p>
+<ul class="simple">
+<li><p>Amazon.com</p></li>
+<li><p>Bing</p></li>
+<li><p>Google</p></li>
+<li><p>Yahoo</p></li>
+<li><p>Other</p></li>
+</ul>
+<p>The following search origins are distinguished:</p>
+<dl class="simple">
+<dt><a class="reference external" href="about:home">about:home</a></dt><dd><p>Searches initiated from the search text box on <a class="reference external" href="about:home">about:home</a>.</p>
+</dd>
+<dt>context menu</dt><dd><p>Searches initiated from the context menu (highlight text, right click,
+and select “search for…”)</p>
+</dd>
+<dt>search bar</dt><dd><p>Searches initiated from the search bar (the text field next to the
+Awesomebar)</p>
+</dd>
+<dt>url bar</dt><dd><p>Searches initiated from the awesomebar/url bar.</p>
+</dd>
+</dl>
+<p>Due to the localization of search engine names, non en-US locales may wrongly
+attribute searches to the <em>other</em> bucket. This is fixed in version 2.</p>
+</div>
+<div class="section" id="id42">
+<h4>Example<a class="headerlink" href="#id42" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.searches.counts&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;google.searchbar&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;google.urlbar&quot;</span><span class="p">:</span> <span class="mi">7</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-searches-engines">
+<h3>org.mozilla.searches.engines<a class="headerlink" href="#org-mozilla-searches-engines" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains information about search engines.</p>
+<div class="section" id="id43">
+<h4>Version 1<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h4>
+<p>This version debuted with Firefox 31 on desktop. It contains the
+following properties:</p>
+<dl>
+<dt>default</dt><dd><p>Daily string identifier or name of the default search engine provider.</p>
+<p>This field will only be collected if Telemetry is enabled. If
+Telemetry is enabled and then later disabled, this field may
+disappear from future days in the payload.</p>
+<p>The special value <code class="docutils literal notranslate"><span class="pre">NONE</span></code> could occur if there is no default search
+engine.</p>
+<p>The special value <code class="docutils literal notranslate"><span class="pre">UNDEFINED</span></code> could occur if a default search
+engine exists but its identifier could not be determined.</p>
+<p>This field’s contents are
+<code class="docutils literal notranslate"><span class="pre">Services.search.defaultEngine.identifier</span></code> (if defined) or
+<code class="docutils literal notranslate"><span class="pre">&quot;other-&quot;</span></code> + <code class="docutils literal notranslate"><span class="pre">Services.search.defaultEngine.name</span></code> if not.
+In other words, search engines without an <code class="docutils literal notranslate"><span class="pre">.identifier</span></code>
+are prefixed with <code class="docutils literal notranslate"><span class="pre">other-</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id44">
+<h4>Version 2<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h4>
+<p>Starting with Firefox 40, there is an additional optional value:</p>
+<dl class="simple">
+<dt>cohort</dt><dd><p>Daily cohort string identifier, recorded if the user is part of
+search defaults A/B testing.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="org-mozilla-sync-sync">
+<h3>org.mozilla.sync.sync<a class="headerlink" href="#org-mozilla-sync-sync" title="Permalink to this headline">¶</a></h3>
+<p>This daily measurement contains information about the Sync service.</p>
+<p>Values should be recorded for every day FHR measurements occurred.</p>
+<div class="section" id="id45">
+<h4>Version 1<a class="headerlink" href="#id45" title="Permalink to this headline">¶</a></h4>
+<p>This version debuted with Firefox 30 on desktop. It contains the following
+properties:</p>
+<dl>
+<dt>enabled</dt><dd><p>Daily numeric indicating whether Sync is configured and enabled. 1 if so,
+0 otherwise.</p>
+</dd>
+<dt>preferredProtocol</dt><dd><p>String version of the maximum Sync protocol version the client supports.
+This will be <code class="docutils literal notranslate"><span class="pre">1.1</span></code> for for legacy Sync and <code class="docutils literal notranslate"><span class="pre">1.5</span></code> for clients that
+speak the Firefox Accounts protocol.</p>
+</dd>
+<dt>actualProtocol</dt><dd><p>The actual Sync protocol version the client is configured to use.</p>
+<p>This will be <code class="docutils literal notranslate"><span class="pre">1.1</span></code> if the client is configured with the legacy Sync
+service or if the client only supports <code class="docutils literal notranslate"><span class="pre">1.1</span></code>.</p>
+<p>It will be <code class="docutils literal notranslate"><span class="pre">1.5</span></code> if the client supports <code class="docutils literal notranslate"><span class="pre">1.5</span></code> and either a) the
+client is not configured b) the client is using Firefox Accounts Sync.</p>
+</dd>
+<dt>syncStart</dt><dd><p>Count of sync operations performed.</p>
+</dd>
+<dt>syncSuccess</dt><dd><p>Count of sync operations that completed successfully.</p>
+</dd>
+<dt>syncError</dt><dd><p>Count of sync operations that did not complete successfully.</p>
+<p>This is a measure of overall sync success. This does <em>not</em> reflect
+recoverable errors (such as record conflict) that can occur during
+sync. This is thus a rough proxy of whether the sync service is
+operating without error.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="org-mozilla-sync-devices">
+<h3>org.mozilla.sync.devices<a class="headerlink" href="#org-mozilla-sync-devices" title="Permalink to this headline">¶</a></h3>
+<p>This daily measurement contains information about the device type composition
+for the configured Sync account.</p>
+<div class="section" id="id46">
+<h4>Version 1<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h4>
+<p>Version 1 was introduced with Firefox 30.</p>
+<p>Field names are dynamic according to the client-reported device types from
+Sync records. All fields are daily last seen integer values corresponding to
+the number of devices of that type.</p>
+<p>Common values include:</p>
+<dl class="simple">
+<dt>desktop</dt><dd><p>Corresponds to a Firefox desktop client.</p>
+</dd>
+<dt>mobile</dt><dd><p>Corresponds to a Fennec client.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="org-mozilla-sync-migration">
+<h3>org.mozilla.sync.migration<a class="headerlink" href="#org-mozilla-sync-migration" title="Permalink to this headline">¶</a></h3>
+<p>This daily measurement contains information about sync migration (that is, the
+semi-automated process of migrating a legacy sync account to an FxA account.)</p>
+<p>Measurements will start being recorded after a migration is offered by the
+sync server and stop after migration is complete or the user elects to “unlink”
+their sync account.  In other words, it is expected that users with Sync setup
+for FxA or with sync unconfigured will not collect data, and that for users
+where data is collected, the collection will only be for a relatively short
+period.</p>
+<div class="section" id="id47">
+<h4>Version 1<a class="headerlink" href="#id47" title="Permalink to this headline">¶</a></h4>
+<p>Version 1 was introduced with Firefox 37 and includes the following properties:</p>
+<dl class="simple">
+<dt>state</dt><dd><p>Corresponds to either a STATE_USER_* string or a STATE_INTERNAL_* string in
+FxaMigration.jsm.  This reflects a state where we are waiting for the user,
+or waiting for some internal process to complete on the way to completing
+the migration.</p>
+</dd>
+<dt>declined</dt><dd><p>Corresponds to the number of times the user closed the migration infobar.</p>
+</dd>
+<dt>unlinked</dt><dd><p>Set if the user declined to migrate and instead “unlinked” Sync from the
+browser.</p>
+</dd>
+<dt>accepted</dt><dd><p>Corresponds to the number of times the user explicitly elected to start or
+continue the migration - it counts how often the user clicked on any UI
+created specifically for migration. The “ideal” UX for migration would see
+this at exactly 1, some known edge-cases (eg, browser restart required to
+finish) could expect this to be 2, and anything more means we are doing
+something wrong.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="org-mozilla-sysinfo-sysinfo">
+<h3>org.mozilla.sysinfo.sysinfo<a class="headerlink" href="#org-mozilla-sysinfo-sysinfo" title="Permalink to this headline">¶</a></h3>
+<p>This measurement contains basic information about the system the application
+is running on.</p>
+<div class="section" id="id48">
+<h4>Version 2<a class="headerlink" href="#id48" title="Permalink to this headline">¶</a></h4>
+<p>This version debuted with Firefox 29 on desktop.</p>
+<p>A single property was introduced.</p>
+<dl>
+<dt>isWow64</dt><dd><p>If present, this property indicates whether the machine supports WoW64.
+This property can be used to identify whether the host machine is 64-bit.</p>
+<p>This property is only present on Windows machines. It is the preferred way
+to identify 32- vs 64-bit support in that environment.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id49">
+<h4>Version 1<a class="headerlink" href="#id49" title="Permalink to this headline">¶</a></h4>
+<p>The following properties may be available:</p>
+<dl class="simple">
+<dt>cpuCount</dt><dd><p>Integer number of CPUs/cores in the machine.</p>
+</dd>
+<dt>memoryMB</dt><dd><p>Integer megabytes of memory in the machine.</p>
+</dd>
+<dt>manufacturer</dt><dd><p>The manufacturer of the device.</p>
+</dd>
+<dt>device</dt><dd><p>The name of the device (like model number).</p>
+</dd>
+<dt>hardware</dt><dd><p>Unknown.</p>
+</dd>
+<dt>name</dt><dd><p>OS name.</p>
+</dd>
+<dt>version</dt><dd><p>OS version.</p>
+</dd>
+<dt>architecture</dt><dd><p>OS architecture that the application is built for. This is not the
+actual system architecture.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id50">
+<h4>Example<a class="headerlink" href="#id50" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.sysinfo.sysinfo&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;cpuCount&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">&quot;memoryMB&quot;</span><span class="p">:</span> <span class="mi">8192</span><span class="p">,</span>
+  <span class="s2">&quot;architecture&quot;</span><span class="p">:</span> <span class="s2">&quot;x86-64&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Darwin&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;12.2.0&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-translation-translation">
+<h3>org.mozilla.translation.translation<a class="headerlink" href="#org-mozilla-translation-translation" title="Permalink to this headline">¶</a></h3>
+<p>This daily measurement contains information about the usage of the translation
+feature. It is a special telemetry measurement which will only be recorded in
+FHR if telemetry is enabled.</p>
+<div class="section" id="id51">
+<h4>Version 1<a class="headerlink" href="#id51" title="Permalink to this headline">¶</a></h4>
+<p>Daily counts are reported in the following properties:</p>
+<dl class="simple">
+<dt>translationOpportunityCount</dt><dd><p>Integer count of the number of opportunities there were to translate a page.</p>
+</dd>
+<dt>missedTranslationOpportunityCount</dt><dd><p>Integer count of the number of missed opportunities there were to translate a page.
+A missed opportunity is when the page language is not supported by the translation
+provider.</p>
+</dd>
+<dt>pageTranslatedCount</dt><dd><p>Integer count of the number of pages translated.</p>
+</dd>
+<dt>charactersTranslatedCount</dt><dd><p>Integer count of the number of characters translated.</p>
+</dd>
+<dt>detectedLanguageChangedBefore</dt><dd><p>Integer count of the number of times the user manually adjusted the detected
+language before translating.</p>
+</dd>
+<dt>detectedLanguageChangedAfter</dt><dd><p>Integer count of the number of times the user manually adjusted the detected
+language after having first translated the page.</p>
+</dd>
+<dt>targetLanguageChanged</dt><dd><p>Integer count of the number of times the user manually adjusted the target
+language.</p>
+</dd>
+<dt>deniedTranslationOffer</dt><dd><p>Integer count of the number of times the user opted-out offered
+page translation, either by the Not Now button or by the notification’s
+close button in the “offer” state.</p>
+</dd>
+<dt>autoRejectedTranlationOffer</dt><dd><p>Integer count of the number of times the user is not offered page
+translation because they had previously clicked “Never translate this
+language” or “Never translate this site”.</p>
+</dd>
+<dt>showOriginalContent</dt><dd><p>Integer count of the number of times the user activated the Show Original
+command.</p>
+</dd>
+</dl>
+<p>Additional daily counts broken down by language are reported in the following
+properties:</p>
+<dl class="simple">
+<dt>translationOpportunityCountsByLanguage</dt><dd><p>A mapping from language to count of opportunities to translate that
+language.</p>
+</dd>
+<dt>missedTranslationOpportunityCountsByLanguage</dt><dd><p>A mapping from language to count of missed opportunities to translate that
+language.</p>
+</dd>
+<dt>pageTranslatedCountsByLanguage</dt><dd><p>A mapping from language to the counts of pages translated from that
+language. Each language entry will be an object containing a “total” member
+along with individual counts for each language translated to.</p>
+</dd>
+</dl>
+<p>Other properties:</p>
+<dl class="simple">
+<dt>detectLanguageEnabled</dt><dd><p>Whether automatic language detection is enabled. This is an integer, 0 or 1.</p>
+</dd>
+<dt>showTranslationUI</dt><dd><p>Whether the translation feature UI will be shown. This is an integer, 0 or 1.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id52">
+<h4>Example<a class="headerlink" href="#id52" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.translation.translation&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;detectLanguageEnabled&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;showTranslationUI&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;translationOpportunityCount&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+  <span class="s2">&quot;missedTranslationOpportunityCount&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="s2">&quot;pageTranslatedCount&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s2">&quot;charactersTranslatedCount&quot;</span><span class="p">:</span> <span class="s2">&quot;1126&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;detectedLanguageChangedBefore&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;detectedLanguageChangedAfter&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;targetLanguageChanged&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">&quot;deniedTranslationOffer&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">&quot;autoRejectedTranlationOffer&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;showOriginalContent&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;translationOpportunityCountsByLanguage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="mi">34</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;missedTranslationOpportunityCountsByLanguage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;it&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;nl&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;fi&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;pageTranslatedCountsByLanguage&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-experiments-info">
+<h3>org.mozilla.experiments.info<a class="headerlink" href="#org-mozilla-experiments-info" title="Permalink to this headline">¶</a></h3>
+<p>Daily measurement reporting information about the Telemetry Experiments service.</p>
+<div class="section" id="id53">
+<h4>Version 1<a class="headerlink" href="#id53" title="Permalink to this headline">¶</a></h4>
+<p>Property:</p>
+<dl class="simple">
+<dt>lastActive</dt><dd><p>ID of the final Telemetry Experiment that is active on a given day, if any.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id54">
+<h4>Version 2<a class="headerlink" href="#id54" title="Permalink to this headline">¶</a></h4>
+<p>Adds an additional optional property:</p>
+<dl class="simple">
+<dt>lastActiveBranch</dt><dd><p>If the experiment uses branches, the branch identifier string.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id55">
+<h4>Example<a class="headerlink" href="#id55" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.experiments.info&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;lastActive&quot;</span><span class="p">:</span> <span class="s2">&quot;some.experiment.id&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;lastActiveBranch&quot;</span><span class="p">:</span> <span class="s2">&quot;control&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-uitour-treatment">
+<h3>org.mozilla.uitour.treatment<a class="headerlink" href="#org-mozilla-uitour-treatment" title="Permalink to this headline">¶</a></h3>
+<p>Daily measurement reporting information about treatment tagging done
+by the UITour module.</p>
+<div class="section" id="id56">
+<h4>Version 1<a class="headerlink" href="#id56" title="Permalink to this headline">¶</a></h4>
+<p>Daily text values in the following properties:</p>
+<dl class="simple">
+<dt>&lt;tag&gt;:</dt><dd><p>Array of discrete strings corresponding to calls for setTreatmentTag(tag, value).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id57">
+<h4>Example<a class="headerlink" href="#id57" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.uitour.treatment&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;treatment&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;optin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;optin-DNT&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;another-tag&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;foobar-value&quot;</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="org-mozilla-passwordmgr-passwordmgr">
+<h3>org.mozilla.passwordmgr.passwordmgr<a class="headerlink" href="#org-mozilla-passwordmgr-passwordmgr" title="Permalink to this headline">¶</a></h3>
+<p>Daily measurement reporting information about the Password Manager</p>
+<div class="section" id="id58">
+<h4>Version 1<a class="headerlink" href="#id58" title="Permalink to this headline">¶</a></h4>
+<p>Property:</p>
+<dl class="simple">
+<dt>numSavedPasswords</dt><dd><p>number of passwords saved in the Password Manager</p>
+</dd>
+<dt>enabled</dt><dd><p>Whether or not the user has disabled the Password Manager in preferences</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id59">
+<h4>Example<a class="headerlink" href="#id59" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.passwordmgr.passwordmgr&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;numSavedPasswords&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id60">
+<h4>Version 2<a class="headerlink" href="#id60" title="Permalink to this headline">¶</a></h4>
+<p>More detailed measurements of login forms &amp; their behavior</p>
+<dl class="simple">
+<dt>numNewSavedPasswordsInSession</dt><dd><p>Number of passwords saved to the password manager this session.</p>
+</dd>
+<dt>numSuccessfulFills</dt><dd><p>Number of times the password manager filled in password fields for user this session.</p>
+</dd>
+<dt>numTotalLoginsEncountered</dt><dd><p>Number of times a login form was encountered by the user in the session.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id61">
+<h4>Example<a class="headerlink" href="#id61" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;org.mozilla.passwordmgr.passwordmgr&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">&quot;_v&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">&quot;numSavedPasswords&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+  <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">&quot;numNewSavedPasswords&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s2">&quot;numSuccessfulFills&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="s2">&quot;numTotalLoginsEncountered&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="identifiers.html" class="btn btn-neutral float-right" title="Identifiers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

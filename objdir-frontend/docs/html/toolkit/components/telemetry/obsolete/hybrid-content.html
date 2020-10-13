@@ -1,0 +1,646 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hybrid Content Telemetry (obsolete) &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="“optout” ping (obsolete)" href="optout-ping.html" />
+    <link rel="prev" title="Identifiers" href="fhr/identifiers.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../data/index.html">Data documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Obsolete Documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="uitelemetry/index.html">UITelemetry data format (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fhr/index.html">Firefox Health Report (Obsolete)</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Hybrid Content Telemetry (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="optout-ping.html">“optout” ping (obsolete)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Obsolete Documentation</a> &raquo;</li>
+        
+      <li>Hybrid Content Telemetry (obsolete)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/obsolete/hybrid-content.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hybrid-content-telemetry-obsolete">
+<h1>Hybrid Content Telemetry (obsolete)<a class="headerlink" href="#hybrid-content-telemetry-obsolete" title="Permalink to this headline">¶</a></h1>
+<p>Hybrid content is web content that is loaded as part of Firefox, appears as part of
+Firefox to the user and is primarily intended to be used in Firefox. This can be
+either a page that ships with Firefox or that can be loaded dynamically from our hosted
+services. Hybrid content telemetry allows Mozilla pages to check whether data
+collection is enabled and to submit Telemetry data.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Every new or changed data collection in Firefox (including hybrid content) needs a <a class="reference external" href="https://wiki.mozilla.org/Firefox/Data_Collection">data collection review</a> from a Data Steward.</p>
+</div>
+<p>The recorded data will be sent to Mozilla servers by Firefox, if the collection is enabled, with the <a class="reference internal" href="../data/main-ping.html"><span class="doc">main-ping</span></a>.</p>
+<div class="section" id="adding-content-data-collection">
+<h2>Adding content data collection<a class="headerlink" href="#adding-content-data-collection" title="Permalink to this headline">¶</a></h2>
+<p>Telemetry can be sent from web content by:</p>
+<ol class="arabic simple">
+<li><p>granting the web content’s host privileges in the Firefox codebase;</p></li>
+<li><p>including the <code class="docutils literal notranslate"><span class="pre">HybridContentTelemetry-lib.js</span></code> file in the page;</p></li>
+<li><p>registering the probes after the library is loaded;</p></li>
+<li><p>using the API to send Telemetry.</p></li>
+</ol>
+<div class="section" id="granting-the-privileges">
+<h3>Granting the privileges<a class="headerlink" href="#granting-the-privileges" title="Permalink to this headline">¶</a></h3>
+<p>For security/privacy reasons <cite>Mozilla.ContentTelemetry</cite> will only work on a list of allowed secure origins.
+The list of allowed origins can be found in
+<a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/app/permissions">browser/app/permissions</a> .
+A host needs to be given the <code class="docutils literal notranslate"><span class="pre">hc_telemetry</span></code> permission in order to be allowed to use the API.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">origin</span>  <span class="n">hc_telemetry</span>  <span class="mi">1</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">discovery</span><span class="o">.</span><span class="n">addons</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span>
+</pre></div>
+</div>
+<p>Adding an entry to the <code class="docutils literal notranslate"><span class="pre">permissions</span></code> file requires riding the trains. If “go-faster” content requires
+granting permissions to a Mozilla page, it can do so by using the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XPCOM/Reference/Interface/nsIPermissionManager">permission manager</a></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">addonInit</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// The following code must be called before attempting to load a page that uses</span>
+  <span class="c1">// hybrid content telemetry on https://example.mozilla.org.</span>
+  <span class="kd">let</span> <span class="nx">principal</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">scriptSecurityManager</span><span class="p">.</span><span class="nx">createContentPrincipalFromOrigin</span><span class="p">(</span><span class="s2">&quot;https://example.mozilla.org&quot;</span><span class="p">);</span>
+  <span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">addFromPrincipal</span><span class="p">(</span><span class="nx">principal</span><span class="p">,</span> <span class="s2">&quot;hc_telemetry&quot;</span><span class="p">,</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">ALLOW_ACTION</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">addonCleanup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// The permission must be removed if no longer needed (e.g. the add-on is shut down).</span>
+  <span class="kd">let</span> <span class="nx">principal</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">scriptSecurityManager</span><span class="p">.</span><span class="nx">createContentPrincipalFromOrigin</span><span class="p">(</span><span class="s2">&quot;https://example.mozilla.org&quot;</span><span class="p">);</span>
+  <span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">removeFromPrincipal</span><span class="p">(</span><span class="nx">principal</span><span class="p">,</span> <span class="s2">&quot;hc_telemetry&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Granted permissions do not disappear when a “go-faster” add-on is uninstalled but are cleared when the browser is closed. If permissions need to be cleaned without closing the browser, it must be done manually. Moreover, permissions are keyed by origin: <code class="docutils literal notranslate"><span class="pre">http://mozilla.com</span></code> and <code class="docutils literal notranslate"><span class="pre">https://mozilla.com</span></code> are different things.</p>
+</div>
+</div>
+<div class="section" id="including-the-library">
+<h3>Including the library<a class="headerlink" href="#including-the-library" title="Permalink to this headline">¶</a></h3>
+<p>To use hybrid content telemetry the related content JS library needs to be included in the page. We have different integration options:</p>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">mozilla-hybrid-content-telemetry</span></code> as a dependency to the project and require it in the code.</p></li>
+<li><p>Load it directly from the <a class="reference external" href="https://unpkg.com/mozilla-hybrid-content-telemetry/HybridContentTelemetry-lib.js">external unpkg CDN</a>.</p></li>
+<li><p>Manually fetch the latest version from the <a class="reference external" href="https://hg.mozilla.org/mozilla-central/file/tip/toolkit/components/telemetry/hybrid-content/HybridContentTelemetry-lib.js">main repository</a> and add it to the page repository. Then this file can be deployed along with the page.</p></li>
+</ul>
+<div class="section" id="example-manual-inclusion">
+<h4>Example (manual inclusion):<a class="headerlink" href="#example-manual-inclusion" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other head stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;application/javascript&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;HybridContentTelemetry-lib.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> <span class="c">&lt;!-- Other body stuff --&gt;</span> <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-npm-dependency">
+<h4>Example (NPM dependency):<a class="headerlink" href="#example-npm-dependency" title="Permalink to this headline">¶</a></h4>
+<p>Add the dependency to your project:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>npm install --save mozilla-hybrid-content-telemetry@1.0.0
+</pre></div>
+</div>
+<p>In your app load the module and use the <a class="reference internal" href="#the-api"><span class="std std-ref">API</span></a>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">ContentTelemetry</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;mozilla-hybrid-content-telemetry&quot;</span><span class="p">);</span>
+
+<span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">registerEvents</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="s2">&quot;click&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;click&quot;</span><span class="p">],</span>
+    <span class="nx">objects</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;red_button&quot;</span><span class="p">,</span> <span class="s2">&quot;blue_button&quot;</span><span class="p">],</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Now events can be recorded.</span>
+<span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;red_button&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following examples assume the manual inclusion of the JS library.</p>
+</div>
+</div>
+</div>
+<div class="section" id="registering-the-probes">
+<h3>Registering the probes<a class="headerlink" href="#registering-the-probes" title="Permalink to this headline">¶</a></h3>
+<p>Probe registration can happen at any time after the library is loaded in the page, but registering early enough ensures that the definition is available once a recording attempt is made.</p>
+<p>Example:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other head stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;application/javascript&quot;</span><span class="p">&gt;</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Mozilla</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// .. uh-oh, was library loaded? Report the error.</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// Register the probe.</span>
+        <span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">registerEvents</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="p">{</span>
+          <span class="s2">&quot;click&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;click&quot;</span><span class="p">],</span>
+            <span class="nx">objects</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;red_button&quot;</span><span class="p">,</span> <span class="s2">&quot;blue_button&quot;</span><span class="p">],</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">};</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span> <span class="c">&lt;!-- Other body stuff --&gt;</span> <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="recording-the-data">
+<h3>Recording the data<a class="headerlink" href="#recording-the-data" title="Permalink to this headline">¶</a></h3>
+<p>Data recording can happen at any time after a probe has been registered. The data will be recorded and sent by Firefox if permitted by the Telemetry <a class="reference internal" href="../internals/preferences.html"><span class="doc">preferences</span></a>.</p>
+<p>Example:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other head stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;application/javascript&quot;</span><span class="p">&gt;</span>
+      <span class="kd">function</span> <span class="nx">triggerEvent</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Mozilla</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// .. uh-oh, was library loaded? Report the error.</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;red_button&quot;</span><span class="p">);</span>
+      <span class="p">};</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other body stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;event-recording&#39;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;triggerEvent();&quot;</span><span class="p">&gt;</span>
+        Trigger Recording
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-if-upload-is-enabled">
+<h3>Checking if upload is enabled<a class="headerlink" href="#checking-if-upload-is-enabled" title="Permalink to this headline">¶</a></h3>
+<p>Mozilla pages can check if data upload is enabled, as reported by Telemetry <a class="reference internal" href="../internals/preferences.html"><span class="doc">preferences</span></a>. This is useful for pages which are not using Telemetry to collect data, but
+need to comply to our data policy for the collection.</p>
+<p>Example:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other head stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;application/javascript&quot;</span><span class="p">&gt;</span>
+      <span class="kd">function</span> <span class="nx">recordData</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Mozilla</span> <span class="o">||</span> <span class="o">!</span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// .. uh-oh, was library loaded? Report the error.</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">canUpload</span><span class="p">())</span> <span class="p">{</span>
+          <span class="c1">// User has opted-out of Telemetry. No collection must take place.</span>
+          <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// ... perform the collection without Telemetry below this point.</span>
+      <span class="p">};</span>
+    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- Other body stuff --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;event-recording&#39;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&quot;recordData();&quot;</span><span class="p">&gt;</span>
+        Trigger Recording
+      <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-api">
+<span id="id1"></span><h2>The API<a class="headerlink" href="#the-api" title="Permalink to this headline">¶</a></h2>
+<p>The hybrid content API is available to the web content through the inclusion of the <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/components/telemetry/hybrid-content/HybridContentTelemetry-lib.js">HybridContentTelemetry-lib.js</a> library.</p>
+<p>The initial implementation of the API allows the registration and the recording of events.</p>
+<div class="section" id="js-api">
+<h3>JS API<a class="headerlink" href="#js-api" title="Permalink to this headline">¶</a></h3>
+<p>Authorized content can use the following functions:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">canUpload</span><span class="p">();</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">initPromise</span><span class="p">();</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">registerEvents</span><span class="p">(</span><span class="nx">category</span><span class="p">,</span> <span class="nx">eventData</span><span class="p">);</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="nx">category</span><span class="p">,</span> <span class="nx">method</span><span class="p">,</span> <span class="nx">object</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">extra</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>These functions will not throw. If an unsupported operation is performed (e.g. recording an unknown event) an error will be logged to the browser console.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Data collected using this API will always respect the user Telemetry preferences: if a user has chosen to not send Telemetry data to Mozilla servers, Telemetry from hybrid content pages will not be sent either.
+Like other Telemetry data, it will still be recorded locally and available through <code class="docutils literal notranslate"><span class="pre">about:telemetry</span></code>.</p>
+</div>
+<div class="section" id="mozilla-contenttelemetry-canupload">
+<h4><code class="docutils literal notranslate"><span class="pre">Mozilla.ContentTelemetry.canUpload()</span></code><a class="headerlink" href="#mozilla-contenttelemetry-canupload" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">canUpload</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This function returns true if the browser is allowed to send collected data to Mozilla servers (i.e. <code class="docutils literal notranslate"><span class="pre">datareporting.healthreport.uploadEnabled</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code>), false otherwise. See <a class="reference internal" href="../internals/preferences.html"><span class="doc">preferences</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The page should use this function to check if it is allowed to collect data. This is only needed in case the Telemetry system is not be being used for collection. If Telemetry is used, then this is taken care of internally by the Telemetry API. The page should not cache the returned value: users can opt in or out from the Data Collection at any time and so the returned value may change.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">canUpload</span><span class="p">())</span> <span class="p">{</span>
+  <span class="c1">// ... perform the data collection here using another measurement system.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozilla-contenttelemetry-initpromise">
+<h4><code class="docutils literal notranslate"><span class="pre">Mozilla.ContentTelemetry.initPromise()</span></code><a class="headerlink" href="#mozilla-contenttelemetry-initpromise" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">initPromise</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This function returns a Promise that gets resolved as soon as Hybrid Content Telemetry is correctly initialized and the value from <code class="docutils literal notranslate"><span class="pre">canUpload</span></code> can be reliably read. The promise will reject if Hybrid Content Telemetry is disabled or the host doesn’t have enough privileges to use the API.</p>
+</div>
+<div class="section" id="mozilla-contenttelemetry-registerevents">
+<h4><code class="docutils literal notranslate"><span class="pre">Mozilla.ContentTelemetry.registerEvents()</span></code><a class="headerlink" href="#mozilla-contenttelemetry-registerevents" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">registerEvents</span><span class="p">(</span><span class="nx">category</span><span class="p">,</span> <span class="nx">eventData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Register new dynamic events from the content. This accepts the same parameters and is subject to the same limitation as <code class="docutils literal notranslate"><span class="pre">Services.telemetry.registerEvents()</span></code>. See the <cite>events</cite> documentation for the definitive reference.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Make sure to call this before recording events, as soon as the library is loaded (e.g. <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Events/load">window load event</a>). This will make sure that the definition will be ready when recording.</p>
+</div>
+<p>The data recorded into events registered with this function will end up in the <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> process section of the main ping.</p>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">registerEvents</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="s2">&quot;click&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">methods</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;click&quot;</span><span class="p">],</span>
+    <span class="nx">objects</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;red_button&quot;</span><span class="p">,</span> <span class="s2">&quot;blue_button&quot;</span><span class="p">],</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">// Now events can be recorded.</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;page.interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;red_button&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mozilla-contenttelemetry-recordevent">
+<h4><code class="docutils literal notranslate"><span class="pre">Mozilla.ContentTelemetry.recordEvent()</span></code><a class="headerlink" href="#mozilla-contenttelemetry-recordevent" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="nx">category</span><span class="p">,</span> <span class="nx">method</span><span class="p">,</span> <span class="nx">object</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">extra</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Record a registered event. This accepts the same parameters and is subject to the same limitation as <code class="docutils literal notranslate"><span class="pre">Services.telemetry.recordEvent()</span></code>. See the <cite>events</cite> documentation for the definitive reference.</p>
+<p>Example:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;ui&quot;</span><span class="p">,</span> <span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="s2">&quot;reload-btn&quot;</span><span class="p">);</span>
+<span class="c1">// event: [543345, &quot;ui&quot;, &quot;click&quot;, &quot;reload-btn&quot;]</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;ui&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">,</span> <span class="s2">&quot;search-bar&quot;</span><span class="p">,</span> <span class="s2">&quot;google&quot;</span><span class="p">);</span>
+<span class="c1">// event: [89438, &quot;ui&quot;, &quot;search&quot;, &quot;search-bar&quot;, &quot;google&quot;]</span>
+<span class="nx">Mozilla</span><span class="p">.</span><span class="nx">ContentTelemetry</span><span class="p">.</span><span class="nx">recordEvent</span><span class="p">(</span><span class="s2">&quot;ui&quot;</span><span class="p">,</span> <span class="s2">&quot;completion&quot;</span><span class="p">,</span> <span class="s2">&quot;search-bar&quot;</span><span class="p">,</span> <span class="s2">&quot;yahoo&quot;</span><span class="p">,</span>
+                                     <span class="p">{</span><span class="s2">&quot;querylen&quot;</span><span class="o">:</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="o">:</span> <span class="s2">&quot;23&quot;</span><span class="p">});</span>
+<span class="c1">// event: [982134, &quot;ui&quot;, &quot;completion&quot;, &quot;search-bar&quot;, &quot;yahoo&quot;,</span>
+<span class="c1">//           {&quot;qerylen&quot;: &quot;7&quot;, &quot;results&quot;: &quot;23&quot;}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-review">
+<h2>Data Review<a class="headerlink" href="#data-review" title="Permalink to this headline">¶</a></h2>
+<p>Adding the <code class="docutils literal notranslate"><span class="pre">hc_telemetry</span></code> permission for a new domain in <a class="reference external" href="https://searchfox.org/mozilla-central/source/browser/app/permissions">browser/app/permissions</a>
+requires <a class="reference external" href="https://wiki.mozilla.org/Firefox/Data_Collection">Data Collection Review</a> as we are enabling a new method of data collection.</p>
+<p>Giving a domain permission to use Hybrid Content Telemetry also gives any Extensions running on this domain permission to use Hybrid Content Telemetry.
+If the domain is already on the <a class="reference external" href="https://hg.mozilla.org/integration/mozilla-inbound/file/39e131181d44/modules/libpref/init/all.js#l5120">list of restricted domains</a>
+(configured by the <code class="docutils literal notranslate"><span class="pre">extensions.webextensions.restrictedDomains</span></code> preference), Extensions don’t run on this domain and therefore cannot access the Hybrid Content Telemetry API.
+No additional approval is necessary.</p>
+<p>If the domain is not on that list, you need additional privacy review. In that case request help from the Telemetry team.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>In order to test Hybrid Content Telemetry integrations, the permission API can be used to enable certain hosts.
+The <code class="docutils literal notranslate"><span class="pre">Services.perms.addFromPrincipal</span></code> API is available in the Browser Console as well as in <code class="docutils literal notranslate"><span class="pre">xpcshell</span></code> and <code class="docutils literal notranslate"><span class="pre">mochi</span></code> tests with access to the <code class="docutils literal notranslate"><span class="pre">Services.*</span></code> APIs.</p>
+<p>The respective <code class="docutils literal notranslate"><span class="pre">hc_telemetry</span></code> permission needs to be set before any pages on that host load the <code class="docutils literal notranslate"><span class="pre">HybridContentTelemetry-lib.js</span></code> file.</p>
+<div class="section" id="manual-testing">
+<h3>Manual testing<a class="headerlink" href="#manual-testing" title="Permalink to this headline">¶</a></h3>
+<p>After starting the browser, open the Browser Console (Tools -&gt; Web Developer -&gt; Browser Console).
+To enable Hybrid Content Telemetry on <code class="docutils literal notranslate"><span class="pre">https://example.mozilla.org</span></code>, execute this code snippet in the console:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">principal</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">scriptSecurityManager</span><span class="p">.</span><span class="nx">createContentPrincipalFromOrigin</span><span class="p">(</span><span class="s2">&quot;https://example.mozilla.org&quot;</span><span class="p">);</span>
+<span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">addFromPrincipal</span><span class="p">(</span><span class="nx">principal</span><span class="p">,</span> <span class="s2">&quot;hc_telemetry&quot;</span><span class="p">,</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">ALLOW_ACTION</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Afterwards load the page on <code class="docutils literal notranslate"><span class="pre">https://example.mozilla.org</span></code> and it will be able to record Telemetry data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Manual testing requires a host that handles HTTPS connections, as this kind of collection is only allowed on secure hosts. To allow for local testing, a local proxy capable of handling HTTPS connection is required.</p>
+</div>
+</div>
+<div class="section" id="automated-testing">
+<h3>Automated testing<a class="headerlink" href="#automated-testing" title="Permalink to this headline">¶</a></h3>
+<p>In test frameworks with privileged access the permission can be set in the <code class="docutils literal notranslate"><span class="pre">head.js</span></code> or during test setup.
+Add the code snippet in your <code class="docutils literal notranslate"><span class="pre">head.js</span></code> to enable Hybrid Content ContentTelemetry on <code class="docutils literal notranslate"><span class="pre">https://example.mozilla.org</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">let</span> <span class="nx">principal</span> <span class="o">=</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">scriptSecurityManager</span><span class="p">.</span><span class="nx">createContentPrincipalFromOrigin</span><span class="p">(</span><span class="s2">&quot;https://example.mozilla.org&quot;</span><span class="p">);</span>
+<span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">addFromPrincipal</span><span class="p">(</span><span class="nx">principal</span><span class="p">,</span> <span class="s2">&quot;hc_telemetry&quot;</span><span class="p">,</span> <span class="nx">Services</span><span class="p">.</span><span class="nx">perms</span><span class="p">.</span><span class="nx">ALLOW_ACTION</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="version-history">
+<h2>Version History<a class="headerlink" href="#version-history" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Firefox 59: Initial hybrid content telemetry support (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1417473">bug 1417473</a>).</p></li>
+<li><p>Firefox 71: Hybrid Content Telemetry removed (<a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1520491">bug 1520491</a>).</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="optout-ping.html" class="btn btn-neutral float-right" title="“optout” ping (obsolete)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="fhr/identifiers.html" class="btn btn-neutral float-left" title="Identifiers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

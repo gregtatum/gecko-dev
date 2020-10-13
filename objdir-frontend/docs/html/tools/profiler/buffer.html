@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Buffers and Memory Management &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="CI Automation" href="ci-automation.html" />
+    <link rel="prev" title="Gecko Profiler" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gecko Profiler</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Buffers and Memory Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#profile-buffer-terminology">Profile Buffer Terminology</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ci-automation.html">CI Automation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrumenting-java.html">Instrumenting Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrumenting-javascript.html">Instrumenting JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrumenting-rust.html">Instrumenting Rust</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jstracer.html">JS Tracer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="LUL.html">LUL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="markers-guide.html">Markers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">Profiling Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="registering-threads.html">Registering Threads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="samples-stackwalking.html">Samples and Stack Walking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serialization.html">Serialization</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Gecko Profiler</a> &raquo;</li>
+        
+      <li>Buffers and Memory Management</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tools/profiler/buffer.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="buffers-and-memory-management">
+<h1>Buffers and Memory Management<a class="headerlink" href="#buffers-and-memory-management" title="Permalink to this headline">¶</a></h1>
+<p>In a post-Fission world, precise memory management across many threads and processes is
+especially important. In order for the profiler to achieve this, it uses a chunked buffer
+strategy.</p>
+<p>The <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfileBuffer&amp;path=&amp;case=true&amp;regexp=false">ProfileBuffer</a> is the overall buffer class that controls the memory and storage
+for the profile, it allows allocating objects into it. This can be used freely
+by things like markers and samples to store data as entries, without needing to know
+about the general strategy for how the memory is managed.</p>
+<p>The <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfileBuffer&amp;path=&amp;case=true&amp;regexp=false">ProfileBuffer</a> is then backed by the <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfileChunkedBuffer&amp;path=&amp;case=true&amp;regexp=false">ProfileChunkedBuffer</a>. This specialized
+buffer grows incrementally, by allocating additional <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfileBufferChunk&amp;path=&amp;case=true&amp;regexp=false">ProfileBufferChunk</a> objects.
+More and more chunks will be allocated until a memory limit is reached, where they will
+be released. After releasing, the chunk will either be recycled or freed.</p>
+<p>The limiting of memory usage is coordinated by the <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfilerParent&amp;path=&amp;case=true&amp;regexp=false">ProfilerParent</a> in the parent
+process. The <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfilerParent&amp;path=&amp;case=true&amp;regexp=false">ProfilerParent</a> receives IPC messages from the <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfilerParent&amp;path=&amp;case=true&amp;regexp=false">ProfilerParent</a>
+with updates from the chunk manager. These updates are then used to keep track of how
+much memory is being used. When the maximum byte threshold is passed, the ProfileChunkManager
+in the parent process removes the oldest chunk, and then the <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfilerParent&amp;path=&amp;case=true&amp;regexp=false">ProfilerParent</a> sends
+a <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=DestroyReleasedChunksAtOrBefore&amp;path=&amp;case=true&amp;regexp=false">DestroyReleasedChunksAtOrBefore</a> message to all of child processes so that the
+oldest chunks in the profile are released. This helps long profiles to keep having
+data in a similar time frame.</p>
+<div class="section" id="profile-buffer-terminology">
+<h2>Profile Buffer Terminology<a class="headerlink" href="#profile-buffer-terminology" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>ProfilerParent</dt><dd><p>The main profiler machinery is installed in the parent process. It uses IPC to
+communicate to the child processes. The PProfiler is the actor which is used
+to communicate across processes to coordinate things. See <a class="reference external" href="https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerParent.h">ProfilerParent.h</a>. The
+ProfilerParent uses the DestroyReleasedChunksAtOrBefore meessage to control the
+overall chunk limit.</p>
+</dd>
+<dt>ProfilerChild</dt><dd><p>ProfilerChild is installed in every child process, it will receive requests from
+DestroyReleasedChunksAtOrBefore.</p>
+</dd>
+<dt>Entry</dt><dd><p>This is an individual entry in the <a class="reference external" href="https://searchfox.org/mozilla-central/source/tools/profiler/core/ProfileBuffer.h">ProfileBuffer.h</a>,. These entry sizes are not
+related to the chunks sizes. An individual entry can straddle two different chunks.
+An entry can contain various pieces of data, like markers, samples, and stacks.</p>
+</dd>
+<dt>Chunk</dt><dd><p>An arbitrary sized chunk of memory, managed by the <a class="reference external" href="https://searchfox.org/mozilla-central/search?q=ProfileChunkedBuffer&amp;path=&amp;case=true&amp;regexp=false">ProfileChunkedBuffer</a>, and
+IPC calls from the ProfilerParent.</p>
+</dd>
+<dt>Unreleased Chunk</dt><dd><p>This chunk is currently being used to write entries into.</p>
+</dd>
+<dt>Released chunk</dt><dd><p>This chunk is full of data. When memory limits happen, it can either be recycled
+or freed.</p>
+</dd>
+<dt>Recycled chunk</dt><dd><p>This is a chunk that was previously written into, and full. When memory limits occur,
+rather than freeing the memory, it is re-used as the next chunk.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ci-automation.html" class="btn btn-neutral float-right" title="CI Automation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Gecko Profiler" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

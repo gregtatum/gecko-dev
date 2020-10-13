@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Understanding Artifact Builds &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Firefox for Mobile Devices" href="building_mobile_firefox.html" />
+    <link rel="prev" title="Firefox Source Code Directory Structure" href="../directory_structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Working on Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../contribution_quickref.html">Firefox Contributors’ Quick Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pocket-guide-shipping-firefox.html">Pocket Guide: Shipping Firefox</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../editor.html">Editor / IDE integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reviews.html">Getting reviews</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial.html">Mercurial Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vcs/mercurial_bundles.html">Mercurial Bundles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/capturing_minidump.html">Capturing a minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_a_hang_on_os_x.html">Debugging A Hang On OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_a_minidump.html">Debugging A Minidump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_gdb.html">Debugging Firefox with GDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_lldb.html">Debugging Firefox with LLDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_rr.html">Debugging Firefox with rr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_firefox_with_valgrind.html">Debugging Firefox with Valgrind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_on_mac_os_x.html">Debugging On Mac Os X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/debugging_on_windows.html">Debugging On Windows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/process_dump_task_manager.html">How to get a process dump with Windows Task Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/stacktrace_report.html">How to get a stacktrace for a bug report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/stacktrace_windbg.html">How to get a stacktrace with WinDbg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../debugging/understanding_crash_reports.html">Understanding Crash Reports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../directory_structure.html">Firefox Source Code Directory Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Understanding Artifact Builds</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pulling-artifacts-from-a-try-build">Pulling artifacts from a try build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restrictions">Restrictions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#things-that-are-supported">Things that are supported</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#things-that-are-not-supported">Things that are not supported</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#things-that-are-not-yet-supported">Things that are not <strong>yet</strong> supported</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="building_mobile_firefox.html">Firefox for Mobile Devices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Working on Firefox</a> &raquo;</li>
+        
+      <li>Understanding Artifact Builds</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contributing/build/artifact_builds.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="understanding-artifact-builds">
+<h1>Understanding Artifact Builds<a class="headerlink" href="#understanding-artifact-builds" title="Permalink to this headline">¶</a></h1>
+<p>Firefox for Desktop and Android supports a <strong>fast build mode</strong> called
+<em>artifact mode</em>. The resulting builds are called <em>artifact builds</em>.
+Artifact mode downloads pre-built C++ components rather than building them
+locally, trading bandwidth for time.</p>
+<p>Artifact builds will be useful to many developers who are not working
+with compiled code (see “Restrictions” below). Artifacts are typically
+fetched from <a class="reference external" href="https://hg.mozilla.org/mozilla-central/">mozilla-central</a>.</p>
+<p>To automatically download and use pre-built binary artifacts, add the
+following lines into your <a class="reference internal" href="../../setup/configuring_build_options.html#configuring-build-options"><span class="std std-ref">mozconfig</span></a>
+file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatically download and use compiled C++ components:</span>
+ac_add_options --enable-artifact-builds
+
+<span class="c1"># Write build artifacts to:</span>
+mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>./objdir-frontend
+</pre></div>
+</div>
+<p>To automatically download and use the debug version of the pre-built
+binary artifact (currently supported for Linux, OSX and Windows
+artifacts), add <code class="docutils literal notranslate"><span class="pre">ac_add_options</span> <span class="pre">--enable-debug</span></code> to your mozconfig file
+(with artifact builds option already enabled):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enable debug versions of the pre-built binary artifacts:</span>
+ac_add_options --enable-debug
+
+<span class="c1"># Automatically download and use compiled C++ components:</span>
+ac_add_options --enable-artifact-builds
+
+<span class="c1"># Download debug info so that stack traces refers to file and columns rather than library and Hex address</span>
+ac_add_options --enable-artifact-build-symbols
+
+<span class="c1"># Write build artifacts to:</span>
+mk_add_options <span class="nv">MOZ_OBJDIR</span><span class="o">=</span>./objdir-frontend-debug-artifact
+</pre></div>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Artifact builds are supported for users of Mercurial and Git. Git
+artifact builds require a mozilla-central clone made with the help of
+<a class="reference external" href="https://github.com/glandium/git-cinnabar">git-cinnabar</a>. Please
+follow the instructions on the git-cinnabar project page to install
+git-cinnabar. Further information about using git-cinnabar to interact
+with Mozilla repositories can be found on <a class="reference external" href="https://github.com/glandium/git-cinnabar/wiki/Mozilla:-A-git-workflow-for-Gecko-development">the project
+wiki</a>.</p>
+</div>
+<div class="section" id="building">
+<h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
+<p>If you’ve added <code class="docutils literal notranslate"><span class="pre">--enable-artifact-builds</span></code> to your <code class="docutils literal notranslate"><span class="pre">mozconfig</span></code>, each
+time you run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span></code> and <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span> <span class="pre">path/to/subdirectory</span></code> the
+build system will determine what the best pre-built binary artifacts
+available are, download them, and put them in place for you. The
+computations are cached, so the additional calculations should be very
+fast after the up-to-date artifacts are downloaded – just a second or
+two on modern hardware. Most Desktop developers should find that</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach build
+./mach run
+</pre></div>
+</div>
+<p>just works.</p>
+<p>To only rebuild local changes (to avoid re-checking for pushes and/or
+unzipping the downloaded cached artifacts after local commits), you can
+use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach build faster
+</pre></div>
+</div>
+<p>which only “builds” local JS, CSS and packaged (e.g. images and other
+asset) files.</p>
+<p>Most Firefox for Android developers should find that</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach build
+./mach package
+./mach install
+</pre></div>
+</div>
+<p>just works.</p>
+</div>
+<div class="section" id="pulling-artifacts-from-a-try-build">
+<h2>Pulling artifacts from a try build<a class="headerlink" href="#pulling-artifacts-from-a-try-build" title="Permalink to this headline">¶</a></h2>
+<p>To only accept artifacts from a specific revision (such as a try build),
+set <code class="docutils literal notranslate"><span class="pre">MOZ_ARTIFACT_REVISION</span></code> in your environment to the value of the
+revision that is at the head of the desired push. Note that this will
+override the default behavior of finding a recent candidate build with
+the required artifacts, and will cause builds to fail if the specified
+revision does not contain the required artifacts.</p>
+</div>
+<div class="section" id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Permalink to this headline">¶</a></h2>
+<p>Oh, so many. Artifact builds are rather delicate: any mismatch between
+your local source directory and the downloaded binary artifacts can
+result in difficult to diagnose incompatibilities, including unexplained
+crashes and catastrophic XPCOM initialization and registration
+failures. These are rare, but do happen.</p>
+</div>
+<div class="section" id="things-that-are-supported">
+<h2>Things that are supported<a class="headerlink" href="#things-that-are-supported" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Modifying JavaScript, (X)HTML, and CSS resources; and string
+properties and DTD and FTL files.</p></li>
+<li><p>Modifying Android Java code, resources, and strings.</p></li>
+<li><p>Running mochitests and xpcshell tests.</p></li>
+<li><p>Modifying <code class="docutils literal notranslate"><span class="pre">Scalars.yaml</span></code> to add Scalar Telemetry (since {{
+Bug(“1425909”) }}, except artifact builds on try).</p></li>
+<li><p>Modifying <code class="docutils literal notranslate"><span class="pre">Events.yaml</span></code> to add Event Telemetry (since {{
+Bug(“1448945”) }}, except artifact builds on try).</p></li>
+</ul>
+<p>Essentially everything updated by <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">build</span> <span class="pre">faster</span></code> should work with
+artifact builds.</p>
+</div>
+<div class="section" id="things-that-are-not-supported">
+<h2>Things that are not supported<a class="headerlink" href="#things-that-are-not-supported" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Support for products other than Firefox for Desktop and
+Android are not supported and are unlikely to ever be supported.
+Other projects like Thunderbird may provide
+&lt;a href=”<a class="reference external" href="https://developer.thunderbird.net/thunderbird-development/building-thunderbird/artifact-builds">https://developer.thunderbird.net/thunderbird-development/building-thunderbird/artifact-builds</a>”&gt;their own support&lt;/a&gt;
+for artifact builds.</p></li>
+<li><p>You cannot modify C, C++, or Rust source code anywhere in the tree.
+If it’s compiled to machine code, it can’t be changed.</p></li>
+<li><p>You cannot modify <code class="docutils literal notranslate"><span class="pre">histograms.json</span></code> to add Telemetry histogram
+definitions.(But see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1206117">Bug 1206117</a>).</p></li>
+<li><p>Modifying build system configuration and definitions does not work in
+all situations.</p></li>
+</ul>
+</div>
+<div class="section" id="things-that-are-not-yet-supported">
+<h2>Things that are not <strong>yet</strong> supported<a class="headerlink" href="#things-that-are-not-yet-supported" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Tests other than mochitests, xpcshell, and Marionette-based tests.
+There aren’t inherent barriers here, but these are not known to work.</p></li>
+<li><p>Modifying WebIDL definitions, even ones implemented in JavaScript.</p></li>
+</ul>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>There are two parts to artifact mode:
+the <code class="docutils literal notranslate"><span class="pre">--disable-compile-environment</span></code> option, and the <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">artifact</span></code>
+command that implements the downloading and caching. Start by running</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./mach artifact install --verbose
+</pre></div>
+</div>
+<p>to see what the build system is trying to do. There is some support for
+querying and printing the cache; run <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">artifact</span></code> to see
+information about those commands.</p>
+<p>Downloaded artifacts are stored in
+<code class="docutils literal notranslate"><span class="pre">$MOZBUILD_STATE_PATH/package-frontend</span></code>, which is almost always
+<code class="docutils literal notranslate"><span class="pre">~/.mozbuild/package-frontend</span></code>.</p>
+<p>Discussion is best started on the <a class="reference external" href="https://lists.mozilla.org/listinfo/dev-builds">dev-builds mailing
+list</a>. Questions are
+best raised in <a class="reference external" href="https://chat.mozilla.org/#/room/#build:mozilla.org">#build</a> on <a class="reference external" href="https://chat.mozilla.org/">Matrix</a>. Please
+file bugs in <em>Firefox Build System :: General</em>, blocking  <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=901840">Bug 901840</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="building_mobile_firefox.html" class="btn btn-neutral float-right" title="Firefox for Mobile Devices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../directory_structure.html" class="btn btn-neutral float-left" title="Firefox Source Code Directory Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

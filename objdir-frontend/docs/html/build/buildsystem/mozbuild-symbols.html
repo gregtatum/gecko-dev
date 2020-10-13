@@ -1,0 +1,2679 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mozbuild Sandbox Symbols &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Files Metadata" href="files-metadata.html" />
+    <link rel="prev" title="moz.build Files" href="mozbuild-files.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build System</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#important-concepts">Important Concepts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Build Glossary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-overview.html">Build System Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supported-configurations.html">Supported build targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozconfigs.html">Mozconfig Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozbuild-files.html">moz.build Files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mozbuild Sandbox Symbols</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sub-context-files">Sub-Context: Files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#special-variables">Special Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="files-metadata.html">Files Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgo.html">Profile Guided Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slow.html">Why the Build System is Slow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="environment-variables.html">Environment Variables Impacting the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="build-targets.html">Build Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python.html">Python and the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_manifests.html">Test Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mozinfo.html">mozinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preprocessor.html">Text Preprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jar-manifests.html">JAR Manifests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-binaries.html">Defining Binaries for the Build System</a></li>
+<li class="toctree-l3"><a class="reference internal" href="defining-xpcom-components.html">Defining XPCOM C++-implemented Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="toolchains.html">Creating Toolchain Archives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locales.html">Localized Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rust.html">Including Rust Code in Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sparse.html">Sparse Checkouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gn.html">Support for projects building with GN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="telemetry.html">Build Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sccache-dist.html">Distributed sccache (sccache-dist)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_certificates.html">Adding Certificates for Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#integrated-development-environment-ide">integrated development environment (IDE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#mozbuild">mozbuild</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Build System</a> &raquo;</li>
+        
+      <li>mozbuild Sandbox Symbols</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/build/buildsystem/mozbuild-symbols.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mozbuild-sandbox-symbols">
+<span id="mozbuild-symbols"></span><h1>mozbuild Sandbox Symbols<a class="headerlink" href="#mozbuild-sandbox-symbols" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>moz.build files’ implementation includes a <code class="docutils literal notranslate"><span class="pre">Path</span></code> class.
+This class is used as a backing type for some of the sandbox variables.
+It expresses paths relative to a context. Supported paths are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘/topsrcdir/relative/paths’</p></li>
+<li><p>‘srcdir/relative/paths’</p></li>
+<li><p>‘!/topobjdir/relative/paths’</p></li>
+<li><p>‘!objdir/relative/paths’</p></li>
+<li><p>‘%/filesystem/absolute/paths’</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="sub-context-files">
+<span id="mozbuild-subcontext-files"></span><h2>Sub-Context: Files<a class="headerlink" href="#sub-context-files" title="Permalink to this headline">¶</a></h2>
+<p>Metadata attached to files.</p>
+<p>It is common to want to annotate files with metadata, such as which
+Bugzilla component tracks issues with certain files. This sub-context is
+where we stick that metadata.</p>
+<p>The argument to this sub-context is a file matching pattern that is applied
+against the host file’s directory. If the pattern matches a file whose info
+is currently being sought, the metadata attached to this instance will be
+applied to that file.</p>
+<p>Patterns are collections of filename characters with <code class="docutils literal notranslate"><span class="pre">/</span></code> used as the
+directory separate (UNIX-style paths) and <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">**</span></code> used to denote
+wildcard matching.</p>
+<p>Patterns without the <code class="docutils literal notranslate"><span class="pre">*</span></code> character are literal matches and will match at
+most one entity.</p>
+<p>Patterns with <code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">**</span></code> are wildcard matches. <code class="docutils literal notranslate"><span class="pre">*</span></code> matches files
+at least within a single directory. <code class="docutils literal notranslate"><span class="pre">**</span></code> matches files across several
+directories.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">foo.html</span></code></dt><dd><p>Will match only the <code class="docutils literal notranslate"><span class="pre">foo.html</span></code> file in the current directory.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">*.jsm</span></code></dt><dd><p>Will match all <code class="docutils literal notranslate"><span class="pre">.jsm</span></code> files in the current directory.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">**/*.cpp</span></code></dt><dd><p>Will match all <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> files in this and all child directories.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">foo/*.css</span></code></dt><dd><p>Will match all <code class="docutils literal notranslate"><span class="pre">.css</span></code> files in the <code class="docutils literal notranslate"><span class="pre">foo/</span></code> directory.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bar/*</span></code></dt><dd><p>Will match all files in the <code class="docutils literal notranslate"><span class="pre">bar/</span></code> directory and all of its
+children directories.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bar/**</span></code></dt><dd><p>This is equivalent to <code class="docutils literal notranslate"><span class="pre">bar/*</span></code> above.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">bar/**/foo</span></code></dt><dd><p>Will match all <code class="docutils literal notranslate"><span class="pre">foo</span></code> files in the <code class="docutils literal notranslate"><span class="pre">bar/</span></code> directory and all of its
+children directories.</p>
+</dd>
+</dl>
+<p>The difference in behavior between <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">**</span></code> is only evident if
+a pattern follows the <code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">**</span></code>. A pattern ending with <code class="docutils literal notranslate"><span class="pre">*</span></code> is
+greedy. <code class="docutils literal notranslate"><span class="pre">**</span></code> is needed when you need an additional pattern after the
+wildcard. e.g. <code class="docutils literal notranslate"><span class="pre">**/foo</span></code>.</p>
+<div class="section" id="bug-component">
+<h3>BUG_COMPONENT<a class="headerlink" href="#bug-component" title="Permalink to this headline">¶</a></h3>
+<p>The bug component that tracks changes to these files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">TypedTuple</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+<p>Values are a 2-tuple of unicode describing the Bugzilla product and
+component. e.g. <code class="docutils literal notranslate"><span class="pre">('Firefox</span> <span class="pre">Build</span> <span class="pre">System',</span> <span class="pre">'General')</span></code>.</p>
+</div>
+<div class="section" id="final">
+<h3>FINAL<a class="headerlink" href="#final" title="Permalink to this headline">¶</a></h3>
+<p>Mark variable assignments as finalized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>During normal processing, values from newer Files contexts
+overwrite previously set values. Last write wins. This behavior is
+not always desired. <code class="docutils literal notranslate"><span class="pre">FINAL</span></code> provides a mechanism to prevent
+further updates to a variable.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">FINAL</span></code> is set, the value of all variables defined in this
+context are marked as frozen and all subsequent writes to them
+are ignored during metadata reading.</p>
+<p>See <a class="reference internal" href="files-metadata.html#mozbuild-files-metadata-finalizing"><span class="std std-ref">Finalizing Values</span></a> for more info.</p>
+</div>
+<div class="section" id="schedules">
+<h3>SCHEDULES<a class="headerlink" href="#schedules" title="Permalink to this headline">¶</a></h3>
+<p>Maps source files to the CI tasks that should be scheduled when</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Schedules</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>they change.  The tasks are grouped by named components, and those
+names appear again in the taskgraph configuration
+<a href="#id1"><span class="problematic" id="id2">`</span></a>($topsrcdir/taskgraph/).</p>
+<p>Some components are “inclusive”, meaning that changes to most files
+do not schedule them, aside from those described in a Files
+subcontext.  For example, py-lint tasks need not be scheduled for
+most changes, but should be scheduled when any Python file changes.
+Such components are named by appending to <cite>SCHEDULES.inclusive</cite>:</p>
+<dl class="simple">
+<dt>with Files(‘<a href="#id3"><span class="problematic" id="id4">**</span></a>.py’):</dt><dd><p>SCHEDULES.inclusive += [‘py-lint’]</p>
+</dd>
+</dl>
+<p>Other components are ‘exclusive’, meaning that changes to most
+files schedule them, but some files affect only one or two
+components. For example, most files schedule builds and tests of
+Firefox for Android, OS X, Windows, and Linux, but files under
+<cite>mobile/android/</cite> affect Android builds and tests exclusively, so
+builds for other operating systems are not needed.  Test suites
+provide another example: most files schedule reftests, but changes
+to reftest scripts need only schedule reftests and no other suites.</p>
+<p>Exclusive components are named by setting <cite>SCHEDULES.exclusive</cite>:</p>
+<dl class="simple">
+<dt>with Files(‘mobile/android/<a href="#id5"><span class="problematic" id="id6">**</span></a>’):</dt><dd><p>SCHEDULES.exclusive = [‘android’]</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="variables">
+<h2>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a11y-manifests">
+<h3>A11Y_MANIFESTS<a class="headerlink" href="#a11y-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining a11y tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="android-instrumentation-manifests">
+<h3>ANDROID_INSTRUMENTATION_MANIFESTS<a class="headerlink" href="#android-instrumentation-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining Android instrumentation tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="asflags">
+<h3>ASFLAGS<a class="headerlink" href="#asflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the assembler for all of the assembly source files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the assembler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="asm-flags">
+<h3>ASM_FLAGS<a class="headerlink" href="#asm-flags" title="Permalink to this headline">¶</a></h3>
+<p>Recipe for linker flags for this context. Not to be</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">AsmFlags</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>manipulated directly.</p>
+</div>
+<div class="section" id="browser-chrome-manifests">
+<h3>BROWSER_CHROME_MANIFESTS<a class="headerlink" href="#browser-chrome-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining browser chrome tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="cflags">
+<h3>CFLAGS<a class="headerlink" href="#cflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the C compiler for all of the C source files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here, these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="cmflags">
+<h3>CMFLAGS<a class="headerlink" href="#cmflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the Objective-C compiler for all of the Objective-C</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>source files declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="cmmflags">
+<h3>CMMFLAGS<a class="headerlink" href="#cmmflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the Objective-C++ compiler for all of the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Objective-C++ source files declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="compile-flags">
+<h3>COMPILE_FLAGS<a class="headerlink" href="#compile-flags" title="Permalink to this headline">¶</a></h3>
+<p>Recipe for compile flags for this context. Not to be manipulated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">CompileFlags</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>directly.</p>
+</div>
+<div class="section" id="configure-define-files">
+<h3>CONFIGURE_DEFINE_FILES<a class="headerlink" href="#configure-define-files" title="Permalink to this headline">¶</a></h3>
+<p>Output files generated from configure/config.status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This is a substitute for <code class="docutils literal notranslate"><span class="pre">AC_CONFIG_HEADER</span></code> in autoconf. This is very
+similar to <code class="docutils literal notranslate"><span class="pre">CONFIGURE_SUBST_FILES</span></code> except the generation logic takes
+into account the values of <code class="docutils literal notranslate"><span class="pre">AC_DEFINE</span></code> instead of <code class="docutils literal notranslate"><span class="pre">AC_SUBST</span></code>.</p>
+</div>
+<div class="section" id="configure-subst-files">
+<h3>CONFIGURE_SUBST_FILES<a class="headerlink" href="#configure-subst-files" title="Permalink to this headline">¶</a></h3>
+<p>Output files that will be generated using configure-like substitution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This is a substitute for <code class="docutils literal notranslate"><span class="pre">AC_OUTPUT</span></code> in autoconf. For each path in this
+list, we will search for a file in the srcdir having the name
+<code class="docutils literal notranslate"><span class="pre">{path}.in</span></code>. The contents of this file will be read and variable
+patterns like <code class="docutils literal notranslate"><span class="pre">&#64;foo&#64;</span></code> will be substituted with the values of the
+<code class="docutils literal notranslate"><span class="pre">AC_SUBST</span></code> variables declared during configure.</p>
+</div>
+<div class="section" id="cpp-unit-tests">
+<h3>CPP_UNIT_TESTS<a class="headerlink" href="#cpp-unit-tests" title="Permalink to this headline">¶</a></h3>
+<p>Compile a list of C++ unit test names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Each name in this variable corresponds to an executable built from the
+corresponding source file with the same base name.</p>
+<p>If the configuration token <code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code> is set, its value will be
+automatically appended to each name. If a name already ends with
+<code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code>, the name will remain unchanged.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="cramtest-manifests">
+<h3>CRAMTEST_MANIFESTS<a class="headerlink" href="#cramtest-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining cram unit tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="crashtest-manifests">
+<h3>CRASHTEST_MANIFESTS<a class="headerlink" href="#crashtest-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining crashtests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These are commonly named crashtests.list.</p>
+</div>
+<div class="section" id="cxxflags">
+<h3>CXXFLAGS<a class="headerlink" href="#cxxflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the C++ compiler for all of the C++ source files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="deffile">
+<h3>DEFFILE<a class="headerlink" href="#deffile" title="Permalink to this headline">¶</a></h3>
+<p>The program .def (module definition) file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This variable can only be used on Windows.</p>
+</div>
+<div class="section" id="defines">
+<h3>DEFINES<a class="headerlink" href="#defines" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary of compiler defines to declare.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">InitializedDefines</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>These are passed in to the compiler as <code class="docutils literal notranslate"><span class="pre">-Dkey='value'</span></code> for string
+values, <code class="docutils literal notranslate"><span class="pre">-Dkey=value</span></code> for numeric values, or <code class="docutils literal notranslate"><span class="pre">-Dkey</span></code> if the
+value is True. Note that for string values, the outer-level of
+single-quotes will be consumed by the shell. If you want to have
+a string-literal in the program, the value needs to have
+double-quotes.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DEFINES</span><span class="p">[</span><span class="s1">&#39;NS_NO_XPCOM&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">DEFINES</span><span class="p">[</span><span class="s1">&#39;MOZ_EXTENSIONS_DB_SCHEMA&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">DEFINES</span><span class="p">[</span><span class="s1">&#39;DLL_SUFFIX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;.so&quot;&#39;</span>
+</pre></div>
+</div>
+<p>This will result in the compiler flags <code class="docutils literal notranslate"><span class="pre">-DNS_NO_XPCOM</span></code>,
+<code class="docutils literal notranslate"><span class="pre">-DMOZ_EXTENSIONS_DB_SCHEMA=15</span></code>, and <code class="docutils literal notranslate"><span class="pre">-DDLL_SUFFIX='&quot;.so&quot;'</span></code>,
+respectively.</p>
+<p>Note that these entries are not necessarily passed to the assembler.
+Whether they are depends on the type of assembly file. As an
+alternative, you may add a <code class="docutils literal notranslate"><span class="pre">-DKEY=value</span></code> entry to <code class="docutils literal notranslate"><span class="pre">ASFLAGS</span></code>.</p>
+</div>
+<div class="section" id="delayload-dlls">
+<h3>DELAYLOAD_DLLS<a class="headerlink" href="#delayload-dlls" title="Permalink to this headline">¶</a></h3>
+<p>Delay-loaded DLLs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of DLL files which the module being linked
+should load lazily.  This only has an effect when building with MSVC.</p>
+</div>
+<div class="section" id="dirs">
+<h3>DIRS<a class="headerlink" href="#dirs" title="Permalink to this headline">¶</a></h3>
+<p>Child directories to descend into looking for build frontend files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This works similarly to the <code class="docutils literal notranslate"><span class="pre">DIRS</span></code> variable in make files. Each str
+value in the list is the name of a child directory. When this file is
+done parsing, the build reader will descend into each listed directory
+and read the frontend file there. If there is no frontend file, an error
+is raised.</p>
+<p>Values are relative paths. They can be multiple directory levels
+above or below. Use <code class="docutils literal notranslate"><span class="pre">..</span></code> for parent directories and <code class="docutils literal notranslate"><span class="pre">/</span></code> for path
+delimiters.</p>
+</div>
+<div class="section" id="dist-install">
+<h3>DIST_INSTALL<a class="headerlink" href="#dist-install" title="Permalink to this headline">¶</a></h3>
+<p>Whether to install certain files into the dist directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">EnumClass</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>By default, some files types are installed in the dist directory, and
+some aren’t. Set this variable to True to force the installation of
+some files that wouldn’t be installed by default. Set this variable to
+False to force to not install some files that would be installed by
+default.</p>
+<p>This is confusing for historical reasons, but eventually, the behavior
+will be made explicit.</p>
+</div>
+<div class="section" id="dist-subdir">
+<h3>DIST_SUBDIR<a class="headerlink" href="#dist-subdir" title="Permalink to this headline">¶</a></h3>
+<p>The name of an alternate directory to install files to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>When this variable is present, the results of this directory will end up
+being placed in the $(DIST_SUBDIR) subdirectory of where it would
+otherwise be placed.</p>
+</div>
+<div class="section" id="exports">
+<h3>EXPORTS<a class="headerlink" href="#exports" title="Permalink to this headline">¶</a></h3>
+<p>List of files to be exported, and in which subdirectories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">EXPORTS</span></code> is generally used to list the include files to be exported to
+<code class="docutils literal notranslate"><span class="pre">dist/include</span></code>, but it can be used for other files as well. This variable
+behaves as a list when appending filenames for export in the top-level
+directory. Files can also be appended to a field to indicate which
+subdirectory they should be exported to. For example, to export
+<code class="docutils literal notranslate"><span class="pre">foo.h</span></code> to the top-level directory, and <code class="docutils literal notranslate"><span class="pre">bar.h</span></code> to <code class="docutils literal notranslate"><span class="pre">mozilla/dom/</span></code>,
+append to <code class="docutils literal notranslate"><span class="pre">EXPORTS</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EXPORTS</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;foo.h&#39;</span><span class="p">]</span>
+<span class="n">EXPORTS</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">dom</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;bar.h&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Entries in <code class="docutils literal notranslate"><span class="pre">EXPORTS</span></code> are paths, so objdir paths may be used, but
+any files listed from the objdir must also be listed in
+<code class="docutils literal notranslate"><span class="pre">GENERATED_FILES</span></code>.</p>
+</div>
+<div class="section" id="extra-dso-ldopts">
+<h3>EXTRA_DSO_LDOPTS<a class="headerlink" href="#extra-dso-ldopts" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the linker when linking a shared library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Note that the ordering of flags matter here, these flags will be
+added to the linker’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="files-per-unified-file">
+<h3>FILES_PER_UNIFIED_FILE<a class="headerlink" href="#files-per-unified-file" title="Permalink to this headline">¶</a></h3>
+<p>The number of source files to compile into each unified source file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="final-library">
+<h3>FINAL_LIBRARY<a class="headerlink" href="#final-library" title="Permalink to this headline">¶</a></h3>
+<p>Library in which the objects of the current directory will be linked.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This variable contains the name of a library, defined elsewhere with
+<code class="docutils literal notranslate"><span class="pre">LIBRARY_NAME</span></code>, in which the objects of the current directory will be
+linked.</p>
+</div>
+<div class="section" id="final-target">
+<h3>FINAL_TARGET<a class="headerlink" href="#final-target" title="Permalink to this headline">¶</a></h3>
+<p>The name of the directory to install targets to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">FinalTargetValue</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>The directory is relative to the top of the object directory. The
+default value is dependent on the values of XPI_NAME and DIST_SUBDIR. If
+neither are present, the result is dist/bin. If XPI_NAME is present, the
+result is dist/xpi-stage/$(XPI_NAME). If DIST_SUBDIR is present, then
+the $(DIST_SUBDIR) directory of the otherwise default value is used.</p>
+</div>
+<div class="section" id="final-target-files">
+<h3>FINAL_TARGET_FILES<a class="headerlink" href="#final-target-files" title="Permalink to this headline">¶</a></h3>
+<p>List of files to be installed into the application directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code> will copy (or symlink, if the platform supports it)
+the contents of its files to the directory specified by
+<code class="docutils literal notranslate"><span class="pre">FINAL_TARGET</span></code> (typically <code class="docutils literal notranslate"><span class="pre">dist/bin</span></code>). Files that are destined for a
+subdirectory can be specified by accessing a field, or as a dict access.
+For example, to export <code class="docutils literal notranslate"><span class="pre">foo.png</span></code> to the top-level directory and
+<code class="docutils literal notranslate"><span class="pre">bar.svg</span></code> to the directory <code class="docutils literal notranslate"><span class="pre">images/do-not-use</span></code>, append to
+<code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FINAL_TARGET_FILES</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;foo.png&#39;</span><span class="p">]</span>
+<span class="n">FINAL_TARGET_FILES</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="s1">&#39;do-not-use&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;bar.svg&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="final-target-pp-files">
+<h3>FINAL_TARGET_PP_FILES<a class="headerlink" href="#final-target-pp-files" title="Permalink to this headline">¶</a></h3>
+<p>Like <code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code>, with preprocessing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="firefox-ui-functional-manifests">
+<h3>FIREFOX_UI_FUNCTIONAL_MANIFESTS<a class="headerlink" href="#firefox-ui-functional-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining firefox-ui-functional tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="force-shared-lib">
+<h3>FORCE_SHARED_LIB<a class="headerlink" href="#force-shared-lib" title="Permalink to this headline">¶</a></h3>
+<p>Whether the library in this directory is a shared library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>This variable is only available in templates.</p>
+</div>
+<div class="section" id="force-static-lib">
+<h3>FORCE_STATIC_LIB<a class="headerlink" href="#force-static-lib" title="Permalink to this headline">¶</a></h3>
+<p>Whether the library in this directory is a static library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="generated-events-webidl-files">
+<h3>GENERATED_EVENTS_WEBIDL_FILES<a class="headerlink" href="#generated-events-webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>WebIDL source files for generated events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be parsed and converted to <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">.h</span></code> files.</p>
+</div>
+<div class="section" id="generated-files">
+<h3>GENERATED_FILES<a class="headerlink" href="#generated-files" title="Permalink to this headline">¶</a></h3>
+<p>Generic generated files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendListWithFlagsSpecialization</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Unless you have a reason not to, use the GeneratedFile template rather
+than referencing GENERATED_FILES directly. The GeneratedFile template
+has all the same arguments as the attributes listed below (<code class="docutils literal notranslate"><span class="pre">script</span></code>,
+<code class="docutils literal notranslate"><span class="pre">inputs</span></code>, <code class="docutils literal notranslate"><span class="pre">flags</span></code>, <code class="docutils literal notranslate"><span class="pre">force</span></code>), plus an additional <code class="docutils literal notranslate"><span class="pre">entry_point</span></code>
+argument to specify a particular function to run in the given script.</p>
+<p>This variable contains a list of files for the build system to
+generate at export time. The generation method may be declared
+with optional <code class="docutils literal notranslate"><span class="pre">script</span></code>, <code class="docutils literal notranslate"><span class="pre">inputs</span></code>, <code class="docutils literal notranslate"><span class="pre">flags</span></code>, and <code class="docutils literal notranslate"><span class="pre">force</span></code>
+attributes on individual entries.
+If the optional <code class="docutils literal notranslate"><span class="pre">script</span></code> attribute is not present on an entry, it
+is assumed that rules for generating the file are present in
+the associated Makefile.in.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GENERATED_FILES</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;bar.c&#39;</span><span class="p">,</span> <span class="s1">&#39;baz.c&#39;</span><span class="p">,</span> <span class="s1">&#39;foo.c&#39;</span><span class="p">]</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">GENERATED_FILES</span><span class="p">[</span><span class="s1">&#39;bar.c&#39;</span><span class="p">]</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;generate.py&#39;</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;datafile-for-bar&#39;</span><span class="p">]</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">GENERATED_FILES</span><span class="p">[</span><span class="s1">&#39;foo.c&#39;</span><span class="p">]</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;generate.py&#39;</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;datafile-for-foo&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This definition will generate bar.c by calling the main method of
+generate.py with a open (for writing) file object for bar.c, and
+the string <code class="docutils literal notranslate"><span class="pre">datafile-for-bar</span></code>. In a similar fashion, the main
+method of generate.py will also be called with an open
+(for writing) file object for foo.c and the string
+<code class="docutils literal notranslate"><span class="pre">datafile-for-foo</span></code>. Please note that only string arguments are
+supported for passing to scripts, and that all arguments provided
+to the script should be filenames relative to the directory in which
+the moz.build file is located.</p>
+<p>To enable using the same script for generating multiple files with
+slightly different non-filename parameters, alternative entry points
+into <code class="docutils literal notranslate"><span class="pre">script</span></code> can be specified:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GENERATED_FILES</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;bar.c&#39;</span><span class="p">]</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">GENERATED_FILES</span><span class="p">[</span><span class="s1">&#39;bar.c&#39;</span><span class="p">]</span>
+<span class="n">bar</span><span class="o">.</span><span class="n">script</span> <span class="o">=</span> <span class="s1">&#39;generate.py:make_bar&#39;</span>
+</pre></div>
+</div>
+<p>The chosen script entry point may optionally return a set of strings,
+indicating extra files the output depends on.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">flags</span></code> attribute is present, the given list of flags is
+passed as extra arguments following the inputs.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">force</span></code> attribute is present, the file is generated every
+build, regardless of whether it is stale.  This is special to the
+RecursiveMake backend and intended for special situations only (e.g.,
+localization).  Please consult a build peer (on the #build channel at
+<a class="reference external" href="https://chat.mozilla.org">https://chat.mozilla.org</a>) before using <code class="docutils literal notranslate"><span class="pre">force</span></code>.</p>
+</div>
+<div class="section" id="generated-webidl-files">
+<h3>GENERATED_WEBIDL_FILES<a class="headerlink" href="#generated-webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>Generated WebIDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be generated from some other files.</p>
+</div>
+<div class="section" id="gn-dirs">
+<h3>GN_DIRS<a class="headerlink" href="#gn-dirs" title="Permalink to this headline">¶</a></h3>
+<p>List of dirs containing gn files describing targets to build. Attributes:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendListWithFlagsSpecialization</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>variables, a dictionary containing variables and values to pass
+to <cite>gn gen</cite>.</p></li>
+<li><p>sandbox_vars, a dictionary containing variables and values to
+pass to the mozbuild processor on top of those derived from gn.</p></li>
+<li><p>non_unified_sources, a list containing sources files, relative to
+the current moz.build, that should be excluded from source file
+unification.</p></li>
+<li><p>mozilla_flags, a set of flags that if present in the gn config
+will be mirrored to the resulting mozbuild configuration.</p></li>
+<li><p>gn_target, the name of the target to build.</p></li>
+</ul>
+</div>
+<div class="section" id="gyp-dirs">
+<h3>GYP_DIRS<a class="headerlink" href="#gyp-dirs" title="Permalink to this headline">¶</a></h3>
+<p>Defines a list of object directories handled by gyp configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendListWithFlagsSpecialization</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Elements of this list give the relative object directory. For each
+element of the list, GYP_DIRS may be accessed as a dictionary
+(GYP_DIRS[foo]). The object this returns has attributes that need to be
+set to further specify gyp processing:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>input, gives the path to the root gyp configuration file for that
+object directory.</p></li>
+<li><p>variables, a dictionary containing variables and values to pass
+to the gyp processor.</p></li>
+<li><p>sandbox_vars, a dictionary containing variables and values to
+pass to the mozbuild processor on top of those derived from gyp
+configuration.</p></li>
+<li><p>no_chromium, a boolean which if set to True disables some
+special handling that emulates gyp_chromium.</p></li>
+<li><p>no_unified, a boolean which if set to True disables source
+file unification entirely.</p></li>
+<li><p>non_unified_sources, a list containing sources files, relative to
+the current moz.build, that should be excluded from source file
+unification.</p></li>
+<li><p>action_overrides, a dict of action_name to values of the <cite>script</cite>
+attribute to use for GENERATED_FILES for the specified action.</p></li>
+</ul>
+</div></blockquote>
+<dl>
+<dt>Typical use looks like:</dt><dd><p>GYP_DIRS += [‘foo’, ‘bar’]
+GYP_DIRS[‘foo’].input = ‘foo/foo.gyp’
+GYP_DIRS[‘foo’].variables = {</p>
+<blockquote>
+<div><p>‘foo’: ‘bar’,
+(…)</p>
+</div></blockquote>
+<p>}
+(…)</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="host-cflags">
+<h3>HOST_CFLAGS<a class="headerlink" href="#host-cflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the host C compiler for all of the C source files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here, these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="host-compile-flags">
+<h3>HOST_COMPILE_FLAGS<a class="headerlink" href="#host-compile-flags" title="Permalink to this headline">¶</a></h3>
+<p>Recipe for host compile flags for this context. Not to be manipulated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">HostCompileFlags</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>directly.</p>
+</div>
+<div class="section" id="host-cxxflags">
+<h3>HOST_CXXFLAGS<a class="headerlink" href="#host-cxxflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the host C++ compiler for all of the C++ source files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="host-defines">
+<h3>HOST_DEFINES<a class="headerlink" href="#host-defines" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary of compiler defines to declare for host compilation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">InitializedDefines</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>See <code class="docutils literal notranslate"><span class="pre">DEFINES</span></code> for specifics.</p>
+</div>
+<div class="section" id="host-library-name">
+<h3>HOST_LIBRARY_NAME<a class="headerlink" href="#host-library-name" title="Permalink to this headline">¶</a></h3>
+<p>Name of target library generated when cross compiling.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This variable is only available in templates.</p>
+</div>
+<div class="section" id="host-os-libs">
+<h3>HOST_OS_LIBS<a class="headerlink" href="#host-os-libs" title="Permalink to this headline">¶</a></h3>
+<p>List of system libraries for host programs and libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="host-program">
+<h3>HOST_PROGRAM<a class="headerlink" href="#host-program" title="Permalink to this headline">¶</a></h3>
+<p>Compiled host executable name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>If the configuration token <code class="docutils literal notranslate"><span class="pre">HOST_BIN_SUFFIX</span></code> is set, its value will be
+automatically appended to <code class="docutils literal notranslate"><span class="pre">HOST_PROGRAM</span></code>. If <code class="docutils literal notranslate"><span class="pre">HOST_PROGRAM</span></code> already
+ends with <code class="docutils literal notranslate"><span class="pre">HOST_BIN_SUFFIX</span></code>, <code class="docutils literal notranslate"><span class="pre">HOST_PROGRAM</span></code> will remain unchanged.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="host-rust-library-features">
+<h3>HOST_RUST_LIBRARY_FEATURES<a class="headerlink" href="#host-rust-library-features" title="Permalink to this headline">¶</a></h3>
+<p>Cargo features to activate for this host library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable should not be used directly; you should be using the
+HostRustLibrary template instead.</p>
+</div>
+<div class="section" id="host-rust-programs">
+<h3>HOST_RUST_PROGRAMS<a class="headerlink" href="#host-rust-programs" title="Permalink to this headline">¶</a></h3>
+<p>Compile a list of Rust executable names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Each name in this variable corresponds to an executable built from
+the Cargo.toml in the same directory.</p>
+</div>
+<div class="section" id="host-simple-programs">
+<h3>HOST_SIMPLE_PROGRAMS<a class="headerlink" href="#host-simple-programs" title="Permalink to this headline">¶</a></h3>
+<p>Compile a list of host executable names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Each name in this variable corresponds to a hosst executable built
+from the corresponding source file with the same base name.</p>
+<p>If the configuration token <code class="docutils literal notranslate"><span class="pre">HOST_BIN_SUFFIX</span></code> is set, its value will
+be automatically appended to each name. If a name already ends with
+<code class="docutils literal notranslate"><span class="pre">HOST_BIN_SUFFIX</span></code>, the name will remain unchanged.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="host-sources">
+<h3>HOST_SOURCES<a class="headerlink" href="#host-sources" title="Permalink to this headline">¶</a></h3>
+<p>Source code files to compile with the host compiler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of source code files to compile.
+with the host compiler.</p>
+</div>
+<div class="section" id="host-use-libs">
+<h3>HOST_USE_LIBS<a class="headerlink" href="#host-use-libs" title="Permalink to this headline">¶</a></h3>
+<p>List of libraries to link to host programs and libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="ipdl-sources">
+<h3>IPDL_SOURCES<a class="headerlink" href="#ipdl-sources" title="Permalink to this headline">¶</a></h3>
+<p>IPDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These are <code class="docutils literal notranslate"><span class="pre">.ipdl</span></code> files that will be parsed and converted to
+<code class="docutils literal notranslate"><span class="pre">.cpp</span></code> files.</p>
+</div>
+<div class="section" id="is-framework">
+<h3>IS_FRAMEWORK<a class="headerlink" href="#is-framework" title="Permalink to this headline">¶</a></h3>
+<p>Whether the library to build should be built as a framework on OSX.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>This implies the name of the library won’t be prefixed nor suffixed.
+Implies FORCE_SHARED_LIB.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="is-gkrust">
+<h3>IS_GKRUST<a class="headerlink" href="#is-gkrust" title="Permalink to this headline">¶</a></h3>
+<p>Whether the current library defined by this moz.build is gkrust.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>Indicates whether the current library contains rust for libxul.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="is-rust-library">
+<h3>IS_RUST_LIBRARY<a class="headerlink" href="#is-rust-library" title="Permalink to this headline">¶</a></h3>
+<p>Whether the current library defined by this moz.build is built by Rust.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>The library defined by this moz.build should have a build definition in
+a Cargo.toml file that exists in this moz.build’s directory.</p>
+</div>
+<div class="section" id="jar-manifests">
+<h3>JAR_MANIFESTS<a class="headerlink" href="#jar-manifests" title="Permalink to this headline">¶</a></h3>
+<p>JAR manifest files that should be processed as part of the build.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>JAR manifests are files in the tree that define how to package files
+into JARs and how chrome registration is performed. For more info,
+see <a class="reference internal" href="jar-manifests.html#jar-manifests"><span class="std std-ref">JAR Manifests</span></a>.</p>
+</div>
+<div class="section" id="ldflags">
+<h3>LDFLAGS<a class="headerlink" href="#ldflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the linker when linking all of the libraries and</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>executables declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the linker’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="library-defines">
+<h3>LIBRARY_DEFINES<a class="headerlink" href="#library-defines" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary of compiler defines to declare for the entire library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">OrderedDict</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>This variable works like DEFINES, except that declarations apply to all
+libraries that link into this library via FINAL_LIBRARY.</p>
+</div>
+<div class="section" id="library-name">
+<h3>LIBRARY_NAME<a class="headerlink" href="#library-name" title="Permalink to this headline">¶</a></h3>
+<p>The code name of the library generated for a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>By default STATIC_LIBRARY_NAME and SHARED_LIBRARY_NAME take this name.
+In <code class="docutils literal notranslate"><span class="pre">example/components/moz.build</span></code>,:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LIBRARY_NAME</span> <span class="o">=</span> <span class="s1">&#39;xpcomsample&#39;</span>
+</pre></div>
+</div>
+<p>would generate <code class="docutils literal notranslate"><span class="pre">example/components/libxpcomsample.so</span></code> on Linux, or
+<code class="docutils literal notranslate"><span class="pre">example/components/xpcomsample.lib</span></code> on Windows.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="link-flags">
+<h3>LINK_FLAGS<a class="headerlink" href="#link-flags" title="Permalink to this headline">¶</a></h3>
+<p>Recipe for linker flags for this context. Not to be manipulated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">LinkFlags</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>directly.</p>
+</div>
+<div class="section" id="localized-files">
+<h3>LOCALIZED_FILES<a class="headerlink" href="#localized-files" title="Permalink to this headline">¶</a></h3>
+<p>List of locale-dependent files to be installed into the application</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>directory.</p>
+<p>This functions similarly to <code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code>, but the files are
+sourced from the locale directory and will vary per localization.
+For an en-US build, this is functionally equivalent to
+<code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code>. For a build with <code class="docutils literal notranslate"><span class="pre">--enable-ui-locale</span></code>,
+the file will be taken from <code class="docutils literal notranslate"><span class="pre">$LOCALE_SRCDIR</span></code>, with the leading
+<code class="docutils literal notranslate"><span class="pre">en-US</span></code> removed. For a l10n repack of an en-US build, the file
+will be taken from the first location where it exists from:
+* the merged locale directory if it exists
+* <code class="docutils literal notranslate"><span class="pre">$LOCALE_SRCDIR</span></code> with the leading <code class="docutils literal notranslate"><span class="pre">en-US</span></code> removed
+* the in-tree en-US location</p>
+<p>Source directory paths specified here must must include a leading <code class="docutils literal notranslate"><span class="pre">en-US</span></code>.
+Wildcards are allowed, and will be expanded at the time of locale packaging to match
+files in the locale directory.</p>
+<p>Object directory paths are allowed here only if the path matches an entry in
+<code class="docutils literal notranslate"><span class="pre">LOCALIZED_GENERATED_FILES</span></code>.</p>
+<p>Files that are missing from a locale will typically have the en-US
+version used, but for wildcard expansions only files from the
+locale directory will be used, even if that means no files will
+be copied.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LOCALIZED_FILES</span><span class="o">.</span><span class="n">foo</span> <span class="o">+=</span> <span class="p">[</span>
+  <span class="s1">&#39;en-US/foo.js&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;en-US/things/*.ini&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>If this was placed in <code class="docutils literal notranslate"><span class="pre">toolkit/locales/moz.build</span></code>, it would copy
+<code class="docutils literal notranslate"><span class="pre">toolkit/locales/en-US/foo.js</span></code> and
+<code class="docutils literal notranslate"><span class="pre">toolkit/locales/en-US/things/*.ini</span></code> to <code class="docutils literal notranslate"><span class="pre">$(DIST)/bin/foo</span></code> in an
+en-US build, and in a build of a different locale (or a repack),
+it would copy <code class="docutils literal notranslate"><span class="pre">$(LOCALE_SRCDIR)/toolkit/foo.js</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$(LOCALE_SRCDIR)/toolkit/things/*.ini</span></code>.</p>
+</div>
+<div class="section" id="localized-generated-files">
+<h3>LOCALIZED_GENERATED_FILES<a class="headerlink" href="#localized-generated-files" title="Permalink to this headline">¶</a></h3>
+<p>Like <code class="docutils literal notranslate"><span class="pre">GENERATED_FILES</span></code>, but for files whose content varies based on the locale in use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendListWithFlagsSpecialization</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>For simple cases of text substitution, prefer <code class="docutils literal notranslate"><span class="pre">LOCALIZED_PP_FILES</span></code>.</p>
+<p>Refer to the documentation of <code class="docutils literal notranslate"><span class="pre">GENERATED_FILES</span></code>; for the most part things work the same.
+The two major differences are:
+1. The function in the Python script will be passed an additional keyword argument <cite>locale</cite></p>
+<blockquote>
+<div><p>which provides the locale in use, i.e. <code class="docutils literal notranslate"><span class="pre">en-US</span></code>.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">inputs</span></code> list may contain paths to files that will be taken from the locale
+source directory (see <code class="docutils literal notranslate"><span class="pre">LOCALIZED_FILES</span></code> for a discussion of the specifics). Paths
+in <code class="docutils literal notranslate"><span class="pre">inputs</span></code> starting with <code class="docutils literal notranslate"><span class="pre">en-US/</span></code> or containing <code class="docutils literal notranslate"><span class="pre">locales/en-US/</span></code> are considered
+localized files.</p></li>
+</ol>
+<p>To place the generated output file in a specific location, list its objdir path in
+<code class="docutils literal notranslate"><span class="pre">LOCALIZED_FILES</span></code>.</p>
+<p>In addition, <code class="docutils literal notranslate"><span class="pre">LOCALIZED_GENERATED_FILES</span></code> can use the special substitutions <code class="docutils literal notranslate"><span class="pre">{AB_CD}</span></code>
+and <code class="docutils literal notranslate"><span class="pre">{AB_rCD}</span></code> in their output paths.  <code class="docutils literal notranslate"><span class="pre">{AB_CD}</span></code> expands to the current locale during
+multi-locale builds and single-locale repacks and <code class="docutils literal notranslate"><span class="pre">{AB_rCD}</span></code> expands to an
+Android-specific encoding of the current locale.  Both expand to the empty string when the
+current locale is <code class="docutils literal notranslate"><span class="pre">en-US</span></code>.</p>
+</div>
+<div class="section" id="localized-pp-files">
+<h3>LOCALIZED_PP_FILES<a class="headerlink" href="#localized-pp-files" title="Permalink to this headline">¶</a></h3>
+<p>Like <code class="docutils literal notranslate"><span class="pre">LOCALIZED_FILES</span></code>, with preprocessing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">AB_CD</span></code> define is available and expands to the current
+locale being packaged, as with preprocessed entries in jar manifests.</p>
+</div>
+<div class="section" id="local-includes">
+<h3>LOCAL_INCLUDES<a class="headerlink" href="#local-includes" title="Permalink to this headline">¶</a></h3>
+<p>Additional directories to be searched for include files by the compiler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="marionette-gpu-manifests">
+<h3>MARIONETTE_GPU_MANIFESTS<a class="headerlink" href="#marionette-gpu-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining marionette-gpu tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="marionette-layout-manifests">
+<h3>MARIONETTE_LAYOUT_MANIFESTS<a class="headerlink" href="#marionette-layout-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining marionette-layout tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="marionette-unit-manifests">
+<h3>MARIONETTE_UNIT_MANIFESTS<a class="headerlink" href="#marionette-unit-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining marionette-unit tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="metro-chrome-manifests">
+<h3>METRO_CHROME_MANIFESTS<a class="headerlink" href="#metro-chrome-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining metro browser chrome tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="mochitest-chrome-manifests">
+<h3>MOCHITEST_CHROME_MANIFESTS<a class="headerlink" href="#mochitest-chrome-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining mochitest chrome tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="mochitest-manifests">
+<h3>MOCHITEST_MANIFESTS<a class="headerlink" href="#mochitest-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining mochitest tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="no-expand-libs">
+<h3>NO_EXPAND_LIBS<a class="headerlink" href="#no-expand-libs" title="Permalink to this headline">¶</a></h3>
+<p>Forces to build a real static library, and no corresponding fake</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>library.</p>
+</div>
+<div class="section" id="no-pgo">
+<h3>NO_PGO<a class="headerlink" href="#no-pgo" title="Permalink to this headline">¶</a></h3>
+<p>Whether profile-guided optimization is disable in this directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="objdir-files">
+<h3>OBJDIR_FILES<a class="headerlink" href="#objdir-files" title="Permalink to this headline">¶</a></h3>
+<p>List of files to be installed anywhere in the objdir. Use sparingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">OBJDIR_FILES</span></code> is similar to FINAL_TARGET_FILES, but it allows copying
+anywhere in the object directory. This is intended for various one-off
+cases, not for general use. If you wish to add entries to OBJDIR_FILES,
+please consult a build peer (on the #build channel at <a class="reference external" href="https://chat.mozilla.org">https://chat.mozilla.org</a>).</p>
+</div>
+<div class="section" id="objdir-pp-files">
+<h3>OBJDIR_PP_FILES<a class="headerlink" href="#objdir-pp-files" title="Permalink to this headline">¶</a></h3>
+<p>Like <code class="docutils literal notranslate"><span class="pre">OBJDIR_FILES</span></code>, with preprocessing. Use sparingly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="os-libs">
+<h3>OS_LIBS<a class="headerlink" href="#os-libs" title="Permalink to this headline">¶</a></h3>
+<p>System link libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of system libaries to link against.</p>
+</div>
+<div class="section" id="perftests-manifests">
+<h3>PERFTESTS_MANIFESTS<a class="headerlink" href="#perftests-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining MozPerftest performance tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="preprocessed-ipdl-sources">
+<h3>PREPROCESSED_IPDL_SOURCES<a class="headerlink" href="#preprocessed-ipdl-sources" title="Permalink to this headline">¶</a></h3>
+<p>Preprocessed IPDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These files will be preprocessed, then parsed and converted to
+<code class="docutils literal notranslate"><span class="pre">.cpp</span></code> files.</p>
+</div>
+<div class="section" id="preprocessed-test-webidl-files">
+<h3>PREPROCESSED_TEST_WEBIDL_FILES<a class="headerlink" href="#preprocessed-test-webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>Preprocessed test WebIDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be preprocessed, then parsed and converted to .cpp
+and <code class="docutils literal notranslate"><span class="pre">.h</span></code> files if tests are enabled.</p>
+</div>
+<div class="section" id="preprocessed-webidl-files">
+<h3>PREPROCESSED_WEBIDL_FILES<a class="headerlink" href="#preprocessed-webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>Preprocessed WebIDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be preprocessed before being parsed and converted.</p>
+</div>
+<div class="section" id="program">
+<h3>PROGRAM<a class="headerlink" href="#program" title="Permalink to this headline">¶</a></h3>
+<p>Compiled executable name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>If the configuration token <code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code> is set, its value will be
+automatically appended to <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code>. If <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> already ends with
+<code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code>, <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> will remain unchanged.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="python-unittest-manifests">
+<h3>PYTHON_UNITTEST_MANIFESTS<a class="headerlink" href="#python-unittest-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining python unit tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="rcfile">
+<h3>RCFILE<a class="headerlink" href="#rcfile" title="Permalink to this headline">¶</a></h3>
+<p>The program .rc file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This variable can only be used on Windows.</p>
+</div>
+<div class="section" id="rcinclude">
+<h3>RCINCLUDE<a class="headerlink" href="#rcinclude" title="Permalink to this headline">¶</a></h3>
+<p>The resource script file to be included in the default .res file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This variable can only be used on Windows.</p>
+</div>
+<div class="section" id="reftest-manifests">
+<h3>REFTEST_MANIFESTS<a class="headerlink" href="#reftest-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining reftests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These are commonly named reftest.list.</p>
+</div>
+<div class="section" id="rust-library-features">
+<h3>RUST_LIBRARY_FEATURES<a class="headerlink" href="#rust-library-features" title="Permalink to this headline">¶</a></h3>
+<p>Cargo features to activate for this library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable should not be used directly; you should be using the
+RustLibrary template instead.</p>
+</div>
+<div class="section" id="rust-library-output-category">
+<h3>RUST_LIBRARY_OUTPUT_CATEGORY<a class="headerlink" href="#rust-library-output-category" title="Permalink to this headline">¶</a></h3>
+<p>The output category for this context’s rust library. If set this will</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>correspond to the build command that will build this rust library, and
+the library will not be built as part of the default build.</p>
+</div>
+<div class="section" id="rust-library-target-dir">
+<h3>RUST_LIBRARY_TARGET_DIR<a class="headerlink" href="#rust-library-target-dir" title="Permalink to this headline">¶</a></h3>
+<p>Where CARGO_TARGET_DIR should point when compiling this library.  If</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>not set, it defaults to the current objdir.  It should be a relative path
+to the current objdir; absolute paths should not be used.</p>
+<p>This variable should not be used directly; you should be using the
+RustLibrary template instead.</p>
+</div>
+<div class="section" id="rust-programs">
+<h3>RUST_PROGRAMS<a class="headerlink" href="#rust-programs" title="Permalink to this headline">¶</a></h3>
+<p>Compile a list of Rust host executable names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Each name in this variable corresponds to an executable built from
+the Cargo.toml in the same directory.</p>
+</div>
+<div class="section" id="rust-tests">
+<h3>RUST_TESTS<a class="headerlink" href="#rust-tests" title="Permalink to this headline">¶</a></h3>
+<p>Names of Rust tests to build and run via <cite>cargo test</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="rust-test-features">
+<h3>RUST_TEST_FEATURES<a class="headerlink" href="#rust-test-features" title="Permalink to this headline">¶</a></h3>
+<p>Cargo features to activate for RUST_TESTS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sandboxed-wasm-library-name">
+<h3>SANDBOXED_WASM_LIBRARY_NAME<a class="headerlink" href="#sandboxed-wasm-library-name" title="Permalink to this headline">¶</a></h3>
+<p>The name of the static sandboxed wasm library generated for a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="shared-library-name">
+<h3>SHARED_LIBRARY_NAME<a class="headerlink" href="#shared-library-name" title="Permalink to this headline">¶</a></h3>
+<p>The name of the static library generated for a directory, if it needs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>differ from the library code name.</p>
+<p>Implies FORCE_SHARED_LIB.</p>
+</div>
+<div class="section" id="shared-library-output-category">
+<h3>SHARED_LIBRARY_OUTPUT_CATEGORY<a class="headerlink" href="#shared-library-output-category" title="Permalink to this headline">¶</a></h3>
+<p>The output category for this context’s shared library. If set this will</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>correspond to the build command that will build this shared library, and
+the library will not be built as part of the default build.</p>
+</div>
+<div class="section" id="simple-programs">
+<h3>SIMPLE_PROGRAMS<a class="headerlink" href="#simple-programs" title="Permalink to this headline">¶</a></h3>
+<p>Compile a list of executable names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Each name in this variable corresponds to an executable built from the
+corresponding source file with the same base name.</p>
+<p>If the configuration token <code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code> is set, its value will be
+automatically appended to each name. If a name already ends with
+<code class="docutils literal notranslate"><span class="pre">BIN_SUFFIX</span></code>, the name will remain unchanged.
+This variable is only available in templates.</p>
+</div>
+<div class="section" id="soname">
+<h3>SONAME<a class="headerlink" href="#soname" title="Permalink to this headline">¶</a></h3>
+<p>The soname of the shared object currently being linked</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>soname is the “logical name” of a shared object, often used to provide
+version backwards compatibility. This variable makes sense only for
+shared objects, and is supported only on some unix platforms.</p>
+</div>
+<div class="section" id="sources">
+<h3>SOURCES<a class="headerlink" href="#sources" title="Permalink to this headline">¶</a></h3>
+<p>Source code files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of source code files to compile.
+Accepts assembler, C, C++, Objective C/C++.</p>
+</div>
+<div class="section" id="sphinx-python-package-dirs">
+<h3>SPHINX_PYTHON_PACKAGE_DIRS<a class="headerlink" href="#sphinx-python-package-dirs" title="Permalink to this headline">¶</a></h3>
+<p>Directories containing Python packages that Sphinx documents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="sphinx-trees">
+<h3>SPHINX_TREES<a class="headerlink" href="#sphinx-trees" title="Permalink to this headline">¶</a></h3>
+<p>Describes what the Sphinx documentation tree will look like.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>Keys are relative directories inside the final Sphinx documentation
+tree to install files into. Values are directories (relative to this
+file) whose content to copy into the Sphinx documentation tree.</p>
+</div>
+<div class="section" id="static-library-name">
+<h3>STATIC_LIBRARY_NAME<a class="headerlink" href="#static-library-name" title="Permalink to this headline">¶</a></h3>
+<p>The name of the static library generated for a directory, if it needs to</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>differ from the library code name.</p>
+<p>Implies FORCE_STATIC_LIB.</p>
+</div>
+<div class="section" id="symbols-file">
+<h3>SYMBOLS_FILE<a class="headerlink" href="#symbols-file" title="Permalink to this headline">¶</a></h3>
+<p>A file containing a list of symbols to export from a shared library.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Path</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>The given file contains a list of symbols to be exported, and is
+preprocessed.
+A special marker “&#64;DATA&#64;” must be added after a symbol name if it
+points to data instead of code, so that the Windows linker can treat
+them correctly.</p>
+</div>
+<div class="section" id="telemetry-tests-client-manifests">
+<h3>TELEMETRY_TESTS_CLIENT_MANIFESTS<a class="headerlink" href="#telemetry-tests-client-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining telemetry client tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="test-harness-files">
+<h3>TEST_HARNESS_FILES<a class="headerlink" href="#test-harness-files" title="Permalink to this headline">¶</a></h3>
+<p>List of files to be installed for test harnesses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedListWithItems</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">TEST_HARNESS_FILES</span></code> can be used to install files to any directory
+under $objdir/_tests. Files can be appended to a field to indicate
+which subdirectory they should be exported to. For example,
+to export <code class="docutils literal notranslate"><span class="pre">foo.py</span></code> to <code class="docutils literal notranslate"><span class="pre">_tests/foo</span></code>, append to
+<code class="docutils literal notranslate"><span class="pre">TEST_HARNESS_FILES</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_HARNESS_FILES</span><span class="o">.</span><span class="n">foo</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;foo.py&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Files from topsrcdir and the objdir can also be installed by prefixing
+the path(s) with a ‘/’ character and a ‘!’ character, respectively:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TEST_HARNESS_FILES</span><span class="o">.</span><span class="n">path</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;/build/bar.py&#39;</span><span class="p">,</span> <span class="s1">&#39;!quux.py&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-webidl-files">
+<h3>TEST_WEBIDL_FILES<a class="headerlink" href="#test-webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>Test WebIDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be parsed and converted to <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">.h</span></code> files
+if tests are enabled.</p>
+</div>
+<div class="section" id="unified-sources">
+<h3>UNIFIED_SOURCES<a class="headerlink" href="#unified-sources" title="Permalink to this headline">¶</a></h3>
+<p>Source code files that can be compiled together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of source code files to compile,
+that can be concatenated all together and built as a single source
+file. This can help make the build faster and reduce the debug info
+size.</p>
+</div>
+<div class="section" id="use-extension-manifest">
+<h3>USE_EXTENSION_MANIFEST<a class="headerlink" href="#use-extension-manifest" title="Permalink to this headline">¶</a></h3>
+<p>Controls the name of the manifest for JAR files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>By default, the name of the manifest is ${JAR_MANIFEST}.manifest.
+Setting this variable to <code class="docutils literal notranslate"><span class="pre">True</span></code> changes the name of the manifest to
+chrome.manifest.</p>
+</div>
+<div class="section" id="use-integrated-clangcl-as">
+<h3>USE_INTEGRATED_CLANGCL_AS<a class="headerlink" href="#use-integrated-clangcl-as" title="Permalink to this headline">¶</a></h3>
+<p>Use the integrated clang-cl assembler to assemble assembly files from SOURCES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>This allows using clang-cl to assemble assembly files which is useful
+on platforms like aarch64 where the alternative is to have to run a
+pre-processor to generate files with suitable syntax.</p>
+</div>
+<div class="section" id="use-libs">
+<h3>USE_LIBS<a class="headerlink" href="#use-libs" title="Permalink to this headline">¶</a></h3>
+<p>List of libraries to link to programs and libraries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="use-nasm">
+<h3>USE_NASM<a class="headerlink" href="#use-nasm" title="Permalink to this headline">¶</a></h3>
+<p>Use the nasm assembler to assemble assembly files from SOURCES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>By default, the build will use the toolchain assembler, $(AS), to
+assemble source files in assembly language (.s or .asm files). Setting
+this value to <code class="docutils literal notranslate"><span class="pre">True</span></code> will cause it to use nasm instead.</p>
+<p>If nasm is not available on this system, or does not support the
+current target architecture, an error will be raised.</p>
+</div>
+<div class="section" id="use-static-libs">
+<h3>USE_STATIC_LIBS<a class="headerlink" href="#use-static-libs" title="Permalink to this headline">¶</a></h3>
+<p>Whether the code in this directory is a built against the static</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>runtime library.</p>
+<p>This variable only has an effect when building with MSVC.</p>
+</div>
+<div class="section" id="use-yasm">
+<h3>USE_YASM<a class="headerlink" href="#use-yasm" title="Permalink to this headline">¶</a></h3>
+<p>Use the yasm assembler to assemble assembly files from SOURCES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+<p>By default, the build will use the toolchain assembler, $(AS), to
+assemble source files in assembly language (.s or .asm files). Setting
+this value to <code class="docutils literal notranslate"><span class="pre">True</span></code> will cause it to use yasm instead.</p>
+<p>If yasm is not available on this system, or does not support the
+current target architecture, an error will be raised.</p>
+</div>
+<div class="section" id="wasm-cflags">
+<h3>WASM_CFLAGS<a class="headerlink" href="#wasm-cflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the C-to-wasm compiler for all of the C</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>source files declared in this directory.</p>
+<p>Note that the ordering of flags matters here, these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="wasm-cxxflags">
+<h3>WASM_CXXFLAGS<a class="headerlink" href="#wasm-cxxflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the C++-to-wasm compiler for all of the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>C++ source files declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="wasm-defines">
+<h3>WASM_DEFINES<a class="headerlink" href="#wasm-defines" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary of compiler defines to declare for wasm compilation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">InitializedDefines</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>See <code class="docutils literal notranslate"><span class="pre">DEFINES</span></code> for specifics.</p>
+</div>
+<div class="section" id="wasm-flags">
+<h3>WASM_FLAGS<a class="headerlink" href="#wasm-flags" title="Permalink to this headline">¶</a></h3>
+<p>Recipe for wasm flags for this context. Not to be</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">WasmFlags</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>manipulated directly.</p>
+</div>
+<div class="section" id="wasm-ldflags">
+<h3>WASM_LDFLAGS<a class="headerlink" href="#wasm-ldflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the linker when linking wasm modules</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matters here; these flags will be
+added to the compiler’s command line in the same order as they
+appear in the moz.build file.</p>
+</div>
+<div class="section" id="wasm-sources">
+<h3>WASM_SOURCES<a class="headerlink" href="#wasm-sources" title="Permalink to this headline">¶</a></h3>
+<p>Source code files to compile with the wasm compiler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="webidl-example-interfaces">
+<h3>WEBIDL_EXAMPLE_INTERFACES<a class="headerlink" href="#webidl-example-interfaces" title="Permalink to this headline">¶</a></h3>
+<p>Names of example WebIDL interfaces to build as part of the build.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Names in this list correspond to WebIDL interface names defined in
+WebIDL files included in the build from one of the *WEBIDL_FILES
+variables.</p>
+</div>
+<div class="section" id="webidl-files">
+<h3>WEBIDL_FILES<a class="headerlink" href="#webidl-files" title="Permalink to this headline">¶</a></h3>
+<p>WebIDL source files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">StrictOrderingOnAppendList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>These will be parsed and converted to <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">.h</span></code> files.</p>
+</div>
+<div class="section" id="win32-exe-ldflags">
+<h3>WIN32_EXE_LDFLAGS<a class="headerlink" href="#win32-exe-ldflags" title="Permalink to this headline">¶</a></h3>
+<p>Flags passed to the linker when linking a Windows .exe executable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">List</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>declared in this directory.</p>
+<p>Note that the ordering of flags matter here, these flags will be
+added to the linker’s command line in the same order as they
+appear in the moz.build file.</p>
+<p>This variable only has an effect on Windows.</p>
+</div>
+<div class="section" id="xpcom-manifests">
+<h3>XPCOM_MANIFESTS<a class="headerlink" href="#xpcom-manifests" title="Permalink to this headline">¶</a></h3>
+<p>XPCOM Component Manifest Files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This is a list of files that define XPCOM components to be added
+to the component registry.</p>
+</div>
+<div class="section" id="xpcshell-tests-manifests">
+<h3>XPCSHELL_TESTS_MANIFESTS<a class="headerlink" href="#xpcshell-tests-manifests" title="Permalink to this headline">¶</a></h3>
+<p>List of manifest files defining xpcshell tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_OrderedListWithAction</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="xpidl-module">
+<h3>XPIDL_MODULE<a class="headerlink" href="#xpidl-module" title="Permalink to this headline">¶</a></h3>
+<p>XPCOM Interface Definition Module Name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This is the name of the <code class="docutils literal notranslate"><span class="pre">.xpt</span></code> file that is created by linking
+<code class="docutils literal notranslate"><span class="pre">XPIDL_SOURCES</span></code> together. If unspecified, it defaults to be the same
+as <code class="docutils literal notranslate"><span class="pre">MODULE</span></code>.</p>
+</div>
+<div class="section" id="xpidl-sources">
+<h3>XPIDL_SOURCES<a class="headerlink" href="#xpidl-sources" title="Permalink to this headline">¶</a></h3>
+<p>XPCOM Interface Definition Files (xpidl).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">_TypedList</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This is a list of files that define XPCOM interface definitions.
+Entries must be files that exist. Entries are almost certainly <code class="docutils literal notranslate"><span class="pre">.idl</span></code>
+files.</p>
+</div>
+<div class="section" id="xpi-name">
+<h3>XPI_NAME<a class="headerlink" href="#xpi-name" title="Permalink to this headline">¶</a></h3>
+<p>The name of an extension XPI to generate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Storage Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-even">Input Type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>When this variable is present, the results of this directory will end up
+being packaged into an extension instead of the main dist/bin results.</p>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="error">
+<h3>error<a class="headerlink" href="#error" title="Permalink to this headline">¶</a></h3>
+<p>Issue a fatal error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+<p>If this function is called, processing is aborted immediately.</p>
+</div>
+<div class="section" id="export">
+<h3>export<a class="headerlink" href="#export" title="Permalink to this headline">¶</a></h3>
+<p>Make the specified variable available to all child directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+<p>The variable specified by the argument string is added to the
+environment of all directories specified in the DIRS and TEST_DIRS
+variables. If those directories themselves have child directories,
+the variable will be exported to all of them.</p>
+<p>The value used for the variable is the final value at the end of the
+moz.build file, so it is possible (but not recommended style) to place
+the export before the definition of the variable.</p>
+<p>This function is limited to the upper-case variables that have special
+meaning in moz.build files.</p>
+<p>NOTE: Please consult with a build peer (on the #build channel at
+<a class="reference external" href="https://chat.mozilla.org">https://chat.mozilla.org</a>) before adding a new use of this function.</p>
+<div class="section" id="example-usage">
+<h4>Example usage<a class="headerlink" href="#example-usage" title="Permalink to this headline">¶</a></h4>
+<p>To make all children directories install as the given extension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XPI_NAME</span> <span class="o">=</span> <span class="s1">&#39;cool-extension&#39;</span>
+<span class="n">export</span><span class="p">(</span><span class="s1">&#39;XPI_NAME&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="include">
+<h3>include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
+<p>Include another mozbuild file in the context of this one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p>(SourcePath)</p>
+</dd>
+</dl>
+<p>This is similar to a <code class="docutils literal notranslate"><span class="pre">#include</span></code> in C languages. The filename passed to
+the function will be read and its contents will be evaluated within the
+context of the calling file.</p>
+<p>If a relative path is given, it is evaluated as relative to the file
+currently being processed. If there is a chain of multiple include(),
+the relative path computation is from the most recent/active file.</p>
+<p>If an absolute path is given, it is evaluated from <code class="docutils literal notranslate"><span class="pre">TOPSRCDIR</span></code>. In
+other words, <code class="docutils literal notranslate"><span class="pre">include('/foo')</span></code> references the path
+<code class="docutils literal notranslate"><span class="pre">TOPSRCDIR</span> <span class="pre">+</span> <span class="pre">'/foo'</span></code>.</p>
+<div class="section" id="id7">
+<h4>Example usage<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>Include <code class="docutils literal notranslate"><span class="pre">sibling.build</span></code> from the current directory.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;sibling.build&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Include <code class="docutils literal notranslate"><span class="pre">foo.build</span></code> from a path within the top source directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">include</span><span class="p">(</span><span class="s1">&#39;/elsewhere/foo.build&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="template">
+<h3>template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>Decorator for template declarations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p>(function)</p>
+</dd>
+</dl>
+<p>Templates are a special kind of functions that can be declared in
+mozbuild files. Uppercase variables assigned in the function scope
+are considered to be the result of the template.</p>
+<dl class="simple">
+<dt>Contrary to traditional python functions:</dt><dd><ul class="simple">
+<li><p>return values from template functions are ignored,</p></li>
+<li><p>template functions don’t have access to the global scope.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="section" id="example-template">
+<h4>Example template<a class="headerlink" href="#example-template" title="Permalink to this headline">¶</a></h4>
+<p>The following <code class="docutils literal notranslate"><span class="pre">Program</span></code> template sets two variables <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> and
+<code class="docutils literal notranslate"><span class="pre">USE_LIBS</span></code>. <code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> is set to the argument given on the template
+invocation, and <code class="docutils literal notranslate"><span class="pre">USE_LIBS</span></code> to contain “mozglue”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@template</span>
+<span class="k">def</span> <span class="nf">Program</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">PROGRAM</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="n">USE_LIBS</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;mozglue&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="template-invocation">
+<h4>Template invocation<a class="headerlink" href="#template-invocation" title="Permalink to this headline">¶</a></h4>
+<p>A template is invoked in the form of a function call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Program</span><span class="p">(</span><span class="s1">&#39;myprog&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The result of the template, being all the uppercase variable it sets
+is mixed to the existing set of variables defined in the mozbuild file
+invoking the template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FINAL_TARGET</span> <span class="o">=</span> <span class="s1">&#39;dist/other&#39;</span>
+<span class="n">USE_LIBS</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;mylib&#39;</span><span class="p">]</span>
+<span class="n">Program</span><span class="p">(</span><span class="s1">&#39;myprog&#39;</span><span class="p">)</span>
+<span class="n">USE_LIBS</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;otherlib&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The above mozbuild results in the following variables set:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FINAL_TARGET</span></code> is ‘dist/other’</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_LIBS</span></code> is [‘mylib’, ‘mozglue’, ‘otherlib’]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PROGRAM</span></code> is ‘myprog’</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="warning">
+<h3>warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<p>Issue a warning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><p>(str)</p>
+</dd>
+</dl>
+<p>Warnings are string messages that are printed during execution.</p>
+<p>Warnings are ignored during execution.</p>
+</div>
+</div>
+<div class="section" id="special-variables">
+<h2>Special Variables<a class="headerlink" href="#special-variables" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="config">
+<h3>CONFIG<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h3>
+<p>Dictionary containing the current configuration variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p>
+</dd>
+</dl>
+<p>All the variables defined by the configuration system are available
+through this object. e.g. <code class="docutils literal notranslate"><span class="pre">ENABLE_TESTS</span></code>, <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code>, etc.</p>
+<p>Values in this container are read-only. Attempts at changing values
+will result in a run-time error.</p>
+<p>Access to an unknown variable will return None.</p>
+</div>
+<div class="section" id="content-accessible-files">
+<h3>CONTENT_ACCESSIBLE_FILES<a class="headerlink" href="#content-accessible-files" title="Permalink to this headline">¶</a></h3>
+<p>List of files which can be accessed by web content through resource:// URIs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">CONTENT_ACCESSIBLE_FILES</span></code> is used to list the files to be exported
+to <code class="docutils literal notranslate"><span class="pre">dist/bin/contentaccessible</span></code>. Files can also be appended to a
+field to indicate which subdirectory they should be exported to.</p>
+</div>
+<div class="section" id="extra-components">
+<h3>EXTRA_COMPONENTS<a class="headerlink" href="#extra-components" title="Permalink to this headline">¶</a></h3>
+<p>Additional component files to distribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of files to copy into
+<code class="docutils literal notranslate"><span class="pre">$(FINAL_TARGET)/components/</span></code>.</p>
+</div>
+<div class="section" id="extra-js-modules">
+<h3>EXTRA_JS_MODULES<a class="headerlink" href="#extra-js-modules" title="Permalink to this headline">¶</a></h3>
+<p>Additional JavaScript files to distribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of files to copy into
+<a href="#id8"><span class="problematic" id="id9">``</span></a>$(FINAL_TARGET)/modules.</p>
+</div>
+<div class="section" id="extra-pp-components">
+<h3>EXTRA_PP_COMPONENTS<a class="headerlink" href="#extra-pp-components" title="Permalink to this headline">¶</a></h3>
+<p>Javascript XPCOM files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of files to preprocess.  Generated
+files will be installed in the <code class="docutils literal notranslate"><span class="pre">/components</span></code> directory of the distribution.</p>
+</div>
+<div class="section" id="extra-pp-js-modules">
+<h3>EXTRA_PP_JS_MODULES<a class="headerlink" href="#extra-pp-js-modules" title="Permalink to this headline">¶</a></h3>
+<p>Additional JavaScript files to distribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>This variable contains a list of files to copy into
+<code class="docutils literal notranslate"><span class="pre">$(FINAL_TARGET)/modules</span></code>, after preprocessing.</p>
+</div>
+<div class="section" id="js-preference-files">
+<h3>JS_PREFERENCE_FILES<a class="headerlink" href="#js-preference-files" title="Permalink to this headline">¶</a></h3>
+<p>Exported JavaScript files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>A list of files copied into the dist directory for packaging and installation.
+Path will be defined for gre or application prefs dir based on what is building.</p>
+</div>
+<div class="section" id="js-preference-pp-files">
+<h3>JS_PREFERENCE_PP_FILES<a class="headerlink" href="#js-preference-pp-files" title="Permalink to this headline">¶</a></h3>
+<p>Like JS_PREFERENCE_FILES, preprocessed..</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="objdir">
+<h3>OBJDIR<a class="headerlink" href="#objdir" title="Permalink to this headline">¶</a></h3>
+<p>The path to the object directory for this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>Is is the same as <code class="docutils literal notranslate"><span class="pre">TOPOBJDIR</span> <span class="pre">+</span> <span class="pre">RELATIVEDIR</span></code>.</p>
+</div>
+<div class="section" id="relativedir">
+<h3>RELATIVEDIR<a class="headerlink" href="#relativedir" title="Permalink to this headline">¶</a></h3>
+<p>Constant defining the relative path of this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>The relative path is from <code class="docutils literal notranslate"><span class="pre">TOPSRCDIR</span></code>. This is defined as relative
+to the main file being executed, regardless of whether additional
+files have been included using <code class="docutils literal notranslate"><span class="pre">include()</span></code>.</p>
+</div>
+<div class="section" id="resource-files">
+<h3>RESOURCE_FILES<a class="headerlink" href="#resource-files" title="Permalink to this headline">¶</a></h3>
+<p>List of resources to be exported, and in which subdirectories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p><code class="docutils literal notranslate"><span class="pre">RESOURCE_FILES</span></code> is used to list the resource files to be exported to
+<code class="docutils literal notranslate"><span class="pre">dist/bin/res</span></code>, but it can be used for other files as well. This variable
+behaves as a list when appending filenames for resources in the top-level
+directory. Files can also be appended to a field to indicate which
+subdirectory they should be exported to. For example, to export
+<code class="docutils literal notranslate"><span class="pre">foo.res</span></code> to the top-level directory, and <code class="docutils literal notranslate"><span class="pre">bar.res</span></code> to <code class="docutils literal notranslate"><span class="pre">fonts/</span></code>,
+append to <code class="docutils literal notranslate"><span class="pre">RESOURCE_FILES</span></code> like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RESOURCE_FILES</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;foo.res&#39;</span><span class="p">]</span>
+<span class="n">RESOURCE_FILES</span><span class="o">.</span><span class="n">fonts</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;bar.res&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="srcdir">
+<h3>SRCDIR<a class="headerlink" href="#srcdir" title="Permalink to this headline">¶</a></h3>
+<p>Constant defining the source directory of this file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>This is the path inside <code class="docutils literal notranslate"><span class="pre">TOPSRCDIR</span></code> where this file is located. It
+is the same as <code class="docutils literal notranslate"><span class="pre">TOPSRCDIR</span> <span class="pre">+</span> <span class="pre">RELATIVEDIR</span></code>.</p>
+</div>
+<div class="section" id="testing-js-modules">
+<h3>TESTING_JS_MODULES<a class="headerlink" href="#testing-js-modules" title="Permalink to this headline">¶</a></h3>
+<p>JavaScript modules to install in the test-only destination.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>Some JavaScript modules (JSMs) are test-only and not distributed
+with Firefox. This variable defines them.</p>
+<p>To install modules in a subdirectory, use properties of this
+variable to control the final destination. e.g.</p>
+<p><code class="docutils literal notranslate"><span class="pre">TESTING_JS_MODULES.foo</span> <span class="pre">+=</span> <span class="pre">['module.jsm']</span></code>.</p>
+</div>
+<div class="section" id="test-dirs">
+<h3>TEST_DIRS<a class="headerlink" href="#test-dirs" title="Permalink to this headline">¶</a></h3>
+<p>Like DIRS but only for directories that contain test-only code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+</dd>
+</dl>
+<p>If tests are not enabled, this variable will be ignored.</p>
+<p>This variable may go away once the transition away from Makefiles is
+complete.</p>
+</div>
+<div class="section" id="topobjdir">
+<h3>TOPOBJDIR<a class="headerlink" href="#topobjdir" title="Permalink to this headline">¶</a></h3>
+<p>Constant defining the top object directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>The top object directory is the parent directory which will contain
+the output of the build. This is commonly referred to as “the object
+directory.”</p>
+</div>
+<div class="section" id="topsrcdir">
+<h3>TOPSRCDIR<a class="headerlink" href="#topsrcdir" title="Permalink to this headline">¶</a></h3>
+<p>Constant defining the top source directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+<p>The top source directory is the parent directory containing the source
+code and all build files. It is typically the root directory of a
+cloned repository.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="files-metadata.html" class="btn btn-neutral float-right" title="Files Metadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mozbuild-files.html" class="btn btn-neutral float-left" title="moz.build Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

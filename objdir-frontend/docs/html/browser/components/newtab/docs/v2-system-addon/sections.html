@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Sections &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script src="../../../../../_static/language_data.js"></script>
+        <script src="../../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Telemetry checklist" href="telemetry.html" />
+    <link rel="prev" title="Remote CFR Messages" href="remote_cfr.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Firefox</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../../urlbar/index.html">Address Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../BrowserUsageTelemetry.html">Browser Usage Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../enterprisepolicies/docs/index.html">Enterprise Policies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../extensions/formautofill/docs/index.html">Form Autofill</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Firefox Home (New Tab)</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../index.html#for-jsm-files">For .jsm files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#for-js-jsx-sass-or-css-files">For .js, .jsx, .sass, or .css files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#building-assets-and-running-firefox">Building assets and running Firefox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#continuous-development-debugging">Continuous development / debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#running-tests">Running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../index.html#code-coverage">Code Coverage</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#detailed-docs">Detailed Docs</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="about_home_startup_cache.html">The <code class="docutils literal notranslate"><span class="pre">about:home</span></code> startup cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_dictionary.html">Activity Stream Pings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="data_events.html">Metrics we collect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="geo_locale.html">Custom <code class="docutils literal notranslate"><span class="pre">geo</span></code>, <code class="docutils literal notranslate"><span class="pre">locale</span></code>, and update channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mochitests.html">Mochitests</a></li>
+<li class="toctree-l4"><a class="reference internal" href="preferences.html">Preferences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="remote_cfr.html">Remote CFR Messages</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Sections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="telemetry.html">Telemetry checklist</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tippytop.html">TippyTop in Activity Stream</a></li>
+<li class="toctree-l4"><a class="reference internal" href="unit_testing_guide.html">Unit testing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installer/windows/installer/index.html">Installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../toolkit/mozapps/defaultagent/default-browser-agent/index.html">Default Browser Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../content-src/asrouter/docs/index.html">Messaging System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../base/sslerrorreport/index.html">SSL Error Reporting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../base/tabbrowser/index.html">tabbrowser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../touchbar/index.html">Touch Bar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../uitour/docs/index.html">UITour</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../payments/docs/index.html">WebPayments UI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Firefox</a> &raquo;</li>
+        
+          <li><a href="../index.html">Firefox Home (New Tab)</a> &raquo;</li>
+        
+      <li>Sections</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../../_sources/browser/components/newtab/docs/v2-system-addon/sections.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sections">
+<h1>Sections<a class="headerlink" href="#sections" title="Permalink to this headline">¶</a></h1>
+<p>Each section in Activity Stream displays data from a corresponding section feed
+in a standardised <code class="docutils literal notranslate"><span class="pre">Section</span></code> UI component. Each section feed is responsible for
+listening to events and updating the section options such as the title, icon,
+and rows (the cards for the section to display).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Section</span></code> UI component displays the rows provided by the section feed. If no
+rows are available it displays an empty state consisting of an icon and a
+message. Optionally, the section may have a info option menu that is displayed
+when users hover over the info icon.</p>
+<p>On load, <code class="docutils literal notranslate"><span class="pre">SectionsManager</span></code> and <code class="docutils literal notranslate"><span class="pre">SectionsFeed</span></code> in <code class="docutils literal notranslate"><span class="pre">SectionsManager.jsm</span></code> add the
+sections configured in the <code class="docutils literal notranslate"><span class="pre">BUILT_IN_SECTIONS</span></code> map to the state. These sections
+are initially disabled, so aren’t visible. The section’s feed may use the
+methods provided by the <code class="docutils literal notranslate"><span class="pre">SectionsManager</span></code> to enable its section and update its
+properties.</p>
+<p>The section configuration in <code class="docutils literal notranslate"><span class="pre">BUILT_IN_SECTIONS</span></code> consists of a generator
+function keyed by the pref name for the section feed. The generator function
+takes an <code class="docutils literal notranslate"><span class="pre">options</span></code> argument as the only parameter, which is passed the object
+stored as serialised JSON in the pref <code class="docutils literal notranslate"><span class="pre">{feed_pref_name}.options</span></code>, or the empty
+object if this doesn’t exist. The generator returns a section configuration
+object which may have the following properties:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>id</p></td>
+<td><p>String</p></td>
+<td><p>Non-optional unique id.</p></td>
+</tr>
+<tr class="row-odd"><td><p>title</p></td>
+<td><p>Localisation object</p></td>
+<td><p>Has property <cite>id</cite>, the string localisation id, and optionally a <cite>values</cite> object to fill in placeholders.</p></td>
+</tr>
+<tr class="row-even"><td><p>icon</p></td>
+<td><p>String</p></td>
+<td><p>Icon id. New icons should be added in icons.scss.</p></td>
+</tr>
+<tr class="row-odd"><td><p>maxRows</p></td>
+<td><p>Integer</p></td>
+<td><p>Maximum number of rows of cards to display. Should be &gt;= 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>contextMenuOptions</p></td>
+<td><p>Array of strings</p></td>
+<td><p>The menu options to provide in the card context menus.</p></td>
+</tr>
+<tr class="row-odd"><td><p>shouldHidePref</p></td>
+<td><p>Boolean</p></td>
+<td><p>If true, will the section preference in the preferences pane will not be shown.</p></td>
+</tr>
+<tr class="row-even"><td><p>pref</p></td>
+<td><p>Object</p></td>
+<td><p>Configures the section preference to show in the preferences pane. Has properties <cite>titleString</cite> and <cite>descString</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>emptyState</p></td>
+<td><p>Object</p></td>
+<td><p>Configures the empty state of the section. Has properties <cite>message</cite> and <cite>icon</cite>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="section-feeds">
+<h2>Section feeds<a class="headerlink" href="#section-feeds" title="Permalink to this headline">¶</a></h2>
+<p>Each section feed should be controlled by the pref <code class="docutils literal notranslate"><span class="pre">feeds.section.{section_id}</span></code>.</p>
+<div class="section" id="enabling-the-section">
+<h3>Enabling the section<a class="headerlink" href="#enabling-the-section" title="Permalink to this headline">¶</a></h3>
+<p>The section feed must listen for the events <code class="docutils literal notranslate"><span class="pre">INIT</span></code> (dispatched when Activity
+Stream is initialised) and <code class="docutils literal notranslate"><span class="pre">FEED_INIT</span></code> (dispatched when a feed is re-enabled
+having been turned off, with the feed id as the <code class="docutils literal notranslate"><span class="pre">data</span></code>). On these events it must
+call <code class="docutils literal notranslate"><span class="pre">SectionsManager.enableSection(id)</span></code>. Care should be taken that this happens
+only once <code class="docutils literal notranslate"><span class="pre">SectionsManager</span></code> has also initialised; the feed can use the method
+<code class="docutils literal notranslate"><span class="pre">SectionsManager.onceInitialized()</span></code>.</p>
+</div>
+<div class="section" id="disabling-the-section">
+<h3>Disabling the section<a class="headerlink" href="#disabling-the-section" title="Permalink to this headline">¶</a></h3>
+<p>The section feed must have an <code class="docutils literal notranslate"><span class="pre">uninit</span></code> method. This is called when the section
+feed is disabled by turning the section’s pref off. In <code class="docutils literal notranslate"><span class="pre">uninit</span></code> the feed must
+call <code class="docutils literal notranslate"><span class="pre">SectionsManager.disableSection(id)</span></code>. This will remove the section’s UI
+component from every existing Activity Stream page.</p>
+</div>
+<div class="section" id="updating-the-section-rows">
+<h3>Updating the section rows<a class="headerlink" href="#updating-the-section-rows" title="Permalink to this headline">¶</a></h3>
+<p>The section feed can call <code class="docutils literal notranslate"><span class="pre">SectionsManager.updateSection(id,</span> <span class="pre">options)</span></code> to update
+section options. The <code class="docutils literal notranslate"><span class="pre">rows</span></code> array property of <code class="docutils literal notranslate"><span class="pre">options</span></code> stores the cards of
+sites to display. Each card object may have the following properties:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">type</span><span class="p">,</span> <span class="c1">// One of the types in Card/types.js, e.g. &quot;Trending&quot;</span>
+  <span class="nx">title</span><span class="p">,</span> <span class="c1">// Title string</span>
+  <span class="nx">description</span><span class="p">,</span> <span class="c1">// Description string</span>
+  <span class="nx">image</span><span class="p">,</span> <span class="c1">// Image url</span>
+  <span class="nx">url</span> <span class="c1">// Site url</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="telemetry.html" class="btn btn-neutral float-right" title="Telemetry checklist" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="remote_cfr.html" class="btn btn-neutral float-left" title="Remote CFR Messages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

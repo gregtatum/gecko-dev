@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Debugger API &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="The Debugger Interface" href="Debugger-API.html" />
+    <link rel="prev" title="Building SpiderMonkey" href="../build.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">SpiderMonkey</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../build.html">Building SpiderMonkey</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Debugger API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html">The Debugger Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Conventions.html">General Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../SavedFrame/index.html">SavedFrame</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">SpiderMonkey</a> &raquo;</li>
+        
+      <li>Debugger API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/js/Debugger/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="debugger-api">
+<h1>Debugger API<a class="headerlink" href="#debugger-api" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Debugger-API.html">The <code class="docutils literal notranslate"><span class="pre">Debugger</span></code> Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger-API.html#debugger-instances-and-shadow-objects">Debugger Instances and Shadow Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger-API.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.html">The Debugger Object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.html#new-debugger-global"><code class="docutils literal notranslate"><span class="pre">new</span> <span class="pre">Debugger([global,</span> <span class="pre">...])</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.html#accessor-properties-of-the-debugger-prototype-object">Accessor Properties of the Debugger Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#allowunobservedasmjs"><code class="docutils literal notranslate"><span class="pre">allowUnobservedAsmJS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#collectcoverageinfo"><code class="docutils literal notranslate"><span class="pre">collectCoverageInfo</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#uncaughtexceptionhook"><code class="docutils literal notranslate"><span class="pre">uncaughtExceptionHook</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.html#debugger-handler-functions">Debugger Handler Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onnewscript-script-global"><code class="docutils literal notranslate"><span class="pre">onNewScript(script,</span> <span class="pre">global)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onnewpromise-promise"><code class="docutils literal notranslate"><span class="pre">onNewPromise(promise)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onpromisesettled-promise"><code class="docutils literal notranslate"><span class="pre">onPromiseSettled(promise)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#ondebuggerstatement-frame"><code class="docutils literal notranslate"><span class="pre">onDebuggerStatement(frame)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onenterframe-frame"><code class="docutils literal notranslate"><span class="pre">onEnterFrame(frame)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onnativecall-callee-reason"><code class="docutils literal notranslate"><span class="pre">onNativeCall(callee,</span> <span class="pre">reason)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onexceptionunwind-frame-value"><code class="docutils literal notranslate"><span class="pre">onExceptionUnwind(frame,</span> <span class="pre">value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#sourcehandler-asuffusionofyellow"><code class="docutils literal notranslate"><span class="pre">sourceHandler(ASuffusionOfYellow)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onerror-frame-report"><code class="docutils literal notranslate"><span class="pre">onError(frame,</span> <span class="pre">report)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#onnewglobalobject-global"><code class="docutils literal notranslate"><span class="pre">onNewGlobalObject(global)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.html#function-properties-of-the-debugger-prototype-object">Function Properties of the Debugger Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#adddebuggee-global"><code class="docutils literal notranslate"><span class="pre">addDebuggee(global)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#addallglobalsasdebuggees"><code class="docutils literal notranslate"><span class="pre">addAllGlobalsAsDebuggees()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#removedebuggee-global"><code class="docutils literal notranslate"><span class="pre">removeDebuggee(global)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#removealldebuggees"><code class="docutils literal notranslate"><span class="pre">removeAllDebuggees()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#hasdebuggee-global"><code class="docutils literal notranslate"><span class="pre">hasDebuggee(global)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#getdebuggees"><code class="docutils literal notranslate"><span class="pre">getDebuggees()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#getnewestframe"><code class="docutils literal notranslate"><span class="pre">getNewestFrame()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#findsources"><code class="docutils literal notranslate"><span class="pre">findSources()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#findscripts-query"><code class="docutils literal notranslate"><span class="pre">findScripts([query])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#findsourceurls"><code class="docutils literal notranslate"><span class="pre">findSourceURLs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#findobjects-query"><code class="docutils literal notranslate"><span class="pre">findObjects([query])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#clearbreakpoint-handler"><code class="docutils literal notranslate"><span class="pre">clearBreakpoint(handler)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#clearallbreakpoints"><code class="docutils literal notranslate"><span class="pre">clearAllBreakpoints()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#findallglobals"><code class="docutils literal notranslate"><span class="pre">findAllGlobals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#makeglobalobjectreference-global"><code class="docutils literal notranslate"><span class="pre">makeGlobalObjectReference(global)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#adoptdebuggeevalue-value"><code class="docutils literal notranslate"><span class="pre">adoptDebuggeeValue(value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#adoptframe-frame"><code class="docutils literal notranslate"><span class="pre">adoptFrame(frame)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#adoptsource-source"><code class="docutils literal notranslate"><span class="pre">adoptSource(source)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.html#static-methods-of-the-debugger-object">Static methods of the Debugger Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.html#iscompilableunit-source"><code class="docutils literal notranslate"><span class="pre">isCompilableUnit(source)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Object.html">Debugger.Object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Object.html#accessor-properties-of-the-debugger-object-prototype">Accessor Properties of the Debugger.Object prototype</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#proto"><code class="docutils literal notranslate"><span class="pre">proto</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#class"><code class="docutils literal notranslate"><span class="pre">class</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#callable"><code class="docutils literal notranslate"><span class="pre">callable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#name"><code class="docutils literal notranslate"><span class="pre">name</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#displayname"><code class="docutils literal notranslate"><span class="pre">displayName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#parameternames"><code class="docutils literal notranslate"><span class="pre">parameterNames</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#script"><code class="docutils literal notranslate"><span class="pre">script</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#environment"><code class="docutils literal notranslate"><span class="pre">environment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#iserror"><code class="docutils literal notranslate"><span class="pre">isError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#errormessagename"><code class="docutils literal notranslate"><span class="pre">errorMessageName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#errorlinenumber"><code class="docutils literal notranslate"><span class="pre">errorLineNumber</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#errorcolumnnumber"><code class="docutils literal notranslate"><span class="pre">errorColumnNumber</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isboundfunction"><code class="docutils literal notranslate"><span class="pre">isBoundFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isarrowfunction"><code class="docutils literal notranslate"><span class="pre">isArrowFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isgeneratorfunction"><code class="docutils literal notranslate"><span class="pre">isGeneratorFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isasyncfunction"><code class="docutils literal notranslate"><span class="pre">isAsyncFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isclassconstructor"><code class="docutils literal notranslate"><span class="pre">isClassConstructor</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#ispromise"><code class="docutils literal notranslate"><span class="pre">isPromise</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#boundtargetfunction"><code class="docutils literal notranslate"><span class="pre">boundTargetFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#boundthis"><code class="docutils literal notranslate"><span class="pre">boundThis</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#boundarguments"><code class="docutils literal notranslate"><span class="pre">boundArguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isproxy"><code class="docutils literal notranslate"><span class="pre">isProxy</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#proxytarget"><code class="docutils literal notranslate"><span class="pre">proxyTarget</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#proxyhandler"><code class="docutils literal notranslate"><span class="pre">proxyHandler</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promisestate"><code class="docutils literal notranslate"><span class="pre">promiseState</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promisevalue"><code class="docutils literal notranslate"><span class="pre">promiseValue</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promisereason"><code class="docutils literal notranslate"><span class="pre">promiseReason</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promiseallocationsite"><code class="docutils literal notranslate"><span class="pre">promiseAllocationSite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promiseresolutionsite"><code class="docutils literal notranslate"><span class="pre">promiseResolutionSite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promiseid"><code class="docutils literal notranslate"><span class="pre">promiseID</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promisedependentpromises"><code class="docutils literal notranslate"><span class="pre">promiseDependentPromises</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promiselifetime"><code class="docutils literal notranslate"><span class="pre">promiseLifetime</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#promisetimetoresolution"><code class="docutils literal notranslate"><span class="pre">promiseTimeToResolution</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#allocationsite"><code class="docutils literal notranslate"><span class="pre">allocationSite</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Object.html#function-properties-of-the-debugger-object-prototype">Function Properties of the Debugger.Object prototype</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#getproperty-key-receiver"><code class="docutils literal notranslate"><span class="pre">getProperty(key,</span> <span class="pre">[receiver])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#setproperty-key-value-receiver"><code class="docutils literal notranslate"><span class="pre">setProperty(key,</span> <span class="pre">value&lt;,</span> <span class="pre">[receiver])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#getownpropertydescriptor-key"><code class="docutils literal notranslate"><span class="pre">getOwnPropertyDescriptor(key)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#getownpropertynames"><code class="docutils literal notranslate"><span class="pre">getOwnPropertyNames()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#getownpropertysymbols"><code class="docutils literal notranslate"><span class="pre">getOwnPropertySymbols()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#defineproperty-key-attributes"><code class="docutils literal notranslate"><span class="pre">defineProperty(key,</span> <span class="pre">attributes)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#defineproperties-properties"><code class="docutils literal notranslate"><span class="pre">defineProperties(properties)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#deleteproperty-key"><code class="docutils literal notranslate"><span class="pre">deleteProperty(key)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#seal"><code class="docutils literal notranslate"><span class="pre">seal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#freeze"><code class="docutils literal notranslate"><span class="pre">freeze()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#preventextensions"><code class="docutils literal notranslate"><span class="pre">preventExtensions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#issealed"><code class="docutils literal notranslate"><span class="pre">isSealed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isfrozen"><code class="docutils literal notranslate"><span class="pre">isFrozen()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#isextensible"><code class="docutils literal notranslate"><span class="pre">isExtensible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#makedebuggeevalue-value"><code class="docutils literal notranslate"><span class="pre">makeDebuggeeValue(value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#makedebuggeenativefunction-value"><code class="docutils literal notranslate"><span class="pre">makeDebuggeeNativeFunction(value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#issamenative-value"><code class="docutils literal notranslate"><span class="pre">isSameNative(value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#decompile-pretty"><code class="docutils literal notranslate"><span class="pre">decompile([pretty])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#call-this-argument"><code class="docutils literal notranslate"><span class="pre">call(this,</span> <span class="pre">argument,</span> <span class="pre">...)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#apply-this-arguments"><code class="docutils literal notranslate"><span class="pre">apply(this,</span> <span class="pre">arguments)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#executeinglobal-code-options"><code class="docutils literal notranslate"><span class="pre">executeInGlobal(code,</span> <span class="pre">[options])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#executeinglobalwithbindings-code-bindings-options"><code class="docutils literal notranslate"><span class="pre">executeInGlobalWithBindings(code,</span> <span class="pre">bindings,</span> <span class="pre">[options])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#createsource-options"><code class="docutils literal notranslate"><span class="pre">createSource(options)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#asenvironment"><code class="docutils literal notranslate"><span class="pre">asEnvironment()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#unwrap"><code class="docutils literal notranslate"><span class="pre">unwrap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#unsafedereference"><code class="docutils literal notranslate"><span class="pre">unsafeDereference()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#forcelexicalinitializationbyname-binding"><code class="docutils literal notranslate"><span class="pre">forceLexicalInitializationByName(binding)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#setinstrumentation-callback-kinds"><code class="docutils literal notranslate"><span class="pre">setInstrumentation(callback,</span> <span class="pre">kinds)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#setinstrumentationactive-active"><code class="docutils literal notranslate"><span class="pre">setInstrumentationActive(active)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Object.html#getpromisereactions"><code class="docutils literal notranslate"><span class="pre">getPromiseReactions</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Script.html">Debugger.Script</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Script.html#debugger-script-for-jsscripts">Debugger.Script for JSScripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Script.html#debugger-script-for-webassembly">Debugger.Script for WebAssembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Script.html#convention">Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Script.html#accessor-properties-of-the-debugger-script-prototype-object">Accessor Properties of the Debugger.Script Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#isgeneratorfunction"><code class="docutils literal notranslate"><span class="pre">isGeneratorFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#isasyncfunction"><code class="docutils literal notranslate"><span class="pre">isAsyncFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#isfunction"><code class="docutils literal notranslate"><span class="pre">isFunction</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#ismodule"><code class="docutils literal notranslate"><span class="pre">isModule</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#displayname"><code class="docutils literal notranslate"><span class="pre">displayName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#parameternames"><code class="docutils literal notranslate"><span class="pre">parameterNames</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#url"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#startline"><code class="docutils literal notranslate"><span class="pre">startLine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#startcolumn"><code class="docutils literal notranslate"><span class="pre">startColumn</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#linecount"><code class="docutils literal notranslate"><span class="pre">lineCount</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#source"><code class="docutils literal notranslate"><span class="pre">source</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#sourcestart"><code class="docutils literal notranslate"><span class="pre">sourceStart</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#sourcelength"><code class="docutils literal notranslate"><span class="pre">sourceLength</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#mainoffset"><code class="docutils literal notranslate"><span class="pre">mainOffset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#global"><code class="docutils literal notranslate"><span class="pre">global</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#format"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Script.html#function-properties-of-the-debugger-script-prototype-object">Function Properties of the Debugger.Script Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getchildscripts"><code class="docutils literal notranslate"><span class="pre">getChildScripts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getpossiblebreakpoints-query"><code class="docutils literal notranslate"><span class="pre">getPossibleBreakpoints(query)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getpossiblebreakpointoffsets-query"><code class="docutils literal notranslate"><span class="pre">getPossibleBreakpointOffsets(query)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getoffsetmetadata-offset"><code class="docutils literal notranslate"><span class="pre">getOffsetMetadata(offset)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#setbreakpoint-offset-handler"><code class="docutils literal notranslate"><span class="pre">setBreakpoint(offset,</span> <span class="pre">handler)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getbreakpoints-offset"><code class="docutils literal notranslate"><span class="pre">getBreakpoints([offset])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#clearbreakpoint-handler-offset"><code class="docutils literal notranslate"><span class="pre">clearBreakpoint(handler,</span> <span class="pre">[offset])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#clearallbreakpoints-offset"><code class="docutils literal notranslate"><span class="pre">clearAllBreakpoints([offset])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#geteffectfuloffsets"><code class="docutils literal notranslate"><span class="pre">getEffectfulOffsets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#getoffsetscoverage"><code class="docutils literal notranslate"><span class="pre">getOffsetsCoverage()</span></code>:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#isincatchscope-offset"><code class="docutils literal notranslate"><span class="pre">isInCatchScope([offset])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#setinstrumentationid-id"><code class="docutils literal notranslate"><span class="pre">setInstrumentationId(id)</span></code>:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Script.html#deprecated-debugger-script-prototype-functions">Deprecated Debugger.Script Prototype Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Script.html#getalloffsets"><code class="docutils literal notranslate"><span class="pre">getAllOffsets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Script.html#getallcolumnoffsets"><code class="docutils literal notranslate"><span class="pre">getAllColumnOffsets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Script.html#getlineoffsets-line"><code class="docutils literal notranslate"><span class="pre">getLineOffsets(line)</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Script.html#getoffsetlocation-offset"><code class="docutils literal notranslate"><span class="pre">getOffsetLocation(offset)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Source.html">Debugger.Source</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Source.html#debugger-source-for-javascript">Debugger.Source for JavaScript</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Source.html#debugger-source-for-webassembly">Debugger.Source for WebAssembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Source.html#convention">Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Source.html#accessor-properties-of-the-debugger-source-prototype-object">Accessor Properties of the Debugger.Source Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#text"><code class="docutils literal notranslate"><span class="pre">text</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#binary"><code class="docutils literal notranslate"><span class="pre">binary</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#url"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#startline"><code class="docutils literal notranslate"><span class="pre">startLine</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#id"><code class="docutils literal notranslate"><span class="pre">id</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#sourcemapurl"><code class="docutils literal notranslate"><span class="pre">sourceMapURL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#displayurl"><code class="docutils literal notranslate"><span class="pre">displayURL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#element"><code class="docutils literal notranslate"><span class="pre">element</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#elementattributename"><code class="docutils literal notranslate"><span class="pre">elementAttributeName</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#introductiontype"><code class="docutils literal notranslate"><span class="pre">introductionType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#introductionscript-introductionoffset"><code class="docutils literal notranslate"><span class="pre">introductionScript</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">introductionOffset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Source.html#function-properties-of-the-debugger-source-prototype-object">Function Properties of the Debugger.Source Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Source.html#reparse"><code class="docutils literal notranslate"><span class="pre">reparse()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Environment.html">Debugger.Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Environment.html#accessor-properties-of-the-debugger-environment-prototype-object">Accessor Properties of the Debugger.Environment Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#inspectable"><code class="docutils literal notranslate"><span class="pre">inspectable</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#type"><code class="docutils literal notranslate"><span class="pre">type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#scopekind"><code class="docutils literal notranslate"><span class="pre">scopeKind</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#parent"><code class="docutils literal notranslate"><span class="pre">parent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#object"><code class="docutils literal notranslate"><span class="pre">object</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#calleescript"><code class="docutils literal notranslate"><span class="pre">calleeScript</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#optimizedout"><code class="docutils literal notranslate"><span class="pre">optimizedOut</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Environment.html#function-properties-of-the-debugger-environment-prototype-object">Function Properties of the Debugger.Environment Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#names"><code class="docutils literal notranslate"><span class="pre">names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#getvariable-name"><code class="docutils literal notranslate"><span class="pre">getVariable(name)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#setvariable-name-value"><code class="docutils literal notranslate"><span class="pre">setVariable(name,</span> <span class="pre">value)</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Environment.html#find-name"><code class="docutils literal notranslate"><span class="pre">find(name)</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Frame.html">Debugger.Frame</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#visible-frames">Visible Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#invocation-functions-and-debugger-frames">Invocation Functions and “debugger” Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#suspended-frames">Suspended Frames</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#stepping-into-generators-the-initial-yield">Stepping Into Generators: The “Initial Yield”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#accessor-properties-of-the-debugger-frame-prototype-object">Accessor Properties of the Debugger.Frame Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#type"><code class="docutils literal notranslate"><span class="pre">type</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#implementation"><code class="docutils literal notranslate"><span class="pre">implementation</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#this"><code class="docutils literal notranslate"><span class="pre">this</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#older"><code class="docutils literal notranslate"><span class="pre">older</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#oldersavedframe"><code class="docutils literal notranslate"><span class="pre">olderSavedFrame</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#onstack"><code class="docutils literal notranslate"><span class="pre">onStack</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#terminated"><code class="docutils literal notranslate"><span class="pre">terminated</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#script"><code class="docutils literal notranslate"><span class="pre">script</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#offset"><code class="docutils literal notranslate"><span class="pre">offset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#environment"><code class="docutils literal notranslate"><span class="pre">environment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#callee"><code class="docutils literal notranslate"><span class="pre">callee</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#constructing"><code class="docutils literal notranslate"><span class="pre">constructing</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#arguments"><code class="docutils literal notranslate"><span class="pre">arguments</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#asyncpromise"><code class="docutils literal notranslate"><span class="pre">asyncPromise</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#handler-methods-of-debugger-frame-instances">Handler Methods of Debugger.Frame Instances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#onstep"><code class="docutils literal notranslate"><span class="pre">onStep</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#onpop"><code class="docutils literal notranslate"><span class="pre">onPop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Frame.html#function-properties-of-the-debugger-frame-prototype-object">Function Properties of the Debugger.Frame Prototype Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#eval-code-options"><code class="docutils literal notranslate"><span class="pre">eval(code,</span> <span class="pre">[options])</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Frame.html#evalwithbindings-code-bindings-options"><code class="docutils literal notranslate"><span class="pre">evalWithBindings(code,</span> <span class="pre">bindings,</span> <span class="pre">[options])</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Debugger.Memory.html">Debugger.Memory</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#allocation-site-tracking">Allocation Site Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#allocation-logging">Allocation Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#censuses">Censuses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#accessor-properties-of-the-debugger-memory-prototype-object">Accessor Properties of the <code class="docutils literal notranslate"><span class="pre">Debugger.Memory.prototype</span></code> Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#trackingallocationsites"><code class="docutils literal notranslate"><span class="pre">trackingAllocationSites</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#allocationsamplingprobability"><code class="docutils literal notranslate"><span class="pre">allocationSamplingProbability</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#maxallocationsloglength"><code class="docutils literal notranslate"><span class="pre">maxAllocationsLogLength</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#allocationslogoverflowed"><code class="docutils literal notranslate"><span class="pre">allocationsLogOverflowed</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#debugger-memory-handler-functions">Debugger.Memory Handler Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#ongarbagecollection-statistics"><code class="docutils literal notranslate"><span class="pre">onGarbageCollection(statistics)</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Memory.html#collections"><code class="docutils literal notranslate"><span class="pre">collections</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Memory.html#reason"><code class="docutils literal notranslate"><span class="pre">reason</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Memory.html#nonincrementalreason"><code class="docutils literal notranslate"><span class="pre">nonincrementalReason</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Debugger.Memory.html#gccyclenumber"><code class="docutils literal notranslate"><span class="pre">gcCycleNumber</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#function-properties-of-the-debugger-memory-prototype-object">Function Properties of the <code class="docutils literal notranslate"><span class="pre">Debugger.Memory.prototype</span></code> Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#drainallocationslog"><code class="docutils literal notranslate"><span class="pre">drainAllocationsLog()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#takecensus-options"><code class="docutils literal notranslate"><span class="pre">takeCensus(options)</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Debugger.Memory.html#memory-use-analysis-exposes-implementation-details">Memory Use Analysis Exposes Implementation Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#objects">Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#strings">Strings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Debugger.Memory.html#scripts">Scripts</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">General Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#debuggee-values">Debuggee Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#debuggee-code">Debuggee Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#completion-values">Completion Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#resumption-values">Resumption Values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#timestamps">Timestamps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Conventions.html#the-debugger-debuggeewouldrun-exception">The <code class="docutils literal notranslate"><span class="pre">Debugger.DebuggeeWouldRun</span></code> Exception</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial-Alloc-Log-Tree.html">Tutorial: Show Allocations Per Call Path</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial-Breakpoint.html">Tutorial: Set a breakpoint using <code class="docutils literal notranslate"><span class="pre">Debugger</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial-Debugger-Statement.html">Tutorial: Evaluate an Expression When a debugger; Statement Is Executed</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Debugger-API.html" class="btn btn-neutral float-right" title="The Debugger Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../build.html" class="btn btn-neutral float-left" title="Building SpiderMonkey" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

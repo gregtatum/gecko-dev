@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Triage for Bugzilla &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="User documentation requests" href="../processes/doc-requests.html" />
+    <link rel="prev" title="Regressions from GitHub" href="regressions-github.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Bug Handling</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#guides">Guides</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#policies">Policies</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="new-feature-triage.html">New Feature Triage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="regressions-github.html">Regressions from GitHub</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Triage for Bugzilla</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#expectations">Expectations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-a-triaged-bug">What is a Triaged Bug</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#why-triage">Why Triage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#who-triages">Who Triages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-do-you-triage">What Do You Triage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#questions-and-edge-cases">Questions and Edge Cases</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-help">Getting help</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#processes">Processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#related-documentation">Related documentation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Bug Handling</a> &raquo;</li>
+        
+      <li>Triage for Bugzilla</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/bug-mgmt/policies/triage-bugzilla.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="triage-for-bugzilla">
+<h1>Triage for Bugzilla<a class="headerlink" href="#triage-for-bugzilla" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="expectations">
+<h2>Expectations<a class="headerlink" href="#expectations" title="Permalink to this headline">¶</a></h2>
+<p>All teams working on Firefox using either or both Mozilla-central and
+Bugzilla are expected to follow the following process.</p>
+</div>
+<div class="section" id="what-is-a-triaged-bug">
+<h2>What is a Triaged Bug<a class="headerlink" href="#what-is-a-triaged-bug" title="Permalink to this headline">¶</a></h2>
+<p>The new definition of Triaged will be Firefox-related bugs of type
+<code class="docutils literal notranslate"><span class="pre">defect</span></code> where the component is not
+<code class="docutils literal notranslate"><span class="pre">UNTRIAGED</span></code>, and a non-default value not equal to <code class="docutils literal notranslate"><span class="pre">--</span></code> or <code class="docutils literal notranslate"><span class="pre">N/A</span></code>.</p>
+<p>Bugs of type Task or Enhancement may have a severity of <code class="docutils literal notranslate"><span class="pre">N/A</span></code>,
+but defects must have a severity that is neither <code class="docutils literal notranslate"><span class="pre">--</span></code> or
+<code class="docutils literal notranslate"><span class="pre">N/A</span></code>.</p>
+</div>
+<div class="section" id="why-triage">
+<h2>Why Triage<a class="headerlink" href="#why-triage" title="Permalink to this headline">¶</a></h2>
+<p>We want to make sure that we looked at every defect and a severity has
+been defined. This way, we make sure that we did not miss any critical
+issues during the development and stabilization cycles.</p>
+<p>Staying on top of the bugs in your component means:</p>
+<ul class="simple">
+<li><p>You get ahead of critical regressions and crashes which could trigger
+a point release if uncaught</p>
+<ul>
+<li><p>And you don’t want to spend your holiday with the Release
+Management team (not that they don’t like you)</p></li>
+</ul>
+</li>
+<li><p>Your bug queue is not overwhelming</p>
+<ul>
+<li><p>Members of your team do not see the bug queue and get the
+‘wiggins’</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="who-triages">
+<h2>Who Triages<a class="headerlink" href="#who-triages" title="Permalink to this headline">¶</a></h2>
+<p>Engineering managers and directors are responsible for naming the
+individuals responsible for triaging <a class="reference internal" href="../guides/bug-types.html#bug-types"><span class="std std-ref">all types of bugs</span></a> in a component.</p>
+<p>We use Bugzilla to manage this. See the <a class="reference external" href="https://bugzilla.mozilla.org/page.cgi?id=triage_owners.html">list of triage
+owners</a>.</p>
+<p>If you need to change who is responsible for triaging a bug in a
+component, please <a class="reference external" href="https://bugzilla.mozilla.org/enter_bug.cgi?product=bugzilla.mozilla.org&amp;component=Administration">file a bug against bugzilla.mozilla.org in the
+Administration
+component</a>.
+When a new component is created, a triage owner <strong>must</strong> be named.</p>
+<div class="section" id="rotating-triage">
+<h3>Rotating triage<a class="headerlink" href="#rotating-triage" title="Permalink to this headline">¶</a></h3>
+<p>Some components are monitored by a rotation of triagers. In those cases,
+the triage owner should be seen as the person responsible for assuring
+the component is triaged, but the work is done by the people in the
+rotation. The <a class="reference external" href="https://github.com/mozilla/relman-auto-nag/tree/master/auto_nag/scripts/configs">rotations are managed as
+calendars</a>.</p>
+<p>If you wish to set up a rotation for triaging one or more components,
+contact the Bugzilla team on Slack (#bmo.)</p>
+</div>
+<div class="section" id="firefox-general-and-toolkit-general">
+<h3>Firefox::General and Toolkit::General<a class="headerlink" href="#firefox-general-and-toolkit-general" title="Permalink to this headline">¶</a></h3>
+<p>Bugs in Firefox::General are fitted with Bug Bug’s model to see if
+there’s another component with a high liklihood of fit, and if a
+threshold confidence is achieved, the bug is moved to that component.</p>
+<p>Members of the community also review bugs in this component and try to
+move them.</p>
+</div>
+</div>
+<div class="section" id="what-do-you-triage">
+<h2>What Do You Triage<a class="headerlink" href="#what-do-you-triage" title="Permalink to this headline">¶</a></h2>
+<p>As a triage owner the queries you should be following for your component
+are:</p>
+<ul class="simple">
+<li><p>All open bugs, in your components without a pending <code class="docutils literal notranslate"><span class="pre">needinfo</span></code> flag
+which do not have a valid value of severity set</p></li>
+<li><p>All bugs with active review requests in your component which have not
+been modified in five days</p></li>
+<li><p>All bugs with reviewed, but unlanded patches in your components</p></li>
+<li><p>All bugs with a needinfo request unanswered for more than 10 days</p></li>
+</ul>
+<p>There’s a tool with these queries to help you find bugs
+<a class="reference external" href="https://mozilla.github.io/triage-center/">https://mozilla.github.io/triage-center/</a> and the source is at
+<a class="reference external" href="https://github.com/mozilla/triage-center/">https://github.com/mozilla/triage-center/</a>.</p>
+<p>If a bug is an enhancement it needs a priority set and a target release
+or program milestone. These bugs are normally reviewed by product
+managers. Enhancements can lead to release notes and QA needed that we
+also need to know about</p>
+<p>If a bug is a task resulting in a changeset, release managers will need
+to known when this work will be done. A task such as refactoring fragile
+code can be risky.</p>
+<p>Weekly or More Frequently (depending on the component) find un-triaged
+bugs in the components you triage.</p>
+<p>Decide the <a class="reference internal" href="../guides/severity.html#defect-severity"><span class="std std-ref">Severity</span></a>  for each untriaged bug
+(you can override what’s already been set.)</p>
+<p>These bugs are reviewed in the weekly Regression Triage meeting</p>
+<ul class="simple">
+<li><p>Bugs of type <code class="docutils literal notranslate"><span class="pre">defect</span></code> with the <code class="docutils literal notranslate"><span class="pre">regression</span></code> keyword without
+<code class="docutils literal notranslate"><span class="pre">status-firefoxNN</span></code> decisions</p></li>
+<li><p>Bugs of type <code class="docutils literal notranslate"><span class="pre">defect</span></code> with the <code class="docutils literal notranslate"><span class="pre">regression</span></code> keyword without
+a regression range</p></li>
+</ul>
+<div class="section" id="automatic-bug-updates">
+<h3>Automatic Bug Updates<a class="headerlink" href="#automatic-bug-updates" title="Permalink to this headline">¶</a></h3>
+<p>When a bug is tracked for a release, i.e. the <code class="docutils literal notranslate"><span class="pre">tracking_firefoxNN</span></code>
+flag is set to <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">blocking</span></code> triage decisions will be overridden,
+or made as follows:</p>
+<ul class="simple">
+<li><p>If a bug is tracked for or blocking beta, release or ESR, its
+priority will be set to <code class="docutils literal notranslate"><span class="pre">P1</span></code></p></li>
+<li><p>If a bug is tracked for or blocking nightly, its priority will be set
+to <code class="docutils literal notranslate"><span class="pre">P2</span></code></p></li>
+</ul>
+<p>Because bugs can be bumped in priority it’s essential that triage owners
+review their
+<a class="reference external" href="https://bugzilla.mozilla.org/buglist.cgi?priority=P1&amp;f1=triage_owner&amp;o1=equals&amp;resolution=---&amp;v1=%25user%25">P1</a>
+and
+<a class="reference external" href="https://bugzilla.mozilla.org/buglist.cgi?priority=P2&amp;f1=triage_owner&amp;o1=equals&amp;resolution=---&amp;v1=%25user%25">P2</a>
+bugs frequently.</p>
+</div>
+<div class="section" id="assumptions">
+<h3>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this headline">¶</a></h3>
+<p>If a bug’s release status in Firefox version N was <code class="docutils literal notranslate"><span class="pre">affected</span></code> or <code class="docutils literal notranslate"><span class="pre">wontfix</span></code>,
+its Severity is <code class="docutils literal notranslate"><span class="pre">S3</span></code> or <code class="docutils literal notranslate"><span class="pre">S4</span></code> and its Priority is <code class="docutils literal notranslate"><span class="pre">P3</span></code> or lower (backlog,)
+then its release status in Firefox version N+1, if the bug is still open,
+is considered to be <code class="docutils literal notranslate"><span class="pre">wontfix</span></code>.</p>
+</div>
+</div>
+<div class="section" id="questions-and-edge-cases">
+<h2>Questions and Edge Cases<a class="headerlink" href="#questions-and-edge-cases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="this-bug-is-a-feature-request">
+<h3>This bug is a feature request<a class="headerlink" href="#this-bug-is-a-feature-request" title="Permalink to this headline">¶</a></h3>
+<p>Set the bug’s type to <code class="docutils literal notranslate"><span class="pre">enhancement</span></code>, add the <code class="docutils literal notranslate"><span class="pre">feature</span></code> keyword if
+relevant, and state to <code class="docutils literal notranslate"><span class="pre">NEW</span></code>. Set the bug’s Severity to <code class="docutils literal notranslate"><span class="pre">N/A</span></code>. This
+bug will be excluded from future triage queries.</p>
+</div>
+<div class="section" id="this-bug-is-a-task-not-a-defect">
+<h3>This bug is a task, not a defect<a class="headerlink" href="#this-bug-is-a-task-not-a-defect" title="Permalink to this headline">¶</a></h3>
+<p>Set the bug’s type to <code class="docutils literal notranslate"><span class="pre">task</span></code>, and state to <code class="docutils literal notranslate"><span class="pre">NEW</span></code>. Set the bug’s
+Severity to <code class="docutils literal notranslate"><span class="pre">N/A</span></code>. This bug will be excluded from future triage queries.</p>
+<p>If you are not sure of a bug’s type, check <a class="reference internal" href="../guides/bug-types.html#bug-types"><span class="std std-ref">our rules for bug
+types</span></a>.</p>
+</div>
+<div class="section" id="this-bugs-state-is-unconfirmed">
+<h3>This bug’s state is <code class="docutils literal notranslate"><span class="pre">UNCONFIRMED</span></code><a class="headerlink" href="#this-bugs-state-is-unconfirmed" title="Permalink to this headline">¶</a></h3>
+<p>Are there steps to reproduce? If not, needinfo the person who filed the
+bug, requesting steps to reproduce. You are not obligated to wait
+forever for a response, and bugs for which open requests for information
+go unanswered can be <code class="docutils literal notranslate"><span class="pre">RESOLVED</span></code> as <code class="docutils literal notranslate"><span class="pre">INCOMPLETE</span></code>.</p>
+</div>
+<div class="section" id="i-need-help-reproducing-the-bug">
+<h3>I need help reproducing the bug<a class="headerlink" href="#i-need-help-reproducing-the-bug" title="Permalink to this headline">¶</a></h3>
+<p>Set a needinfo for the QA managers, Softvision project managers, or the
+QA owner of the component of the bug.</p>
+</div>
+<div class="section" id="i-dont-have-enough-information-to-make-a-decision">
+<h3>I don’t have enough information to make a decision<a class="headerlink" href="#i-dont-have-enough-information-to-make-a-decision" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t have a reproduction or confirmation, or have questions
+about how to proceed, <code class="docutils literal notranslate"><span class="pre">needinfo</span></code> the person who filed the bug, or
+someone who can answer.</p>
+</div>
+<div class="section" id="the-stalled-keyword">
+<h3>The <code class="docutils literal notranslate"><span class="pre">stalled</span></code> keyword<a class="headerlink" href="#the-stalled-keyword" title="Permalink to this headline">¶</a></h3>
+<p>The extreme case of not-enough-information is one which cannot be
+answered with a <code class="docutils literal notranslate"><span class="pre">needinfo</span></code> request. The reporter has shared all they
+know about the bug, we are out of strategies to take to resolve it, but
+the bug should be kept open.</p>
+<p>Mark the bug as stalled by adding the <code class="docutils literal notranslate"><span class="pre">stalled</span></code> keyword to it. The
+keyword will remove it from the list of bugs to be triaged.</p>
+<p>If a patch lands on a <code class="docutils literal notranslate"><span class="pre">stalled</span></code> bug, automation will remove the
+keyword. Otherwise, when the <code class="docutils literal notranslate"><span class="pre">keyword</span></code> is removed, the bug will have
+its priority reset to <code class="docutils literal notranslate"><span class="pre">--</span></code> and the components triage owner notified by
+automation.</p>
+<p>Bugs which remain <code class="docutils literal notranslate"><span class="pre">stalled</span></code> for long periods of time should be
+reviewed, and closed if necessary.</p>
+</div>
+<div class="section" id="bug-is-in-the-wrong-component">
+<h3>Bug is in the wrong Component<a class="headerlink" href="#bug-is-in-the-wrong-component" title="Permalink to this headline">¶</a></h3>
+<p>If the bug has a Severity of <code class="docutils literal notranslate"><span class="pre">S3</span></code>, <code class="docutils literal notranslate"><span class="pre">S4</span></code>, or <code class="docutils literal notranslate"><span class="pre">N/A</span></code> move the what
+you think is the correct component, or needinfo the person
+responsible for the component to ask them.</p>
+<p>If the bug has a Severity of <code class="docutils literal notranslate"><span class="pre">S1</span></code> or <code class="docutils literal notranslate"><span class="pre">S2</span></code> then notify Release Management
+and contact the triage owner of the component for which you think it belongs to.
+We cannot lose track of a high severity bug because it is in the wrong component.</p>
+</div>
+<div class="section" id="my-project-is-on-github">
+<h3>My project is on GitHub<a class="headerlink" href="#my-project-is-on-github" title="Permalink to this headline">¶</a></h3>
+<p>We have <a class="reference internal" href="../processes/labels.html#github-metadata-recommendations"><span class="std std-ref">a guide for GitHub projects to follow</span></a> when
+triaging. (Note: this guide needs updating.)</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="multiple-times-weekly">
+<h3>Multiple times weekly<a class="headerlink" href="#multiple-times-weekly" title="Permalink to this headline">¶</a></h3>
+<p>Use queries for the components you are responsible for in
+<a class="reference external" href="https://mozilla.github.io/triage-center/">https://mozilla.github.io/triage-center/</a> to find bugs in
+need of triage.</p>
+<p>For each untriaged bug:</p>
+<ul class="simple">
+<li><p>Assign a Severity</p></li>
+<li><p><strong>Do not</strong> assign a <code class="docutils literal notranslate"><span class="pre">defect</span></code> a Severity of
+<code class="docutils literal notranslate"><span class="pre">N/A</span></code></p></li>
+</ul>
+<p>You can, but are not required to set the bug’s <a class="reference internal" href="../guides/priority.html#priority-definitions"><span class="std std-ref">Priority</span></a>.</p>
+</div>
+<div class="section" id="watch-open-needinfo-flags">
+<h3>Watch open needinfo flags<a class="headerlink" href="#watch-open-needinfo-flags" title="Permalink to this headline">¶</a></h3>
+<p>Don’t let open needinfo flags linger for more than two weeks.</p>
+<p>Close minor bugs with unresponded needinfo flags.</p>
+<p>Follow up on needinfo flag requests.</p>
+<p>The <a class="reference external" href="https://mozilla.github.io/triage-center/">Triage Center tool</a> will help you find these.</p>
+</div>
+<div class="section" id="end-of-iteration-release-cycle">
+<h3>End of Iteration/Release Cycle<a class="headerlink" href="#end-of-iteration-release-cycle" title="Permalink to this headline">¶</a></h3>
+<p>Any open <code class="docutils literal notranslate"><span class="pre">S1</span></code> or <code class="docutils literal notranslate"><span class="pre">S2</span></code> bugs at the end of the release cycle
+will require review by engineering and release management. A
+policy on this is forthcoming.</p>
+<div class="section" id="optional">
+<h4>Optional<a class="headerlink" href="#optional" title="Permalink to this headline">¶</a></h4>
+<p>(The guidelines on bug priority are under review.)</p>
+<p>Are there open P1s? Revisit their priority,
+and move to them to the backlog (<code class="docutils literal notranslate"><span class="pre">P3</span></code>) or <code class="docutils literal notranslate"><span class="pre">P2</span></code>.</p>
+<p>Are there <code class="docutils literal notranslate"><span class="pre">P2</span></code> bugs that should move to <code class="docutils literal notranslate"><span class="pre">P1</span></code>
+for the next cycle?</p>
+<p>Are there <code class="docutils literal notranslate"><span class="pre">P2</span></code> you now know are lower priority,
+move to <code class="docutils literal notranslate"><span class="pre">P3</span></code>.</p>
+<p>Are there <code class="docutils literal notranslate"><span class="pre">P3</span></code> bugs you now know you won’t get to?
+Either demote to <code class="docutils literal notranslate"><span class="pre">P5</span></code> (will accept patch) or
+resolve as <code class="docutils literal notranslate"><span class="pre">WONTFIX</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="getting-help">
+<h2>Getting help<a class="headerlink" href="#getting-help" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Ask in #bug-handling on chat.mozilla.org</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../processes/doc-requests.html" class="btn btn-neutral float-right" title="User documentation requests" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="regressions-github.html" class="btn btn-neutral float-left" title="Regressions from GitHub" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

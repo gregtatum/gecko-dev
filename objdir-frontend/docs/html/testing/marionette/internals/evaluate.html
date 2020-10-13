@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>evaluate module &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="event module" href="event.html" />
+    <link rel="prev" title="error module" href="error.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Marionette</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Intro.html">Introduction to Marionette</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PythonTests.html">Mn Python tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Protocol.html">Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Contributing.html">Contributing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../NewContributors.html">New contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Patches.html">Submitting patches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Debugging.html">Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Testing.html">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Taskcluster.html">Testing with one-click loaners</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../CodeStyle.html">Style guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SeleniumAtoms.html">Selenium atoms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Prefs.html">Preferences</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Internals</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="action.html">action module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="addon.html">addon module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="assert.html">assert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="browser.html">browser module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capabilities.html">capabilities module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="capture.html">capture module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cert.html">cert module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cookie.html">cookie module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dom.html">dom module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="driver.html">driver module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html">element module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error.html">error module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">evaluate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="event.html">event module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="format.html">format module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interaction.html">interaction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listener.html">listener module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">log module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="message.html">message module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modal.html">modal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="navigate.html">navigate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packets.html">packets module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prefs.html">prefs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="proxy.html">proxy module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="reftest.html">reftest module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">server module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync.html">sync module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#bugs">Bugs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#communication">Communication</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Marionette</a> &raquo;</li>
+        
+          <li><a href="index.html">Internals</a> &raquo;</li>
+        
+      <li>evaluate module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/testing/marionette/internals/evaluate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="evaluate-module">
+<h1>evaluate module<a class="headerlink" href="#evaluate-module" title="Permalink to this headline">¶</a></h1>
+<dl class="js class">
+<dt id="evaluate">
+<em class="property">class </em><code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="js function">
+<dt id="evaluate.fromJSON">
+<code class="sig-prename descclassname">evaluate.</code><code class="sig-name descname">fromJSON</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">seenEls</em>, <em class="sig-param">win</em><span class="sig-paren">)</span><a class="headerlink" href="#evaluate.fromJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert any web elements in arbitrary objects to DOM elements by
+looking them up in the seen element store. For ElementIdentifiers a new
+entry in the seen element reference store gets added when running in the
+parent process, otherwise ContentDOMReference is used to retrieve the DOM
+node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Object</em>) – Arbitrary object containing web elements or ElementIdentifiers.</p></li>
+<li><p><strong>seenEls</strong> (<em>element.Store|element.ReferenceStore</em>) – Known element store to look up web elements from. If <cite>seenEls</cite> is an instance of <cite>element.ReferenceStore</cite>, return WebElement. If <cite>seenEls</cite> is an instance of <cite>element.Store</cite>, return Element. If <cite>seenEls</cite> is <cite>undefined</cite> the Element from the ContentDOMReference cache is returned when executed in the child process, in the parent process the WebElement is passed-through.</p></li>
+<li><p><strong>win</strong> (<em>WindowProxy</em>) – Current browsing context, if <cite>seenEls</cite> is provided.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="error.html#NoSuchElementError" title="NoSuchElementError"><strong>NoSuchElementError</strong></a> – If <cite>seenEls</cite> is an <cite>element.Store</cite> and the web element reference has not been seen before.</p></li>
+<li><p><a class="reference internal" href="error.html#StaleElementReferenceError" title="StaleElementReferenceError"><strong>StaleElementReferenceError</strong></a> – If <cite>seenEls</cite> is an <cite>element.ReferenceStore</cite> or <cite>element.Store</cite> and the element has gone stale, indicating it is no longer attached to the DOM, or its node document is no longer the active document.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Object</strong> – Same object as provided by <cite>obj</cite> with the web elements replaced by DOM elements.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="evaluate.isCyclic">
+<code class="sig-prename descclassname">evaluate.</code><code class="sig-name descname">isCyclic</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#evaluate.isCyclic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests if an arbitrary object is cyclic.</p>
+<p>Element prototypes are by definition acyclic, even when they
+contain cyclic references.  This is because <cite>evaluate.toJSON</cite>
+ensures they are marshaled as web elements.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>*</em>) – Object to test for cyclical references.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if object is cyclic, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="evaluate.isDead">
+<code class="sig-prename descclassname">evaluate.</code><code class="sig-name descname">isDead</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">prop</em><span class="sig-paren">)</span><a class="headerlink" href="#evaluate.isDead" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>Cu.isDeadWrapper</cite> does not return true for a dead sandbox that
+was assosciated with and extension popup.  This provides a way to
+still test for a dead object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Object</em>) – A potentially dead object.</p></li>
+<li><p><strong>prop</strong> (<em>string</em>) – Name of a property on the object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>boolean</strong> – True if &lt;var&gt;obj&lt;/var&gt; is dead, false otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt id="evaluate.sandbox">
+<code class="sig-prename descclassname">evaluate.</code><code class="sig-name descname">sandbox</code><span class="sig-paren">(</span><em class="sig-param">sb</em>, <em class="sig-param">script</em>, <em class="sig-param">args</em>, <em class="sig-param">async=false</em>, <em class="sig-param">file=&quot;\&quot;dummy file\&quot;&quot;</em>, <em class="sig-param">line=0</em>, <em class="sig-param">timeout=DEFAULT_TIMEOUT</em><span class="sig-paren">)</span><a class="headerlink" href="#evaluate.sandbox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a script in given sandbox.</p>
+<p>The the provided <cite>script</cite> will be wrapped in an anonymous function
+with the <cite>args</cite> argument applied.</p>
+<p>The arguments provided by the <cite>args&lt;</cite> argument are exposed
+through the <cite>arguments</cite> object available in the script context,
+and if the script is executed asynchronously with the <cite>async</cite>
+option, an additional last argument that is synonymous to the
+name <cite>resolve</cite> is appended, and can be accessed
+through <cite>arguments[arguments.length - 1]</cite>.</p>
+<p>The <cite>timeout</cite> option specifies the duration for how long the
+script should be allowed to run before it is interrupted and aborted.
+An interrupted script will cause a <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> ScriptTimeoutError} to occur.</p>
+<p>The <cite>async</cite> option indicates that the script will not return
+until the <cite>resolve</cite> callback is invoked,
+which is analogous to the last argument of the <cite>arguments</cite> object.</p>
+<p>The <cite>file</cite> option is used in error messages to provide information
+on the origin script file in the local end.</p>
+<p>The <cite>line</cite> option is used in error messages, along with <cite>filename</cite>,
+to provide the line number in the origin script file on the local end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sb</strong> (<em>nsISandbox</em>) – Sandbox the script will be evaluted in.</p></li>
+<li><p><strong>script</strong> (<em>string</em>) – Script to evaluate.</p></li>
+<li><p><strong>'Array' ].&lt;?&gt; args</strong> (<em>[</em>) – A sequence of arguments to call the script with.</p></li>
+<li><p><strong>async</strong> (<em>boolean</em>) – async Indicates if the script should return immediately or wait for the callback to be invoked before returning.</p></li>
+<li><p><strong>file</strong> (<em>string</em>) – file File location of the program in the client.</p></li>
+<li><p><strong>line</strong> (<em>number</em>) – line Line number of th eprogram in the client.</p></li>
+<li><p><strong>timeout</strong> (<em>number</em>) – timeout Duration in milliseconds before interrupting the script.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="error.html#JavaScriptError" title="JavaScriptError"><strong>JavaScriptError</strong></a> – If an <a class="reference external" href="mailto:{&#37;&#52;&#48;link">{<span>&#64;</span>link</a> Error} was thrown whilst evaluating the script.</p></li>
+<li><p><a class="reference internal" href="error.html#ScriptTimeoutError" title="ScriptTimeoutError"><strong>ScriptTimeoutError</strong></a> – If the script was interrupted due to script timeout.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Promise</strong> – A promise that when resolved will give you the return value from the script.  Note that the return value requires serialisation before it can be sent to the client.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js attribute">
+<dt id="evaluate.this.Sandboxes">
+<code class="sig-prename descclassname">evaluate.this.</code><code class="sig-name descname">Sandboxes</code><a class="headerlink" href="#evaluate.this.Sandboxes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="js function">
+<dt id="evaluate.toJSON">
+<code class="sig-prename descclassname">evaluate.</code><code class="sig-name descname">toJSON</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">seenEls</em><span class="sig-paren">)</span><a class="headerlink" href="#evaluate.toJSON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marshal arbitrary objects to JSON-safe primitives that can be
+transported over the Marionette protocol or across processes.</p>
+<p>The marshaling rules are as follows:</p>
+<ul class="simple">
+<li><p>Primitives are returned as is.</p></li>
+<li><p>Collections, such as <cite>Array&lt;</cite>, <cite>NodeList</cite>, <cite>HTMLCollection</cite>
+et al. are expanded to arrays and then recursed.</p></li>
+<li><p>Elements that are not known web elements are added to the <cite>seenEls</cite> element
+store, or the ContentDOMReference registry. Once known, the elements’
+associated web element representation is returned.</p></li>
+<li><p>WebElements are transformed to the corresponding ElementIdentifier
+for use in the content process, if an <cite>element.ReferenceStore</cite> is provided.</p></li>
+<li><p>Objects with custom JSON representations, i.e. if they have
+a callable <cite>toJSON</cite> function, are returned verbatim.  This means
+their internal integrity _are <a href="#id1"><span class="problematic" id="id2">not_</span></a> checked.  Be careful.</p></li>
+<li><p>Other arbitrary objects are first tested for cyclic references
+and then recursed into.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>Object</em>) – Object to be marshaled.</p></li>
+<li><p><strong>seenEls</strong> (<em>element.Store|element.ReferenceStore</em>) – Element store to use for lookup of web element references.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Throws</dt>
+<dd class="field-even"><p><a class="reference internal" href="error.html#JavaScriptError" title="JavaScriptError"><strong>JavaScriptError</strong></a> – If an object contains cyclic references.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Object</strong> – Same object as provided by <cite>obj</cite> with the elements replaced by web elements.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="event.html" class="btn btn-neutral float-right" title="event module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="error.html" class="btn btn-neutral float-left" title="error module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

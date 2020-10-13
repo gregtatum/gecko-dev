@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parameters &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Task Attributes" href="attributes.html" />
+    <link rel="prev" title="Task Kinds" href="kinds.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">TaskCluster Task-Graph Generation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="taskgraph.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mach.html">Taskcluster Mach commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loading.html">Loading Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transforms.html">Transforms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimization.html">Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docker-images.html">Docker Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cron.html">Periodic Taskgraphs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="try.html">Try</a></li>
+<li class="toctree-l2"><a class="reference internal" href="actions.html">Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release-promotion.html">Release Promotion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioncontrol.html">Version Control in CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">Taskcluster Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="how-tos.html">How Tos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="task-graph.html">Task Graph</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="kinds.html">Task Kinds</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#push-information">Push Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tree-information">Tree Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#try-configuration">Try Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test-configuration">Test Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target-set">Target Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimization">Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#release-promotion">Release Promotion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#repository-merge-day">Repository Merge Day</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comm-push-information">Comm Push Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#code-review">Code Review</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#local-configuration">Local configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="attributes.html">Task Attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="caches.html">Caches</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">TaskCluster Task-Graph Generation</a> &raquo;</li>
+        
+          <li><a href="reference.html">Reference</a> &raquo;</li>
+        
+      <li>Parameters</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/taskcluster/parameters.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parameters">
+<h1>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h1>
+<p>Task-graph generation takes a collection of parameters as input, in the form of
+a JSON or YAML file.</p>
+<p>During decision-task processing, some of these parameters are supplied on the
+command line or by environment variables.  The decision task helpfully produces
+a full parameters file as one of its output artifacts.  The other <code class="docutils literal notranslate"><span class="pre">mach</span>
+<span class="pre">taskgraph</span></code> commands can take this file as input.  This can be very helpful
+when working on a change to the task graph.</p>
+<p>When experimenting with local runs of the task-graph generation, it is always
+best to find a recent decision task’s <code class="docutils literal notranslate"><span class="pre">parameters.yml</span></code> file, and modify that
+file if necessary, rather than starting from scratch.  This ensures you have a
+complete set of parameters.</p>
+<p>The properties of the parameters object are described here, divided roughly by
+topic.</p>
+<div class="section" id="push-information">
+<h2>Push Information<a class="headerlink" href="#push-information" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">backstop</span></code></dt><dd><p>Whether or not this push is a “backstop” push. That is a push where all
+builds and tests should run to ensure regressions aren’t accidentally
+missed.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">base_repository</span></code></dt><dd><p>The repository from which to do an initial clone, utilizing any available
+caching.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">head_repository</span></code></dt><dd><p>The repository containing the changeset to be built.  This may differ from
+<code class="docutils literal notranslate"><span class="pre">base_repository</span></code> in cases where <code class="docutils literal notranslate"><span class="pre">base_repository</span></code> is likely to be cached
+and only a few additional commits are needed from <code class="docutils literal notranslate"><span class="pre">head_repository</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">head_rev</span></code></dt><dd><p>The revision to check out; this can be a short revision string</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">head_ref</span></code></dt><dd><p>For Mercurial repositories, this is the same as <code class="docutils literal notranslate"><span class="pre">head_rev</span></code>.  For
+git repositories, which do not allow pulling explicit revisions, this gives
+the symbolic ref containing <code class="docutils literal notranslate"><span class="pre">head_rev</span></code> that should be pulled from
+<code class="docutils literal notranslate"><span class="pre">head_repository</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">owner</span></code></dt><dd><p>Email address indicating the person who made the push.  Note that this
+value may be forged and <em>must not</em> be relied on for authentication.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">message</span></code></dt><dd><p>The try syntax in the commit message, if any.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pushlog_id</span></code></dt><dd><p>The ID from the <code class="docutils literal notranslate"><span class="pre">hg.mozilla.org</span></code> pushlog</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">pushdate</span></code></dt><dd><p>The timestamp of the push to the repository that triggered this decision
+task.  Expressed as an integer seconds since the UNIX epoch.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">hg_branch</span></code></dt><dd><p>The mercurial branch where the revision lives in.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">build_date</span></code></dt><dd><p>The timestamp of the build date. Defaults to <code class="docutils literal notranslate"><span class="pre">pushdate</span></code> and falls back to present time of
+taskgraph invocation. Expressed as an integer seconds since the UNIX epoch.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">moz_build_date</span></code></dt><dd><p>A formatted timestamp of <code class="docutils literal notranslate"><span class="pre">build_date</span></code>. Expressed as a string with the following
+format: %Y%m%d%H%M%S</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tasks_for</span></code></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">tasks_for</span></code> value used to generate the decision task.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="tree-information">
+<h2>Tree Information<a class="headerlink" href="#tree-information" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">project</span></code></dt><dd><p>Another name for what may otherwise be called tree or branch or
+repository.  This is the unqualified name, such as <code class="docutils literal notranslate"><span class="pre">mozilla-central</span></code> or
+<code class="docutils literal notranslate"><span class="pre">cedar</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">level</span></code></dt><dd><p>The <a class="reference external" href="https://www.mozilla.org/en-US/about/governance/policies/commit/access-policy/">SCM level</a>
+associated with this tree.  This dictates the names of resources used in the
+generated tasks, and those tasks will fail if it is incorrect.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="try-configuration">
+<h2>Try Configuration<a class="headerlink" href="#try-configuration" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">try_mode</span></code></dt><dd><p>The mode in which a try push is operating.  This can be one of:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;try_task_config&quot;</span></code> - Used to configure the taskgraph.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;try_option_syntax&quot;</span></code> - Used when pushing to try with legacy try syntax.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;try_auto&quot;</span></code> - Used to make try pushes behave more like a push on <code class="docutils literal notranslate"><span class="pre">autoland</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;try_select&quot;</span></code> - Used by <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">try</span></code> to build a list of tasks locally.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">None</span></code> - Not a try push or <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">try</span> <span class="pre">release</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">try_options</span></code></dt><dd><p>The arguments given as try syntax (as a dictionary), or <code class="docutils literal notranslate"><span class="pre">None</span></code> if
+<code class="docutils literal notranslate"><span class="pre">try_mode</span></code> is not <code class="docutils literal notranslate"><span class="pre">try_option_syntax</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">try_task_config</span></code></dt><dd><p>The contents of the <code class="docutils literal notranslate"><span class="pre">try_task_config.json</span></code> file, or <code class="docutils literal notranslate"><span class="pre">{}</span></code> if
+<code class="docutils literal notranslate"><span class="pre">try_mode</span></code> is not <code class="docutils literal notranslate"><span class="pre">try_task_config</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="test-configuration">
+<h2>Test Configuration<a class="headerlink" href="#test-configuration" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">test_manifest_loader</span></code></dt><dd><p>The test manifest loader to use as defined in <code class="docutils literal notranslate"><span class="pre">taskgraph.util.chunking.manifest_loaders</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="target-set">
+<h2>Target Set<a class="headerlink" href="#target-set" title="Permalink to this headline">¶</a></h2>
+<p>The “target set” is the set of task labels which must be included in a task
+graph.  The task graph generation process will include any tasks required by
+those in the target set, recursively.  In a decision task, this set can be
+specified programmatically using one of a variety of methods (e.g., parsing try
+syntax or reading a project-specific configuration file).</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">filters</span></code></dt><dd><p>List of filter functions (from <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/filter_tasks.py</span></code>) to
+apply. This is usually defined internally, as filters are typically
+global.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">target_tasks_method</span></code></dt><dd><p>The method to use to determine the target task set.  This is the suffix of
+one of the functions in <code class="docutils literal notranslate"><span class="pre">taskcluster/taskgraph/target_tasks.py</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_history</span></code></dt><dd><p>History of recent releases by platform and locale, used when generating
+partial updates for nightly releases.
+Suitable contents can be generated with <code class="docutils literal notranslate"><span class="pre">mach</span> <span class="pre">release-history</span></code>,
+which will print to the console by default.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">optimize_strategies</span></code></dt><dd><p>A python path of the form <code class="docutils literal notranslate"><span class="pre">&lt;module&gt;:&lt;object&gt;</span></code> containing a dictionary of
+optimization strategies to use, overwriting the defaults.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">optimize_target_tasks</span></code></dt><dd><p>If true, then target tasks are eligible for optimization.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">do_not_optimize</span></code></dt><dd><p>Specify tasks to not optimize out of the graph. This is a list of labels.
+Any tasks in the graph matching one of the labels will not be optimized out
+of the graph.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">existing_tasks</span></code></dt><dd><p>Specify tasks to optimize out of the graph. This is a dictionary of label to taskId.
+Any tasks in the graph matching one of the labels will use the previously-run
+taskId rather than submitting a new task.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="release-promotion">
+<h2>Release Promotion<a class="headerlink" href="#release-promotion" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">build_number</span></code></dt><dd><p>Specify the release promotion build number.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Specify the version for release tasks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">app_version</span></code></dt><dd><p>Specify the application version for release tasks. For releases, this is often a less specific version number than <code class="docutils literal notranslate"><span class="pre">version</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">next_version</span></code></dt><dd><p>Specify the next version for version bump tasks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_type</span></code></dt><dd><p>The type of release being promoted. One of “nightly”, “beta”, “esr78”, “release-rc”, or “release”.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_eta</span></code></dt><dd><p>The time and date when a release is scheduled to live. This value is passed to Balrog.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_enable_partner_repack</span></code></dt><dd><p>Boolean which controls repacking vanilla Firefox builds for partners.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_enable_partner_attribution</span></code></dt><dd><p>Boolean which controls adding attribution to vanilla Firefox builds for partners.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_enable_emefree</span></code></dt><dd><p>Boolean which controls repacking vanilla Firefox builds into EME-free builds.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_partners</span></code></dt><dd><p>List of partners to repack or attribute if a subset of the whole config. A null value defaults to all.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_partner_config</span></code></dt><dd><p>Configuration for partner repacks &amp; attribution, as well as EME-free repacks.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_partner_build_number</span></code></dt><dd><p>The build number for partner repacks. We sometimes have multiple partner build numbers per release build number; this parameter lets us bump them independently. Defaults to 1.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release_product</span></code></dt><dd><p>The product that is being released.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">required_signoffs</span></code></dt><dd><p>A list of signoffs that are required for this release promotion flavor. If specified, and if the corresponding <cite>signoff_urls</cite> url isn’t specified, tasks that require these signoffs will not be scheduled.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">signoff_urls</span></code></dt><dd><p>A dictionary of signoff keys to url values. These are the urls marking the corresponding <code class="docutils literal notranslate"><span class="pre">required_signoffs</span></code> as signed off.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="repository-merge-day">
+<h2>Repository Merge Day<a class="headerlink" href="#repository-merge-day" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">merge_config</span></code></dt><dd><p>Merge config describes the repository merge behaviour, using an alias to cover which set of file replacements and version increments are required, along with overrides for the source and target repository URIs.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_repo</span></code></dt><dd><p>The clone/push URI of the source repository, such as <a class="reference external" href="https://hg.mozilla.org/mozilla-central">https://hg.mozilla.org/mozilla-central</a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">target_repo</span></code></dt><dd><p>The clone/push URI of the target repository, such as <a class="reference external" href="https://hg.mozilla.org/releases/mozilla-beta">https://hg.mozilla.org/releases/mozilla-beta</a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">source_branch</span></code></dt><dd><p>The firefoxtree alias of the source branch, such as ‘central’, ‘beta’</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">target_branch</span></code></dt><dd><p>The firefoxtree alias of the target branch, such as ‘beta’, ‘release’</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">force-dry-run</span></code></dt><dd><p>Don’t push any results to target repositories.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="comm-push-information">
+<h2>Comm Push Information<a class="headerlink" href="#comm-push-information" title="Permalink to this headline">¶</a></h2>
+<p>These parameters correspond to the repository and revision of the comm-central
+repository to checkout. Their meaning is the same as the corresponding
+parameters for the gecko repository above. They are optional, but if any of
+them are specified, they must all be specified.</p>
+<p><code class="docutils literal notranslate"><span class="pre">comm_base_repository</span></code>
+<code class="docutils literal notranslate"><span class="pre">comm_head_repository</span></code>
+<code class="docutils literal notranslate"><span class="pre">comm_head_rev</span></code>
+<code class="docutils literal notranslate"><span class="pre">comm_head_ref</span></code></p>
+</div>
+<div class="section" id="code-review">
+<h2>Code Review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">phabricator_diff</span></code></dt><dd><p>The code review process needs to know the Phabricator Differential diff that
+started the analysis. This parameter must start with <cite>PHID-DIFF-</cite></p>
+</dd>
+</dl>
+</div>
+<div class="section" id="local-configuration">
+<h2>Local configuration<a class="headerlink" href="#local-configuration" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">target-kind</span></code></dt><dd><p>Generate only the given kind and its kind-dependencies. This is used for local inspection of the graph
+and is not supported at run-time.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="attributes.html" class="btn btn-neutral float-right" title="Task Attributes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="kinds.html" class="btn btn-neutral float-left" title="Task Kinds" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

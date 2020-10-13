@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Remote Settings &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="File Handling" href="../../../uriloader/index.html" />
+    <link rel="prev" title="Services" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../toolkit/index.html">Toolkit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Services</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Remote Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#empty-local-database">Empty local database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#events">Events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-attachments">File attachments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initial-data">Initial data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#targets-and-a-b-testing">Targets and A/B testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uptake-telemetry">Uptake Telemetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-new-remote-settings">Create new remote settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global-notifications">Global Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-options">Advanced Options</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#localfields-records-fields-that-remain-local"><code class="docutils literal notranslate"><span class="pre">localFields</span></code>: records fields that remain local</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#filterfunc-custom-filtering-function"><code class="docutils literal notranslate"><span class="pre">filterFunc</span></code>: custom filtering function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-and-manual-testing">Debugging and manual testing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#logging">Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#remote-settings-dev-tools">Remote Settings Dev Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trigger-a-synchronization-manually">Trigger a synchronization manually</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inspect-local-data">Inspect local data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#delete-all-local-data">Delete all local data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tests">Unit Tests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulate-sync-events">Simulate <code class="docutils literal notranslate"><span class="pre">&quot;sync&quot;</span></code> events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manipulate-local-data">Manipulate local data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#misc">Misc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#about-blocklists">About blocklists</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Services</a> &raquo;</li>
+        
+      <li>Remote Settings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/services/common/services/RemoteSettings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="remote-settings">
+<span id="services-remotesettings"></span><h1>Remote Settings<a class="headerlink" href="#remote-settings" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://searchfox.org/mozilla-central/source/services/settings/remote-settings.js">remote-settings.js</a> module offers the ability to fetch remote settings that are kept in sync with Mozilla servers.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">get()</span></code> method returns the list of entries for a specific key. Each entry can have arbitrary attributes, and can only be modified on the server.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">RemoteSettings</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">ChromeUtils</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s2">&quot;resource://services-settings/remote-settings.js&quot;</span><span class="p">,</span> <span class="p">{});</span>
+
+<span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">get</span><span class="p">();</span>
+
+<span class="cm">/*</span>
+<span class="cm">  data == [</span>
+<span class="cm">    {label: &quot;Yahoo&quot;,  enabled: true,  weight: 10, id: &quot;d0782d8d&quot;, last_modified: 1522764475905},</span>
+<span class="cm">    {label: &quot;Google&quot;, enabled: true,  weight: 20, id: &quot;8883955f&quot;, last_modified: 1521539068414},</span>
+<span class="cm">    {label: &quot;Ecosia&quot;, enabled: false, weight: 5,  id: &quot;337c865d&quot;, last_modified: 1520527480321},</span>
+<span class="cm">  ]</span>
+<span class="cm">*/</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kr">const</span> <span class="nx">entry</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Do something with entry...</span>
+  <span class="c1">// await InternalAPI.load(entry.id, entry.label, entry.weight);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> and <code class="docutils literal notranslate"><span class="pre">last_modified</span></code> (timestamp) attributes are assigned by the server.</p>
+</div>
+<div class="section" id="empty-local-database">
+<h3>Empty local database<a class="headerlink" href="#empty-local-database" title="Permalink to this headline">¶</a></h3>
+<p>On new user profiles or for recently added use-cases, the local database will be empty until a synchronization with the server happens. Synchronizations are managed internally, and can sometimes be triggered minutes after browser starts.</p>
+<p>By default, if <code class="docutils literal notranslate"><span class="pre">.get()</span></code> is called before the local database had the chance to be synchronized, and if no initial data was provided (<a class="reference internal" href="#services-initial-data"><span class="std std-ref">see below</span></a>), then the settings will be pulled from the server in order to avoid returning an empty list. In that case, the first call to <code class="docutils literal notranslate"><span class="pre">.get()</span></code> will thus take longer than the following ones.</p>
+<p>This behaviour can be disabled using the <code class="docutils literal notranslate"><span class="pre">syncIfEmpty</span></code> option.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the implicit synchronization fails (e.g network is not available) then errors are silent and an empty list is returned. <a class="reference internal" href="#services-settings-uptake-telemetry"><span class="std std-ref">Uptake Telemetry</span></a> status is sent though.</p>
+</div>
+</div>
+<div class="section" id="options">
+<h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">filters</span></code>, <code class="docutils literal notranslate"><span class="pre">order</span></code>: The list can optionally be filtered or ordered:</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">subset</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">get</span><span class="p">({</span>
+  <span class="nx">filters</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">property</span><span class="o">:</span> <span class="s2">&quot;value&quot;</span>
+  <span class="p">},</span>
+  <span class="nx">order</span><span class="o">:</span> <span class="s2">&quot;-weight&quot;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">syncIfEmpty</span></code>: implicit synchronization if local data is empty (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>).
+Set it to <code class="docutils literal notranslate"><span class="pre">false</span></code> if your use-case can tolerate an empty list until the first synchronization happens.</p>
+<blockquote>
+<div><div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">get</span><span class="p">({</span> <span class="nx">syncIfEmpty</span><span class="o">:</span> <span class="kc">false</span> <span class="p">});</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">verifySignature</span></code>: verify the content signature of the local data (default: <code class="docutils literal notranslate"><span class="pre">false</span></code>).
+An error is thrown if the local data was altered. This hurts performance, but can be used if your use case needs to be secure from local tampering.</p></li>
+</ul>
+</div>
+<div class="section" id="events">
+<h3>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">on()</span></code> function registers handlers to be triggered when events occur.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sync</span></code> event allows to be notified when the remote settings are changed on the server side. Your handler is given an <code class="docutils literal notranslate"><span class="pre">event</span></code> object that contains a <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute that has information about the changes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span></code>: current list of entries (after changes were applied);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">created</span></code>, <code class="docutils literal notranslate"><span class="pre">updated</span></code>, <code class="docutils literal notranslate"><span class="pre">deleted</span></code>: list of entries that were created/updated/deleted respectively.</p></li>
+</ul>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">current</span> <span class="p">}</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">event</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kr">const</span> <span class="nx">entry</span> <span class="k">of</span> <span class="nx">current</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something with entry...</span>
+    <span class="c1">// await InternalAPI.reload(entry.id, entry.label, entry.weight);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, the synchronization of remote settings is triggered via push notifications, and also by its own timer every 24H (see the preference <code class="docutils literal notranslate"><span class="pre">services.settings.poll_interval</span></code> ).</p>
+</div>
+</div>
+<div class="section" id="file-attachments">
+<h3>File attachments<a class="headerlink" href="#file-attachments" title="Permalink to this headline">¶</a></h3>
+<p>When an entry has a file attached to it, it has an <code class="docutils literal notranslate"><span class="pre">attachment</span></code> attribute, which contains the file related information (url, hash, size, mimetype, etc.).</p>
+<p>Remote files are not downloaded automatically. In order to keep attachments in sync, the provided helper can be leveraged like this:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">);</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="nx">async</span> <span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">created</span><span class="p">,</span> <span class="nx">updated</span><span class="p">,</span> <span class="nx">deleted</span> <span class="p">}</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">toDelete</span> <span class="o">=</span> <span class="nx">deleted</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">d</span> <span class="p">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">attachment</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">toDownload</span> <span class="o">=</span> <span class="nx">created</span>
+    <span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">u</span> <span class="p">=&gt;</span> <span class="nx">u</span><span class="p">.</span><span class="k">new</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">d</span> <span class="p">=&gt;</span> <span class="nx">d</span><span class="p">.</span><span class="nx">attachment</span><span class="p">);</span>
+
+  <span class="c1">// Remove local files of deleted records</span>
+  <span class="nx">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">toDelete</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">entry</span> <span class="p">=&gt;</span> <span class="nx">client</span><span class="p">.</span><span class="nx">attachments</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">entry</span><span class="p">)));</span>
+  <span class="c1">// Download attachments</span>
+  <span class="kr">const</span> <span class="nx">fileURLs</span> <span class="o">=</span> <span class="nx">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
+    <span class="nx">toDownload</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">entry</span> <span class="p">=&gt;</span> <span class="nx">client</span><span class="p">.</span><span class="nx">attachments</span><span class="p">.</span><span class="nx">download</span><span class="p">(</span><span class="nx">entry</span><span class="p">,</span> <span class="p">{</span> <span class="nx">retries</span><span class="o">:</span> <span class="mf">2</span> <span class="p">}))</span>
+  <span class="p">);</span>
+
+  <span class="c1">// Open downloaded files...</span>
+  <span class="kr">const</span> <span class="nx">fileContents</span> <span class="o">=</span> <span class="nx">await</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span>
+    <span class="nx">fileURLs</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">async</span> <span class="nx">url</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">r</span><span class="p">.</span><span class="nx">blob</span><span class="p">();</span>
+    <span class="p">})</span>
+  <span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>The provided helper will:</dt><dd><ul class="simple">
+<li><p>fetch the remote binary content</p></li>
+<li><p>write the file in the profile folder</p></li>
+<li><p>check the file size</p></li>
+<li><p>check the content SHA256 hash</p></li>
+<li><p>do nothing if the file is already present and sound locally.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The following aspects are not taken care of (yet! help welcome):</p>
+<ul class="simple">
+<li><p>check available disk space</p></li>
+<li><p>preserve bandwidth</p></li>
+<li><p>resume downloads of large files</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">download()</span></code> method does not return a file path but instead a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL which points to the locally-downloaded file.
+This will allow us to package attachments as part of a Firefox release (see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1542177">Bug 1542177</a>)
+and return them to calling code as <code class="docutils literal notranslate"><span class="pre">resource://</span></code> from within a package archive.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the <code class="docutils literal notranslate"><span class="pre">download()</span></code> method is prone to leaving extraneous files in the profile directory
+(see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1634127">Bug 1634127</a>).
+Pass the <code class="docutils literal notranslate"><span class="pre">useCache</span></code> option to use an IndexedDB-based cache, and unlock the following features:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fallbackToCache</span></code> option allows callers to fall back to the cached file and record, if the requested record’s attachment fails to download.
+This enables callers to always have a valid pair of attachment and record,
+provided that the attachment has been retrieved at least once.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fallbackToDump</span></code> option activates a fallback to a dump that has been
+packaged with the client, when other ways to load the attachment have failed.
+See <span class="xref std std-ref">_services/packaging-attachments</span> for more information.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">downloadAsBytes()</span></code> method returning an <code class="docutils literal notranslate"><span class="pre">ArrayBuffer</span></code> is also available, if writing the attachment into the user profile is not necessary.</p>
+</div>
+</div>
+<div class="section" id="initial-data">
+<span id="services-initial-data"></span><h3>Initial data<a class="headerlink" href="#initial-data" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to package a dump of the server records that will be loaded into the local database when no synchronization has happened yet.</p>
+<p>The JSON dump will serve as the default dataset for <code class="docutils literal notranslate"><span class="pre">.get()</span></code>, instead of doing a round-trip to pull the latest data. It will also reduce the amount of data to be downloaded on the first synchronization.</p>
+<ol class="arabic simple">
+<li><p>Place the JSON dump of the server records in the <code class="docutils literal notranslate"><span class="pre">services/settings/dumps/main/</span></code> folder</p></li>
+<li><p>Add the filename to the <code class="docutils literal notranslate"><span class="pre">FINAL_TARGET_FILES</span></code> list in <code class="docutils literal notranslate"><span class="pre">services/settings/dumps/main/moz.build</span></code></p></li>
+<li><p>Add the filename to the <code class="docutils literal notranslate"><span class="pre">[browser]</span></code> section of <code class="docutils literal notranslate"><span class="pre">mobile/android/installer/package-manifest.in</span></code> IF the file should be bundled with Android.</p></li>
+</ol>
+<p>Now, when <code class="docutils literal notranslate"><span class="pre">RemoteSettings(&quot;some-key&quot;).get()</span></code> is called from an empty profile, the <code class="docutils literal notranslate"><span class="pre">some-key.json</span></code> file is going to be loaded before the results are returned.</p>
+<p>JSON dumps in the tree are periodically updated by <code class="docutils literal notranslate"><span class="pre">taskcluster/docker/periodic-updates/scripts/periodic_file_updates.sh</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The example above uses “main” because that’s the default bucket name.
+If you have customized the bucket name, use the actual bucket name instead of “main”.</p>
+</div>
+<div class="section" id="packaging-attachments">
+<span id="services-packaging-attachments"></span><h4>Packaging attachments<a class="headerlink" href="#packaging-attachments" title="Permalink to this headline">¶</a></h4>
+<p>Attachments are not included in the JSON dumps by default. You may choose to package the attachment
+with the client, for example if it is important to have the data available at the first startup
+without requiring network activity. Or if most users would download the attachment anyway.
+Only package attachments if needed, since they increase the file size of the Firefox installer.</p>
+<p>To package an attachment for consumers of the <cite>download()</cite> method:</p>
+<ol class="arabic simple">
+<li><p>Select the desired attachment record from the JSON dump of the server records, and place it at
+<code class="docutils literal notranslate"><span class="pre">services/settings/dumps/&lt;bucket</span> <span class="pre">name&gt;/&lt;collection</span> <span class="pre">name&gt;/&lt;attachment</span> <span class="pre">id&gt;.meta.json</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">&lt;attachment</span> <span class="pre">id&gt;</span></code> defaults to the <code class="docutils literal notranslate"><span class="pre">id</span></code> field of the record. If this <code class="docutils literal notranslate"><span class="pre">id</span></code> is not fixed,
+you must choose a custom ID that can be relied upon as a long-term attachment identifier. See
+the notes below for more details.</p></li>
+<li><p>Download the attachment associated with the record, and place it at
+<code class="docutils literal notranslate"><span class="pre">services/settings/dumps/&lt;bucket</span> <span class="pre">name&gt;/&lt;collection</span> <span class="pre">name&gt;/&lt;attachment</span> <span class="pre">id&gt;</span></code>.</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">taskcluster/docker/periodic-updates/scripts/periodic_file_updates.sh</span></code> and add the attachment,
+by editing the <code class="docutils literal notranslate"><span class="pre">compare_remote_settings_files</span></code> function and describing the attachment.
+Unlike JSON dumps, attachments must explicitly be listed in that update script, because the
+attachment selection logic needs to be codified in a <code class="docutils literal notranslate"><span class="pre">jq</span></code> filter in the script.
+For an example, see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1636158">Bug 1636158</a>.</p></li>
+<li><p>Register the location of the <code class="docutils literal notranslate"><span class="pre">&lt;attachment</span> <span class="pre">id&gt;.meta.json</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;attachment</span> <span class="pre">id&gt;</span></code> in the
+<code class="docutils literal notranslate"><span class="pre">moz.build</span></code> file of the collection folder, and possibly <code class="docutils literal notranslate"><span class="pre">package-manifest.in</span></code>,
+as described in <cite>the previous section about registering JSON dumps &lt;services/initial-data&gt;</cite>.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;attachment</span> <span class="pre">id&gt;</span></code> is used to derive the file names of the packaged attachment dump, and as the
+key for the (optional) cache where attachment updates from the network are saved. If the cache
+is enabled, the attachment identifier is expected to be fixed across client application updates.
+If that expectation cannot be met, the <code class="docutils literal notranslate"><span class="pre">attachmentId</span></code> option of the <code class="docutils literal notranslate"><span class="pre">download</span></code> method of the
+attachment downloader should be used to override the attachment ID with a custom (stable) value.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The contents of the <code class="docutils literal notranslate"><span class="pre">.meta.json</span></code> file is already contained within the records, but separated
+from the main set of records to ensure the availability of the original record with the data,
+independently of the packaged or downloaded records.
+This file may become optional in a future update, see <a class="reference external" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1640059">Bug 1640059</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="targets-and-a-b-testing">
+<h2>Targets and A/B testing<a class="headerlink" href="#targets-and-a-b-testing" title="Permalink to this headline">¶</a></h2>
+<p>In order to deliver settings to subsets of the population, you can set targets on entries (platform, language, channel, version range, preferences values, samples, etc.) when editing records on the server.</p>
+<p>From the client API standpoint, this is completely transparent: the <code class="docutils literal notranslate"><span class="pre">.get()</span></code> method — as well as the event data — will always filter the entries on which the target matches.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The remote settings targets follow the same approach as the <a class="reference internal" href="../../../toolkit/components/normandy/normandy/index.html#components-normandy"><span class="std std-ref">Normandy recipe client</span></a> (ie. JEXL filter expressions),</p>
+</div>
+</div>
+<div class="section" id="uptake-telemetry">
+<span id="services-settings-uptake-telemetry"></span><h2>Uptake Telemetry<a class="headerlink" href="#uptake-telemetry" title="Permalink to this headline">¶</a></h2>
+<p>Some <a class="reference internal" href="../../../toolkit/components/telemetry/collection/uptake.html#telemetry-collection-uptake"><span class="std std-ref">uptake telemetry</span></a> is collected in order to monitor how remote settings are propagated.</p>
+<p>It is submitted to a single <a class="reference internal" href="../../../toolkit/components/telemetry/collection/histograms.html#histogram-type-keyed"><span class="std std-ref">keyed histogram</span></a> whose id is <code class="docutils literal notranslate"><span class="pre">UPTAKE_REMOTE_CONTENT_RESULT_1</span></code> and the keys are prefixed with <code class="docutils literal notranslate"><span class="pre">main/</span></code> (eg. <code class="docutils literal notranslate"><span class="pre">main/a-key</span></code> in the above example).</p>
+</div>
+<div class="section" id="create-new-remote-settings">
+<h2>Create new remote settings<a class="headerlink" href="#create-new-remote-settings" title="Permalink to this headline">¶</a></h2>
+<p>Staff members can create new kinds of remote settings, following <a class="reference external" href="https://remote-settings.readthedocs.io/en/latest/getting-started.html">this documentation</a>.</p>
+<p>It basically consists in:</p>
+<ol class="arabic simple">
+<li><p>Choosing a key (eg. <code class="docutils literal notranslate"><span class="pre">search-providers</span></code>)</p></li>
+<li><p>Assigning collaborators to editors and reviewers groups</p></li>
+<li><p>(<em>optional</em>) Define a JSONSchema to validate entries</p></li>
+<li><p>(<em>optional</em>) Allow attachments on entries</p></li>
+</ol>
+<p>And once done:</p>
+<ol class="arabic simple">
+<li><p>Create, modify or delete entries and let reviewers approve the changes</p></li>
+<li><p>Wait for Firefox to pick-up the changes for your settings key</p></li>
+</ol>
+</div>
+<div class="section" id="global-notifications">
+<h2>Global Notifications<a class="headerlink" href="#global-notifications" title="Permalink to this headline">¶</a></h2>
+<p>The polling for changes process sends two notifications that observers can register to:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">remote-settings:changes-poll-start</span></code>: Polling for changes is starting. triggered either by the scheduled timer or a push broadcast.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remote-settings:changes-poll-end</span></code>: Polling for changes has ended</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">observer</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">observe</span><span class="p">(</span><span class="nx">aSubject</span><span class="p">,</span> <span class="nx">aTopic</span><span class="p">,</span> <span class="nx">aData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Services</span><span class="p">.</span><span class="nx">obs</span><span class="p">.</span><span class="nx">removeObserver</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s2">&quot;remote-settings:changes-poll-start&quot;</span><span class="p">);</span>
+
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">expectedTimestamp</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">aData</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Polling started&quot;</span><span class="p">,</span> <span class="nx">expectedTimestamp</span> <span class="o">?</span> <span class="s2">&quot;from push broadcast&quot;</span> <span class="o">:</span> <span class="s2">&quot;by scheduled trigger&quot;</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nx">Services</span><span class="p">.</span><span class="nx">obs</span><span class="p">.</span><span class="nx">addObserver</span><span class="p">(</span><span class="nx">observer</span><span class="p">,</span> <span class="s2">&quot;remote-settings:changes-poll-start&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="advanced-options">
+<h2>Advanced Options<a class="headerlink" href="#advanced-options" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="localfields-records-fields-that-remain-local">
+<h3><code class="docutils literal notranslate"><span class="pre">localFields</span></code>: records fields that remain local<a class="headerlink" href="#localfields-records-fields-that-remain-local" title="Permalink to this headline">¶</a></h3>
+<p>During synchronization, the local database is compared with the server data. Any difference will be overwritten by the remote version.</p>
+<p>In some use-cases it’s necessary to store some state using extra attributes on records. The <code class="docutils literal notranslate"><span class="pre">localFields</span></code> options allows to specify which records field names should be preserved on records during synchronization.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-collection&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">localFields</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;userNotified&quot;</span><span class="p">,</span> <span class="s2">&quot;userResponse&quot;</span> <span class="p">],</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filterfunc-custom-filtering-function">
+<h3><code class="docutils literal notranslate"><span class="pre">filterFunc</span></code>: custom filtering function<a class="headerlink" href="#filterfunc-custom-filtering-function" title="Permalink to this headline">¶</a></h3>
+<p>By default, the entries returned by <code class="docutils literal notranslate"><span class="pre">.get()</span></code> are filtered based on the JEXL expression result from the <code class="docutils literal notranslate"><span class="pre">filter_expression</span></code> field. The <code class="docutils literal notranslate"><span class="pre">filterFunc</span></code> option allows to execute a custom filter (async) function, that should return the record (modified or not) if kept or a falsy value if filtered out.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-collection&quot;</span><span class="p">,</span> <span class="p">{</span>
+  <span class="nx">filterFunc</span><span class="o">:</span> <span class="p">(</span><span class="nx">record</span><span class="p">,</span> <span class="nx">environment</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">enabled</span><span class="p">,</span> <span class="p">...</span><span class="nx">entry</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">record</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">enabled</span> <span class="o">?</span> <span class="nx">entry</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="debugging-and-manual-testing">
+<h2>Debugging and manual testing<a class="headerlink" href="#debugging-and-manual-testing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logging">
+<h3>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<p>In order to enable verbose logging, set the log level preference to <code class="docutils literal notranslate"><span class="pre">debug</span></code>.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Services</span><span class="p">.</span><span class="nx">prefs</span><span class="p">.</span><span class="nx">setCharPref</span><span class="p">(</span><span class="s2">&quot;services.settings.loglevel&quot;</span><span class="p">,</span> <span class="s2">&quot;debug&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remote-settings-dev-tools">
+<h3>Remote Settings Dev Tools<a class="headerlink" href="#remote-settings-dev-tools" title="Permalink to this headline">¶</a></h3>
+<p>The Remote Settings Dev Tools extension provides some tooling to inspect synchronization statuses, to change the remote server or to switch to <em>preview</em> mode in order to sign-off pending changes. <a class="reference external" href="https://github.com/mozilla/remote-settings-devtools">More information on the dedicated repository</a>.</p>
+</div>
+<div class="section" id="trigger-a-synchronization-manually">
+<h3>Trigger a synchronization manually<a class="headerlink" href="#trigger-a-synchronization-manually" title="Permalink to this headline">¶</a></h3>
+<p>The synchronization of every known remote settings clients can be triggered manually with <code class="docutils literal notranslate"><span class="pre">pollChanges()</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">.</span><span class="nx">pollChanges</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In order to ignore last synchronization status during polling for changes, set the <code class="docutils literal notranslate"><span class="pre">full</span></code> option:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">.</span><span class="nx">pollChanges</span><span class="p">({</span> <span class="nx">full</span><span class="o">:</span> <span class="kc">true</span> <span class="p">})</span>
+</pre></div>
+</div>
+<p>The synchronization of a single client can be forced with the <code class="docutils literal notranslate"><span class="pre">.sync()</span></code> method:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">sync</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The above methods are only relevant during development or debugging and should never be called in production code.</p>
+</div>
+</div>
+<div class="section" id="inspect-local-data">
+<h3>Inspect local data<a class="headerlink" href="#inspect-local-data" title="Permalink to this headline">¶</a></h3>
+<p>The internal IndexedDB of Remote Settings can be accessed via the Storage Inspector in the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Tools/Browser_Toolbox">browser toolbox</a>.</p>
+<p>For example, the local data of the <code class="docutils literal notranslate"><span class="pre">&quot;key&quot;</span></code> collection can be accessed in the <code class="docutils literal notranslate"><span class="pre">remote-settings</span></code> database at <em>Browser Toolbox</em> &gt; <em>Storage</em> &gt; <em>IndexedDB</em> &gt; <em>chrome</em>, in the <code class="docutils literal notranslate"><span class="pre">records</span></code> store.</p>
+</div>
+<div class="section" id="delete-all-local-data">
+<h3>Delete all local data<a class="headerlink" href="#delete-all-local-data" title="Permalink to this headline">¶</a></h3>
+<p>All local data, of <strong>every collection</strong>, including downloaded attachments, can be deleted with:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">.</span><span class="nx">clearAll</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="unit-tests">
+<h2>Unit Tests<a class="headerlink" href="#unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>As a foreword, we would like to underline the fact that your tests should not test Remote Settings itself. Your tests should assume Remote Settings works, and should only run assertions on the integration part. For example, if you see yourself mocking the server responses, your tests may go over their responsibility.</p>
+<p>If your code relies on the <code class="docutils literal notranslate"><span class="pre">&quot;sync&quot;</span></code> event, you are likely to be interested in faking this event and make sure your code runs as expected. If it relies on <code class="docutils literal notranslate"><span class="pre">.get()</span></code>, you will probably want to insert some fake local data.</p>
+<div class="section" id="simulate-sync-events">
+<h3>Simulate <code class="docutils literal notranslate"><span class="pre">&quot;sync&quot;</span></code> events<a class="headerlink" href="#simulate-sync-events" title="Permalink to this headline">¶</a></h3>
+<p>You can forge a <code class="docutils literal notranslate"><span class="pre">payload</span></code> that contains the events attributes as described above, and emit it :)</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">payload</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">current</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mf">43</span> <span class="p">}],</span>
+  <span class="nx">created</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">updated</span><span class="o">:</span> <span class="p">[{</span> <span class="nx">old</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mf">42</span> <span class="p">},</span> <span class="k">new</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="mf">43</span> <span class="p">}}],</span>
+  <span class="nx">deleted</span><span class="o">:</span> <span class="p">[],</span>
+<span class="p">};</span>
+
+<span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;sync&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">payload</span> <span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="manipulate-local-data">
+<h3>Manipulate local data<a class="headerlink" href="#manipulate-local-data" title="Permalink to this headline">¶</a></h3>
+<p>A handle on the underlying database can be obtained through the <code class="docutils literal notranslate"><span class="pre">.db</span></code> attribute.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;a-key&quot;</span><span class="p">).</span><span class="nx">db</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And records can be created manually (as if they were synchronized from the server):</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">record</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="s2">&quot;a-custom-string-or-uuid&quot;</span><span class="p">,</span>
+  <span class="nx">domain</span><span class="o">:</span> <span class="s2">&quot;website.com&quot;</span><span class="p">,</span>
+  <span class="nx">usernameSelector</span><span class="o">:</span> <span class="s2">&quot;#login-account&quot;</span><span class="p">,</span>
+  <span class="nx">passwordSelector</span><span class="o">:</span> <span class="s2">&quot;#pass-signin&quot;</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>If no timestamp is set, any call to <code class="docutils literal notranslate"><span class="pre">.get()</span></code> will trigger the load of initial data (JSON dump) if any, or a synchronization will be triggered. To avoid that, store a fake timestamp:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">saveLastModified</span><span class="p">(</span><span class="mf">42</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In order to bypass the potential target filtering of <code class="docutils literal notranslate"><span class="pre">RemoteSettings(&quot;key&quot;).get()</span></code>, the low-level listing of records can be obtained with <code class="docutils literal notranslate"><span class="pre">collection.list()</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">subset</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span>
+  <span class="nx">filters</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;property&quot;</span><span class="o">:</span> <span class="s2">&quot;value&quot;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The local data can be flushed with <code class="docutils literal notranslate"><span class="pre">clear()</span></code>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">clear</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="misc">
+<h2>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+<p>We host more documentation on <a class="reference external" href="https://remote-settings.readthedocs.io/">https://remote-settings.readthedocs.io/</a>, on how to run a server locally, manage attachments, or use the REST API etc.</p>
+<div class="section" id="about-blocklists">
+<h3>About blocklists<a class="headerlink" href="#about-blocklists" title="Permalink to this headline">¶</a></h3>
+<p>The security settings, as well as addons, plugins, and GFX blocklists were the first use-cases of remote settings, and thus have some specificities.</p>
+<p>For example, they leverage advanced customization options (bucket, content-signature certificate, target filtering etc.). In order to get a reference to these clients, their initialization code must be executed first.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="p">{</span><span class="nx">RemoteSecuritySettings</span><span class="p">}</span> <span class="o">=</span> <span class="nx">ChromeUtils</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s2">&quot;resource://gre/modules/psm/RemoteSecuritySettings.jsm&quot;</span><span class="p">);</span>
+
+<span class="nx">RemoteSecuritySettings</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+
+
+<span class="kr">const</span> <span class="nx">Blocklist</span> <span class="o">=</span> <span class="nx">ChromeUtils</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s2">&quot;resource://gre/modules/Blocklist.jsm&quot;</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+
+<span class="nx">Blocklist</span><span class="p">.</span><span class="nx">ExtensionBlocklistRS</span><span class="p">.</span><span class="nx">_ensureInitialized</span><span class="p">();</span>
+<span class="nx">Blocklist</span><span class="p">.</span><span class="nx">PluginBlocklistRS</span><span class="p">.</span><span class="nx">_ensureInitialized</span><span class="p">();</span>
+<span class="nx">Blocklist</span><span class="p">.</span><span class="nx">GfxBlocklistRS</span><span class="p">.</span><span class="nx">_ensureInitialized</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then, in order to access a specific client instance, the <code class="docutils literal notranslate"><span class="pre">bucketName</span></code> must be specified:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">RemoteSettings</span><span class="p">(</span><span class="s2">&quot;onecrl&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">bucketName</span><span class="o">:</span> <span class="s2">&quot;security-state&quot;</span> <span class="p">});</span>
+</pre></div>
+</div>
+<p>And in the storage inspector, the IndexedDB internal store will be prefixed with <code class="docutils literal notranslate"><span class="pre">security-state</span></code> instead of <code class="docutils literal notranslate"><span class="pre">main</span></code> (eg. <code class="docutils literal notranslate"><span class="pre">security-state/onecrl</span></code>).</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../../uriloader/index.html" class="btn btn-neutral float-right" title="File Handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Services" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

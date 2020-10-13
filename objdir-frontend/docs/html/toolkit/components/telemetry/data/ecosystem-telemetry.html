@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ecosystem Telemetry &mdash; Firefox Source Docs  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../../../_static/firefox.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script src="../../../../_static/clipboard.min.js"></script>
+        <script src="../../../../_static/copybutton.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.4.4/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Internals" href="../internals/index.html" />
+    <link rel="prev" title="“xfocsp-error-report” ping" href="xfocsp-error-report-ping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> Firefox Source Docs
+          
+
+          
+            
+            <img src="../../../../_static/firefox-wordmark.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../setup/index.html">Getting Set Up To Work On The Firefox Codebase</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Working On Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing/index.html">Working on Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bug-mgmt/index.html">Bug Handling</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Source Code Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../browser/index.html">Firefox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/index.html">DOM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../layout/index.html">Layout &amp; CSS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../gfx/index.html">Graphics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devtools/index.html">Firefox DevTools Contributor Docs</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Toolkit</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../mozapps/extensions/addon-manager/index.html">Add-on Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../crashes/crash-manager/index.html">Crash Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../crashreporter/crashreporter/index.html">Crash Reporter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregates/featuregates/index.html">Feature Gates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../search/index.html">Search Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normandy/normandy/index.html">Shield Recipe Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../messaging-system/docs/index.html">Messaging System Schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pictureinpicture/pictureinpicture/index.html">Picture-in-Picture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../prompts/prompts/index.html">Prompts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/subprocess/toolkit_modules/subprocess/index.html">Subprocess Module</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Telemetry</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../start/index.html">Getting started</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../collection/index.html">Data collection</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Data documentation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="common-ping.html">Common ping format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="environment.html">Environment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="main-ping.html">“main” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="crash-ping.html">Crash ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="backgroundhangmonitor-ping.html">“backgroundhangmonitor” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="anonymous-ping.html">“anonymous” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="first-shutdown-ping.html">“first-shutdown” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="activation-ping.html">“activation” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="addons-malware-ping.html">Add-ons malware ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core-ping.html">“core” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="coverage-ping.html">“coverage” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="default-browser-ping.html">“default-browser” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-ping.html">“deletion” ping (obsolete)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="deletion-request-ping.html">“deletion-request” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="downgrade-ping.html">“downgrade” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="event-ping.html">“event” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="health-ping.html">“health” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="heartbeat-ping.html">“heartbeat” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="install-ping.html">Install Ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="launcher-process-failure-ping.html">Launcher Process Failure ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modules-ping.html">“modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="new-profile-ping.html">“new-profile” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="prio-ping.html">“prio” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sync-ping.html">“sync” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="third-party-modules-ping.html">“third-party-modules” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uitour-ping.html">“uitour-tag” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="update-ping.html">“update” ping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xfocsp-error-report-ping.html">“xfocsp-error-report” ping</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Ecosystem Telemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../internals/index.html">Internals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../obsolete/index.html">Obsolete Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../glean/index.html">Firefox on Glean (FOG)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../modules/toolkit_modules/index.html">Toolkit Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../content/toolkit_widgets/index.html">Toolkit Widgets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../url-classifier/url-classifier/index.html">URL Classifier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../extensions/webextensions/index.html">WebExtensions API Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../js/index.html">SpiderMonkey</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobile/android/geckoview/index.html">Welcome to GeckoView’s documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../dom/bindings/webidl/index.html">WebIDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../modules/libpref/index.html">libpref</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../remote/index.html">Remote Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../services/common/services/index.html">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../uriloader/index.html">File Handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../widget/cocoa/index.html">Firefox on macOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../code-quality/index.html">Code quality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../writing-rust-code/index.html">Writing Rust Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/profiler/index.html">Gecko Profiler</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The Firefox Build System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mach/index.html">Mach</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/try/index.html">Try Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../build/buildsystem/index.html">Build System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../taskcluster/index.html">TaskCluster Task-Graph Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/moztreedocs/index.html">Managing Documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Testing &amp; Test Infrastructure</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/testing-policy/index.html">Testing Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/marionette/index.html">Marionette</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/geckodriver/index.html">geckodriver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web-platform/index.html">web-platform-tests documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/fuzzing/index.html">Fuzzing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/sanitizer/index.html">Sanitizer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing/perfdocs/index.html">Performance Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools/code-coverage/index.html">Code coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../testing-rust-code/index.html">Testing &amp; Debugging Rust Code</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Localization &amp; Internationalization</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intl/index.html">Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../l10n/index.html">Localization</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Firefox and Python</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mozbase/index.html">mozbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../python/index.html">Using third-party Python packages</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Metrics Collected in Firefox</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html">Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../metrics/index.html#pings">Pings</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Firefox Source Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Toolkit</a> &raquo;</li>
+        
+          <li><a href="../index.html">Telemetry</a> &raquo;</li>
+        
+          <li><a href="index.html">Data documentation</a> &raquo;</li>
+        
+      <li>Ecosystem Telemetry</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/toolkit/components/telemetry/data/ecosystem-telemetry.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ecosystem-telemetry">
+<h1>Ecosystem Telemetry<a class="headerlink" href="#ecosystem-telemetry" title="Permalink to this headline">¶</a></h1>
+<p>This module transmits Ecosystem Telemetry from Firefox Desktop.
+It is only sent for Firefox Account users, using a single ping type
+“account-ecosystem”</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might like to read the <a class="reference external" href="https://mozilla.github.io/ecosystem-platform/docs/features/firefox-accounts/ecosystem-telemetry/">background information on Ecosystem
+Telemetry</a></p>
+</div>
+<p>The existing telemetry client id is <strong>not</strong> submitted with the ping, but an
+“ecosystem client id” is - this has the same semantics as the existing
+client id, although is a different value, and is not sent in any other ping.</p>
+<p>An anonymized user ID is submitted with each ping - <a class="reference external" href="https://mozilla.github.io/ecosystem-platform/docs/features/firefox-accounts/ecosystem-telemetry/">read more about these
+IDs and how they’re designed to safeguard user privacy</a></p>
+<p>A reduced Telemetry environment is submitted in the ping, as described below.</p>
+<div class="section" id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
+<p>In an effort to reduce the possibility of fingerprinting, we only provide the
+following environment subset:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nx">settings</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">locale</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// e.g. &quot;it&quot;, null on failure</span>
+  <span class="p">},</span>
+  <span class="nx">system</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">memoryMB</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="nx">os</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// e.g. &quot;Windows_NT&quot;, null on failure</span>
+        <span class="nx">version</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// e.g. &quot;6.1&quot;, null on failure</span>
+        <span class="nx">locale</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// &quot;en&quot; or null on failure</span>
+    <span class="p">},</span>
+    <span class="nx">cpu</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">speedMHz</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// cpu clock speed in MHz</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">profile</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">creationDate</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// integer days since UNIX epoch, e.g. 16446</span>
+    <span class="nx">firstUseDate</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">integer</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// integer days since UNIX epoch, e.g. 16446 - optional</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="account-ecosystem-ping">
+<h2>account-ecosystem ping<a class="headerlink" href="#account-ecosystem-ping" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;account-ecosystem&quot;</span><span class="p">,</span>
+  <span class="p">...</span> <span class="nx">common</span> <span class="nx">ping</span> <span class="nx">data</span>
+  <span class="s2">&quot;environment&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="c1">// as above</span>
+  <span class="s2">&quot;payload&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;reason&quot;</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// Why the ping was submitted</span>
+    <span class="s2">&quot;ecosystemAnonId&quot;</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The anonymized ID, as described above.</span>
+    <span class="s2">&quot;ecosystemClientId&quot;</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">guid</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// The ecosystem client ID as described above.</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">,</span> <span class="c1">// duration since ping was last sent or since the beginning of the Firefox session in seconds</span>
+    <span class="s2">&quot;histograms&quot;</span><span class="o">:</span> <span class="p">{...},</span>
+    <span class="s2">&quot;keyedHistograms&quot;</span><span class="o">:</span> <span class="p">{...},</span>
+    <span class="s2">&quot;scalars&quot;</span><span class="o">:</span> <span class="p">{...},</span>
+    <span class="s2">&quot;keyedScalars&quot;</span><span class="o">:</span> <span class="p">{...},</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="reason">
+<h3>reason<a class="headerlink" href="#reason" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">reason</span></code> field contains the information about why the “account-ecosystem” ping was submitted:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">periodic</span></code> - Sent roughly every 24 hours</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shutdown</span></code> - Sent on shutdown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logout</span></code> - Sent when the user logs out</p></li>
+</ul>
+</div>
+<div class="section" id="histograms-and-keyedhistograms">
+<h3>histograms and keyedHistograms<a class="headerlink" href="#histograms-and-keyedhistograms" title="Permalink to this headline">¶</a></h3>
+<p>This section contains the <a class="reference internal" href="../collection/histograms.html"><span class="doc">Histograms</span></a> that are valid for the account-ecosystem ping, per process.
+The recorded histograms are described in <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/components/telemetry/Histograms.json">Histograms.json</a>, marked with the <cite>account-ecosystem</cite> store.</p>
+</div>
+<div class="section" id="scalars-and-keyedscalars">
+<h3>scalars and keyedScalars<a class="headerlink" href="#scalars-and-keyedscalars" title="Permalink to this headline">¶</a></h3>
+<p>This section contains the <a class="reference internal" href="../collection/scalars.html"><span class="doc">Scalars</span></a> that are valid for the account-ecosystem ping, per process.
+Scalars are only submitted if data was added to them.
+The recorded scalars are described in <a class="reference external" href="https://searchfox.org/mozilla-central/source/toolkit/components/telemetry/Scalars.yaml">Scalars.yaml</a>, marked with the <cite>account-ecosystem</cite> store.</p>
+</div>
+</div>
+<div class="section" id="send-behavior">
+<h2>Send behavior<a class="headerlink" href="#send-behavior" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="without-an-account">
+<h3>Without an account<a class="headerlink" href="#without-an-account" title="Permalink to this headline">¶</a></h3>
+<p>Never.</p>
+<p>When a user logs into Firefox Accounts, this ping is submitted as described in
+“With an account” below. No ping is immediately sent.</p>
+</div>
+<div class="section" id="with-an-account">
+<h3>With an account<a class="headerlink" href="#with-an-account" title="Permalink to this headline">¶</a></h3>
+<p>The ping is submitted; roughly every 24 hours with reason <em>periodic</em>. On
+shutdown this ping is submitted with reason <em>shutdown</em>.</p>
+<p>If the user logs out and disconnects the account, this ping is submitted with
+reason <em>logout</em>. While logged out, no pings will be submitted.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../internals/index.html" class="btn btn-neutral float-right" title="Internals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xfocsp-error-report-ping.html" class="btn btn-neutral float-left" title="“xfocsp-error-report” ping" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
