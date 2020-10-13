@@ -1,1 +1,0 @@
-/Users/greg/dev/gecko-dev/tools/profiler/docs/markers-guide.rst
