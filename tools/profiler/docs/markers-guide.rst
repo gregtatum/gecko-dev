@@ -13,13 +13,8 @@ The first step is to determine the location of the marker type definition:
 * If this type is only used in one function, or a component, it can be defined in a local common place relative to its use.
 * For a more common type that could be used from multiple locations:
 
-  * If there is no dependency on XUL, it can be defined in the Base Profiler, which can be used
-in most locations in the codebase:
-`mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h
-<https://searchfox.org/mozilla-central/source/mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h>`__
-  * However, if there is a XUL dependency, then it needs to be defined in the Gecko Profiler:
-`tools/profiler/public/ProfilerMarkerTypes.h
-<https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerMarkerTypes.h>`__
+  * If there is no dependency on XUL, it can be defined in the Base Profiler, which can be used in most locations in the codebase: `mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h <https://searchfox.org/mozilla-central/source/mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h>`__
+  * However, if there is a XUL dependency, then it needs to be defined in the Gecko Profiler: `tools/profiler/public/ProfilerMarkerTypes.h <https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerMarkerTypes.h>`__
 
 How to Define New Marker Types
 ------------------------------
