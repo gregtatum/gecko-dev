@@ -7,10 +7,18 @@ indicate something important happening at a point in time, or during an interval
 Each marker has a name, a category, some common optional information (timing, backtrace, etc.),
 and an optional payload of a specific type (containing arbitrary data relevant to that type).
 
+
 Example
 -------
 
 Short example, details below.
+
+.. code-block:: c++
+
+    PROFILER_MARKER_UNTYPED("Only a name", DOM);
+    PROFILER_MARKER_TEXT("This JS marker...", JS, MarkerOptions{}, "... has text data");
+    // Record a marker of type `NumberMarker` (see definition below).
+    PROFILER_MARKER("Number", OTHER, MarkerOptions, NumberMarker{}, 42);
 
 .. code-block:: c++
 
@@ -19,7 +27,9 @@ Short example, details below.
       // Unique marker type name.
       static constexpr Span<const char> MarkerTypeName() { return MakeStringSpan("number"); }
       // Data specific to this marker type, serialized to JSON for profiler.firefox.com.
-      static void StreamJSONMarkerData(mozilla::SpliceableJSONWriter& aWriter, const int aNumber) { aWriter.IntProperty("number", aNumber); }
+      static void StreamJSONMarkerData(mozilla::SpliceableJSONWriter& aWriter, int aNumber) {
+        aWriter.IntProperty("number", aNumber);
+      }
       // Where and how to display the marker and its data.
       static mozilla::MarkerSchema MarkerTypeDisplay() {
         using MS = mozilla::MarkerSchema;
@@ -30,10 +40,107 @@ Short example, details below.
       }
     };
 
+
+How to Record Markers
+---------------------
+
+Headers to #include
+^^^^^^^^^^^^^^^^^^^
+
+If the compilation unit only defines and records untyped, text, and/or its own markers:
+
 .. code-block:: c++
 
-    // Record a marker of that type.
-    PROFILER_MARKER("Number", OTHER, MarkerOptions{}, NumberMarker{}, 42);
+    #include "mozilla/ProfilerMarkers.h"
+
+If it also records one of the other common markers defined in ProfilerMarkerTypes.h,
+include that one instead:
+
+.. code-block:: c++
+
+    #include "mozilla/ProfilerMarkerTypes.h"
+
+And if it uses any other profiler functions (e.g., labels), use the main Gecko Profiler
+header instead:
+
+.. code-block:: c++
+
+    #include "GeckoProfiler.h"
+
+The above works from source files that end up in libxul, which is true for the majority
+of Firefox source code. But some files live outside of libxul, such as mfbt, in which
+case the advice is the same but the equivalent headers are from the Base Profiler instead:
+
+.. code-block:: c++
+
+    #include "mozilla/BaseProfilerMarkers.h" // Only own/untyped/text markers
+    #include "mozilla/BaseProfilerMarkerTypes.h" // Only common markers
+    #include "BaseProfiler.h" // Markers and other profiler functions
+
+Untyped Markers
+^^^^^^^^^^^^^^^
+
+Untyped markers don't carry any information apart from the common data: Name, category,
+options.
+
+.. code-block:: c++
+
+    PROFILER_MARKER_UNTYPED(
+        // Name, and category pair.
+        "This happened", OTHER,
+        // Marker options, may be omitted if defaults are acceptable.
+        MarkerOptions{MarkerStack::Capture()});
+
+* ``PROFILER_MARKER_UNTYPED`` is a macro that simplifies the use of the main ``profiler_add_marker`` function, by adding the appropriate namespaces, and a surrounding ``#ifdef MOZ_GECKO_PROFILER`` guard.
+1. The first argument is the name of this marker. This will be displayed in most places the marker is shown. It can be a literal C string, or any dynamic string object.
+2. A category pair name. `The list of names can be found there <https://searchfox.org/mozilla-central/define?q=M_174bb0de187ee7d9>`_, the second parameter of each ``SUBCATEGORY`` line. (Internally, it's really a `mozilla::MarkerCategory <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerCategory>`_ object, in case you need to construct it elsewhere.)
+3. Options, which can be omitted, ``{}``, or ``MarkerOptions()`` (no specified options); only one of the following option types alone; or ``MarkerOptions(...)`` with one or more of the following options types:
+  * MarkerThreadId: Rarely used, as it defaults to the current thread. Otherwise it specifies the target "thread id" (aka "track") where the marker should appear; This may be useful when referring to something that happened on another thread (use ``profiler_current_thread_id()`` from the original thread); or for some important markers, they may be sent to the "main thread", which can be specified with ``MarkerThreadId::MainThread()``.
+  * MarkerTiming: This specifies an instant or interval of the marker. It defaults to the current instant if left unspecified. Otherwise use ``MarkerTiming::InstantAt(timestamp)`` or ``MarkerTiming::Interval(ts1, ts2)``; timestamps are usually captured with ``TimeStamp::Now()``. It is also possible to record only the start or the end of an interval, pairs of start/end markers will be matched by their name. *Note: The upcoming "marker sets" feature will make this pairing more reliable, and also allow more than two markers to be connected*.
+  * MarkerStack: By default, markers do not record a "stack" (or "backtrace"). To record a stack at this point in the most efficient manner, specify ``MarkerStack::Capture()``. If the marker should store a previously recorded stack, store a stack into a ``mozilla::UniquePtr<mozilla::ProfileChunkedBuffer>`` with ``profiler_capture_backtrace()``, then pass it to the marker with ``MarkerStack::TakeBacktrace(std::move(stack))``.
+  * MarkerInnerWindowId: If you have access to an "inner window id", consider specifying it as an option, to later better filter markers by the tab.
+
+Text Markers
+^^^^^^^^^^^^
+
+Text markers are very common, they carry an arbitrary string as a fourth argument, in
+addition to the marker name. Use the following macro:
+
+.. code-block:: c++
+
+    PROFILER_MARKER_TEXT(
+        // Name, category pair, options.
+        "This happened", OTHER, {},
+        // Text string.
+        "Here are some more details."
+    );
+
+As useful as it is, it can be overused, sometimes by doing an expensive ``printf``
+operation to generate a complex text string! Please consider using a custom marker type
+to help separate and better present the data.
+
+Other Typed Markers
+^^^^^^^^^^^^^^^^^^^
+
+From C++ code, a marker of some type ``YourMarker`` can be recorded like this:
+
+.. code-block:: c++
+
+    PROFILER_MARKER(
+        "YourMarker name", OTHER,
+        MarkerOptions(MarkerTiming::IntervalUntilNowFrom(someStartTimestamp),
+                      MarkerInnerWindowId(innerWindowId))),
+        YourMarker, "some string", 12345, "http://example.com");
+
+After the first three common arguments (like in ``PROFILER_MARKER_UNTYPED``), there are:
+
+4. The marker type, which is the name of the C++ ``struct`` that defines that type.
+5. A variadic list of type-specific argument. They must match the number of, and must be convertible to, ``StreamJSONMarkerData`` parameters as specified in the marker type definition (see details below).
+
+"Auto" Scoped Interval Markers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+TODO
 
 
 Where to Define New Marker Types
@@ -53,7 +160,7 @@ How to Define New Marker Types
 
 Each marker type must be defined once and only once.
 The definition is a C++ ``struct``, its name is used when recording markers of
-that type:
+that type in C++:
 
 .. code-block:: c++
 
@@ -63,7 +170,8 @@ Marker Type Name
 ^^^^^^^^^^^^^^^^
 
 A marker type must have a unique name, it is used to keep track of the type of
-markers in the profiler storage, and to identify them uniquely in profiler.firefox.com.
+markers in the profiler storage, and to identify them uniquely on profiler.firefox.com.
+(It does not need to be the same as the ``struct``'s name.)
 
 This name is defined in a special static member function ``MarkerTypeName``:
 
@@ -228,102 +336,6 @@ And that is the end of the marker definition ``struct``.
 
     // …
     };
-
-How to Record Markers
----------------------
-
-Headers to #include
-^^^^^^^^^^^^^^^^^^^
-
-If the compilation unit **only** defines and records its own markers (or untyped or text
-markers) :
-
-.. code-block:: c++
-
-    #include "mozilla/ProfilerMarkers.h"
-
-If it only records one of the other common markers defined in ProfilerMarkerTypes.h,
-include that instead:
-
-.. code-block:: c++
-
-    #include "mozilla/ProfilerMarkerTypes.h"
-
-And if it uses any other profiler functions (e.g., labels), use the main Gecko Profiler
-header instead:
-
-.. code-block:: c++
-
-    #include "GeckoProfiler.h"
-
-The above works from source files that end up in libxul, which is true for the majority
-of Firefox source code. But some files live outside of libxul, such as mfbt, in which
-case the advice is the same but the equivalent headers are from the Base Profiler instead:
-
-.. code-block:: c++
-
-    #include "mozilla/BaseProfilerMarkers.h" // Only own/untyped/text markers
-    #include "mozilla/BaseProfilerMarkerTypes.h" // Only common markers
-    #include "BaseProfiler.h" // Markers and other profiler functions
-
-Recording a typed marker
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-From C++ code, the above marker can be used like this:
-
-.. code-block:: c++
-
-    PROFILER_MARKER(
-        "YourMarker", DOM,
-        MarkerOptions(MarkerTiming::IntervalUntilNowFrom(someStartTimestamp), MarkerInnerWindowId(innerWindowId))),
-        YourMarker{}, "some string", 12345, "http://example.com");
-
-* ``PROFILER_MARKER`` is a macro that simplifies the use of the main ``profiler_add_marker`` function, by adding the appropriate namespaces, and a surrounding ``#ifdef MOZ_GECKO_PROFILER`` guard.
-1. The first argument is the name of this marker, it can be the same for all markers of that type, or it can be different. This will be displayed in most places the marker is shown. It can be a literal C string, or any dynamic string object.
-2. A category pair name. `The list of names can be found there <https://searchfox.org/mozilla-central/define?q=M_174bb0de187ee7d9>`_, the second parameter of each ``SUBCATEGORY`` line. (Internally, it's really a `mozilla::MarkerCategory <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerCategory>`_ object, in case you need to construct it elsewhere.)
-3. Options, which can be ``{}`` or ``MarkerOptions()`` (no specified options), only one of the following option types alone, or ``MarkerOptions(...)`` with one or more of the following options types:
-  * MarkerThreadId: Rarely used, as it defaults to the current thread. Otherwise it specifies the target "thread id" (aka "track") where the marker should appear; This may be useful when referring to something that happened on another thread (use ``profiler_current_thread_id()`` from the original thread); or for some important markers, they may be sent to the "main thread", which can be specified with ``MarkerThreadId::MainThread()``.
-  * MarkerTiming: This specifies an instant or interval of the marker. It defaults to the current instant if left unspecified. Otherwise use ``MarkerTiming::InstantAt(timestamp)`` or ``MarkerTiming::Interval(ts1, ts2)``; timestamps are usually captured with ``TimeStamp::Now()``. It is also possible to record only the start or the end of an interval, pairs of start/end markers will be matched by their name. *Note: The upcoming "marker sets" feature will make this pairing more reliable, and also allow more than two markers to be connected*.
-  * MarkerStack: By default, markers do not record a "stack" (or "backtrace"). To record a stack at this point in the most efficient manner, specify ``MarkerStack::Capture()``. If the marker should store a previously recorded stack, store a stack into a ``mozilla::UniquePtr<mozilla::ProfileChunkedBuffer>`` with ``profiler_capture_backtrace()``, then pass it to the marker with ``MarkerStack::TakeBacktrace(std::move(stack))``.
-  * MarkerInnerWindowId: If you have access to an "inner window id", consider specifying it as an option, to later better filter markers by the tab.
-4. The marker type as a default constructed object, e.g.: ``YourMarker{}``.
-5. A variadic list of type-specific argument. They must match the number of, and must be convertible to, ``StreamJSONMarkerData`` parameters as defined above.
-
-Untyped Markers
-^^^^^^^^^^^^^^^
-
-Untyped markers don't carry any information apart from the common data: Name, category,
-options.
-
-.. code-block:: c++
-
-    PROFILER_MARKER_UNTYPED(
-        // Name, and category pair.
-        "This happened", OTHER,
-        // Marker options, may be omitted if defaults are acceptable.
-        MarkerOptions{MarkerStack::Capture()});
-
-Text Markers
-^^^^^^^^^^^^
-
-Text markers are very common, as they carry an arbitrary string in addition to the
-marker name. Use the following macro:
-
-.. code-block:: c++
-
-    PROFILER_MARKER_TEXT(
-        // Name, and category pair, options.
-        "This happened", OTHER, {},
-        // Text string.
-        "Here are some more details."
-    );
-
-This is equivalent to:
-``profiler_add_marker("...", geckoprofiler::category::OTHER, {}, geckoprofiler::markers::Text{}, "...");``.
-
-As useful as it is, it is easy to overuse it, sometimes by doing an expensive ``printf``
-operation to generate a complex text string! Please consider using a custom marker type
-to help separate and better present the data.
 
 Performance Considerations
 --------------------------
