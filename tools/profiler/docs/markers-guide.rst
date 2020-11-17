@@ -1,9 +1,40 @@
 Markers
 =======
 
-Markers are packets of arbitrary data that are added to a profile by the Firefox code, usually to indicate something important happening at a point in time, or during an interval of time.
+Markers are packets of arbitrary data that are added to a profile by the Firefox code, usually to
+indicate something important happening at a point in time, or during an interval of time.
 
-Each marker has a name, a category, some common optional information (timing, backtrace, etc.), and an optional payload of a specific type (containing arbitrary data relevant to that type).
+Each marker has a name, a category, some common optional information (timing, backtrace, etc.),
+and an optional payload of a specific type (containing arbitrary data relevant to that type).
+
+Example
+-------
+
+Short example, details below.
+
+.. code-block:: c++
+
+    // Marker type definition.
+    struct NumberMarker {
+      // Unique marker type name.
+      static constexpr Span<const char> MarkerTypeName() { return MakeStringSpan("number"); }
+      // Data specific to this marker type, serialized to JSON for profiler.firefox.com.
+      static void StreamJSONMarkerData(mozilla::SpliceableJSONWriter& aWriter, const int aNumber) { aWriter.IntProperty("number", aNumber); }
+      // Where and how to display the marker and its data.
+      static mozilla::MarkerSchema MarkerTypeDisplay() {
+        using MS = mozilla::MarkerSchema;
+        MS schema(MS::Location::markerChart, MS::Location::markerTable);
+        schema.SetChartLabel("Number: {marker.data.number}");
+        schema.AddKeyLabelFormat("number", "Number", MS::Format::number);
+        return schema;
+      }
+    };
+
+.. code-block:: c++
+
+    // Record a marker of that type.
+    PROFILER_MARKER("Number", OTHER, MarkerOptions{}, NumberMarker{}, 42);
+
 
 Where to Define New Marker Types
 --------------------------------
@@ -14,77 +45,257 @@ The first step is to determine the location of the marker type definition:
 * For a more common type that could be used from multiple locations:
 
   * If there is no dependency on XUL, it can be defined in the Base Profiler, which can be used in most locations in the codebase: `mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h <https://searchfox.org/mozilla-central/source/mozglue/baseprofiler/public/BaseProfilerMarkerTypes.h>`__
+
   * However, if there is a XUL dependency, then it needs to be defined in the Gecko Profiler: `tools/profiler/public/ProfilerMarkerTypes.h <https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerMarkerTypes.h>`__
 
 How to Define New Marker Types
 ------------------------------
 
+Each marker type must be defined once and only once.
+The definition is a C++ ``struct``, its name is used when recording markers of
+that type:
+
 .. code-block:: c++
 
     struct YourMarker {
+
+Marker Type Name
+^^^^^^^^^^^^^^^^
+
+A marker type must have a unique name, it is used to keep track of the type of
+markers in the profiler storage, and to identify them uniquely in profiler.firefox.com.
+
+This name is defined in a special static member function ``MarkerTypeName``:
+
+.. code-block:: c++
+
+    // …
       static constexpr Span<const char> MarkerTypeName() {
-        // This marker name must be unique in the Firefox code.
         return MakeStringSpan("YourMarker");
       }
 
-      static void StreamJSONMarkerData(JSONWriter& aWriter,
-                                        const ProfilerString8View& aString,
-                                        const int64_t aBytes,
-                                        const ProfilerString8View& aURL) {
-        // This JSONWriter will write out the custom information for this
-        // marker payload. The arguments are populated by the variadic
-        // profiler_add_marker function call and related macros like PROFILER_MARKER.
+Marker Type Data
+^^^^^^^^^^^^^^^^
+
+All markers of any type have some common data: A name, a category, options like
+timing, etc. These will be explained in the next section.
+
+In addition, a certain marker type may carry zero of more arbitrary pieces of
+information, and they are always the same for all markers of that type.
+
+These are defined in a special static member function ``StreamJSONMarkerData``.
+
+The first function parameters is always ``SpliceableJSONWriter& aWriter``,
+it will be used to stream the data as JSON, to later be read by
+profiler.firefox.com.
+
+.. code-block:: c++
+
+    // …
+      static void StreamJSONMarkerData(SpliceableJSONWriter& aWriter,
+
+The following function parameters is how the data is received as C++ objects
+from the call sites.
+
+* Most C/C++ POD (Plain Old Data) and trivial types should work as-is, and combination thereof including ``mozilla::TimeStamp``.
+* Character strings should be passed using ``const ProfilerString8View&`` (this handles literal strings, and various ``std::string`` and ``nsCString`` types, and span with or without null terminator). Use ``const ProfilerString16View&`` for 16-bit strings such as ``nsString``.
+* Other types can be used if they define specializations for ``mozilla::ProfileBufferEntryWriter::Serializer`` and ``mozilla::ProfileBufferEntryReader::Deserializer``. You should rarely need to define new ones, but if needed see how existing specializations are written, or contact the perf-tools team for help.
+
+For example, here's how to handle a string, a 64-bit number, and another
+string:
+
+.. code-block:: c++
+
+    // …
+                                       const ProfilerString8View& aString,
+                                       const int64_t aBytes,
+                                       const ProfilerString8View& aURL) {
+
+Then the body of the function turns these parameters into a JSON stream.
+
+When this function is called, the writer has just started a JSON object, so
+everything that is written should be a named object property. Use
+``SpliceableJSONWriter`` functions, in most cases ``...Property`` functions
+from its parent class ``JSONWriter``: ``NullProperty``, ``BoolProperty``,
+``IntProperty``, ``DoubleProperty``, ``StringProperty``. (Other nested JSON
+types like arrays or objects are not supported by the profiler.)
+
+The property names will be used below, to identify where each piece of data
+is stored and how it should be displayed.
+
+Here's how the above functions parameters could be streamed:
+
+.. code-block:: c++
+
+    // …
         aWriter.StringProperty("myString", aString);
         aWriter.IntProperty("myBytes", aBytes);
         aWriter.StringProperty("aURL", aURL);
       }
 
-      static MarkerSchemar MarkerTypeDisplay() {
-        using MS = MarkerSchema;
-        // Start by constructing a schema writer.
-        // Arguments determine where this marker shows up in the profiler.firefox.com UI.
-        MS schema(S::Location::markerChart, S::Location::markerTable);
+Marker Type Display Schema
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        // Some labels can be specified, to display certain information in different locations.
+Now that we have defined how to stream type-specific data (from Firefox to
+profiler.firefox.com), we need to describe where and how this data will be
+displayed on profiler.firefox.com.
+
+The static member function ``MarkerTypeDisplay`` returns an opaque ``MarkerSchema``
+object, which will be forwarded to profiler.firefox.com.
+
+.. code-block:: c++
+
+    // …
+      static mozilla::MarkerSchema MarkerTypeDisplay() {
+
+The ``MarkerSchema`` type will be used repeatedly, so for convenience we can define
+a using-alias:
+
+.. code-block:: c++
+
+    // …
+        using MS = MarkerSchema;
+
+First, we construct the ``MarkerSchema`` object to be returned at the end.
+
+One or more constructor arguments determine where this marker will be displayed in
+the profiler.firefox.com UI. See the `MarkerSchema::Location enumeration for the
+full list <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerSchema%3A%3ALocation>`_.
+
+Here is the most common set of locations, showing markers of that type in both the
+Marker Chart and the Marker Table panels:
+
+.. code-block:: c++
+
+    // …
+        MS schema(MS::Location::markerChart, MS::Location::markerTable);
+
+Some labels can optionally be specified, to display certain information in different
+locations: ``SetChartLabel``, ``SetTooltipLabel``, and ``SetTableLabel``; or
+``SetAllLabels`` to define all of them the same way.
+
+The arguments is a string that may refer to marker data within braces:
+
+* ``{marker.name}``: Marker name.
+* ``{marker.data.X}``: Type-specific data, as streamed with property name "X" from ``StreamJSONMarkerData`` (e.g., ``aWriter.IntProperty("X", aNumber);``
+
+For example, here's how to set the Marker Chart label to show the marker name and the
+``myBytes`` number of bytes:
+
+.. code-block:: c++
+
+    // …
         schema.SetChartLabel("{marker.name} {marker.data.myBytes}B");
 
-        // These main labels will show up in tooltips with proper formatting of the values.
-        // In addition, this will help not leak sensitive user information, as information
-        // such as URLs can properly be sanitized.
-        schema.AddKeyLabelFormat(
-            "myString", "My String", S::Format::string);
-        schema.AddKeyLabelFormat(
-            "myBytes", "My Bytes", S::Format::bytes);
-        schema.AddKeyLabelFormat(
-            "myUrl", "My URL", S::Format::url);
+Then we can define the main display of marker data, which will appear in the Marker
+Chart tooltips and the Marker Table sidebar.
 
+Each row may either be:
+
+* A dynamic key-value pair, using one of the ``MarkerSchema::AddKey...`` functions. Each function is given:
+
+  * Key: Element property name as streamed in ``StreamJSONMarkerData``.
+  * Label: Optional prefix. Defaults to the key name.
+  * Format: How to format the data element value, see `MarkerSchema::Format for details <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerSchema%3A%3AFormat>`_.
+  * Searchable: Optional boolean, indicates if the value is used in searches, defaults to false.
+
+* Or a fixed label and value strings, using ``MarkerSchema::AddStaticLabelValue``.
+
+.. code-block:: c++
+
+    // …
+        schema.AddKeyLabelFormatSearchable(
+            "myString", "My String", MS::Format::string, true);
+        schema.AddKeyLabelFormat(
+            "myBytes", "My Bytes", MS::Format::bytes);
+        schema.AddKeyLabelFormat(
+            "myUrl", "My URL", MS::Format::url);
+
+Finally the ``schema`` object is returned from the function:
+
+.. code-block:: c++
+
+    // …
         return schema;
       }
+
+Any other member function is ignored. There could be utility functions used by the above
+compulsory functions, to make the code clearer.
+
+And that is the end of the marker definition ``struct``.
+
+.. code-block:: c++
+
+    // …
     };
 
-Then in your C++ code, this marker can be used like so:
+How to Record Markers
+---------------------
+
+Headers to #include
+^^^^^^^^^^^^^^^^^^^
+
+If the compilation unit **only** defines and records its own markers (or untyped or text
+markers) :
+
+.. code-block:: c++
+
+    #include "mozilla/ProfilerMarkers.h"
+
+If it only records one of the other common markers defined in ProfilerMarkerTypes.h,
+include that instead:
+
+.. code-block:: c++
+
+    #include "mozilla/ProfilerMarkerTypes.h"
+
+And if it uses any other profiler functions (e.g., labels), use the main Gecko Profiler
+header instead:
 
 .. code-block:: c++
 
     #include "GeckoProfiler.h"
+
+The above works from source files that end up in libxul, which is true for the majority
+of Firefox source code. But some files live outside of libxul, such as mfbt, in which
+case the advice is the same but the equivalent headers are from the Base Profiler instead:
+
+.. code-block:: c++
+
+    #include "mozilla/BaseProfilerMarkers.h" // Only own/untyped/text markers
+    #include "mozilla/BaseProfilerMarkerTypes.h" // Only common markers
+    #include "BaseProfiler.h" // Markers and other profiler functions
+
+Recording a typed marker
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+From C++ code, the above marker can be used like this:
+
+.. code-block:: c++
 
     PROFILER_MARKER(
-        // Name, and category pair.
         "YourMarker", DOM,
-        // Marker options, see documentation below.
-        MarkerOptions{
-            MarkerTiming::IntervalUntilNowFrom(someStartTimestamp),
-            MarkerInnerWindowId(innerWindowId))},
-        // The rest of the arguments are variadic, and should match the order
-        // in StreamJSONMarkerData.
-        myString, myBytes, myUrl);
+        MarkerOptions(MarkerTiming::IntervalUntilNowFrom(someStartTimestamp), MarkerInnerWindowId(innerWindowId))),
+        YourMarker{}, "some string", 12345, "http://example.com");
 
+* ``PROFILER_MARKER`` is a macro that simplifies the use of the main ``profiler_add_marker`` function, by adding the appropriate namespaces, and a surrounding ``#ifdef MOZ_GECKO_PROFILER`` guard.
+1. The first argument is the name of this marker, it can be the same for all markers of that type, or it can be different. This will be displayed in most places the marker is shown. It can be a literal C string, or any dynamic string object.
+2. A category pair name. `The list of names can be found there <https://searchfox.org/mozilla-central/define?q=M_174bb0de187ee7d9>`_, the second parameter of each ``SUBCATEGORY`` line. (Internally, it's really a `mozilla::MarkerCategory <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerCategory>`_ object, in case you need to construct it elsewhere.)
+3. Options, which can be ``{}`` or ``MarkerOptions()`` (no specified options), only one of the following option types alone, or ``MarkerOptions(...)`` with one or more of the following options types:
+  * MarkerThreadId: Rarely used, as it defaults to the current thread. Otherwise it specifies the target "thread id" (aka "track") where the marker should appear; This may be useful when referring to something that happened on another thread (use ``profiler_current_thread_id()`` from the original thread); or for some important markers, they may be sent to the "main thread", which can be specified with ``MarkerThreadId::MainThread()``.
+  * MarkerTiming: This specifies an instant or interval of the marker. It defaults to the current instant if left unspecified. Otherwise use ``MarkerTiming::InstantAt(timestamp)`` or ``MarkerTiming::Interval(ts1, ts2)``; timestamps are usually captured with ``TimeStamp::Now()``. It is also possible to record only the start or the end of an interval, pairs of start/end markers will be matched by their name. *Note: The upcoming "marker sets" feature will make this pairing more reliable, and also allow more than two markers to be connected*.
+  * MarkerStack: By default, markers do not record a "stack" (or "backtrace"). To record a stack at this point in the most efficient manner, specify ``MarkerStack::Capture()``. If the marker should store a previously recorded stack, store a stack into a ``mozilla::UniquePtr<mozilla::ProfileChunkedBuffer>`` with ``profiler_capture_backtrace()``, then pass it to the marker with ``MarkerStack::TakeBacktrace(std::move(stack))``.
+  * MarkerInnerWindowId: If you have access to an "inner window id", consider specifying it as an option, to later better filter markers by the tab.
+4. The marker type as a default constructed object, e.g.: ``YourMarker{}``.
+5. A variadic list of type-specific argument. They must match the number of, and must be convertible to, ``StreamJSONMarkerData`` parameters as defined above.
 
-Untyped markers are also available, when a single string is sufficient for your use-case:
+Untyped Markers
+^^^^^^^^^^^^^^^
+
+Untyped markers don't carry any information apart from the common data: Name, category,
+options.
 
 .. code-block:: c++
-
-    #include "GeckoProfiler.h"
 
     PROFILER_MARKER_UNTYPED(
         // Name, and category pair.
@@ -92,16 +303,45 @@ Untyped markers are also available, when a single string is sufficient for your 
         // Marker options, may be omitted if defaults are acceptable.
         MarkerOptions{MarkerStack::Capture()});
 
+Text Markers
+^^^^^^^^^^^^
 
-The full list of available categories is located in:
+Text markers are very common, as they carry an arbitrary string in addition to the
+marker name. Use the following macro:
 
-`mozglue/baseprofiler/public/ProfilingCategoryList.h
-<https://searchfox.org/mozilla-central/source/mozglue/baseprofiler/public/ProfilingCategoryList.h>`__
+.. code-block:: c++
 
-``MarkerSchema``, ``MarkerOptions`` and the different types of sub-options it accepts are defined in:
+    PROFILER_MARKER_TEXT(
+        // Name, and category pair, options.
+        "This happened", OTHER, {},
+        // Text string.
+        "Here are some more details."
+    );
 
-`mozglue/baseprofiler/public/BaseProfilerMarkersPrerequisites.h
-<https://searchfox.org/mozilla-central/source/mozglue/baseprofiler/public/BaseProfilerMarkersPrerequisites.h>`__
+This is equivalent to:
+``profiler_add_marker("...", geckoprofiler::category::OTHER, {}, geckoprofiler::markers::Text{}, "...");``.
+
+As useful as it is, it is easy to overuse it, sometimes by doing an expensive ``printf``
+operation to generate a complex text string! Please consider using a custom marker type
+to help separate and better present the data.
+
+Performance Considerations
+--------------------------
+
+During profiling, it is best to reduce the amount of work spent doing profiler
+operations, as they can influence the performance of the code that you want to profile.
+
+Whenever possible, consider passing simple types to marker functions, such that
+``StreamJSONMarkerData`` will do the minimum amount of work necessary to serialize
+the marker type-specific arguments to its internal buffer representation. POD types
+(numbers) and strings are the easiest and cheapest to serialize. Look at the
+corresponding ``mozilla::ProfileBufferEntryWriter::Serializer`` specializations if you
+want to better understand the work done.
+
+Avoid doing expensive operations when recording markers. E.g.: ``printf`` of
+different things into a string, or complex computations; instead pass the
+``printf``/computation arguments straight through to the marker function, so that
+``StreamJSONMarkerData`` can do the expensive work at the end of the profiling session.
 
 Marker Architecture Description
 -------------------------------
