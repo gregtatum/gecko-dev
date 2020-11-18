@@ -13,12 +13,15 @@ Example
 
 Short example, details below.
 
+Note: Most marker-related identifiers are in the ``mozilla`` namespace, to be added where necessary.
+
 .. code-block:: c++
 
     PROFILER_MARKER_UNTYPED("Only a name", DOM);
     PROFILER_MARKER_TEXT("This JS marker...", JS, MarkerOptions{}, "... has text data");
+
     // Record a marker of type `NumberMarker` (see definition below).
-    PROFILER_MARKER("Number", OTHER, MarkerOptions, NumberMarker{}, 42);
+    PROFILER_MARKER("Number", OTHER, MarkerOptions{}, NumberMarker, 42);
 
 .. code-block:: c++
 
@@ -27,12 +30,12 @@ Short example, details below.
       // Unique marker type name.
       static constexpr Span<const char> MarkerTypeName() { return MakeStringSpan("number"); }
       // Data specific to this marker type, serialized to JSON for profiler.firefox.com.
-      static void StreamJSONMarkerData(mozilla::SpliceableJSONWriter& aWriter, int aNumber) {
+      static void StreamJSONMarkerData(SpliceableJSONWriter& aWriter, int aNumber) {
         aWriter.IntProperty("number", aNumber);
       }
       // Where and how to display the marker and its data.
-      static mozilla::MarkerSchema MarkerTypeDisplay() {
-        using MS = mozilla::MarkerSchema;
+      static MarkerSchema MarkerTypeDisplay() {
+        using MS = MarkerSchema;
         MS schema(MS::Location::markerChart, MS::Location::markerTable);
         schema.SetChartLabel("Number: {marker.data.number}");
         schema.AddKeyLabelFormat("number", "Number", MS::Format::number);
@@ -44,24 +47,27 @@ Short example, details below.
 How to Record Markers
 ---------------------
 
-Headers to #include
-^^^^^^^^^^^^^^^^^^^
+Header to Include
+^^^^^^^^^^^^^^^^^
 
-If the compilation unit only defines and records untyped, text, and/or its own markers:
+If the compilation unit only defines and records untyped, text, and/or its own markers, include
+`the main profiler markers header <https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerMarkers.h>`_:
 
 .. code-block:: c++
 
     #include "mozilla/ProfilerMarkers.h"
 
-If it also records one of the other common markers defined in ProfilerMarkerTypes.h,
+If it also records one of the other common markers defined in
+`ProfilerMarkerTypes.h <https://searchfox.org/mozilla-central/source/tools/profiler/public/ProfilerMarkerTypes.h>`_,
 include that one instead:
 
 .. code-block:: c++
 
     #include "mozilla/ProfilerMarkerTypes.h"
 
-And if it uses any other profiler functions (e.g., labels), use the main Gecko Profiler
-header instead:
+And if it uses any other profiler functions (e.g., labels), use
+`the main Gecko Profiler header <https://searchfox.org/mozilla-central/source/tools/profiler/public/GeckoProfiler.h>`_
+instead:
 
 .. code-block:: c++
 
@@ -80,31 +86,31 @@ case the advice is the same but the equivalent headers are from the Base Profile
 Untyped Markers
 ^^^^^^^^^^^^^^^
 
-Untyped markers don't carry any information apart from the common data: Name, category,
-options.
+Untyped markers don't carry any information apart from common marker data:
+Name, category, options.
 
 .. code-block:: c++
 
     PROFILER_MARKER_UNTYPED(
         // Name, and category pair.
         "This happened", OTHER,
-        // Marker options, may be omitted if defaults are acceptable.
-        MarkerOptions{MarkerStack::Capture()});
+        // Marker options, may be omitted if all defaults are acceptable.
+        MarkerOptions(MarkerStack::Capture(), ...));
 
 * ``PROFILER_MARKER_UNTYPED`` is a macro that simplifies the use of the main ``profiler_add_marker`` function, by adding the appropriate namespaces, and a surrounding ``#ifdef MOZ_GECKO_PROFILER`` guard.
 1. The first argument is the name of this marker. This will be displayed in most places the marker is shown. It can be a literal C string, or any dynamic string object.
-2. A category pair name. `The list of names can be found there <https://searchfox.org/mozilla-central/define?q=M_174bb0de187ee7d9>`_, the second parameter of each ``SUBCATEGORY`` line. (Internally, it's really a `mozilla::MarkerCategory <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerCategory>`_ object, in case you need to construct it elsewhere.)
-3. Options, which can be omitted, ``{}``, or ``MarkerOptions()`` (no specified options); only one of the following option types alone; or ``MarkerOptions(...)`` with one or more of the following options types:
-  * MarkerThreadId: Rarely used, as it defaults to the current thread. Otherwise it specifies the target "thread id" (aka "track") where the marker should appear; This may be useful when referring to something that happened on another thread (use ``profiler_current_thread_id()`` from the original thread); or for some important markers, they may be sent to the "main thread", which can be specified with ``MarkerThreadId::MainThread()``.
-  * MarkerTiming: This specifies an instant or interval of the marker. It defaults to the current instant if left unspecified. Otherwise use ``MarkerTiming::InstantAt(timestamp)`` or ``MarkerTiming::Interval(ts1, ts2)``; timestamps are usually captured with ``TimeStamp::Now()``. It is also possible to record only the start or the end of an interval, pairs of start/end markers will be matched by their name. *Note: The upcoming "marker sets" feature will make this pairing more reliable, and also allow more than two markers to be connected*.
-  * MarkerStack: By default, markers do not record a "stack" (or "backtrace"). To record a stack at this point in the most efficient manner, specify ``MarkerStack::Capture()``. If the marker should store a previously recorded stack, store a stack into a ``mozilla::UniquePtr<mozilla::ProfileChunkedBuffer>`` with ``profiler_capture_backtrace()``, then pass it to the marker with ``MarkerStack::TakeBacktrace(std::move(stack))``.
-  * MarkerInnerWindowId: If you have access to an "inner window id", consider specifying it as an option, to later better filter markers by the tab.
+2. A category pair name. `The list of names can be found there <https://searchfox.org/mozilla-central/define?q=M_174bb0de187ee7d9>`_, the second parameter of each ``SUBCATEGORY`` line. (Internally, it's really a `MarkerCategory <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerCategory>`_ object, in case you need to construct it elsewhere.)
+3. A `MarkerOptions <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerOptions>`_ object, which can be omitted if there are no other arguments, ``{}``, or ``MarkerOptions()`` (no specified options); only one of the following option types alone; or ``MarkerOptions(...)`` with one or more of the following options types:
+  * `MarkerThreadId <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerThreadId>`_: Rarely used, as it defaults to the current thread. Otherwise it specifies the target "thread id" (aka "track") where the marker should appear; This may be useful when referring to something that happened on another thread (use ``profiler_current_thread_id()`` from the original thread to get its id); or for some important markers, they may be sent to the "main thread", which can be specified with ``MarkerThreadId::MainThread()``.
+  * `MarkerTiming <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerTiming>`_: This specifies an instant or interval of time. It defaults to the current instant if left unspecified. Otherwise use ``MarkerTiming::InstantAt(timestamp)`` or ``MarkerTiming::Interval(ts1, ts2)``; timestamps are usually captured with ``TimeStamp::Now()``. It is also possible to record only the start or the end of an interval, pairs of start/end markers will be matched by their name. *Note: The upcoming "marker sets" feature will make this pairing more reliable, and also allow more than two markers to be connected*.
+  * `MarkerStack <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerStack>`_: By default, markers do not record a "stack" (or "backtrace"). To record a stack at this point, in the most efficient manner, specify ``MarkerStack::Capture()``. To record a previously captured stack, first store a stack into a ``UniquePtr<ProfileChunkedBuffer>`` with ``profiler_capture_backtrace()``, then pass it to the marker with ``MarkerStack::TakeBacktrace(std::move(stack))``.
+  * `MarkerInnerWindowId <https://searchfox.org/mozilla-central/define?q=T_mozilla%3A%3AMarkerInnerWindowId>`_: If you have access to an "inner window id", consider specifying it as an option, to help profiler.firefox.com to classify them by tab.
 
 Text Markers
 ^^^^^^^^^^^^
 
-Text markers are very common, they carry an arbitrary string as a fourth argument, in
-addition to the marker name. Use the following macro:
+Text markers are very common, they carry an extra text as a fourth argument, in addition to
+the marker name. Use the following macro:
 
 .. code-block:: c++
 
@@ -116,13 +122,14 @@ addition to the marker name. Use the following macro:
     );
 
 As useful as it is, it can be overused, sometimes by doing an expensive ``printf``
-operation to generate a complex text string! Please consider using a custom marker type
-to help separate and better present the data.
+operation to generate a complex text string. Please consider using a custom marker type
+to separate and better present the data.
 
 Other Typed Markers
 ^^^^^^^^^^^^^^^^^^^
 
-From C++ code, a marker of some type ``YourMarker`` can be recorded like this:
+From C++ code, a marker of some type ``YourMarker`` (details about type definition follow) can be
+recorded like this:
 
 .. code-block:: c++
 
@@ -130,18 +137,44 @@ From C++ code, a marker of some type ``YourMarker`` can be recorded like this:
         "YourMarker name", OTHER,
         MarkerOptions(MarkerTiming::IntervalUntilNowFrom(someStartTimestamp),
                       MarkerInnerWindowId(innerWindowId))),
-        YourMarker, "some string", 12345, "http://example.com");
+        YourMarker, "some string", 12345, "http://example.com", someTimeStamp);
 
 After the first three common arguments (like in ``PROFILER_MARKER_UNTYPED``), there are:
 
 4. The marker type, which is the name of the C++ ``struct`` that defines that type.
-5. A variadic list of type-specific argument. They must match the number of, and must be convertible to, ``StreamJSONMarkerData`` parameters as specified in the marker type definition (see details below).
+5. A variadic list of type-specific argument. They must match the number of, and must be convertible to, ``StreamJSONMarkerData`` parameters as specified in the marker type definition.
 
 "Auto" Scoped Interval Markers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+To capture time intervals around some important operations, it is common to store a timestamp, do the work,
+and then record a marker, e.g.:
 
+.. code-block:: c++
+
+    void DoTimedWork() {
+      TimeStamp start = TimeStamp::Now();
+      DoWork();
+      PROFILER_MARKER_TEXT("Timed work", OTHER, MarkerTiming::IntervalUntilNowFrom(start), "Details");
+    }
+
+`RAII <https://en.cppreference.com/w/cpp/language/raii>`_ objects automate this, by recording the time
+when the object is constructed, and later recording the marker when the object is destroyed at the end
+of its C++ scope.
+This is especially useful if there are multiple scope exit points.
+
+``AUTO_PROFILER_MARKER_TEXT`` is `the only one implemented <https://searchfox.org/mozilla-central/define?q=M_ac7b392646edf5a5>`_ at this time.
+
+.. code-block:: c++
+
+    void MaybeDoTimedWork(bool aDoIt) {
+      AUTO_PROFILER_MARKER_TEXT("Timed work", OTHER, "Details");
+      if (!aDoIt) { /* Marker recorded here... */ return; }
+      DoWork();
+      /* ... or here. */
+    }
+
+Note that these RAII objects only record one marker. In some situation, a very long operation could be missed if it hasn't completed by the end of the profiling session. In this case, consider recording two distinct markers, using ``MarkerTiming::IntervalStart()`` and ``MarkerTiming::IntervalEnd()``.
 
 Where to Define New Marker Types
 --------------------------------
@@ -186,7 +219,7 @@ Marker Type Data
 ^^^^^^^^^^^^^^^^
 
 All markers of any type have some common data: A name, a category, options like
-timing, etc. These will be explained in the next section.
+timing, etc. as previously explained.
 
 In addition, a certain marker type may carry zero of more arbitrary pieces of
 information, and they are always the same for all markers of that type.
@@ -205,19 +238,22 @@ profiler.firefox.com.
 The following function parameters is how the data is received as C++ objects
 from the call sites.
 
-* Most C/C++ POD (Plain Old Data) and trivial types should work as-is, and combination thereof including ``mozilla::TimeStamp``.
-* Character strings should be passed using ``const ProfilerString8View&`` (this handles literal strings, and various ``std::string`` and ``nsCString`` types, and span with or without null terminator). Use ``const ProfilerString16View&`` for 16-bit strings such as ``nsString``.
-* Other types can be used if they define specializations for ``mozilla::ProfileBufferEntryWriter::Serializer`` and ``mozilla::ProfileBufferEntryReader::Deserializer``. You should rarely need to define new ones, but if needed see how existing specializations are written, or contact the perf-tools team for help.
+* Most C/C++ `POD (Plain Old Data) <https://en.cppreference.com/w/cpp/named_req/PODType>`_ and `trivially-copyable <https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable>`_ types should work as-is, including ``TimeStamp``.
+* Character strings should be passed using ``const ProfilerString8View&`` (this handles literal strings, and various ``std::string`` and ``nsCString`` types, and spans with or without null terminator). Use ``const ProfilerString16View&`` for 16-bit strings such as ``nsString``.
+* Other types can be used if they define specializations for ``ProfileBufferEntryWriter::Serializer`` and ``ProfileBufferEntryReader::Deserializer``. You should rarely need to define new ones, but if needed see how existing specializations are written, or contact the perf-tools team for help.
 
-For example, here's how to handle a string, a 64-bit number, and another
-string:
+Passing by value or by reference-to-const is recommended, because arguments are serialized in binary form (i.e., there are no optimizable ``move`` operations).
+
+For example, here's how to handle a string, a 64-bit number, another string, and
+a timestamp:
 
 .. code-block:: c++
 
     // …
                                        const ProfilerString8View& aString,
                                        const int64_t aBytes,
-                                       const ProfilerString8View& aURL) {
+                                       const ProfilerString8View& aURL,
+                                       const TimeStamp& aTime) {
 
 Then the body of the function turns these parameters into a JSON stream.
 
@@ -228,8 +264,10 @@ from its parent class ``JSONWriter``: ``NullProperty``, ``BoolProperty``,
 ``IntProperty``, ``DoubleProperty``, ``StringProperty``. (Other nested JSON
 types like arrays or objects are not supported by the profiler.)
 
-The property names will be used below, to identify where each piece of data
-is stored and how it should be displayed.
+As a special case, ``TimeStamps`` must be streamed using `WritePropertyTime <https://searchfox.org/mozilla-central/define?q=_ZN7mozilla12baseprofiler17WritePropertyTimeERNS_10JSONWriterERKNS_4SpanIKcLy18446744073709551615EEERKNS_9TimeStampE>`_.
+
+The property names will be used to identify where each piece of data is stored and
+how it should be displayed on profiler.firefox.com (see next section).
 
 Here's how the above functions parameters could be streamed:
 
@@ -238,7 +276,8 @@ Here's how the above functions parameters could be streamed:
     // …
         aWriter.StringProperty("myString", aString);
         aWriter.IntProperty("myBytes", aBytes);
-        aWriter.StringProperty("aURL", aURL);
+        aWriter.StringProperty("myURL", aURL);
+        WritePropertyTime(aWriter, "myTime", aTime);
       }
 
 Marker Type Display Schema
@@ -254,10 +293,10 @@ object, which will be forwarded to profiler.firefox.com.
 .. code-block:: c++
 
     // …
-      static mozilla::MarkerSchema MarkerTypeDisplay() {
+      static MarkerSchema MarkerTypeDisplay() {
 
 The ``MarkerSchema`` type will be used repeatedly, so for convenience we can define
-a using-alias:
+a local type alias:
 
 .. code-block:: c++
 
@@ -295,7 +334,7 @@ For example, here's how to set the Marker Chart label to show the marker name an
     // …
         schema.SetChartLabel("{marker.name} {marker.data.myBytes}B");
 
-Then we can define the main display of marker data, which will appear in the Marker
+Then define the main display of marker data, which will appear in the Marker
 Chart tooltips and the Marker Table sidebar.
 
 Each row may either be:
@@ -318,6 +357,8 @@ Each row may either be:
             "myBytes", "My Bytes", MS::Format::bytes);
         schema.AddKeyLabelFormat(
             "myUrl", "My URL", MS::Format::url);
+        schema.AddKeyLabelFormat(
+            "myTime", "Event time", MS::Format::time);
 
 Finally the ``schema`` object is returned from the function:
 
@@ -327,7 +368,7 @@ Finally the ``schema`` object is returned from the function:
         return schema;
       }
 
-Any other member function is ignored. There could be utility functions used by the above
+Any other ``struct`` member function is ignored. There could be utility functions used by the above
 compulsory functions, to make the code clearer.
 
 And that is the end of the marker definition ``struct``.
@@ -347,7 +388,7 @@ Whenever possible, consider passing simple types to marker functions, such that
 ``StreamJSONMarkerData`` will do the minimum amount of work necessary to serialize
 the marker type-specific arguments to its internal buffer representation. POD types
 (numbers) and strings are the easiest and cheapest to serialize. Look at the
-corresponding ``mozilla::ProfileBufferEntryWriter::Serializer`` specializations if you
+corresponding ``ProfileBufferEntryWriter::Serializer`` specializations if you
 want to better understand the work done.
 
 Avoid doing expensive operations when recording markers. E.g.: ``printf`` of
