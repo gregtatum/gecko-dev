@@ -264,7 +264,7 @@ from its parent class ``JSONWriter``: ``NullProperty``, ``BoolProperty``,
 ``IntProperty``, ``DoubleProperty``, ``StringProperty``. (Other nested JSON
 types like arrays or objects are not supported by the profiler.)
 
-As a special case, ``TimeStamps`` must be streamed using `WritePropertyTime <https://searchfox.org/mozilla-central/define?q=_ZN7mozilla12baseprofiler17WritePropertyTimeERNS_10JSONWriterERKNS_4SpanIKcLy18446744073709551615EEERKNS_9TimeStampE>`_.
+As a special case, ``TimeStamps`` must be streamed using ``aWriter.TimeProperty(timestamp)``.
 
 The property names will be used to identify where each piece of data is stored and
 how it should be displayed on profiler.firefox.com (see next section).
@@ -277,7 +277,7 @@ Here's how the above functions parameters could be streamed:
         aWriter.StringProperty("myString", aString);
         aWriter.IntProperty("myBytes", aBytes);
         aWriter.StringProperty("myURL", aURL);
-        WritePropertyTime(aWriter, "myTime", aTime);
+        aWriter.TimeProperty("myTime", aTime);
       }
 
 Marker Type Display Schema
