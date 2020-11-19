@@ -13,18 +13,29 @@ In addition to the sampling, the profiler can collect markers, which are collect
 deterministically (as opposed to statistically, like samples). These include some
 kind of text description, and optionally a payload with more information.
 
+This documentation serves to document the Gecko Profiler and Base Profiler components,
+while the profiler.firefox.com interface is documented at `profiler.firefox.com/docs/ <https://profiler.firefox.com/docs/>`_
+
 .. toctree::
    :maxdepth: 1
 
    buffer
    ci-automation
-   instrumenting-java
    instrumenting-javascript
-   instrumenting-rust
    jstracer
-   LUL
    markers-guide
    memory
    registering-threads
    samples-stackwalking
    serialization
+
+The following areas still need documentation:
+
+ * LUL
+ * Instrumenting Java
+ * Instrumenting Rust
+ * Registering Threads
+ * Samples and Stack Walking
+ * Triggering Gecko Profiles in Automation
+ * JS Tracer
+ * Serialization

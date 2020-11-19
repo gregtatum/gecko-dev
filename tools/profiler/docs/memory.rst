@@ -1,7 +1,7 @@
 Profiling Memory
 ================
 
-Sample stacks from native allocations
+Sampling stacks from native allocations
 -------------------------------------
 
 The profiler can sample allocations and de-allocations from malloc using the

@@ -1,2 +1,0 @@
-Samples and Stack Walking
-=========================

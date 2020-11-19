@@ -17,16 +17,19 @@ Note: Most marker-related identifiers are in the ``mozilla`` namespace, to be ad
 
 .. code-block:: c++
 
-    PROFILER_MARKER_UNTYPED("Only a name", DOM);
-    PROFILER_MARKER_TEXT("This JS marker...", JS, MarkerOptions{}, "... has text data");
+    // Record a simple marker with the category of DOM.
+    PROFILER_MARKER_UNTYPED("Marker Name", DOM);
 
-    // Record a marker of type `NumberMarker` (see definition below).
-    PROFILER_MARKER("Number", OTHER, MarkerOptions{}, NumberMarker, 42);
+    // Create a marker with some additional text information. (Be wary of printf!)
+    PROFILER_MARKER_TEXT("Marker Name", JS, MarkerOptions{}, "Additional text information.");
+
+    // Record a custom marker of type `ExampleNumberMarker` (see definition below).
+    PROFILER_MARKER("Number", OTHER, MarkerOptions{}, ExampleNumberMarker, 42);
 
 .. code-block:: c++
 
     // Marker type definition.
-    struct NumberMarker {
+    struct ExampleNumberMarker {
       // Unique marker type name.
       static constexpr Span<const char> MarkerTypeName() { return MakeStringSpan("number"); }
       // Data specific to this marker type, serialized to JSON for profiler.firefox.com.
@@ -93,7 +96,7 @@ Name, category, options.
 
     PROFILER_MARKER_UNTYPED(
         // Name, and category pair.
-        "This happened", OTHER,
+        "Marker Name", OTHER,
         // Marker options, may be omitted if all defaults are acceptable.
         MarkerOptions(MarkerStack::Capture(), ...));
 
@@ -116,14 +119,17 @@ the marker name. Use the following macro:
 
     PROFILER_MARKER_TEXT(
         // Name, category pair, options.
-        "This happened", OTHER, {},
+        "Marker Name", OTHER, {},
         // Text string.
         "Here are some more details."
     );
 
-As useful as it is, it can be overused, sometimes by doing an expensive ``printf``
-operation to generate a complex text string. Please consider using a custom marker type
-to separate and better present the data.
+As useful as it is, using an expensive ``printf`` operation to generate a complex text
+comes with a variety of issues string. It can leak potentially sensitive information
+such as URLs can be leaked during the profile sharing step. profiler.firefox.com cannot
+access the information programmatically. It won't get the formatting benefits of the
+built-in marker schema. Please consider using a custom marker type to separate and
+better present the data.
 
 Other Typed Markers
 ^^^^^^^^^^^^^^^^^^^
@@ -332,9 +338,16 @@ For example, here's how to set the Marker Chart label to show the marker name an
 .. code-block:: c++
 
     // …
-        schema.SetChartLabel("{marker.name} {marker.data.myBytes}B");
+        schema.SetChartLabel("{marker.name} – {marker.data.myBytes}");
 
-Then define the main display of marker data, which will appear in the Marker
+profiler.firefox.com will apply the label with the data in a consistent manner. For
+example with this type of label it may display:
+
+ * "Marker Name – 10B"
+ * "Marker Name – 25.204KB"
+ * "Marker Name – 512.54MB"
+
+Next, define the main display of marker data, which will appear in the Marker
 Chart tooltips and the Marker Table sidebar.
 
 Each row may either be:
